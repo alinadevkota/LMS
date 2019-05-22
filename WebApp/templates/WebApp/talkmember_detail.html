@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'WebApp_talkmember_list' %}">TalkMember Listing</a></p>
+<table class="table">
+<tr><td>member_code</td><td>{{ object.member_code }}</td></tr>
+<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit TalkMember</a>
+
+{% endblock %}

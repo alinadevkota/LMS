@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'WebApp_quizinfo_list' %}">QuizInfo Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>subject_code</td>
+    <td>lecture_code</td>
+    <td>chapter_code</td>
+    <td>quiz_type</td>
+    <td>quiz_question</td>
+    <td>quiz_media_type</td>
+    <td>quiz_media_file</td>
+    <td>quiz_score</td>
+    <td>quiz_comment</td>
+    <td>use_flag</td>
+    <td>reg_date</td>
+    <td>reg_time</td>
+    <td>reg_agent</td>
+    <td>udt_date</td>
+    <td>udt_time</td>
+    <td>udt_agent</td>
+    <td>quiz_head</td>
+    <td>quiz_media_file2</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.subject_code }}</td>
+    <td>{{ object.lecture_code }}</td>
+    <td>{{ object.chapter_code }}</td>
+    <td>{{ object.quiz_type }}</td>
+    <td>{{ object.quiz_question }}</td>
+    <td>{{ object.quiz_media_type }}</td>
+    <td>{{ object.quiz_media_file }}</td>
+    <td>{{ object.quiz_score }}</td>
+    <td>{{ object.quiz_comment }}</td>
+    <td>{{ object.use_flag }}</td>
+    <td>{{ object.reg_date }}</td>
+    <td>{{ object.reg_time }}</td>
+    <td>{{ object.reg_agent }}</td>
+    <td>{{ object.udt_date }}</td>
+    <td>{{ object.udt_time }}</td>
+    <td>{{ object.udt_agent }}</td>
+    <td>{{ object.quiz_head }}</td>
+    <td>{{ object.quiz_media_file2 }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'WebApp_quizinfo_create' %}">Create new QuizInfo</a>
+{% endblock %}

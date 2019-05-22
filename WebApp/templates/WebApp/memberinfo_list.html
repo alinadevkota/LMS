@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'WebApp_memberinfo_list' %}">MemberInfo Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>member_id</td>
+    <td>member_level</td>
+    <td>member_pw</td>
+    <td>member_name</td>
+    <td>member_jumin</td>
+    <td>member_birth</td>
+    <td>member_college</td>
+    <td>member_email</td>
+    <td>member_phone</td>
+    <td>member_post</td>
+    <td>member_addr1</td>
+    <td>member_addr2</td>
+    <td>member_file</td>
+    <td>member_gender</td>
+    <td>member_major</td>
+    <td>member_nation</td>
+    <td>use_flag</td>
+    <td>reg_date</td>
+    <td>reg_time</td>
+    <td>reg_agent</td>
+    <td>udt_date</td>
+    <td>udt_time</td>
+    <td>udt_agent</td>
+    <td>center_code</td>
+    <td>member_fax</td>
+    <td>member_memo</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.member_id }}</td>
+    <td>{{ object.member_level }}</td>
+    <td>{{ object.member_pw }}</td>
+    <td>{{ object.member_name }}</td>
+    <td>{{ object.member_jumin }}</td>
+    <td>{{ object.member_birth }}</td>
+    <td>{{ object.member_college }}</td>
+    <td>{{ object.member_email }}</td>
+    <td>{{ object.member_phone }}</td>
+    <td>{{ object.member_post }}</td>
+    <td>{{ object.member_addr1 }}</td>
+    <td>{{ object.member_addr2 }}</td>
+    <td>{{ object.member_file }}</td>
+    <td>{{ object.member_gender }}</td>
+    <td>{{ object.member_major }}</td>
+    <td>{{ object.member_nation }}</td>
+    <td>{{ object.use_flag }}</td>
+    <td>{{ object.reg_date }}</td>
+    <td>{{ object.reg_time }}</td>
+    <td>{{ object.reg_agent }}</td>
+    <td>{{ object.udt_date }}</td>
+    <td>{{ object.udt_time }}</td>
+    <td>{{ object.udt_agent }}</td>
+    <td>{{ object.center_code }}</td>
+    <td>{{ object.member_fax }}</td>
+    <td>{{ object.member_memo }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'WebApp_memberinfo_create' %}">Create new MemberInfo</a>
+{% endblock %}

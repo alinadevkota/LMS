@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'WebApp_quizanswerinfo_list' %}">QuizAnswerInfo Listing</a></p>
+<table class="table">
+<tr><td>subject_code</td><td>{{ object.subject_code }}</td></tr>
+<tr><td>lecture_code</td><td>{{ object.lecture_code }}</td></tr>
+<tr><td>chapter_code</td><td>{{ object.chapter_code }}</td></tr>
+<tr><td>member_code</td><td>{{ object.member_code }}</td></tr>
+<tr><td>quiz_code</td><td>{{ object.quiz_code }}</td></tr>
+<tr><td>quiz_type</td><td>{{ object.quiz_type }}</td></tr>
+<tr><td>quiz_answer</td><td>{{ object.quiz_answer }}</td></tr>
+<tr><td>quiz_answer_idx</td><td>{{ object.quiz_answer_idx }}</td></tr>
+<tr><td>quiz_correct</td><td>{{ object.quiz_correct }}</td></tr>
+<tr><td>quiz_score</td><td>{{ object.quiz_score }}</td></tr>
+<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
+<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
+<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
+<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
+<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
+<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
+<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
+<tr><td>test_type</td><td>{{ object.test_type }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit QuizAnswerInfo</a>
+
+{% endblock %}

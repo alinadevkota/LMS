@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'WebApp_membergroup_list' %}">MemberGroup Listing</a></p>
+<table class="table">
+<tr><td>center_code</td><td>{{ object.center_code }}</td></tr>
+<tr><td>group_name</td><td>{{ object.group_name }}</td></tr>
+<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
+<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
+<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
+<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
+<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
+<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
+<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit MemberGroup</a>
+
+{% endblock %}

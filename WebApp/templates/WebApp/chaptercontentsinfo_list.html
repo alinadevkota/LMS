@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'WebApp_chaptercontentsinfo_list' %}">ChapterContentsInfo Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>chapter_code</td>
+    <td>chapter_contents</td>
+    <td>chapter_audio</td>
+    <td>use_flag</td>
+    <td>reg_date</td>
+    <td>reg_time</td>
+    <td>reg_agent</td>
+    <td>udt_date</td>
+    <td>udt_time</td>
+    <td>udt_agent</td>
+    <td>contents_index</td>
+    <td>chapter_type</td>
+    <td>thum_file</td>
+    <td>vod_file</td>
+    <td>today</td>
+    <td>front1_img</td>
+    <td>front1_text</td>
+    <td>back1_img</td>
+    <td>back1_text</td>
+    <td>pdf_file</td>
+    <td>front2_img</td>
+    <td>front3_img</td>
+    <td>front4_img</td>
+    <td>front2_text</td>
+    <td>front3_text</td>
+    <td>front4_text</td>
+    <td>back2_img</td>
+    <td>back3_img</td>
+    <td>back4_img</td>
+    <td>back2_text</td>
+    <td>back3_text</td>
+    <td>back4_text</td>
+    <td>c1_audio</td>
+    <td>c2_audio</td>
+    <td>c3_audio</td>
+    <td>c4_audio</td>
+    <td>vod_size</td>
+    <td>offline_file</td>
+    <td>teacher_guide</td>
+    <td>today_text</td>
+    <td>contents_text</td>
+    <td>pbl_allow</td>
+    <td>pbl_lec_allow</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.chapter_code }}</td>
+    <td>{{ object.chapter_contents }}</td>
+    <td>{{ object.chapter_audio }}</td>
+    <td>{{ object.use_flag }}</td>
+    <td>{{ object.reg_date }}</td>
+    <td>{{ object.reg_time }}</td>
+    <td>{{ object.reg_agent }}</td>
+    <td>{{ object.udt_date }}</td>
+    <td>{{ object.udt_time }}</td>
+    <td>{{ object.udt_agent }}</td>
+    <td>{{ object.contents_index }}</td>
+    <td>{{ object.chapter_type }}</td>
+    <td>{{ object.thum_file }}</td>
+    <td>{{ object.vod_file }}</td>
+    <td>{{ object.today }}</td>
+    <td>{{ object.front1_img }}</td>
+    <td>{{ object.front1_text }}</td>
+    <td>{{ object.back1_img }}</td>
+    <td>{{ object.back1_text }}</td>
+    <td>{{ object.pdf_file }}</td>
+    <td>{{ object.front2_img }}</td>
+    <td>{{ object.front3_img }}</td>
+    <td>{{ object.front4_img }}</td>
+    <td>{{ object.front2_text }}</td>
+    <td>{{ object.front3_text }}</td>
+    <td>{{ object.front4_text }}</td>
+    <td>{{ object.back2_img }}</td>
+    <td>{{ object.back3_img }}</td>
+    <td>{{ object.back4_img }}</td>
+    <td>{{ object.back2_text }}</td>
+    <td>{{ object.back3_text }}</td>
+    <td>{{ object.back4_text }}</td>
+    <td>{{ object.c1_audio }}</td>
+    <td>{{ object.c2_audio }}</td>
+    <td>{{ object.c3_audio }}</td>
+    <td>{{ object.c4_audio }}</td>
+    <td>{{ object.vod_size }}</td>
+    <td>{{ object.offline_file }}</td>
+    <td>{{ object.teacher_guide }}</td>
+    <td>{{ object.today_text }}</td>
+    <td>{{ object.contents_text }}</td>
+    <td>{{ object.pbl_allow }}</td>
+    <td>{{ object.pbl_lec_allow }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'WebApp_chaptercontentsinfo_create' %}">Create new ChapterContentsInfo</a>
+{% endblock %}
