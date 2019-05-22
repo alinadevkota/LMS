@@ -1,20 +1,53 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_messageinfo_list' %}">MessageInfo Listing</a></p>
-<table class="table">
-<tr><td>teacher_code</td><td>{{ object.teacher_code }}</td></tr>
-<tr><td>member_code</td><td>{{ object.member_code }}</td></tr>
-<tr><td>message</td><td>{{ object.message }}</td></tr>
-<tr><td>message_read</td><td>{{ object.message_read }}</td></tr>
-<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
-<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
-<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
-<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
-<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
-<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
-<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit MessageInfo</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_messageinfo_list' %}">MessageInfo Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>teacher_code</td>
+            <td>{{ object.teacher_code }}</td>
+        </tr>
+        <tr>
+            <td>member_code</td>
+            <td>{{ object.member_code }}</td>
+        </tr>
+        <tr>
+            <td>message</td>
+            <td>{{ object.message }}</td>
+        </tr>
+        <tr>
+            <td>message_read</td>
+            <td>{{ object.message_read }}</td>
+        </tr>
+        <tr>
+            <td>use_flag</td>
+            <td>{{ object.use_flag }}</td>
+        </tr>
+        <tr>
+            <td>reg_date</td>
+            <td>{{ object.reg_date }}</td>
+        </tr>
+        <tr>
+            <td>reg_time</td>
+            <td>{{ object.reg_time }}</td>
+        </tr>
+        <tr>
+            <td>reg_agent</td>
+            <td>{{ object.reg_agent }}</td>
+        </tr>
+        <tr>
+            <td>udt_date</td>
+            <td>{{ object.udt_date }}</td>
+        </tr>
+        <tr>
+            <td>udt_time</td>
+            <td>{{ object.udt_time }}</td>
+        </tr>
+        <tr>
+            <td>udt_agent</td>
+            <td>{{ object.udt_agent }}</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit MessageInfo</a>
 
 {% endblock %}

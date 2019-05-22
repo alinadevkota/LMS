@@ -1,44 +1,45 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_scheduleinfo_list' %}">ScheduleInfo Listing</a></p>
-<table class="table">
-<tr>
-<td>ID</td><td>Link</td>
-    <td>member_code</td>
-    <td>title</td>
-    <td>content</td>
-    <td>start_date</td>
-    <td>start_time</td>
-    <td>end_date</td>
-    <td>end_time</td>
-    <td>use_flag</td>
-    <td>reg_date</td>
-    <td>reg_time</td>
-    <td>reg_agent</td>
-    <td>udt_date</td>
-    <td>udt_time</td>
-    <td>udt_agent</td>
-</tr>
-{% for object in object_list %}
-<tr>
-    <td>{{object.pk}}</td>
-    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-    <td>{{ object.member_code }}</td>
-    <td>{{ object.title }}</td>
-    <td>{{ object.content }}</td>
-    <td>{{ object.start_date }}</td>
-    <td>{{ object.start_time }}</td>
-    <td>{{ object.end_date }}</td>
-    <td>{{ object.end_time }}</td>
-    <td>{{ object.use_flag }}</td>
-    <td>{{ object.reg_date }}</td>
-    <td>{{ object.reg_time }}</td>
-    <td>{{ object.reg_agent }}</td>
-    <td>{{ object.udt_date }}</td>
-    <td>{{ object.udt_time }}</td>
-    <td>{{ object.udt_agent }}</td>
-</tr>
-{% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_scheduleinfo_create' %}">Create new ScheduleInfo</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_scheduleinfo_list' %}">ScheduleInfo Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>Link</td>
+            <td>member_code</td>
+            <td>title</td>
+            <td>content</td>
+            <td>start_date</td>
+            <td>start_time</td>
+            <td>end_date</td>
+            <td>end_time</td>
+            <td>use_flag</td>
+            <td>reg_date</td>
+            <td>reg_time</td>
+            <td>reg_agent</td>
+            <td>udt_date</td>
+            <td>udt_time</td>
+            <td>udt_agent</td>
+        </tr>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.pk }}</td>
+                <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+                <td>{{ object.member_code }}</td>
+                <td>{{ object.title }}</td>
+                <td>{{ object.content }}</td>
+                <td>{{ object.start_date }}</td>
+                <td>{{ object.start_time }}</td>
+                <td>{{ object.end_date }}</td>
+                <td>{{ object.end_time }}</td>
+                <td>{{ object.use_flag }}</td>
+                <td>{{ object.reg_date }}</td>
+                <td>{{ object.reg_time }}</td>
+                <td>{{ object.reg_agent }}</td>
+                <td>{{ object.udt_date }}</td>
+                <td>{{ object.udt_time }}</td>
+                <td>{{ object.udt_agent }}</td>
+            </tr>
+        {% endfor %}
+    </table><a class="btn btn-primary" href="{% url 'WebApp_scheduleinfo_create' %}">Create new ScheduleInfo</a>
 {% endblock %}

@@ -1,26 +1,77 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_boardcontentinfo_list' %}">BoardContentInfo Listing</a></p>
-<table class="table">
-<tr><td>board_code</td><td>{{ object.board_code }}</td></tr>
-<tr><td>admin_id</td><td>{{ object.admin_id }}</td></tr>
-<tr><td>title</td><td>{{ object.title }}</td></tr>
-<tr><td>contents</td><td>{{ object.contents }}</td></tr>
-<tr><td>writer</td><td>{{ object.writer }}</td></tr>
-<tr><td>view_cnt</td><td>{{ object.view_cnt }}</td></tr>
-<tr><td>ref_code</td><td>{{ object.ref_code }}</td></tr>
-<tr><td>ref_step</td><td>{{ object.ref_step }}</td></tr>
-<tr><td>ref_level</td><td>{{ object.ref_level }}</td></tr>
-<tr><td>write_time</td><td>{{ object.write_time }}</td></tr>
-<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
-<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
-<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
-<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
-<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
-<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
-<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit BoardContentInfo</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_boardcontentinfo_list' %}">BoardContentInfo Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>board_code</td>
+            <td>{{ object.board_code }}</td>
+        </tr>
+        <tr>
+            <td>admin_id</td>
+            <td>{{ object.admin_id }}</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>{{ object.title }}</td>
+        </tr>
+        <tr>
+            <td>contents</td>
+            <td>{{ object.contents }}</td>
+        </tr>
+        <tr>
+            <td>writer</td>
+            <td>{{ object.writer }}</td>
+        </tr>
+        <tr>
+            <td>view_cnt</td>
+            <td>{{ object.view_cnt }}</td>
+        </tr>
+        <tr>
+            <td>ref_code</td>
+            <td>{{ object.ref_code }}</td>
+        </tr>
+        <tr>
+            <td>ref_step</td>
+            <td>{{ object.ref_step }}</td>
+        </tr>
+        <tr>
+            <td>ref_level</td>
+            <td>{{ object.ref_level }}</td>
+        </tr>
+        <tr>
+            <td>write_time</td>
+            <td>{{ object.write_time }}</td>
+        </tr>
+        <tr>
+            <td>use_flag</td>
+            <td>{{ object.use_flag }}</td>
+        </tr>
+        <tr>
+            <td>reg_date</td>
+            <td>{{ object.reg_date }}</td>
+        </tr>
+        <tr>
+            <td>reg_time</td>
+            <td>{{ object.reg_time }}</td>
+        </tr>
+        <tr>
+            <td>reg_agent</td>
+            <td>{{ object.reg_agent }}</td>
+        </tr>
+        <tr>
+            <td>udt_date</td>
+            <td>{{ object.udt_date }}</td>
+        </tr>
+        <tr>
+            <td>udt_time</td>
+            <td>{{ object.udt_time }}</td>
+        </tr>
+        <tr>
+            <td>udt_agent</td>
+            <td>{{ object.udt_agent }}</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit BoardContentInfo</a>
 
 {% endblock %}

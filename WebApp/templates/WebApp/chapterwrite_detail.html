@@ -1,20 +1,53 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_chapterwrite_list' %}">ChapterWrite Listing</a></p>
-<table class="table">
-<tr><td>inning_code</td><td>{{ object.inning_code }}</td></tr>
-<tr><td>chapter_contents_code</td><td>{{ object.chapter_contents_code }}</td></tr>
-<tr><td>student_code</td><td>{{ object.student_code }}</td></tr>
-<tr><td>write_content</td><td>{{ object.write_content }}</td></tr>
-<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
-<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
-<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
-<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
-<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
-<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
-<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit ChapterWrite</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_chapterwrite_list' %}">ChapterWrite Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>inning_code</td>
+            <td>{{ object.inning_code }}</td>
+        </tr>
+        <tr>
+            <td>chapter_contents_code</td>
+            <td>{{ object.chapter_contents_code }}</td>
+        </tr>
+        <tr>
+            <td>student_code</td>
+            <td>{{ object.student_code }}</td>
+        </tr>
+        <tr>
+            <td>write_content</td>
+            <td>{{ object.write_content }}</td>
+        </tr>
+        <tr>
+            <td>use_flag</td>
+            <td>{{ object.use_flag }}</td>
+        </tr>
+        <tr>
+            <td>reg_date</td>
+            <td>{{ object.reg_date }}</td>
+        </tr>
+        <tr>
+            <td>reg_time</td>
+            <td>{{ object.reg_time }}</td>
+        </tr>
+        <tr>
+            <td>reg_agent</td>
+            <td>{{ object.reg_agent }}</td>
+        </tr>
+        <tr>
+            <td>udt_date</td>
+            <td>{{ object.udt_date }}</td>
+        </tr>
+        <tr>
+            <td>udt_time</td>
+            <td>{{ object.udt_time }}</td>
+        </tr>
+        <tr>
+            <td>udt_agent</td>
+            <td>{{ object.udt_agent }}</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit ChapterWrite</a>
 
 {% endblock %}

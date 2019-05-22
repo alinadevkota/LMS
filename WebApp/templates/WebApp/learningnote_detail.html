@@ -1,15 +1,33 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_learningnote_list' %}">LearningNote Listing</a></p>
-<table class="table">
-<tr><td>inning_code</td><td>{{ object.inning_code }}</td></tr>
-<tr><td>lecture_code</td><td>{{ object.lecture_code }}</td></tr>
-<tr><td>chapter_code</td><td>{{ object.chapter_code }}</td></tr>
-<tr><td>contents_code</td><td>{{ object.contents_code }}</td></tr>
-<tr><td>note_contents</td><td>{{ object.note_contents }}</td></tr>
-<tr><td>note_attachment</td><td>{{ object.note_attachment }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit LearningNote</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_learningnote_list' %}">LearningNote Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>inning_code</td>
+            <td>{{ object.inning_code }}</td>
+        </tr>
+        <tr>
+            <td>lecture_code</td>
+            <td>{{ object.lecture_code }}</td>
+        </tr>
+        <tr>
+            <td>chapter_code</td>
+            <td>{{ object.chapter_code }}</td>
+        </tr>
+        <tr>
+            <td>contents_code</td>
+            <td>{{ object.contents_code }}</td>
+        </tr>
+        <tr>
+            <td>note_contents</td>
+            <td>{{ object.note_contents }}</td>
+        </tr>
+        <tr>
+            <td>note_attachment</td>
+            <td>{{ object.note_attachment }}</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit LearningNote</a>
 
 {% endblock %}

@@ -1,6 +1,19 @@
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
-from .models import AssignHomeworkInfo, AssignQuestionInfo, BoardContentInfo, BoardInfo, CenterInfo, ChapterContentMedia, ChapterContentsInfo, ChapterImgInfo, ChapterInfo, ChapterMissonCheck, ChapterMissonCheckCard, ChapterMissonCheckItem, ChapterWrite, GroupMapping, HomeworkInfo, InningGroup, InningInfo, LearningNote, LectureInfo, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MemberInfo, MessageInfo, OmrAnswerInfo, OmrAssignInfo, OmrExampleInfo, OmrQuestionInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, QuizInfo, ScheduleInfo, TalkMember, TalkMessage, TalkMessageRead, TalkRoom, TodoInfo, TodoTInfo
-from .forms import AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardContentInfoForm, BoardInfoForm, CenterInfoForm, ChapterContentMediaForm, ChapterContentsInfoForm, ChapterImgInfoForm, ChapterInfoForm, ChapterMissonCheckForm, ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, ChapterWriteForm, GroupMappingForm, HomeworkInfoForm, InningGroupForm, InningInfoForm, LearningNoteForm, LectureInfoForm, LectureUbtInfoForm, LessonInfoForm, LessonLogForm, MemberGroupForm, MemberInfoForm, MessageInfoForm, OmrAnswerInfoForm, OmrAssignInfoForm, OmrExampleInfoForm, OmrQuestionInfoForm, QAnswerInfoForm, QAnswerLogForm, QExampleInfoForm, QuestionInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, QuizInfoForm, ScheduleInfoForm, TalkMemberForm, TalkMessageForm, TalkMessageReadForm, TalkRoomForm, TodoInfoForm, TodoTInfoForm
+
+from .forms import AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardContentInfoForm, BoardInfoForm, CenterInfoForm, \
+    ChapterContentMediaForm, ChapterContentsInfoForm, ChapterImgInfoForm, ChapterInfoForm, ChapterMissonCheckForm, \
+    ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, ChapterWriteForm, GroupMappingForm, HomeworkInfoForm, \
+    InningGroupForm, InningInfoForm, LearningNoteForm, LectureInfoForm, LectureUbtInfoForm, LessonInfoForm, \
+    LessonLogForm, MemberGroupForm, MemberInfoForm, MessageInfoForm, OmrAnswerInfoForm, OmrAssignInfoForm, \
+    OmrExampleInfoForm, OmrQuestionInfoForm, QAnswerInfoForm, QAnswerLogForm, QExampleInfoForm, QuestionInfoForm, \
+    QuizAnswerInfoForm, QuizExampleInfoForm, QuizInfoForm, ScheduleInfoForm, TalkMemberForm, TalkMessageForm, \
+    TalkMessageReadForm, TalkRoomForm, TodoInfoForm, TodoTInfoForm
+from .models import AssignHomeworkInfo, AssignQuestionInfo, BoardContentInfo, BoardInfo, CenterInfo, \
+    ChapterContentMedia, ChapterContentsInfo, ChapterImgInfo, ChapterInfo, ChapterMissonCheck, ChapterMissonCheckCard, \
+    ChapterMissonCheckItem, ChapterWrite, GroupMapping, HomeworkInfo, InningGroup, InningInfo, LearningNote, \
+    LectureInfo, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MemberInfo, MessageInfo, OmrAnswerInfo, \
+    OmrAssignInfo, OmrExampleInfo, OmrQuestionInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, \
+    QuizExampleInfo, QuizInfo, ScheduleInfo, TalkMember, TalkMessage, TalkMessageRead, TalkRoom, TodoInfo, TodoTInfo
 
 
 class AssignHomeworkInfoListView(ListView):
@@ -775,4 +788,3 @@ class TodoTInfoDetailView(DetailView):
 class TodoTInfoUpdateView(UpdateView):
     model = TodoTInfo
     form_class = TodoTInfoForm
-

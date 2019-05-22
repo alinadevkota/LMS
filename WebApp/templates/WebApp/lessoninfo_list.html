@@ -1,54 +1,55 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_lessoninfo_list' %}">LessonInfo Listing</a></p>
-<table class="table">
-<tr>
-<td>ID</td><td>Link</td>
-    <td>lecture_code</td>
-    <td>member_code</td>
-    <td>teacher_code</td>
-    <td>start_date</td>
-    <td>end_date</td>
-    <td>progress</td>
-    <td>use_flag</td>
-    <td>reg_date</td>
-    <td>reg_time</td>
-    <td>reg_agent</td>
-    <td>udt_date</td>
-    <td>udt_time</td>
-    <td>udt_agent</td>
-    <td>ubt_start</td>
-    <td>ubt_end</td>
-    <td>download_count</td>
-    <td>download_date</td>
-    <td>center_code</td>
-    <td>inning_code</td>
-</tr>
-{% for object in object_list %}
-<tr>
-    <td>{{object.pk}}</td>
-    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-    <td>{{ object.lecture_code }}</td>
-    <td>{{ object.member_code }}</td>
-    <td>{{ object.teacher_code }}</td>
-    <td>{{ object.start_date }}</td>
-    <td>{{ object.end_date }}</td>
-    <td>{{ object.progress }}</td>
-    <td>{{ object.use_flag }}</td>
-    <td>{{ object.reg_date }}</td>
-    <td>{{ object.reg_time }}</td>
-    <td>{{ object.reg_agent }}</td>
-    <td>{{ object.udt_date }}</td>
-    <td>{{ object.udt_time }}</td>
-    <td>{{ object.udt_agent }}</td>
-    <td>{{ object.ubt_start }}</td>
-    <td>{{ object.ubt_end }}</td>
-    <td>{{ object.download_count }}</td>
-    <td>{{ object.download_date }}</td>
-    <td>{{ object.center_code }}</td>
-    <td>{{ object.inning_code }}</td>
-</tr>
-{% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_lessoninfo_create' %}">Create new LessonInfo</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_lessoninfo_list' %}">LessonInfo Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>Link</td>
+            <td>lecture_code</td>
+            <td>member_code</td>
+            <td>teacher_code</td>
+            <td>start_date</td>
+            <td>end_date</td>
+            <td>progress</td>
+            <td>use_flag</td>
+            <td>reg_date</td>
+            <td>reg_time</td>
+            <td>reg_agent</td>
+            <td>udt_date</td>
+            <td>udt_time</td>
+            <td>udt_agent</td>
+            <td>ubt_start</td>
+            <td>ubt_end</td>
+            <td>download_count</td>
+            <td>download_date</td>
+            <td>center_code</td>
+            <td>inning_code</td>
+        </tr>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.pk }}</td>
+                <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+                <td>{{ object.lecture_code }}</td>
+                <td>{{ object.member_code }}</td>
+                <td>{{ object.teacher_code }}</td>
+                <td>{{ object.start_date }}</td>
+                <td>{{ object.end_date }}</td>
+                <td>{{ object.progress }}</td>
+                <td>{{ object.use_flag }}</td>
+                <td>{{ object.reg_date }}</td>
+                <td>{{ object.reg_time }}</td>
+                <td>{{ object.reg_agent }}</td>
+                <td>{{ object.udt_date }}</td>
+                <td>{{ object.udt_time }}</td>
+                <td>{{ object.udt_agent }}</td>
+                <td>{{ object.ubt_start }}</td>
+                <td>{{ object.ubt_end }}</td>
+                <td>{{ object.download_count }}</td>
+                <td>{{ object.download_date }}</td>
+                <td>{{ object.center_code }}</td>
+                <td>{{ object.inning_code }}</td>
+            </tr>
+        {% endfor %}
+    </table><a class="btn btn-primary" href="{% url 'WebApp_lessoninfo_create' %}">Create new LessonInfo</a>
 {% endblock %}

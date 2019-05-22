@@ -1,23 +1,65 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_boardinfo_list' %}">BoardInfo Listing</a></p>
-<table class="table">
-<tr><td>board_name</td><td>{{ object.board_name }}</td></tr>
-<tr><td>board_write_level</td><td>{{ object.board_write_level }}</td></tr>
-<tr><td>board_read_level</td><td>{{ object.board_read_level }}</td></tr>
-<tr><td>board_reply_level</td><td>{{ object.board_reply_level }}</td></tr>
-<tr><td>board_new_time</td><td>{{ object.board_new_time }}</td></tr>
-<tr><td>board_create_time</td><td>{{ object.board_create_time }}</td></tr>
-<tr><td>admin_id</td><td>{{ object.admin_id }}</td></tr>
-<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
-<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
-<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
-<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
-<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
-<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
-<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit BoardInfo</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_boardinfo_list' %}">BoardInfo Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>board_name</td>
+            <td>{{ object.board_name }}</td>
+        </tr>
+        <tr>
+            <td>board_write_level</td>
+            <td>{{ object.board_write_level }}</td>
+        </tr>
+        <tr>
+            <td>board_read_level</td>
+            <td>{{ object.board_read_level }}</td>
+        </tr>
+        <tr>
+            <td>board_reply_level</td>
+            <td>{{ object.board_reply_level }}</td>
+        </tr>
+        <tr>
+            <td>board_new_time</td>
+            <td>{{ object.board_new_time }}</td>
+        </tr>
+        <tr>
+            <td>board_create_time</td>
+            <td>{{ object.board_create_time }}</td>
+        </tr>
+        <tr>
+            <td>admin_id</td>
+            <td>{{ object.admin_id }}</td>
+        </tr>
+        <tr>
+            <td>use_flag</td>
+            <td>{{ object.use_flag }}</td>
+        </tr>
+        <tr>
+            <td>reg_date</td>
+            <td>{{ object.reg_date }}</td>
+        </tr>
+        <tr>
+            <td>reg_time</td>
+            <td>{{ object.reg_time }}</td>
+        </tr>
+        <tr>
+            <td>reg_agent</td>
+            <td>{{ object.reg_agent }}</td>
+        </tr>
+        <tr>
+            <td>udt_date</td>
+            <td>{{ object.udt_date }}</td>
+        </tr>
+        <tr>
+            <td>udt_time</td>
+            <td>{{ object.udt_time }}</td>
+        </tr>
+        <tr>
+            <td>udt_agent</td>
+            <td>{{ object.udt_agent }}</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit BoardInfo</a>
 
 {% endblock %}

@@ -1,23 +1,65 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_scheduleinfo_list' %}">ScheduleInfo Listing</a></p>
-<table class="table">
-<tr><td>member_code</td><td>{{ object.member_code }}</td></tr>
-<tr><td>title</td><td>{{ object.title }}</td></tr>
-<tr><td>content</td><td>{{ object.content }}</td></tr>
-<tr><td>start_date</td><td>{{ object.start_date }}</td></tr>
-<tr><td>start_time</td><td>{{ object.start_time }}</td></tr>
-<tr><td>end_date</td><td>{{ object.end_date }}</td></tr>
-<tr><td>end_time</td><td>{{ object.end_time }}</td></tr>
-<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
-<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
-<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
-<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
-<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
-<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
-<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit ScheduleInfo</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_scheduleinfo_list' %}">ScheduleInfo Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>member_code</td>
+            <td>{{ object.member_code }}</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>{{ object.title }}</td>
+        </tr>
+        <tr>
+            <td>content</td>
+            <td>{{ object.content }}</td>
+        </tr>
+        <tr>
+            <td>start_date</td>
+            <td>{{ object.start_date }}</td>
+        </tr>
+        <tr>
+            <td>start_time</td>
+            <td>{{ object.start_time }}</td>
+        </tr>
+        <tr>
+            <td>end_date</td>
+            <td>{{ object.end_date }}</td>
+        </tr>
+        <tr>
+            <td>end_time</td>
+            <td>{{ object.end_time }}</td>
+        </tr>
+        <tr>
+            <td>use_flag</td>
+            <td>{{ object.use_flag }}</td>
+        </tr>
+        <tr>
+            <td>reg_date</td>
+            <td>{{ object.reg_date }}</td>
+        </tr>
+        <tr>
+            <td>reg_time</td>
+            <td>{{ object.reg_time }}</td>
+        </tr>
+        <tr>
+            <td>reg_agent</td>
+            <td>{{ object.reg_agent }}</td>
+        </tr>
+        <tr>
+            <td>udt_date</td>
+            <td>{{ object.udt_date }}</td>
+        </tr>
+        <tr>
+            <td>udt_time</td>
+            <td>{{ object.udt_time }}</td>
+        </tr>
+        <tr>
+            <td>udt_agent</td>
+            <td>{{ object.udt_agent }}</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit ScheduleInfo</a>
 
 {% endblock %}

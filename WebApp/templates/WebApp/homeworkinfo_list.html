@@ -1,36 +1,37 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_homeworkinfo_list' %}">HomeworkInfo Listing</a></p>
-<table class="table">
-<tr>
-<td>ID</td><td>Link</td>
-    <td>question_code</td>
-    <td>subject_code</td>
-    <td>lecture_code</td>
-    <td>chapter_code</td>
-    <td>level_score</td>
-    <td>use_flag</td>
-    <td>reg_date</td>
-    <td>reg_time</td>
-    <td>reg_agent</td>
-    <td>level</td>
-</tr>
-{% for object in object_list %}
-<tr>
-    <td>{{object.pk}}</td>
-    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-    <td>{{ object.question_code }}</td>
-    <td>{{ object.subject_code }}</td>
-    <td>{{ object.lecture_code }}</td>
-    <td>{{ object.chapter_code }}</td>
-    <td>{{ object.level_score }}</td>
-    <td>{{ object.use_flag }}</td>
-    <td>{{ object.reg_date }}</td>
-    <td>{{ object.reg_time }}</td>
-    <td>{{ object.reg_agent }}</td>
-    <td>{{ object.level }}</td>
-</tr>
-{% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_homeworkinfo_create' %}">Create new HomeworkInfo</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_homeworkinfo_list' %}">HomeworkInfo Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>Link</td>
+            <td>question_code</td>
+            <td>subject_code</td>
+            <td>lecture_code</td>
+            <td>chapter_code</td>
+            <td>level_score</td>
+            <td>use_flag</td>
+            <td>reg_date</td>
+            <td>reg_time</td>
+            <td>reg_agent</td>
+            <td>level</td>
+        </tr>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.pk }}</td>
+                <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+                <td>{{ object.question_code }}</td>
+                <td>{{ object.subject_code }}</td>
+                <td>{{ object.lecture_code }}</td>
+                <td>{{ object.chapter_code }}</td>
+                <td>{{ object.level_score }}</td>
+                <td>{{ object.use_flag }}</td>
+                <td>{{ object.reg_date }}</td>
+                <td>{{ object.reg_time }}</td>
+                <td>{{ object.reg_agent }}</td>
+                <td>{{ object.level }}</td>
+            </tr>
+        {% endfor %}
+    </table><a class="btn btn-primary" href="{% url 'WebApp_homeworkinfo_create' %}">Create new HomeworkInfo</a>
 {% endblock %}

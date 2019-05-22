@@ -1,58 +1,59 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_lectureinfo_list' %}">LectureInfo Listing</a></p>
-<table class="table">
-<tr>
-<td>ID</td><td>Link</td>
-    <td>lecture_name</td>
-    <td>lecture_teacher</td>
-    <td>lecture_cover</td>
-    <td>lecture_cover_file</td>
-    <td>lecture_level</td>
-    <td>lecture_info</td>
-    <td>teacher</td>
-    <td>use_flag</td>
-    <td>reg_date</td>
-    <td>reg_time</td>
-    <td>reg_agent</td>
-    <td>udt_date</td>
-    <td>udt_time</td>
-    <td>udt_agent</td>
-    <td>lecture_certification</td>
-    <td>lecture_provider</td>
-    <td>cert_crit_prog</td>
-    <td>cert_crit_post</td>
-    <td>cert_crit_ubt</td>
-    <td>cert_crit_issue</td>
-    <td>center_code</td>
-</tr>
-{% for object in object_list %}
-<tr>
-    <td>{{object.pk}}</td>
-    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-    <td>{{ object.lecture_name }}</td>
-    <td>{{ object.lecture_teacher }}</td>
-    <td>{{ object.lecture_cover }}</td>
-    <td>{{ object.lecture_cover_file }}</td>
-    <td>{{ object.lecture_level }}</td>
-    <td>{{ object.lecture_info }}</td>
-    <td>{{ object.teacher }}</td>
-    <td>{{ object.use_flag }}</td>
-    <td>{{ object.reg_date }}</td>
-    <td>{{ object.reg_time }}</td>
-    <td>{{ object.reg_agent }}</td>
-    <td>{{ object.udt_date }}</td>
-    <td>{{ object.udt_time }}</td>
-    <td>{{ object.udt_agent }}</td>
-    <td>{{ object.lecture_certification }}</td>
-    <td>{{ object.lecture_provider }}</td>
-    <td>{{ object.cert_crit_prog }}</td>
-    <td>{{ object.cert_crit_post }}</td>
-    <td>{{ object.cert_crit_ubt }}</td>
-    <td>{{ object.cert_crit_issue }}</td>
-    <td>{{ object.center_code }}</td>
-</tr>
-{% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_lectureinfo_create' %}">Create new LectureInfo</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_lectureinfo_list' %}">LectureInfo Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>Link</td>
+            <td>lecture_name</td>
+            <td>lecture_teacher</td>
+            <td>lecture_cover</td>
+            <td>lecture_cover_file</td>
+            <td>lecture_level</td>
+            <td>lecture_info</td>
+            <td>teacher</td>
+            <td>use_flag</td>
+            <td>reg_date</td>
+            <td>reg_time</td>
+            <td>reg_agent</td>
+            <td>udt_date</td>
+            <td>udt_time</td>
+            <td>udt_agent</td>
+            <td>lecture_certification</td>
+            <td>lecture_provider</td>
+            <td>cert_crit_prog</td>
+            <td>cert_crit_post</td>
+            <td>cert_crit_ubt</td>
+            <td>cert_crit_issue</td>
+            <td>center_code</td>
+        </tr>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.pk }}</td>
+                <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+                <td>{{ object.lecture_name }}</td>
+                <td>{{ object.lecture_teacher }}</td>
+                <td>{{ object.lecture_cover }}</td>
+                <td>{{ object.lecture_cover_file }}</td>
+                <td>{{ object.lecture_level }}</td>
+                <td>{{ object.lecture_info }}</td>
+                <td>{{ object.teacher }}</td>
+                <td>{{ object.use_flag }}</td>
+                <td>{{ object.reg_date }}</td>
+                <td>{{ object.reg_time }}</td>
+                <td>{{ object.reg_agent }}</td>
+                <td>{{ object.udt_date }}</td>
+                <td>{{ object.udt_time }}</td>
+                <td>{{ object.udt_agent }}</td>
+                <td>{{ object.lecture_certification }}</td>
+                <td>{{ object.lecture_provider }}</td>
+                <td>{{ object.cert_crit_prog }}</td>
+                <td>{{ object.cert_crit_post }}</td>
+                <td>{{ object.cert_crit_ubt }}</td>
+                <td>{{ object.cert_crit_issue }}</td>
+                <td>{{ object.center_code }}</td>
+            </tr>
+        {% endfor %}
+    </table><a class="btn btn-primary" href="{% url 'WebApp_lectureinfo_create' %}">Create new LectureInfo</a>
 {% endblock %}

@@ -1,26 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_talkmessage_list' %}">TalkMessage Listing</a></p>
-<table class="table">
-<tr>
-<td>ID</td><td>Link</td>
-    <td>talk_room_id</td>
-    <td>message</td>
-    <td>sender_member_code</td>
-    <td>send_date</td>
-    <td>send_time</td>
-</tr>
-{% for object in object_list %}
-<tr>
-    <td>{{object.pk}}</td>
-    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-    <td>{{ object.talk_room_id }}</td>
-    <td>{{ object.message }}</td>
-    <td>{{ object.sender_member_code }}</td>
-    <td>{{ object.send_date }}</td>
-    <td>{{ object.send_time }}</td>
-</tr>
-{% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_talkmessage_create' %}">Create new TalkMessage</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_talkmessage_list' %}">TalkMessage Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>Link</td>
+            <td>talk_room_id</td>
+            <td>message</td>
+            <td>sender_member_code</td>
+            <td>send_date</td>
+            <td>send_time</td>
+        </tr>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.pk }}</td>
+                <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+                <td>{{ object.talk_room_id }}</td>
+                <td>{{ object.message }}</td>
+                <td>{{ object.sender_member_code }}</td>
+                <td>{{ object.send_date }}</td>
+                <td>{{ object.send_time }}</td>
+            </tr>
+        {% endfor %}
+    </table><a class="btn btn-primary" href="{% url 'WebApp_talkmessage_create' %}">Create new TalkMessage</a>
 {% endblock %}

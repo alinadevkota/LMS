@@ -1,35 +1,113 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_memberinfo_list' %}">MemberInfo Listing</a></p>
-<table class="table">
-<tr><td>member_id</td><td>{{ object.member_id }}</td></tr>
-<tr><td>member_level</td><td>{{ object.member_level }}</td></tr>
-<tr><td>member_pw</td><td>{{ object.member_pw }}</td></tr>
-<tr><td>member_name</td><td>{{ object.member_name }}</td></tr>
-<tr><td>member_jumin</td><td>{{ object.member_jumin }}</td></tr>
-<tr><td>member_birth</td><td>{{ object.member_birth }}</td></tr>
-<tr><td>member_college</td><td>{{ object.member_college }}</td></tr>
-<tr><td>member_email</td><td>{{ object.member_email }}</td></tr>
-<tr><td>member_phone</td><td>{{ object.member_phone }}</td></tr>
-<tr><td>member_post</td><td>{{ object.member_post }}</td></tr>
-<tr><td>member_addr1</td><td>{{ object.member_addr1 }}</td></tr>
-<tr><td>member_addr2</td><td>{{ object.member_addr2 }}</td></tr>
-<tr><td>member_file</td><td>{{ object.member_file }}</td></tr>
-<tr><td>member_gender</td><td>{{ object.member_gender }}</td></tr>
-<tr><td>member_major</td><td>{{ object.member_major }}</td></tr>
-<tr><td>member_nation</td><td>{{ object.member_nation }}</td></tr>
-<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
-<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
-<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
-<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
-<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
-<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
-<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
-<tr><td>center_code</td><td>{{ object.center_code }}</td></tr>
-<tr><td>member_fax</td><td>{{ object.member_fax }}</td></tr>
-<tr><td>member_memo</td><td>{{ object.member_memo }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit MemberInfo</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_memberinfo_list' %}">MemberInfo Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>member_id</td>
+            <td>{{ object.member_id }}</td>
+        </tr>
+        <tr>
+            <td>member_level</td>
+            <td>{{ object.member_level }}</td>
+        </tr>
+        <tr>
+            <td>member_pw</td>
+            <td>{{ object.member_pw }}</td>
+        </tr>
+        <tr>
+            <td>member_name</td>
+            <td>{{ object.member_name }}</td>
+        </tr>
+        <tr>
+            <td>member_jumin</td>
+            <td>{{ object.member_jumin }}</td>
+        </tr>
+        <tr>
+            <td>member_birth</td>
+            <td>{{ object.member_birth }}</td>
+        </tr>
+        <tr>
+            <td>member_college</td>
+            <td>{{ object.member_college }}</td>
+        </tr>
+        <tr>
+            <td>member_email</td>
+            <td>{{ object.member_email }}</td>
+        </tr>
+        <tr>
+            <td>member_phone</td>
+            <td>{{ object.member_phone }}</td>
+        </tr>
+        <tr>
+            <td>member_post</td>
+            <td>{{ object.member_post }}</td>
+        </tr>
+        <tr>
+            <td>member_addr1</td>
+            <td>{{ object.member_addr1 }}</td>
+        </tr>
+        <tr>
+            <td>member_addr2</td>
+            <td>{{ object.member_addr2 }}</td>
+        </tr>
+        <tr>
+            <td>member_file</td>
+            <td>{{ object.member_file }}</td>
+        </tr>
+        <tr>
+            <td>member_gender</td>
+            <td>{{ object.member_gender }}</td>
+        </tr>
+        <tr>
+            <td>member_major</td>
+            <td>{{ object.member_major }}</td>
+        </tr>
+        <tr>
+            <td>member_nation</td>
+            <td>{{ object.member_nation }}</td>
+        </tr>
+        <tr>
+            <td>use_flag</td>
+            <td>{{ object.use_flag }}</td>
+        </tr>
+        <tr>
+            <td>reg_date</td>
+            <td>{{ object.reg_date }}</td>
+        </tr>
+        <tr>
+            <td>reg_time</td>
+            <td>{{ object.reg_time }}</td>
+        </tr>
+        <tr>
+            <td>reg_agent</td>
+            <td>{{ object.reg_agent }}</td>
+        </tr>
+        <tr>
+            <td>udt_date</td>
+            <td>{{ object.udt_date }}</td>
+        </tr>
+        <tr>
+            <td>udt_time</td>
+            <td>{{ object.udt_time }}</td>
+        </tr>
+        <tr>
+            <td>udt_agent</td>
+            <td>{{ object.udt_agent }}</td>
+        </tr>
+        <tr>
+            <td>center_code</td>
+            <td>{{ object.center_code }}</td>
+        </tr>
+        <tr>
+            <td>member_fax</td>
+            <td>{{ object.member_fax }}</td>
+        </tr>
+        <tr>
+            <td>member_memo</td>
+            <td>{{ object.member_memo }}</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit MemberInfo</a>
 
 {% endblock %}

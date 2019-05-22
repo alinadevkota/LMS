@@ -1,6 +1,7 @@
+from rest_framework import viewsets, permissions
+
 from . import models
 from . import serializers
-from rest_framework import viewsets, permissions
 
 
 class AssignHomeworkInfoViewSet(viewsets.ModelViewSet):
@@ -345,5 +346,3 @@ class TodoTInfoViewSet(viewsets.ModelViewSet):
     queryset = models.TodoTInfo.objects.all()
     serializer_class = serializers.TodoTInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-

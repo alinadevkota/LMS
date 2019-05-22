@@ -1,40 +1,41 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_omrassigninfo_list' %}">OmrAssignInfo Listing</a></p>
-<table class="table">
-<tr>
-<td>ID</td><td>Link</td>
-    <td>question_code</td>
-    <td>subject_code</td>
-    <td>lecture_code</td>
-    <td>chapter_code</td>
-    <td>member_code</td>
-    <td>use_flag</td>
-    <td>reg_date</td>
-    <td>reg_time</td>
-    <td>reg_agent</td>
-    <td>udt_date</td>
-    <td>udt_time</td>
-    <td>udt_agent</td>
-</tr>
-{% for object in object_list %}
-<tr>
-    <td>{{object.pk}}</td>
-    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-    <td>{{ object.question_code }}</td>
-    <td>{{ object.subject_code }}</td>
-    <td>{{ object.lecture_code }}</td>
-    <td>{{ object.chapter_code }}</td>
-    <td>{{ object.member_code }}</td>
-    <td>{{ object.use_flag }}</td>
-    <td>{{ object.reg_date }}</td>
-    <td>{{ object.reg_time }}</td>
-    <td>{{ object.reg_agent }}</td>
-    <td>{{ object.udt_date }}</td>
-    <td>{{ object.udt_time }}</td>
-    <td>{{ object.udt_agent }}</td>
-</tr>
-{% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_omrassigninfo_create' %}">Create new OmrAssignInfo</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_omrassigninfo_list' %}">OmrAssignInfo Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>Link</td>
+            <td>question_code</td>
+            <td>subject_code</td>
+            <td>lecture_code</td>
+            <td>chapter_code</td>
+            <td>member_code</td>
+            <td>use_flag</td>
+            <td>reg_date</td>
+            <td>reg_time</td>
+            <td>reg_agent</td>
+            <td>udt_date</td>
+            <td>udt_time</td>
+            <td>udt_agent</td>
+        </tr>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.pk }}</td>
+                <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+                <td>{{ object.question_code }}</td>
+                <td>{{ object.subject_code }}</td>
+                <td>{{ object.lecture_code }}</td>
+                <td>{{ object.chapter_code }}</td>
+                <td>{{ object.member_code }}</td>
+                <td>{{ object.use_flag }}</td>
+                <td>{{ object.reg_date }}</td>
+                <td>{{ object.reg_time }}</td>
+                <td>{{ object.reg_agent }}</td>
+                <td>{{ object.udt_date }}</td>
+                <td>{{ object.udt_time }}</td>
+                <td>{{ object.udt_agent }}</td>
+            </tr>
+        {% endfor %}
+    </table><a class="btn btn-primary" href="{% url 'WebApp_omrassigninfo_create' %}">Create new OmrAssignInfo</a>
 {% endblock %}

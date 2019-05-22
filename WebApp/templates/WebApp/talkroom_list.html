@@ -1,24 +1,25 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_talkroom_list' %}">TalkRoom Listing</a></p>
-<table class="table">
-<tr>
-<td>ID</td><td>Link</td>
-    <td>talk_room_cate_code</td>
-    <td>lecture_code</td>
-    <td>inning_code</td>
-    <td>use_flag</td>
-</tr>
-{% for object in object_list %}
-<tr>
-    <td>{{object.pk}}</td>
-    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-    <td>{{ object.talk_room_cate_code }}</td>
-    <td>{{ object.lecture_code }}</td>
-    <td>{{ object.inning_code }}</td>
-    <td>{{ object.use_flag }}</td>
-</tr>
-{% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_talkroom_create' %}">Create new TalkRoom</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_talkroom_list' %}">TalkRoom Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>Link</td>
+            <td>talk_room_cate_code</td>
+            <td>lecture_code</td>
+            <td>inning_code</td>
+            <td>use_flag</td>
+        </tr>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.pk }}</td>
+                <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+                <td>{{ object.talk_room_cate_code }}</td>
+                <td>{{ object.lecture_code }}</td>
+                <td>{{ object.inning_code }}</td>
+                <td>{{ object.use_flag }}</td>
+            </tr>
+        {% endfor %}
+    </table><a class="btn btn-primary" href="{% url 'WebApp_talkroom_create' %}">Create new TalkRoom</a>
 {% endblock %}

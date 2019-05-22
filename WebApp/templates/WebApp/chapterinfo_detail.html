@@ -1,57 +1,201 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_chapterinfo_list' %}">ChapterInfo Listing</a></p>
-<table class="table">
-<tr><td>lecture_code</td><td>{{ object.lecture_code }}</td></tr>
-<tr><td>chapter_no</td><td>{{ object.chapter_no }}</td></tr>
-<tr><td>chapter_name</td><td>{{ object.chapter_name }}</td></tr>
-<tr><td>topic</td><td>{{ object.topic }}</td></tr>
-<tr><td>summary</td><td>{{ object.summary }}</td></tr>
-<tr><td>page_num</td><td>{{ object.page_num }}</td></tr>
-<tr><td>vod_size</td><td>{{ object.vod_size }}</td></tr>
-<tr><td>intro</td><td>{{ object.intro }}</td></tr>
-<tr><td>target</td><td>{{ object.target }}</td></tr>
-<tr><td>top_img</td><td>{{ object.top_img }}</td></tr>
-<tr><td>bottom_img1</td><td>{{ object.bottom_img1 }}</td></tr>
-<tr><td>bottom_img2</td><td>{{ object.bottom_img2 }}</td></tr>
-<tr><td>bottom_img3</td><td>{{ object.bottom_img3 }}</td></tr>
-<tr><td>thum_file</td><td>{{ object.thum_file }}</td></tr>
-<tr><td>vod_file</td><td>{{ object.vod_file }}</td></tr>
-<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
-<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
-<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
-<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
-<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
-<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
-<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
-<tr><td>today</td><td>{{ object.today }}</td></tr>
-<tr><td>chapter_type</td><td>{{ object.chapter_type }}</td></tr>
-<tr><td>prologue_type</td><td>{{ object.prologue_type }}</td></tr>
-<tr><td>tabset</td><td>{{ object.tabset }}</td></tr>
-<tr><td>chapter_image</td><td>{{ object.chapter_image }}</td></tr>
-<tr><td>chapter_use</td><td>{{ object.chapter_use }}</td></tr>
-<tr><td>offline_file</td><td>{{ object.offline_file }}</td></tr>
-<tr><td>pre_test_type</td><td>{{ object.pre_test_type }}</td></tr>
-<tr><td>post_test_type</td><td>{{ object.post_test_type }}</td></tr>
-<tr><td>level1_avg</td><td>{{ object.level1_avg }}</td></tr>
-<tr><td>level2_avg</td><td>{{ object.level2_avg }}</td></tr>
-<tr><td>level3_avg</td><td>{{ object.level3_avg }}</td></tr>
-<tr><td>level1_hard_avg</td><td>{{ object.level1_hard_avg }}</td></tr>
-<tr><td>level1_medium_avg</td><td>{{ object.level1_medium_avg }}</td></tr>
-<tr><td>level1_easy_avg</td><td>{{ object.level1_easy_avg }}</td></tr>
-<tr><td>level2_hard_avg</td><td>{{ object.level2_hard_avg }}</td></tr>
-<tr><td>level2_medium_avg</td><td>{{ object.level2_medium_avg }}</td></tr>
-<tr><td>level2_easy_avg</td><td>{{ object.level2_easy_avg }}</td></tr>
-<tr><td>level3_hard_avg</td><td>{{ object.level3_hard_avg }}</td></tr>
-<tr><td>level3_medium_avg</td><td>{{ object.level3_medium_avg }}</td></tr>
-<tr><td>level3_easy_avg</td><td>{{ object.level3_easy_avg }}</td></tr>
-<tr><td>homework_count</td><td>{{ object.homework_count }}</td></tr>
-<tr><td>epilogue_type</td><td>{{ object.epilogue_type }}</td></tr>
-<tr><td>epilogue_img</td><td>{{ object.epilogue_img }}</td></tr>
-<tr><td>pbl_flag</td><td>{{ object.pbl_flag }}</td></tr>
-<tr><td>chapter_use_time</td><td>{{ object.chapter_use_time }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit ChapterInfo</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_chapterinfo_list' %}">ChapterInfo Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>lecture_code</td>
+            <td>{{ object.lecture_code }}</td>
+        </tr>
+        <tr>
+            <td>chapter_no</td>
+            <td>{{ object.chapter_no }}</td>
+        </tr>
+        <tr>
+            <td>chapter_name</td>
+            <td>{{ object.chapter_name }}</td>
+        </tr>
+        <tr>
+            <td>topic</td>
+            <td>{{ object.topic }}</td>
+        </tr>
+        <tr>
+            <td>summary</td>
+            <td>{{ object.summary }}</td>
+        </tr>
+        <tr>
+            <td>page_num</td>
+            <td>{{ object.page_num }}</td>
+        </tr>
+        <tr>
+            <td>vod_size</td>
+            <td>{{ object.vod_size }}</td>
+        </tr>
+        <tr>
+            <td>intro</td>
+            <td>{{ object.intro }}</td>
+        </tr>
+        <tr>
+            <td>target</td>
+            <td>{{ object.target }}</td>
+        </tr>
+        <tr>
+            <td>top_img</td>
+            <td>{{ object.top_img }}</td>
+        </tr>
+        <tr>
+            <td>bottom_img1</td>
+            <td>{{ object.bottom_img1 }}</td>
+        </tr>
+        <tr>
+            <td>bottom_img2</td>
+            <td>{{ object.bottom_img2 }}</td>
+        </tr>
+        <tr>
+            <td>bottom_img3</td>
+            <td>{{ object.bottom_img3 }}</td>
+        </tr>
+        <tr>
+            <td>thum_file</td>
+            <td>{{ object.thum_file }}</td>
+        </tr>
+        <tr>
+            <td>vod_file</td>
+            <td>{{ object.vod_file }}</td>
+        </tr>
+        <tr>
+            <td>use_flag</td>
+            <td>{{ object.use_flag }}</td>
+        </tr>
+        <tr>
+            <td>reg_date</td>
+            <td>{{ object.reg_date }}</td>
+        </tr>
+        <tr>
+            <td>reg_time</td>
+            <td>{{ object.reg_time }}</td>
+        </tr>
+        <tr>
+            <td>reg_agent</td>
+            <td>{{ object.reg_agent }}</td>
+        </tr>
+        <tr>
+            <td>udt_date</td>
+            <td>{{ object.udt_date }}</td>
+        </tr>
+        <tr>
+            <td>udt_time</td>
+            <td>{{ object.udt_time }}</td>
+        </tr>
+        <tr>
+            <td>udt_agent</td>
+            <td>{{ object.udt_agent }}</td>
+        </tr>
+        <tr>
+            <td>today</td>
+            <td>{{ object.today }}</td>
+        </tr>
+        <tr>
+            <td>chapter_type</td>
+            <td>{{ object.chapter_type }}</td>
+        </tr>
+        <tr>
+            <td>prologue_type</td>
+            <td>{{ object.prologue_type }}</td>
+        </tr>
+        <tr>
+            <td>tabset</td>
+            <td>{{ object.tabset }}</td>
+        </tr>
+        <tr>
+            <td>chapter_image</td>
+            <td>{{ object.chapter_image }}</td>
+        </tr>
+        <tr>
+            <td>chapter_use</td>
+            <td>{{ object.chapter_use }}</td>
+        </tr>
+        <tr>
+            <td>offline_file</td>
+            <td>{{ object.offline_file }}</td>
+        </tr>
+        <tr>
+            <td>pre_test_type</td>
+            <td>{{ object.pre_test_type }}</td>
+        </tr>
+        <tr>
+            <td>post_test_type</td>
+            <td>{{ object.post_test_type }}</td>
+        </tr>
+        <tr>
+            <td>level1_avg</td>
+            <td>{{ object.level1_avg }}</td>
+        </tr>
+        <tr>
+            <td>level2_avg</td>
+            <td>{{ object.level2_avg }}</td>
+        </tr>
+        <tr>
+            <td>level3_avg</td>
+            <td>{{ object.level3_avg }}</td>
+        </tr>
+        <tr>
+            <td>level1_hard_avg</td>
+            <td>{{ object.level1_hard_avg }}</td>
+        </tr>
+        <tr>
+            <td>level1_medium_avg</td>
+            <td>{{ object.level1_medium_avg }}</td>
+        </tr>
+        <tr>
+            <td>level1_easy_avg</td>
+            <td>{{ object.level1_easy_avg }}</td>
+        </tr>
+        <tr>
+            <td>level2_hard_avg</td>
+            <td>{{ object.level2_hard_avg }}</td>
+        </tr>
+        <tr>
+            <td>level2_medium_avg</td>
+            <td>{{ object.level2_medium_avg }}</td>
+        </tr>
+        <tr>
+            <td>level2_easy_avg</td>
+            <td>{{ object.level2_easy_avg }}</td>
+        </tr>
+        <tr>
+            <td>level3_hard_avg</td>
+            <td>{{ object.level3_hard_avg }}</td>
+        </tr>
+        <tr>
+            <td>level3_medium_avg</td>
+            <td>{{ object.level3_medium_avg }}</td>
+        </tr>
+        <tr>
+            <td>level3_easy_avg</td>
+            <td>{{ object.level3_easy_avg }}</td>
+        </tr>
+        <tr>
+            <td>homework_count</td>
+            <td>{{ object.homework_count }}</td>
+        </tr>
+        <tr>
+            <td>epilogue_type</td>
+            <td>{{ object.epilogue_type }}</td>
+        </tr>
+        <tr>
+            <td>epilogue_img</td>
+            <td>{{ object.epilogue_img }}</td>
+        </tr>
+        <tr>
+            <td>pbl_flag</td>
+            <td>{{ object.pbl_flag }}</td>
+        </tr>
+        <tr>
+            <td>chapter_use_time</td>
+            <td>{{ object.chapter_use_time }}</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit ChapterInfo</a>
 
 {% endblock %}

@@ -1,22 +1,61 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_chaptermissoncheck_list' %}">ChapterMissonCheck Listing</a></p>
-<table class="table">
-<tr><td>check_code</td><td>{{ object.check_code }}</td></tr>
-<tr><td>check_item_code</td><td>{{ object.check_item_code }}</td></tr>
-<tr><td>student_code</td><td>{{ object.student_code }}</td></tr>
-<tr><td>check_agent_code</td><td>{{ object.check_agent_code }}</td></tr>
-<tr><td>is_check_yn</td><td>{{ object.is_check_yn }}</td></tr>
-<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
-<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
-<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
-<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
-<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
-<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
-<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
-<tr><td>inning_code</td><td>{{ object.inning_code }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit ChapterMissonCheck</a>
+    <p><a class="btn btn-default" href="{% url 'WebApp_chaptermissoncheck_list' %}">ChapterMissonCheck Listing</a></p>
+    <table class="table">
+        <tr>
+            <td>check_code</td>
+            <td>{{ object.check_code }}</td>
+        </tr>
+        <tr>
+            <td>check_item_code</td>
+            <td>{{ object.check_item_code }}</td>
+        </tr>
+        <tr>
+            <td>student_code</td>
+            <td>{{ object.student_code }}</td>
+        </tr>
+        <tr>
+            <td>check_agent_code</td>
+            <td>{{ object.check_agent_code }}</td>
+        </tr>
+        <tr>
+            <td>is_check_yn</td>
+            <td>{{ object.is_check_yn }}</td>
+        </tr>
+        <tr>
+            <td>use_flag</td>
+            <td>{{ object.use_flag }}</td>
+        </tr>
+        <tr>
+            <td>reg_date</td>
+            <td>{{ object.reg_date }}</td>
+        </tr>
+        <tr>
+            <td>reg_time</td>
+            <td>{{ object.reg_time }}</td>
+        </tr>
+        <tr>
+            <td>reg_agent</td>
+            <td>{{ object.reg_agent }}</td>
+        </tr>
+        <tr>
+            <td>udt_date</td>
+            <td>{{ object.udt_date }}</td>
+        </tr>
+        <tr>
+            <td>udt_time</td>
+            <td>{{ object.udt_time }}</td>
+        </tr>
+        <tr>
+            <td>udt_agent</td>
+            <td>{{ object.udt_agent }}</td>
+        </tr>
+        <tr>
+            <td>inning_code</td>
+            <td>{{ object.inning_code }}</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit ChapterMissonCheck</a>
 
 {% endblock %}
