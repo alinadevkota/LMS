@@ -8,7 +8,7 @@ URL of the remote repository: **https://gitlab.com/nsdevil/lms.git**
 
 **For Windows user:**
 If you get problem in installing **Twisted** library:
-Download Suitable Version of pre compilled library from: [https://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted](https://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted) and install using :
+Download Suitable Version of pre compilled library from: [https://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted](https://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted) and install from  venv activated Pycharm terminal using :
 **pip install *filename*.whl** 
 and again Install Requirements 
 
