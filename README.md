@@ -11,7 +11,7 @@ Download Suitable Version of pre compilled library from: [https://www.lfd.uci.ed
 **pip install *filename*.whl** 
 and again Install Requirements 
 After all the requirements get install you additionally need to install Win32API from venv activated Pycharm terminal:
-**pip install win32api**
+**pip install pypiwin32**
 
 5.  Migrate Database: **python manage.py makemigrations WebApp**
 6. Migrate Database: **python manage.py migrate**
