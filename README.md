@@ -9,8 +9,8 @@ URL of the remote repository: **https://gitlab.com/nsdevil/lms.git**
 If you get problem in installing **Twisted** library:
 Download Suitable Version of pre compilled library from: [https://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted](https://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted) and install from venv activated Pycharm terminal using :
 **pip install *filename*.whl** 
-and again Install Requirements 
-After all the requirements get install you additionally need to install Win32API from venv activated Pycharm terminal:
+and again Install Requirements.<br>
+After all the requirements get installed, you additionally need to install Win32API from venv activated Pycharm terminal:
 **pip install pypiwin32**
 
 5.  Migrate Database: **python manage.py makemigrations WebApp**
