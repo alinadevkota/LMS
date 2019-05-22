@@ -18,7 +18,7 @@ and again Install Requirements
 8. Access the homepage on     http://localhost:8000
 
 # Live Deployment:
-Check > **lms-nsd.sushant.info.nplms-nsd.sushant.info.np**
+Check  http://lms-nsd.sushant.info.np
 
 
 # Project Management Links
