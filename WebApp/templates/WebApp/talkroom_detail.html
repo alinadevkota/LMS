@@ -1,25 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <p><a class="btn btn-default" href="{% url 'WebApp_talkroom_list' %}">TalkRoom Listing</a></p>
-    <table class="table">
-        <tr>
-            <td>talk_room_cate_code</td>
-            <td>{{ object.talk_room_cate_code }}</td>
-        </tr>
-        <tr>
-            <td>lecture_code</td>
-            <td>{{ object.lecture_code }}</td>
-        </tr>
-        <tr>
-            <td>inning_code</td>
-            <td>{{ object.inning_code }}</td>
-        </tr>
-        <tr>
-            <td>use_flag</td>
-            <td>{{ object.use_flag }}</td>
-        </tr>
-    </table>
-    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit TalkRoom</a>
+<p><a class="btn btn-default" href="{% url 'WebApp_talkroom_list' %}">TalkRoom Listing</a></p>
+<table class="table">
+<tr><td>talk_room_cate_code</td><td>{{ object.talk_room_cate_code }}</td></tr>
+<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit TalkRoom</a>
 
 {% endblock %}

@@ -1,7 +1,94 @@
-from rest_framework import viewsets, permissions
-
 from . import models
 from . import serializers
+from rest_framework import viewsets, permissions
+
+
+# class ProfileViewSet(viewsets.ModelViewSet):
+#     """ViewSet for the Profile class"""
+#
+#     queryset = models.Profile.objects.all()
+#     serializer_class = serializers.ProfileSerializer
+#     permission_classes = [permissions.IsAuthenticated]
+
+
+class CenterInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the CenterInfo class"""
+
+    queryset = models.CenterInfo.objects.all()
+    serializer_class = serializers.CenterInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class MemberInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the MemberInfo class"""
+
+    queryset = models.MemberInfo.objects.all()
+    serializer_class = serializers.MemberInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class LectureInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the LectureInfo class"""
+
+    queryset = models.LectureInfo.objects.all()
+    serializer_class = serializers.LectureInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class ChapterInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the ChapterInfo class"""
+
+    queryset = models.ChapterInfo.objects.all()
+    serializer_class = serializers.ChapterInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class ChapterContentsInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the ChapterContentsInfo class"""
+
+    queryset = models.ChapterContentsInfo.objects.all()
+    serializer_class = serializers.ChapterContentsInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class ChapterMissonCheckCardViewSet(viewsets.ModelViewSet):
+    """ViewSet for the ChapterMissonCheckCard class"""
+
+    queryset = models.ChapterMissonCheckCard.objects.all()
+    serializer_class = serializers.ChapterMissonCheckCardSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class ChapterMissonCheckItemViewSet(viewsets.ModelViewSet):
+    """ViewSet for the ChapterMissonCheckItem class"""
+
+    queryset = models.ChapterMissonCheckItem.objects.all()
+    serializer_class = serializers.ChapterMissonCheckItemSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class InningInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the InningInfo class"""
+
+    queryset = models.InningInfo.objects.all()
+    serializer_class = serializers.InningInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class OmrQuestionInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the OmrQuestionInfo class"""
+
+    queryset = models.OmrQuestionInfo.objects.all()
+    serializer_class = serializers.OmrQuestionInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class QuizInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the QuizInfo class"""
+
+    queryset = models.QuizInfo.objects.all()
+    serializer_class = serializers.QuizInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class AssignHomeworkInfoViewSet(viewsets.ModelViewSet):
@@ -20,14 +107,6 @@ class AssignQuestionInfoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class BoardContentInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the BoardContentInfo class"""
-
-    queryset = models.BoardContentInfo.objects.all()
-    serializer_class = serializers.BoardContentInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
 class BoardInfoViewSet(viewsets.ModelViewSet):
     """ViewSet for the BoardInfo class"""
 
@@ -36,11 +115,19 @@ class BoardInfoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class CenterInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the CenterInfo class"""
+class BoardContentInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the BoardContentInfo class"""
 
-    queryset = models.CenterInfo.objects.all()
-    serializer_class = serializers.CenterInfoSerializer
+    queryset = models.BoardContentInfo.objects.all()
+    serializer_class = serializers.BoardContentInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class InningGroupViewSet(viewsets.ModelViewSet):
+    """ViewSet for the InningGroup class"""
+
+    queryset = models.InningGroup.objects.all()
+    serializer_class = serializers.InningGroupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -52,14 +139,6 @@ class ChapterContentMediaViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class ChapterContentsInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the ChapterContentsInfo class"""
-
-    queryset = models.ChapterContentsInfo.objects.all()
-    serializer_class = serializers.ChapterContentsInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
 class ChapterImgInfoViewSet(viewsets.ModelViewSet):
     """ViewSet for the ChapterImgInfo class"""
 
@@ -68,35 +147,11 @@ class ChapterImgInfoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class ChapterInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the ChapterInfo class"""
-
-    queryset = models.ChapterInfo.objects.all()
-    serializer_class = serializers.ChapterInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
 class ChapterMissonCheckViewSet(viewsets.ModelViewSet):
     """ViewSet for the ChapterMissonCheck class"""
 
     queryset = models.ChapterMissonCheck.objects.all()
     serializer_class = serializers.ChapterMissonCheckSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class ChapterMissonCheckCardViewSet(viewsets.ModelViewSet):
-    """ViewSet for the ChapterMissonCheckCard class"""
-
-    queryset = models.ChapterMissonCheckCard.objects.all()
-    serializer_class = serializers.ChapterMissonCheckCardSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class ChapterMissonCheckItemViewSet(viewsets.ModelViewSet):
-    """ViewSet for the ChapterMissonCheckItem class"""
-
-    queryset = models.ChapterMissonCheckItem.objects.all()
-    serializer_class = serializers.ChapterMissonCheckItemSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -124,35 +179,11 @@ class HomeworkInfoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class InningGroupViewSet(viewsets.ModelViewSet):
-    """ViewSet for the InningGroup class"""
-
-    queryset = models.InningGroup.objects.all()
-    serializer_class = serializers.InningGroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class InningInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the InningInfo class"""
-
-    queryset = models.InningInfo.objects.all()
-    serializer_class = serializers.InningInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
 class LearningNoteViewSet(viewsets.ModelViewSet):
     """ViewSet for the LearningNote class"""
 
     queryset = models.LearningNote.objects.all()
     serializer_class = serializers.LearningNoteSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class LectureInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the LectureInfo class"""
-
-    queryset = models.LectureInfo.objects.all()
-    serializer_class = serializers.LectureInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -188,14 +219,6 @@ class MemberGroupViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class MemberInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the MemberInfo class"""
-
-    queryset = models.MemberInfo.objects.all()
-    serializer_class = serializers.MemberInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
 class MessageInfoViewSet(viewsets.ModelViewSet):
     """ViewSet for the MessageInfo class"""
 
@@ -225,14 +248,6 @@ class OmrExampleInfoViewSet(viewsets.ModelViewSet):
 
     queryset = models.OmrExampleInfo.objects.all()
     serializer_class = serializers.OmrExampleInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class OmrQuestionInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the OmrQuestionInfo class"""
-
-    queryset = models.OmrQuestionInfo.objects.all()
-    serializer_class = serializers.OmrQuestionInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -284,14 +299,6 @@ class QuizExampleInfoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class QuizInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the QuizInfo class"""
-
-    queryset = models.QuizInfo.objects.all()
-    serializer_class = serializers.QuizInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
 class ScheduleInfoViewSet(viewsets.ModelViewSet):
     """ViewSet for the ScheduleInfo class"""
 
@@ -305,6 +312,14 @@ class TalkMemberViewSet(viewsets.ModelViewSet):
 
     queryset = models.TalkMember.objects.all()
     serializer_class = serializers.TalkMemberSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class TalkRoomViewSet(viewsets.ModelViewSet):
+    """ViewSet for the TalkRoom class"""
+
+    queryset = models.TalkRoom.objects.all()
+    serializer_class = serializers.TalkRoomSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -324,14 +339,6 @@ class TalkMessageReadViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class TalkRoomViewSet(viewsets.ModelViewSet):
-    """ViewSet for the TalkRoom class"""
-
-    queryset = models.TalkRoom.objects.all()
-    serializer_class = serializers.TalkRoomSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
 class TodoInfoViewSet(viewsets.ModelViewSet):
     """ViewSet for the TodoInfo class"""
 
@@ -346,3 +353,5 @@ class TodoTInfoViewSet(viewsets.ModelViewSet):
     queryset = models.TodoTInfo.objects.all()
     serializer_class = serializers.TodoTInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+

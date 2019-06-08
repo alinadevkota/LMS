@@ -1,51 +1,48 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <p><a class="btn btn-default" href="{% url 'WebApp_boardcontentinfo_list' %}">BoardContentInfo Listing</a></p>
-    <table class="table">
-        <tr>
-            <td>ID</td>
-            <td>Link</td>
-            <td>board_code</td>
-            <td>admin_id</td>
-            <td>title</td>
-            <td>contents</td>
-            <td>writer</td>
-            <td>view_cnt</td>
-            <td>ref_code</td>
-            <td>ref_step</td>
-            <td>ref_level</td>
-            <td>write_time</td>
-            <td>use_flag</td>
-            <td>reg_date</td>
-            <td>reg_time</td>
-            <td>reg_agent</td>
-            <td>udt_date</td>
-            <td>udt_time</td>
-            <td>udt_agent</td>
-        </tr>
-        {% for object in object_list %}
-            <tr>
-                <td>{{ object.pk }}</td>
-                <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
-                <td>{{ object.board_code }}</td>
-                <td>{{ object.admin_id }}</td>
-                <td>{{ object.title }}</td>
-                <td>{{ object.contents }}</td>
-                <td>{{ object.writer }}</td>
-                <td>{{ object.view_cnt }}</td>
-                <td>{{ object.ref_code }}</td>
-                <td>{{ object.ref_step }}</td>
-                <td>{{ object.ref_level }}</td>
-                <td>{{ object.write_time }}</td>
-                <td>{{ object.use_flag }}</td>
-                <td>{{ object.reg_date }}</td>
-                <td>{{ object.reg_time }}</td>
-                <td>{{ object.reg_agent }}</td>
-                <td>{{ object.udt_date }}</td>
-                <td>{{ object.udt_time }}</td>
-                <td>{{ object.udt_agent }}</td>
-            </tr>
-        {% endfor %}
-    </table><a class="btn btn-primary" href="{% url 'WebApp_boardcontentinfo_create' %}">Create new BoardContentInfo</a>
+<p><a class="btn btn-default" href="{% url 'WebApp_boardcontentinfo_list' %}">BoardContentInfo Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>admin_id</td>
+    <td>title</td>
+    <td>contents</td>
+    <td>writer</td>
+    <td>view_cnt</td>
+    <td>ref_code</td>
+    <td>ref_step</td>
+    <td>ref_level</td>
+    <td>write_time</td>
+    <td>use_flag</td>
+    <td>reg_date</td>
+    <td>reg_time</td>
+    <td>reg_agent</td>
+    <td>udt_date</td>
+    <td>udt_time</td>
+    <td>udt_agent</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.admin_id }}</td>
+    <td>{{ object.title }}</td>
+    <td>{{ object.contents }}</td>
+    <td>{{ object.writer }}</td>
+    <td>{{ object.view_cnt }}</td>
+    <td>{{ object.ref_code }}</td>
+    <td>{{ object.ref_step }}</td>
+    <td>{{ object.ref_level }}</td>
+    <td>{{ object.write_time }}</td>
+    <td>{{ object.use_flag }}</td>
+    <td>{{ object.reg_date }}</td>
+    <td>{{ object.reg_time }}</td>
+    <td>{{ object.reg_agent }}</td>
+    <td>{{ object.udt_date }}</td>
+    <td>{{ object.udt_time }}</td>
+    <td>{{ object.udt_agent }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'WebApp_boardcontentinfo_create' %}">Create new BoardContentInfo</a>
 {% endblock %}

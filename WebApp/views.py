@@ -1,19 +1,204 @@
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
+from .models import  CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
+from .forms import  CenterInfoForm, MemberInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardInfoForm, BoardContentInfoForm, InningGroupForm, ChapterContentMediaForm, ChapterImgInfoForm, ChapterMissonCheckForm, ChapterWriteForm, GroupMappingForm, HomeworkInfoForm, LearningNoteForm, LectureUbtInfoForm, LessonInfoForm, LessonLogForm, MemberGroupForm, MessageInfoForm, OmrAnswerInfoForm, OmrAssignInfoForm, OmrExampleInfoForm, QAnswerInfoForm, QAnswerLogForm, QExampleInfoForm, QuestionInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, ScheduleInfoForm, TalkMemberForm, TalkRoomForm, TalkMessageForm, TalkMessageReadForm, TodoInfoForm, TodoTInfoForm
+#
+#
+# class ProfileListView(ListView):
+#     model = Profile
+#
+#
+# class ProfileCreateView(CreateView):
+#     model = Profile
+#     form_class = ProfileForm
+#
+#
+# class ProfileDetailView(DetailView):
+#     model = Profile
+#
+#
+# class ProfileUpdateView(UpdateView):
+#     model = Profile
+#     form_class = ProfileForm
+#
 
-from .forms import AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardContentInfoForm, BoardInfoForm, CenterInfoForm, \
-    ChapterContentMediaForm, ChapterContentsInfoForm, ChapterImgInfoForm, ChapterInfoForm, ChapterMissonCheckForm, \
-    ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, ChapterWriteForm, GroupMappingForm, HomeworkInfoForm, \
-    InningGroupForm, InningInfoForm, LearningNoteForm, LectureInfoForm, LectureUbtInfoForm, LessonInfoForm, \
-    LessonLogForm, MemberGroupForm, MemberInfoForm, MessageInfoForm, OmrAnswerInfoForm, OmrAssignInfoForm, \
-    OmrExampleInfoForm, OmrQuestionInfoForm, QAnswerInfoForm, QAnswerLogForm, QExampleInfoForm, QuestionInfoForm, \
-    QuizAnswerInfoForm, QuizExampleInfoForm, QuizInfoForm, ScheduleInfoForm, TalkMemberForm, TalkMessageForm, \
-    TalkMessageReadForm, TalkRoomForm, TodoInfoForm, TodoTInfoForm
-from .models import AssignHomeworkInfo, AssignQuestionInfo, BoardContentInfo, BoardInfo, CenterInfo, \
-    ChapterContentMedia, ChapterContentsInfo, ChapterImgInfo, ChapterInfo, ChapterMissonCheck, ChapterMissonCheckCard, \
-    ChapterMissonCheckItem, ChapterWrite, GroupMapping, HomeworkInfo, InningGroup, InningInfo, LearningNote, \
-    LectureInfo, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MemberInfo, MessageInfo, OmrAnswerInfo, \
-    OmrAssignInfo, OmrExampleInfo, OmrQuestionInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, \
-    QuizExampleInfo, QuizInfo, ScheduleInfo, TalkMember, TalkMessage, TalkMessageRead, TalkRoom, TodoInfo, TodoTInfo
+class CenterInfoListView(ListView):
+    model = CenterInfo
+
+
+class CenterInfoCreateView(CreateView):
+    model = CenterInfo
+    form_class = CenterInfoForm
+
+
+class CenterInfoDetailView(DetailView):
+    model = CenterInfo
+
+
+class CenterInfoUpdateView(UpdateView):
+    model = CenterInfo
+    form_class = CenterInfoForm
+
+
+class MemberInfoListView(ListView):
+    model = MemberInfo
+
+
+class MemberInfoCreateView(CreateView):
+    model = MemberInfo
+    form_class = MemberInfoForm
+
+
+class MemberInfoDetailView(DetailView):
+    model = MemberInfo
+
+
+class MemberInfoUpdateView(UpdateView):
+    model = MemberInfo
+    form_class = MemberInfoForm
+
+
+class LectureInfoListView(ListView):
+    model = LectureInfo
+
+
+class LectureInfoCreateView(CreateView):
+    model = LectureInfo
+    form_class = LectureInfoForm
+
+
+class LectureInfoDetailView(DetailView):
+    model = LectureInfo
+
+
+class LectureInfoUpdateView(UpdateView):
+    model = LectureInfo
+    form_class = LectureInfoForm
+
+
+class ChapterInfoListView(ListView):
+    model = ChapterInfo
+
+
+class ChapterInfoCreateView(CreateView):
+    model = ChapterInfo
+    form_class = ChapterInfoForm
+
+
+class ChapterInfoDetailView(DetailView):
+    model = ChapterInfo
+
+
+class ChapterInfoUpdateView(UpdateView):
+    model = ChapterInfo
+    form_class = ChapterInfoForm
+
+
+class ChapterContentsInfoListView(ListView):
+    model = ChapterContentsInfo
+
+
+class ChapterContentsInfoCreateView(CreateView):
+    model = ChapterContentsInfo
+    form_class = ChapterContentsInfoForm
+
+
+class ChapterContentsInfoDetailView(DetailView):
+    model = ChapterContentsInfo
+
+
+class ChapterContentsInfoUpdateView(UpdateView):
+    model = ChapterContentsInfo
+    form_class = ChapterContentsInfoForm
+
+
+class ChapterMissonCheckCardListView(ListView):
+    model = ChapterMissonCheckCard
+
+
+class ChapterMissonCheckCardCreateView(CreateView):
+    model = ChapterMissonCheckCard
+    form_class = ChapterMissonCheckCardForm
+
+
+class ChapterMissonCheckCardDetailView(DetailView):
+    model = ChapterMissonCheckCard
+
+
+class ChapterMissonCheckCardUpdateView(UpdateView):
+    model = ChapterMissonCheckCard
+    form_class = ChapterMissonCheckCardForm
+
+
+class ChapterMissonCheckItemListView(ListView):
+    model = ChapterMissonCheckItem
+
+
+class ChapterMissonCheckItemCreateView(CreateView):
+    model = ChapterMissonCheckItem
+    form_class = ChapterMissonCheckItemForm
+
+
+class ChapterMissonCheckItemDetailView(DetailView):
+    model = ChapterMissonCheckItem
+
+
+class ChapterMissonCheckItemUpdateView(UpdateView):
+    model = ChapterMissonCheckItem
+    form_class = ChapterMissonCheckItemForm
+
+
+class InningInfoListView(ListView):
+    model = InningInfo
+
+
+class InningInfoCreateView(CreateView):
+    model = InningInfo
+    form_class = InningInfoForm
+
+
+class InningInfoDetailView(DetailView):
+    model = InningInfo
+
+
+class InningInfoUpdateView(UpdateView):
+    model = InningInfo
+    form_class = InningInfoForm
+
+
+class OmrQuestionInfoListView(ListView):
+    model = OmrQuestionInfo
+
+
+class OmrQuestionInfoCreateView(CreateView):
+    model = OmrQuestionInfo
+    form_class = OmrQuestionInfoForm
+
+
+class OmrQuestionInfoDetailView(DetailView):
+    model = OmrQuestionInfo
+
+
+class OmrQuestionInfoUpdateView(UpdateView):
+    model = OmrQuestionInfo
+    form_class = OmrQuestionInfoForm
+
+
+class QuizInfoListView(ListView):
+    model = QuizInfo
+
+
+class QuizInfoCreateView(CreateView):
+    model = QuizInfo
+    form_class = QuizInfoForm
+
+
+class QuizInfoDetailView(DetailView):
+    model = QuizInfo
+
+
+class QuizInfoUpdateView(UpdateView):
+    model = QuizInfo
+    form_class = QuizInfoForm
 
 
 class AssignHomeworkInfoListView(ListView):
@@ -52,24 +237,6 @@ class AssignQuestionInfoUpdateView(UpdateView):
     form_class = AssignQuestionInfoForm
 
 
-class BoardContentInfoListView(ListView):
-    model = BoardContentInfo
-
-
-class BoardContentInfoCreateView(CreateView):
-    model = BoardContentInfo
-    form_class = BoardContentInfoForm
-
-
-class BoardContentInfoDetailView(DetailView):
-    model = BoardContentInfo
-
-
-class BoardContentInfoUpdateView(UpdateView):
-    model = BoardContentInfo
-    form_class = BoardContentInfoForm
-
-
 class BoardInfoListView(ListView):
     model = BoardInfo
 
@@ -88,22 +255,40 @@ class BoardInfoUpdateView(UpdateView):
     form_class = BoardInfoForm
 
 
-class CenterInfoListView(ListView):
-    model = CenterInfo
+class BoardContentInfoListView(ListView):
+    model = BoardContentInfo
 
 
-class CenterInfoCreateView(CreateView):
-    model = CenterInfo
-    form_class = CenterInfoForm
+class BoardContentInfoCreateView(CreateView):
+    model = BoardContentInfo
+    form_class = BoardContentInfoForm
 
 
-class CenterInfoDetailView(DetailView):
-    model = CenterInfo
+class BoardContentInfoDetailView(DetailView):
+    model = BoardContentInfo
 
 
-class CenterInfoUpdateView(UpdateView):
-    model = CenterInfo
-    form_class = CenterInfoForm
+class BoardContentInfoUpdateView(UpdateView):
+    model = BoardContentInfo
+    form_class = BoardContentInfoForm
+
+
+class InningGroupListView(ListView):
+    model = InningGroup
+
+
+class InningGroupCreateView(CreateView):
+    model = InningGroup
+    form_class = InningGroupForm
+
+
+class InningGroupDetailView(DetailView):
+    model = InningGroup
+
+
+class InningGroupUpdateView(UpdateView):
+    model = InningGroup
+    form_class = InningGroupForm
 
 
 class ChapterContentMediaListView(ListView):
@@ -124,24 +309,6 @@ class ChapterContentMediaUpdateView(UpdateView):
     form_class = ChapterContentMediaForm
 
 
-class ChapterContentsInfoListView(ListView):
-    model = ChapterContentsInfo
-
-
-class ChapterContentsInfoCreateView(CreateView):
-    model = ChapterContentsInfo
-    form_class = ChapterContentsInfoForm
-
-
-class ChapterContentsInfoDetailView(DetailView):
-    model = ChapterContentsInfo
-
-
-class ChapterContentsInfoUpdateView(UpdateView):
-    model = ChapterContentsInfo
-    form_class = ChapterContentsInfoForm
-
-
 class ChapterImgInfoListView(ListView):
     model = ChapterImgInfo
 
@@ -160,24 +327,6 @@ class ChapterImgInfoUpdateView(UpdateView):
     form_class = ChapterImgInfoForm
 
 
-class ChapterInfoListView(ListView):
-    model = ChapterInfo
-
-
-class ChapterInfoCreateView(CreateView):
-    model = ChapterInfo
-    form_class = ChapterInfoForm
-
-
-class ChapterInfoDetailView(DetailView):
-    model = ChapterInfo
-
-
-class ChapterInfoUpdateView(UpdateView):
-    model = ChapterInfo
-    form_class = ChapterInfoForm
-
-
 class ChapterMissonCheckListView(ListView):
     model = ChapterMissonCheck
 
@@ -194,42 +343,6 @@ class ChapterMissonCheckDetailView(DetailView):
 class ChapterMissonCheckUpdateView(UpdateView):
     model = ChapterMissonCheck
     form_class = ChapterMissonCheckForm
-
-
-class ChapterMissonCheckCardListView(ListView):
-    model = ChapterMissonCheckCard
-
-
-class ChapterMissonCheckCardCreateView(CreateView):
-    model = ChapterMissonCheckCard
-    form_class = ChapterMissonCheckCardForm
-
-
-class ChapterMissonCheckCardDetailView(DetailView):
-    model = ChapterMissonCheckCard
-
-
-class ChapterMissonCheckCardUpdateView(UpdateView):
-    model = ChapterMissonCheckCard
-    form_class = ChapterMissonCheckCardForm
-
-
-class ChapterMissonCheckItemListView(ListView):
-    model = ChapterMissonCheckItem
-
-
-class ChapterMissonCheckItemCreateView(CreateView):
-    model = ChapterMissonCheckItem
-    form_class = ChapterMissonCheckItemForm
-
-
-class ChapterMissonCheckItemDetailView(DetailView):
-    model = ChapterMissonCheckItem
-
-
-class ChapterMissonCheckItemUpdateView(UpdateView):
-    model = ChapterMissonCheckItem
-    form_class = ChapterMissonCheckItemForm
 
 
 class ChapterWriteListView(ListView):
@@ -286,42 +399,6 @@ class HomeworkInfoUpdateView(UpdateView):
     form_class = HomeworkInfoForm
 
 
-class InningGroupListView(ListView):
-    model = InningGroup
-
-
-class InningGroupCreateView(CreateView):
-    model = InningGroup
-    form_class = InningGroupForm
-
-
-class InningGroupDetailView(DetailView):
-    model = InningGroup
-
-
-class InningGroupUpdateView(UpdateView):
-    model = InningGroup
-    form_class = InningGroupForm
-
-
-class InningInfoListView(ListView):
-    model = InningInfo
-
-
-class InningInfoCreateView(CreateView):
-    model = InningInfo
-    form_class = InningInfoForm
-
-
-class InningInfoDetailView(DetailView):
-    model = InningInfo
-
-
-class InningInfoUpdateView(UpdateView):
-    model = InningInfo
-    form_class = InningInfoForm
-
-
 class LearningNoteListView(ListView):
     model = LearningNote
 
@@ -338,24 +415,6 @@ class LearningNoteDetailView(DetailView):
 class LearningNoteUpdateView(UpdateView):
     model = LearningNote
     form_class = LearningNoteForm
-
-
-class LectureInfoListView(ListView):
-    model = LectureInfo
-
-
-class LectureInfoCreateView(CreateView):
-    model = LectureInfo
-    form_class = LectureInfoForm
-
-
-class LectureInfoDetailView(DetailView):
-    model = LectureInfo
-
-
-class LectureInfoUpdateView(UpdateView):
-    model = LectureInfo
-    form_class = LectureInfoForm
 
 
 class LectureUbtInfoListView(ListView):
@@ -430,24 +489,6 @@ class MemberGroupUpdateView(UpdateView):
     form_class = MemberGroupForm
 
 
-class MemberInfoListView(ListView):
-    model = MemberInfo
-
-
-class MemberInfoCreateView(CreateView):
-    model = MemberInfo
-    form_class = MemberInfoForm
-
-
-class MemberInfoDetailView(DetailView):
-    model = MemberInfo
-
-
-class MemberInfoUpdateView(UpdateView):
-    model = MemberInfo
-    form_class = MemberInfoForm
-
-
 class MessageInfoListView(ListView):
     model = MessageInfo
 
@@ -518,24 +559,6 @@ class OmrExampleInfoDetailView(DetailView):
 class OmrExampleInfoUpdateView(UpdateView):
     model = OmrExampleInfo
     form_class = OmrExampleInfoForm
-
-
-class OmrQuestionInfoListView(ListView):
-    model = OmrQuestionInfo
-
-
-class OmrQuestionInfoCreateView(CreateView):
-    model = OmrQuestionInfo
-    form_class = OmrQuestionInfoForm
-
-
-class OmrQuestionInfoDetailView(DetailView):
-    model = OmrQuestionInfo
-
-
-class OmrQuestionInfoUpdateView(UpdateView):
-    model = OmrQuestionInfo
-    form_class = OmrQuestionInfoForm
 
 
 class QAnswerInfoListView(ListView):
@@ -646,24 +669,6 @@ class QuizExampleInfoUpdateView(UpdateView):
     form_class = QuizExampleInfoForm
 
 
-class QuizInfoListView(ListView):
-    model = QuizInfo
-
-
-class QuizInfoCreateView(CreateView):
-    model = QuizInfo
-    form_class = QuizInfoForm
-
-
-class QuizInfoDetailView(DetailView):
-    model = QuizInfo
-
-
-class QuizInfoUpdateView(UpdateView):
-    model = QuizInfo
-    form_class = QuizInfoForm
-
-
 class ScheduleInfoListView(ListView):
     model = ScheduleInfo
 
@@ -698,6 +703,24 @@ class TalkMemberDetailView(DetailView):
 class TalkMemberUpdateView(UpdateView):
     model = TalkMember
     form_class = TalkMemberForm
+
+
+class TalkRoomListView(ListView):
+    model = TalkRoom
+
+
+class TalkRoomCreateView(CreateView):
+    model = TalkRoom
+    form_class = TalkRoomForm
+
+
+class TalkRoomDetailView(DetailView):
+    model = TalkRoom
+
+
+class TalkRoomUpdateView(UpdateView):
+    model = TalkRoom
+    form_class = TalkRoomForm
 
 
 class TalkMessageListView(ListView):
@@ -736,24 +759,6 @@ class TalkMessageReadUpdateView(UpdateView):
     form_class = TalkMessageReadForm
 
 
-class TalkRoomListView(ListView):
-    model = TalkRoom
-
-
-class TalkRoomCreateView(CreateView):
-    model = TalkRoom
-    form_class = TalkRoomForm
-
-
-class TalkRoomDetailView(DetailView):
-    model = TalkRoom
-
-
-class TalkRoomUpdateView(UpdateView):
-    model = TalkRoom
-    form_class = TalkRoomForm
-
-
 class TodoInfoListView(ListView):
     model = TodoInfo
 
@@ -788,3 +793,4 @@ class TodoTInfoDetailView(DetailView):
 class TodoTInfoUpdateView(UpdateView):
     model = TodoTInfo
     form_class = TodoTInfoForm
+

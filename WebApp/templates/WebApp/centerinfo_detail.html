@@ -1,49 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <p><a class="btn btn-default" href="{% url 'WebApp_centerinfo_list' %}">CenterInfo Listing</a></p>
-    <table class="table">
-        <tr>
-            <td>center_name</td>
-            <td>{{ object.center_name }}</td>
-        </tr>
-        <tr>
-            <td>center_location</td>
-            <td>{{ object.center_location }}</td>
-        </tr>
-        <tr>
-            <td>center_tel</td>
-            <td>{{ object.center_tel }}</td>
-        </tr>
-        <tr>
-            <td>use_flag</td>
-            <td>{{ object.use_flag }}</td>
-        </tr>
-        <tr>
-            <td>reg_date</td>
-            <td>{{ object.reg_date }}</td>
-        </tr>
-        <tr>
-            <td>reg_time</td>
-            <td>{{ object.reg_time }}</td>
-        </tr>
-        <tr>
-            <td>reg_agent</td>
-            <td>{{ object.reg_agent }}</td>
-        </tr>
-        <tr>
-            <td>udt_date</td>
-            <td>{{ object.udt_date }}</td>
-        </tr>
-        <tr>
-            <td>udt_time</td>
-            <td>{{ object.udt_time }}</td>
-        </tr>
-        <tr>
-            <td>udt_agent</td>
-            <td>{{ object.udt_agent }}</td>
-        </tr>
-    </table>
-    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit CenterInfo</a>
+<p><a class="btn btn-default" href="{% url 'WebApp_centerinfo_list' %}">CenterInfo Listing</a></p>
+<table class="table">
+<tr><td>Center_Name</td><td>{{ object.Center_Name }}</td></tr>
+<tr><td>Center_Address</td><td>{{ object.Center_Address }}</td></tr>
+<tr><td>Use_Flag</td><td>{{ object.Use_Flag }}</td></tr>
+<tr><td>Register_DateTime</td><td>{{ object.Register_DateTime }}</td></tr>
+<tr><td>Register_Agent</td><td>{{ object.Register_Agent }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit CenterInfo</a>
 
 {% endblock %}

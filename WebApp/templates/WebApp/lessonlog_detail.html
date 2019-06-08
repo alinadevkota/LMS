@@ -1,105 +1,29 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <p><a class="btn btn-default" href="{% url 'WebApp_lessonlog_list' %}">LessonLog Listing</a></p>
-    <table class="table">
-        <tr>
-            <td>lesson_code</td>
-            <td>{{ object.lesson_code }}</td>
-        </tr>
-        <tr>
-            <td>lecture_code</td>
-            <td>{{ object.lecture_code }}</td>
-        </tr>
-        <tr>
-            <td>chapter_code</td>
-            <td>{{ object.chapter_code }}</td>
-        </tr>
-        <tr>
-            <td>member_code</td>
-            <td>{{ object.member_code }}</td>
-        </tr>
-        <tr>
-            <td>member_id</td>
-            <td>{{ object.member_id }}</td>
-        </tr>
-        <tr>
-            <td>member_ip</td>
-            <td>{{ object.member_ip }}</td>
-        </tr>
-        <tr>
-            <td>member_browser</td>
-            <td>{{ object.member_browser }}</td>
-        </tr>
-        <tr>
-            <td>member_os</td>
-            <td>{{ object.member_os }}</td>
-        </tr>
-        <tr>
-            <td>start_date</td>
-            <td>{{ object.start_date }}</td>
-        </tr>
-        <tr>
-            <td>start_time</td>
-            <td>{{ object.start_time }}</td>
-        </tr>
-        <tr>
-            <td>end_date</td>
-            <td>{{ object.end_date }}</td>
-        </tr>
-        <tr>
-            <td>end_time</td>
-            <td>{{ object.end_time }}</td>
-        </tr>
-        <tr>
-            <td>connect_date</td>
-            <td>{{ object.connect_date }}</td>
-        </tr>
-        <tr>
-            <td>connect_time</td>
-            <td>{{ object.connect_time }}</td>
-        </tr>
-        <tr>
-            <td>connect_count</td>
-            <td>{{ object.connect_count }}</td>
-        </tr>
-        <tr>
-            <td>use_flag</td>
-            <td>{{ object.use_flag }}</td>
-        </tr>
-        <tr>
-            <td>reg_date</td>
-            <td>{{ object.reg_date }}</td>
-        </tr>
-        <tr>
-            <td>reg_time</td>
-            <td>{{ object.reg_time }}</td>
-        </tr>
-        <tr>
-            <td>reg_agent</td>
-            <td>{{ object.reg_agent }}</td>
-        </tr>
-        <tr>
-            <td>udt_date</td>
-            <td>{{ object.udt_date }}</td>
-        </tr>
-        <tr>
-            <td>udt_time</td>
-            <td>{{ object.udt_time }}</td>
-        </tr>
-        <tr>
-            <td>udt_agent</td>
-            <td>{{ object.udt_agent }}</td>
-        </tr>
-        <tr>
-            <td>study_time</td>
-            <td>{{ object.study_time }}</td>
-        </tr>
-        <tr>
-            <td>connect_page</td>
-            <td>{{ object.connect_page }}</td>
-        </tr>
-    </table>
-    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit LessonLog</a>
+<p><a class="btn btn-default" href="{% url 'WebApp_lessonlog_list' %}">LessonLog Listing</a></p>
+<table class="table">
+<tr><td>member_id</td><td>{{ object.member_id }}</td></tr>
+<tr><td>member_ip</td><td>{{ object.member_ip }}</td></tr>
+<tr><td>member_browser</td><td>{{ object.member_browser }}</td></tr>
+<tr><td>member_os</td><td>{{ object.member_os }}</td></tr>
+<tr><td>start_date</td><td>{{ object.start_date }}</td></tr>
+<tr><td>start_time</td><td>{{ object.start_time }}</td></tr>
+<tr><td>end_date</td><td>{{ object.end_date }}</td></tr>
+<tr><td>end_time</td><td>{{ object.end_time }}</td></tr>
+<tr><td>connect_date</td><td>{{ object.connect_date }}</td></tr>
+<tr><td>connect_time</td><td>{{ object.connect_time }}</td></tr>
+<tr><td>connect_count</td><td>{{ object.connect_count }}</td></tr>
+<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
+<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
+<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
+<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
+<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
+<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
+<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
+<tr><td>study_time</td><td>{{ object.study_time }}</td></tr>
+<tr><td>connect_page</td><td>{{ object.connect_page }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit LessonLog</a>
 
 {% endblock %}

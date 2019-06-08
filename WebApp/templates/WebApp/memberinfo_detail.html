@@ -1,113 +1,24 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <p><a class="btn btn-default" href="{% url 'WebApp_memberinfo_list' %}">MemberInfo Listing</a></p>
-    <table class="table">
-        <tr>
-            <td>member_id</td>
-            <td>{{ object.member_id }}</td>
-        </tr>
-        <tr>
-            <td>member_level</td>
-            <td>{{ object.member_level }}</td>
-        </tr>
-        <tr>
-            <td>member_pw</td>
-            <td>{{ object.member_pw }}</td>
-        </tr>
-        <tr>
-            <td>member_name</td>
-            <td>{{ object.member_name }}</td>
-        </tr>
-        <tr>
-            <td>member_jumin</td>
-            <td>{{ object.member_jumin }}</td>
-        </tr>
-        <tr>
-            <td>member_birth</td>
-            <td>{{ object.member_birth }}</td>
-        </tr>
-        <tr>
-            <td>member_college</td>
-            <td>{{ object.member_college }}</td>
-        </tr>
-        <tr>
-            <td>member_email</td>
-            <td>{{ object.member_email }}</td>
-        </tr>
-        <tr>
-            <td>member_phone</td>
-            <td>{{ object.member_phone }}</td>
-        </tr>
-        <tr>
-            <td>member_post</td>
-            <td>{{ object.member_post }}</td>
-        </tr>
-        <tr>
-            <td>member_addr1</td>
-            <td>{{ object.member_addr1 }}</td>
-        </tr>
-        <tr>
-            <td>member_addr2</td>
-            <td>{{ object.member_addr2 }}</td>
-        </tr>
-        <tr>
-            <td>member_file</td>
-            <td>{{ object.member_file }}</td>
-        </tr>
-        <tr>
-            <td>member_gender</td>
-            <td>{{ object.member_gender }}</td>
-        </tr>
-        <tr>
-            <td>member_major</td>
-            <td>{{ object.member_major }}</td>
-        </tr>
-        <tr>
-            <td>member_nation</td>
-            <td>{{ object.member_nation }}</td>
-        </tr>
-        <tr>
-            <td>use_flag</td>
-            <td>{{ object.use_flag }}</td>
-        </tr>
-        <tr>
-            <td>reg_date</td>
-            <td>{{ object.reg_date }}</td>
-        </tr>
-        <tr>
-            <td>reg_time</td>
-            <td>{{ object.reg_time }}</td>
-        </tr>
-        <tr>
-            <td>reg_agent</td>
-            <td>{{ object.reg_agent }}</td>
-        </tr>
-        <tr>
-            <td>udt_date</td>
-            <td>{{ object.udt_date }}</td>
-        </tr>
-        <tr>
-            <td>udt_time</td>
-            <td>{{ object.udt_time }}</td>
-        </tr>
-        <tr>
-            <td>udt_agent</td>
-            <td>{{ object.udt_agent }}</td>
-        </tr>
-        <tr>
-            <td>center_code</td>
-            <td>{{ object.center_code }}</td>
-        </tr>
-        <tr>
-            <td>member_fax</td>
-            <td>{{ object.member_fax }}</td>
-        </tr>
-        <tr>
-            <td>member_memo</td>
-            <td>{{ object.member_memo }}</td>
-        </tr>
-    </table>
-    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit MemberInfo</a>
+<p><a class="btn btn-default" href="{% url 'WebApp_memberinfo_list' %}">MemberInfo Listing</a></p>
+<table class="table">
+<tr><td>Member_ID</td><td>{{ object.Member_ID }}</td></tr>
+<tr><td>Member_Password</td><td>{{ object.Member_Password }}</td></tr>
+<tr><td>Member_Type</td><td>{{ object.Member_Type }}</td></tr>
+<tr><td>Member_Name</td><td>{{ object.Member_Name }}</td></tr>
+<tr><td>Member_Permanent_Address</td><td>{{ object.Member_Permanent_Address }}</td></tr>
+<tr><td>Member_Temporary_Address</td><td>{{ object.Member_Temporary_Address }}</td></tr>
+<tr><td>Member_BirthDate</td><td>{{ object.Member_BirthDate }}</td></tr>
+<tr><td>Member_Email</td><td>{{ object.Member_Email }}</td></tr>
+<tr><td>Member_Phone</td><td>{{ object.Member_Phone }}</td></tr>
+<tr><td>member_Avatar</td><td>{{ object.member_Avatar }}</td></tr>
+<tr><td>member_Gender</td><td>{{ object.member_Gender }}</td></tr>
+<tr><td>Use_Flag</td><td>{{ object.Use_Flag }}</td></tr>
+<tr><td>Register_DateTime</td><td>{{ object.Register_DateTime }}</td></tr>
+<tr><td>Register_Agent</td><td>{{ object.Register_Agent }}</td></tr>
+<tr><td>Member_Memo</td><td>{{ object.Member_Memo }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit MemberInfo</a>
 
 {% endblock %}

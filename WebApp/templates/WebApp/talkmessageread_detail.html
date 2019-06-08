@@ -1,17 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <p><a class="btn btn-default" href="{% url 'WebApp_talkmessageread_list' %}">TalkMessageRead Listing</a></p>
-    <table class="table">
-        <tr>
-            <td>member_code</td>
-            <td>{{ object.member_code }}</td>
-        </tr>
-        <tr>
-            <td>is_read</td>
-            <td>{{ object.is_read }}</td>
-        </tr>
-    </table>
-    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit TalkMessageRead</a>
+<p><a class="btn btn-default" href="{% url 'WebApp_talkmessageread_list' %}">TalkMessageRead Listing</a></p>
+<table class="table">
+<tr><td>is_read</td><td>{{ object.is_read }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit TalkMessageRead</a>
 
 {% endblock %}

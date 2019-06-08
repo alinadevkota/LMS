@@ -1,41 +1,36 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <p><a class="btn btn-default" href="{% url 'WebApp_inninginfo_list' %}">InningInfo Listing</a></p>
-    <table class="table">
-        <tr>
-            <td>ID</td>
-            <td>Link</td>
-            <td>inning_name</td>
-            <td>lecture_code</td>
-            <td>start_date</td>
-            <td>end_date</td>
-            <td>use_flag</td>
-            <td>reg_date</td>
-            <td>reg_time</td>
-            <td>reg_agent</td>
-            <td>udt_date</td>
-            <td>udt_time</td>
-            <td>udt_agent</td>
-            <td>center_code</td>
-        </tr>
-        {% for object in object_list %}
-            <tr>
-                <td>{{ object.pk }}</td>
-                <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
-                <td>{{ object.inning_name }}</td>
-                <td>{{ object.lecture_code }}</td>
-                <td>{{ object.start_date }}</td>
-                <td>{{ object.end_date }}</td>
-                <td>{{ object.use_flag }}</td>
-                <td>{{ object.reg_date }}</td>
-                <td>{{ object.reg_time }}</td>
-                <td>{{ object.reg_agent }}</td>
-                <td>{{ object.udt_date }}</td>
-                <td>{{ object.udt_time }}</td>
-                <td>{{ object.udt_agent }}</td>
-                <td>{{ object.center_code }}</td>
-            </tr>
-        {% endfor %}
-    </table><a class="btn btn-primary" href="{% url 'WebApp_inninginfo_create' %}">Create new InningInfo</a>
+<p><a class="btn btn-default" href="{% url 'WebApp_inninginfo_list' %}">InningInfo Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>inning_name</td>
+    <td>start_date</td>
+    <td>end_date</td>
+    <td>use_flag</td>
+    <td>reg_date</td>
+    <td>reg_time</td>
+    <td>reg_agent</td>
+    <td>udt_date</td>
+    <td>udt_time</td>
+    <td>udt_agent</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.inning_name }}</td>
+    <td>{{ object.start_date }}</td>
+    <td>{{ object.end_date }}</td>
+    <td>{{ object.use_flag }}</td>
+    <td>{{ object.reg_date }}</td>
+    <td>{{ object.reg_time }}</td>
+    <td>{{ object.reg_agent }}</td>
+    <td>{{ object.udt_date }}</td>
+    <td>{{ object.udt_time }}</td>
+    <td>{{ object.udt_agent }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'WebApp_inninginfo_create' %}">Create new InningInfo</a>
 {% endblock %}

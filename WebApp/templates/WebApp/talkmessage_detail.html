@@ -1,29 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <p><a class="btn btn-default" href="{% url 'WebApp_talkmessage_list' %}">TalkMessage Listing</a></p>
-    <table class="table">
-        <tr>
-            <td>talk_room_id</td>
-            <td>{{ object.talk_room_id }}</td>
-        </tr>
-        <tr>
-            <td>message</td>
-            <td>{{ object.message }}</td>
-        </tr>
-        <tr>
-            <td>sender_member_code</td>
-            <td>{{ object.sender_member_code }}</td>
-        </tr>
-        <tr>
-            <td>send_date</td>
-            <td>{{ object.send_date }}</td>
-        </tr>
-        <tr>
-            <td>send_time</td>
-            <td>{{ object.send_time }}</td>
-        </tr>
-    </table>
-    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit TalkMessage</a>
+<p><a class="btn btn-default" href="{% url 'WebApp_talkmessage_list' %}">TalkMessage Listing</a></p>
+<table class="table">
+<tr><td>message</td><td>{{ object.message }}</td></tr>
+<tr><td>sender_member_code</td><td>{{ object.sender_member_code }}</td></tr>
+<tr><td>send_date</td><td>{{ object.send_date }}</td></tr>
+<tr><td>send_time</td><td>{{ object.send_time }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit TalkMessage</a>
 
 {% endblock %}

@@ -1,93 +1,29 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <p><a class="btn btn-default" href="{% url 'WebApp_lectureinfo_list' %}">LectureInfo Listing</a></p>
-    <table class="table">
-        <tr>
-            <td>lecture_name</td>
-            <td>{{ object.lecture_name }}</td>
-        </tr>
-        <tr>
-            <td>lecture_teacher</td>
-            <td>{{ object.lecture_teacher }}</td>
-        </tr>
-        <tr>
-            <td>lecture_cover</td>
-            <td>{{ object.lecture_cover }}</td>
-        </tr>
-        <tr>
-            <td>lecture_cover_file</td>
-            <td>{{ object.lecture_cover_file }}</td>
-        </tr>
-        <tr>
-            <td>lecture_level</td>
-            <td>{{ object.lecture_level }}</td>
-        </tr>
-        <tr>
-            <td>lecture_info</td>
-            <td>{{ object.lecture_info }}</td>
-        </tr>
-        <tr>
-            <td>teacher</td>
-            <td>{{ object.teacher }}</td>
-        </tr>
-        <tr>
-            <td>use_flag</td>
-            <td>{{ object.use_flag }}</td>
-        </tr>
-        <tr>
-            <td>reg_date</td>
-            <td>{{ object.reg_date }}</td>
-        </tr>
-        <tr>
-            <td>reg_time</td>
-            <td>{{ object.reg_time }}</td>
-        </tr>
-        <tr>
-            <td>reg_agent</td>
-            <td>{{ object.reg_agent }}</td>
-        </tr>
-        <tr>
-            <td>udt_date</td>
-            <td>{{ object.udt_date }}</td>
-        </tr>
-        <tr>
-            <td>udt_time</td>
-            <td>{{ object.udt_time }}</td>
-        </tr>
-        <tr>
-            <td>udt_agent</td>
-            <td>{{ object.udt_agent }}</td>
-        </tr>
-        <tr>
-            <td>lecture_certification</td>
-            <td>{{ object.lecture_certification }}</td>
-        </tr>
-        <tr>
-            <td>lecture_provider</td>
-            <td>{{ object.lecture_provider }}</td>
-        </tr>
-        <tr>
-            <td>cert_crit_prog</td>
-            <td>{{ object.cert_crit_prog }}</td>
-        </tr>
-        <tr>
-            <td>cert_crit_post</td>
-            <td>{{ object.cert_crit_post }}</td>
-        </tr>
-        <tr>
-            <td>cert_crit_ubt</td>
-            <td>{{ object.cert_crit_ubt }}</td>
-        </tr>
-        <tr>
-            <td>cert_crit_issue</td>
-            <td>{{ object.cert_crit_issue }}</td>
-        </tr>
-        <tr>
-            <td>center_code</td>
-            <td>{{ object.center_code }}</td>
-        </tr>
-    </table>
-    <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit LectureInfo</a>
+<p><a class="btn btn-default" href="{% url 'WebApp_lectureinfo_list' %}">LectureInfo Listing</a></p>
+<table class="table">
+<tr><td>lecture_name</td><td>{{ object.lecture_name }}</td></tr>
+<tr><td>lecture_teacher</td><td>{{ object.lecture_teacher }}</td></tr>
+<tr><td>lecture_cover</td><td>{{ object.lecture_cover }}</td></tr>
+<tr><td>lecture_cover_file</td><td>{{ object.lecture_cover_file }}</td></tr>
+<tr><td>lecture_level</td><td>{{ object.lecture_level }}</td></tr>
+<tr><td>lecture_info</td><td>{{ object.lecture_info }}</td></tr>
+<tr><td>teacher</td><td>{{ object.teacher }}</td></tr>
+<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
+<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
+<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
+<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
+<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
+<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
+<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
+<tr><td>lecture_certification</td><td>{{ object.lecture_certification }}</td></tr>
+<tr><td>lecture_provider</td><td>{{ object.lecture_provider }}</td></tr>
+<tr><td>cert_crit_prog</td><td>{{ object.cert_crit_prog }}</td></tr>
+<tr><td>cert_crit_post</td><td>{{ object.cert_crit_post }}</td></tr>
+<tr><td>cert_crit_ubt</td><td>{{ object.cert_crit_ubt }}</td></tr>
+<tr><td>cert_crit_issue</td><td>{{ object.cert_crit_issue }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit LectureInfo</a>
 
 {% endblock %}
