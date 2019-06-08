@@ -1,34 +1,9 @@
 from datetime import datetime
 
+from django.contrib.contenttypes.models import ContentType
+from django.db import models as models
 from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, TimeField, BooleanField
 from django.urls import reverse
-from django_extensions.db.fields import AutoSlugField
-
-from django.conf import settings
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth import get_user_model
-from django.contrib.auth import models as auth_models
-from django.db import models as models
-from django_extensions.db import fields as extension_fields
-
-
-# class Profile(models.Model):
-#
-#
-#
-#     class Meta:
-#         ordering = ('-pk',)
-#
-#     def __unicode__(self):
-#         return u'%s' % self.pk
-#
-#     def get_absolute_url(self):
-#         return reverse('WebApp_profile_detail', args=(self.pk,))
-#
-#
-#     def get_update_url(self):
-#         return reverse('WebApp_profile_update', args=(self.pk,))
 
 
 class CenterInfo(models.Model):
@@ -48,11 +23,11 @@ class CenterInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_centerinfo_detail', args=(self.pk,))
+        return reverse('centerinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_centerinfo_update', args=(self.pk,))
+        return reverse('centerinfo_update', args=(self.pk,))
 
 
 class MemberInfo(models.Model):
@@ -76,7 +51,7 @@ class MemberInfo(models.Model):
 
     # Relationship Fields
     center_code = ForeignKey(
-        'WebApp.CenterInfo',
+        'CenterInfo',
          related_name="memberinfos", on_delete=models.DO_NOTHING
     )
 
@@ -87,11 +62,11 @@ class MemberInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_memberinfo_detail', args=(self.pk,))
+        return reverse('memberinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_memberinfo_update', args=(self.pk,))
+        return reverse('memberinfo_update', args=(self.pk,))
 
 
 class LectureInfo(models.Model):
@@ -120,7 +95,7 @@ class LectureInfo(models.Model):
 
     # Relationship Fields
     center_code = ForeignKey(
-        'WebApp.CenterInfo',
+        'CenterInfo',
          related_name="lectureinfos", on_delete=models.DO_NOTHING)
 
     class Meta:
@@ -130,11 +105,11 @@ class LectureInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_lectureinfo_detail', args=(self.pk,))
+        return reverse('lectureinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_lectureinfo_update', args=(self.pk,))
+        return reverse('lectureinfo_update', args=(self.pk,))
 
 
 class ChapterInfo(models.Model):
@@ -190,7 +165,7 @@ class ChapterInfo(models.Model):
 
     # Relationship Fields
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="chapterinfos", on_delete=models.DO_NOTHING
     )
 
@@ -201,11 +176,11 @@ class ChapterInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_chapterinfo_detail', args=(self.pk,))
+        return reverse('chapterinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_chapterinfo_update', args=(self.pk,))
+        return reverse('chapterinfo_update', args=(self.pk,))
 
 
 class ChapterContentsInfo(models.Model):
@@ -256,7 +231,7 @@ class ChapterContentsInfo(models.Model):
 
     # Relationship Fields
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="chaptercontentsinfos", on_delete=models.DO_NOTHING
     )
 
@@ -267,11 +242,11 @@ class ChapterContentsInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_chaptercontentsinfo_detail', args=(self.pk,))
+        return reverse('chaptercontentsinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_chaptercontentsinfo_update', args=(self.pk,))
+        return reverse('chaptercontentsinfo_update', args=(self.pk,))
 
 
 class ChapterMissonCheckCard(models.Model):
@@ -288,7 +263,7 @@ class ChapterMissonCheckCard(models.Model):
 
     # Relationship Fields
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="chaptermissoncheckcards", on_delete=models.DO_NOTHING
     )
 
@@ -299,11 +274,11 @@ class ChapterMissonCheckCard(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_chaptermissoncheckcard_detail', args=(self.pk,))
+        return reverse('chaptermissoncheckcard_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_chaptermissoncheckcard_update', args=(self.pk,))
+        return reverse('chaptermissoncheckcard_update', args=(self.pk,))
 
 
 class ChapterMissonCheckItem(models.Model):
@@ -322,11 +297,11 @@ class ChapterMissonCheckItem(models.Model):
 
     # Relationship Fields
     check_card_code = ForeignKey(
-        'WebApp.ChapterMissonCheckCard',
+        'ChapterMissonCheckCard',
          related_name="chaptermissoncheckitems", on_delete=models.DO_NOTHING
     )
     chapter_contents_code = ForeignKey(
-        'WebApp.ChapterContentsInfo',
+        'ChapterContentsInfo',
          related_name="chaptermissoncheckitems", on_delete=models.DO_NOTHING
     )
 
@@ -337,11 +312,11 @@ class ChapterMissonCheckItem(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_chaptermissoncheckitem_detail', args=(self.pk,))
+        return reverse('chaptermissoncheckitem_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_chaptermissoncheckitem_update', args=(self.pk,))
+        return reverse('chaptermissoncheckitem_update', args=(self.pk,))
 
 
 class InningInfo(models.Model):
@@ -360,11 +335,11 @@ class InningInfo(models.Model):
 
     # Relationship Fields
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="inninginfos", on_delete=models.DO_NOTHING
     )
     center_code = ForeignKey(
-        'WebApp.CenterInfo',
+        'CenterInfo',
          related_name="inninginfos", on_delete=models.DO_NOTHING
     )
 
@@ -375,11 +350,11 @@ class InningInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_inninginfo_detail', args=(self.pk,))
+        return reverse('inninginfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_inninginfo_update', args=(self.pk,))
+        return reverse('inninginfo_update', args=(self.pk,))
 
 
 class OmrQuestionInfo(models.Model):
@@ -398,11 +373,11 @@ class OmrQuestionInfo(models.Model):
 
     # Relationship Fields
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="omrquestioninfos", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="omrquestioninfos", on_delete=models.DO_NOTHING
     )
 
@@ -413,11 +388,11 @@ class OmrQuestionInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_omrquestioninfo_detail', args=(self.pk,))
+        return reverse('omrquestioninfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_omrquestioninfo_update', args=(self.pk,))
+        return reverse('omrquestioninfo_update', args=(self.pk,))
 
 
 class QuizInfo(models.Model):
@@ -442,11 +417,11 @@ class QuizInfo(models.Model):
 
     # Relationship Fields
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="quizinfos", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="quizinfos", on_delete=models.DO_NOTHING
     )
 
@@ -457,11 +432,11 @@ class QuizInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_quizinfo_detail', args=(self.pk,))
+        return reverse('quizinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_quizinfo_update', args=(self.pk,))
+        return reverse('quizinfo_update', args=(self.pk,))
 
 
 class AssignHomeworkInfo(models.Model):
@@ -478,19 +453,19 @@ class AssignHomeworkInfo(models.Model):
 
     # Relationship Fields
     question_code = ForeignKey(
-        'WebApp.OmrQuestionInfo',
+        'OmrQuestionInfo',
          related_name="assignhomeworkinfos", on_delete=models.DO_NOTHING
     )
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="assignhomeworkinfos", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="assignhomeworkinfos", on_delete=models.DO_NOTHING
     )
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="assignhomeworkinfos", on_delete=models.DO_NOTHING
     )
 
@@ -501,11 +476,11 @@ class AssignHomeworkInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_assignhomeworkinfo_detail', args=(self.pk,))
+        return reverse('assignhomeworkinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_assignhomeworkinfo_update', args=(self.pk,))
+        return reverse('assignhomeworkinfo_update', args=(self.pk,))
 
 
 class AssignQuestionInfo(models.Model):
@@ -522,15 +497,15 @@ class AssignQuestionInfo(models.Model):
 
     # Relationship Fields
     question_code = ForeignKey(
-        'WebApp.OmrQuestionInfo',
+        'OmrQuestionInfo',
          related_name="assignquestioninfos", on_delete=models.DO_NOTHING
     )
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="assignquestioninfos", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="assignquestioninfos", on_delete=models.DO_NOTHING
     )
 
@@ -541,11 +516,11 @@ class AssignQuestionInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_assignquestioninfo_detail', args=(self.pk,))
+        return reverse('assignquestioninfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_assignquestioninfo_update', args=(self.pk,))
+        return reverse('assignquestioninfo_update', args=(self.pk,))
 
 
 class BoardInfo(models.Model):
@@ -575,11 +550,11 @@ class BoardInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_boardinfo_detail', args=(self.pk,))
+        return reverse('boardinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_boardinfo_update', args=(self.pk,))
+        return reverse('boardinfo_update', args=(self.pk,))
 
 
 class BoardContentInfo(models.Model):
@@ -604,7 +579,7 @@ class BoardContentInfo(models.Model):
 
     # Relationship Fields
     board_code = ForeignKey(
-        'WebApp.BoardInfo',
+        'BoardInfo',
          related_name="boardcontentinfos", on_delete=models.DO_NOTHING
     )
 
@@ -615,11 +590,11 @@ class BoardContentInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_boardcontentinfo_detail', args=(self.pk,))
+        return reverse('boardcontentinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_boardcontentinfo_update', args=(self.pk,))
+        return reverse('boardcontentinfo_update', args=(self.pk,))
 
 
 class InningGroup(models.Model):
@@ -636,15 +611,15 @@ class InningGroup(models.Model):
 
     # Relationship Fields
     center_code = ForeignKey(
-        'WebApp.CenterInfo',
+        'CenterInfo',
          related_name="inninggroups", on_delete=models.DO_NOTHING
     )
     inning_code = ForeignKey(
-        'WebApp.InningInfo',
+        'InningInfo',
          related_name="inninggroups", on_delete=models.DO_NOTHING
     )
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="inninggroups", on_delete=models.DO_NOTHING
     )
 
@@ -655,11 +630,11 @@ class InningGroup(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_inninggroup_detail', args=(self.pk,))
+        return reverse('inninggroup_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_inninggroup_update', args=(self.pk,))
+        return reverse('inninggroup_update', args=(self.pk,))
 
 
 class ChapterContentMedia(models.Model):
@@ -678,7 +653,7 @@ class ChapterContentMedia(models.Model):
 
     # Relationship Fields
     chapter_contents_code = ForeignKey(
-        'WebApp.ChapterContentsInfo',
+        'ChapterContentsInfo',
          related_name="chaptercontentmedias", on_delete=models.DO_NOTHING
     )
 
@@ -689,11 +664,11 @@ class ChapterContentMedia(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_chaptercontentmedia_detail', args=(self.pk,))
+        return reverse('chaptercontentmedia_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_chaptercontentmedia_update', args=(self.pk,))
+        return reverse('chaptercontentmedia_update', args=(self.pk,))
 
 
 class ChapterImgInfo(models.Model):
@@ -710,7 +685,7 @@ class ChapterImgInfo(models.Model):
 
     # Relationship Fields
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="chapterimginfos", on_delete=models.DO_NOTHING
     )
 
@@ -721,11 +696,11 @@ class ChapterImgInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_chapterimginfo_detail', args=(self.pk,))
+        return reverse('chapterimginfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_chapterimginfo_update', args=(self.pk,))
+        return reverse('chapterimginfo_update', args=(self.pk,))
 
 
 class ChapterMissonCheck(models.Model):
@@ -745,11 +720,11 @@ class ChapterMissonCheck(models.Model):
 
     # Relationship Fields
     check_item_code = ForeignKey(
-        'WebApp.ChapterMissonCheckItem',
+        'ChapterMissonCheckItem',
          related_name="chaptermissonchecks", on_delete=models.DO_NOTHING
     )
     inning_code = ForeignKey(
-        'WebApp.InningInfo',
+        'InningInfo',
          related_name="chaptermissonchecks", on_delete=models.DO_NOTHING
     )
 
@@ -760,11 +735,11 @@ class ChapterMissonCheck(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_chaptermissoncheck_detail', args=(self.pk,))
+        return reverse('chaptermissoncheck_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_chaptermissoncheck_update', args=(self.pk,))
+        return reverse('chaptermissoncheck_update', args=(self.pk,))
 
 
 class ChapterWrite(models.Model):
@@ -782,11 +757,11 @@ class ChapterWrite(models.Model):
 
     # Relationship Fields
     inning_code = ForeignKey(
-        'WebApp.InningInfo',
+        'InningInfo',
          related_name="chapterwrites", on_delete=models.DO_NOTHING
     )
     chapter_contents_code = ForeignKey(
-        'WebApp.ChapterContentsInfo',
+        'ChapterContentsInfo',
          related_name="chapterwrites", on_delete=models.DO_NOTHING
     )
 
@@ -797,11 +772,11 @@ class ChapterWrite(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_chapterwrite_detail', args=(self.pk,))
+        return reverse('chapterwrite_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_chapterwrite_update', args=(self.pk,))
+        return reverse('chapterwrite_update', args=(self.pk,))
 
 
 class GroupMapping(models.Model):
@@ -817,15 +792,15 @@ class GroupMapping(models.Model):
 
     # Relationship Fields
     center_code = ForeignKey(
-        'WebApp.CenterInfo',
+        'CenterInfo',
          related_name="groupmappings", on_delete=models.DO_NOTHING
     )
     group_code = ForeignKey(
-        'WebApp.InningGroup',
+        'InningGroup',
          related_name="groupmappings", on_delete=models.DO_NOTHING
     )
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="groupmappings", on_delete=models.DO_NOTHING
     )
 
@@ -836,11 +811,11 @@ class GroupMapping(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_groupmapping_detail', args=(self.pk,))
+        return reverse('groupmapping_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_groupmapping_update', args=(self.pk,))
+        return reverse('groupmapping_update', args=(self.pk,))
 
 
 class HomeworkInfo(models.Model):
@@ -856,15 +831,15 @@ class HomeworkInfo(models.Model):
 
     # Relationship Fields
     question_code = ForeignKey(
-        'WebApp.OmrQuestionInfo',
+        'OmrQuestionInfo',
          related_name="homeworkinfos", on_delete=models.DO_NOTHING
     )
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="homeworkinfos", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="homeworkinfos", on_delete=models.DO_NOTHING
     )
 
@@ -875,11 +850,11 @@ class HomeworkInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_homeworkinfo_detail', args=(self.pk,))
+        return reverse('homeworkinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_homeworkinfo_update', args=(self.pk,))
+        return reverse('homeworkinfo_update', args=(self.pk,))
 
 
 class LearningNote(models.Model):
@@ -891,15 +866,15 @@ class LearningNote(models.Model):
 
     # Relationship Fields
     inning_code = ForeignKey(
-        'WebApp.InningInfo',
+        'InningInfo',
          related_name="learningnotes", on_delete=models.DO_NOTHING
     )
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="learningnotes", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="learningnotes", on_delete=models.DO_NOTHING
     )
 
@@ -910,11 +885,11 @@ class LearningNote(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_learningnote_detail', args=(self.pk,))
+        return reverse('learningnote_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_learningnote_update', args=(self.pk,))
+        return reverse('learningnote_update', args=(self.pk,))
 
 
 class LectureUbtInfo(models.Model):
@@ -930,11 +905,11 @@ class LectureUbtInfo(models.Model):
 
     # Relationship Fields
     quiz_code = ForeignKey(
-        'WebApp.QuizInfo',
+        'QuizInfo',
          related_name="lectureubtinfos", on_delete=models.DO_NOTHING
     )
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="lectureubtinfos", on_delete=models.DO_NOTHING
     )
 
@@ -945,11 +920,11 @@ class LectureUbtInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_lectureubtinfo_detail', args=(self.pk,))
+        return reverse('lectureubtinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_lectureubtinfo_update', args=(self.pk,))
+        return reverse('lectureubtinfo_update', args=(self.pk,))
 
 
 class LessonInfo(models.Model):
@@ -973,19 +948,19 @@ class LessonInfo(models.Model):
 
     # Relationship Fields
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="lessoninfos", on_delete=models.DO_NOTHING
     )
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="lessoninfos", on_delete=models.DO_NOTHING
     )
     center_code = ForeignKey(
-        'WebApp.CenterInfo',
+        'CenterInfo',
          related_name="lessoninfos", on_delete=models.DO_NOTHING
     )
     inning_code = ForeignKey(
-        'WebApp.InningInfo',
+        'InningInfo',
          related_name="lessoninfos", on_delete=models.DO_NOTHING
     )
 
@@ -996,11 +971,11 @@ class LessonInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_lessoninfo_detail', args=(self.pk,))
+        return reverse('lessoninfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_lessoninfo_update', args=(self.pk,))
+        return reverse('lessoninfo_update', args=(self.pk,))
 
 
 class LessonLog(models.Model):
@@ -1029,19 +1004,19 @@ class LessonLog(models.Model):
 
     # Relationship Fields
     lesson_code = ForeignKey(
-        'WebApp.LessonInfo',
+        'LessonInfo',
          related_name="lessonlogs", on_delete=models.DO_NOTHING
     )
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="lessonlogs", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="lessonlogs", on_delete=models.DO_NOTHING
     )
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="lessonlogs", on_delete=models.DO_NOTHING
     )
 
@@ -1052,11 +1027,11 @@ class LessonLog(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_lessonlog_detail', args=(self.pk,))
+        return reverse('lessonlog_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_lessonlog_update', args=(self.pk,))
+        return reverse('lessonlog_update', args=(self.pk,))
 
 
 class MemberGroup(models.Model):
@@ -1073,7 +1048,7 @@ class MemberGroup(models.Model):
 
     # Relationship Fields
     center_code = ForeignKey(
-        'WebApp.CenterInfo',
+        'CenterInfo',
          related_name="membergroups", on_delete=models.DO_NOTHING
     )
 
@@ -1084,11 +1059,11 @@ class MemberGroup(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_membergroup_detail', args=(self.pk,))
+        return reverse('membergroup_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_membergroup_update', args=(self.pk,))
+        return reverse('membergroup_update', args=(self.pk,))
 
 
 class MessageInfo(models.Model):
@@ -1107,7 +1082,7 @@ class MessageInfo(models.Model):
 
     # Relationship Fields
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="messageinfos", on_delete=models.DO_NOTHING
     )
 
@@ -1118,11 +1093,11 @@ class MessageInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_messageinfo_detail', args=(self.pk,))
+        return reverse('messageinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_messageinfo_update', args=(self.pk,))
+        return reverse('messageinfo_update', args=(self.pk,))
 
 
 class OmrAnswerInfo(models.Model):
@@ -1143,23 +1118,23 @@ class OmrAnswerInfo(models.Model):
 
     # Relationship Fields
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="omranswerinfos", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="omranswerinfos", on_delete=models.DO_NOTHING
     )
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="omranswerinfos", on_delete=models.DO_NOTHING
     )
     question_code = ForeignKey(
-        'WebApp.OmrQuestionInfo',
+        'OmrQuestionInfo',
          related_name="omranswerinfos", on_delete=models.DO_NOTHING
     )
     lesson_code = ForeignKey(
-        'WebApp.LessonInfo',
+        'LessonInfo',
          related_name="omranswerinfos", on_delete=models.DO_NOTHING
     )
 
@@ -1170,11 +1145,11 @@ class OmrAnswerInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_omranswerinfo_detail', args=(self.pk,))
+        return reverse('omranswerinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_omranswerinfo_update', args=(self.pk,))
+        return reverse('omranswerinfo_update', args=(self.pk,))
 
 
 class OmrAssignInfo(models.Model):
@@ -1191,19 +1166,19 @@ class OmrAssignInfo(models.Model):
 
     # Relationship Fields
     question_code = ForeignKey(
-        'WebApp.OmrQuestionInfo',
+        'OmrQuestionInfo',
          related_name="omrassigninfos", on_delete=models.DO_NOTHING
     )
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="omrassigninfos", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="omrassigninfos", on_delete=models.DO_NOTHING
     )
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="omrassigninfos", on_delete=models.DO_NOTHING
     )
 
@@ -1214,11 +1189,11 @@ class OmrAssignInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_omrassigninfo_detail', args=(self.pk,))
+        return reverse('omrassigninfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_omrassigninfo_update', args=(self.pk,))
+        return reverse('omrassigninfo_update', args=(self.pk,))
 
 
 class OmrExampleInfo(models.Model):
@@ -1236,7 +1211,7 @@ class OmrExampleInfo(models.Model):
 
     # Relationship Fields
     question_code = ForeignKey(
-        'WebApp.OmrQuestionInfo',
+        'OmrQuestionInfo',
          related_name="omrexampleinfos", on_delete=models.DO_NOTHING
     )
 
@@ -1247,11 +1222,11 @@ class OmrExampleInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_omrexampleinfo_detail', args=(self.pk,))
+        return reverse('omrexampleinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_omrexampleinfo_update', args=(self.pk,))
+        return reverse('omrexampleinfo_update', args=(self.pk,))
 
 
 class QAnswerInfo(models.Model):
@@ -1273,23 +1248,23 @@ class QAnswerInfo(models.Model):
 
     # Relationship Fields
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="qanswerinfos", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="qanswerinfos", on_delete=models.DO_NOTHING
     )
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="qanswerinfos", on_delete=models.DO_NOTHING
     )
     question_code = ForeignKey(
-        'WebApp.OmrQuestionInfo',
+        'OmrQuestionInfo',
          related_name="qanswerinfos", on_delete=models.DO_NOTHING
     )
     lesson_code = ForeignKey(
-        'WebApp.LessonInfo',
+        'LessonInfo',
          related_name="qanswerinfos", on_delete=models.DO_NOTHING
     )
 
@@ -1300,11 +1275,11 @@ class QAnswerInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_qanswerinfo_detail', args=(self.pk,))
+        return reverse('qanswerinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_qanswerinfo_update', args=(self.pk,))
+        return reverse('qanswerinfo_update', args=(self.pk,))
 
 
 class QAnswerLog(models.Model):
@@ -1323,15 +1298,15 @@ class QAnswerLog(models.Model):
 
     # Relationship Fields
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="qanswerlogs", on_delete=models.DO_NOTHING
     )
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="qanswerlogs", on_delete=models.DO_NOTHING
     )
     question_code = ForeignKey(
-        'WebApp.OmrQuestionInfo',
+        'OmrQuestionInfo',
          related_name="qanswerlogs", on_delete=models.DO_NOTHING
     )
 
@@ -1342,11 +1317,11 @@ class QAnswerLog(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_qanswerlog_detail', args=(self.pk,))
+        return reverse('qanswerlog_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_qanswerlog_update', args=(self.pk,))
+        return reverse('qanswerlog_update', args=(self.pk,))
 
 
 class QExampleInfo(models.Model):
@@ -1366,7 +1341,7 @@ class QExampleInfo(models.Model):
 
     # Relationship Fields
     question_code = ForeignKey(
-        'WebApp.OmrQuestionInfo',
+        'OmrQuestionInfo',
          related_name="qexampleinfos", on_delete=models.DO_NOTHING
     )
 
@@ -1377,11 +1352,11 @@ class QExampleInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_qexampleinfo_detail', args=(self.pk,))
+        return reverse('qexampleinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_qexampleinfo_update', args=(self.pk,))
+        return reverse('qexampleinfo_update', args=(self.pk,))
 
 
 class QuestionInfo(models.Model):
@@ -1410,11 +1385,11 @@ class QuestionInfo(models.Model):
 
     # Relationship Fields
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="questioninfos", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="questioninfos", on_delete=models.DO_NOTHING
     )
 
@@ -1425,11 +1400,11 @@ class QuestionInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_questioninfo_detail', args=(self.pk,))
+        return reverse('questioninfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_questioninfo_update', args=(self.pk,))
+        return reverse('questioninfo_update', args=(self.pk,))
 
 
 class QuizAnswerInfo(models.Model):
@@ -1452,19 +1427,19 @@ class QuizAnswerInfo(models.Model):
 
     # Relationship Fields
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="quizanswerinfos", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="quizanswerinfos", on_delete=models.DO_NOTHING
     )
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="quizanswerinfos", on_delete=models.DO_NOTHING
     )
     quiz_code = ForeignKey(
-        'WebApp.QuizInfo',
+        'QuizInfo',
          related_name="quizanswerinfos", on_delete=models.DO_NOTHING
     )
 
@@ -1475,11 +1450,11 @@ class QuizAnswerInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_quizanswerinfo_detail', args=(self.pk,))
+        return reverse('quizanswerinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_quizanswerinfo_update', args=(self.pk,))
+        return reverse('quizanswerinfo_update', args=(self.pk,))
 
 
 class QuizExampleInfo(models.Model):
@@ -1499,7 +1474,7 @@ class QuizExampleInfo(models.Model):
 
     # Relationship Fields
     quiz_code = ForeignKey(
-        'WebApp.QuizInfo',
+        'QuizInfo',
          related_name="quizexampleinfos", on_delete=models.DO_NOTHING
     )
 
@@ -1510,11 +1485,11 @@ class QuizExampleInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_quizexampleinfo_detail', args=(self.pk,))
+        return reverse('quizexampleinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_quizexampleinfo_update', args=(self.pk,))
+        return reverse('quizexampleinfo_update', args=(self.pk,))
 
 
 class ScheduleInfo(models.Model):
@@ -1536,7 +1511,7 @@ class ScheduleInfo(models.Model):
 
     # Relationship Fields
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="scheduleinfos", on_delete=models.DO_NOTHING
     )
 
@@ -1547,11 +1522,11 @@ class ScheduleInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_scheduleinfo_detail', args=(self.pk,))
+        return reverse('scheduleinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_scheduleinfo_update', args=(self.pk,))
+        return reverse('scheduleinfo_update', args=(self.pk,))
 
 
 class TalkMember(models.Model):
@@ -1561,7 +1536,7 @@ class TalkMember(models.Model):
 
     # Relationship Fieldspro
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="talkmembers", on_delete=models.DO_NOTHING
     )
 
@@ -1572,11 +1547,11 @@ class TalkMember(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_talkmember_detail', args=(self.pk,))
+        return reverse('talkmember_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_talkmember_update', args=(self.pk,))
+        return reverse('talkmember_update', args=(self.pk,))
 
 
 class TalkRoom(models.Model):
@@ -1587,11 +1562,11 @@ class TalkRoom(models.Model):
 
     # Relationship Fields
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="talkrooms", on_delete=models.DO_NOTHING
     )
     inning_code = ForeignKey(
-        'WebApp.InningInfo',
+        'InningInfo',
          related_name="talkrooms", on_delete=models.DO_NOTHING
     )
 
@@ -1602,11 +1577,11 @@ class TalkRoom(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_talkroom_detail', args=(self.pk,))
+        return reverse('talkroom_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_talkroom_update', args=(self.pk,))
+        return reverse('talkroom_update', args=(self.pk,))
 
 
 class TalkMessage(models.Model):
@@ -1619,7 +1594,7 @@ class TalkMessage(models.Model):
 
     # Relationship Fields
     talk_room_id = ForeignKey(
-        'WebApp.TalkRoom',
+        'TalkRoom',
          related_name="talkmessages", on_delete=models.DO_NOTHING
     )
 
@@ -1630,11 +1605,11 @@ class TalkMessage(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_talkmessage_detail', args=(self.pk,))
+        return reverse('talkmessage_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_talkmessage_update', args=(self.pk,))
+        return reverse('talkmessage_update', args=(self.pk,))
 
 
 class TalkMessageRead(models.Model):
@@ -1644,7 +1619,7 @@ class TalkMessageRead(models.Model):
 
     # Relationship Fields
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="talkmessagereads", on_delete=models.DO_NOTHING
     )
 
@@ -1655,11 +1630,11 @@ class TalkMessageRead(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_talkmessageread_detail', args=(self.pk,))
+        return reverse('talkmessageread_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_talkmessageread_update', args=(self.pk,))
+        return reverse('talkmessageread_update', args=(self.pk,))
 
 
 class TodoInfo(models.Model):
@@ -1683,15 +1658,15 @@ class TodoInfo(models.Model):
 
     # Relationship Fields
     chapter_code = ForeignKey(
-        'WebApp.ChapterInfo',
+        'ChapterInfo',
          related_name="todoinfos", on_delete=models.DO_NOTHING
     )
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="todoinfos", on_delete=models.DO_NOTHING
     )
     lecture_code = ForeignKey(
-        'WebApp.LectureInfo',
+        'LectureInfo',
          related_name="todoinfos", on_delete=models.DO_NOTHING
     )
 
@@ -1702,11 +1677,11 @@ class TodoInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_todoinfo_detail', args=(self.pk,))
+        return reverse('todoinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_todoinfo_update', args=(self.pk,))
+        return reverse('todoinfo_update', args=(self.pk,))
 
 
 class TodoTInfo(models.Model):
@@ -1724,7 +1699,7 @@ class TodoTInfo(models.Model):
 
     # Relationship Fields
     member_code = ForeignKey(
-        'WebApp.MemberInfo',
+        'MemberInfo',
          related_name="todotinfos", on_delete=models.DO_NOTHING
     )
 
@@ -1735,10 +1710,8 @@ class TodoTInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('WebApp_todotinfo_detail', args=(self.pk,))
+        return reverse('todotinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('WebApp_todotinfo_update', args=(self.pk,))
-
-
+        return reverse('todotinfo_update', args=(self.pk,))
