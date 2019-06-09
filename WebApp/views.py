@@ -1,6 +1,20 @@
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
+from django.views import generic
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from .models import  CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
-from .forms import  CenterInfoForm, MemberInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardInfoForm, BoardContentInfoForm, InningGroupForm, ChapterContentMediaForm, ChapterImgInfoForm, ChapterMissonCheckForm, ChapterWriteForm, GroupMappingForm, HomeworkInfoForm, LearningNoteForm, LectureUbtInfoForm, LessonInfoForm, LessonLogForm, MemberGroupForm, MessageInfoForm, OmrAnswerInfoForm, OmrAssignInfoForm, OmrExampleInfoForm, QAnswerInfoForm, QAnswerLogForm, QExampleInfoForm, QuestionInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, ScheduleInfoForm, TalkMemberForm, TalkRoomForm, TalkMessageForm, TalkMessageReadForm, TodoInfoForm, TodoTInfoForm
+from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
+    ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, \
+    AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardInfoForm, BoardContentInfoForm, InningGroupForm, \
+    ChapterContentMediaForm, ChapterImgInfoForm, ChapterMissonCheckForm, ChapterWriteForm, GroupMappingForm, \
+    HomeworkInfoForm, LearningNoteForm, LectureUbtInfoForm, LessonInfoForm, LessonLogForm, MemberGroupForm, \
+    MessageInfoForm, OmrAnswerInfoForm, OmrAssignInfoForm, OmrExampleInfoForm, QAnswerInfoForm, QAnswerLogForm, \
+    QExampleInfoForm, QuestionInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, ScheduleInfoForm, TalkMemberForm, \
+    TalkRoomForm, TalkMessageForm, TalkMessageReadForm, TodoInfoForm, TodoTInfoForm, UserUpdateForm, UserRegisterForm, \
+    MemberInfoForm
+
+
 #
 #
 # class ProfileListView(ListView):
@@ -20,6 +34,51 @@ from .forms import  CenterInfoForm, MemberInfoForm, LectureInfoForm, ChapterInfo
 #     model = Profile
 #     form_class = ProfileForm
 #
+
+def start(request):
+    """Start page with a documentation.
+    """
+    # return render(request,"start.html")
+    return render(request, "homepage.html")
+
+def editprofile(request):
+    if not request.user.is_authenticated:
+        return HttpResponse("you are not authenticated", {'error_message': 'Error Message Customize here'})
+
+    post = get_object_or_404(MemberInfo, pk=request.user.id)
+    if request.method == "POST":
+
+        form = UserUpdateForm(request.POST, request.FILES, instance=post)
+
+        # if request.user.isAdmin:
+        #     form = UserUpdateFormForAdmin(request.POST, request.FILES, instance=post)
+
+        if form.is_valid():
+            # post.date_last_update = datetime.now()
+            post.save()
+            return redirect('start')
+    else:
+
+        # form = UserUpdateForm(instance=post)
+        form = UserUpdateForm(request.POST, request.FILES, instance=post)
+
+
+        # if request.user.isAdmin == 1:
+        #     form = UserUpdateFormForAdmin(instance=post)
+
+    return render(request, 'registration/editprofile.html', {'form': form})
+
+class register(generic.CreateView):
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('loginsuccess')
+    template_name = 'registration/register.html'
+
+def loginsuccess(request):
+    return render(request, "registration/registrationsuccessful.html")
+
+
+
+
 
 class CenterInfoListView(ListView):
     model = CenterInfo

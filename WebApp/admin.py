@@ -40,8 +40,8 @@ class MemberInfoAdminForm(forms.ModelForm):
 
 class MemberInfoAdmin(admin.ModelAdmin):
     form = MemberInfoAdminForm
-    list_display = ['Member_ID', 'Member_Password', 'Member_Type', 'Member_Name', 'Member_Permanent_Address', 'Member_Temporary_Address', 'Member_BirthDate', 'Member_Email', 'Member_Phone', 'member_Avatar', 'member_Gender', 'Use_Flag', 'Register_DateTime', 'Register_Agent', 'Member_Memo']
-    readonly_fields = ['Member_ID', 'Member_Password', 'Member_Type', 'Member_Name', 'Member_Permanent_Address', 'Member_Temporary_Address', 'Member_BirthDate', 'Member_Email', 'Member_Phone', 'member_Avatar', 'member_Gender', 'Use_Flag', 'Register_DateTime', 'Register_Agent', 'Member_Memo']
+    list_display = ['Member_ID', 'Member_Type', 'Member_Name', 'Member_Permanent_Address', 'Member_Temporary_Address', 'Member_BirthDate', 'Member_Email', 'Member_Phone', 'member_Avatar', 'member_Gender', 'Use_Flag', 'Register_DateTime', 'Register_Agent', 'Member_Memo','Member_Role']
+    readonly_fields = ['Member_ID', 'Member_Type', 'Member_Name', 'Member_Permanent_Address', 'Member_Temporary_Address', 'Member_BirthDate', 'Member_Email', 'Member_Phone', 'member_Avatar', 'member_Gender', 'Use_Flag', 'Register_DateTime', 'Register_Agent', 'Member_Memo','Member_Role']
 
 admin.site.register(MemberInfo, MemberInfoAdmin)
 

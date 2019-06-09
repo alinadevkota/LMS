@@ -1,11 +1,44 @@
 from django import forms
-from .models import  CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
+from django.contrib.auth.forms import UserCreationForm
+from django.forms import Select
+
+from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
+    ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, \
+    BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
+    HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, \
+    OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, \
+    ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, USER_ROLES
 
 
 # class ProfileForm(forms.ModelForm):
 #     class Meta:
 #         model = Profile
 #         fields = '__all__'
+
+
+class UserRegisterForm(UserCreationForm):
+    Member_Role = forms.MultipleChoiceField(choices=USER_ROLES, widget=forms.CheckboxSelectMultiple())
+
+    class Meta(UserCreationForm.Meta):
+        model = MemberInfo
+        fields = ('username', 'email','Member_Role')
+
+
+class UserUpdateForm(forms.ModelForm):
+    role = forms.MultipleChoiceField(choices=USER_ROLES,)
+
+    class Meta:
+        model = MemberInfo
+        fields = ('username', 'email')
+        widgets = {
+            'role': forms.CheckboxSelectMultiple,
+        }
+
+
+class UserUpdateFormForAdmin(forms.ModelForm):
+    class Meta:
+        model = MemberInfo
+        fields = '__all__'
 
 
 class CenterInfoForm(forms.ModelForm):
@@ -17,8 +50,7 @@ class CenterInfoForm(forms.ModelForm):
 class MemberInfoForm(forms.ModelForm):
     class Meta:
         model = MemberInfo
-        fields = ['Member_ID', 'Member_Password', 'Member_Type', 'Member_Name', 'Member_Permanent_Address', 'Member_Temporary_Address', 'Member_BirthDate', 'Member_Email', 'Member_Phone', 'member_Avatar', 'member_Gender', 'Use_Flag', 'Register_DateTime', 'Register_Agent', 'Member_Memo', 'center_code']
-
+        fields = '__all__'
 
 class LectureInfoForm(forms.ModelForm):
     class Meta:
