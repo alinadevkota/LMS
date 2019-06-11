@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'django_extensions',
     'crispy_forms',
     'rest_framework',
-    'WebApp'
+    'rest_framework.authtoken',
+    'rest_auth',
+    'WebApp',
+
 ]
 
 MIDDLEWARE = [
@@ -131,6 +134,7 @@ CHANNEL_LAYERS = {
 
 INSTALLED_APPS += [
     'channels'
+
 ]
 
 

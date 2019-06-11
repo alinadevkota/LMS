@@ -3,10 +3,17 @@ from django.conf.urls import url
 from django.urls import path, include
 from rest_framework import routers
 
+from rest_auth.views import (
+    LoginView, LogoutView, UserDetailsView, PasswordChangeView,
+    PasswordResetView, PasswordResetConfirmView
+)
+
 from . import api
 from . import views
 
 router = routers.DefaultRouter()
+
+
 # router.register(r'profile', api.ProfileViewSet)
 router.register(r'centerinfo', api.CenterInfoViewSet)
 router.register(r'memberinfo', api.MemberInfoViewSet)
