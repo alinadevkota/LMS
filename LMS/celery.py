@@ -4,9 +4,9 @@ import os
 from celery import Celery
 from django.conf import settings
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project_name.settings') # Change this to the project name
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LMS.settings') # Change this to the project name
 
-app = Celery('project_name')
+app = Celery('LMS')
 
 app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
