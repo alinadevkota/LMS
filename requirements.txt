@@ -9,4 +9,7 @@ whitenoise
 django-heroku
 coverage
 django-coverage
+django-rest-auth==0.9.5
+djangorestframework==3.7.7
+
 
