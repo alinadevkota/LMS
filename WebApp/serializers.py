@@ -41,7 +41,7 @@ class MemberInfoSerializer(serializers.ModelSerializer):
             'Member_BirthDate', 
             'Member_Email', 
             'Member_Phone', 
-            'member_Avatar', 
+            'forum_avatar', 
             'member_Gender', 
             'Use_Flag', 
             'Register_DateTime', 

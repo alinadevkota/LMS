@@ -5,7 +5,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models as models
 from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, TimeField, BooleanField
 from django.urls import reverse
+from django.core.files.storage import FileSystemStorage
 
+fs = FileSystemStorage(location='LMS')
 
 class CenterInfo(models.Model):
 
@@ -50,7 +52,6 @@ class MemberInfo(AbstractUser):
     Member_BirthDate = models.CharField(max_length=50, blank=True, null=True)
     Member_Email = models.CharField(max_length=150, blank=True, null=True)
     Member_Phone = models.CharField(max_length=150, blank=True, null=True)
-    member_Avatar = models.CharField(max_length=50, blank=True, null=True)
     member_Gender = models.IntegerField(blank=True, null=True)
     Use_Flag = models.CharField(max_length=1, blank=True, null=True)
     Register_DateTime = models.DateTimeField(default=datetime.now(), blank=True)
