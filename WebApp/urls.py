@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.contrib.auth.views import login, logout
+# from django.contrib.auth.views import login, logout
 from django.urls import path, include
 from rest_framework import routers
 
@@ -57,10 +57,10 @@ urlpatterns = (
     # urls for Django Rest Framework API
     path('api/v1/', include(router.urls)),
     url(r'^$', views.start, name = 'start'),
-    url(r'^login/$', login, {'template_name': 'registration/login.html',
+    url(r'^login/$', views.login, {'template_name': 'registration/login.html',
                              'redirect_authenticated_user': True}, name='login' ),
 
-    url(r'^.*logout/$', logout, {'template_name': 'registration/logout.html'}, name='logout'),
+    url(r'^.*logout/$', views.logout, {'template_name': 'registration/logout.html'}, name='logout'),
 
     url(r'^.*editprofile/$', views.editprofile, name='editprofile'),
 
