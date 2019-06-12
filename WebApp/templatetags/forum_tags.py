@@ -23,13 +23,11 @@ def gravatar_url(user, size=48):
         email.lower().encode('utf-8')
     ).hexdigest() + "?"
     avatar_url += urlencode({'d': default, 's': str(size)})
-    print(escape(avatar_url))
     return escape(avatar_url)
 
 
 @register.simple_tag
 def avatar_url(user, size=48, no_gravatar=False):
-    print(user)
     try:
         avatar = user.forum_avatar
     except ForumAvatar.DoesNotExist:

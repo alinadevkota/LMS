@@ -12,7 +12,7 @@ api_router.register(r'topics', api.TopicApiView)
 api_router.register(r'post', api.PostApiView)
 
 urlpatterns = [
-    url(r'^page/(?P<page>[0-9]+)/$', views.Index.as_view(), name='index'),
+    path(r'^page/(?P<page>[0-9]+)/$', views.Index.as_view(), name='index'),
     path(r'^$', views.Index.as_view(), name='index'),
     path(r'^n/(?P<pk>\d+)/page/(?P<page>[0-9]+)/$', views.NodeView.as_view(), name='node'),
     path(r'^n/(?P<pk>\d+)/$', views.NodeView.as_view(), name='node'),

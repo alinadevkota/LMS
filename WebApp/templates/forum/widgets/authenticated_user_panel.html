@@ -5,9 +5,9 @@
     <div class="panel-body user-panel">
         <div class="panel-user-info">
             <div class="avatar-name">
-{#                <a href="{% url "forum:upload_avatar" %}">#}
-{#                    <img class="panel-avatar user-avatar" src="{% avatar_url request.user %}" alt=""/>#}
-{#                </a>#}
+                <a href="{% url "forum:upload_avatar" %}">
+                    <img class="panel-avatar user-avatar" src="{% avatar_url request.user %}" alt=""/>
+                </a>
                 <span class="panel-username"><a href="{% url 'forum:user_info' request.user.pk %}">{{ request.user.username }}</a></span>
             </div>
             <div class="row panel-user-meta">
