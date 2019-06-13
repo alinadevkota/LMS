@@ -150,7 +150,7 @@ class Post(models.Model):
         t.last_replied = t.get_last_replied()
         t.save(update_fields=['last_replied', 'reply_count'])
         for to in mentioned_users:
-            notify.delay(to=to.username, sender=self.user.username, post=self.pk)
+            notify(to=to.username, sender=self.user.username, post=self.pk)
 
     def delete(self, *args, **kwargs):
         super(Post, self).delete(*args, **kwargs)

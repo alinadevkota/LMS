@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.contrib.auth import get_user_model
-
+from WebApp.models import MemberInfo
 
 logger = get_task_logger(__name__)
 
@@ -11,8 +11,8 @@ logger = get_task_logger(__name__)
 @shared_task
 def notify(sender, to, topic=None, post=None):
     from forum.models import Notification, Topic, Post
-    User = get_user_model()
-
+    User = MemberInfo
+    print("hello")
     if not any([topic, post]):
         logger.warning('No topic or post provided, ignored')
 
