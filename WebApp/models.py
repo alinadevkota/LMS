@@ -26,11 +26,11 @@ class CenterInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('centerinfo_detail', args=(self.pk,))
+        return reverse('WebApp_centerinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('centerinfo_update', args=(self.pk,))
+        return reverse('WebApp_centerinfo_update', args=(self.pk,))
 
 USER_ROLES = (
     ('CenterAdmin', 'CenterAdmin'),
@@ -61,7 +61,7 @@ class MemberInfo(AbstractUser):
     Member_Role = models.CharField(max_length=30, default="Student")
 
     # Relationship Fields
-    center_code = ForeignKey(
+    centcode = ForeignKey(
         'CenterInfo',
          related_name="memberinfos", on_delete=models.DO_NOTHING, null=True
     )
