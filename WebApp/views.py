@@ -78,7 +78,7 @@ def start(request):
     """Start page with a documentation.
     """
     # return render(request,"start.html")
-    return render(request, "homepage.html")
+    return render(request, "WebApp/homepage.html")
 
 def editprofile(request):
     if not request.user.is_authenticated:
