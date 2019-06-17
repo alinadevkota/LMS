@@ -3,7 +3,6 @@
 {% block smart_forum_title %} Register  {% endblock %}
 
 {% block content %}
-
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
