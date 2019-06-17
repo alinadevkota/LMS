@@ -1,0 +1,14 @@
+.out{ 
+    margin-top: 40px;
+    text-align: center;
+    padding-left: 600px;
+    padding-right: 600px;
+} 
+.btn-default{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.form-control-label{
+    font-weight: bold;
+}

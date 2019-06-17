@@ -4,8 +4,8 @@
 {% block content %}
 <p><a class="btn btn-default" href="{% url 'WebApp_boardinfo_list' %}">BoardInfo Listing</a></p>
 <form method="post">
-{% csrf_token %}
-{{form|crispy}}
-<button class="btn btn-primary" type="submit">Submit</button>
+    {% csrf_token %}
+    {{form|crispy}}
+    <button class="btn btn-primary" type="submit">Submit</button>
 </form>
 {% endblock %}

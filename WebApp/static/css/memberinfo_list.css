@@ -1,0 +1,28 @@
+.memberInfoListClass{
+    margin-top: 40px;
+    text-align: center;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+a.btn-default{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.tableTitleRow{
+    font-weight: bold;
+    background-color: azure;
+}
+
+
+.table,td,th{
+    border: 1px solid grey;
+    
+}
+
+.btn-createnew{
+    padding-top:20px;
+}
+
+

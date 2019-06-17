@@ -1,32 +1,46 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_assignhomeworkinfo_list' %}">AssignHomeworkInfo Listing</a></p>
-<table class="table">
-<tr>
-<td>ID</td><td>Link</td>
-    <td>subject_code</td>
-    <td>use_flag</td>
-    <td>reg_date</td>
-    <td>reg_time</td>
-    <td>reg_agent</td>
-    <td>udt_date</td>
-    <td>udt_time</td>
-    <td>udt_agent</td>
-</tr>
-{% for object in object_list %}
-<tr>
-    <td>{{object.pk}}</td>
-    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-    <td>{{ object.subject_code }}</td>
-    <td>{{ object.use_flag }}</td>
-    <td>{{ object.reg_date }}</td>
-    <td>{{ object.reg_time }}</td>
-    <td>{{ object.reg_agent }}</td>
-    <td>{{ object.udt_date }}</td>
-    <td>{{ object.udt_time }}</td>
-    <td>{{ object.udt_agent }}</td>
-</tr>
+
+
+
+<link rel="stylesheet" href="{% static 'css/assignhomeworkinfo_list.css' %}">
+
+
+<div class="assignhomework">
+
+
+    <p><a class="btn btn-default" href="{% url 'WebApp_assignhomeworkinfo_list' %}">AssignHomeworkInfo Listing</a></p>
+    <table class="table">
+        <tr>
+        <tr class="font">
+            <td>ID</td>
+            <td>Link</td>
+            <td>Subject Code</td>
+            <td>Use Flag</td>
+            <td>Registration Date</td>
+            <td>Registration Time</td>
+            <td>Registration Agent</t d>
+            <td>Updated Date</td>
+            <td>Updated Time</td>
+            <td>Updated Agent</td>
+        </tr>
+        </tr>
+        {% for object in object_list %}
+        <tr>
+            <td>{{object.pk}}</td>
+            <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+            <td>{{ object.subject_code }}</td>
+            <td>{{ object.use_flag }}</td>
+            <td>{{ object.reg_date }}</td>
+            <td>{{ object.reg_time }}</td>
+            <td>{{ object.reg_agent }}</td>
+            <td>{{ object.udt_date }}</td>
+            <td>{{ object.udt_time }}</td>
+            <td>{{ object.udt_agent }}</td>
+        </tr>
+</div>
+
 {% endfor %}
 </table><a class="btn btn-primary" href="{% url 'WebApp_assignhomeworkinfo_create' %}">Create new AssignHomeworkInfo</a>
 {% endblock %}

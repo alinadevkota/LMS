@@ -1,11 +1,36 @@
-{% extends "base.html" %}
-{% load static %}
-{% load crispy_forms_tags %}
+{% extends "base.html" %} {% load static %} {% load crispy_forms_tags %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_centerinfo_list' %}">CenterInfo Listing</a></p>
-<form method="post">
-{% csrf_token %}
-{{form|crispy}}
-<button class="btn btn-primary" type="submit">Submit</button>
-</form>
+
+
+
+<link rel="stylesheet" href="{% static 'css/centerinfo_form.css' %}">
+<div class="centerInfoListingHeader">
+  <p>
+    <a class="btn btn-default" href="{% url 'WebApp_centerinfo_list' %}">Centers</a>
+  </p>
+</div>
+
+<div class="centerInfoForm">
+  <form method="post">
+    {% csrf_token %}
+    <!-- {{ form | crispy }} -->
+    {{ form.Center_Name|as_crispy_field }}
+    {{ form.Center_Address|as_crispy_field }}
+    <div class="row">
+      <div class="col-6">
+        {{ form.Use_Flag|as_crispy_field }}
+      </div>
+      <div class="col-6">
+        {{ form.Register_DateTime|as_crispy_field }}
+      </div>
+    </div>
+
+    {{ form.Register_Agent|as_crispy_field }}
+    <div class="submitButton">
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+
+
 {% endblock %}

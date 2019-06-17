@@ -1,26 +1,45 @@
 {% extends "base.html" %}
+
+
 {% load static %}
+
+
+{% load crispy_forms_tags %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_centerinfo_list' %}">CenterInfo Listing</a></p>
-<table class="table">
-<tr>
-<td>ID</td><td>Link</td>
-    <td>Center_Name</td>
-    <td>Center_Address</td>
-    <td>Use_Flag</td>
-    <td>Register_DateTime</td>
-    <td>Register_Agent</td>
-</tr>
-{% for object in object_list %}
-<tr>
-    <td>{{object.pk}}</td>
-    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-    <td>{{ object.Center_Name }}</td>
-    <td>{{ object.Center_Address }}</td>
-    <td>{{ object.Use_Flag }}</td>
-    <td>{{ object.Register_DateTime }}</td>
-    <td>{{ object.Register_Agent }}</td>
-</tr>
-{% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_centerinfo_create' %}">Create new CenterInfo</a>
+<link rel="stylesheet" href="{% static 'css/centerinfo_list.css' %}">
+
+
+<div class="centerInfoListClass">
+
+    <a class="btn btn-default" href="{% url 'WebApp_centerinfo_list' %}">List of Centers</a>
+    <div class="tableDiv">
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr class="tableTitleRow">
+                    <td>ID</td>
+                    <td>Center Name</td>
+                    <td>Center Address</td>
+                    <!-- <td>Use Flag</td> -->
+                    <td>Register DateTime</td>
+                    <td>Register Agent</td>
+                </tr>
+            </thead>
+            {% for object in object_list %}
+            <tr>
+                <td>{{object.pk}}</td>
+
+                <td><a href="{{object.get_absolute_url}}">{{ object.Center_Name }}</a></td>
+                <td>{{ object.Center_Address }}</td>
+                <!-- <td>{{ object.Use_Flag }}</td> -->
+                <td>{{ object.Register_DateTime }}</td>
+                <td>{{ object.Register_Agent }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="btn-createnew">
+        <a class="btn btn-primary" href="{% url 'WebApp_centerinfo_create' %}">Create new Center</a>
+    </div>
+</div>
+
 {% endblock %}
