@@ -1,10 +1,13 @@
 from datetime import datetime
 
+from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.models import ContentType
 from django.db import models as models
 from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, TimeField, BooleanField
 from django.urls import reverse
+from django.core.files.storage import FileSystemStorage
 
+fs = FileSystemStorage(location='LMS')
 
 class CenterInfo(models.Model):
 
@@ -23,36 +26,44 @@ class CenterInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('centerinfo_detail', args=(self.pk,))
+        return reverse('WebApp_centerinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('centerinfo_update', args=(self.pk,))
+        return reverse('WebApp_centerinfo_update', args=(self.pk,))
 
+USER_ROLES = (
+    ('CenterAdmin', 'CenterAdmin'),
+    ('Teacher', 'Teacher'),
+    ('Student', 'Student'),
+    ('Parent', 'Parent'),
+)
 
-class MemberInfo(models.Model):
+class MemberInfo(AbstractUser):
 
     # Fields
-    Member_ID = CharField(max_length=250, blank=True, null=True)
-    Member_Password = CharField(max_length=250, blank=True, null=True)
-    Member_Type = IntegerField(blank=True, null=True)
-    Member_Name = CharField(max_length=500, blank=True, null=True)
-    Member_Permanent_Address = CharField(max_length=500, blank=True, null=True)
-    Member_Temporary_Address = CharField(max_length=500, blank=True, null=True)
-    Member_BirthDate = CharField(max_length=50, blank=True, null=True)
-    Member_Email = CharField(max_length=150, blank=True, null=True)
-    Member_Phone = CharField(max_length=150, blank=True, null=True)
-    member_Avatar = CharField(max_length=50, blank=True, null=True)
-    member_Gender = IntegerField(blank=True, null=True)
-    Use_Flag = CharField(max_length=1, blank=True, null=True)
-    Register_DateTime = DateTimeField(default=datetime.now(), blank=True)
-    Register_Agent = CharField(max_length=200, blank=True, null=True)
-    Member_Memo = CharField(max_length=500, blank=True, null=True)
+    Member_ID = models.CharField(max_length=250, blank=True, null=True)
+    # remove this password field
+    # Member_Password = models.CharField(max_length=250, blank=True, null=True)
+    Member_Type = models.IntegerField(blank=True, null=True)
+    Member_Name = models.CharField(max_length=500, blank=True, null=True)
+    Member_Permanent_Address = models.CharField(max_length=500, blank=True, null=True)
+    Member_Temporary_Address = models.CharField(max_length=500, blank=True, null=True)
+    Member_BirthDate = models.CharField(max_length=50, blank=True, null=True)
+    Member_Email = models.CharField(max_length=150, blank=True, null=True)
+    Member_Phone = models.CharField(max_length=150, blank=True, null=True)
+    member_Gender = models.IntegerField(blank=True, null=True)
+    Use_Flag = models.CharField(max_length=1, blank=True, null=True)
+    Register_DateTime = models.DateTimeField(default=datetime.now(), blank=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Member_Memo = models.CharField(max_length=500, blank=True, null=True)
+
+    Member_Role = models.CharField(max_length=30, default="Student")
 
     # Relationship Fields
-    center_code = ForeignKey(
+    centcode = ForeignKey(
         'CenterInfo',
-         related_name="memberinfos", on_delete=models.DO_NOTHING
+         related_name="memberinfos", on_delete=models.DO_NOTHING, null=True
     )
 
     class Meta:

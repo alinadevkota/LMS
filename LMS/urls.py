@@ -19,5 +19,8 @@ from django.urls import path
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^rest-auth/', include('rest_auth.urls')),
     path('', include('WebApp.urls')),
+    path('forum/',include('forum.urls')),
+
 ]

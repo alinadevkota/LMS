@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<<<<<<< HEAD
 <link rel="stylesheet" href="{% static 'css/memberinfo_list.css' %}">
 
 <div class="memberInfoListClass">
@@ -48,6 +49,48 @@
             <td>{{ object.Member_Memo }}</td> -->
         </tr>
 </div>
+=======
+<p><a class="btn btn-default" href="{% url 'WebApp_memberinfo_list' %}">MemberInfo Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>Member_ID</td>
+    <td>Member_Password</td>
+    <td>Member_Type</td>
+    <td>Member_Name</td>
+    <td>Member_Permanent_Address</td>
+    <td>Member_Temporary_Address</td>
+    <td>Member_BirthDate</td>
+    <td>Member_Email</td>
+    <td>Member_Phone</td>
+    <td>forum_avatar</td>
+    <td>member_Gender</td>
+    <td>Use_Flag</td>
+    <td>Register_DateTime</td>
+    <td>Register_Agent</td>
+    <td>Member_Memo</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.Member_ID }}</td>
+    <td>{{ object.Member_Password }}</td>
+    <td>{{ object.Member_Type }}</td>
+    <td>{{ object.Member_Name }}</td>
+    <td>{{ object.Member_Permanent_Address }}</td>
+    <td>{{ object.Member_Temporary_Address }}</td>
+    <td>{{ object.Member_BirthDate }}</td>
+    <td>{{ object.Member_Email }}</td>
+    <td>{{ object.Member_Phone }}</td>
+    <td>{{ object.forum_avatar }}</td>
+    <td>{{ object.member_Gender }}</td>
+    <td>{{ object.Use_Flag }}</td>
+    <td>{{ object.Register_DateTime }}</td>
+    <td>{{ object.Register_Agent }}</td>
+    <td>{{ object.Member_Memo }}</td>
+</tr>
+>>>>>>> 50e2b6b4e5b3c0a52fa7dbb933e9ff0770f19921
 {% endfor %}
 </table>
 <div class="btn-createnew">

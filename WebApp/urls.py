@@ -1,10 +1,19 @@
+from django.conf.urls import url
+# from django.contrib.auth.views import login, logout
 from django.urls import path, include
 from rest_framework import routers
+
+from rest_auth.views import (
+    LoginView, LogoutView, UserDetailsView, PasswordChangeView,
+    PasswordResetView, PasswordResetConfirmView
+)
 
 from . import api
 from . import views
 
 router = routers.DefaultRouter()
+
+
 # router.register(r'profile', api.ProfileViewSet)
 router.register(r'centerinfo', api.CenterInfoViewSet)
 router.register(r'memberinfo', api.MemberInfoViewSet)
@@ -54,6 +63,17 @@ router.register(r'todotinfo', api.TodoTInfoViewSet)
 urlpatterns = (
     # urls for Django Rest Framework API
     path('api/v1/', include(router.urls)),
+    url(r'^$', views.start, name = 'start'),
+    url(r'^login/$', views.login, {'template_name': 'registration/login.html',
+                             'redirect_authenticated_user': True}, name='login' ),
+
+    url(r'^.*logout/$', views.logout, {'template_name': 'registration/logout.html'}, name='logout'),
+
+    url(r'^.*editprofile/$', views.editprofile, name='editprofile'),
+
+    url(r'^successlogin/$', views.loginsuccess, name='loginsuccess'),
+
+    url(r'^.*register/$', views.register.as_view(), name='register'),
 )
 
 # urlpatterns += (

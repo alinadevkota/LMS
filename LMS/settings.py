@@ -41,7 +41,12 @@ INSTALLED_APPS = [
     'django_extensions',
     'crispy_forms',
     'rest_framework',
-    'WebApp'
+    'rest_framework.authtoken',
+    'rest_auth',
+    'WebApp',
+
+    'django.contrib.humanize',
+    'forum'
 ]
 
 MIDDLEWARE = [
@@ -71,6 +76,24 @@ TEMPLATES = [
         },
     },
 ]
+
+
+# Template context_processors
+TEMPLATES[0]['OPTIONS']['context_processors'].append("forum.context_processors.forum_processor")
+
+# Media related settings are required for avatar uploading to function properly
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# Form UI Settings
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# Configure where to link to from the Login and Reg buttons in the forum
+forum_LOGIN_URL_NAME = "account:login"
+forum_REG_URL_NAME = "account:reg"
+
+# Site Name
+forum_SITE_NAME = "A lovely forum"
 
 WSGI_APPLICATION = 'LMS.wsgi.application'
 
@@ -137,3 +160,7 @@ INSTALLED_APPS += [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 django_heroku.settings(locals())
+
+LOGIN_REDIRECT_URL = "/"
+
+AUTH_USER_MODEL = 'WebApp.MemberInfo'

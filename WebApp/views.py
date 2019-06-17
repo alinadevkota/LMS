@@ -1,6 +1,23 @@
+from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LogoutView, LoginView
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
+from django.views import generic
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from .models import  CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
-from .forms import  CenterInfoForm, MemberInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardInfoForm, BoardContentInfoForm, InningGroupForm, ChapterContentMediaForm, ChapterImgInfoForm, ChapterMissonCheckForm, ChapterWriteForm, GroupMappingForm, HomeworkInfoForm, LearningNoteForm, LectureUbtInfoForm, LessonInfoForm, LessonLogForm, MemberGroupForm, MessageInfoForm, OmrAnswerInfoForm, OmrAssignInfoForm, OmrExampleInfoForm, QAnswerInfoForm, QAnswerLogForm, QExampleInfoForm, QuestionInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, ScheduleInfoForm, TalkMemberForm, TalkRoomForm, TalkMessageForm, TalkMessageReadForm, TodoInfoForm, TodoTInfoForm
+from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
+    ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, \
+    AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardInfoForm, BoardContentInfoForm, InningGroupForm, \
+    ChapterContentMediaForm, ChapterImgInfoForm, ChapterMissonCheckForm, ChapterWriteForm, GroupMappingForm, \
+    HomeworkInfoForm, LearningNoteForm, LectureUbtInfoForm, LessonInfoForm, LessonLogForm, MemberGroupForm, \
+    MessageInfoForm, OmrAnswerInfoForm, OmrAssignInfoForm, OmrExampleInfoForm, QAnswerInfoForm, QAnswerLogForm, \
+    QExampleInfoForm, QuestionInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, ScheduleInfoForm, TalkMemberForm, \
+    TalkRoomForm, TalkMessageForm, TalkMessageReadForm, TodoInfoForm, TodoTInfoForm, UserUpdateForm, UserRegisterForm, \
+    MemberInfoForm
+
+
 #
 #
 # class ProfileListView(ListView):
@@ -20,6 +37,87 @@ from .forms import  CenterInfoForm, MemberInfoForm, LectureInfoForm, ChapterInfo
 #     model = Profile
 #     form_class = ProfileForm
 #
+
+def login(request, template_name='registration/login.html',
+          redirect_field_name=REDIRECT_FIELD_NAME,
+          authentication_form=AuthenticationForm,
+          extra_context=None, redirect_authenticated_user=False):
+    # warnings.warn(
+    #     'The login() view is superseded by the class-based LoginView().',
+    #     RemovedInDjango21Warning, stacklevel=2
+    # )
+    return LoginView.as_view(
+        template_name=template_name,
+        redirect_field_name=redirect_field_name,
+        form_class=authentication_form,
+        extra_context=extra_context,
+        redirect_authenticated_user=redirect_authenticated_user,
+    )(request)
+
+
+def logout(request, next_page=None,
+           template_name='logged_out.html',
+           redirect_field_name=REDIRECT_FIELD_NAME,
+           extra_context=None):
+    # warnings.warn(
+    #     'The logout() view is superseded by the class-based LogoutView().',
+    #     RemovedInDjango21Warning, stacklevel=2
+    # )
+    return LogoutView.as_view(
+        next_page=next_page,
+        template_name=template_name,
+        redirect_field_name=redirect_field_name,
+        extra_context=extra_context,
+    )(request)
+
+
+_sentinel = object()
+
+
+def start(request):
+    """Start page with a documentation.
+    """
+    # return render(request,"start.html")
+    return render(request, "homepage.html")
+
+def editprofile(request):
+    if not request.user.is_authenticated:
+        return HttpResponse("you are not authenticated", {'error_message': 'Error Message Customize here'})
+
+    post = get_object_or_404(MemberInfo, pk=request.user.id)
+    if request.method == "POST":
+
+        form = UserUpdateForm(request.POST, request.FILES, instance=post)
+
+        # if request.user.isAdmin:
+        #     form = UserUpdateFormForAdmin(request.POST, request.FILES, instance=post)
+
+        if form.is_valid():
+            # post.date_last_update = datetime.now()
+            post.save()
+            return redirect('start')
+    else:
+
+        # form = UserUpdateForm(instance=post)
+        form = UserUpdateForm(request.POST, request.FILES, instance=post)
+
+
+        # if request.user.isAdmin == 1:
+        #     form = UserUpdateFormForAdmin(instance=post)
+
+    return render(request, 'registration/editprofile.html', {'form': form})
+
+class register(generic.CreateView):
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('loginsuccess')
+    template_name = 'registration/register.html'
+
+def loginsuccess(request):
+    return render(request, "registration/registrationsuccessful.html")
+
+
+
+
 
 class CenterInfoListView(ListView):
     model = CenterInfo

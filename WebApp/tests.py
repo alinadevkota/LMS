@@ -56,7 +56,7 @@ def create_memberinfo(**kwargs):
     defaults["Member_BirthDate"] = "Member_BirthDate"
     defaults["Member_Email"] = "Member_Email"
     defaults["Member_Phone"] = "Member_Phone"
-    defaults["member_Avatar"] = "member_Avatar"
+    defaults["forum_avatar"] = "forum_avatar"
     defaults["member_Gender"] = "member_Gender"
     defaults["Use_Flag"] = "Use_Flag"
     defaults["Register_DateTime"] = "Register_DateTime"
@@ -1074,7 +1074,7 @@ class MemberInfoViewTest(unittest.TestCase):
             "Member_BirthDate": "Member_BirthDate",
             "Member_Email": "Member_Email",
             "Member_Phone": "Member_Phone",
-            "member_Avatar": "member_Avatar",
+            "forum_avatar": "forum_avatar",
             "member_Gender": "member_Gender",
             "Use_Flag": "Use_Flag",
             "Register_DateTime": "Register_DateTime",
@@ -1103,7 +1103,7 @@ class MemberInfoViewTest(unittest.TestCase):
             "Member_BirthDate": "Member_BirthDate",
             "Member_Email": "Member_Email",
             "Member_Phone": "Member_Phone",
-            "member_Avatar": "member_Avatar",
+            "forum_avatar": "forum_avatar",
             "member_Gender": "member_Gender",
             "Use_Flag": "Use_Flag",
             "Register_DateTime": "Register_DateTime",
