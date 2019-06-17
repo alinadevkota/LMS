@@ -73,11 +73,11 @@ class MemberInfo(AbstractUser):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('memberinfo_detail', args=(self.pk,))
+        return reverse('WebApp_memberinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('memberinfo_update', args=(self.pk,))
+        return reverse('WebApp_memberinfo_update', args=(self.pk,))
 
 
 class LectureInfo(models.Model):
@@ -116,11 +116,11 @@ class LectureInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('lectureinfo_detail', args=(self.pk,))
+        return reverse('WebApp_lectureinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('lectureinfo_update', args=(self.pk,))
+        return reverse('WebApp_lectureinfo_update', args=(self.pk,))
 
 
 class ChapterInfo(models.Model):
@@ -187,11 +187,11 @@ class ChapterInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('chapterinfo_detail', args=(self.pk,))
+        return reverse('WebApp_chapterinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('chapterinfo_update', args=(self.pk,))
+        return reverse('WebApp_chapterinfo_update', args=(self.pk,))
 
 
 class ChapterContentsInfo(models.Model):
@@ -253,11 +253,11 @@ class ChapterContentsInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('chaptercontentsinfo_detail', args=(self.pk,))
+        return reverse('WebApp_chaptercontentsinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('chaptercontentsinfo_update', args=(self.pk,))
+        return reverse('WebApp_chaptercontentsinfo_update', args=(self.pk,))
 
 
 class ChapterMissonCheckCard(models.Model):
@@ -487,11 +487,11 @@ class AssignHomeworkInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('assignhomeworkinfo_detail', args=(self.pk,))
+        return reverse('WebApp_assignhomeworkinfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('assignhomeworkinfo_update', args=(self.pk,))
+        return reverse('WebApp_assignhomeworkinfo_update', args=(self.pk,))
 
 
 class AssignQuestionInfo(models.Model):
@@ -527,11 +527,11 @@ class AssignQuestionInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('assignquestioninfo_detail', args=(self.pk,))
+        return reverse('WebApp_assignquestioninfo_detail', args=(self.pk,))
 
 
     def get_update_url(self):
-        return reverse('assignquestioninfo_update', args=(self.pk,))
+        return reverse('WebApp_assignquestioninfo_update', args=(self.pk,))
 
 
 class BoardInfo(models.Model):
