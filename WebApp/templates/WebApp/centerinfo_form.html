@@ -16,20 +16,18 @@
     <!-- {{ form | crispy }} -->
     {{ form.Center_Name|as_crispy_field }}
     {{ form.Center_Address|as_crispy_field }}
-    <div class="row">
-      <div class="col-6">
-        {{ form.Use_Flag|as_crispy_field }}
-      </div>
-      <div class="col-6">
-        {{ form.Register_DateTime|as_crispy_field }}
-      </div>
-    </div>
 
-    {{ form.Register_Agent|as_crispy_field }}
-    <div class="submitButton">
-      <button class="btn btn-primary" type="submit">Submit</button>
-    </div>
-  </form>
+    {{ form.Use_Flag|as_crispy_field }}
+
+    {{ form.Register_DateTime|as_crispy_field }}
+
+</div>
+
+{{ form.Register_Agent|as_crispy_field }}
+<div class="submitButton">
+  <button class="btn btn-primary" type="submit">Submit</button>
+</div>
+</form>
 </div>
 
 
