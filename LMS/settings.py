@@ -157,6 +157,12 @@ INSTALLED_APPS += [
 ]
 
 
+STATICFILES_DIRS = (
+
+    os.path.join(BASE_DIR, '/WebApp/static'),
+
+) #/opt/soundshelter/soundshelter/soundshelter/static
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 django_heroku.settings(locals())
