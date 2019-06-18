@@ -7,10 +7,74 @@
     <p><a class="btn btn-default" href="{% url 'WebApp_lectureinfo_list' %}">LectureInfo Listing</a></p>
     <form method="post">
         {% csrf_token %}
-        {{form|crispy}}
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_lecture_name" class="control-label ">
+                        Lecture Name
+                    </label>
+                    <input type="text" name="lecture_name" id="id_lecture_name" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Name">
+                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    <label for="id_lecture_teacher" class="control-label ">
+                            Lecture Teacher
+                        </label>
+                    <input type="number" name="lecture_teacher" id="id_lecture_name"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Teacher">
+                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                  </div>
+
+                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <label for="id_lecture_cover" class="control-label ">
+                                Lecture Cover
+                            </label>
+                            <input type="text" name="lecture_cover" id="id_lecture_cover" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Cover">
+                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+        
+                      </div>
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <label for="id_lecture_cover_file" class="control-label ">
+                                   Lecture Cover File
+                                </label>
+                            <input type="text" name="lecture_cover_file" id="id_lecture_cover_file"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Cover File">
+                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+         
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                <label for="id_lecture_level" class="control-label ">
+                                        Lecture Level
+                                    </label>
+                                    <input type="number" name="lecture_level" id="id_lecture_level" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Level">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                    <label for="id_lecture_info" class="control-label ">
+                                           Lecture Information
+                                        </label>
+                                    <textarea name="lecture_info" id="id_lecture_info"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Information"></textarea>
+                              </div>
+             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_teacher" class="control-label ">
+                         Teacher
+                </label>
+                    <input type="text" name="teacher" id="id_teacher" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Teacher">
+                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                            
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_lecture_cover_file" class="control-label ">
+                          Use Flag
+                </label>
+                <input type="text" name="lecture_cover_file" id="id_lecture_cover_file"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Use Flag">
+                <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+            </div>
+            
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 </div>
+<!-- <div class="out">
+        {{form|crispy}}
+    </div> -->
 
 
 
