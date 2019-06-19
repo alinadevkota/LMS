@@ -6,6 +6,15 @@ html , body {
     background: gainsboro;
 }
 
+.btn-title{
+   margin-left: 37%;
+    font-size: 27px;
+    font-weight: bold;
+}
+.btn-primary{
+    float:right;
+}
+
 .full-width {
     width: 100%;
 }
