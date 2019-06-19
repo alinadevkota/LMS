@@ -2,30 +2,25 @@
 {% load static %}
 {% block content %}
 
-
-
 <link rel="stylesheet" href="{% static 'css/assignhomeworkinfo_list.css' %}">
 
-
-<div class="assignhomework">
-
-
-    <p><a class="btn btn-default" href="{% url 'WebApp_assignhomeworkinfo_list' %}">AssignHomeworkInfo Listing</a></p>
-    <table class="table">
-        <tr>
-        <tr class="font">
-            <td>ID</td>
-            <td>Link</td>
-            <td>Subject Code</td>
-            <td>Use Flag</td>
-            <td>Registration Date</td>
-            <td>Registration Time</td>
-            <td>Registration Agent</t d>
-            <td>Updated Date</td>
-            <td>Updated Time</td>
-            <td>Updated Agent</td>
-        </tr>
-        </tr>
+<div class="assignhomeworkInfoListClass">
+    <a class="btn btn-default" href="{% url 'WebApp_assignhomeworkinfo_list' %}">AssignHomeworkInfo Listing</a>
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr class="tableTitleRow">
+                <td>ID</td>
+                <td>Link</td>
+                <td>Subject Code</td>
+                <td>Use Flag</td>
+                <td>Registration Date</td>
+                <td>Registration Time</td>
+                <td>Registration Agent</t d>
+                <td>Updated Date</td>
+                <td>Updated Time</td>
+                <td>Updated Agent</td>
+            </tr>
+        </thead>
         {% for object in object_list %}
         <tr>
             <td>{{object.pk}}</td>
@@ -39,8 +34,25 @@
             <td>{{ object.udt_time }}</td>
             <td>{{ object.udt_agent }}</td>
         </tr>
+        {% endfor %}
+    </table>
 </div>
+<br>
+<br>
 
-{% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_assignhomeworkinfo_create' %}">Create new AssignHomeworkInfo</a>
+<div class="btn-createnew">
+    <a class="btn btn-primary" href="{% url 'WebApp_assignhomeworkinfo_create' %}">Create new AssignHomeworkInfo</a>
+</div>
+{% endblock %}
+
+{% block customjss %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.table').DataTable({
+            dom: 'lBfrtip',
+            buttons: ['csv', 'print']
+        });
+    });
+</script>
+
 {% endblock %}
