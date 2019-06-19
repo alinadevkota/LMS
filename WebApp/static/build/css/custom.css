@@ -1,6 +1,10 @@
 html , body {
     height: 100%;
 }
+.navClass{
+    font-size: 15px;
+    background: gainsboro;
+}
 
 .full-width {
     width: 100%;
@@ -988,6 +992,7 @@ a:hover, a:focus {
 }
 
 footer {
+   
     background: #fff;
     padding: 15px 20px;
     display: block
