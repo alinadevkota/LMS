@@ -19,7 +19,7 @@ production:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --theme=lms-nsdev --api-key=849372a22b4b2efa58e609be38be0ef558931da0
+    - dpl --provider=heroku --app=lms-nsdev --api-key=a201737c-1888-4a15-b5b6-f79c53978c85
   only:
     - master
 

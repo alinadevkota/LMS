@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{% static 'css/memberinfo_list.css' %}">
 
 <div class="memberInfoListClass">
-    <p><a class="btn btn-default" href="{% url 'WebApp_memberinfo_list' %}">List of Members</a></p>
+    <a class="btn btn-title" href="{% url 'WebApp_memberinfo_list' %}">List of Members</a>
     <table class="table table-striped">
         <thead class="thead-light">
             <tr class="tableTitleRow">
@@ -47,10 +47,24 @@
             <td>{{ object.Register_Agent }}</td>
             <td>{{ object.Member_Memo }}</td> -->
         </tr>
+        {% endfor %}
+    </table>
 </div>
-{% endfor %}
-</table>
+<br>
+<br>
+
 <div class="btn-createnew">
     <a class="btn btn-primary" href="{% url 'WebApp_memberinfo_create' %}">Create new Member</a>
 </div>
+{% endblock %}
+{% block customjss %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.table').DataTable({
+            dom: 'lBfrtip',
+            buttons: ['csv', 'print']
+        });
+    });
+</script>
+
 {% endblock %}

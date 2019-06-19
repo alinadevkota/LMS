@@ -11,35 +11,55 @@
 
 <div class="centerInfoListClass">
 
-    <a class="btn btn-default" href="{% url 'WebApp_centerinfo_list' %}">List of Centers</a>
-    <div class="tableDiv">
-        <table class="table table-striped">
-            <thead class="thead-light">
-                <tr class="tableTitleRow">
-                    <td>ID</td>
-                    <td>Center Name</td>
-                    <td>Center Address</td>
-                    <!-- <td>Use Flag</td> -->
-                    <td>Register DateTime</td>
-                    <td>Register Agent</td>
-                </tr>
-            </thead>
-            {% for object in object_list %}
-            <tr>
-                <td>{{object.pk}}</td>
-
-                <td><a href="{{object.get_absolute_url}}">{{ object.Center_Name }}</a></td>
-                <td>{{ object.Center_Address }}</td>
-                <!-- <td>{{ object.Use_Flag }}</td> -->
-                <td>{{ object.Register_DateTime }}</td>
-                <td>{{ object.Register_Agent }}</td>
+    <a class="btn btn-title" href="{% url 'WebApp_centerinfo_list' %}">List of Centers</a>
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr class="tableTitleRow">
+                <td>ID</td>
+                <td>Center Name</td>
+                <td>Center Address</td>
+                <!-- <td>Use Flag</td> -->
+                <td>Register DateTime</td>
+                <td>Register Agent</td>
             </tr>
-            {% endfor %}
-        </table>
-    </div>
+        </thead>
+        {% for object in object_list %}
+        <tr>
+            <td>{{object.pk}}</td>
+
+            <td><a href="{{object.get_absolute_url}}">{{ object.Center_Name }}</a></td>
+            <td>{{ object.Center_Address }}</td>
+            <!-- <td>{{ object.Use_Flag }}</td> -->
+            <td>{{ object.Register_DateTime }}</td>
+            <td>{{ object.Register_Agent }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <br>
     <div class="btn-createnew">
+
         <a class="btn btn-primary" href="{% url 'WebApp_centerinfo_create' %}">Create new Center</a>
     </div>
+
+
 </div>
+
+
+
+
+{% endblock %}
+
+
+{% block customjss %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.table').DataTable({
+            dom: 'lBfrtip',
+            buttons: ['csv', 'print']
+        });
+    });
+</script>
 
 {% endblock %}
