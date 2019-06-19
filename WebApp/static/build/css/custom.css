@@ -6,12 +6,13 @@ html , body {
     background: gainsboro;
 }
 
+
 .btn-title{
    margin-left: 37%;
     font-size: 27px;
     font-weight: bold;
 }
-.btn-primary{
+.btn-createnew{
     float:right;
 }
 
