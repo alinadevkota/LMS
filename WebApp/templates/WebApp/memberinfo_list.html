@@ -4,7 +4,15 @@
 <link rel="stylesheet" href="{% static 'css/memberinfo_list.css' %}">
 
 <div class="memberInfoListClass">
-    <a class="btn btn-title" href="{% url 'WebApp_memberinfo_list' %}">List of Members</a>
+    <ol aria-label="breadcrumb" class="breadcrumb navClass">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Members</li>
+    </ol>
+
+    <h2 class="btn btn-title">List of Members</h2>
+    <div class="btn-createnew">
+        <a class="btn btn-primary" href="{% url 'WebApp_lectureinfo_create' %}">Create new Lecture</a>
+    </div>
     <table class="table table-striped">
         <thead class="thead-light">
             <tr class="tableTitleRow">
@@ -53,9 +61,7 @@
 <br>
 <br>
 
-<div class="btn-createnew">
-    <a class="btn btn-primary" href="{% url 'WebApp_memberinfo_create' %}">Create new Member</a>
-</div>
+
 {% endblock %}
 {% block customjss %}
 <script type="text/javascript">

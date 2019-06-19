@@ -4,13 +4,18 @@ html , body{
  height:100%;
 
 }
+.navClass{
+    font-size: 15px;
+    background: gainsboro;
+}
 
 .btn-title{
-   padding-left: 38%;
-    font-size: 25px;
+   margin-left: 37%;
+    font-size: 27px;
+    font-weight: bold;
 }
 .btn-primary{
-       margin-left: 39%;
+    float:right;
 }
 .full-width {
     width:100%;
@@ -908,7 +913,9 @@ a:focus {
     display: block;
     padding: 4px 6px
 }
+
 footer {
+   
     background: #fff;
     padding: 15px 20px;
     display: block
