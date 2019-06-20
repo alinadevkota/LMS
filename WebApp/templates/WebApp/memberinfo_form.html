@@ -8,11 +8,11 @@
 <div class="memberInfoForm-outerDiv">
         <p><a class="btn btn-default" href="{% url 'WebApp_memberinfo_list' %}">Members</a></p>
         <!-- <form method="post">
-    {% csrf_token %}s
+    {% csrf_token %}
     {{form|crispy}}
     <button class="btn btn-primary" type="submit">Submit</button>
 </form> -->
-
+</div>
         <form method="post" data-parsley-validate="" >
                 {% csrf_token %}
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -70,7 +70,7 @@
                                                 <label for="id_Member_BirthDate" class="control-label ">
                                                         Member BirthDate
                                                     </label>
-                                                    <input type="text" name="Member_BirthDate" id="id_Member_BirthDate" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Member BirthDate">
+                                                    <input type="date" name="Member_BirthDate" id="id_Member_BirthDate" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Member BirthDate">
                                                     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                 
                                               </div>
@@ -78,21 +78,21 @@
                                                     <label for="id_Member_Email" class="control-label ">
                                                         Member Email
                                                         </label>
-                                                    <input type="text" name="Member_Email" id="id_Member_Email" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Member Email">
-                                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                                    <input type="email" name="Member_Email" id="id_Member_Email" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Member Email">
+                                                    <span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
                                                   </div>
                                                   <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                         <label for="id_Member_Phone" class="control-label ">
                                                                 Member Phone
                                                             </label>
-                                                            <input type="text" name="Member_Phone" id="id_Member_Phone" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Member_Phone">
-                                                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                            <input type="tel" name="Member_Phone" id="id_Member_Phone" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Member_Phone">
+                                                            <span class="fa fa-mobile form-control-feedback left" aria-hidden="true"></span>
                                         
                                                       </div>
                                                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                             <label for="id_member_Avatar" class="control-label ">
                                                                 Member Avatar                                                                </label>
-                                                            <input type="text" name="member_Avatar" id="id_member_Avatar" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="member_Avatar">
+                                                            <input type="image" name="member_Avatar" id="id_member_Avatar" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Member Avatar">
                                                             <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                                           </div>
                                         
@@ -101,22 +101,24 @@
                                                                         Member Gender
                                                                     </label>
                                                                     <input type="text" name="member_Gender" id="id_member_Gender" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Member Gender">
-                                                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                                    <span class="fa fa-child form-control-feedback left" aria-hidden="true"></span>
                                                 
                                                               </div>
                                                               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                                    <label for= "id_Use_Flag" class="control-label ">
+                                                                    <label>
                                                                         Use Flag
-                                                                        </label>
-                                                                    <input type="text" name="Use_Flag" id="id_Use_Flag" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Use Flag">
-                                                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                                                        <input type="checkbox" class="js-switch" checked="" data-switchery="true" style="display: none;">
+                                                                        <span class="switchery switchery-default" style="background-color: rgb(38, 185, 154); border-color: rgb(38, 185, 154); box-shadow: rgb(38, 185, 154) 0px 0px 0px 11px inset; transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s, background-color 1.2s ease 0s;"><small style="left: 12px; background-color: rgb(255, 255, 255); transition: background-color 0.4s ease 0s, left 0.2s ease 0s;"></small></span>
+                                                                    </label>
+                                                                    <!-- <input type="text" name="Use_Flag" id="id_Use_Flag" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Use Flag">
+                                                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
                                                                   </div>
                                                                   <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                                         <label for="id_Register_DateTime" class="control-label ">
                                                                                 Register DateTime
                                                                             </label>
                                                                             <input type="text" name="Register_DateTime" id="id_Register_DateTime" required="required" class="form-control has-feedback-left" id="inputSuccess3" value="2019-06-14 10:49:45">
-                                                                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                                            <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
                                                         
                                                                       </div>
                                                                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -127,8 +129,8 @@
                                                                             <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                                                           </div>
         
-                                                                          <div class="col-md-6 col-sm-6 col-xs-12>
-                
+                                                                          <div class="col-md-6 col-sm-6 col-xs-12" >
+            
                                                                           <label for="id_center_code"
                                                                           class="form-control-label  requiredField">
                                                                           Center code
@@ -143,134 +145,12 @@
                                           
                                                                           </select>
                                                                           </div>
+                                                                          
                                                                   </div>
-                <!-- <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        
-                <label for="id_Member_ID" class="form-control-label ">
-                                Member ID
-                        </label>
-                <input type="text" name="Member_ID" id="id_Member_ID" maxlength="250"
-                                        class="textinput textInput form-control" placeholder="Member ID">
-                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                
-                </div>
-                <div id="div_id_Member_Password" class="form-group"> <label for="id_Member_Password"
-                                class="form-control-label ">
-                                Member Password
-                        </label>
-                        <div class=""> <input type="text" name="Member_Password" id="id_Member_Password" maxlength="250"
-                                        class="textinput textInput form-control"> </div>
-                </div>
-                <div id="div_id_Member_Type" class="form-group"> <label for="id_Member_Type"
-                                class="form-control-label ">
-                                Member Type
-                        </label>
-                        <div class=""> <input type="number" name="Member_Type" id="id_Member_Type"
-                                        class="numberinput form-control">
-                        </div>
-                </div>
-                <div id="div_id_Member_Name" class="form-group"> <label for="id_Member_Name"
-                                class="form-control-label ">
-                                Member Name
-                        </label>
-                        <div class=""> <input type="text" name="Member_Name" id="id_Member_Name" maxlength="500"
-                                        class="textinput textInput form-control"> </div>
-                </div>
-                <div id="div_id_Member_Permanent_Address" class="form-group"> <label for="id_Member_Permanent_Address"
-                                class="form-control-label ">
-                                Member Permanent Address
-                        </label>
-                        <div class=""> <input type="text" name="Member_Permanent_Address"
-                                        id="id_Member_Permanent_Address" maxlength="500"
-                                        class="textinput textInput form-control"> </div>
-                </div>
-                <div id="div_id_Member_Temporary_Address" class="form-group"> <label for="id_Member_Temporary_Address"
-                                class="form-control-label ">
-                                Member Temporary Address
-                        </label>
-                        <div class=""> <input type="text" name="Member_Temporary_Address"
-                                        id="id_Member_Temporary_Address" maxlength="500"
-                                        class="textinput textInput form-control"> </div>
-                </div>
-                <div id="div_id_Member_BirthDate" class="form-group"> <label for="id_Member_BirthDate"
-                                class="form-control-label ">
-                                Member BirthDate
-                        </label>
-                        <div class=""> <input type="text" name="Member_BirthDate" id="id_Member_BirthDate"
-                                        maxlength="50" class="textinput textInput form-control"> </div>
-                </div>
-                <div id="div_id_Member_Email" class="form-group"> <label for="id_Member_Email"
-                                class="form-control-label ">
-                                Member Email
-                        </label>
-                        <div class=""> <input type="text" name="Member_Email" id="id_Member_Email" maxlength="150"
-                                        class="textinput textInput form-control"> </div>
-                </div>
-                <div id="div_id_Member_Phone" class="form-group"> <label for="id_Member_Phone"
-                                class="form-control-label ">
-                                Member Phone
-                        </label>
-                        <div class=""> <input type="text" name="Member_Phone" id="id_Member_Phone" maxlength="150"
-                                        class="textinput textInput form-control"> </div>
-                </div>
-                <div id="div_id_member_Avatar" class="form-group"> <label for="id_member_Avatar"
-                                class="form-control-label ">
-                                Member Avatar
-                        </label>
-                        <div class=""> <input type="text" name="member_Avatar" id="id_member_Avatar" maxlength="50"
-                                        class="textinput textInput form-control"> </div>
-                </div>
-                <div id="div_id_member_Gender" class="form-group"> <label for="id_member_Gender"
-                                class="form-control-label ">
-                                Member Gender
-                        </label>
-                        <div class=""> <input type="number" name="member_Gender" id="id_member_Gender"
-                                        class="numberinput form-control">
-                        </div>
-                </div>
-                <div id="div_id_Use_Flag" class="form-group"> <label for="id_Use_Flag" class="form-control-label ">
-                                Use Flag
-                        </label>
-                        <div class=""> <input type="text" name="Use_Flag" id="id_Use_Flag" maxlength="1"
-                                        class="textinput textInput form-control"> </div>
-                </div>
-                <div id="div_id_Register_DateTime" class="form-group"> <label for="id_Register_DateTime"
-                                class="form-control-label ">
-                                Register DateTime
-                        </label>
-                        <div class=""> <input type="text" name="Register_DateTime" value="2019-06-14 10:49:45"
-                                        id="id_Register_DateTime" class="datetimeinput form-control"> </div>
-                </div>
-                <div id="div_id_Register_Agent" class="form-group"> <label for="id_Register_Agent"
-                                class="form-control-label ">
-                                Register Agent
-                        </label>
-                        <div class=""> <input type="text" name="Register_Agent" id="id_Register_Agent" maxlength="200"
-                                        class="textinput textInput form-control"> </div>
-                </div>
-                <div id="div_id_Member_Memo" class="form-group"> <label for="id_Member_Memo"
-                                class="form-control-label ">
-                                Member Memo
-                        </label>
-                        <div class=""> <input type="text" name="Member_Memo" id="id_Member_Memo" maxlength="500"
-                                        class="textinput textInput form-control"> </div>
-                </div>
-                <div id="div_id_center_code" class="form-group"> <label for="id_center_code"
-                                class="form-control-label  requiredField">
-                                Center code<span class="asteriskField">*</span> </label>
-                        <div class=""> <select name="center_code" id="id_center_code" required=""
-                                        class="select form-control">
-                                        <option value="" selected="">---------</option>
-                                        <option value="4">CenterInfo object (4)</option>
-                                        <option value="3">CenterInfo object (3)</option>
-                                        <option value="2">CenterInfo object (2)</option>
-                                        <option value="1">CenterInfo object (1)</option>
-
-                                </select> </div>
-                </div> -->
-
+                
                 <button class="btn btn-primary" type="submit">Submit</button>
         </form>
 </div>
+<!-- <button class="btn btn-primary" type="submit">Submit</button> -->
 
 {% endblock %}

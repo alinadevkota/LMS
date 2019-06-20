@@ -20,7 +20,7 @@
                     <label for="id_lecture_teacher" class="control-label ">
                             Lecture Teacher
                         </label>
-                    <input type="number" name="lecture_teacher" id="id_lecture_name" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Teacher">
+                    <input type="number" name="lecture_teacher" id="id_lecture_teacher" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Teacher">
                     <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                   </div>
 
@@ -36,8 +36,8 @@
                             <label for="id_lecture_cover_file" class="control-label ">
                                    Lecture Cover File
                                 </label>
-                            <input type="text" name="lecture_cover_file" id="id_lecture_cover_file" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Cover File">
-                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                            <input type="file" name="lecture_cover_file" id="id_lecture_cover_file" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Cover File">
+                            <span class="fa fa-archive form-control-feedback right" aria-hidden="true"></span>
                           </div>
          
                           <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -68,7 +68,7 @@
                 </label>
                 <input type="text" name="use_flag" id="id_use_flag" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Use Flag">
                 <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                {% for error in form.use_flag.errors %}
+                <!-- {% for error in form.use_flag.errors %}
                     <p id="error_1_id_Register_DateTime" class="has-error control-label"><strong>
           
                         {{ error|escape }}
@@ -76,22 +76,22 @@
                                              </strong></p>
            
 
-                {% endfor %}
+                {% endfor %} -->
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <label for="id_reg_date" class="control-label ">
                         Registration Date
                     </label>
-                    <input type="text" name="reg_date" id="id_reg_date" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="dd/mm/yy">
-                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                    <input type="date" name="reg_date" id="id_reg_date" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="dd/mm/yy">
+                    <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
 
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                     <label for="id_reg_time" class="control-label ">
                            Registration Time
                         </label>
-                    <input type="text" name="reg_time" id="id_reg_time" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="hh:mm">
+                    <input type="time" name="reg_time" id="id_reg_time" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="hh:mm">
                     <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                   </div>
  
@@ -107,14 +107,14 @@
                         <label for="id_udt_date" class="control-label ">
                                Updated Date
                             </label>
-                        <input type="text" name="udt_date" id="id_udt_date" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="dd/mm/yy">
-                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        <input type="date" name="udt_date" id="id_udt_date" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="dd/mm/yy">
+                        <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                         <label for="id_udt_time" class="control-label ">
                                 Updated Time
                             </label>
-                            <input type="text" name="udt_time" id="id_udt_time" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="hh:mm">
+                            <input type="time" name="udt_time" id="id_udt_time" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="hh:mm">
                             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
         
                       </div>
