@@ -6,6 +6,20 @@ html , body {
     background: gainsboro;
 }
 
+.detailListHeader{
+    text-align: center;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.table{
+    margin-top:40px;
+}
+.tableHeader{
+    text-align: center;
+    font-size: 27px;
+    font-weight: bold;
+}
 
 .btn-title{
    margin-left: 37%;

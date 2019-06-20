@@ -78,11 +78,9 @@
                 </div>
             </div>
 
-            {% block footer %}
-            <footer>
-                {% include "WebApp/theme/footer.html" %}
-            </footer>
-            {% endblock footer %}
+
+            {% include "WebApp/theme/footer.html" %}
+
         </div>
     </div>
 
@@ -120,6 +118,7 @@
     <script src="{% static "vendorsx/devbridge-autocomplete/dist/jquery.autocomplete.min.js" %}"></script>
     <!-- starrr -->
     <script src="{% static "vendorsx/starrr/dist/starrr.js" %}"></script>
+
 
     <script src="{% static "vendorsx/datatables.net/js/jquery.dataTables.min.js" %}"></script>
     <script src="{% static "vendorsx/datatables.net-bs/js/dataTables.bootstrap.min.js" %}"></script>
