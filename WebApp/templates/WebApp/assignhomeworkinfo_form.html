@@ -8,8 +8,138 @@
 
     <p><a class="btn btn-default" href="{% url 'WebApp_assignhomeworkinfo_list' %}">AssignHomeworkInfo Listing</a></p>
 
-    <form method="post">
-        {{form|crispy}}
+
+
+
+    <form method="post" data-parsely-validate="">
+            {% csrf_token %}
+
+
+     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+         <label for="id_subject_code" class="control-label ">
+             Subject Code
+        </label>
+            <input type="number" name="subject_code" id="id_subject_code" required="required" class="numberinput form-control has-feedback-left" id="inputSuccess3" placeholder="Subject Code">
+             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+    
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+        <label for="id_use_flag" class="control-label ">
+            Use Flag
+        </label>
+        <input type="number" name="use_flag" id="id_use_flag" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Use Flag">
+        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+         </div>
+
+    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+        <label for="id_reg_date" class="control-label ">
+            Reg date
+        </label>
+        <input type="date" name="reg_date" id="id_reg_date" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Reg date">
+        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+
+        </div>
+    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+        <label for="id_reg_time" class="control-label ">
+                            Reg Time
+        </label>
+        <input type="time" name="reg_time" id="id_reg_time" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Reg Time">
+        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+    </div>
+
+
+    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <label for="id_reg_agent" class="control-label ">
+                Reg agent
+            </label>
+            <input type="text" name="reg_agent" id="id_reg_agent" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Reg agent">
+            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+    
+            </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <label for="id_udt_date" class="control-label ">
+                               Udt Date
+            </label>
+            <input type="date" name="udt_date" id="id_udt_date" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Udt Date">
+            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+        </div>
+    
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_udt_time" class="control-label ">
+                   Udt Time
+                </label>
+                <input type="time" name="udt_time" id="id_udt_time" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Udt Time">
+                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+        
+                </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_udt_agent" class="control-label ">
+                                   Udt Agent
+                </label>
+                <input type="text" name="udt_agent" id="id_udt_agent" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Udt Agent">
+                <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+            </div>
+
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    <label for="id_question_code" class="control-label ">
+                        Question Code
+                    </label>
+                    <select name="question_code" id="id_question_code" required="required"  class = "select form-control" id="inputSuccess3" >
+                            <option value="" selected="">---------</option>
+                            </select>
+                    <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+            
+                    </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    <label for="id_lecture_code" class="control-label ">
+                            Lecture Code
+                    </label>
+                    <select name="lecture_code" id="id_lecture_code" required="required"  class = "select form-control" id="inputSuccess3" >
+                    <option value="" selected="">---------</option>
+                    </select>
+
+                            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+                    </div>    
+                    
+                    <div class="col-md-6 col-sm-6 col-xs-12" >
+            
+                            <label for="id_chapter_code"
+                            class="form-control-label  requiredField">
+                           Chapter Code
+                           </label>
+                    <div class=""> <select name="chapter_code" id="id_chapter_code" required=""
+                                    class="select form-control">
+                                    <option value="" selected="">---------</option>
+                                    
+
+                            </select>
+                            </div>
+                            
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12" >
+            
+                            <label for="id_member_code"
+                            class="form-control-label  requiredField">
+                           Member Code
+                           </label>
+                    <div class=""> <select name="member_code" id="id_member_code" required=""
+                                    class="select form-control">
+                                    <option value="" selected="">---------</option>
+                                    
+
+                            </select>
+                            </div>
+                            
+                    </div>
+
+
+
+                        
+</div>
+
+        <!-- {{form|crispy}} -->
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 </div>
