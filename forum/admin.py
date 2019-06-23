@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from .models import Topic, Node, Post, Appendix
+from .models import Topic, Node, Post, Appendix, NodeGroup
 
 
 class PostInline(admin.TabularInline):
@@ -80,6 +80,22 @@ class NodeAdmin(admin.ModelAdmin):
     search_fields = (
         'title',
     )
+class NodeGroupAdmin(admin.ModelAdmin):
+
+    def number_of_nodes(self, obj):
+        nodes = Node.objects.filter(node_group=obj)
+        return "{}({})".format(nodes.count())
+
+    number_of_nodes.short_description = "Number of nodes [total(visible)]"
+
+    list_display = (
+        'title',
+        'number_of_nodes'
+    )
+    search_fields = (
+        'title',
+    )
 
 admin.site.register(Topic, TopicAdmin)
+admin.site.register(NodeGroup, NodeGroupAdmin)
 admin.site.register(Node, NodeAdmin)
