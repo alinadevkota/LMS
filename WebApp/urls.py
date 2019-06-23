@@ -90,6 +90,9 @@ urlpatterns += (
     path('WebApp/centerinfo/create/', views.CenterInfoCreateView.as_view(), name='WebApp_centerinfo_create'),
     path('WebApp/centerinfo/detail/<int:pk>/', views.CenterInfoDetailView.as_view(), name='WebApp_centerinfo_detail'),
     path('WebApp/centerinfo/update/<int:pk>/', views.CenterInfoUpdateView.as_view(), name='WebApp_centerinfo_update'),
+    path('WebApp/centerinfo/delete/<int:pk>/', views.CenterInfoDeleteView.as_view(), name='WebApp_centerinfo_delete'),
+#url(r'^deletethread/(?P<pk>\d+)/$', views.thread_delete, name='smart_forum_thread_delete'),
+
 )
 
 urlpatterns += (
