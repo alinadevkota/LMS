@@ -11,7 +11,6 @@ html , body {
     color: white;
     font-size: 15px;
     background: gainsboro;
-    /* background: #5c8a8a; */
 }
 .breadcrumb .active{
     color: #3973ac;
@@ -20,8 +19,11 @@ html , body {
 
 .detailListHeader{
     text-align: center;
-    font-size: 27px;
-    font-weight: bold;
+    font-size: 2em;
+    color: #009999;
+}
+.header_hr{
+    border-color: #c2d6d6;
 }
 
 .table{
@@ -33,7 +35,6 @@ html , body {
 .tableHeader{
     text-align: center;
     font-size: 2.5em;
-    font-weight: bold;
     color: #009999;
 }
 
@@ -4867,7 +4868,7 @@ ul.notifications {
 .centerInfoListingHeader{
     text-align: center;
     font-size: 2em;
-    color: teal;
+    color: #009999;
 }
 
 .lectureInfoListingHeader{
@@ -4938,4 +4939,12 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 .print i{
     color: #0099cc;
     font-size: 1.1em;
+}
+
+.outerDiv .table{
+    font-size: 1.1em;
+    /* color: #996633; */
+    border: 0;
+    margin-left: 2em;
+    margin-right: 10em;
 }

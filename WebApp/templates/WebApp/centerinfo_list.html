@@ -17,7 +17,7 @@
     </ol>
 
     <h2 class="tableHeader">List of Centers</h2>
-    <hr>
+    <hr class="header_hr">
 
     <div class="btn-createnew">
         <a class="btn btn-success" href="{% url 'centerinfo_create' %}">Create new Center</a>
@@ -31,20 +31,21 @@
                     <td>ID</td>
                     <td>Center Name</td>
                     <td>Center Address</td>
-                    <!-- <td>Use Flag</td> -->
-                    <td>Register DateTime</td>
                     <td>Register Agent</td>
+                    <td>Register Date</td>
+                    <td>Updated Date</td>
                 </tr>
             </thead>
             {% for object in object_list %}
             <tr>
-                <td>{{object.pk}}</td>
+                <td>{{ forloop.counter }}</td>
 
                 <td><a href="{{object.get_absolute_url}}">{{ object.Center_Name }}</a></td>
                 <td>{{ object.Center_Address }}</td>
-                <!-- <td>{{ object.Use_Flag }}</td> -->
-                <td>{{ object.Register_DateTime }}</td>
                 <td>{{ object.Register_Agent }}</td>
+                <td>{{ object.Register_DateTime }}</td>
+                <td>{{ object.Updated_DateTime }}</td>                
+                
             </tr>
             {% endfor %}
         </table>

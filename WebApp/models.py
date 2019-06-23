@@ -14,9 +14,10 @@ class CenterInfo(models.Model):
     # Fields
     Center_Name = CharField(max_length=500, blank=True, null=True)
     Center_Address = CharField(max_length=500, blank=True, null=True)
-    Use_Flag = CharField(max_length=1, blank=True, null=True)
-    Register_DateTime = DateTimeField(default=datetime.now(), blank=True)
+    Use_Flag = BooleanField(default=True)
     Register_Agent = CharField(max_length=200, blank=True, null=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
 
 
     class Meta:

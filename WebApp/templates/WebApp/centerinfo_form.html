@@ -7,12 +7,24 @@
 <ol aria-label="breadcrumb" class="breadcrumb navClass">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
     <li class="breadcrumb-item" aria-current="page"><a href="{% url 'centerinfo_list' %}">Center</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Create New Center</li>
+    <li class="breadcrumb-item active" aria-current="page">
+      {% if '/centerinfo/create/' == request.path %}
+          Create New Center
+      {% else %}
+          Edit Center Info
+      {% endif %}
+    </li>
 </ol>
 
 <div class="centerInfoListingHeader">
-    <h2 class="font2">Create New Center</h2>
-    <hr>
+    <h2 class="font2">
+      {% if '/centerinfo/create/' == request.path %}
+        Create New Center
+      {% else %}
+          Edit Center Info
+      {% endif %}
+    </h2>
+    <hr class="header_hr">
 </div>
 
 
@@ -45,7 +57,10 @@
       <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <label>
-          <input type="checkbox" id="id_Use_Flag" class="js-switch">
+          <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
+          {% if object.Use_Flag == True %}
+            checked
+          {% endif %}>
         </label>
       </div>
       <!-- <div class="col-md-6 col-sm-6 col-xs-12">
