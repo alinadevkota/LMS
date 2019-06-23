@@ -17,16 +17,16 @@
     </ol>
 
     <h2 class="tableHeader">List of Centers</h2>
-    <br>
+    <hr>
 
     <div class="btn-createnew">
-        <a class="btn btn-primary" href="{% url 'centerinfo_create' %}">Create new Center</a>
+        <a class="btn btn-success" href="{% url 'centerinfo_create' %}">Create new Center</a>
     </div>
     <br><br><br>
 
     <div class="table-responsive">
-        <table class="table table-striped">
-            <thead class="thead-light">
+        <table class="table table-striped table-bordered bg-white">
+            <thead class="thead-light bg-primary">
                 <tr class="tableTitleRow">
                     <td>ID</td>
                     <td>Center Name</td>
@@ -66,7 +66,16 @@
     $(document).ready(function () {
         $('.table').DataTable({
             dom: 'lBfrtip',
-            buttons: ['csv', 'print']
+            buttons: [
+            {
+                extend: 'csv',
+                text: '<span class="exportcsv"><i class="fa fa-paper-plane-o"></i> Export to CSV </span>'
+            },
+            {
+                extend: 'print',
+                text: '<span class="print"><i class="fa fa-print"></i> Print </span>',
+                fieldSeparator: '\t'
+            }]
         });
     });
 </script>
