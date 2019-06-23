@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_qanswerlog_list' %}">QAnswerLog Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'qanswerlog_list' %}">QAnswerLog Listing</a></p>
 <table class="table">
 <tr><td>question_answer</td><td>{{ object.question_answer }}</td></tr>
 <tr><td>question_idx</td><td>{{ object.question_idx }}</td></tr>

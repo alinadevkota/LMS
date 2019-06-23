@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_chapterimginfo_list' %}">ChapterImgInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'chapterimginfo_list' %}">ChapterImgInfo Listing</a></p>
 <table class="table">
 <tr><td>filename</td><td>{{ object.filename }}</td></tr>
 <tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_todoinfo_list' %}">TodoInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'todoinfo_list' %}">TodoInfo Listing</a></p>
 <table class="table">
 <tr><td>todo_comment</td><td>{{ object.todo_comment }}</td></tr>
 <tr><td>todo_status</td><td>{{ object.todo_status }}</td></tr>

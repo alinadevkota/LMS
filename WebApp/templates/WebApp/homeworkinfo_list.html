@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_homeworkinfo_list' %}">HomeworkInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'homeworkinfo_list' %}">HomeworkInfo Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -26,5 +26,5 @@
     <td>{{ object.level }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_homeworkinfo_create' %}">Create new HomeworkInfo</a>
+</table><a class="btn btn-primary" href="{% url 'homeworkinfo_create' %}">Create new HomeworkInfo</a>
 {% endblock %}

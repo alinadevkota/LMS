@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_talkmessage_list' %}">TalkMessage Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'talkmessage_list' %}">TalkMessage Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -20,5 +20,5 @@
     <td>{{ object.send_time }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_talkmessage_create' %}">Create new TalkMessage</a>
+</table><a class="btn btn-primary" href="{% url 'talkmessage_create' %}">Create new TalkMessage</a>
 {% endblock %}

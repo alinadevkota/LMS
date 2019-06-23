@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_chaptercontentsinfo_list' %}">ChapterContentsInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'chaptercontentsinfo_list' %}">ChapterContentsInfo Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -96,5 +96,5 @@
     <td>{{ object.pbl_lec_allow }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_chaptercontentsinfo_create' %}">Create new ChapterContentsInfo</a>
+</table><a class="btn btn-primary" href="{% url 'chaptercontentsinfo_create' %}">Create new ChapterContentsInfo</a>
 {% endblock %}

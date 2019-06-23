@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_membergroup_list' %}">MemberGroup Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'membergroup_list' %}">MemberGroup Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -28,5 +28,5 @@
     <td>{{ object.udt_agent }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_membergroup_create' %}">Create new MemberGroup</a>
+</table><a class="btn btn-primary" href="{% url 'membergroup_create' %}">Create new MemberGroup</a>
 {% endblock %}

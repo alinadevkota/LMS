@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_groupmapping_list' %}">GroupMapping Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'groupmapping_list' %}">GroupMapping Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -26,5 +26,5 @@
     <td>{{ object.udt_agent }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_groupmapping_create' %}">Create new GroupMapping</a>
+</table><a class="btn btn-primary" href="{% url 'groupmapping_create' %}">Create new GroupMapping</a>
 {% endblock %}

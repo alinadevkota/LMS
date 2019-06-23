@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_omrexampleinfo_list' %}">OmrExampleInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'omrexampleinfo_list' %}">OmrExampleInfo Listing</a></p>
 <table class="table">
 <tr><td>omr_example_correct</td><td>{{ object.omr_example_correct }}</td></tr>
 <tr><td>omr_example_idx</td><td>{{ object.omr_example_idx }}</td></tr>

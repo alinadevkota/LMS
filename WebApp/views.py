@@ -78,7 +78,7 @@ def start(request):
     """Start page with a documentation.
     """
     # return render(request,"start.html")
-    return render(request, "WebApp/homepage.html")
+    return render(request, "WebApp\homepage.html")
 
 def editprofile(request):
     if not request.user.is_authenticated:
@@ -138,7 +138,7 @@ class CenterInfoUpdateView(UpdateView):
 
 class CenterInfoDeleteView(DeleteView):
     model=CenterInfo
-    success_url = reverse_lazy('WebApp_centerinfo_list')
+    success_url = reverse_lazy('centerinfo_list')
 
 
 

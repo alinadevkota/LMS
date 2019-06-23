@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_quizinfo_list' %}">QuizInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'quizinfo_list' %}">QuizInfo Listing</a></p>
 <form method="post">
 {% csrf_token %}
 {{form|crispy}}

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_qexampleinfo_list' %}">QExampleInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'qexampleinfo_list' %}">QExampleInfo Listing</a></p>
 <table class="table">
 <tr><td>q_example</td><td>{{ object.q_example }}</td></tr>
 <tr><td>q_example_correct</td><td>{{ object.q_example_correct }}</td></tr>

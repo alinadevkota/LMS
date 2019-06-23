@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_chaptercontentsinfo_list' %}">ChapterContentsInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'chaptercontentsinfo_list' %}">ChapterContentsInfo Listing</a></p>
 <table class="table">
 <tr><td>chapter_contents</td><td>{{ object.chapter_contents }}</td></tr>
 <tr><td>chapter_audio</td><td>{{ object.chapter_audio }}</td></tr>

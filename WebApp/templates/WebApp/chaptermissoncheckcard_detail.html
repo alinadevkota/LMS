@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_chaptermissoncheckcard_list' %}">ChapterMissonCheckCard Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'chaptermissoncheckcard_list' %}">ChapterMissonCheckCard Listing</a></p>
 <table class="table">
 <tr><td>check_card_code</td><td>{{ object.check_card_code }}</td></tr>
 <tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
