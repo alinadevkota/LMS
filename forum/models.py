@@ -197,23 +197,25 @@ class Appendix(models.Model):
         return 'Appendix to %s' % self.topic.title
 
 
-@python_2_unicode_compatible
-class Node(models.Model):
-    title = models.CharField(max_length=30, verbose_name=_("title"))
-    description = models.TextField(default='', blank=True, verbose_name=_("description"))
-
-    def __str__(self):
-        return self.title
 
 
 @python_2_unicode_compatible
 class NodeGroup(models.Model):
-    title = models.CharField(max_length=30)
-    node = models.ManyToManyField('Node')
+    title = models.CharField(max_length=30, verbose_name=_("title"))
+    description = models.TextField(default='', blank=True, verbose_name=_("description"))
+
 
     def __str__(self):
         return self.title
 
+@python_2_unicode_compatible
+class Node(models.Model):
+    title = models.CharField(max_length=30, verbose_name=_("title"))
+    description = models.TextField(default='', blank=True, verbose_name=_("description"))
+    node_group = models.ForeignKey(NodeGroup, verbose_name=_("nodegroup"), on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
 
 @python_2_unicode_compatible
 class ForumAvatar(models.Model):

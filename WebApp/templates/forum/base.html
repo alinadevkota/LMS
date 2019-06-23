@@ -1,31 +1,24 @@
+{% extends "base.html" %}
 {% load i18n %}
-<!DOCTYPE HTML>
-{% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}">
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-    <meta content="yes" name="apple-mobile-web-app-capable" />
-    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
-    <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/forum/css/main.css"/>
-    <title>{{ title }}{% if site_name %}-{{ site_name }}{% endif %}</title>
-</head>
-<body>
+{#{% get_current_language as LANGUAGE_CODE %}#}
+{#<html lang="{{ LANGUAGE_CODE }}">#}
+{##}
+{#{% block additionalResources %}#}
+{#    <meta charset="UTF-8">#}
+{#    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />#}
+{#    <meta content="yes" name="apple-mobile-web-app-capable" />#}
+{#    <meta content="black" name="apple-mobile-web-app-status-bar-style" />#}
+{#    <meta name="format-detection" content="telephone=no" />#}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" crossorigin="anonymous">#}
+{#    <link rel="stylesheet" href="/static/forum/css/main.css"/>#}
+{#    <title>{{ title }}{% if site_name %}-{{ site_name }}{% endif %}</title>#}
+{#{% endblock additionalResources %}#}
 
-<nav class="navbar navbar-default">
+{% block content %}
+
+
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{% url 'forum:index' %}">{% if site_name %}{{ site_name }}{% else %}forum{% endif %}</a>
-        </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -39,7 +32,7 @@
             </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
-</nav>
+
 
 <div id="main" class="container">
     <div class="row">
@@ -73,5 +66,5 @@
     });
 </script>
 {% block footer_ext %}{% endblock %}
-</body>
-</html>
+{% endblock %}
+{#</html>#}
