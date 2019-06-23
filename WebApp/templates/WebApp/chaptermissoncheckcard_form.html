@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_chaptermissoncheckcard_list' %}">ChapterMissonCheckCard Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'chaptermissoncheckcard_list' %}">ChapterMissonCheckCard Listing</a></p>
 <form method="post">
 {% csrf_token %}
 {{form|crispy}}

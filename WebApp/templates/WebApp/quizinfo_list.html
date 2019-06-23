@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_quizinfo_list' %}">QuizInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'quizinfo_list' %}">QuizInfo Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -44,5 +44,5 @@
     <td>{{ object.quiz_media_file2 }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_quizinfo_create' %}">Create new QuizInfo</a>
+</table><a class="btn btn-primary" href="{% url 'quizinfo_create' %}">Create new QuizInfo</a>
 {% endblock %}

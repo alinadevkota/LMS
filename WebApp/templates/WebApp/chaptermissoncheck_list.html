@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_chaptermissoncheck_list' %}">ChapterMissonCheck Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'chaptermissoncheck_list' %}">ChapterMissonCheck Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -34,5 +34,5 @@
     <td>{{ object.udt_agent }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_chaptermissoncheck_create' %}">Create new ChapterMissonCheck</a>
+</table><a class="btn btn-primary" href="{% url 'chaptermissoncheck_create' %}">Create new ChapterMissonCheck</a>
 {% endblock %}

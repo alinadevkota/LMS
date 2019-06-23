@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_chaptercontentmedia_list' %}">ChapterContentMedia Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'chaptercontentmedia_list' %}">ChapterContentMedia Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -32,5 +32,5 @@
     <td>{{ object.udt_agent }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_chaptercontentmedia_create' %}">Create new ChapterContentMedia</a>
+</table><a class="btn btn-primary" href="{% url 'chaptercontentmedia_create' %}">Create new ChapterContentMedia</a>
 {% endblock %}

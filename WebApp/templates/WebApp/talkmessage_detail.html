@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_talkmessage_list' %}">TalkMessage Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'talkmessage_list' %}">TalkMessage Listing</a></p>
 <table class="table">
 <tr><td>message</td><td>{{ object.message }}</td></tr>
 <tr><td>sender_member_code</td><td>{{ object.sender_member_code }}</td></tr>

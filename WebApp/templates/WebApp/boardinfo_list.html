@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_boardinfo_list' %}">BoardInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'boardinfo_list' %}">BoardInfo Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -42,5 +42,5 @@
     <td>{{ object.udt_agent }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_boardinfo_create' %}">Create new BoardInfo</a>
+</table><a class="btn btn-primary" href="{% url 'boardinfo_create' %}">Create new BoardInfo</a>
 {% endblock %}

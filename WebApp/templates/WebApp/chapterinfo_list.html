@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_chapterinfo_list' %}">ChapterInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'chapterinfo_list' %}">ChapterInfo Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -106,5 +106,5 @@
     <td>{{ object.chapter_use_time }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_chapterinfo_create' %}">Create new ChapterInfo</a>
+</table><a class="btn btn-primary" href="{% url 'chapterinfo_create' %}">Create new ChapterInfo</a>
 {% endblock %}

@@ -980,12 +980,12 @@ class ProfileViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_profile(self):
-        url = reverse('WebApp_profile_list')
+        url = reverse('profile_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_profile(self):
-        url = reverse('WebApp_profile_create')
+        url = reverse('profile_create')
         data = {
         }
         response = self.client.post(url, data=data)
@@ -993,7 +993,7 @@ class ProfileViewTest(unittest.TestCase):
 
     def test_detail_profile(self):
         profile = create_profile()
-        url = reverse('WebApp_profile_detail', args=[profile.pk,])
+        url = reverse('profile_detail', args=[profile.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1001,7 +1001,7 @@ class ProfileViewTest(unittest.TestCase):
         profile = create_profile()
         data = {
         }
-        url = reverse('WebApp_profile_update', args=[profile.pk,])
+        url = reverse('profile_update', args=[profile.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1014,12 +1014,12 @@ class CenterInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_centerinfo(self):
-        url = reverse('WebApp_centerinfo_list')
+        url = reverse('centerinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_centerinfo(self):
-        url = reverse('WebApp_centerinfo_create')
+        url = reverse('centerinfo_create')
         data = {
             "Center_Name": "Center_Name",
             "Center_Address": "Center_Address",
@@ -1032,7 +1032,7 @@ class CenterInfoViewTest(unittest.TestCase):
 
     def test_detail_centerinfo(self):
         centerinfo = create_centerinfo()
-        url = reverse('WebApp_centerinfo_detail', args=[centerinfo.pk,])
+        url = reverse('centerinfo_detail', args=[centerinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1045,7 +1045,7 @@ class CenterInfoViewTest(unittest.TestCase):
             "Register_DateTime": "Register_DateTime",
             "Register_Agent": "Register_Agent",
         }
-        url = reverse('WebApp_centerinfo_update', args=[centerinfo.pk,])
+        url = reverse('centerinfo_update', args=[centerinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1058,12 +1058,12 @@ class MemberInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_memberinfo(self):
-        url = reverse('WebApp_memberinfo_list')
+        url = reverse('memberinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_memberinfo(self):
-        url = reverse('WebApp_memberinfo_create')
+        url = reverse('memberinfo_create')
         data = {
             "Member_ID": "Member_ID",
             "Member_Password": "Member_Password",
@@ -1087,7 +1087,7 @@ class MemberInfoViewTest(unittest.TestCase):
 
     def test_detail_memberinfo(self):
         memberinfo = create_memberinfo()
-        url = reverse('WebApp_memberinfo_detail', args=[memberinfo.pk,])
+        url = reverse('memberinfo_detail', args=[memberinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1111,7 +1111,7 @@ class MemberInfoViewTest(unittest.TestCase):
             "Member_Memo": "Member_Memo",
             "center_code": create_centerinfo().pk,
         }
-        url = reverse('WebApp_memberinfo_update', args=[memberinfo.pk,])
+        url = reverse('memberinfo_update', args=[memberinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1124,12 +1124,12 @@ class LectureInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_lectureinfo(self):
-        url = reverse('WebApp_lectureinfo_list')
+        url = reverse('lectureinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_lectureinfo(self):
-        url = reverse('WebApp_lectureinfo_create')
+        url = reverse('lectureinfo_create')
         data = {
             "lecture_name": "lecture_name",
             "lecture_teacher": "lecture_teacher",
@@ -1158,7 +1158,7 @@ class LectureInfoViewTest(unittest.TestCase):
 
     def test_detail_lectureinfo(self):
         lectureinfo = create_lectureinfo()
-        url = reverse('WebApp_lectureinfo_detail', args=[lectureinfo.pk,])
+        url = reverse('lectureinfo_detail', args=[lectureinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1187,7 +1187,7 @@ class LectureInfoViewTest(unittest.TestCase):
             "cert_crit_issue": "cert_crit_issue",
             "center_code": create_centerinfo().pk,
         }
-        url = reverse('WebApp_lectureinfo_update', args=[lectureinfo.pk,])
+        url = reverse('lectureinfo_update', args=[lectureinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1200,12 +1200,12 @@ class ChapterInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_chapterinfo(self):
-        url = reverse('WebApp_chapterinfo_list')
+        url = reverse('chapterinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_chapterinfo(self):
-        url = reverse('WebApp_chapterinfo_create')
+        url = reverse('chapterinfo_create')
         data = {
             "chapter_no": "chapter_no",
             "chapter_name": "chapter_name",
@@ -1261,7 +1261,7 @@ class ChapterInfoViewTest(unittest.TestCase):
 
     def test_detail_chapterinfo(self):
         chapterinfo = create_chapterinfo()
-        url = reverse('WebApp_chapterinfo_detail', args=[chapterinfo.pk,])
+        url = reverse('chapterinfo_detail', args=[chapterinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1317,7 +1317,7 @@ class ChapterInfoViewTest(unittest.TestCase):
             "chapter_use_time": "chapter_use_time",
             "lecture_code": create_lectureinfo().pk,
         }
-        url = reverse('WebApp_chapterinfo_update', args=[chapterinfo.pk,])
+        url = reverse('chapterinfo_update', args=[chapterinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1330,12 +1330,12 @@ class ChapterContentsInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_chaptercontentsinfo(self):
-        url = reverse('WebApp_chaptercontentsinfo_list')
+        url = reverse('chaptercontentsinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_chaptercontentsinfo(self):
-        url = reverse('WebApp_chaptercontentsinfo_create')
+        url = reverse('chaptercontentsinfo_create')
         data = {
             "chapter_contents": "chapter_contents",
             "chapter_audio": "chapter_audio",
@@ -1386,7 +1386,7 @@ class ChapterContentsInfoViewTest(unittest.TestCase):
 
     def test_detail_chaptercontentsinfo(self):
         chaptercontentsinfo = create_chaptercontentsinfo()
-        url = reverse('WebApp_chaptercontentsinfo_detail', args=[chaptercontentsinfo.pk,])
+        url = reverse('chaptercontentsinfo_detail', args=[chaptercontentsinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1437,7 +1437,7 @@ class ChapterContentsInfoViewTest(unittest.TestCase):
             "pbl_lec_allow": "pbl_lec_allow",
             "chapter_code": create_chapterinfo().pk,
         }
-        url = reverse('WebApp_chaptercontentsinfo_update', args=[chaptercontentsinfo.pk,])
+        url = reverse('chaptercontentsinfo_update', args=[chaptercontentsinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1450,12 +1450,12 @@ class ChapterMissonCheckCardViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_chaptermissoncheckcard(self):
-        url = reverse('WebApp_chaptermissoncheckcard_list')
+        url = reverse('chaptermissoncheckcard_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_chaptermissoncheckcard(self):
-        url = reverse('WebApp_chaptermissoncheckcard_create')
+        url = reverse('chaptermissoncheckcard_create')
         data = {
             "check_card_code": "check_card_code",
             "use_flag": "use_flag",
@@ -1472,7 +1472,7 @@ class ChapterMissonCheckCardViewTest(unittest.TestCase):
 
     def test_detail_chaptermissoncheckcard(self):
         chaptermissoncheckcard = create_chaptermissoncheckcard()
-        url = reverse('WebApp_chaptermissoncheckcard_detail', args=[chaptermissoncheckcard.pk,])
+        url = reverse('chaptermissoncheckcard_detail', args=[chaptermissoncheckcard.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1489,7 +1489,7 @@ class ChapterMissonCheckCardViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "chapter_code": create_chapterinfo().pk,
         }
-        url = reverse('WebApp_chaptermissoncheckcard_update', args=[chaptermissoncheckcard.pk,])
+        url = reverse('chaptermissoncheckcard_update', args=[chaptermissoncheckcard.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1502,12 +1502,12 @@ class ChapterMissonCheckItemViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_chaptermissoncheckitem(self):
-        url = reverse('WebApp_chaptermissoncheckitem_list')
+        url = reverse('chaptermissoncheckitem_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_chaptermissoncheckitem(self):
-        url = reverse('WebApp_chaptermissoncheckitem_create')
+        url = reverse('chaptermissoncheckitem_create')
         data = {
             "check_item_code": "check_item_code",
             "item_text": "item_text",
@@ -1527,7 +1527,7 @@ class ChapterMissonCheckItemViewTest(unittest.TestCase):
 
     def test_detail_chaptermissoncheckitem(self):
         chaptermissoncheckitem = create_chaptermissoncheckitem()
-        url = reverse('WebApp_chaptermissoncheckitem_detail', args=[chaptermissoncheckitem.pk,])
+        url = reverse('chaptermissoncheckitem_detail', args=[chaptermissoncheckitem.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1547,7 +1547,7 @@ class ChapterMissonCheckItemViewTest(unittest.TestCase):
             "check_card_code": create_chaptermissoncheckcard().pk,
             "chapter_contents_code": create_chaptercontentsinfo().pk,
         }
-        url = reverse('WebApp_chaptermissoncheckitem_update', args=[chaptermissoncheckitem.pk,])
+        url = reverse('chaptermissoncheckitem_update', args=[chaptermissoncheckitem.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1560,12 +1560,12 @@ class InningInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_inninginfo(self):
-        url = reverse('WebApp_inninginfo_list')
+        url = reverse('inninginfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_inninginfo(self):
-        url = reverse('WebApp_inninginfo_create')
+        url = reverse('inninginfo_create')
         data = {
             "inning_name": "inning_name",
             "start_date": "start_date",
@@ -1585,7 +1585,7 @@ class InningInfoViewTest(unittest.TestCase):
 
     def test_detail_inninginfo(self):
         inninginfo = create_inninginfo()
-        url = reverse('WebApp_inninginfo_detail', args=[inninginfo.pk,])
+        url = reverse('inninginfo_detail', args=[inninginfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1605,7 +1605,7 @@ class InningInfoViewTest(unittest.TestCase):
             "lecture_code": create_lectureinfo().pk,
             "center_code": create_centerinfo().pk,
         }
-        url = reverse('WebApp_inninginfo_update', args=[inninginfo.pk,])
+        url = reverse('inninginfo_update', args=[inninginfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1618,12 +1618,12 @@ class OmrQuestionInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_omrquestioninfo(self):
-        url = reverse('WebApp_omrquestioninfo_list')
+        url = reverse('omrquestioninfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_omrquestioninfo(self):
-        url = reverse('WebApp_omrquestioninfo_create')
+        url = reverse('omrquestioninfo_create')
         data = {
             "subject_code": "subject_code",
             "use_flag": "use_flag",
@@ -1643,7 +1643,7 @@ class OmrQuestionInfoViewTest(unittest.TestCase):
 
     def test_detail_omrquestioninfo(self):
         omrquestioninfo = create_omrquestioninfo()
-        url = reverse('WebApp_omrquestioninfo_detail', args=[omrquestioninfo.pk,])
+        url = reverse('omrquestioninfo_detail', args=[omrquestioninfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1663,7 +1663,7 @@ class OmrQuestionInfoViewTest(unittest.TestCase):
             "lecture_code": create_lectureinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
-        url = reverse('WebApp_omrquestioninfo_update', args=[omrquestioninfo.pk,])
+        url = reverse('omrquestioninfo_update', args=[omrquestioninfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1676,12 +1676,12 @@ class QuizInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_quizinfo(self):
-        url = reverse('WebApp_quizinfo_list')
+        url = reverse('quizinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_quizinfo(self):
-        url = reverse('WebApp_quizinfo_create')
+        url = reverse('quizinfo_create')
         data = {
             "subject_code": "subject_code",
             "quiz_type": "quiz_type",
@@ -1707,7 +1707,7 @@ class QuizInfoViewTest(unittest.TestCase):
 
     def test_detail_quizinfo(self):
         quizinfo = create_quizinfo()
-        url = reverse('WebApp_quizinfo_detail', args=[quizinfo.pk,])
+        url = reverse('quizinfo_detail', args=[quizinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1733,7 +1733,7 @@ class QuizInfoViewTest(unittest.TestCase):
             "lecture_code": create_lectureinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
-        url = reverse('WebApp_quizinfo_update', args=[quizinfo.pk,])
+        url = reverse('quizinfo_update', args=[quizinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1746,12 +1746,12 @@ class AssignHomeworkInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_assignhomeworkinfo(self):
-        url = reverse('WebApp_assignhomeworkinfo_list')
+        url = reverse('assignhomeworkinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_assignhomeworkinfo(self):
-        url = reverse('WebApp_assignhomeworkinfo_create')
+        url = reverse('assignhomeworkinfo_create')
         data = {
             "subject_code": "subject_code",
             "use_flag": "use_flag",
@@ -1771,7 +1771,7 @@ class AssignHomeworkInfoViewTest(unittest.TestCase):
 
     def test_detail_assignhomeworkinfo(self):
         assignhomeworkinfo = create_assignhomeworkinfo()
-        url = reverse('WebApp_assignhomeworkinfo_detail', args=[assignhomeworkinfo.pk,])
+        url = reverse('assignhomeworkinfo_detail', args=[assignhomeworkinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1791,7 +1791,7 @@ class AssignHomeworkInfoViewTest(unittest.TestCase):
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
         }
-        url = reverse('WebApp_assignhomeworkinfo_update', args=[assignhomeworkinfo.pk,])
+        url = reverse('assignhomeworkinfo_update', args=[assignhomeworkinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1804,12 +1804,12 @@ class AssignQuestionInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_assignquestioninfo(self):
-        url = reverse('WebApp_assignquestioninfo_list')
+        url = reverse('assignquestioninfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_assignquestioninfo(self):
-        url = reverse('WebApp_assignquestioninfo_create')
+        url = reverse('assignquestioninfo_create')
         data = {
             "subject_code": "subject_code",
             "question_type": "question_type",
@@ -1828,7 +1828,7 @@ class AssignQuestionInfoViewTest(unittest.TestCase):
 
     def test_detail_assignquestioninfo(self):
         assignquestioninfo = create_assignquestioninfo()
-        url = reverse('WebApp_assignquestioninfo_detail', args=[assignquestioninfo.pk,])
+        url = reverse('assignquestioninfo_detail', args=[assignquestioninfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1847,7 +1847,7 @@ class AssignQuestionInfoViewTest(unittest.TestCase):
             "lecture_code": create_lectureinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
-        url = reverse('WebApp_assignquestioninfo_update', args=[assignquestioninfo.pk,])
+        url = reverse('assignquestioninfo_update', args=[assignquestioninfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1860,12 +1860,12 @@ class BoardInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_boardinfo(self):
-        url = reverse('WebApp_boardinfo_list')
+        url = reverse('boardinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_boardinfo(self):
-        url = reverse('WebApp_boardinfo_create')
+        url = reverse('boardinfo_create')
         data = {
             "board_name": "board_name",
             "board_write_level": "board_write_level",
@@ -1888,7 +1888,7 @@ class BoardInfoViewTest(unittest.TestCase):
 
     def test_detail_boardinfo(self):
         boardinfo = create_boardinfo()
-        url = reverse('WebApp_boardinfo_detail', args=[boardinfo.pk,])
+        url = reverse('boardinfo_detail', args=[boardinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1911,7 +1911,7 @@ class BoardInfoViewTest(unittest.TestCase):
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
         }
-        url = reverse('WebApp_boardinfo_update', args=[boardinfo.pk,])
+        url = reverse('boardinfo_update', args=[boardinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1924,12 +1924,12 @@ class BoardContentInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_boardcontentinfo(self):
-        url = reverse('WebApp_boardcontentinfo_list')
+        url = reverse('boardcontentinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_boardcontentinfo(self):
-        url = reverse('WebApp_boardcontentinfo_create')
+        url = reverse('boardcontentinfo_create')
         data = {
             "admin_id": "admin_id",
             "title": "title",
@@ -1954,7 +1954,7 @@ class BoardContentInfoViewTest(unittest.TestCase):
 
     def test_detail_boardcontentinfo(self):
         boardcontentinfo = create_boardcontentinfo()
-        url = reverse('WebApp_boardcontentinfo_detail', args=[boardcontentinfo.pk,])
+        url = reverse('boardcontentinfo_detail', args=[boardcontentinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -1979,7 +1979,7 @@ class BoardContentInfoViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "board_code": create_boardinfo().pk,
         }
-        url = reverse('WebApp_boardcontentinfo_update', args=[boardcontentinfo.pk,])
+        url = reverse('boardcontentinfo_update', args=[boardcontentinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1992,12 +1992,12 @@ class InningGroupViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_inninggroup(self):
-        url = reverse('WebApp_inninggroup_list')
+        url = reverse('inninggroup_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_inninggroup(self):
-        url = reverse('WebApp_inninggroup_create')
+        url = reverse('inninggroup_create')
         data = {
             "teacher_code": "teacher_code",
             "use_flag": "use_flag",
@@ -2016,7 +2016,7 @@ class InningGroupViewTest(unittest.TestCase):
 
     def test_detail_inninggroup(self):
         inninggroup = create_inninggroup()
-        url = reverse('WebApp_inninggroup_detail', args=[inninggroup.pk,])
+        url = reverse('inninggroup_detail', args=[inninggroup.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2035,7 +2035,7 @@ class InningGroupViewTest(unittest.TestCase):
             "inning_code": create_inninginfo().pk,
             "lecture_code": create_lectureinfo().pk,
         }
-        url = reverse('WebApp_inninggroup_update', args=[inninggroup.pk,])
+        url = reverse('inninggroup_update', args=[inninggroup.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2048,12 +2048,12 @@ class ChapterContentMediaViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_chaptercontentmedia(self):
-        url = reverse('WebApp_chaptercontentmedia_list')
+        url = reverse('chaptercontentmedia_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_chaptercontentmedia(self):
-        url = reverse('WebApp_chaptercontentmedia_create')
+        url = reverse('chaptercontentmedia_create')
         data = {
             "media_type": "media_type",
             "media_desc": "media_desc",
@@ -2072,7 +2072,7 @@ class ChapterContentMediaViewTest(unittest.TestCase):
 
     def test_detail_chaptercontentmedia(self):
         chaptercontentmedia = create_chaptercontentmedia()
-        url = reverse('WebApp_chaptercontentmedia_detail', args=[chaptercontentmedia.pk,])
+        url = reverse('chaptercontentmedia_detail', args=[chaptercontentmedia.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2091,7 +2091,7 @@ class ChapterContentMediaViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "chapter_contents_code": create_chaptercontentsinfo().pk,
         }
-        url = reverse('WebApp_chaptercontentmedia_update', args=[chaptercontentmedia.pk,])
+        url = reverse('chaptercontentmedia_update', args=[chaptercontentmedia.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2104,12 +2104,12 @@ class ChapterImgInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_chapterimginfo(self):
-        url = reverse('WebApp_chapterimginfo_list')
+        url = reverse('chapterimginfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_chapterimginfo(self):
-        url = reverse('WebApp_chapterimginfo_create')
+        url = reverse('chapterimginfo_create')
         data = {
             "filename": "filename",
             "use_flag": "use_flag",
@@ -2126,7 +2126,7 @@ class ChapterImgInfoViewTest(unittest.TestCase):
 
     def test_detail_chapterimginfo(self):
         chapterimginfo = create_chapterimginfo()
-        url = reverse('WebApp_chapterimginfo_detail', args=[chapterimginfo.pk,])
+        url = reverse('chapterimginfo_detail', args=[chapterimginfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2143,7 +2143,7 @@ class ChapterImgInfoViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "chapter_code": create_chapterinfo().pk,
         }
-        url = reverse('WebApp_chapterimginfo_update', args=[chapterimginfo.pk,])
+        url = reverse('chapterimginfo_update', args=[chapterimginfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2156,12 +2156,12 @@ class ChapterMissonCheckViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_chaptermissoncheck(self):
-        url = reverse('WebApp_chaptermissoncheck_list')
+        url = reverse('chaptermissoncheck_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_chaptermissoncheck(self):
-        url = reverse('WebApp_chaptermissoncheck_create')
+        url = reverse('chaptermissoncheck_create')
         data = {
             "check_code": "check_code",
             "student_code": "student_code",
@@ -2182,7 +2182,7 @@ class ChapterMissonCheckViewTest(unittest.TestCase):
 
     def test_detail_chaptermissoncheck(self):
         chaptermissoncheck = create_chaptermissoncheck()
-        url = reverse('WebApp_chaptermissoncheck_detail', args=[chaptermissoncheck.pk,])
+        url = reverse('chaptermissoncheck_detail', args=[chaptermissoncheck.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2203,7 +2203,7 @@ class ChapterMissonCheckViewTest(unittest.TestCase):
             "check_item_code": create_chaptermissoncheckitem().pk,
             "inning_code": create_inninginfo().pk,
         }
-        url = reverse('WebApp_chaptermissoncheck_update', args=[chaptermissoncheck.pk,])
+        url = reverse('chaptermissoncheck_update', args=[chaptermissoncheck.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2216,12 +2216,12 @@ class ChapterWriteViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_chapterwrite(self):
-        url = reverse('WebApp_chapterwrite_list')
+        url = reverse('chapterwrite_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_chapterwrite(self):
-        url = reverse('WebApp_chapterwrite_create')
+        url = reverse('chapterwrite_create')
         data = {
             "student_code": "student_code",
             "write_content": "write_content",
@@ -2240,7 +2240,7 @@ class ChapterWriteViewTest(unittest.TestCase):
 
     def test_detail_chapterwrite(self):
         chapterwrite = create_chapterwrite()
-        url = reverse('WebApp_chapterwrite_detail', args=[chapterwrite.pk,])
+        url = reverse('chapterwrite_detail', args=[chapterwrite.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2259,7 +2259,7 @@ class ChapterWriteViewTest(unittest.TestCase):
             "inning_code": create_inninginfo().pk,
             "chapter_contents_code": create_chaptercontentsinfo().pk,
         }
-        url = reverse('WebApp_chapterwrite_update', args=[chapterwrite.pk,])
+        url = reverse('chapterwrite_update', args=[chapterwrite.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2272,12 +2272,12 @@ class GroupMappingViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_groupmapping(self):
-        url = reverse('WebApp_groupmapping_list')
+        url = reverse('groupmapping_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_groupmapping(self):
-        url = reverse('WebApp_groupmapping_create')
+        url = reverse('groupmapping_create')
         data = {
             "use_flag": "use_flag",
             "reg_date": "reg_date",
@@ -2295,7 +2295,7 @@ class GroupMappingViewTest(unittest.TestCase):
 
     def test_detail_groupmapping(self):
         groupmapping = create_groupmapping()
-        url = reverse('WebApp_groupmapping_detail', args=[groupmapping.pk,])
+        url = reverse('groupmapping_detail', args=[groupmapping.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2313,7 +2313,7 @@ class GroupMappingViewTest(unittest.TestCase):
             "group_code": create_inninggroup().pk,
             "member_code": create_memberinfo().pk,
         }
-        url = reverse('WebApp_groupmapping_update', args=[groupmapping.pk,])
+        url = reverse('groupmapping_update', args=[groupmapping.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2326,12 +2326,12 @@ class HomeworkInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_homeworkinfo(self):
-        url = reverse('WebApp_homeworkinfo_list')
+        url = reverse('homeworkinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_homeworkinfo(self):
-        url = reverse('WebApp_homeworkinfo_create')
+        url = reverse('homeworkinfo_create')
         data = {
             "subject_code": "subject_code",
             "level_score": "level_score",
@@ -2349,7 +2349,7 @@ class HomeworkInfoViewTest(unittest.TestCase):
 
     def test_detail_homeworkinfo(self):
         homeworkinfo = create_homeworkinfo()
-        url = reverse('WebApp_homeworkinfo_detail', args=[homeworkinfo.pk,])
+        url = reverse('homeworkinfo_detail', args=[homeworkinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2367,7 +2367,7 @@ class HomeworkInfoViewTest(unittest.TestCase):
             "lecture_code": create_lectureinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
-        url = reverse('WebApp_homeworkinfo_update', args=[homeworkinfo.pk,])
+        url = reverse('homeworkinfo_update', args=[homeworkinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2380,12 +2380,12 @@ class LearningNoteViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_learningnote(self):
-        url = reverse('WebApp_learningnote_list')
+        url = reverse('learningnote_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_learningnote(self):
-        url = reverse('WebApp_learningnote_create')
+        url = reverse('learningnote_create')
         data = {
             "contents_code": "contents_code",
             "note_contents": "note_contents",
@@ -2399,7 +2399,7 @@ class LearningNoteViewTest(unittest.TestCase):
 
     def test_detail_learningnote(self):
         learningnote = create_learningnote()
-        url = reverse('WebApp_learningnote_detail', args=[learningnote.pk,])
+        url = reverse('learningnote_detail', args=[learningnote.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2413,7 +2413,7 @@ class LearningNoteViewTest(unittest.TestCase):
             "lecture_code": create_lectureinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
-        url = reverse('WebApp_learningnote_update', args=[learningnote.pk,])
+        url = reverse('learningnote_update', args=[learningnote.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2426,12 +2426,12 @@ class LectureUbtInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_lectureubtinfo(self):
-        url = reverse('WebApp_lectureubtinfo_list')
+        url = reverse('lectureubtinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_lectureubtinfo(self):
-        url = reverse('WebApp_lectureubtinfo_create')
+        url = reverse('lectureubtinfo_create')
         data = {
             "use_flag": "use_flag",
             "reg_date": "reg_date",
@@ -2448,7 +2448,7 @@ class LectureUbtInfoViewTest(unittest.TestCase):
 
     def test_detail_lectureubtinfo(self):
         lectureubtinfo = create_lectureubtinfo()
-        url = reverse('WebApp_lectureubtinfo_detail', args=[lectureubtinfo.pk,])
+        url = reverse('lectureubtinfo_detail', args=[lectureubtinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2465,7 +2465,7 @@ class LectureUbtInfoViewTest(unittest.TestCase):
             "quiz_code": create_quizinfo().pk,
             "lecture_code": create_lectureinfo().pk,
         }
-        url = reverse('WebApp_lectureubtinfo_update', args=[lectureubtinfo.pk,])
+        url = reverse('lectureubtinfo_update', args=[lectureubtinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2478,12 +2478,12 @@ class LessonInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_lessoninfo(self):
-        url = reverse('WebApp_lessoninfo_list')
+        url = reverse('lessoninfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_lessoninfo(self):
-        url = reverse('WebApp_lessoninfo_create')
+        url = reverse('lessoninfo_create')
         data = {
             "teacher_code": "teacher_code",
             "start_date": "start_date",
@@ -2510,7 +2510,7 @@ class LessonInfoViewTest(unittest.TestCase):
 
     def test_detail_lessoninfo(self):
         lessoninfo = create_lessoninfo()
-        url = reverse('WebApp_lessoninfo_detail', args=[lessoninfo.pk,])
+        url = reverse('lessoninfo_detail', args=[lessoninfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2537,7 +2537,7 @@ class LessonInfoViewTest(unittest.TestCase):
             "center_code": create_centerinfo().pk,
             "inning_code": create_inninginfo().pk,
         }
-        url = reverse('WebApp_lessoninfo_update', args=[lessoninfo.pk,])
+        url = reverse('lessoninfo_update', args=[lessoninfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2550,12 +2550,12 @@ class LessonLogViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_lessonlog(self):
-        url = reverse('WebApp_lessonlog_list')
+        url = reverse('lessonlog_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_lessonlog(self):
-        url = reverse('WebApp_lessonlog_create')
+        url = reverse('lessonlog_create')
         data = {
             "member_id": "member_id",
             "member_ip": "member_ip",
@@ -2587,7 +2587,7 @@ class LessonLogViewTest(unittest.TestCase):
 
     def test_detail_lessonlog(self):
         lessonlog = create_lessonlog()
-        url = reverse('WebApp_lessonlog_detail', args=[lessonlog.pk,])
+        url = reverse('lessonlog_detail', args=[lessonlog.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2619,7 +2619,7 @@ class LessonLogViewTest(unittest.TestCase):
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
         }
-        url = reverse('WebApp_lessonlog_update', args=[lessonlog.pk,])
+        url = reverse('lessonlog_update', args=[lessonlog.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2632,12 +2632,12 @@ class MemberGroupViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_membergroup(self):
-        url = reverse('WebApp_membergroup_list')
+        url = reverse('membergroup_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_membergroup(self):
-        url = reverse('WebApp_membergroup_create')
+        url = reverse('membergroup_create')
         data = {
             "group_name": "group_name",
             "use_flag": "use_flag",
@@ -2654,7 +2654,7 @@ class MemberGroupViewTest(unittest.TestCase):
 
     def test_detail_membergroup(self):
         membergroup = create_membergroup()
-        url = reverse('WebApp_membergroup_detail', args=[membergroup.pk,])
+        url = reverse('membergroup_detail', args=[membergroup.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2671,7 +2671,7 @@ class MemberGroupViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "center_code": create_centerinfo().pk,
         }
-        url = reverse('WebApp_membergroup_update', args=[membergroup.pk,])
+        url = reverse('membergroup_update', args=[membergroup.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2684,12 +2684,12 @@ class MessageInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_messageinfo(self):
-        url = reverse('WebApp_messageinfo_list')
+        url = reverse('messageinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_messageinfo(self):
-        url = reverse('WebApp_messageinfo_create')
+        url = reverse('messageinfo_create')
         data = {
             "teacher_code": "teacher_code",
             "message": "message",
@@ -2708,7 +2708,7 @@ class MessageInfoViewTest(unittest.TestCase):
 
     def test_detail_messageinfo(self):
         messageinfo = create_messageinfo()
-        url = reverse('WebApp_messageinfo_detail', args=[messageinfo.pk,])
+        url = reverse('messageinfo_detail', args=[messageinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2727,7 +2727,7 @@ class MessageInfoViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "member_code": create_memberinfo().pk,
         }
-        url = reverse('WebApp_messageinfo_update', args=[messageinfo.pk,])
+        url = reverse('messageinfo_update', args=[messageinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2740,12 +2740,12 @@ class OmrAnswerInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_omranswerinfo(self):
-        url = reverse('WebApp_omranswerinfo_list')
+        url = reverse('omranswerinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_omranswerinfo(self):
-        url = reverse('WebApp_omranswerinfo_create')
+        url = reverse('omranswerinfo_create')
         data = {
             "subject_code": "subject_code",
             "omr_answer": "omr_answer",
@@ -2770,7 +2770,7 @@ class OmrAnswerInfoViewTest(unittest.TestCase):
 
     def test_detail_omranswerinfo(self):
         omranswerinfo = create_omranswerinfo()
-        url = reverse('WebApp_omranswerinfo_detail', args=[omranswerinfo.pk,])
+        url = reverse('omranswerinfo_detail', args=[omranswerinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2795,7 +2795,7 @@ class OmrAnswerInfoViewTest(unittest.TestCase):
             "question_code": create_omrquestioninfo().pk,
             "lesson_code": create_lessoninfo().pk,
         }
-        url = reverse('WebApp_omranswerinfo_update', args=[omranswerinfo.pk,])
+        url = reverse('omranswerinfo_update', args=[omranswerinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2808,12 +2808,12 @@ class OmrAssignInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_omrassigninfo(self):
-        url = reverse('WebApp_omrassigninfo_list')
+        url = reverse('omrassigninfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_omrassigninfo(self):
-        url = reverse('WebApp_omrassigninfo_create')
+        url = reverse('omrassigninfo_create')
         data = {
             "subject_code": "subject_code",
             "use_flag": "use_flag",
@@ -2833,7 +2833,7 @@ class OmrAssignInfoViewTest(unittest.TestCase):
 
     def test_detail_omrassigninfo(self):
         omrassigninfo = create_omrassigninfo()
-        url = reverse('WebApp_omrassigninfo_detail', args=[omrassigninfo.pk,])
+        url = reverse('omrassigninfo_detail', args=[omrassigninfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2853,7 +2853,7 @@ class OmrAssignInfoViewTest(unittest.TestCase):
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
         }
-        url = reverse('WebApp_omrassigninfo_update', args=[omrassigninfo.pk,])
+        url = reverse('omrassigninfo_update', args=[omrassigninfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2866,12 +2866,12 @@ class OmrExampleInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_omrexampleinfo(self):
-        url = reverse('WebApp_omrexampleinfo_list')
+        url = reverse('omrexampleinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_omrexampleinfo(self):
-        url = reverse('WebApp_omrexampleinfo_create')
+        url = reverse('omrexampleinfo_create')
         data = {
             "omr_example_correct": "omr_example_correct",
             "omr_example_idx": "omr_example_idx",
@@ -2889,7 +2889,7 @@ class OmrExampleInfoViewTest(unittest.TestCase):
 
     def test_detail_omrexampleinfo(self):
         omrexampleinfo = create_omrexampleinfo()
-        url = reverse('WebApp_omrexampleinfo_detail', args=[omrexampleinfo.pk,])
+        url = reverse('omrexampleinfo_detail', args=[omrexampleinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2907,7 +2907,7 @@ class OmrExampleInfoViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "question_code": create_omrquestioninfo().pk,
         }
-        url = reverse('WebApp_omrexampleinfo_update', args=[omrexampleinfo.pk,])
+        url = reverse('omrexampleinfo_update', args=[omrexampleinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2920,12 +2920,12 @@ class QAnswerInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_qanswerinfo(self):
-        url = reverse('WebApp_qanswerinfo_list')
+        url = reverse('qanswerinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_qanswerinfo(self):
-        url = reverse('WebApp_qanswerinfo_create')
+        url = reverse('qanswerinfo_create')
         data = {
             "subject_code": "subject_code",
             "question_type": "question_type",
@@ -2951,7 +2951,7 @@ class QAnswerInfoViewTest(unittest.TestCase):
 
     def test_detail_qanswerinfo(self):
         qanswerinfo = create_qanswerinfo()
-        url = reverse('WebApp_qanswerinfo_detail', args=[qanswerinfo.pk,])
+        url = reverse('qanswerinfo_detail', args=[qanswerinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -2977,7 +2977,7 @@ class QAnswerInfoViewTest(unittest.TestCase):
             "question_code": create_omrquestioninfo().pk,
             "lesson_code": create_lessoninfo().pk,
         }
-        url = reverse('WebApp_qanswerinfo_update', args=[qanswerinfo.pk,])
+        url = reverse('qanswerinfo_update', args=[qanswerinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2990,12 +2990,12 @@ class QAnswerLogViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_qanswerlog(self):
-        url = reverse('WebApp_qanswerlog_list')
+        url = reverse('qanswerlog_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_qanswerlog(self):
-        url = reverse('WebApp_qanswerlog_create')
+        url = reverse('qanswerlog_create')
         data = {
             "question_answer": "question_answer",
             "question_idx": "question_idx",
@@ -3016,7 +3016,7 @@ class QAnswerLogViewTest(unittest.TestCase):
 
     def test_detail_qanswerlog(self):
         qanswerlog = create_qanswerlog()
-        url = reverse('WebApp_qanswerlog_detail', args=[qanswerlog.pk,])
+        url = reverse('qanswerlog_detail', args=[qanswerlog.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -3037,7 +3037,7 @@ class QAnswerLogViewTest(unittest.TestCase):
             "member_code": create_memberinfo().pk,
             "question_code": create_omrquestioninfo().pk,
         }
-        url = reverse('WebApp_qanswerlog_update', args=[qanswerlog.pk,])
+        url = reverse('qanswerlog_update', args=[qanswerlog.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -3050,12 +3050,12 @@ class QExampleInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_qexampleinfo(self):
-        url = reverse('WebApp_qexampleinfo_list')
+        url = reverse('qexampleinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_qexampleinfo(self):
-        url = reverse('WebApp_qexampleinfo_create')
+        url = reverse('qexampleinfo_create')
         data = {
             "q_example": "q_example",
             "q_example_correct": "q_example_correct",
@@ -3075,7 +3075,7 @@ class QExampleInfoViewTest(unittest.TestCase):
 
     def test_detail_qexampleinfo(self):
         qexampleinfo = create_qexampleinfo()
-        url = reverse('WebApp_qexampleinfo_detail', args=[qexampleinfo.pk,])
+        url = reverse('qexampleinfo_detail', args=[qexampleinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -3095,7 +3095,7 @@ class QExampleInfoViewTest(unittest.TestCase):
             "q_example_type": "q_example_type",
             "question_code": create_omrquestioninfo().pk,
         }
-        url = reverse('WebApp_qexampleinfo_update', args=[qexampleinfo.pk,])
+        url = reverse('qexampleinfo_update', args=[qexampleinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -3108,12 +3108,12 @@ class QuestionInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_questioninfo(self):
-        url = reverse('WebApp_questioninfo_list')
+        url = reverse('questioninfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_questioninfo(self):
-        url = reverse('WebApp_questioninfo_create')
+        url = reverse('questioninfo_create')
         data = {
             "subject_code": "subject_code",
             "question_type": "question_type",
@@ -3143,7 +3143,7 @@ class QuestionInfoViewTest(unittest.TestCase):
 
     def test_detail_questioninfo(self):
         questioninfo = create_questioninfo()
-        url = reverse('WebApp_questioninfo_detail', args=[questioninfo.pk,])
+        url = reverse('questioninfo_detail', args=[questioninfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -3173,7 +3173,7 @@ class QuestionInfoViewTest(unittest.TestCase):
             "lecture_code": create_lectureinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
-        url = reverse('WebApp_questioninfo_update', args=[questioninfo.pk,])
+        url = reverse('questioninfo_update', args=[questioninfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -3186,12 +3186,12 @@ class QuizAnswerInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_quizanswerinfo(self):
-        url = reverse('WebApp_quizanswerinfo_list')
+        url = reverse('quizanswerinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_quizanswerinfo(self):
-        url = reverse('WebApp_quizanswerinfo_create')
+        url = reverse('quizanswerinfo_create')
         data = {
             "subject_code": "subject_code",
             "quiz_type": "quiz_type",
@@ -3217,7 +3217,7 @@ class QuizAnswerInfoViewTest(unittest.TestCase):
 
     def test_detail_quizanswerinfo(self):
         quizanswerinfo = create_quizanswerinfo()
-        url = reverse('WebApp_quizanswerinfo_detail', args=[quizanswerinfo.pk,])
+        url = reverse('quizanswerinfo_detail', args=[quizanswerinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -3243,7 +3243,7 @@ class QuizAnswerInfoViewTest(unittest.TestCase):
             "member_code": create_memberinfo().pk,
             "quiz_code": create_quizinfo().pk,
         }
-        url = reverse('WebApp_quizanswerinfo_update', args=[quizanswerinfo.pk,])
+        url = reverse('quizanswerinfo_update', args=[quizanswerinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -3256,12 +3256,12 @@ class QuizExampleInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_quizexampleinfo(self):
-        url = reverse('WebApp_quizexampleinfo_list')
+        url = reverse('quizexampleinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_quizexampleinfo(self):
-        url = reverse('WebApp_quizexampleinfo_create')
+        url = reverse('quizexampleinfo_create')
         data = {
             "quiz_example": "quiz_example",
             "quiz_example_correct": "quiz_example_correct",
@@ -3281,7 +3281,7 @@ class QuizExampleInfoViewTest(unittest.TestCase):
 
     def test_detail_quizexampleinfo(self):
         quizexampleinfo = create_quizexampleinfo()
-        url = reverse('WebApp_quizexampleinfo_detail', args=[quizexampleinfo.pk,])
+        url = reverse('quizexampleinfo_detail', args=[quizexampleinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -3301,7 +3301,7 @@ class QuizExampleInfoViewTest(unittest.TestCase):
             "quiz_example_type": "quiz_example_type",
             "quiz_code": create_quizinfo().pk,
         }
-        url = reverse('WebApp_quizexampleinfo_update', args=[quizexampleinfo.pk,])
+        url = reverse('quizexampleinfo_update', args=[quizexampleinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -3314,12 +3314,12 @@ class ScheduleInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_scheduleinfo(self):
-        url = reverse('WebApp_scheduleinfo_list')
+        url = reverse('scheduleinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_scheduleinfo(self):
-        url = reverse('WebApp_scheduleinfo_create')
+        url = reverse('scheduleinfo_create')
         data = {
             "title": "title",
             "content": "content",
@@ -3341,7 +3341,7 @@ class ScheduleInfoViewTest(unittest.TestCase):
 
     def test_detail_scheduleinfo(self):
         scheduleinfo = create_scheduleinfo()
-        url = reverse('WebApp_scheduleinfo_detail', args=[scheduleinfo.pk,])
+        url = reverse('scheduleinfo_detail', args=[scheduleinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -3363,7 +3363,7 @@ class ScheduleInfoViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "member_code": create_memberinfo().pk,
         }
-        url = reverse('WebApp_scheduleinfo_update', args=[scheduleinfo.pk,])
+        url = reverse('scheduleinfo_update', args=[scheduleinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -3376,12 +3376,12 @@ class TalkMemberViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_talkmember(self):
-        url = reverse('WebApp_talkmember_list')
+        url = reverse('talkmember_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_talkmember(self):
-        url = reverse('WebApp_talkmember_create')
+        url = reverse('talkmember_create')
         data = {
             "use_flag": "use_flag",
             "member_code": create_memberinfo().pk,
@@ -3391,7 +3391,7 @@ class TalkMemberViewTest(unittest.TestCase):
 
     def test_detail_talkmember(self):
         talkmember = create_talkmember()
-        url = reverse('WebApp_talkmember_detail', args=[talkmember.pk,])
+        url = reverse('talkmember_detail', args=[talkmember.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -3401,7 +3401,7 @@ class TalkMemberViewTest(unittest.TestCase):
             "use_flag": "use_flag",
             "member_code": create_memberinfo().pk,
         }
-        url = reverse('WebApp_talkmember_update', args=[talkmember.pk,])
+        url = reverse('talkmember_update', args=[talkmember.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -3414,12 +3414,12 @@ class TalkRoomViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_talkroom(self):
-        url = reverse('WebApp_talkroom_list')
+        url = reverse('talkroom_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_talkroom(self):
-        url = reverse('WebApp_talkroom_create')
+        url = reverse('talkroom_create')
         data = {
             "talk_room_cate_code": "talk_room_cate_code",
             "use_flag": "use_flag",
@@ -3431,7 +3431,7 @@ class TalkRoomViewTest(unittest.TestCase):
 
     def test_detail_talkroom(self):
         talkroom = create_talkroom()
-        url = reverse('WebApp_talkroom_detail', args=[talkroom.pk,])
+        url = reverse('talkroom_detail', args=[talkroom.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -3443,7 +3443,7 @@ class TalkRoomViewTest(unittest.TestCase):
             "lecture_code": create_lectureinfo().pk,
             "inning_code": create_inninginfo().pk,
         }
-        url = reverse('WebApp_talkroom_update', args=[talkroom.pk,])
+        url = reverse('talkroom_update', args=[talkroom.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -3456,12 +3456,12 @@ class TalkMessageViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_talkmessage(self):
-        url = reverse('WebApp_talkmessage_list')
+        url = reverse('talkmessage_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_talkmessage(self):
-        url = reverse('WebApp_talkmessage_create')
+        url = reverse('talkmessage_create')
         data = {
             "message": "message",
             "sender_member_code": "sender_member_code",
@@ -3474,7 +3474,7 @@ class TalkMessageViewTest(unittest.TestCase):
 
     def test_detail_talkmessage(self):
         talkmessage = create_talkmessage()
-        url = reverse('WebApp_talkmessage_detail', args=[talkmessage.pk,])
+        url = reverse('talkmessage_detail', args=[talkmessage.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -3487,7 +3487,7 @@ class TalkMessageViewTest(unittest.TestCase):
             "send_time": "send_time",
             "talk_room_id": create_talkroom().pk,
         }
-        url = reverse('WebApp_talkmessage_update', args=[talkmessage.pk,])
+        url = reverse('talkmessage_update', args=[talkmessage.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -3500,12 +3500,12 @@ class TalkMessageReadViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_talkmessageread(self):
-        url = reverse('WebApp_talkmessageread_list')
+        url = reverse('talkmessageread_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_talkmessageread(self):
-        url = reverse('WebApp_talkmessageread_create')
+        url = reverse('talkmessageread_create')
         data = {
             "is_read": "is_read",
             "member_code": create_memberinfo().pk,
@@ -3515,7 +3515,7 @@ class TalkMessageReadViewTest(unittest.TestCase):
 
     def test_detail_talkmessageread(self):
         talkmessageread = create_talkmessageread()
-        url = reverse('WebApp_talkmessageread_detail', args=[talkmessageread.pk,])
+        url = reverse('talkmessageread_detail', args=[talkmessageread.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -3525,7 +3525,7 @@ class TalkMessageReadViewTest(unittest.TestCase):
             "is_read": "is_read",
             "member_code": create_memberinfo().pk,
         }
-        url = reverse('WebApp_talkmessageread_update', args=[talkmessageread.pk,])
+        url = reverse('talkmessageread_update', args=[talkmessageread.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -3538,12 +3538,12 @@ class TodoInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_todoinfo(self):
-        url = reverse('WebApp_todoinfo_list')
+        url = reverse('todoinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_todoinfo(self):
-        url = reverse('WebApp_todoinfo_create')
+        url = reverse('todoinfo_create')
         data = {
             "todo_comment": "todo_comment",
             "todo_status": "todo_status",
@@ -3569,7 +3569,7 @@ class TodoInfoViewTest(unittest.TestCase):
 
     def test_detail_todoinfo(self):
         todoinfo = create_todoinfo()
-        url = reverse('WebApp_todoinfo_detail', args=[todoinfo.pk,])
+        url = reverse('todoinfo_detail', args=[todoinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -3595,7 +3595,7 @@ class TodoInfoViewTest(unittest.TestCase):
             "member_code": create_memberinfo().pk,
             "lecture_code": create_lectureinfo().pk,
         }
-        url = reverse('WebApp_todoinfo_update', args=[todoinfo.pk,])
+        url = reverse('todoinfo_update', args=[todoinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -3608,12 +3608,12 @@ class TodoTInfoViewTest(unittest.TestCase):
         self.client = Client()
 
     def test_list_todotinfo(self):
-        url = reverse('WebApp_todotinfo_list')
+        url = reverse('todotinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_create_todotinfo(self):
-        url = reverse('WebApp_todotinfo_create')
+        url = reverse('todotinfo_create')
         data = {
             "todo_code": "todo_code",
             "todo_t_flag": "todo_t_flag",
@@ -3631,7 +3631,7 @@ class TodoTInfoViewTest(unittest.TestCase):
 
     def test_detail_todotinfo(self):
         todotinfo = create_todotinfo()
-        url = reverse('WebApp_todotinfo_detail', args=[todotinfo.pk,])
+        url = reverse('todotinfo_detail', args=[todotinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -3649,7 +3649,7 @@ class TodoTInfoViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "member_code": create_memberinfo().pk,
         }
-        url = reverse('WebApp_todotinfo_update', args=[todotinfo.pk,])
+        url = reverse('todotinfo_update', args=[todotinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 

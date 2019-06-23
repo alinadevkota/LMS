@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_lessoninfo_list' %}">LessonInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'lessoninfo_list' %}">LessonInfo Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -42,5 +42,5 @@
     <td>{{ object.download_date }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_lessoninfo_create' %}">Create new LessonInfo</a>
+</table><a class="btn btn-primary" href="{% url 'lessoninfo_create' %}">Create new LessonInfo</a>
 {% endblock %}

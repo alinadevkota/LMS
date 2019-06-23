@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_lessonlog_list' %}">LessonLog Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'lessonlog_list' %}">LessonLog Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -52,5 +52,5 @@
     <td>{{ object.connect_page }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_lessonlog_create' %}">Create new LessonLog</a>
+</table><a class="btn btn-primary" href="{% url 'lessonlog_create' %}">Create new LessonLog</a>
 {% endblock %}

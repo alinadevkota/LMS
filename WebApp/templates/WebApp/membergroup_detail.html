@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_membergroup_list' %}">MemberGroup Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'membergroup_list' %}">MemberGroup Listing</a></p>
 <table class="table">
 <tr><td>group_name</td><td>{{ object.group_name }}</td></tr>
 <tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>

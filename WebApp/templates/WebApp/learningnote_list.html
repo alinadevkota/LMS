@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<p><a class="btn btn-default" href="{% url 'WebApp_learningnote_list' %}">LearningNote Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'learningnote_list' %}">LearningNote Listing</a></p>
 <table class="table">
     <tr>
         <td>ID</td>
@@ -21,5 +21,5 @@
         <td>{{ object.note_attachment }}</td>
     </tr>
     {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_learningnote_create' %}">Create new LearningNote</a>
+</table><a class="btn btn-primary" href="{% url 'learningnote_create' %}">Create new LearningNote</a>
 {% endblock %}

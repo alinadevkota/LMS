@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_omrquestioninfo_list' %}">OmrQuestionInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'omrquestioninfo_list' %}">OmrQuestionInfo Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -32,5 +32,5 @@
     <td>{{ object.question_score }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'WebApp_omrquestioninfo_create' %}">Create new OmrQuestionInfo</a>
+</table><a class="btn btn-primary" href="{% url 'omrquestioninfo_create' %}">Create new OmrQuestionInfo</a>
 {% endblock %}

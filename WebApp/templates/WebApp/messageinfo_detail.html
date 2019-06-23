@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_messageinfo_list' %}">MessageInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'messageinfo_list' %}">MessageInfo Listing</a></p>
 <table class="table">
 <tr><td>teacher_code</td><td>{{ object.teacher_code }}</td></tr>
 <tr><td>message</td><td>{{ object.message }}</td></tr>

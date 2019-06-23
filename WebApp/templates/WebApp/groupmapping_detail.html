@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'WebApp_groupmapping_list' %}">GroupMapping Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'groupmapping_list' %}">GroupMapping Listing</a></p>
 <table class="table">
 <tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
 <tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
