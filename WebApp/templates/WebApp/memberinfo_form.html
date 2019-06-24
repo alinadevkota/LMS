@@ -4,9 +4,30 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/memberinfo_form.css' %}">
+<ol aria-label="breadcrumb" class="breadcrumb navClass">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'memberinfo_list' %}">Member</a></li>
+    <li class="breadcrumb-item active" aria-current="page">
+      {% if '/memberinfo/create/' == request.path %}
+      Create New Member
+      {% else %}
+      Edit Member Info
+      {% endif %}
+    </li>
+  </ol>
+  <div class="headerDiv">
+  <h2 class="infoFormHeader">
+    {% if '/memberinfo/create/' == request.path %}
+    Create New Member
+    {% else %}
+    Edit Member Info
+    {% endif %}
+  </h2>
+  <hr class="header_hr">
+</div>
 
 <div class="memberInfoForm-outerDiv">
-        <p><a class="btn btn-default" href="{% url 'memberinfo_list' %}">Members</a></p>
+      
         <!-- <form method="post">
     {% csrf_token %}
     {{form|crispy}}

@@ -44,8 +44,8 @@
                 <td>{{ object.Center_Address }}</td>
                 <td>{{ object.Register_Agent }}</td>
                 <td>{{ object.Register_DateTime }}</td>
-                <td>{{ object.Updated_DateTime }}</td>                
-                
+                <td>{{ object.Updated_DateTime }}</td>
+
             </tr>
             {% endfor %}
         </table>
@@ -68,15 +68,15 @@
         $('.table').DataTable({
             dom: 'lBfrtip',
             buttons: [
-            {
-                extend: 'csv',
-                text: '<span class="exportcsv"><i class="fa fa-paper-plane-o"></i> Export to CSV </span>'
-            },
-            {
-                extend: 'print',
-                text: '<span class="print"><i class="fa fa-print"></i> Print </span>',
-                fieldSeparator: '\t'
-            }]
+                {
+                    extend: 'csv',
+                    text: '<span class="exportcsv"><i class="fa fa-paper-plane-o"></i> Export to CSV </span>'
+                },
+                {
+                    extend: 'print',
+                    text: '<span class="print"><i class="fa fa-print"></i> Print </span>',
+                    fieldSeparator: '\t'
+                }]
         });
     });
 </script>
