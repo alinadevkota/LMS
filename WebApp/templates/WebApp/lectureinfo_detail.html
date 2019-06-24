@@ -2,9 +2,15 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/lectureinfo_detail.css' %}">
+<ol aria-label="breadcrumb" class="breadcrumb navClass">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'lectureinfo_list' %}">Lecture</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ object.lecture_name }}</li>
+</ol>
 <div class="outerdiv">
 
-    <p><a class="btn btn-default" href="{% url 'lectureinfo_list' %}">LectureInfo Listing</a></p>
+    <h2 class="detailListHeader">Lecture Information</h2>
+    <hr class="header_hr"><br>
     <table class="table">
         <tr>
             <td>lecture_name</td>
