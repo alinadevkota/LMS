@@ -23,9 +23,9 @@
             <td>Status</td>
             <td>
                 {% if object.Use_Flag == True %}
-                    <span class="text-success">Active</span>
+                <span class="text-success">Active</span>
                 {% else %}
-                    <span class="text-danger">Disable</span>
+                <span class="text-danger">Disable</span>
                 {% endif %}
             </td>
         </tr>
@@ -41,10 +41,10 @@
             <td>Updated DateTime</td>
             <td>{{ object.Updated_DateTime }}</td>
         </tr>
-       
+
     </table><br>
     <a class="btn btn-primary" href="{{object.get_update_url}}">Edit Center</a>
-    <a class="btn btn-primary" href="{{object.get_delete_url}}">Delete Center</a>
+    <a class="btn btn-danger" href="{{object.get_delete_url}}">Delete Center</a>
 </div>
 
 {% endblock %}
