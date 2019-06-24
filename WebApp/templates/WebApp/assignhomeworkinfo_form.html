@@ -7,9 +7,9 @@
 <div class="out">
 
     <p><a class="btn btn-default" href="{% url 'assignhomeworkinfo_list' %}">AssignHomeworkInfo Listing</a></p>
+</div>
 
-
-
+    <div class="x-content">
 
     <form method="post" data-parsely-validate="">
             {% csrf_token %}
@@ -23,7 +23,7 @@
              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
     
     </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback clearfix ">
         <label for="id_use_flag" class="control-label ">
             Use Flag
         </label>
@@ -93,7 +93,6 @@
                     <select name="question_code" id="id_question_code" required="required"  class = "select form-control" id="inputSuccess3" >
                             <option value="" selected="">---------</option>
                             </select>
-                    <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
             
                     </div>
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -136,16 +135,19 @@
 
                             </select>
                             </div>
-                            
                     </div>
+                            
+                    
 
 
 
-                        
-</div>
-
+</div>                       
+<br>
+ 
         <!-- {{form|crispy}} -->
+        <div class="assign-button">
         <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
     </form>
-</div>
+
 {% endblock %}
