@@ -1,8 +1,9 @@
 html , body {
     height: 100%;
+    font-family: 'Poppins', sans-serif!important;
 }
 .bg-white{
-    background: white;
+    background: white;  
 }
 .font2{
     font-size: 1.1em;
@@ -19,7 +20,8 @@ html , body {
 
 .detailListHeader{
     text-align: center;
-    font-size: 2em;
+    font-size: 2.5em;
+    font-weight: bold;
     color: #009999;
 }
 .header_hr{
@@ -33,6 +35,7 @@ html , body {
     padding:1em;
 }
 .tableHeader{
+    font-weight: bold;
     text-align: center;
     font-size: 2.5em;
     color: #009999;
@@ -4865,9 +4868,10 @@ ul.notifications {
     text-align: center;
 }
 
-.centerInfoListingHeader{
+.infoFormHeader{
+    font-weight: bold;
     text-align: center;
-    font-size: 2em;
+    font-size: 2.5em;
     color: #009999;
 }
 
