@@ -55,9 +55,21 @@ html , body {
     height: 100%;
 }
 
+.member_submit{
+    text-align: center;
+}
+
 .daterangepicker .ranges li {
     color: #73879C
 }
+
+.lecture_submit{
+    text-align: center;
+}
+.js-switch{
+    clear: both;
+}
+
 
 .daterangepicker .ranges li.active, .daterangepicker .ranges li:hover {
     background: #536A7F;

@@ -37,7 +37,7 @@
                                    Lecture Cover File
                                 </label>
                             <input type="file" name="lecture_cover_file" id="id_lecture_cover_file" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Cover File">
-                            <span class="fa fa-archive form-control-feedback right" aria-hidden="true"></span>
+                            <span class="fa fa-file-pdf-o form-control-feedback right" aria-hidden="true"></span>
                           </div>
          
                           <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -92,7 +92,7 @@
                            Registration Time
                         </label>
                     <input type="time" name="reg_time" id="id_reg_time" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="hh:mm">
-                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                    <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
                   </div>
  
                   <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -115,7 +115,7 @@
                                 Updated Time
                             </label>
                             <input type="time" name="udt_time" id="id_udt_time" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="hh:mm">
-                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                            <span class="fa fa-clock-o form-control-feedback left" aria-hidden="true"></span>
         
                       </div>
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -170,18 +170,21 @@
                                         <input type="number" name="cert_crit_issue" id="id_cert_crit_issue" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="cert_crit_issue">
                                         <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                       </div>
-                                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                        <label for="id_reg_agent" class="control-label ">
-                                                Center Code
-                                            </label>
-                                            <select name="center_code" id="id_center_code" required="required" class="select-form-control has-feedback-left" id="inputSuccess3" placeholder="choose">
-                                                    <option value="" selected="">---------</option> <option value="7">CenterInfo object (7)</option> <option value="6">CenterInfo object (6)</option> <option value="5">CenterInfo object (5)</option> <option value="4">CenterInfo object (4)</option> <option value="3">CenterInfo object (3)</option> <option value="2">CenterInfo object (2)</option> <option value="1">CenterInfo object (1)</option>
-
-                                                    </select>
-                                            <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-             
-                                            -->
-                                        </div>
+                                      <div class="col-md-6 col-sm-6 col-xs-12" >
+            
+                                        <label for="id_center_code" class="form-control-label  requiredField">
+                                            Center code
+                                        </label>
+                                        <div class=""> <select name="center_code" id="id_center_code" required=""
+                                        class="select form-control">
+                                        <option value="" selected="">---------</option>
+                                        <option value="4">CenterInfo object (4)</option>
+                                        <option value="3">CenterInfo object (3)</option>
+                                        <option value="2">CenterInfo object (2)</option>
+                                        <option value="1">CenterInfo object (1)</option>
+                                                                  
+                                        </select>
+                                    </div>
                                         <br>
                                         <br>
          <div class="lecture_submit">                             
