@@ -2,6 +2,25 @@ html , body {
     height: 100%;
     font-family: 'Poppins', sans-serif!important;
 }
+/* .navbar-light{
+    text-align: center;
+} */
+
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}
+.navbar-nav > li{
+    margin-left:30px;
+    margin-right:30px;
+    margin-top:-5px;
+    
+}
+
+.nav.navbar-nav>li>a {
+    color: #515356 !important
+}
 .bg-white{
     background: white;  
 }
@@ -950,9 +969,7 @@ a:hover, a:focus {
     text-decoration: none
 }
 
-.nav.navbar-nav>li>a {
-    color: #515356 !important
-}
+
 
 .nav.top_menu>li>a {
     position: relative;

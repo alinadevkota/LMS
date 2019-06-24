@@ -9,56 +9,66 @@
         <li class="breadcrumb-item active" aria-current="page">Members</li>
     </ol>
 
-    <h2 class="btn btn-title">List of Members</h2>
-    <br>
+    <nav class="navbar navbar-dark" style="background-color: grey">
+        <ul class="nav navbar-nav navbar-center">
+            <li><a class="navbar-brand" href="#">Teacher</a></li>
+            <li><a class="navbar-brand" href="#">Student</a></li>
+            <li><a class="navbar-brand" href="#">Parent</a></li>
+        </ul>
+    </nav>
+    <hr class="header_hr">
+    <h2 class="tableHeader">List of Members</h2>
+    <hr class="header_hr">
     <div class="btn-createnew">
-        <a class="btn btn-primary" href="{% url 'lectureinfo_create' %}">Create new Member</a>
+        <a class="btn btn-success" href="{% url 'memberinfo_create' %}">Create new Member</a>
     </div>
     <br><br><br>
-    <table class="table table-striped">
-        <thead class="thead-light">
-            <tr class="tableTitleRow">
-                <td>ID</td>
-                <!-- <td>Link</td> -->
-                <td>Member_ID</td>
-                <!-- <td>Member_Password</td> -->
-                <td>Member_Type</td>
-                <td>Member_Name</td>
-                <td>Member_Permanent_Address</td>
-                <!-- <td>Member_Temporary_Address</td> -->
-                <td>Member_BirthDate</td>
-                <td>Member_Email</td>
-                <td>Member_Phone</td>
-                <!-- <td>member_Avatar</td> -->
-                <td>member_Gender</td>
-                <!-- <td>Use_Flag</td>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered bg-white">
+            <thead class="thead-light bg-primary">
+                <tr class="tableTitleRow">
+                    <td>ID</td>
+                    <!-- <td>Link</td> -->
+                    <td>Member ID</td>
+                    <!-- <td>Member_Password</td> -->
+                    <td>Member Type</td>
+                    <td>Member Name</td>
+                    <td>Member Permanent Address</td>
+                    <!-- <td>Member_Temporary_Address</td> -->
+                    <td>Member BirthDate</td>
+                    <td>Member Email</td>
+                    <td>Member Phone</td>
+                    <!-- <td>member_Avatar</td> -->
+                    <td>member Gender</td>
+                    <!-- <td>Use_Flag</td>
             <td>Register_DateTime</td>
             <td>Register_Agent</td>
             <td>Member_Memo</td> -->
-            </tr>
-        </thead>
-        {% for object in object_list %}
-        <tr>
-            <td>{{object.pk}}</td>
-            <!-- <td><a href="{{object.get_absolute_url}}">{{object}}</a></td> -->
-            <td>{{ object.Member_ID }}</td>
-            <!-- <td>{{ object.Member_Password }}</td> -->
-            <td>{{ object.Member_Type }}</td>
-            <td><a href="{{object.get_absolute_url}}">{{ object.Member_Name }}</a></td>
-            <td>{{ object.Member_Permanent_Address }}</td>
-            <!-- <td>{{ object.Member_Temporary_Address }}</td> -->
-            <td>{{ object.Member_BirthDate }}</td>
-            <td>{{ object.Member_Email }}</td>
-            <td>{{ object.Member_Phone }}</td>
-            <!-- <td>{{ object.member_Avatar }}</td> -->
-            <td>{{ object.member_Gender }}</td>
-            <!-- <td>{{ object.Use_Flag }}</td>
+                </tr>
+            </thead>
+            {% for object in object_list %}
+            <tr>
+                <td>{{object.pk}}</td>
+                <!-- <td><a href="{{object.get_absolute_url}}">{{object}}</a></td> -->
+                <td>{{ object.Member_ID }}</td>
+                <!-- <td>{{ object.Member_Password }}</td> -->
+                <td>{{ object.Member_Type }}</td>
+                <td><a href="{{object.get_absolute_url}}">{{ object.Member_Name }}</a></td>
+                <td>{{ object.Member_Permanent_Address }}</td>
+                <!-- <td>{{ object.Member_Temporary_Address }}</td> -->
+                <td>{{ object.Member_BirthDate }}</td>
+                <td>{{ object.Member_Email }}</td>
+                <td>{{ object.Member_Phone }}</td>
+                <!-- <td>{{ object.member_Avatar }}</td> -->
+                <td>{{ object.member_Gender }}</td>
+                <!-- <td>{{ object.Use_Flag }}</td>
             <td>{{ object.Register_DateTime }}</td>
             <td>{{ object.Register_Agent }}</td>
             <td>{{ object.Member_Memo }}</td> -->
-        </tr>
-        {% endfor %}
-    </table>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </div>
 <br>
 <br>
@@ -70,7 +80,16 @@
     $(document).ready(function () {
         $('.table').DataTable({
             dom: 'lBfrtip',
-            buttons: ['csv', 'print']
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: '<span class="exportcsv"><i class="fa fa-paper-plane-o"></i> Export to CSV </span>'
+                },
+                {
+                    extend: 'print',
+                    text: '<span class="print"><i class="fa fa-print"></i> Print </span>',
+                    fieldSeparator: '\t'
+                }]
         });
     });
 </script>
