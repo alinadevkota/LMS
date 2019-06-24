@@ -26,78 +26,69 @@
     </h2>
     <hr class="header_hr">
 </div>
+    <form method="post" data-parsley-validate="" >
+        {% csrf_token %}
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_lecture_name" class="control-label ">
+                        Lecture Name
+                    </label>
+                    <input type="text" name="lecture_name" id="id_lecture_name" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Name">
+                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
-<form method="post" data-parsley-validate="">
-    {% csrf_token %}
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_name" class="control-label ">
-            Lecture Name
-        </label>
-        <input type="text" name="lecture_name" id="id_lecture_name" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Name">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    <label for="id_lecture_teacher" class="control-label ">
+                            Lecture Teacher
+                        </label>
+                    <input type="number" name="lecture_teacher" id="id_lecture_teacher" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Teacher">
+                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                  </div>
 
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_teacher" class="control-label ">
-            Lecture Teacher
-        </label>
-        <input type="number" name="lecture_teacher" id="id_lecture_teacher" required="required"
-            class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Teacher">
-        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-    </div>
-
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_cover" class="control-label ">
-            Lecture Cover
-        </label>
-        <input type="text" name="lecture_cover" id="id_lecture_cover" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Cover">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_cover_file" class="control-label ">
-            Lecture Cover File
-        </label>
-        <input type="file" name="lecture_cover_file" id="id_lecture_cover_file" required="required"
-            class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Cover File">
-        <span class="fa fa-archive form-control-feedback right" aria-hidden="true"></span>
-    </div>
-
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_level" class="control-label ">
-            Lecture Level
-        </label>
-        <input type="number" name="lecture_level" id="id_lecture_level" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Level">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_info" class="control-label ">
-            Lecture Information
-        </label>
-        <textarea name="lecture_info" id="id_lecture_info" required="required" class="form-control has-feedback right"
-            id="inputSuccess3" placeholder="Lecture Information"></textarea>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_teacher" class="control-label ">
-            Teacher
-        </label>
-        <input type="text" name="teacher" id="id_teacher" required="required" class="form-control has-feedback-left"
-            id="inputSuccess3" placeholder="Teacher">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_cover_file" class="control-label ">
-            Use Flag
-        </label>
-        <input type="text" name="use_flag" id="id_use_flag" required="required" class="form-control has-feedback right"
-            id="inputSuccess3" placeholder="Use Flag">
-        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-        <!-- {% for error in form.use_flag.errors %}
+                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <label for="id_lecture_cover" class="control-label ">
+                                Lecture Cover
+                            </label>
+                            <input type="text" name="lecture_cover" id="id_lecture_cover" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Cover">
+                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+        
+                      </div>
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <label for="id_lecture_cover_file" class="control-label ">
+                                   Lecture Cover File
+                                </label>
+                            <input type="file" name="lecture_cover_file" id="id_lecture_cover_file" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Cover File">
+                            <span class="fa fa-file-pdf-o form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+         
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                <label for="id_lecture_level" class="control-label ">
+                                        Lecture Level
+                                    </label>
+                                    <input type="number" name="lecture_level" id="id_lecture_level" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Level">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                    <label for="id_lecture_info" class="control-label ">
+                                           Lecture Information
+                                        </label>
+                                    <textarea name="lecture_info" id="id_lecture_info" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Information"></textarea>
+                              </div>
+             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_teacher" class="control-label ">
+                         Teacher
+                </label>
+                    <input type="text" name="teacher" id="id_teacher" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Teacher">
+                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                            
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_lecture_cover_file" class="control-label ">
+                          Use Flag
+                </label>
+                <input type="text" name="use_flag" id="id_use_flag" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Use Flag">
+                <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                <!-- {% for error in form.use_flag.errors %}
                     <p id="error_1_id_Register_DateTime" class="has-error control-label"><strong>
           
                         {{ error|escape }}
@@ -106,6 +97,119 @@
            
 
                 {% endfor %} -->
+<<<<<<< HEAD
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_reg_date" class="control-label ">
+                        Registration Date
+                    </label>
+                    <input type="date" name="reg_date" id="id_reg_date" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="dd/mm/yy">
+                    <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    <label for="id_reg_time" class="control-label ">
+                           Registration Time
+                        </label>
+                    <input type="time" name="reg_time" id="id_reg_time" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="hh:mm">
+                    <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
+                  </div>
+ 
+                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    <label for="id_reg_agent" class="control-label ">
+                            Registration Agent
+                        </label>
+                        <input type="text" name="reg_agent" id="id_reg_agent" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Registration Agent">
+                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+    
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <label for="id_udt_date" class="control-label ">
+                               Updated Date
+                            </label>
+                        <input type="date" name="udt_date" id="id_udt_date" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="dd/mm/yy">
+                        <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
+                      </div>
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <label for="id_udt_time" class="control-label ">
+                                Updated Time
+                            </label>
+                            <input type="time" name="udt_time" id="id_udt_time" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="hh:mm">
+                            <span class="fa fa-clock-o form-control-feedback left" aria-hidden="true"></span>
+        
+                      </div>
+                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <label for="id_udt_agent" class="control-label ">
+                                   Updated Agent
+                                </label>
+                            <input type="text" name="udt_agent" id="id_udt_agent" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Updated Agent">
+                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                            <label for="id_lecture_certification" class="control-label ">
+                                    Lecture Certification
+                                </label>
+                                <input type="text" name="lecture_certification" id="id_lecture_certification" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Certification">
+                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+            
+                          </div>
+                          <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                <label for="id_lecture_provider" class="control-label ">
+                                        Lecture Provider
+                                    </label>
+                                <input type="text" name="lecture_provider" id="id_lecture_provider" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Lecture Provider">
+                                <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                <label for="id_cert_crit_prog" class="control-label ">
+                                        cert_crit_prog
+                                    </label>
+                                    <input type="number" name="cert_crit_prog" id="id_cert_crit_prog" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="cert_crit_prog">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                    <label for="id_cert_crit_post" class="control-label ">
+                                            cert_crit_post
+                                        </label>
+                                    <input type="number" name="cert_crit_post" id="id_cert_crit_post" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="cert_crit_post">
+                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                  </div>
+                                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                    <label for="id_cert_crit_ubt" class="control-label ">
+                                            cert_crit_ubt
+                                        </label>
+                                        <input type="number" name="cert_crit_ubt" id="id_cert_crit_ubt" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="cert_crit_ubt">
+                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                    
+                                  </div>
+                                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <label for="id_cert_crit_issue" class="control-label ">
+                                                cert_crit_issue
+                                            </label>
+                                        <input type="number" name="cert_crit_issue" id="id_cert_crit_issue" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="cert_crit_issue">
+                                        <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                      </div>
+                                      <div class="col-md-6 col-sm-6 col-xs-12" >
+            
+                                        <label for="id_center_code" class="form-control-label  requiredField">
+                                            Center code
+                                        </label>
+                                        <div class=""> <select name="center_code" id="id_center_code" required=""
+                                        class="select form-control">
+                                        <option value="" selected="">---------</option>
+                                        <option value="4">CenterInfo object (4)</option>
+                                        <option value="3">CenterInfo object (3)</option>
+                                        <option value="2">CenterInfo object (2)</option>
+                                        <option value="1">CenterInfo object (1)</option>
+                                                                  
+                                        </select>
+                                    </div>
+                                        <br>
+                                        <br>
+         <div class="lecture_submit">                             
+=======
     </div>
 
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -234,6 +338,7 @@
     <br>
     <br>
     <div class="lecture_submit">
+>>>>>>> 06a430d18b721a4ce523fd4b96ac9bbea08093fd
         <button class="btn btn-primary" type="submit">Submit</button>
     </div>
     </div>
