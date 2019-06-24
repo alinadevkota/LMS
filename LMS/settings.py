@@ -64,7 +64,7 @@ ROOT_URLCONF = 'LMS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['WebApp'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,14 +72,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'forum.context_processors.forum_processor',
             ],
         },
     },
 ]
 
-
-# Template context_processors
-TEMPLATES[0]['OPTIONS']['context_processors'].append("forum.context_processors.forum_processor")
 
 # Media related settings are required for avatar uploading to function properly
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
