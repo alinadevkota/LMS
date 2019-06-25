@@ -184,7 +184,7 @@
         <label for="id_center_code" class="form-control-label  requiredField">
             Center code
         </label>
-            <div class=""> <select name="center_code" id="id_center_code" required="" class="select form-control">
+        <div class=""> <select name="center_code" id="id_center_code" required="" class="select form-control">
                 <option value="" selected="">---------</option>
                 <option value="4">CenterInfo object (4)</option>
                 <option value="3">CenterInfo object (3)</option>
@@ -193,21 +193,16 @@
 
             </select>
         </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label>
-                Status
-                <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
-                    {% if object.Use_Flag == True %} checked {% endif %}> </label>
-        </div>
-
-
-
-        <br>
-        <br>
-        <div class="lecture_submit">
-            <button class="btn btn-primary" type="submit">Submit</button>
-        </div>
+    </div>
+    <div class="col-md-12 form-group has-feedback">
+        <label>
+            Status
+        </label>
+        <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag" {% if object.Use_Flag == True %}
+            checked {% endif %}>
+    </div>
+    <div class="lecture_submit col-md-12">
+        <button class="btn btn-success" type="submit">Submit</button>
     </div>
 </form>
 

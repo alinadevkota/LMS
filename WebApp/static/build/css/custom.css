@@ -4071,7 +4071,7 @@ a.hiddenanchor {
 }
 
 .clearfix:after, form:after {
-    content: ".";
+    content: "";
     display: block;
     height: 0;
     clear: both;
