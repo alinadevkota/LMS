@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/lectureinfo_list.css' %}">
+
 <div class="lectureInfoListClass">
     <ol aria-label="breadcrumb" class="breadcrumb navClass">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -24,8 +24,8 @@
                     <td>Lecture Name</td>
                     <td>Teacher</td>
                     <td>Lecture Cover</td>
-                    <!-- <td>lecture_cover_file</td>
-            <td>lecture_level</td> -->
+                    <td>lecture_cover_file</td>
+                    <td>lecture_level</td>
                     <td>Lecture Info</td>
                     <!-- <td>teacher</td> -->
                     <!-- <td>use_flag</td>
@@ -51,7 +51,7 @@
                 <td><a href="{{object.get_absolute_url}}">{{ object.lecture_name }}</a></td>
                 <td>{{ object.lecture_teacher }}</td>
                 <td>{{ object.lecture_cover }}</td>
-                <!-- <td>{{ object.lecture_cover_file }}</td> -->
+                <td>{{ object.lecture_cover_file }}</td>
                 <!-- <td>{{ object.lecture_level }}</td> -->
                 <td>{{ object.lecture_info }}</td>
                 <!-- <td>{{ object.teacher }}</td> -->
