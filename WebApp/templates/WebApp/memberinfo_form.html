@@ -136,26 +136,10 @@
                                                 
             </div>
 
-            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <label>
-                     Use Flag
-            <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
-          {% if object.Use_Flag == True %}
-            checked
-          {% endif %}> </label>
-            </div>
-        </div> 
             
             
 
-            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <label for="id_Register_DateTime" class="control-label ">
-                    Register DateTime
-                </label>
-            <input type="text" name="Register_DateTime" id="id_Register_DateTime" required="required" class="form-control has-feedback-left" id="inputSuccess3" value="2019-06-14 10:49:45">
-            <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
-                                                        
-            </div>
+           
 
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -185,6 +169,17 @@
         </div>
                                                                           
         </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <label>
+                 Use Flag
+        <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
+      {% if object.Use_Flag == True %}
+        checked
+      {% endif %}> </label>
+        </div>
+    </div> 
+        
     
             
        

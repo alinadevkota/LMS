@@ -82,12 +82,12 @@
                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                             
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <!-- <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <label for="id_lecture_cover_file" class="control-label ">
                           Use Flag
                 </label>
                 <input type="text" name="use_flag" id="id_use_flag" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Use Flag">
-                <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
                 <!-- {% for error in form.use_flag.errors %}
                     <p id="error_1_id_Register_DateTime" class="has-error control-label"><strong>
           
@@ -97,23 +97,10 @@
            
 
                 {% endfor %} -->
-            </div>
+            <!-- </div> -->
 
-            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <label for="id_reg_date" class="control-label ">
-                        Registration Date
-                    </label>
-                    <input type="date" name="reg_date" id="id_reg_date" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="dd/mm/yy">
-                    <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
-
-              </div>
-              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                    <label for="id_reg_time" class="control-label ">
-                           Registration Time
-                        </label>
-                    <input type="time" name="reg_time" id="id_reg_time" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="hh:mm">
-                    <span class="fa fa-clock-o form-control-feedback right" aria-hidden="true"></span>
-                  </div>
+            
+              
  
                   <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                     <label for="id_reg_agent" class="control-label ">
@@ -123,21 +110,8 @@
                         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
     
                   </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <label for="id_udt_date" class="control-label ">
-                               Updated Date
-                            </label>
-                        <input type="date" name="udt_date" id="id_udt_date" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="dd/mm/yy">
-                        <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-                      <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                        <label for="id_udt_time" class="control-label ">
-                                Updated Time
-                            </label>
-                            <input type="time" name="udt_time" id="id_udt_time" required="required" class="form-control has-feedback-left" id="inputSuccess3" placeholder="hh:mm">
-                            <span class="fa fa-clock-o form-control-feedback left" aria-hidden="true"></span>
-        
-                      </div>
+                 
+                      
                       <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                             <label for="id_udt_agent" class="control-label ">
                                    Updated Agent
@@ -205,6 +179,18 @@
                                                                   
                                         </select>
                                     </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                            <label>
+                                                 Status
+                                        <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
+                                      {% if object.Use_Flag == True %}
+                                        checked
+                                      {% endif %}> </label>
+                                        </div>                         
+
+
+
                                         <br>
                                         <br>
          <div class="lecture_submit">                             
