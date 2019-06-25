@@ -9,8 +9,8 @@
         <li class="breadcrumb-item active" aria-current="page">Members</li>
     </ol>
 
-    <nav class="navbar navbar-dark" style="background-color: grey">
-        <ul class="nav navbar-nav navbar-center">
+    <nav class="navbar navbar-light" style="background-color: grey">
+        <ul class="nav navbar-nav navbar-center member-list">
             <li><a class="navbar-brand" href="#">Teacher</a></li>
             <li><a class="navbar-brand" href="#">Student</a></li>
             <li><a class="navbar-brand" href="#">Parent</a></li>
@@ -80,6 +80,7 @@
     $(document).ready(function () {
         $('.table').DataTable({
             dom: 'lBfrtip',
+            responsive: true,
             buttons: [
                 {
                     extend: 'csv',
