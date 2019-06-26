@@ -1,11 +1,108 @@
-{% extends "base.html" %}
-{% block title %}Register{% endblock %}
-{% block smart_forum_title %} Register  {% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Register</title>
 
-{% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign up</button>
+    <link rel="stylesheet" href="{% static 'css/bootstrap4.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/floating-labels.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    />
+  </head>
+  <body>
+    <form class="form-signin" method="POST" action="">
+      {% csrf_token %}
+      <!-- <div class="text-center mb-4">
+        <img
+          class="mb-4"
+          src="/static/image/scholarship.png"
+          alt=""
+          width="60"
+          height="60"
+        /> -->
+      </div>
+      <h4 align="center" style="color:green">
+        <hr style="border-top: 3px double #8c8b8b;">
+        Create Account
+        <hr style="border-top: 3px double #8c8b8b;">
+        
+      </h4>
+      <div class="form-label-group">
+        <input
+          name="username"
+          type="text"
+          id="full-name"
+          class="form-control"
+          placeholder="Your Name"
+          required=""
+          autofocus=""
+        />
+        <label for="full-name">Full Name</label>
+      </div>
+
+      <div class="form-label-group">
+        <select name="" id="" class="form-control">
+          <option value="" disabled="" selected="">Gender</option>
+          <option value="male">Male</option>
+          <option value="femal">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-label-group">
+        <select name="" id="" class="form-control">
+          <option value="" disabled="" selected="">Member</option>
+          <option value="teacher">Teacher</option>
+          <option value="student">Student</option>
+          <option value="parent">Parent</option>
+        </select>
+      </div>
+
+      <div class="form-label-group">
+        <input
+          name="email"
+          type="email"
+          id="inputEmail"
+          class="form-control"
+          placeholder="Your Email"
+          required=""
+        />
+        <label for="inputEmail">Email</label>
+      </div>
+
+      <div class="form-label-group">
+        <input
+          name="password"
+          type="password"
+          id="inputPassword"
+          class="form-control"
+          placeholder="Password"
+          required=""
+        />
+        <label for="inputPassword">Password</label>
+      </div>
+
+      <div class="form-label-group">
+        <input
+          name="password"
+          type="password"
+          id="inputPassword"
+          class="form-control"
+          placeholder="Password"
+          required=""
+        />
+        <label for="inputPassword">Repeat Password</label>
+      </div>
+
+      <button class="btn btn-lg btn-success btn-block" type="submit">
+        Register
+      </button>
     </form>
-{% endblock %}
+  </body>
+</html>
