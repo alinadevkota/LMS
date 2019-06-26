@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'css/assignhomeworkinfo_list.css' %}">
 
 <div class="assignhomeworkInfoListClass">
     <ol aria-label="breadcrumb" class="breadcrumb navClass">
@@ -27,9 +27,9 @@
                     <td>Registration Date</td>
                     <td>Registration Time</td>
                     <td>Registration Agent</t d>
-                    <td>Updated Date</td>
+                        <!-- <td>Updated Date</td>
                     <td>Updated Time</td>
-                    <td>Updated Agent</td>
+                    <td>Updated Agent</td> -->
                 </tr>
             </thead>
             {% for object in object_list %}
@@ -41,9 +41,9 @@
                 <td>{{ object.reg_date }}</td>
                 <td>{{ object.reg_time }}</td>
                 <td>{{ object.reg_agent }}</td>
-                <td>{{ object.udt_date }}</td>
+                <!-- <td>{{ object.udt_date }}</td>
                 <td>{{ object.udt_time }}</td>
-                <td>{{ object.udt_agent }}</td>
+                <td>{{ object.udt_agent }}</td> -->
             </tr>
             {% endfor %}
         </table>

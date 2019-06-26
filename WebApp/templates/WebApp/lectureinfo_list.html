@@ -28,19 +28,19 @@
                     <td>lecture_level</td>
                     <td>Lecture Info</td>
                     <!-- <td>teacher</td> -->
-                    <!-- <td>use_flag</td>
-             <td>reg_date</td>
-              <td>reg_time</td> -->
+                    <!-- <td>use_flag</td> -->
+                    <td>reg_date</td>
+                    <td>reg_time</td>
                     <td>Reg Agent</td>
-                    <!-- <td>udt_date</td> -->
-                    <!-- <td>udt_time</td> -->
+                    <!-- <td>udt_date</td>
+                    <td>udt_time</td>
                     <td>UDT Agent</td>
-                    <!-- <td>lecture_certification</td> -->
+                    <td>lecture_certification</td>
                     <td>Lecture Provider</td>
-                    <!-- <td>cert_crit_prog</td> -->
-                    <!-- <td>cert_crit_post</td> -->
-                    <!-- <td>cert_crit_ubt</td> -->
-                    <!-- <td>cert_crit_issue</td> -->
+                    <td>cert_crit_prog</td>
+                    <td>cert_crit_post</td>
+                    <td>cert_crit_ubt</td>
+                    <td>cert_crit_issue</td> -->
 
                 </tr>
             </thead>
@@ -52,29 +52,33 @@
                 <td>{{ object.lecture_teacher }}</td>
                 <td>{{ object.lecture_cover }}</td>
                 <td>{{ object.lecture_cover_file }}</td>
-                <!-- <td>{{ object.lecture_level }}</td> -->
+                <td>{{ object.lecture_level }}</td>
                 <td>{{ object.lecture_info }}</td>
                 <!-- <td>{{ object.teacher }}</td> -->
-                <!-- <td>{{ object.use_flag }}</td>
-            <td>{{ object.reg_date }}</td>
-            <td>{{ object.reg_time }}</td> -->
+                <!-- <td>{{ object.use_flag }}</td> -->
+                <td>{{ object.reg_date }}</td>
+                <td>{{ object.reg_time }}</td>
                 <td>{{ object.reg_agent }}</td>
                 <!-- <td>{{ object.udt_date }}</td>
-            <td>{{ object.udt_time }}</td> -->
+                <td>{{ object.udt_time }}</td>
                 <td>{{ object.udt_agent }}</td>
-                <!-- <td>{{ object.lecture_certification }}</td> -->
+                <td>{{ object.lecture_certification }}</td>
                 <td>{{ object.lecture_provider }}</td>
-                <!-- <td>{{ object.cert_crit_prog }}</td>
-        <td>{{ object.cert_crit_post }}</td>
-        <td>{{ object.cert_crit_ubt }}</td>
-        <td>{{ object.cert_crit_issue }}</td> -->
+                <td>{{ object.cert_crit_prog }}</td>
+                <td>{{ object.cert_crit_post }}</td>
+                <td>{{ object.cert_crit_ubt }}</td>
+                <td>{{ object.cert_crit_issue }}</td> -->
             </tr>
             {% endfor %}
         </table>
+
     </div>
+
+
 </div>
 <br>
 <br>
+
 
 {% endblock %}
 
