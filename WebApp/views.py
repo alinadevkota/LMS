@@ -1,6 +1,7 @@
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LogoutView, LoginView
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -46,13 +47,21 @@ def login(request, template_name='registration/login.html',
     #     'The login() view is superseded by the class-based LoginView().',
     #     RemovedInDjango21Warning, stacklevel=2
     # )
-    return LoginView.as_view(
-        template_name=template_name,
-        redirect_field_name=redirect_field_name,
-        form_class=authentication_form,
-        extra_context=extra_context,
-        redirect_authenticated_user=redirect_authenticated_user,
-    )(request)
+    if request.method == "POST":
+        form = authentication_form(request, data=request.POST)
+        if form.is_valid():
+            return redirect('/')
+        else:
+            messages.error(request, 'Invalid Credential')
+            return redirect('/login')
+    else:
+        return LoginView.as_view(
+            template_name=template_name,
+            redirect_field_name=redirect_field_name,
+            form_class=authentication_form,
+            extra_context=extra_context,
+            redirect_authenticated_user=redirect_authenticated_user,
+        )(request)
 
 
 def logout(request, next_page=None,
