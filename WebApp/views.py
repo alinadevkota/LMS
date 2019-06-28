@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView
-
+from .models import  CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
     ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, \
     AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardInfoForm, BoardContentInfoForm, InningGroupForm, \
@@ -94,6 +94,7 @@ def start(request):
     # return render(request,"start.html")
     return render(request, "WebApp/homepage.html")
 
+
 def editprofile(request):
     if not request.user.is_authenticated:
         return HttpResponse("you are not authenticated", {'error_message': 'Error Message Customize here'})
@@ -115,22 +116,20 @@ def editprofile(request):
         # form = UserUpdateForm(instance=post)
         form = UserUpdateForm(request.POST, request.FILES, instance=post)
 
-
         # if request.user.isAdmin == 1:
         #     form = UserUpdateFormForAdmin(instance=post)
 
     return render(request, 'registration/editprofile.html', {'form': form})
+
 
 class register(generic.CreateView):
     form_class = UserRegisterForm
     success_url = reverse_lazy('loginsuccess')
     template_name = 'registration/register.html'
 
+
 def loginsuccess(request):
     return render(request, "registration/registrationsuccessful.html")
-
-
-
 
 
 class CenterInfoListView(ListView):
@@ -150,10 +149,10 @@ class CenterInfoUpdateView(UpdateView):
     model = CenterInfo
     form_class = CenterInfoForm
 
-class CenterInfoDeleteView(DeleteView):
-    model=CenterInfo
-    success_url = reverse_lazy('centerinfo_list')
 
+def CenterInfoDeleteView(request, pk):
+    CenterInfo.objects.filter(pk=pk).delete()
+    return redirect("centerinfo_list")
 
 
 class MemberInfoListView(ListView):
@@ -173,6 +172,10 @@ class MemberInfoUpdateView(UpdateView):
     model = MemberInfo
     form_class = MemberInfoForm
 
+
+def MemberInfoDeleteView(request, pk):
+    MemberInfo.objects.filter(pk=pk).delete()
+    return redirect("memberinfo_list")
 
 class LectureInfoListView(ListView):
     model = LectureInfo
@@ -910,4 +913,3 @@ class TodoTInfoDetailView(DetailView):
 class TodoTInfoUpdateView(UpdateView):
     model = TodoTInfo
     form_class = TodoTInfoForm
-
