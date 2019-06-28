@@ -63,7 +63,7 @@ urlpatterns = (
     url(r'^login/$', views.login, {'template_name': 'registration/login.html',
                              'redirect_authenticated_user': True}, name='login' ),
 
-    url(r'^.*logout/$', views.logout, {'template_name': 'registration/logout.html'}, name='logout'),
+    url(r'^.*logout/$', views.logout, {'template_name': 'registration/logout.html', 'next_page': '/'}, name='logout'),
 
     url(r'^.*editprofile/$', views.editprofile, name='editprofile'),
 

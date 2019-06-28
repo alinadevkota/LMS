@@ -32,15 +32,15 @@
                     <td>use_flag</td>
                     <td>reg_date</td>
                     <td>reg_time</td>
-                    <td>reg_agent</td>
+                    <!-- <td>reg_agent</td>
                     <td>udt_date</td>
                     <td>udt_time</td>
-                    <td>udt_agent</td>
+                    <td>udt_agent</td> -->
                     <td>question_media_file2</td>
                     <td>question_comment</td>
-                    <td>question_level</td>
+                    <!-- <td>question_level</td>
                     <td>teacher_contents</td>
-                    <td>student_contents</td>
+                    <td>student_contents</td> -->
                 </tr>
             </thead>
             {% for object in object_list %}
@@ -58,15 +58,15 @@
                 <td>{{ object.use_flag }}</td>
                 <td>{{ object.reg_date }}</td>
                 <td>{{ object.reg_time }}</td>
-                <td>{{ object.reg_agent }}</td>
+                <!-- <td>{{ object.reg_agent }}</td>
                 <td>{{ object.udt_date }}</td>
                 <td>{{ object.udt_time }}</td>
-                <td>{{ object.udt_agent }}</td>
+                <td>{{ object.udt_agent }}</td> -->
                 <td>{{ object.question_media_file2 }}</td>
                 <td>{{ object.question_comment }}</td>
-                <td>{{ object.question_level }}</td>
+                <!-- <td>{{ object.question_level }}</td>
                 <td>{{ object.teacher_contents }}</td>
-                <td>{{ object.student_contents }}</td>
+                <td>{{ object.student_contents }}</td> -->
             </tr>
             {% endfor %}
         </table>
