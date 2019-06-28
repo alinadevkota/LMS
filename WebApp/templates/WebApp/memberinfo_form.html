@@ -57,13 +57,23 @@
             </div>
 
 
-            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <label for="id_Member_Type" class="control-label ">
-                    Member Type
+            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                <label for="id_Member_Role" class="form-control-label  requiredField">
+                    Member Role
                 </label>
-                <input type="text" name="Member_Type" id="id_Member_Type" required="required"
-                       class="form-control has-feedback-left" id="inputSuccess3" placeholder="Member Type">
-                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                <div class="">
+                    <select name="Member_Role" id="id_Member_Role" required="" class="select form-control">
+                        <option value="" selected="">---------</option>
+                        <option value="Student">Student</option>
+                        <option value="Teacher">Teacher</option>
+                        <option value="Parent">Parent</option>
+                        <option value="CenterAdmin">CenterAdmin</option>
+
+
+                    </select>
+
+                </div>
 
             </div>
 
@@ -165,7 +175,7 @@
                     <select name="centcode" id="id_center_code" required="" class="select form-control">
                         <option value="" selected="">---------</option>
                         {% for c in form.fields.centcode.queryset %}
-                            <option value="{{ c.id }}">{{ c.Center_Name|capfirst }}</option>
+                            <option value="{{ c.Center_Name|capfirst }}">{{ c.Center_Name|capfirst }}</option>
                         {% endfor %}
 
 
