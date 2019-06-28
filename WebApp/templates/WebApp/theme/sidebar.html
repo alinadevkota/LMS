@@ -31,7 +31,7 @@
 
           </ul> -->
         </li>
-        <li><a><i class="fa fa-book"></i> Lecture <span class="fa fa-chevron-down"></span></a>
+        <li><a><i class="fa fa-book"></i> Lectures <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="{% url 'lectureinfo_list' %}">Lecture List</a></li>
             <li><a href="{% url 'lectureinfo_create' %}">Create New Lecture</a></li>
@@ -45,11 +45,20 @@
 
           </ul>
         </li>
-        <li><a><i class="fa fa-edit"></i> Assignment <span class="fa fa-chevron-down"></span></a>
+        <li><a><i class="fa fa-edit"></i> Assignments <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="{% url 'assignhomeworkinfo_list' %}">Assignment List</a></li>
             <li><a href="{% url 'assignhomeworkinfo_create' %}">Create New Assignment</a></li>
           </ul>
+        </li>
+        <li><a><i class="fa fa-list-ol"></i> Chapters <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'chapterinfo_list' %}">Chapter List</a></li>
+            <li><a href="{% url 'chapterinfo_create' %}">Insert New Chapter</a></li>
+          </ul>
+        </li>
+        <li><a href="{% url 'questioninfo_list' %}"><i class="fa fa-question"></i> Questions </a>
+
         </li>
         <li><a><i class="fa fa-user"></i>Forum<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">

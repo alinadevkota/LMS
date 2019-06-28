@@ -1,12 +1,8 @@
 from django.conf.urls import url
 # from django.contrib.auth.views import login, logout
+from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from rest_framework import routers
-
-from rest_auth.views import (
-    LoginView, LogoutView, UserDetailsView, PasswordChangeView,
-    PasswordResetView, PasswordResetConfirmView
-)
 
 from . import api
 from . import views
@@ -86,8 +82,8 @@ urlpatterns = (
 
 urlpatterns += (
     # urls for CenterInfo
-    path('centerinfo/', views.CenterInfoListView.as_view(), name='centerinfo_list'),
-    path('centerinfo/create/', views.CenterInfoCreateView.as_view(), name='centerinfo_create'),
+    path('centerinfo/', login_required( views.CenterInfoListView.as_view()), name='centerinfo_list'),
+    path('centerinfo/create/', login_required(views.CenterInfoCreateView.as_view()), name='centerinfo_create'),
     path('centerinfo/detail/<int:pk>/', views.CenterInfoDetailView.as_view(), name='centerinfo_detail'),
     path('centerinfo/update/<int:pk>/', views.CenterInfoUpdateView.as_view(), name='centerinfo_update'),
     path('centerinfo/delete/<int:pk>/', views.CenterInfoDeleteView, name='centerinfo_delete'),

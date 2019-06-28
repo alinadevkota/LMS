@@ -49,80 +49,79 @@
             <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
         </div>
 
-        <!-- </div> -->
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_udt_agent" class="control-label ">
-                Udt Agent
-            </label>
-            <input type="text" name="udt_agent" id="id_udt_agent" required="required"
-                class="form-control has-feedback right" id="inputSuccess3" placeholder="Udt Agent">
-            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-        </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+    <label for="id_udt_agent" class="control-label ">
+        Udt Agent
+    </label>
+    <input type="text" name="udt_agent" id="id_udt_agent" required="required" class="form-control has-feedback right"
+        id="inputSuccess3" placeholder="Udt Agent">
+    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+</div>
 
 
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_question_code" class="control-label ">
-                Question Code
-            </label>
-            <select name="question_code" id="id_question_code" required="required" class="select form-control"
-                id="inputSuccess3">
-                <option value="" selected="">---------</option>
-            </select>
+<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+    <label for="id_question_code" class="control-label ">
+        Question Code
+    </label>
+    <select name="question_code" id="id_question_code" required="required" class="select form-control"
+        id="inputSuccess3">
+        <option value="" selected="">---------</option>
+    </select>
 
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_lecture_code" class="control-label ">
-                Lecture Code
-            </label>
-            <select name="lecture_code" id="id_lecture_code" required="required" class="select form-control"
-                id="inputSuccess3">
-                <option value="" selected="">---------</option>
-            </select>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+    <label for="id_lecture_code" class="control-label ">
+        Lecture Code
+    </label>
+    <select name="lecture_code" id="id_lecture_code" required="required" class="select form-control" id="inputSuccess3">
+        <option value="" selected="">---------</option>
+    </select>
 
-        </div>
+</div>
 
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
-            <label for="id_chapter_code" class="form-control-label  requiredField">
-                Chapter Code
-            </label>
-            <div class=""> <select name="chapter_code" id="id_chapter_code" required="" class="select form-control">
-                    <option value="" selected="">---------</option>
-
-
-                </select>
-            </div>
-
-        </div>
+    <label for="id_chapter_code" class="form-control-label  requiredField">
+        Chapter Code
+    </label>
+    <div class=""> <select name="chapter_code" id="id_chapter_code" required="" class="select form-control">
+            <option value="" selected="">---------</option>
 
 
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label>
-                Status
-            </label><br>
-            <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag" {% if object.Use_Flag == True %}
-                checked {% endif %}>
-        </div>
+        </select>
+    </div>
 
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-
-            <label for="id_member_code" class="form-control-label  requiredField">
-                Member Code
-            </label>
-            <div class=""> <select name="member_code" id="id_member_code" required="" class="select form-control">
-                    <option value="" selected="">---------</option>
+</div>
 
 
-                </select>
-            </div>
-        </div>
+<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+    <label>
+        Status
+    </label><br>
+    <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag" {% if object.Use_Flag == True %} checked
+        {% endif %}>
+</div>
 
+<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+
+    <label for="id_member_code" class="form-control-label  requiredField">
+        Member Code
+    </label>
+    <div class=""> <select name="member_code" id="id_member_code" required="" class="select form-control">
+            <option value="" selected="">---------</option>
+
+
+        </select>
+    </div>
+</div>
 
 
 
-        <div class="submitButton col-md-12">
-            <button class="btn btn-success" type="submit">Submit</button>
-        </div>
-    </form>
+
+<div class="submitButton col-md-12">
+    <button class="btn btn-success" type="submit">Submit</button>
+</div>
+</form>
 </div>
 {% endblock %}
