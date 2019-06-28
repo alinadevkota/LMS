@@ -1,13 +1,13 @@
+from django.contrib import messages
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LogoutView, LoginView
-from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView
-from .models import  CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
+
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
     ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, \
     AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardInfoForm, BoardContentInfoForm, InningGroupForm, \
@@ -17,6 +17,12 @@ from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterCont
     QExampleInfoForm, QuestionInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, ScheduleInfoForm, TalkMemberForm, \
     TalkRoomForm, TalkMessageForm, TalkMessageReadForm, TodoInfoForm, TodoTInfoForm, UserUpdateForm, UserRegisterForm, \
     MemberInfoForm
+from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
+    ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, \
+    BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
+    HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, \
+    OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, \
+    ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
 
 
 #
@@ -42,7 +48,7 @@ from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterCont
 def login(request, template_name='registration/login.html',
           redirect_field_name=REDIRECT_FIELD_NAME,
           authentication_form=AuthenticationForm,
-          extra_context=None, redirect_authenticated_user=False):
+          extra_context=None, redirect_authenticated_user=True):
     # warnings.warn(
     #     'The login() view is superseded by the class-based LoginView().',
     #     RemovedInDjango21Warning, stacklevel=2
