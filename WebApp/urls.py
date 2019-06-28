@@ -90,7 +90,7 @@ urlpatterns += (
     path('centerinfo/create/', views.CenterInfoCreateView.as_view(), name='centerinfo_create'),
     path('centerinfo/detail/<int:pk>/', views.CenterInfoDetailView.as_view(), name='centerinfo_detail'),
     path('centerinfo/update/<int:pk>/', views.CenterInfoUpdateView.as_view(), name='centerinfo_update'),
-    path('centerinfo/delete/<int:pk>/', views.CenterInfoDeleteView.as_view(), name='centerinfo_delete'),
+    path('centerinfo/delete/<int:pk>/', views.CenterInfoDeleteView, name='centerinfo_delete'),
 #url(r'^deletethread/(?P<pk>\d+)/$', views.thread_delete, name='smart_forum_thread_delete'),
 
 )
@@ -101,6 +101,7 @@ urlpatterns += (
     path('memberinfo/create/', views.MemberInfoCreateView.as_view(), name='memberinfo_create'),
     path('memberinfo/detail/<int:pk>/', views.MemberInfoDetailView.as_view(), name='memberinfo_detail'),
     path('memberinfo/update/<int:pk>/', views.MemberInfoUpdateView.as_view(), name='memberinfo_update'),
+    path('memberinfo/delete/<int:pk>/', views.MemberInfoDeleteView, name='memberinfo_delete'),
 )
 
 urlpatterns += (
