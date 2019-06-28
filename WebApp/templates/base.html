@@ -53,8 +53,8 @@
 <body class="{% block body_class %}nav-md {% endblock body_class %}">
 
     {% block body %}
-    <div class="container body">
-        <div class="main_container">
+    <div class="container body" id="page-conatiner">
+        <div class="main_container" id="content-wrap">
 
             {% block sidebar %}
             <div class="col-md-3 left_col {% block sidebar_class %} {% endblock sidebar_class %}">
@@ -80,9 +80,9 @@
                 </div>
             </div>
 
-            <div class="footer">
+            <!-- <div class="footer">
                 {% include "WebApp/theme/footer.html" %}
-            </div>
+            </div> -->
         </div>
     </div>
 
