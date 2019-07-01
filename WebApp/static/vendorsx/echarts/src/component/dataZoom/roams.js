@@ -5,9 +5,9 @@ define(function(require) {
 
     // Only create one roam controller for each coordinate system.
     // one roam controller might be refered by two inside data zoom
-    // components (for example, one for x and one for y). When user
+    // theme (for example, one for x and one for y). When user
     // pan or zoom, only dispatch one action for those data zoom
-    // components.
+    // theme.
 
     var zrUtil = require('zrender/core/util');
     var RoamController = require('../../component/helper/RoamController');

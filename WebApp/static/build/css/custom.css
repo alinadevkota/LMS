@@ -5008,3 +5008,64 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     margin-left: 2em;
     margin-right: 10em;
 }
+
+/*Student model css*/
+
+.page_section {
+    color: black;
+    padding-top: 70px;
+    padding-bottom: 20px;
+}
+
+.min-width {
+    width: 100px;
+}
+
+.text-display-1 {
+    font-size: 2.61rem;
+    font-weight: 400;
+    line-height: 3.07rem;
+}
+
+.title {
+    padding: 5px;
+    padding-left: 15px;
+
+}
+
+.progress-mini {
+    height: 8px;
+}
+
+.width-100 {
+    width: 100px !important;
+}
+
+.margin-none {
+    margin: 0 !important;
+}
+
+.width-60 {
+    width: 80px !important;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-light {
+    color: #757575;
+}
+
+.text-caption {
+    font-size: 0.92rem;
+    font-weight: 400;
+}
+
+.width-40 {
+    width: 40px !important;
+}
+
+.bg-green {
+    background-color: #26B99A;
+}
