@@ -8,7 +8,7 @@
   <!-- menu profile quick info -->
 
   <div class="profile clearfix">
-      {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated %}
     <div class="profile_pic">
       <img src="/static/images/img.jpg" alt="..." class="img-circle profile_img">
     </div>
@@ -18,7 +18,7 @@
       <span>Welcome,</span>
       <h2>{{ request.user.username }}</h2>
     </div>
-      {% endif %}
+    {% endif %}
 
   </div>
   <!-- /menu profile quick info -->
@@ -26,41 +26,41 @@
   <br />
 
   <!-- sidebar menu -->
-    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-        <div class="menu_section">
+  <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
 
-        <h3>Teacher Portal Home</h3>
+      <h3>Teacher Portal Home</h3>
 
 
 
-                <ul class="nav side-menu">
-                    {% if user.is_authenticated %}
+      <ul class="nav side-menu">
+        {% if user.is_authenticated %}
 
-                <li><a><i class="fa fa-book"></i> Lectures <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="{% url 'lectureinfo_list' %}">Lecture List</a></li>
-                    <li><a href="{% url 'lectureinfo_create' %}">Create New Lecture</a></li>
+        <li><a><i class="fa fa-book"></i> Lectures <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'lectureinfo_list' %}">Lecture List</a></li>
+            <li><a href="{% url 'lectureinfo_create' %}">Create New Lecture</a></li>
 
-                  </ul>
-                </li>
+          </ul>
+        </li>
 
-                <li><a><i class="fa fa-edit"></i> Assignments <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="{% url 'assignhomeworkinfo_list' %}">Assignment List</a></li>
-                    <li><a href="{% url 'assignhomeworkinfo_create' %}">Create New Assignment</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-list-ol"></i> Chapters <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="{% url 'chapterinfo_list' %}">Chapter List</a></li>
-                    <li><a href="{% url 'chapterinfo_create' %}">Insert New Chapter</a></li>
-                  </ul>
-                </li>
-                <li><a href="{% url 'questioninfo_list' %}"><i class="fa fa-question"></i> Questions </a>
+        <li><a><i class="fa fa-edit"></i> Assignments <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'assignhomeworkinfo_list' %}">Assignment List</a></li>
+            <li><a href="{% url 'assignhomeworkinfo_create' %}">Create New Assignment</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-list-ol"></i> Chapters <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'chapterinfo_list' %}">Chapter List</a></li>
+            <li><a href="{% url 'chapterinfo_create' %}">Insert New Chapter</a></li>
+          </ul>
+        </li>
+        <li><a href="{% url 'questioninfo_list' %}"><i class="fa fa-question"></i> Questions </a>
 
-                </li>
+        </li>
 
-            {% endif %}
+        {% endif %}
         <li><a><i class="fa fa-user"></i>Forum<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="{% url 'forum:index' %}">Home</a></li>
