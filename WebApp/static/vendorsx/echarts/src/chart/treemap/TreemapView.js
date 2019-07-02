@@ -863,7 +863,7 @@
     // hierarchy sequence, which cause that lowser background element overlap
     // upper ones. So we calculate z based on depth.
     // Moreover, we try to shrink down z interval to [0, 1] to avoid that
-    // treemap with large z overlaps other components.
+     // treemap with large z overlaps other theme.
     function calculateZ(depth, zInLevel) {
         var zb = depth * Z_BASE + zInLevel;
         return (zb - 1) / zb;

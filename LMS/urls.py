@@ -22,5 +22,7 @@ urlpatterns = [
     url(r'^rest-auth/', include('rest_auth.urls')),
     path('', include('WebApp.urls')),
     path('forum/',include('forum.urls')),
+    path('students/',include('WebApp.student_module.urls')),
+    path('teachers/',include('WebApp.teacher_module.urls')),
 
 ]

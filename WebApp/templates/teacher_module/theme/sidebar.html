@@ -1,6 +1,6 @@
 <div class="left_col scroll-view">
   <div class="navbar nav_title" style="border: 0;">
-    <a href="/" class="site_title"><i class="fa fa-spinner"></i> <span>u-LMS</span></a>
+    <a href="index.html" class="site_title"><i class="fa fa-spinner"></i> <span>u-LMS</span></a>
   </div>
 
   <div class="clearfix"></div>
@@ -29,19 +29,13 @@
   <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
 
-      <h3>Admin Portal Home</h3>
+      <h3>Teacher Portal Home</h3>
 
 
 
       <ul class="nav side-menu">
         {% if user.is_authenticated %}
-        <li><a href="{% url 'centerinfo_list' %}"><i class="fa fa-home"></i> Center </a>
-          <!-- <ul class="nav child_menu">
-                    <li><a href="{% url 'centerinfo_list' %}">Center List</a></li>
-                    <li><a href="{% url 'centerinfo_create' %}">Create New Center</a></li>
 
-                  </ul> -->
-        </li>
         <li><a><i class="fa fa-book"></i> Lectures <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="{% url 'lectureinfo_list' %}">Lecture List</a></li>
@@ -49,13 +43,7 @@
 
           </ul>
         </li>
-        <li><a><i class="fa fa-user"></i>Members<span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="{% url 'memberinfo_list' %}">Members List</a></li>
-            <li><a href="{% url 'memberinfo_create' %}">Create New Member</a></li>
 
-          </ul>
-        </li>
         <li><a><i class="fa fa-edit"></i> Assignments <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="{% url 'assignhomeworkinfo_list' %}">Assignment List</a></li>
