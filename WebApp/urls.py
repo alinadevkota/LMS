@@ -59,7 +59,7 @@ router.register(r'todotinfo', api.TodoTInfoViewSet)
 urlpatterns = (
     # urls for Django Rest Framework API
     path('api/v1/', include(router.urls)),
-    url(r'^$', views.start, name = 'start'),
+    url(r'^$', views.start, name='start'),
     url(r'^login/$', views.login, {'template_name': 'registration/login.html',
                              'redirect_authenticated_user': True}, name='login' ),
 

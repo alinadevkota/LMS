@@ -1199,7 +1199,7 @@
                     if (unit == "year")
                         d.setUTCFullYear(floorInBase(d.getUTCFullYear(), tickSize));
 
-                    // reset smaller components
+                    // reset smaller theme
                     d.setUTCMilliseconds(0);
                     if (step >= timeUnitSize.minute)
                         d.setUTCSeconds(0);

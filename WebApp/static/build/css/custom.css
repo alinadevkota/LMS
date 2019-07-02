@@ -6,27 +6,21 @@ html , body {
     text-align: center;
 } */
 
+
 .tableTitleRow{
     max-width: 50%;
 }
-#page-container {
-    position: relative;
-    min-height: 100vh;
-  }
-  
-  #content-wrap {
-    padding-bottom: 2.5rem;    /* Footer height */
-  }
-  
-  .footer {
+.footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 2.5rem;            /* Footer height */
-  }
+}
+
 .omb-login{
     margin: 40%;
 }
+
 .navbar-nav.navbar-center {
     position: absolute;
     left: 50%;
@@ -266,15 +260,17 @@ html , body {
 }
 
 .left_col {
-    background: #2A3F54
+    background: #2A3F54;
+    
 }
 
 .nav-sm .container.body .col-md-3.left_col {
     min-height: 100%;
     width: 70px;
     padding: 0;
-    z-index: 9999;
-    position: absolute
+    z-index: 1;
+    position: fixed;
+   
 }
 
 .nav-sm .container.body .col-md-3.left_col.menu_fixed {
@@ -283,7 +279,7 @@ html , body {
 }
 
 .nav-sm .container.body .col-md-3.left_col .mCSB_container, .nav-sm .container.body .col-md-3.left_col .mCustomScrollBox {
-    overflow: visible
+    overflow: hidden
 }
 
 .nav-sm .hidden-small {
@@ -495,8 +491,8 @@ html , body {
     min-height: 100%;
     width: 230px;
     padding: 0;
-    position: absolute;
-    display: -ms-flexbox;
+    position: fixed;
+    /* display: -ms-flexbox; */
     display: flex;
     z-index: 1
 }
@@ -5007,4 +5003,65 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     border: 0;
     margin-left: 2em;
     margin-right: 10em;
+}
+
+/*Student model css*/
+
+.page_section {
+    color: black;
+    padding-top: 70px;
+    padding-bottom: 20px;
+}
+
+.min-width {
+    width: 100px;
+}
+
+.text-display-1 {
+    font-size: 2.61rem;
+    font-weight: 400;
+    line-height: 3.07rem;
+}
+
+.title {
+    padding: 5px;
+    padding-left: 15px;
+
+}
+
+.progress-mini {
+    height: 8px;
+}
+
+.width-100 {
+    width: 100px !important;
+}
+
+.margin-none {
+    margin: 0 !important;
+}
+
+.width-60 {
+    width: 80px !important;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-light {
+    color: #757575;
+}
+
+.text-caption {
+    font-size: 0.92rem;
+    font-weight: 400;
+}
+
+.width-40 {
+    width: 40px !important;
+}
+
+.bg-green {
+    background-color: #26B99A;
 }
