@@ -45,8 +45,8 @@
                 Reg Agent
             </label>
             <input type="number" name="reg_agent" id="id_reg_agent" required="required"
-                class="form-control has-feedback right" id="inputSuccess3" placeholder="Reg Agent">
-            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                class="form-control has-feedback-left" id="inputSuccess3" placeholder="Reg Agent">
+            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
         </div>
 
 </div>
@@ -54,9 +54,9 @@
     <label for="id_udt_agent" class="control-label ">
         Udt Agent
     </label>
-    <input type="text" name="udt_agent" id="id_udt_agent" required="required" class="form-control has-feedback right"
+    <input type="text" name="udt_agent" id="id_udt_agent" required="required" class="form-control has-feedback-left"
         id="inputSuccess3" placeholder="Udt Agent">
-    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 </div>
 
 
@@ -95,13 +95,7 @@
 </div>
 
 
-<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-    <label>
-        Status
-    </label><br>
-    <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag" {% if object.Use_Flag == True %} checked
-        {% endif %}>
-</div>
+
 
 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
@@ -114,6 +108,14 @@
 
         </select>
     </div>
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+    <label>
+        Status
+    </label><br>
+    <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag" {% if object.Use_Flag == True %} checked
+        {% endif %}>
 </div>
 
 

@@ -12,7 +12,7 @@ define(function(require) {
      * Operate single axis.
      * One axis can only operated by one axis operator.
      * Different dataZoomModels may be defined to operate the same axis.
-     * (i.e. 'inside' data zoom and 'slider' data zoom components)
+     * (i.e. 'inside' data zoom and 'slider' data zoom theme)
      * So dataZoomModels share one axisProxy in that case.
      *
      * @class

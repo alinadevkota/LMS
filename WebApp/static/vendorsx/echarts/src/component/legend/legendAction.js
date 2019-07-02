@@ -10,7 +10,7 @@ define(function(require) {
         var selectedMap = {};
         var isToggleSelect = methodName === 'toggleSelected';
         var isSelected;
-        // Update all legend components
+        // Update all legend theme
         ecModel.eachComponent('legend', function (legendModel) {
             if (isToggleSelect && isSelected != null) {
                 // Force other legend has same selected status
