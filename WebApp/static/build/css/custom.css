@@ -6,27 +6,21 @@ html , body {
     text-align: center;
 } */
 
+
 .tableTitleRow{
     max-width: 50%;
 }
-#page-container {
-    position: relative;
-    min-height: 100vh;
-  }
-  
-  #content-wrap {
-    padding-bottom: 2.5rem;    /* Footer height */
-  }
-  
-  .footer {
+.footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 2.5rem;            /* Footer height */
-  }
+}
+
 .omb-login{
     margin: 40%;
 }
+
 .navbar-nav.navbar-center {
     position: absolute;
     left: 50%;
@@ -266,15 +260,17 @@ html , body {
 }
 
 .left_col {
-    background: #2A3F54
+    background: #2A3F54;
+    
 }
 
 .nav-sm .container.body .col-md-3.left_col {
     min-height: 100%;
     width: 70px;
     padding: 0;
-    z-index: 9999;
-    position: absolute
+    z-index: 1;
+    position: fixed;
+   
 }
 
 .nav-sm .container.body .col-md-3.left_col.menu_fixed {
@@ -283,7 +279,7 @@ html , body {
 }
 
 .nav-sm .container.body .col-md-3.left_col .mCSB_container, .nav-sm .container.body .col-md-3.left_col .mCustomScrollBox {
-    overflow: visible
+    overflow: hidden
 }
 
 .nav-sm .hidden-small {
@@ -468,9 +464,19 @@ html , body {
     margin: 0
 }
 
-.nav-sm span.fa, .nav-sm .menu_section h3 {
+/* top nav bar edited */
+#topNavSpan{
+    display: inline;
+}
+.nav-sm .menu_section h3 {
+
+}
+
+.nav-sm span.fa{
     display: none
 }
+
+
 
 .nav-sm li li span.fa {
     display: inline-block
@@ -495,8 +501,8 @@ html , body {
     min-height: 100%;
     width: 230px;
     padding: 0;
-    position: absolute;
-    display: -ms-flexbox;
+    position: fixed;
+    /* display: -ms-flexbox; */
     display: flex;
     z-index: 1
 }
