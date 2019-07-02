@@ -26,14 +26,12 @@
   <hr class="header_hr">
 </div>
 
-<div class="memberInfoForm-outerDiv">
 
-  <!-- <form method="post">
-    {% csrf_token %}
-    {{form|crispy}}
-    <button class="btn btn-primary" type="submit">Submit</button>
-</form> -->
-</div>
+
+
+<!-- {{form|crispy}} -->
+
+
 <div class="x_content">
   <form method="post" data-parsley-validate="">
     {% csrf_token %}
@@ -53,7 +51,7 @@
       </label>
       <input type="password" name="Member_Password" id="id_Member_Password" required="required"
         class="form-control has-feedback-left" id="inputSuccess3" placeholder="Member Password">
-      <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+      <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
     </div>
 
 
@@ -62,9 +60,9 @@
       <label for="id_Member_Role" class="form-control-label  requiredField">
         Member Role
       </label>
-      <div class="">
-        <select name="Member_Role" id="id_Member_Role" required="" class="select form-control">
-          <option value="" selected="">---------</option>
+      <div class="Member_Role">
+        <select name="Member_Role" id="id_Member_Role" required="" class="form-control">
+          <option value="" selected="true" disabled="true">Select Role</option>
           <option value="Student">Student</option>
           <option value="Teacher">Teacher</option>
           <option value="Parent">Parent</option>
@@ -150,10 +148,15 @@
       <label for="id_member_Gender" class="control-label ">
         Member Gender
       </label>
-      <input type="text" name="member_Gender" id="id_member_Gender" required="required"
-        class="form-control has-feedback-left" id="inputSuccess3" placeholder="Member Gender">
-      <span class="fa fa-child form-control-feedback left" aria-hidden="true"></span>
+      <select name="Member_Role" id="id_Member_Role" required="" class="select form-control">
+        <option value="" selected="">Select Gender</option>
+        <option value="Student">Male</option>
+        <option value="Teacher">Female</option>
+        <option value="Parent">Others</option>
 
+
+        <span class="fa fa-child form-control-feedback left" aria-hidden="true"></span>
+      </select>
     </div>
 
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -202,6 +205,6 @@
   <button class="btn btn-success" type="submit">Submit</button>
 </div>
 
-<!-- <button class="btn btn-primary" type="submit">Submit</button> -->
+
 
 {% endblock %}
