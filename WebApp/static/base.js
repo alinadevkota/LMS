@@ -3,7 +3,7 @@ function settingdropdown() {
 }
 
 // Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (!event.target.matches('.setting-class')) {
     var set_dropdowns = document.getElementsByClassName("setting-dropdown-content");
     var i;
@@ -21,7 +21,7 @@ function notifdropdown() {
 }
 
 // Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (!event.target.matches('.notif-class')) {
     var not_dropdowns = document.getElementsByClassName("notif-dropdown-content");
     var j;
@@ -34,12 +34,12 @@ window.onclick = function(event) {
   }
 }
 document.getElementById("myBtn").addEventListener("click", toggleNav());
-function toggleNav(){
-    navSize = document.getElementById("mySidenav").style.width;
-    if (navSize === 250) {
-        document.getElementById('mySidenav').style.width ='0px';
-    }
-    else {
-      document.getElementById('mySidenav').style.width = '250px';
-    }
+function toggleNav() {
+  navSize = document.getElementById("mySidenav").style.width;
+  if (navSize === 250) {
+    document.getElementById('mySidenav').style.width = '0px';
+  }
+  else {
+    document.getElementById('mySidenav').style.width = '250px';
+  }
 }
