@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/lectureinfo_form.css' %}">
+
 
 <ol aria-label="breadcrumb" class="breadcrumb navClass">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -26,6 +26,9 @@
     </h2>
     <hr class="header_hr">
 </div>
+
+
+
 <form method="post" data-parsley-validate="">
     {% csrf_token %}
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -186,10 +189,9 @@
         </label>
         <div class=""> <select name="center_code" id="id_center_code" required="" class="select form-control">
                 <option value="" selected="">---------</option>
-                <option value="4">CenterInfo object (4)</option>
-                <option value="3">CenterInfo object (3)</option>
-                <option value="2">CenterInfo object (2)</option>
-                <option value="1">CenterInfo object (1)</option>
+                {% for c in form.fields.centcode.queryset %}
+                <option value="{{ c.Center_Name|capfirst }}">{{ c.Center_Name|capfirst }}</option>
+                {% endfor %}
 
             </select>
         </div>
@@ -201,7 +203,7 @@
         <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag" {% if object.Use_Flag == True %}
             checked {% endif %}>
     </div>
-    <div class="lecture_submit col-md-12">
+    <div class="submitButton  col-md-12">
         <button class="btn btn-success" type="submit">Submit</button>
     </div>
 </form>
