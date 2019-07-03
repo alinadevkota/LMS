@@ -29,14 +29,14 @@
 
 
 
-<form method="post" data-parsley-validate="">
+<form method="post" id="demo-form2" data-parsley-validate="">
     {% csrf_token %}
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         <label for="id_lecture_name" class="control-label ">
             Lecture Name
         </label>
-        <input type="text" name="lecture_name" id="id_lecture_name" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Name">
+        <input type="text" name="lecture_name" value="{{ object.lecture_name}}" id="id_lecture_name" required="required"
+            class="form-control has-feedback-left" placeholder="Lecture Name">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -45,7 +45,7 @@
             Lecture Teacher
         </label>
         <input type="number" name="lecture_teacher" id="id_lecture_teacher" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Teacher">
+            class="form-control has-feedback-left" placeholder="Lecture Teacher">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
     </div>
 
@@ -54,7 +54,7 @@
             Lecture Cover
         </label>
         <input type="text" name="lecture_cover" id="id_lecture_cover" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Cover">
+            class="form-control has-feedback-left" placeholder="Lecture Cover">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -63,7 +63,7 @@
             Lecture Cover File
         </label>
         <input type="file" name="lecture_cover_file" id="id_lecture_cover_file" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Cover File">
+            class="form-control has-feedback-left" placeholder="Lecture Cover File">
         <span class="fa fa-file-pdf-o form-control-feedback left" aria-hidden="true"></span>
     </div>
 
@@ -72,7 +72,7 @@
             Lecture Level
         </label>
         <input type="number" name="lecture_level" id="id_lecture_level" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Level">
+            class="form-control has-feedback-left" placeholder="Lecture Level">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -81,14 +81,14 @@
             Lecture Information
         </label>
         <textarea name="lecture_info" id="id_lecture_info" required="required" class="form-control has-feedback right"
-            id="inputSuccess3" placeholder="Lecture Information"></textarea>
+            placeholder="Lecture Information"></textarea>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         <label for="id_teacher" class="control-label ">
             Teacher
         </label>
         <input type="text" name="teacher" id="id_teacher" required="required" class="form-control has-feedback-left"
-            id="inputSuccess3" placeholder="Teacher">
+            placeholder="Teacher">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -96,7 +96,7 @@
                 <label for="id_lecture_cover_file" class="control-label ">
                           Use Flag
                 </label>
-                <input type="text" name="use_flag" id="id_use_flag" required="required"  class="form-control has-feedback right" id="inputSuccess3" placeholder="Use Flag">
+                <input type="text" name="use_flag" id="id_use_flag" required="required"  class="form-control has-feedback right"  placeholder="Use Flag">
                 <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
     <!-- {% for error in form.use_flag.errors %}
                     <p id="error_1_id_Register_DateTime" class="has-error control-label"><strong>
@@ -117,7 +117,7 @@
             Registration Agent
         </label>
         <input type="text" name="reg_agent" id="id_reg_agent" required="required" class="form-control has-feedback-left"
-            id="inputSuccess3" placeholder="Registration Agent">
+            placeholder="Registration Agent">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -128,7 +128,7 @@
             Updated Agent
         </label>
         <input type="text" name="udt_agent" id="id_udt_agent" required="required" class="form-control has-feedback-left"
-            id="inputSuccess3" placeholder="Updated Agent">
+            placeholder="Updated Agent">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -136,7 +136,7 @@
             Lecture Certification
         </label>
         <input type="text" name="lecture_certification" id="id_lecture_certification" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Certification">
+            class="form-control has-feedback-left" placeholder="Lecture Certification">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -145,7 +145,7 @@
             Lecture Provider
         </label>
         <input type="text" name="lecture_provider" id="id_lecture_provider" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="Lecture Provider">
+            class="form-control has-feedback-left" placeholder="Lecture Provider">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -153,7 +153,7 @@
             cert_crit_prog
         </label>
         <input type="number" name="cert_crit_prog" id="id_cert_crit_prog" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="cert_crit_prog">
+            class="form-control has-feedback-left" placeholder="cert_crit_prog">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -162,7 +162,7 @@
             cert_crit_post
         </label>
         <input type="number" name="cert_crit_post" id="id_cert_crit_post" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="cert_crit_post">
+            class="form-control has-feedback-left" placeholder="cert_crit_post">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -170,7 +170,7 @@
             cert_crit_ubt
         </label>
         <input type="number" name="cert_crit_ubt" id="id_cert_crit_ubt" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="cert_crit_ubt">
+            class="form-control has-feedback-left" placeholder="cert_crit_ubt">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -179,7 +179,7 @@
             cert_crit_issue
         </label>
         <input type="number" name="cert_crit_issue" id="id_cert_crit_issue" required="required"
-            class="form-control has-feedback-left" id="inputSuccess3" placeholder="cert_crit_issue">
+            class="form-control has-feedback-left" placeholder="cert_crit_issue">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -187,10 +187,10 @@
         <label for="id_center_code" class="form-control-label  requiredField">
             Center code
         </label>
-        <div class=""> <select name="center_code" id="id_center_code" required="" class="select form-control">
-                <option value="" selected="">---------</option>
-                {% for c in form.fields.centcode.queryset %}
-                <option value="{{ c.Center_Name|capfirst }}">{{ c.Center_Name|capfirst }}</option>
+        <div class=""> <select name="center_code" id="id_center_code" class="select form-control">
+                <option value="" selected=""></option>
+                {% for c in form.fields.center_code.queryset %}
+                <option value="{{ c.id|capfirst }}">{{ c.Center_Name|capfirst }}</option>
                 {% endfor %}
 
             </select>
@@ -209,8 +209,8 @@
 </form>
 
 <!-- <div class="out">
-        {{form|crispy}}
-    </div> -->
+    {{form|crispy}}
+</div> -->
 
 
 

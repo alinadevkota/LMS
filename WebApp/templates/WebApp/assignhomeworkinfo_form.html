@@ -26,7 +26,7 @@
     <hr class="header_hr">
 </div>
 <div class="x_content">
-    <form method="post" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+    <form method="post" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left">
         {% csrf_token %}
 
 
@@ -44,8 +44,8 @@
             <label for="id_reg_agent" class="control-label ">
                 Reg Agent
             </label>
-            <input type="number" name="reg_agent" id="id_reg_agent" required="required"
-                class="form-control has-feedback-left" id="inputSuccess3" placeholder="Reg Agent">
+            <input type="text" name="reg_agent" id="id_reg_agent" required="required"
+                class="form-control has-feedback-left" placeholder="Reg Agent">
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
         </div>
 
@@ -54,8 +54,8 @@
     <label for="id_udt_agent" class="control-label ">
         Udt Agent
     </label>
-    <input type="text" name="udt_agent" id="id_udt_agent" required="required" class="form-control has-feedback-left"
-        id="inputSuccess3" placeholder="Udt Agent">
+    <input type="text" name="udt_agent" id="id_udt_agent" required pattern="[A-Z]"
+        class="form-control has-feedback-left" placeholder="Udt Agent">
     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 </div>
 
@@ -64,8 +64,7 @@
     <label for="id_question_code" class="control-label ">
         Question Code
     </label>
-    <select name="question_code" id="id_question_code" required="required" class="select form-control"
-        id="inputSuccess3">
+    <select name="question_code" id="id_question_code" required pattern="[A-Z]" class="select form-control">
         <option value="" selected="">---------</option>
     </select>
 
