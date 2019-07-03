@@ -466,9 +466,19 @@ html , body {
     margin: 0
 }
 
-.nav-sm span.fa, .nav-sm .menu_section h3 {
+/* top nav bar edited */
+#topNavSpan{
+    display: inline;
+}
+.nav-sm .menu_section h3 {
+
+}
+
+.nav-sm span.fa{
     display: none
 }
+
+
 
 .nav-sm li li span.fa {
     display: inline-block
