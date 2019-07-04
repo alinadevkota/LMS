@@ -34,8 +34,8 @@
             <label for="id_subject_code" class="control-label ">
                 Subject Code
             </label>
-            <input type="number" name="subject_code" id="id_subject_code" required="required"
-                class="numberinput form-control has-feedback-left" placeholder="Subject Code">
+            <input type="number" value="{{ object.subject_code}}" name="subject_code" id="id_subject_code"
+                required="required" class="numberinput form-control has-feedback-left" placeholder="Subject Code">
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
         </div>
@@ -44,7 +44,7 @@
             <label for="id_reg_agent" class="control-label ">
                 Reg Agent
             </label>
-            <input type="text" name="reg_agent" id="id_reg_agent" required="required"
+            <input type="text" value="{{ object.reg_agent}}" name="reg_agent" id="id_reg_agent" required="required"
                 class="form-control has-feedback-left" placeholder="Reg Agent">
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
         </div>
@@ -54,7 +54,7 @@
     <label for="id_udt_agent" class="control-label ">
         Udt Agent
     </label>
-    <input type="text" name="udt_agent" id="id_udt_agent" required pattern="[A-Z]"
+    <input type="text" name="udt_agent" value="{{ object.udt_agent}}" id="id_udt_agent" required pattern="[A-Z]"
         class="form-control has-feedback-left" placeholder="Udt Agent">
     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 </div>
