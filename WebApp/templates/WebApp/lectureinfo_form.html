@@ -44,8 +44,8 @@
         <label for="id_lecture_teacher" class="control-label ">
             Lecture Teacher
         </label>
-        <input type="number" name="lecture_teacher" id="id_lecture_teacher" required="required"
-            class="form-control has-feedback-left" placeholder="Lecture Teacher">
+        <input type="number" name="lecture_teacher" value="{{ object.lecture_teacher}}" id="id_lecture_teacher"
+            required="required" class="form-control has-feedback-left" placeholder="Lecture Teacher">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
     </div>
 
@@ -53,8 +53,8 @@
         <label for="id_lecture_cover" class="control-label ">
             Lecture Cover
         </label>
-        <input type="text" name="lecture_cover" id="id_lecture_cover" required="required"
-            class="form-control has-feedback-left" placeholder="Lecture Cover">
+        <input type="text" name="lecture_cover" value="{{ object.lecture_cover}}" id="id_lecture_cover"
+            required="required" class="form-control has-feedback-left" placeholder="Lecture Cover">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -62,8 +62,8 @@
         <label for="id_lecture_cover_file" class="control-label ">
             Lecture Cover File
         </label>
-        <input type="file" name="lecture_cover_file" id="id_lecture_cover_file" required="required"
-            class="form-control has-feedback-left" placeholder="Lecture Cover File">
+        <input type="file" name="lecture_cover_file" value="{{ object.lecture_cover_file}}" id="id_lecture_cover_file"
+            required="required" class="form-control has-feedback-left" placeholder="Lecture Cover File">
         <span class="fa fa-file-pdf-o form-control-feedback left" aria-hidden="true"></span>
     </div>
 
@@ -71,8 +71,8 @@
         <label for="id_lecture_level" class="control-label ">
             Lecture Level
         </label>
-        <input type="number" name="lecture_level" id="id_lecture_level" required="required"
-            class="form-control has-feedback-left" placeholder="Lecture Level">
+        <input type="number" name="lecture_level" value="{{ object.lecture_level}}" id="id_lecture_level"
+            required="required" class="form-control has-feedback-left" placeholder="Lecture Level">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -80,15 +80,15 @@
         <label for="id_lecture_info" class="control-label ">
             Lecture Information
         </label>
-        <textarea name="lecture_info" id="id_lecture_info" required="required" class="form-control has-feedback right"
-            placeholder="Lecture Information"></textarea>
+        <textarea name="lecture_info" id="id_lecture_info" value="{{ object.lecture_info}}" required="required"
+            class="form-control has-feedback right" placeholder="Lecture Information"></textarea>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         <label for="id_teacher" class="control-label ">
             Teacher
         </label>
-        <input type="text" name="teacher" id="id_teacher" required="required" class="form-control has-feedback-left"
-            placeholder="Teacher">
+        <input type="text" name="teacher" value="{{ object.teacher}}" id="id_teacher" required="required"
+            class="form-control has-feedback-left" placeholder="Teacher">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -116,8 +116,8 @@
         <label for="id_reg_agent" class="control-label ">
             Registration Agent
         </label>
-        <input type="text" name="reg_agent" id="id_reg_agent" required="required" class="form-control has-feedback-left"
-            placeholder="Registration Agent">
+        <input type="text" name="reg_agent" value="{{ object.reg_agent}}" id="id_reg_agent" required="required"
+            class="form-control has-feedback-left" placeholder="Registration Agent">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -127,16 +127,17 @@
         <label for="id_udt_agent" class="control-label ">
             Updated Agent
         </label>
-        <input type="text" name="udt_agent" id="id_udt_agent" required="required" class="form-control has-feedback-left"
-            placeholder="Updated Agent">
+        <input type="text" name="udt_agent" value="{{ object.udt_agent}}" id="id_udt_agent" required="required"
+            class="form-control has-feedback-left" placeholder="Updated Agent">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         <label for="id_lecture_certification" class="control-label ">
             Lecture Certification
         </label>
-        <input type="text" name="lecture_certification" id="id_lecture_certification" required="required"
-            class="form-control has-feedback-left" placeholder="Lecture Certification">
+        <input type="text" name="lecture_certification" value="{{ object.lecture_certification}}"
+            id="id_lecture_certification" required="required" class="form-control has-feedback-left"
+            placeholder="Lecture Certification">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -144,16 +145,16 @@
         <label for="id_lecture_provider" class="control-label ">
             Lecture Provider
         </label>
-        <input type="text" name="lecture_provider" id="id_lecture_provider" required="required"
-            class="form-control has-feedback-left" placeholder="Lecture Provider">
+        <input type="text" name="lecture_provider" value="{{ object.lecture_provider}}" id="id_lecture_provider"
+            required="required" class="form-control has-feedback-left" placeholder="Lecture Provider">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         <label for="id_cert_crit_prog" class="control-label ">
             cert_crit_prog
         </label>
-        <input type="number" name="cert_crit_prog" id="id_cert_crit_prog" required="required"
-            class="form-control has-feedback-left" placeholder="cert_crit_prog">
+        <input type="number" name="cert_crit_prog" value="{{ object.cert_crit_prog}}" id="id_cert_crit_prog"
+            required="required" class="form-control has-feedback-left" placeholder="cert_crit_prog">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -161,16 +162,16 @@
         <label for="id_cert_crit_post" class="control-label ">
             cert_crit_post
         </label>
-        <input type="number" name="cert_crit_post" id="id_cert_crit_post" required="required"
-            class="form-control has-feedback-left" placeholder="cert_crit_post">
+        <input type="number" name="cert_crit_post" value="{{ object.cert_crit_post}}" id="id_cert_crit_post"
+            required="required" class="form-control has-feedback-left" placeholder="cert_crit_post">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         <label for="id_cert_crit_ubt" class="control-label ">
             cert_crit_ubt
         </label>
-        <input type="number" name="cert_crit_ubt" id="id_cert_crit_ubt" required="required"
-            class="form-control has-feedback-left" placeholder="cert_crit_ubt">
+        <input type="number" name="cert_crit_ubt" value="{{ object.cert_crit_ubt}}" id="id_cert_crit_ubt"
+            required="required" class="form-control has-feedback-left" placeholder="cert_crit_ubt">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
     </div>
@@ -178,8 +179,8 @@
         <label for="id_cert_crit_issue" class="control-label ">
             cert_crit_issue
         </label>
-        <input type="number" name="cert_crit_issue" id="id_cert_crit_issue" required="required"
-            class="form-control has-feedback-left" placeholder="cert_crit_issue">
+        <input type="number" name="cert_crit_issue" value="{{ object.cert_crit_issue}}" id="id_cert_crit_issue"
+            required="required" class="form-control has-feedback-left" placeholder="cert_crit_issue">
         <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12">
