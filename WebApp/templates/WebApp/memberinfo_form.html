@@ -43,7 +43,7 @@
             <label for="id_password" class="control-label ">
                 Member Password
             </label>
-            <input type="password" name="password" id="id_password" required="required"
+            <input type="password" value="{{ object.password}}" name="password" id="id_password" required="required"
                 class="form-control has-feedback-left" placeholder="Member Password">
             <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
         </div>
@@ -55,12 +55,13 @@
                 Member Role
             </label>
             <div class="Member_Role">
-                <select name="Member_Role" id="id_Member_Role" required="" class="form-control">
+                <select name="Member_Role" value="{{ object.Member_Role}}" id="id_Member_Role" required=""
+                    class="form-control">
                     <option value="" selected="true" disabled="true">Select Role</option>
                     <option value="1">Student</option>
                     <option value="2">Teacher</option>
                     <option value="3">Parent</option>
-                    <option value="CenterAdmin">CenterAdmin</option>
+                    <option value="4">CenterAdmin</option>
 
 
                 </select>
@@ -73,7 +74,7 @@
             <label for="id_username" class="control-label ">
                 Member Name
             </label>
-            <input type="text" name="username" value="1" id="id_username" required="required"
+            <input type="text" value="{{ object.username}}" name="username" id="id_username" required="required"
                 class="form-control has-feedback-left" placeholder="Member Name">
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
         </div>
@@ -83,8 +84,8 @@
             <label for="id_date_joined" class="control-label ">
                 Date joined
             </label>
-            <input type="date" name="date_joined" id="id_date_joined" required="required"
-                class="form-control has-feedback-left" placeholder="Date joined">
+            <input type="date" name="date_joined" value="{{ object.date_joined}}" id="id_date_joined"
+                required="required" class="form-control has-feedback-left" placeholder="Date joined">
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
         </div>
 
@@ -93,8 +94,9 @@
             <label for="id_Member_Permanent_Address" class="control-label ">
                 Member Permanent Address
             </label>
-            <input type="text" name="Member_Permanent_Address" id="id_Member_Permanent_Address" required="required"
-                class="form-control has-feedback-left" placeholder="Member Permanent Address">
+            <input type="text" name="Member_Permanent_Address" value="{{ object.Member_Permanent_Address}}"
+                id="id_Member_Permanent_Address" required="required" class="form-control has-feedback-left"
+                placeholder="Member Permanent Address">
             <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
 
         </div>
@@ -103,8 +105,9 @@
             <label for="id_Member_Temporary_Address" class="control-label ">
                 Member Temporary Address
             </label>
-            <input type="text" name="Member_Temporary_Address" id="id_Member_Temporary_Address" required="required"
-                class="form-control has-feedback-left" placeholder="Member Temporary Address">
+            <input type="text" name="Member_Temporary_Address" value="{{ object.Member_Temporary_Address}}"
+                id="id_Member_Temporary_Address" required="required" class="form-control has-feedback-left"
+                placeholder="Member Temporary Address">
             <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
         </div>
 
@@ -113,8 +116,8 @@
             <label for="id_Member_BirthDate" class="control-label ">
                 Member BirthDate
             </label>
-            <input type="date" name="Member_BirthDate" id="id_Member_BirthDate" required="required"
-                class="form-control has-feedback-left">
+            <input type="date" name="Member_BirthDate" value="{{ object.Member_BirthDate}}" id="id_Member_BirthDate"
+                required="required" class="form-control has-feedback-left">
             <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
 
         </div>
@@ -123,8 +126,8 @@
             <label for="id_Member_Email" class="control-label ">
                 Member Email
             </label>
-            <input type="email" name="Member_Email" id="id_Member_Email" required="required"
-                class="form-control has-feedback-left" placeholder="Member Email">
+            <input type="email" name="Member_Email" value="{{ object.Member_Email}}" id="id_Member_Email"
+                required="required" class="form-control has-feedback-left" placeholder="Member Email">
             <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
         </div>
 
@@ -132,8 +135,8 @@
             <label for="id_Member_Phone" class="control-label ">
                 Member Phone
             </label>
-            <input type="tel" name="Member_Phone" id="id_Member_Phone" required="required"
-                class="form-control has-feedback-left" placeholder="Member_Phone">
+            <input type="tel" name="Member_Phone" value="{{ object.Member_Phone}}" id="id_Member_Phone"
+                required="required" class="form-control has-feedback-left" placeholder="Member_Phone">
             <span class="fa fa-volume-control-phone form-control-feedback left" aria-hidden="true"></span>
 
         </div>
@@ -142,8 +145,8 @@
             <label for="id_member_Avatar" class="control-label ">
                 Member Avatar
             </label>
-            <input type="file" name="member_Avatar" id="id_member_Avatar" required="required"
-                class="form-control has-feedback-left" placeholder="Member Avatar">
+            <input type="file" name="member_Avatar" value="{{ object.member_Avatar}}" id="id_member_Avatar"
+                required="required" class="form-control has-feedback-left" placeholder="Member Avatar">
             <span class="fa fa-image form-control-feedback left" aria-hidden="true"></span>
         </div>
 
@@ -152,7 +155,8 @@
             <label for="id_member_Gender" class="control-label ">
                 Member Gender
             </label>
-            <select name="member_Gender" id="id_member_Gender" required="" class="select form-control">
+            <select name="member_Gender" id="id_member_Gender" value="{{ object.member_Gender}}" required=""
+                class="select form-control">
                 <option value="" selected="">Select Gender</option>
                 <option value="1">Male</option>
                 <option value="2">Female</option>
@@ -167,18 +171,19 @@
             <label for="id_Member_Memo" class="control-label ">
                 Member Memo
             </label>
-            <input type="text" name="Member_Memo" id="id_Member_Memo" required="required"
-                class="form-control has-feedback-left" placeholder="Member Memo">
+            <input type="text" name="Member_Memo" value="{{ object.Member_Memo}}" id="id_Member_Memo"
+                required="required" class="form-control has-feedback-left" placeholder="Member Memo">
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
         </div>
 
         <div class="col-md-6 col-sm-6 col-xs-12">
 
-            <label for="id_centcode" class="form-control-label  requiredField">
+            <label for="id_center_code" class="form-control-label  requiredField">
                 Center code
             </label>
             <div class="">
-                <select name="centcode" id="id_center_code" required="" class="select form-control">
+                <select name="centcode" id="id_center_code" value="{{ object.center_code}}" required=""
+                    class="select form-control">
                     <option value="" selected=""></option>
                     {% for c in form.fields.centcode.queryset %}
                     <option value="{{ c.id|capfirst }}">{{ c.Center_Name|capfirst }}</option>
@@ -208,8 +213,8 @@
     </form>
 </div>
 
-<!-- <div class="out">
+<div class="out">
     {{form|crispy}}
-</div> -->
+</div>
 
 {% endblock %}
