@@ -182,7 +182,7 @@
                 Center code
             </label>
             <div class="">
-                <select name="centcode" id="id_center_code" value="{{ object.center_code}}" required=""
+                <select name="centcode" id="id_center_code" value="{{ object.center_code}}" required="required"
                     class="select form-control">
                     <option value="" selected=""></option>
                     {% for c in form.fields.centcode.queryset %}

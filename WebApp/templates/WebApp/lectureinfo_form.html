@@ -188,7 +188,7 @@
         <label for="id_center_code" class="form-control-label  requiredField">
             Center code
         </label>
-        <div class=""> <select name="center_code" id="id_center_code" class="select form-control">
+        <div class=""> <select name="center_code" id="id_center_code" class="select form-control" required="required">
                 <option value="" selected=""></option>
                 {% for c in form.fields.center_code.queryset %}
                 <option value="{{ c.id|capfirst }}">{{ c.Center_Name|capfirst }}</option>
@@ -201,8 +201,8 @@
         <label>
             Status
         </label>
-        <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag" {% if object.Use_Flag == True %}
-            checked {% endif %}>
+        <input type="checkbox" id="id_Use_Flag" class="js-switch" required="required" name="Use_Flag"
+            {% if object.Use_Flag == True %} checked {% endif %}>
     </div>
     <div class="submitButton  col-md-12">
         <button class="btn btn-success" type="submit">Submit</button>
