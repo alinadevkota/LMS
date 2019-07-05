@@ -5077,7 +5077,8 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 }
 
 
-/* message module css */
+
+/* message module */
 .header1{
     text-align: center;
    
@@ -5252,4 +5253,3 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
    border-radius: 5px;
    flex-direction: row-reverse;
 }
-
