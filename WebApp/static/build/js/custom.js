@@ -5121,3 +5121,26 @@ $(document).ready(function () {
     init_autocomplete();
 
 });
+
+$(document).ready(function () {
+
+
+    $('#fa-comment').on('click', function () {
+        $(".notification").show(300);
+
+        $(".users").hide();
+
+    });
+
+    $('#fa-bell').on('click', function () {
+
+    });
+
+    $('#fa-users').on('click', function () {
+        $('.users').show(300);
+        // Animation complete.
+        $(".notification").hide();
+
+    });
+
+});
