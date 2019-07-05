@@ -21,7 +21,7 @@ define(function (require) {
      *
      * [option]:
      *
-     *     An object that contains definitions of components. For example:
+     *     An object that contains definitions of theme. For example:
      *     var option = {
      *         title: {...},
      *         legend: {...},

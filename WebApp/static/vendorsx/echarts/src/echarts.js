@@ -652,7 +652,7 @@ define(function (require) {
     function invokeUpdateMethod(methodName, ecModel, payload) {
         var api = this._api;
 
-        // Update all components
+        // Update all theme
         each(this._componentsViews, function (component) {
             var componentModel = component.__model;
             component[methodName](componentModel, ecModel, api, payload);
@@ -671,7 +671,7 @@ define(function (require) {
     }
 
     /**
-     * Prepare view instances of charts and components
+     * Prepare view instances of charts and theme
      * @param  {module:echarts/model/Global} ecModel
      * @private
      */
@@ -801,7 +801,7 @@ define(function (require) {
      */
     function doRender(ecModel, payload) {
         var api = this._api;
-        // Render all components
+        // Render all theme
         each(this._componentsViews, function (componentView) {
             var componentModel = componentView.__model;
             componentView.render(componentModel, ecModel, api, payload);
@@ -850,7 +850,7 @@ define(function (require) {
                     params.type = eveName;
                     this.trigger(eveName, params);
                 }
-                // If element has custom eventData of components
+                // If element has custom eventData of theme
                 else if (el && el.eventData) {
                     this.trigger(eveName, el.eventData);
                 }

@@ -13436,7 +13436,7 @@ var AgendaView = FC.AgendaView = View.extend({
 
 
 	// Builds the HTML skeleton for the view.
-	// The day-grid and time-grid components will render inside containers defined by this HTML.
+    // The day-grid and time-grid theme will render inside containers defined by this HTML.
 	renderSkeletonHtml: function() {
 		return '' +
 			'<table>' +

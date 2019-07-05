@@ -3,7 +3,7 @@
  */
 module.exports = require('./lib/echarts');
 
-// Import all charts and components
+// Import all charts and theme
 require('./lib/chart/line');
 require('./lib/chart/bar');
 require('./lib/chart/pie');

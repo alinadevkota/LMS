@@ -44,7 +44,9 @@
 
     </table><br>
     <a class="btn btn-primary" href="{{object.get_update_url}}">Edit Center</a>
-    <a class="btn btn-danger" href="{{object.get_delete_url}}">Delete Center</a>
+    <a class="btn btn-danger" href="{% url 'centerinfo_delete' pk=object.pk %}"
+       onclick="return confirm('Are you sure you want to delete the center:\n'+ '{{ object.Center_Name|safe }}' +'\n\nThis cannot be undone.')">
+        Delete Center</a>
 </div>
 
 {% endblock %}

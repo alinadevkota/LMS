@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
+<ol aria-label="breadcrumb" class="breadcrumb navClass">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'memberinfo_list' %}">Member</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ object.Member_Name }}</li>
+</ol>
 
 <div class="outerdiv">
-    <p><a class="btn btn-default" href="{% url 'memberinfo_list' %}">MemberInfo Listing</a></p>
+    <h2 class="detailListHeader">Center Information</h2>
+    <hr class="header_hr"><br>
     <table class="table">
         <tr>
             <td>Member_ID</td>
@@ -13,6 +18,10 @@
         <tr>
             <td>Member_Password</td>
             <td>{{ object.Member_Password }}</td>
+        </tr>
+        <tr>
+            <td>Member_Role</td>
+            <td>{{ object.Member_Role }}</td>
         </tr>
         <tr>
             <td>Member_Type</td>
@@ -67,8 +76,11 @@
             <td>{{ object.Member_Memo }}</td>
         </tr>
     </table>
+    <br>
     <a class="btn btn-primary" href="{{object.get_update_url}}">Edit Member</a>
-    <a class="btn btn-danger" href="{{object.get_delete_url}}">Delete Member</a>
+    <a class="btn btn-danger" href="{% url 'memberinfo_delete' pk=object.pk %}"
+        onclick="return confirm('Are you sure you want to delete the member:\n'+ '{{ object.Member_Name|safe }}' +'\n\nThis cannot be undone.')">
+        Delete Member</a>
 </div>
 
 {% endblock %}

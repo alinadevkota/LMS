@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url, include
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework import routers
 from django.urls import path
+from rest_framework import routers
+
+from WebApp.views import login
 from . import api
 from . import views
 
@@ -23,7 +24,7 @@ urlpatterns = [
     url(r'^u/(?P<pk>\d+)/$', views.user_info, name='user_info'),
     path(r'^u/(?P<pk>\d+)/topics/page/(?P<page>[0-9]+)/$', views.UserTopics.as_view(), name='user_topics'),
     path(r'^u/(?P<pk>\d+)/topics/$', views.UserTopics.as_view(), name='user_topics'),
-    url(r'^login/$', views.login_view, name='login'),
+    url(r'^login/$', login , name='login'),
     url(r'^reg/$', views.reg_view, name='reg'),
     url(r'^logout/$', views.logout_view, name="logout"),
     url(r'^search/$', views.search_redirect, name='search_redirect'),

@@ -722,7 +722,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function invokeUpdateMethod(methodName, ecModel, payload) {
 	        var api = this._api;
 
-	        // Update all components
+            // Update all theme
 	        each(this._componentsViews, function (component) {
 	            var componentModel = component.__model;
 	            component[methodName](componentModel, ecModel, api, payload);
@@ -741,7 +741,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    /**
-	     * Prepare view instances of charts and components
+         * Prepare view instances of charts and theme
 	     * @param  {module:echarts/model/Global} ecModel
 	     * @private
 	     */
@@ -871,7 +871,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    function doRender(ecModel, payload) {
 	        var api = this._api;
-	        // Render all components
+            // Render all theme
 	        each(this._componentsViews, function (componentView) {
 	            var componentModel = componentView.__model;
 	            componentView.render(componentModel, ecModel, api, payload);
@@ -920,7 +920,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    params.type = eveName;
 	                    this.trigger(eveName, params);
 	                }
-	                // If element has custom eventData of components
+                    // If element has custom eventData of theme
 	                else if (el && el.eventData) {
 	                    this.trigger(eveName, el.eventData);
 	                }
@@ -1993,8 +1993,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // no-merge mode. So we generate model id by name and plus
 	        // type in view id.
 
-	        // name can be duplicated among components, which is convenient
-	        // to specify multi components (like series) by one name.
+            // name can be duplicated among theme, which is convenient
+            // to specify multi theme (like series) by one name.
 
 	        // Ensure that each id is distinct.
 	        var idMap = {};
@@ -5781,7 +5781,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     *
 	     * [option]:
 	     *
-	     *     An object that contains definitions of components. For example:
+         *     An object that contains definitions of theme. For example:
 	     *     var option = {
 	     *         title: {...},
 	     *         legend: {...},
