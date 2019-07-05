@@ -257,6 +257,8 @@ class OmrQuestionInfoSerializer(serializers.ModelSerializer):
             'udt_agent', 
             'question_level', 
             'question_score', 
+            'chapter_code',
+            'lecture_code',
         )
 
 
