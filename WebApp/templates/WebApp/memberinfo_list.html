@@ -9,11 +9,11 @@
         <li class="breadcrumb-item active" aria-current="page">Members</li>
     </ol>
 
-    <nav class="navbar navbar-light" style="background-color: grey">
+    <nav id="navbar_parent" class="navbar navbar-light" style="background-color: grey">
         <ul class="nav navbar-nav navbar-center member-list">
-            <li><a class="navbar-brand" href="#">Teacher</a></li>
-            <li><a class="navbar-brand" href="#">Student</a></li>
-            <li><a class="navbar-brand" href="#">Parent</a></li>
+            <li><a class="navbar-brand" id="teacher_button" href="#">Teacher</a></li>
+            <li><a class="navbar-brand" id="student_button" href="#">Student</a></li>
+            <li><a class="navbar-brand" id="parent_button" href="#">Parent</a></li>
         </ul>
     </nav>
     <hr class="header_hr">
@@ -54,7 +54,7 @@
                 <td>{{ object.Member_ID }}</td>
                 <!-- <td>{{ object.Member_Password }}</td> -->
                 <td>{{ object.Member_Role }}</td>
-                <td><a href="{{object.get_absolute_url}}">{{ object.Member_Name }}</a></td>
+                <td><a href="{{object.get_absolute_url}}">{{ object.username }}</a></td>
                 <td>{{ object.Member_Permanent_Address }}</td>
                 <!-- <td>{{ object.Member_Temporary_Address }}</td> -->
                 <td>{{ object.Member_BirthDate }}</td>
@@ -80,7 +80,8 @@
 {% block customjss %}
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.table').DataTable({
+
+        var table_main = $('.table').DataTable({
             dom: 'lBfrtip',
             responsive: true,
             buttons: [
@@ -93,7 +94,34 @@
                     text: '<span class="print"><i class="fa fa-print"></i> Print </span>',
                     fieldSeparator: '\t'
                 }]
+
         });
+
+
+        $("#student_button").bind("click", function () {
+
+            $("#student_button").css("color", "black");
+            $("#parent_button").css("color", "white");
+            $("#teacher_button").css("color", "white");
+            table_main.column(2).search("1").draw();
+            $('td:nth-child(3)').hide();
+
+        });
+        $("#parent_button").bind("click", function () {
+            $("#student_button").css("color", "white");
+            $("#parent_button").css("color", "black");
+            $("#teacher_button").css("color", "white");
+            table_main.column(2).search("3").draw();
+            $('td:nth-child(3)').hide();
+        });
+        $("#teacher_button").bind("click", function () {
+            $("#student_button").css("color", "white");
+            $("#parent_button").css("color", "white");
+            $("#teacher_button").css("color", "black");
+            table_main.column(2).search("2").draw();
+            $('td:nth-child(3)').hide();
+        });
+
     });
 </script>
 
