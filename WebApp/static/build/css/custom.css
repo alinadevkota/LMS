@@ -5,9 +5,7 @@ html , body {
 /* .navbar-light{
     text-align: center;
 } */
-#buttonID{
-    margin-top: 20px;   
-}
+
 
 .tableTitleRow{
     max-width: 50%;
@@ -515,7 +513,7 @@ html , body {
 }
 
 body .container.body .right_col {
-    background: #e8e8e8
+    background: #F7F7F7
 }
 
 .nav-md .container.body .right_col {
@@ -5017,182 +5015,6 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     margin-right: 10em;
 }
 
-<<<<<<< HEAD
-/* css for message section */
-.header1{
-    text-align: center;
-    
-}
-
-.containerMessage{
-    margin-top: 10px; 
-    margin-left: -10px;
-    height: 560px;
-    background-color: #fafafa;
-    border-radius: 5px 5px 5px 5px;
-    box-shadow: 0 0 5px #adadad;
-    
-}
-
-.containerMessage ul {
-    list-style: none;   
-}
-
-.containerMessage2{   
-    margin-top: 10px;
-    margin-left: 10px;
-    height: 560px;
-    background-color: #fafafa   ;
-    border-radius: 5px 5px 5px 5px;
-    box-shadow: 0 0 5px #adadad; 
-    
-}
-
-.containerMessage2 ul{
-    list-style: none;
-}
-
-.users h4{
-    margin-left: -20px;
-    margin-top: 20px;
-}
-
-.users>li h5 {
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.2;
-    color: #212529;
-    margin-top: -60px;
-    margin-right: auto;  
-    margin-bottom: 4px;
-}
-
-.onlineUser {
-    width: 20%;
-    background: #fff;  
-    /* z-index: 1000; */
-    /* position: inherit; */
-    margin-top: -30px;
-    padding: 7px;
-    border-radius: 50%;
-}
-
-
-
-/* ===================chating==================== */
-
-.status{
-    width:300px;
-    height:100px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding:10px;
-    margin-left:-30px;
-}
-
-.users :hover{
-    background-color: #e6e6e6;
-}
-
-.content{
-    width:170px;
-    margin-top:55px;
-    margin-left: 15px;
-   
-}
-
-.content span{
-    font-size: 11px;
-}
-
- .onlineIcon{
-    background-color: #1ABB9C;
-    border-radius: 50%;
-    width:10px;
-    height: 10px;
-    align-content: inline;
-    margin-left:-15px;
-    margin-top: -5px;
-}
-
-/* ====================message area=============================== */
-
-.col-100{
-    margin-top: 300px ;
-    text-align: center;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-  }
-  
-#fname{
-    width: 100%;
-}
-.content1{
-    weight: 600;
-    width:170px;
-    margin-top:0px;
-    margin-left: 15px;
-   
-}
-
-
-.onlineUser1 {
-    width: 20%;
-    background: #fff;  
-    margin-top: 0px;
-    padding: 7px;
-    border-radius: 50%;
-}
-
-.onlineIcon1{
-    background-color: #1ABB9C;
-    border-radius: 50%;
-    width:10px;
-    height: 10px;
-    align-content: inline;
-    margin-left:-15px;
-    margin-top: 20px;
-}
-
-.status1{
-    width:300px;
-    height:100px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding:10px;
-    margin-left:-30px;
-}
-
-.message {
-    background-color: #dedede;
-    width: 30%;
-    height: auto;
-    margin-left: 70px;
-    margin-top: 10px;
-    border: 2px solid #dedede;
-    border-radius: 5px;
-    box-shadow: 2px 2px 4px #bdbdbd;
-}
-
-.message p {
-    
-    padding-left: 10px;
-    padding-top: 10px;
-}
-
-.message1 {
-    
-    background-color: #2d3a52;
-    width: 40%;
-    height: auto;
-    margin-left: 70px;
-    margin-top: auto;
-    border: 2px solid #2d3a52;
-    border-radius: 5px;
-    flex-direction: row-reverse;
-=======
 /*Student model css*/
 
 .page_section {
@@ -5252,5 +5074,182 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 
 .bg-green {
     background-color: #26B99A;
->>>>>>> 23c856a34bd0ab7a872f00254359f89b37fa6096
 }
+
+
+/* message module css */
+.header1{
+    text-align: center;
+   
+}
+
+.containerMessage{
+   margin-top: 10px; 
+   margin-left: -10px;
+   height: 560px;
+   background-color: #fafafa;
+   border-radius: 5px 5px 5px 5px;
+   box-shadow: 0 0 5px #adadad;
+   
+}
+
+.containerMessage ul {
+   list-style: none;   
+}
+
+.containerMessage2{   
+   margin-top: 10px;
+   margin-left: 10px;
+   height: 560px;
+   background-color: #fafafa   ;
+   border-radius: 5px 5px 5px 5px;
+   box-shadow: 0 0 5px #adadad; 
+   
+}
+
+.containerMessage2 ul{
+   list-style: none;
+}
+
+.users h4{
+   margin-left: -20px;
+   margin-top: 20px;
+}
+
+.users>li h5 {
+   font-size: 14px;
+   font-weight: 600;
+   line-height: 1.2;
+   color: #212529;
+   margin-top: -60px;
+   margin-right: auto;  
+   margin-bottom: 4px;
+}
+
+.onlineUser {
+   width: 20%;
+   background: #fff;  
+   /* z-index: 1000; */
+   /* position: inherit; */
+   margin-top: -30px;
+   padding: 7px;
+   border-radius: 50%;
+}
+
+
+
+/* ===================chating==================== */
+
+.status{
+   width:300px;
+   height:100px;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   padding:10px;
+   margin-left:-30px;
+}
+
+.users :hover{
+   background-color: #e6e6e6;
+}
+
+.content{
+   width:170px;
+   margin-top:55px;
+   margin-left: 15px;
+  
+}
+
+.content span{
+   font-size: 11px;
+}
+
+.onlineIcon{
+   background-color: #1ABB9C;
+   border-radius: 50%;
+   width:10px;
+   height: 10px;
+   align-content: inline;
+   margin-left:-15px;
+   margin-top: -5px;
+}
+
+/* ====================message area=============================== */
+
+.col-100{
+   margin-top: 300px ;
+   text-align: center;
+   border-radius: 6px;
+   border: 1px solid #ccc;
+ }
+ 
+#fname{
+   width: 100%;
+}
+.content1{
+   weight: 600;
+   width:170px;
+   margin-top:0px;
+   margin-left: 15px;
+  
+}
+
+
+.onlineUser1 {
+   width: 20%;
+   background: #fff;  
+   margin-top: 0px;
+   padding: 7px;
+   border-radius: 50%;
+}
+
+.onlineIcon1{
+   background-color: #1ABB9C;
+   border-radius: 50%;
+   width:10px;
+   height: 10px;
+   align-content: inline;
+   margin-left:-15px;
+   margin-top: 20px;
+}
+
+.status1{
+   width:300px;
+   height:100px;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   padding:10px;
+   margin-left:-30px;
+}
+
+.message {
+   background-color: #dedede;
+   width: 30%;
+   height: auto;
+   margin-left: 70px;
+   margin-top: 10px;
+   border: 2px solid #dedede;
+   border-radius: 5px;
+   box-shadow: 2px 2px 4px #bdbdbd;
+}
+
+.message p {
+   
+   padding-left: 10px;
+   padding-top: 10px;
+}
+
+.message1 {
+   
+   background-color: #2d3a52;
+   width: 40%;
+   height: auto;
+   margin-left: 70px;
+   margin-top: auto;
+   border: 2px solid #2d3a52;
+   border-radius: 5px;
+   flex-direction: row-reverse;
+}
+
