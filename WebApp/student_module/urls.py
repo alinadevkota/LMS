@@ -19,5 +19,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name="students_dashboard"),
     path('mycourse/', views.mycourse, name="students_mycourse"),
     path('quiz/', views.quiz, name="students_quiz"),
-    path('quizzes/', views.quizzes)
+    path('quizzes/', views.quizzes, name="quiz_questions")
 ]

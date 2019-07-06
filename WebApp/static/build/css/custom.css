@@ -5081,31 +5081,31 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 /* message module */
 .header1{
     text-align: center;
-   
+
 }
 
 .containerMessage{
-   margin-top: 10px; 
+   margin-top: 10px;
    margin-left: -10px;
    height: 560px;
    background-color: #fafafa;
    border-radius: 5px 5px 5px 5px;
    box-shadow: 0 0 5px #adadad;
-   
+
 }
 
 .containerMessage ul {
-   list-style: none;   
+   list-style: none;
 }
 
-.containerMessage2{   
+.containerMessage2{
    margin-top: 10px;
    margin-left: 10px;
    height: 560px;
    background-color: #fafafa   ;
    border-radius: 5px 5px 5px 5px;
-   box-shadow: 0 0 5px #adadad; 
-   
+   box-shadow: 0 0 5px #adadad;
+
 }
 
 .containerMessage2 ul{
@@ -5123,13 +5123,13 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
    line-height: 1.2;
    color: #212529;
    margin-top: -60px;
-   margin-right: auto;  
+   margin-right: auto;
    margin-bottom: 4px;
 }
 
 .onlineUser {
    width: 20%;
-   background: #fff;  
+   background: #fff;
    /* z-index: 1000; */
    /* position: inherit; */
    margin-top: -30px;
@@ -5159,7 +5159,7 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
    width:170px;
    margin-top:55px;
    margin-left: 15px;
-  
+
 }
 
 .content span{
@@ -5184,7 +5184,7 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
    border-radius: 6px;
    border: 1px solid #ccc;
  }
- 
+
 #fname{
    width: 100%;
 }
@@ -5193,13 +5193,13 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
    width:170px;
    margin-top:0px;
    margin-left: 15px;
-  
+
 }
 
 
 .onlineUser1 {
    width: 20%;
-   background: #fff;  
+   background: #fff;
    margin-top: 0px;
    padding: 7px;
    border-radius: 50%;
@@ -5237,13 +5237,13 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 }
 
 .message12 p {
-   
+
    padding-left: 10px;
    padding-top: 10px;
 }
 
 .message1 {
-   
+
    background-color: #2d3a52;
    width: 40%;
    height: auto;
