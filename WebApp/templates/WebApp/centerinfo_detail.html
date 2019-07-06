@@ -9,30 +9,44 @@
 </ol>
 <div class="outerDiv">
     <h2 class="detailListHeader">Center Information</h2>
+    <hr class="header_hr"><br>
     <table class="table">
         <tr>
-            <td>Center_Name</td>
+            <td>Center Name</td>
             <td>{{ object.Center_Name }}</td>
         </tr>
         <tr>
-            <td>Center_Address</td>
+            <td>Center Address</td>
             <td>{{ object.Center_Address }}</td>
         </tr>
         <tr>
-            <td>Use_Flag</td>
-            <td>{{ object.Use_Flag }}</td>
+            <td>Status</td>
+            <td>
+                {% if object.Use_Flag == True %}
+                <span class="text-success">Active</span>
+                {% else %}
+                <span class="text-danger">Disable</span>
+                {% endif %}
+            </td>
         </tr>
         <tr>
-            <td>Register_DateTime</td>
+            <td>Register Agent</td>
+            <td>{{ object.Register_Agent }}</td>
+        </tr>
+        <tr>
+            <td>Register DateTime</td>
             <td>{{ object.Register_DateTime }}</td>
         </tr>
         <tr>
-            <td>Register_Agent</td>
-            <td>{{ object.Register_Agent }}</td>
+            <td>Updated DateTime</td>
+            <td>{{ object.Updated_DateTime }}</td>
         </tr>
-    </table>
+
+    </table><br>
     <a class="btn btn-primary" href="{{object.get_update_url}}">Edit Center</a>
-    <a class="btn btn-primary" href="{{object.get_delete_url}}">Delete Center</a>
+    <a class="btn btn-danger" href="{% url 'centerinfo_delete' pk=object.pk %}"
+       onclick="return confirm('Are you sure you want to delete the center:\n'+ '{{ object.Center_Name|safe }}' +'\n\nThis cannot be undone.')">
+        Delete Center</a>
 </div>
 
 {% endblock %}

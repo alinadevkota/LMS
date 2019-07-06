@@ -16,6 +16,12 @@ from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterCont
     QExampleInfoForm, QuestionInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, ScheduleInfoForm, TalkMemberForm, \
     TalkRoomForm, TalkMessageForm, TalkMessageReadForm, TodoInfoForm, TodoTInfoForm, UserUpdateForm, UserRegisterForm, \
     MemberInfoForm
+from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
+    ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, \
+    BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
+    HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, \
+    OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, \
+    ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
 
 
 #
@@ -41,11 +47,19 @@ from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterCont
 def login(request, template_name='registration/login.html',
           redirect_field_name=REDIRECT_FIELD_NAME,
           authentication_form=AuthenticationForm,
-          extra_context=None, redirect_authenticated_user=False):
+          extra_context=None, redirect_authenticated_user=True):
     # warnings.warn(
     #     'The login() view is superseded by the class-based LoginView().',
     #     RemovedInDjango21Warning, stacklevel=2
     # )
+    # if request.method == "POST":
+    #     form = authentication_form(request, data=request.POST)
+    #     if form.is_valid():
+    #         return redirect('/')
+    #     else:
+    #         messages.error(request, 'Invalid Credential')
+    #         return redirect('/login')
+    # else:
     return LoginView.as_view(
         template_name=template_name,
         redirect_field_name=redirect_field_name,
@@ -78,7 +92,8 @@ def start(request):
     """Start page with a documentation.
     """
     # return render(request,"start.html")
-    return render(request, "WebApp\homepage.html")
+    return render(request, "WebApp/homepage.html")
+
 
 def editprofile(request):
     if not request.user.is_authenticated:
@@ -101,22 +116,20 @@ def editprofile(request):
         # form = UserUpdateForm(instance=post)
         form = UserUpdateForm(request.POST, request.FILES, instance=post)
 
-
         # if request.user.isAdmin == 1:
         #     form = UserUpdateFormForAdmin(instance=post)
 
     return render(request, 'registration/editprofile.html', {'form': form})
+
 
 class register(generic.CreateView):
     form_class = UserRegisterForm
     success_url = reverse_lazy('loginsuccess')
     template_name = 'registration/register.html'
 
+
 def loginsuccess(request):
     return render(request, "registration/registrationsuccessful.html")
-
-
-
 
 
 class CenterInfoListView(ListView):
@@ -136,10 +149,10 @@ class CenterInfoUpdateView(UpdateView):
     model = CenterInfo
     form_class = CenterInfoForm
 
-class CenterInfoDeleteView(DeleteView):
-    model=CenterInfo
-    success_url = reverse_lazy('centerinfo_list')
 
+def CenterInfoDeleteView(request, pk):
+    CenterInfo.objects.filter(pk=pk).delete()
+    return redirect("centerinfo_list")
 
 
 class MemberInfoListView(ListView):
@@ -159,6 +172,10 @@ class MemberInfoUpdateView(UpdateView):
     model = MemberInfo
     form_class = MemberInfoForm
 
+
+def MemberInfoDeleteView(request, pk):
+    MemberInfo.objects.filter(pk=pk).delete()
+    return redirect("memberinfo_list")
 
 class LectureInfoListView(ListView):
     model = LectureInfo
@@ -896,4 +913,3 @@ class TodoTInfoDetailView(DetailView):
 class TodoTInfoUpdateView(UpdateView):
     model = TodoTInfo
     form_class = TodoTInfoForm
-

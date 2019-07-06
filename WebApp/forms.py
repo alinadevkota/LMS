@@ -44,7 +44,7 @@ class UserUpdateFormForAdmin(forms.ModelForm):
 class CenterInfoForm(forms.ModelForm):
     class Meta:
         model = CenterInfo
-        fields = ['Center_Name', 'Center_Address', 'Use_Flag', 'Register_DateTime', 'Register_Agent']
+        fields = ['Center_Name', 'Center_Address', 'Use_Flag', 'Register_Agent']
 
 
 class MemberInfoForm(forms.ModelForm):

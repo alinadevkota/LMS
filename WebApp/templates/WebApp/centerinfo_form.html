@@ -4,10 +4,27 @@
 
 
 <link rel="stylesheet" href="{% static 'css/centerinfo_form.css' %}">
-<div class="centerInfoListingHeader">
-  <p>
-    <a class="btn btn-default" href="{% url 'centerinfo_list' %}">Centers</a>
-  </p>
+<ol aria-label="breadcrumb" class="breadcrumb navClass">
+  <li class="breadcrumb-item"><a href="/">Home</a></li>
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'centerinfo_list' %}">Center</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    {% if '/centerinfo/create/' == request.path %}
+    Create New Center
+    {% else %}
+    Edit Center Info
+    {% endif %}
+  </li>
+</ol>
+
+<div class="headerDiv">
+  <h2 class="infoFormHeader">
+    {% if '/centerinfo/create/' == request.path %}
+    Create New Center
+    {% else %}
+    Edit Center Info
+    {% endif %}
+  </h2>
+  <hr class="header_hr">
 </div>
 
 
@@ -37,10 +54,11 @@
     </div>
     <div class="form-group" id="div_id_Use_Flag">
 
-      <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Use Flag</label>
+      <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <label>
-          <input type="checkbox" id="id_Use_Flag" class="js-switch">
+          <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag" {% if object.Use_Flag == True %}
+            checked {% endif %}>
         </label>
       </div>
       <!-- <div class="col-md-6 col-sm-6 col-xs-12">
@@ -65,7 +83,7 @@
           class="datetimeinput form-control form-control"> </div>
     </div> -->
     <div class="form-group" id="div_id_Center_Name">
-      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Register_Agent<span
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Register Agent<span
           class="required">*</span>
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -76,7 +94,7 @@
 
 
     <div class="submitButton">
-      <button class="btn btn-primary" type="submit">Submit</button>
+      <button class="btn btn-success" type="submit">Submit</button>
     </div>
 
 

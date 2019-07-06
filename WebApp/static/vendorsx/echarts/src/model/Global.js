@@ -629,8 +629,8 @@ define(function (require) {
         // no-merge mode. So we generate model id by name and plus
         // type in view id.
 
-        // name can be duplicated among components, which is convenient
-        // to specify multi components (like series) by one name.
+        // name can be duplicated among theme, which is convenient
+        // to specify multi theme (like series) by one name.
 
         // Ensure that each id is distinct.
         var idMap = {};

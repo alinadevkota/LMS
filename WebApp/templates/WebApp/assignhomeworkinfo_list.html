@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'css/assignhomeworkinfo_list.css' %}">
 
 <div class="assignhomeworkInfoListClass">
     <ol aria-label="breadcrumb" class="breadcrumb navClass">
@@ -10,42 +10,44 @@
         <li class="breadcrumb-item active" aria-current="page">Assignments</li>
     </ol>
 
-    <h2 class="btn btn-title">List of Assignments</h2>
-    <br>
+    <h2 class="tableHeader">List of Assignment</h2>
+    <hr class="header_hr">
     <div class="btn-createnew">
-        <a class="btn btn-primary" href="{% url 'assignhomeworkinfo_create' %}">Create new Assignment</a>
+        <a class="btn btn-success" href="{% url 'assignhomeworkinfo_create' %}">Create new Assignment</a>
     </div>
     <br><br><br>
-    <table class="table table-striped">
-        <thead class="thead-light">
-            <tr class="tableTitleRow">
-                <td>ID</td>
-                <td>Link</td>
-                <td>Subject Code</td>
-                <td>Use Flag</td>
-                <td>Registration Date</td>
-                <td>Registration Time</td>
-                <td>Registration Agent</t d>
-                <td>Updated Date</td>
-                <td>Updated Time</td>
-                <td>Updated Agent</td>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered bg-white">
+            <thead class="thead-light bg-primary">
+                <tr class="tableTitleRow">
+                    <td>ID</td>
+                    <td>Link</td>
+                    <td>Subject Code</td>
+                    <td>Use Flag</td>
+                    <td>Registration Date</td>
+                    <td>Registration Time</td>
+                    <td>Registration Agent</t d>
+                        <!-- <td>Updated Date</td>
+                    <td>Updated Time</td>
+                    <td>Updated Agent</td> -->
+                </tr>
+            </thead>
+            {% for object in object_list %}
+            <tr>
+                <td>{{object.pk}}</td>
+                <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+                <td>{{ object.subject_code }}</td>
+                <td>{{ object.use_flag }}</td>
+                <td>{{ object.reg_date }}</td>
+                <td>{{ object.reg_time }}</td>
+                <td>{{ object.reg_agent }}</td>
+                <!-- <td>{{ object.udt_date }}</td>
+                <td>{{ object.udt_time }}</td>
+                <td>{{ object.udt_agent }}</td> -->
             </tr>
-        </thead>
-        {% for object in object_list %}
-        <tr>
-            <td>{{object.pk}}</td>
-            <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-            <td>{{ object.subject_code }}</td>
-            <td>{{ object.use_flag }}</td>
-            <td>{{ object.reg_date }}</td>
-            <td>{{ object.reg_time }}</td>
-            <td>{{ object.reg_agent }}</td>
-            <td>{{ object.udt_date }}</td>
-            <td>{{ object.udt_time }}</td>
-            <td>{{ object.udt_agent }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+            {% endfor %}
+        </table>
+    </div>
 </div>
 <br>
 <br>
@@ -58,7 +60,17 @@
     $(document).ready(function () {
         $('.table').DataTable({
             dom: 'lBfrtip',
-            buttons: ['csv', 'print']
+            responsive: true,
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: '<span class="exportcsv"><i class="fa fa-paper-plane-o"></i> Export to CSV </span>'
+                },
+                {
+                    extend: 'print',
+                    text: '<span class="print"><i class="fa fa-print"></i> Print </span>',
+                    fieldSeparator: '\t'
+                }]
         });
     });
 </script>

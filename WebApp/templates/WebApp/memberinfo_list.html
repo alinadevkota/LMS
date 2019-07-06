@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/memberinfo_list.css' %}">
+
 
 <div class="memberInfoListClass">
     <ol aria-label="breadcrumb" class="breadcrumb navClass">
@@ -9,56 +9,68 @@
         <li class="breadcrumb-item active" aria-current="page">Members</li>
     </ol>
 
-    <h2 class="btn btn-title">List of Members</h2>
-    <br>
+    <nav id="navbar_parent" class="navbar navbar-light" style="background-color: grey">
+        <ul class="nav navbar-nav navbar-center member-list">
+            <li><a class="navbar-brand" id="teacher_button" href="#">Teacher</a></li>
+            <li><a class="navbar-brand" id="student_button" href="#">Student</a></li>
+            <li><a class="navbar-brand" id="parent_button" href="#">Parent</a></li>
+        </ul>
+    </nav>
+    <hr class="header_hr">
+    <h2 class="tableHeader">List of Members</h2>
+    <hr class="header_hr">
     <div class="btn-createnew">
-        <a class="btn btn-primary" href="{% url 'lectureinfo_create' %}">Create new Member</a>
+        <a class="btn btn-success" href="{% url 'memberinfo_create' %}">Create new Member</a>
     </div>
     <br><br><br>
-    <table class="table table-striped">
-        <thead class="thead-light">
-            <tr class="tableTitleRow">
-                <td>ID</td>
-                <!-- <td>Link</td> -->
-                <td>Member_ID</td>
-                <!-- <td>Member_Password</td> -->
-                <td>Member_Type</td>
-                <td>Member_Name</td>
-                <td>Member_Permanent_Address</td>
-                <!-- <td>Member_Temporary_Address</td> -->
-                <td>Member_BirthDate</td>
-                <td>Member_Email</td>
-                <td>Member_Phone</td>
-                <!-- <td>member_Avatar</td> -->
-                <td>member_Gender</td>
-                <!-- <td>Use_Flag</td>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered bg-white nowrap">
+            <thead class="thead-light bg-primary">
+                <tr class="tableTitleRow">
+                    <td>ID</td>
+                    <!-- <td>Link</td> -->
+                    <td>Member ID</td>
+                    <!-- <td>Member_Password</td> -->
+                    <td>Member Role</td>
+                    <td>Member Name</td>
+                    <td>Member Permanent Address</td>
+                    <!-- <td>Member_Temporary_Address</td> -->
+                    <td>Member BirthDate</td>
+                    <td>Member Email</td>
+                    <td>Member Phone</td>
+                    <!-- <td>member_Avatar</td> -->
+                    <td>member Gender</td>
+                    <!-- <td>Use_Flag</td>
             <td>Register_DateTime</td>
             <td>Register_Agent</td>
             <td>Member_Memo</td> -->
-            </tr>
-        </thead>
-        {% for object in object_list %}
-        <tr>
-            <td>{{object.pk}}</td>
-            <!-- <td><a href="{{object.get_absolute_url}}">{{object}}</a></td> -->
-            <td>{{ object.Member_ID }}</td>
-            <!-- <td>{{ object.Member_Password }}</td> -->
-            <td>{{ object.Member_Type }}</td>
-            <td><a href="{{object.get_absolute_url}}">{{ object.Member_Name }}</a></td>
-            <td>{{ object.Member_Permanent_Address }}</td>
-            <!-- <td>{{ object.Member_Temporary_Address }}</td> -->
-            <td>{{ object.Member_BirthDate }}</td>
-            <td>{{ object.Member_Email }}</td>
-            <td>{{ object.Member_Phone }}</td>
-            <!-- <td>{{ object.member_Avatar }}</td> -->
-            <td>{{ object.member_Gender }}</td>
-            <!-- <td>{{ object.Use_Flag }}</td>
+                </tr>
+            </thead>
+            {% for object in object_list %}
+
+            <tr>
+                <td>{{object.pk}}</td>
+                <!-- <td><a href="{{object.get_absolute_url}}">{{object}}</a></td> -->
+                <td>{{ object.Member_ID }}</td>
+                <!-- <td>{{ object.Member_Password }}</td> -->
+                <td>{{ object.Member_Role }}</td>
+                <td><a href="{{object.get_absolute_url}}">{{ object.username }}</a></td>
+                <td>{{ object.Member_Permanent_Address }}</td>
+                <!-- <td>{{ object.Member_Temporary_Address }}</td> -->
+                <td>{{ object.Member_BirthDate }}</td>
+                <td>{{ object.Member_Email }}</td>
+                <td>{{ object.Member_Phone }}</td>
+                <!-- <td>{{ object.member_Avatar }}</td> -->
+                <td>{{ object.member_Gender }}</td>
+                <!-- <td>{{ object.Use_Flag }}</td>
             <td>{{ object.Register_DateTime }}</td>
             <td>{{ object.Register_Agent }}</td>
             <td>{{ object.Member_Memo }}</td> -->
-        </tr>
-        {% endfor %}
-    </table>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
 </div>
 <br>
 <br>
@@ -68,10 +80,48 @@
 {% block customjss %}
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.table').DataTable({
+
+        var table_main = $('.table').DataTable({
             dom: 'lBfrtip',
-            buttons: ['csv', 'print']
+            responsive: true,
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: '<span class="exportcsv"><i class="fa fa-paper-plane-o"></i> Export to CSV </span>'
+                },
+                {
+                    extend: 'print',
+                    text: '<span class="print"><i class="fa fa-print"></i> Print </span>',
+                    fieldSeparator: '\t'
+                }]
+
         });
+
+
+        $("#student_button").bind("click", function () {
+
+            $("#student_button").css("color", "black");
+            $("#parent_button").css("color", "white");
+            $("#teacher_button").css("color", "white");
+            table_main.column(2).search("1").draw();
+            $('td:nth-child(3)').hide();
+
+        });
+        $("#parent_button").bind("click", function () {
+            $("#student_button").css("color", "white");
+            $("#parent_button").css("color", "black");
+            $("#teacher_button").css("color", "white");
+            table_main.column(2).search("3").draw();
+            $('td:nth-child(3)').hide();
+        });
+        $("#teacher_button").bind("click", function () {
+            $("#student_button").css("color", "white");
+            $("#parent_button").css("color", "white");
+            $("#teacher_button").css("color", "black");
+            table_main.column(2).search("2").draw();
+            $('td:nth-child(3)').hide();
+        });
+
     });
 </script>
 

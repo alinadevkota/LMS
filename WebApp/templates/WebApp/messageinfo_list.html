@@ -1,36 +1,146 @@
-{% extends "base.html" %}
-{% load static %}
-{% block content %}
-<p><a class="btn btn-default" href="{% url 'messageinfo_list' %}">MessageInfo Listing</a></p>
-<table class="table">
-<tr>
-<td>ID</td><td>Link</td>
+{% extends "base.html" %} {% load static %} {% block content %}
+
+
+<div class="container-fluid" id="onlineFriends">
+  <div class="row">
+    <div class="containerMessage col-lg-4 ">
+
+      <ul class="users">
+        <h4>Friends</h4>
+        <hr>
+        <li>
+          <a href="#">
+            <div class="status online">
+              <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+              <div class="onlineIcon"></div>
+              <div class="content">
+                <h5>Rojan Bade</h5>
+                <span>Banepa, Nepal</span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <div class="status online">
+              <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+              <div class="onlineIcon"></div>
+              <div class="content">
+                <h5>Rojan Bade</h5>
+                <span>Banepa, Nepal</span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+
+        <li>
+          <a href="#">
+            <div class="status online">
+              <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+              <div class="onlineIcon"></div>
+              <div class="content">
+                <h5>Rojan Bade</h5>
+                <span>Banepa, Nepal</span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <div class="status online">
+              <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+              <div class="onlineIcon"></div>
+              <div class="content">
+                <h5>Rojan Bade</h5>
+                <span>Banepa, Nepal</span>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+
+      <div class="notification" style="display: none">
+        <h1 class=" header1">hello</h1>
+      </div>
+    </div>
+
+
+
+    <div class="containerMessage2 col-lg-8 ">
+
+      <ul>
+        <li>
+          <a href="#">
+            <div class="status1 online">
+              <img class="onlineUser1" src="/static/images/suted.jpg" alt="avatar">
+              <div class="onlineIcon1"></div>
+              <div class="content1">
+                <h5>Rojan Bade</h5>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+
+      <ul>
+        <li>
+
+        </li>
+      </ul>
+      <div class="message12">
+        <p>Good morning...</p>
+      </div>
+
+      <div class="message12 message1">
+        <p>How is work?</p>
+      </div>
+
+      <div class="message12">
+        <p>All good yours?</p>
+      </div>
+
+      <div class="message12 message1">
+        <p>Its great. I am currently working on LMS project and learning a lot in these short amount of time
+        </p>
+      </div>
+
+      <div class="col-100">
+        <input type="text" id="fname" placeholder="Type message..." style="height:40px">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- <p>
+  <a class="btn btn-default" href="{% url 'messageinfo_list' %}">MessageInfo Listing</a>
+</p> -->
+<!-- <table class="table">
+  <tr>
+    <td>ID</td>
+    <td>Link</td>
     <td>teacher_code</td>
     <td>message</td>
     <td>message_read</td>
-    <td>use_flag</td>
-    <td>reg_date</td>
-    <td>reg_time</td>
-    <td>reg_agent</td>
-    <td>udt_date</td>
-    <td>udt_time</td>
-    <td>udt_agent</td>
-</tr>
-{% for object in object_list %}
-<tr>
-    <td>{{object.pk}}</td>
-    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+  </tr>
+  {% for object in object_list %}
+  <tr>
+    <td>{{ object.pk }}</td>
+    <td>
+      <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+    </td>
     <td>{{ object.teacher_code }}</td>
     <td>{{ object.message }}</td>
     <td>{{ object.message_read }}</td>
-    <td>{{ object.use_flag }}</td>
-    <td>{{ object.reg_date }}</td>
-    <td>{{ object.reg_time }}</td>
-    <td>{{ object.reg_agent }}</td>
-    <td>{{ object.udt_date }}</td>
-    <td>{{ object.udt_time }}</td>
-    <td>{{ object.udt_agent }}</td>
-</tr>
-{% endfor %}
-</table><a class="btn btn-primary" href="{% url 'messageinfo_create' %}">Create new MessageInfo</a>
+  </tr>
+  {% endfor %}
+</table> -->
+
+<!-- <a class="btn btn-primary" href="{% url 'messageinfo_create' %}">Create new MessageInfo</a> -->
 {% endblock %}

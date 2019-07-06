@@ -14,9 +14,10 @@ class CenterInfo(models.Model):
     # Fields
     Center_Name = CharField(max_length=500, blank=True, null=True)
     Center_Address = CharField(max_length=500, blank=True, null=True)
-    Use_Flag = CharField(max_length=1, blank=True, null=True)
-    Register_DateTime = DateTimeField(default=datetime.now(), blank=True)
+    Use_Flag = BooleanField(default=True)
     Register_Agent = CharField(max_length=200, blank=True, null=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
 
 
     class Meta:
@@ -56,7 +57,7 @@ class MemberInfo(AbstractUser):
     Member_Email = models.CharField(max_length=150, blank=True, null=True)
     Member_Phone = models.CharField(max_length=150, blank=True, null=True)
     member_Gender = models.IntegerField(blank=True, null=True)
-    Use_Flag = models.CharField(max_length=1, blank=True, null=True)
+    Use_Flag = BooleanField(default=True)
     Register_DateTime = models.DateTimeField(default=datetime.now(), blank=True)
     Register_Agent = models.CharField(max_length=200, blank=True, null=True)
     Member_Memo = models.CharField(max_length=500, blank=True, null=True)
@@ -93,7 +94,7 @@ class LectureInfo(models.Model):
     lecture_level = IntegerField(blank=True, null=True)
     lecture_info = TextField(blank=True, null=True)
     teacher = CharField(max_length=120, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
+    use_flag = BooleanField(default=True)
     reg_date = CharField(max_length=10, blank=True, null=True)
     reg_time = CharField(max_length=8, blank=True, null=True)
     reg_agent = CharField(max_length=200, blank=True, null=True)
@@ -457,7 +458,7 @@ class AssignHomeworkInfo(models.Model):
 
     # Fields
     subject_code = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
+    use_flag = BooleanField(default=True)
     reg_date = CharField(max_length=10, blank=True, null=True)
     reg_time = CharField(max_length=8, blank=True, null=True)
     reg_agent = CharField(max_length=200, blank=True, null=True)
