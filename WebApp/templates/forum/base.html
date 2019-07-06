@@ -46,14 +46,12 @@
             {% else %}
                 {% include 'forum/widgets/visitor_user_panel.html' %}
             {% endif %}
-            {% include 'forum/widgets/nodes.html' %}
+            {% include 'forum/widgets/nodegroups.html' %}
             {% block widget_after %}{% endblock %}
         </div><!-- END RIGHT -->
     </div>
 </div>
 
-<script src="//code.jquery.com/jquery-2.2.0.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function(){
         $('#navSearchBtn').click(function(e){

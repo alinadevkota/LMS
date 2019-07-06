@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from forum.models import Topic, Post
+from forum.models import Thread, Post
 
 
-class TopicSerializer(serializers.HyperlinkedModelSerializer):
+class ThreadSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Topic
+        model =Thread
         fields = ('title', 'content_raw', 'order', 'hidden', 'closed')
 
 
