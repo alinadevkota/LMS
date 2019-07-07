@@ -5253,3 +5253,10 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
    border-radius: 5px;
    flex-direction: row-reverse;
 }
+/* 
+calendar div */
+#calendarDiv.right_col{
+    float: right;
+    margin-right: 10px;
+    
+}
