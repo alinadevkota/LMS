@@ -79,7 +79,6 @@ class MemberInfo(AbstractUser):
     def get_absolute_url(self):
         return reverse('memberinfo_detail', args=(self.pk,))
 
-
     def get_update_url(self):
         return reverse('memberinfo_update', args=(self.pk,))
 

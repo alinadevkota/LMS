@@ -54,32 +54,32 @@ def render_content(content_raw, sender):
     return content_rendered, mentioned_users
 
 
-class TopicQueryset(models.QuerySet):
+class ThreadQueryset(models.QuerySet):
 
     def visible(self):
         return self.filter(hidden=False)
 
 
 @python_2_unicode_compatible
-class Topic(models.Model):
-    user = models.ForeignKey(USER_MODEL, related_name='topics', verbose_name=_("user"),on_delete=models.DO_NOTHING)
+class Thread(models.Model):
+    user = models.ForeignKey(USER_MODEL, related_name='threads', verbose_name=_("user"),on_delete=models.CASCADE)
     title = models.CharField(max_length=120, verbose_name=_("title"))
     content_raw = models.TextField(verbose_name=_("raw content"))
     content_rendered = models.TextField(default='', blank=True, verbose_name=_("rendered content"))
     view_count = models.IntegerField(default=0, verbose_name=_("view count"))
     reply_count = models.IntegerField(default=0, verbose_name=_("reply count"))
-    node = models.ForeignKey('Node', related_name='topics', verbose_name=_("node"),on_delete=models.DO_NOTHING)
+    topic = models.ForeignKey('Topic', related_name='threads', verbose_name=_("topic"),on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name=_("published time"))
     last_replied = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name=_("last replied time"))
     order = models.IntegerField(default=10, verbose_name=_("order"))
     hidden = models.BooleanField(default=False, verbose_name=_("hidden"))
     closed = models.BooleanField(default=False, verbose_name=_("closed"))
-    objects = TopicQueryset.as_manager()
+    objects = ThreadQueryset.as_manager()
 
     raw_content_hash = None
 
     def __init__(self, *args, **kwargs):
-        super(Topic, self).__init__(*args, **kwargs)
+        super(Thread, self).__init__(*args, **kwargs)
         self.raw_content_hash = xxhash.xxh64(self.content_raw).hexdigest()
 
     def get_reply_count(self):
@@ -92,18 +92,18 @@ class Topic(models.Model):
         return self.pub_date
 
     def increase_view_count(self):
-        Topic.objects.filter(pk=self.id).update(view_count=F('view_count') + 1)
+        Thread.objects.filter(pk=self.id).update(view_count=F('view_count') + 1)
 
     def save(self, *args, **kwargs):
         new_hash = xxhash.xxh64(self.content_raw).hexdigest()
         mentioned_users = []
         if new_hash != self.raw_content_hash or (not self.pk):
-            # To (re-)render the content if content changed or topic is newly created
+            # To (re-)render the content if content changed or thread is newly created
             self.content_rendered, mentioned_users = render_content(self.content_raw, sender=self.user.username)
-        super(Topic, self).save(*args, **kwargs)
+        super(Thread, self).save(*args, **kwargs)
         self.raw_content_hash = new_hash
         for to in mentioned_users:
-                notify.delay(to=to.username, sender=self.user.username, topic=self.pk)
+                notify.delay(to=to.username, sender=self.user.username, thread=self.pk)
 
     class Meta:
         ordering = ['order', '-pub_date']
@@ -122,8 +122,8 @@ class PostQueryset(models.QuerySet):
 
 @python_2_unicode_compatible
 class Post(models.Model):
-    topic = models.ForeignKey('Topic', related_name='replies', verbose_name=_("topic"),on_delete=models.DO_NOTHING)
-    user = models.ForeignKey(USER_MODEL, related_name='posts', verbose_name=_("user"),on_delete=models.DO_NOTHING)
+    thread = models.ForeignKey('thread', related_name='replies', verbose_name=_("thread"),on_delete=models.CASCADE)
+    user = models.ForeignKey(USER_MODEL, related_name='posts', verbose_name=_("user"),on_delete=models.CASCADE)
     content_raw = models.TextField(verbose_name=_("raw content"))
     content_rendered = models.TextField(default='', verbose_name=_("rendered content"))
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name=_("published time"))
@@ -137,7 +137,7 @@ class Post(models.Model):
         self.raw_content_hash = xxhash.xxh64(self.content_raw).hexdigest()
 
     def __str__(self):
-        return 'Reply to %s' % self.topic.title
+        return 'Reply to %s' % self.thread.title
 
     def save(self, *args, **kwargs):
         new_hash = xxhash.xxh64(self.content_raw).hexdigest()
@@ -145,7 +145,7 @@ class Post(models.Model):
         if new_hash != self.raw_content_hash or (not self.pk):
             self.content_rendered, mentioned_users = render_content(self.content_raw, sender=self.user.username)
         super(Post, self).save(*args, **kwargs)
-        t = self.topic
+        t = self.thread
         t.reply_count = t.get_reply_count()
         t.last_replied = t.get_last_replied()
         t.save(update_fields=['last_replied', 'reply_count'])
@@ -154,7 +154,7 @@ class Post(models.Model):
 
     def delete(self, *args, **kwargs):
         super(Post, self).delete(*args, **kwargs)
-        t = self.topic
+        t = self.thread
         t.reply_count = t.get_reply_count()
         t.last_replied = t.get_last_replied()
         t.save(update_fields=['last_replied', 'reply_count'])
@@ -162,10 +162,10 @@ class Post(models.Model):
 
 @python_2_unicode_compatible
 class Notification(models.Model):
-    sender = models.ForeignKey(USER_MODEL, related_name='sent_notifications', verbose_name=_("sender"),on_delete=models.DO_NOTHING)
-    to = models.ForeignKey(USER_MODEL, related_name='received_notifications', verbose_name=_("recipient"),on_delete=models.DO_NOTHING)
-    topic = models.ForeignKey('Topic', null=True, verbose_name=_("topic"),on_delete=models.DO_NOTHING)
-    post = models.ForeignKey('Post', null=True, verbose_name=_("reply"),on_delete=models.DO_NOTHING)
+    sender = models.ForeignKey(USER_MODEL, related_name='sent_notifications', verbose_name=_("sender"),on_delete=models.CASCADE)
+    to = models.ForeignKey(USER_MODEL, related_name='received_notifications', verbose_name=_("recipient"),on_delete=models.CASCADE)
+    thread = models.ForeignKey('thread', null=True, verbose_name=_("thread"),on_delete=models.CASCADE)
+    post = models.ForeignKey('Post', null=True, verbose_name=_("reply"),on_delete=models.CASCADE)
     read = models.BooleanField(default=False, verbose_name=_("read"))
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name=_("published time"))
 
@@ -175,7 +175,7 @@ class Notification(models.Model):
 
 @python_2_unicode_compatible
 class Appendix(models.Model):
-    topic = models.ForeignKey('Topic', verbose_name=_("topic"),on_delete=models.DO_NOTHING)
+    thread = models.ForeignKey('thread', verbose_name=_("thread"),on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name=_("published time"))
     content_raw = models.TextField(verbose_name=_("raw content"))
     content_rendered = models.TextField(default='', blank=True, verbose_name=_("rendered content"))
@@ -194,7 +194,7 @@ class Appendix(models.Model):
         self.raw_content_hash = new_hash
 
     def __str__(self):
-        return 'Appendix to %s' % self.topic.title
+        return 'Appendix to %s' % self.thread.title
 
 
 
@@ -209,7 +209,7 @@ class NodeGroup(models.Model):
         return self.title
 
 @python_2_unicode_compatible
-class Node(models.Model):
+class Topic(models.Model):
     title = models.CharField(max_length=30, verbose_name=_("title"))
     description = models.TextField(default='', blank=True, verbose_name=_("description"))
     node_group = models.ForeignKey(NodeGroup, verbose_name=_("nodegroup"), on_delete=models.CASCADE)
@@ -219,7 +219,7 @@ class Node(models.Model):
 
 @python_2_unicode_compatible
 class ForumAvatar(models.Model):
-    user = models.OneToOneField(USER_MODEL, related_name='forum_avatar',on_delete=models.DO_NOTHING)
+    user = models.OneToOneField(USER_MODEL, related_name='forum_avatar',on_delete=models.CASCADE)
     use_gravatar = models.BooleanField(default=False)
     image = models.ImageField(max_length=255,
                               upload_to='uploads/forum/avatars/',

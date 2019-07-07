@@ -5,7 +5,7 @@
 {% block left %}
     <div class="panel panel-default">
         <div class="panel-body">
-            <form method="post" action="{% url "forum:create_topic" %}">
+            <form method="post" action="{% url "forum:create_thread" %}">
                 {% crispy form %}
             </form>
         </div>

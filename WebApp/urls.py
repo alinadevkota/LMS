@@ -109,6 +109,11 @@ urlpatterns += (
 )
 
 urlpatterns += (
+    # urls for Admin profile
+    path('profile/', views.ProfileView, name='profile'),
+)
+
+urlpatterns += (
     # urls for ChapterInfo
     path('chapterinfo/', views.ChapterInfoListView.as_view(), name='chapterinfo_list'),
     path('chapterinfo/create/', views.ChapterInfoCreateView.as_view(), name='chapterinfo_create'),
