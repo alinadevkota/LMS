@@ -84,7 +84,24 @@
           <a href="{% url 'messageinfo_list' %}">
             <i class="fa fa-envelope"></i>Message</a>
         </li>
+
+
+        <li>
+          <a><i class="fa fa-question-circle"></i>Quiz<span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'quizinfo_list' %}">Quiz List</a></li>
+            <li>
+              <a href="{% url 'quizinfo_create' %}">Create </a>
+            </li>
+          </ul>
+        </li>
       </ul>
+
+
+
+
+
+
     </div>
     <!-- <div class="menu_section">
       <h3>Live On</h3>
