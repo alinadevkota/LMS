@@ -5256,7 +5256,6 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 /* 
 calendar div */
 #calendarDiv.right_col{
-    float: right;
     margin-right: 10px;
     
 }
