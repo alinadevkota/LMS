@@ -5124,10 +5124,8 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-
     $('#fa-comment').on('click', function () {
         $(".notification").show(300);
-
         $(".users").hide();
 
     });
