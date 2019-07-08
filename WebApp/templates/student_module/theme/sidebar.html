@@ -17,15 +17,17 @@
     </div>
     <!-- /menu profile quick info -->
 
-    <br/>
+    <br />
 
     <!-- sidebar menu -->
     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
         <div class="menu_section">
             <h3>Student Portal Home</h3>
-            <hr/>
+            <hr />
             <ul class="nav side-menu">
-                <li><a href=" {% url "students_dashboard" %}"><i class="fa fa-home"></i> Dashboard </a>
+                <li><a href=" {% url 'students_dashboard' %}"><i class="fa fa-home"></i> Dashboard </a>
+                </li>
+                <li><a href=" {% url 'students_calendar' %}"><i class="fa fa-calendar"></i> Calendar </a>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Course <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -57,20 +59,21 @@
     </div>
     <!-- /sidebar menu -->
 
-    {% comment %} <!-- /menu footer buttons -->
-  <div class="sidebar-footer hidden-small">
-    <a data-toggle="tooltip" data-placement="top" title="Settings">
-      <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-    </a>
-    <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-      <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-    </a>
-    <a data-toggle="tooltip" data-placement="top" title="Lock">
-      <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-    </a>
-    <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-      <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-    </a>
-  </div>
-  <!-- /menu footer buttons --> {% endcomment %}
+    {% comment %}
+    <!-- /menu footer buttons -->
+    <div class="sidebar-footer hidden-small">
+        <a data-toggle="tooltip" data-placement="top" title="Settings">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="Lock">
+            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+        </a>
+    </div>
+    <!-- /menu footer buttons --> {% endcomment %}
 </div>
