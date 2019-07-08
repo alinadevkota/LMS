@@ -5090,12 +5090,12 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
    height: 560px;
    background-color: #fafafa;
    border-radius: 5px 5px 5px 5px;
-   box-shadow: 0 0 5px #adadad;
-   
+   box-shadow: 0 0 5px #adadad;   
 }
 
 .containerMessage ul {
    list-style: none;   
+   
 }
 
 .containerMessage2{   
@@ -5130,8 +5130,7 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 .onlineUser {
    width: 20%;
    background: #fff;  
-   /* z-index: 1000; */
-   /* position: inherit; */
+
    margin-top: -30px;
    padding: 7px;
    border-radius: 50%;
@@ -5143,28 +5142,49 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 
 .status{
    width:300px;
-   height:100px;
+   height:80px;
    display: flex;
    justify-content: flex-start;
    align-items: center;
-   padding:10px;
+   padding:5px;
    margin-left:-30px;
+   margin-top: 30px;
+   
+
 }
 
-.users :hover{
+.groups :hover{
    background-color: #e6e6e6;
 }
+
 
 .content{
    width:170px;
    margin-top:55px;
    margin-left: 15px;
-  
+  padding-top: 10px;
 }
 
-.content span{
+.status .content1{
+    width:170px;
+    margin-top:-10px;
+    margin-left: 15px;      
+ }
+
+ 
+.status .content1 span{
    font-size: 11px;
 }
+
+.onlineUser2 {
+    width: 20%;
+    background: #fff;  
+    margin-top: 0px;
+    padding: 7px;
+    border-radius: 50%;
+ }
+ 
+
 
 .onlineIcon{
    background-color: #1ABB9C;
@@ -5173,29 +5193,55 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
    height: 10px;
    align-content: inline;
    margin-left:-15px;
-   margin-top: -5px;
+   margin-top: 30px;
 }
 
 /* ====================message area=============================== */
 
-.col-100{
-   margin-top: 300px ;
-   text-align: center;
-   border-radius: 6px;
-   border: 1px solid #ccc;
+.col-100{ 
+   margin-top: 120px ;
+   font-size: 15px;
+  
  }
+
+ .inputField{
+     position: relative;
+
+ }
+
+.col-100 input{ 
+  width: 100%;
+  height:50px;  
+  background-color:#dedede; 
+  border: 2px solid #dedede;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px #bdbdbd;
  
-#fname{
-   width: 100%;
 }
+
+.fa-location-arrow{
+  
+    margin-right: 20px;
+    position: absolute;
+    top:2px;
+    left:0;
+    margin-left: 660px;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    align-items: center;
+    height:50px;
+    padding:5px; 
+}
+
 .content1{
-   weight: 600;
+   
    width:170px;
    margin-top:0px;
    margin-left: 15px;
   
 }
-
 
 .onlineUser1 {
    width: 20%;
@@ -5237,19 +5283,149 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 }
 
 .message12 p {
-   
+   font-size: 15px;
    padding-left: 10px;
-   padding-top: 10px;
+   padding-top: 15px;
 }
 
 .message1 {
    
    background-color: #2d3a52;
-   width: 40%;
+   width: auto;
    height: auto;
-   margin-left: 70px;
-   margin-top: auto;
+   margin-left: 400px;
    border: 2px solid #2d3a52;
    border-radius: 5px;
-   flex-direction: row-reverse;
+   text-align: relative;
+   font-size: 15px;
+   padding-top: -10px;
 }
+
+
+.fa-comment {
+    padding-top: 20px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.fa-users{
+    padding-top: 20px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.fa-bell{
+    padding-top: 20px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.notifi-lock{
+    background-color:#f0f0f0;
+    border-radius: 5px;
+    width: auto ;
+    height: 20%;
+    margin-top: 10px;
+    text-align: inline;
+}
+
+.notifi-lock .fa-lock {
+   
+    padding-left: 10px;
+    margin-top: 10px;
+ }
+ 
+
+.notifi-lock h5 {
+   
+    padding-left: 40px;
+    margin-top: -30px;
+ }
+
+ .notification h4{
+    margin-left: 20px;
+    margin-top: 20px;
+ }
+
+ .discussions{
+     display: none;
+ }
+
+ .discussions .status{
+    background-color:#f0f0f0;
+    border-radius: 5px;
+    width: auto ;
+    height: auto;
+    margin-left: 10px;
+    margin-right: 5px;
+    margin-top: 10px;
+ }
+
+ .discussions .onlineUser{
+    margin-top: 10px;
+    width: 20%;
+    background: #fff;   
+    padding: 7px;
+    border-radius: 50%;
+ }
+
+ .discussions {
+    margin-bottom: 4px;
+ }
+
+ .discussions h4{
+    margin-left: 20px;
+    margin-top: 20px;
+ }
+ 
+ .discussions .content h5 {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #212529;
+    margin-top: -50px;
+    margin-right: auto;  
+    margin-bottom: 4px;
+ }
+
+ .discussions .content span {
+    font-size: 14px;
+ }
+ 
+ 
+.search-header{
+    width:auto;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-content: center;
+    
+}
+
+#form-btn{
+    width:170px;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding:3px;
+    margin-top: 10px;
+}
+
+
+#form-btn input[type="text"]{
+    width:140px;
+    margin-left: 5px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    padding-left:10px;
+    box-shadow: 1px 1px 3px;
+    border: 2px solid #f2f2f2;
+    
+ }
+
+ #form-btn button{
+    border-radius: 5px;
+     margin:2px;
+     
+ }
