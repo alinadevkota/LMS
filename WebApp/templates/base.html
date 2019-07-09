@@ -17,7 +17,6 @@
 
     <title>LMS | {% block title %}{% endblock %}</title>
 
-    {% block stylesheets %}
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <!-- Bootstrap -->
     <link href="{% static 'vendorsx/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -46,6 +45,7 @@
     <link href="{%  static "/build/css/custom.css" %}" rel="stylesheet">
 
     <link rel="icon" href="{% static 'images/icon.jpg' %}" type="image/x-icon" />
+    {% block stylesheets %}
     {% endblock stylesheets %}
 
 
