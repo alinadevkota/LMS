@@ -5429,3 +5429,11 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
      margin:2px;
      
  }
+
+ #ubl_logo{
+     height: 50px;
+     width: 50px;
+ }
+ #LMS{
+     margin-left: 30px;
+ }
