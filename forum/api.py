@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.authentication import SessionAuthentication
-from forum.models import Topic, Post
-from forum.serializers import TopicSerializer, PostSerializer
+from forum.models import Thread, Post
+from forum.serializers import ThreadSerializer, PostSerializer
 
 
 class SessionAuthenticationExemptCSRF(SessionAuthentication):
@@ -10,10 +10,10 @@ class SessionAuthenticationExemptCSRF(SessionAuthentication):
         return
 
 
-class TopicApiView(viewsets.ModelViewSet):
+class ThreadApiView(viewsets.ModelViewSet):
     authentication_classes = (SessionAuthenticationExemptCSRF,)
-    queryset = Topic.objects.all()
-    serializer_class = TopicSerializer
+    queryset = Thread.objects.all()
+    serializer_class = ThreadSerializer
 
 
 class PostApiView(viewsets.ModelViewSet):

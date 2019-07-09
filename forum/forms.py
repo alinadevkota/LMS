@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.conf import settings
 from crispy_forms.layout import Submit
 from crispy_forms.helper import FormHelper
-from .models import Topic, Appendix, ForumAvatar, Post
+from .models import Thread, Appendix, ForumAvatar, Post, Topic
 from django.utils.translation import ugettext as _
 
 if 'pagedown' in settings.INSTALLED_APPS:
@@ -14,6 +14,51 @@ else:
     use_pagedown = False
 
 
+class ThreadForm(ModelForm):
+
+    if use_pagedown:
+        content_raw = forms.CharField(label=_('Content'), widget=PagedownWidget())
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(ThreadForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.add_input(Submit('submit', _('Submit')))
+
+    class Meta:
+        model = Thread
+        fields = ['topic', 'title', 'content_raw']
+        labels = {
+            'content_raw': _('Content'),
+            'topic': _('Topic'),
+            'title': _('Title'),
+        }
+
+    def save(self, commit=True):
+        inst = super(ThreadForm, self).save(commit=False)
+        inst.user = self.user
+        if commit:
+            inst.save()
+            self.save_m2m()
+        return inst
+
+
+class ThreadEditForm(ModelForm):
+
+    if use_pagedown:
+        content_raw = forms.CharField(label=_('Content'), widget=PagedownWidget())
+
+    def __init__(self, *args, **kwargs):
+        super(ThreadEditForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.add_input(Submit('submit', _('Submit')))
+
+    class Meta:
+        model = Thread
+        fields = ('content_raw', )
+        labels = {
+            'content_raw': _('Content'),
+        }
 class TopicForm(ModelForm):
 
     if use_pagedown:
@@ -27,10 +72,10 @@ class TopicForm(ModelForm):
 
     class Meta:
         model = Topic
-        fields = ['node', 'title', 'content_raw']
+        fields = ['node_group','title','description' ]
         labels = {
-            'content_raw': _('Content'),
-            'node': _('Node'),
+            'node_group':_('NodeGroup'),
+            'description': _('Description'),
             'title': _('Title'),
         }
 
@@ -55,16 +100,16 @@ class TopicEditForm(ModelForm):
 
     class Meta:
         model = Topic
-        fields = ('content_raw', )
+        fields = ('description', )
         labels = {
-            'content_raw': _('Content'),
+            'description': _('Description'),
         }
 
 
 class AppendixForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
-        self.topic = kwargs.pop('topic', None)
+        self.thread = kwargs.pop('thread', None)
         super(AppendixForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.add_input(Submit('submit', _('Submit')))
@@ -78,7 +123,7 @@ class AppendixForm(ModelForm):
 
     def save(self, commit=True):
         inst = super(AppendixForm, self).save(commit=False)
-        inst.topic = self.topic
+        inst.thread = self.thread
         if commit:
             inst.save()
             self.save_m2m()
@@ -117,7 +162,7 @@ class ReplyForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
-        self.topic_id = kwargs.pop('topic_id', None)
+        self.thread_id = kwargs.pop('thread_id', None)
         super(ReplyForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.add_input(Submit('submit', _('Submit')))
@@ -132,7 +177,7 @@ class ReplyForm(ModelForm):
     def save(self, commit=True):
         inst = super(ReplyForm, self).save(commit=False)
         inst.user = self.user
-        inst.topic_id = self.topic_id
+        inst.thread_id = self.thread_id
         if commit:
             inst.save()
             self.save_m2m()
