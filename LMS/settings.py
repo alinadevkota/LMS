@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'WebApp',
 
     'django.contrib.humanize',
-    'forum'
+    'forum',
+    'quiz',
 ]
 
 MIDDLEWARE = [
@@ -155,7 +156,7 @@ django_heroku.settings(locals())
 
 
 LOGIN_URL = "/login/"
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'WebApp.MemberInfo'
 
