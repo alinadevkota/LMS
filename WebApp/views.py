@@ -44,6 +44,9 @@ from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterCon
 #     form_class = ProfileForm
 #
 
+def ProfileView(request):
+    return render(request, 'WebApp/profile.html')
+
 def login(request, template_name='registration/login.html',
           redirect_field_name=REDIRECT_FIELD_NAME,
           authentication_form=AuthenticationForm,
