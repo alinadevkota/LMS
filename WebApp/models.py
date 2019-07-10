@@ -49,7 +49,7 @@ class MemberInfo(AbstractUser):
     Member_ID = models.CharField(max_length=250, blank=True, null=True)
     # remove this password field
     # Member_Password = models.CharField(max_length=250, blank=True, null=True)
-    Member_Type = models.IntegerField(blank=True, null=True)
+    # Member_Type = models.IntegerField(blank=True, null=True)
     Member_Name = models.CharField(max_length=500, blank=True, null=True)
     Member_Permanent_Address = models.CharField(max_length=500, blank=True, null=True)
     Member_Temporary_Address = models.CharField(max_length=500, blank=True, null=True)
@@ -62,7 +62,12 @@ class MemberInfo(AbstractUser):
     Register_Agent = models.CharField(max_length=200, blank=True, null=True)
     Member_Memo = models.CharField(max_length=500, blank=True, null=True)
 
-    Member_Role = models.CharField(max_length=30, default="Student")
+    Is_Teacher = models.BooleanField(default=False)
+    Is_Student = models.BooleanField(default=False)
+    Is_CenterAdmin = models.BooleanField(default=False)
+    Is_Parent = models.BooleanField(default=False)
+
+    # Member_Role = models.CharField(max_length=30, default="Student")
 
     # Relationship Fields
     centcode = ForeignKey(
