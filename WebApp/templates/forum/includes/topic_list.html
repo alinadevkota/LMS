@@ -7,6 +7,11 @@
     {% block before_main_left %}{% endblock %}
     <div class="panel panel-default">
         <div class="panel-body panel-subtitle">
+        <ol class="breadcrumb">
+                <li><a href="{% url 'forum:index' %}">Home</a></li>
+
+                <li class="active">{{ topic.title }}</li>
+            </ol>
             <span class="label label-success">{{ panel_title }}</span>
             {% if show_order %}
               <span class="pull-right ordering">
