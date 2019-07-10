@@ -1083,7 +1083,9 @@ fieldset[disabled] .btn-inverse.active {
   border-top: 1px solid #efefef;
 }
 .panel-heading > *:first-child {
-  margin-top: 0;
+  margin-top: 12px;
+    margin-right: 9px;
+}
 }
 .panel-heading > *:last-child {
   margin-bottom: 0;
