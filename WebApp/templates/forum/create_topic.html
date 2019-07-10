@@ -3,11 +3,11 @@
 {% load crispy_forms_tags %}
 
 {% block left %}
-<div class="panel panel-default">
-    <div class="panel-body">
-        <form method="post" action="{% url 'forum:create_topic' %}">
-            {% crispy form %}
-        </form>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form method="post" action="{% url "forum:create_topic" %}">
+                {% crispy form %}
+            </form>
+        </div>
     </div>
-</div>
 {% endblock %}

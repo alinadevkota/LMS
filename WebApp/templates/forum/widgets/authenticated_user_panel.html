@@ -13,12 +13,12 @@
             </div>
             <div class="row panel-user-meta">
                 <div class="col-xs-4 panel-user-meta-item">
-                    <a href="{% url 'forum:user_topics' request.user.pk %}">
+                    <a href="{% url 'forum:user_threads' request.user.pk %}">
                         <div class="text-center">
                             <p class="panel-user-meta-item-value">
-                                {{ request.user.topics.count }}
+                                {{ request.user.threads.count }}
                             </p>
-                            <p class="panel-user-meta-item-title">Topics</p>
+                            <p class="panel-user-meta-item-title">threads</p>
                         </div>
                     </a>
                 </div>
@@ -45,7 +45,13 @@
         <!-- <li class="list-group-item">
             <a href="{% url 'forum:create_topic' %}">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                {% trans 'Create Topic' %}
+                {% trans 'Add Topic' %}
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="{% url 'forum:create_thread' %}">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                {% trans 'Create Thread' %}
             </a>
         </li> -->
 
