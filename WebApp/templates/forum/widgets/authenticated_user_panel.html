@@ -6,9 +6,10 @@
         <div class="panel-user-info">
             <div class="avatar-name">
                 <a href="{% url "forum:upload_avatar" %}">
-                    <img class="panel-avatar user-avatar" src="{% avatar_url request.user %}" alt=""/>
+                    <img class="panel-avatar user-avatar" src="{% avatar_url request.user %}" alt="" />
                 </a>
-                <span class="panel-username"><a href="{% url 'forum:user_info' request.user.pk %}">{{ request.user.username }}</a></span>
+                <span class="panel-username"><a
+                        href="{% url 'forum:user_info' request.user.pk %}">{{ request.user.username }}</a></span>
             </div>
             <div class="row panel-user-meta">
                 <div class="col-xs-4 panel-user-meta-item">
@@ -29,19 +30,19 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-xs-4 panel-user-meta-item">
+                <!-- <div class="col-xs-4 panel-user-meta-item">
                     <a href="{% url 'forum:user_info' request.user.pk %}">
                         <div class="text-center">
                             <p class="panel-user-meta-item-value">{{ request.user.pk }}</p>
                             <p class="panel-user-meta-item-title">UID</p>
                         </div>
                     </a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
     <ul class="list-group">
-    <li class="list-group-item">
+        <!-- <li class="list-group-item">
             <a href="{% url 'forum:create_topic' %}">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 {% trans 'Add Topic' %}
@@ -52,26 +53,13 @@
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 {% trans 'Create Thread' %}
             </a>
-        </li>
-        <li class="list-group-item">
-            <a class="text-success" href="{% url 'forum:notifications' %}">
-                {% if unread_count %}
-                    <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
-                    {% blocktrans count unread_count=unread_count %}
-                        {{ unread_count }} new notification
-                        {% plural %}
-                        {{ unread_count }} new notifications
-                    {% endblocktrans %}
-                {% else %}
-                    <span class="text-muted">{% trans 'No new nofitications' %}</span>
-                {% endif %}
-            </a>
-        </li>
-        <li class="list-group-item">
+        </li> -->
+
+        <!-- <li class="list-group-item">
             <a href="{% url 'forum:logout' %}">
                 <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                 {% trans "Log out" %}
             </a>
-        </li>
+        </li> -->
     </ul>
 </div>

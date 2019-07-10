@@ -138,7 +138,6 @@ def loginsuccess(request):
 class CenterInfoListView(ListView):
     model = CenterInfo
 
-
 class CenterInfoCreateView(CreateView):
     model = CenterInfo
     form_class = CenterInfoForm
@@ -160,6 +159,10 @@ def CenterInfoDeleteView(request, pk):
 
 class MemberInfoListView(ListView):
     model = MemberInfo
+
+    def get_queryset(self):
+        return MemberInfo.objects.filter(centcode=self.request.user.centcode)
+
 
 
 class MemberInfoCreateView(CreateView):
