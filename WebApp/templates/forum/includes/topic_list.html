@@ -1,0 +1,68 @@
+{% extends 'forum/base.html' %}
+{% load i18n %}
+{% load forum_tags %}
+{% load humanize %}
+
+{% block left %}
+    {% block before_main_left %}{% endblock %}
+    <div class="panel panel-default">
+        <div class="panel-body panel-subtitle">
+        <ol class="breadcrumb">
+                <li><a href="{% url 'forum:index' %}">Home</a></li>
+
+                <li class="active">{{ topic.title }}</li>
+            </ol>
+            <span class="label label-success">{{ panel_title }}</span>
+            {% if show_order %}
+              <span class="pull-right ordering">
+                Order:
+                <span>
+                  <a href="{% change_thread_ordering request '-last_replied' %}">Last Replied</a>
+                </span>
+                <span>
+                  <a href="{% change_thread_ordering request '-pub_date' %}">thread Date</a>
+                </span>
+              </span>
+            {% endif %}
+        </div>
+        <!-- List group -->
+        <ul class="list-group thread-list">
+            {% for topic in topics %}
+                <li class="list-group-item thread-entry">
+                    <div class="entry media">
+
+                        <div class="media-body media-middle">
+                            <a href="{% url 'forum:topic' pk=topic.pk %}" class="entry-link">
+                                {{ topic.title }}
+                            </a>
+                            <p class="entry-meta">
+                                {% if topic.order <= 3 %}
+                                <span class="meta">
+                                    <span class="label label-info meta-top">
+                                        TOP
+                                    </span>
+                                </span>
+                                {% endif %}
+                                <span class="meta">
+                                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">
+                                        <span class="label label-default meta-topic">
+                                        {{ topic.node_group.title }}
+                                        </span>
+                                    </a>
+                                </span>
+
+
+                            </p>
+                        </div>
+{#                        <div class="media-right media-middle">#}
+{#                            <span class="badge">{{ topic.reply_count }}</span>#}
+{#                        </div>#}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="panel-footer">
+            {% get_pagination %}
+        </div>
+    </div>
+{% endblock %}

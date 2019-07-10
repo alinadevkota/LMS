@@ -33,8 +33,8 @@ class MemberInfoSerializer(serializers.ModelSerializer):
         fields = (
             'pk', 
             'Member_ID', 
-            'Member_Password', 
-            'Member_Type', 
+            'Member_Password', \
+ \
             'Member_Name', 
             'Member_Permanent_Address', 
             'Member_Temporary_Address', 
@@ -45,8 +45,12 @@ class MemberInfoSerializer(serializers.ModelSerializer):
             'member_Gender', 
             'Use_Flag', 
             'Register_DateTime', 
-            'Register_Agent', 
-            'Member_Memo', 
+            'Register_Agent',
+            'Member_Memo',
+            'Is_Teacher',
+            'Is_CenterAdmin'
+            'Is_Student',
+            'Is_Parent'
         )
 
 
@@ -257,6 +261,8 @@ class OmrQuestionInfoSerializer(serializers.ModelSerializer):
             'udt_agent', 
             'question_level', 
             'question_score', 
+            'chapter_code',
+            'lecture_code',
         )
 
 

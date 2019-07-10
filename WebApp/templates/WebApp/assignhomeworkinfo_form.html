@@ -26,7 +26,7 @@
     <hr class="header_hr">
 </div>
 <div class="x_content">
-    <form method="post" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+    <form method="post" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left">
         {% csrf_token %}
 
 
@@ -34,8 +34,8 @@
             <label for="id_subject_code" class="control-label ">
                 Subject Code
             </label>
-            <input type="number" name="subject_code" id="id_subject_code" required="required"
-                class="numberinput form-control has-feedback-left" placeholder="Subject Code">
+            <input type="number" value="{{ object.subject_code}}" name="subject_code" id="id_subject_code"
+                required="required" class="numberinput form-control has-feedback-left" placeholder="Subject Code">
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
         </div>
@@ -44,8 +44,8 @@
             <label for="id_reg_agent" class="control-label ">
                 Reg Agent
             </label>
-            <input type="number" name="reg_agent" id="id_reg_agent" required="required"
-                class="form-control has-feedback-left" id="inputSuccess3" placeholder="Reg Agent">
+            <input type="text" value="{{ object.reg_agent}}" name="reg_agent" id="id_reg_agent" required="required"
+                class="form-control has-feedback-left" placeholder="Reg Agent">
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
         </div>
 
@@ -54,29 +54,39 @@
     <label for="id_udt_agent" class="control-label ">
         Udt Agent
     </label>
-    <input type="text" name="udt_agent" id="id_udt_agent" required="required" class="form-control has-feedback-left"
-        id="inputSuccess3" placeholder="Udt Agent">
+    <input type="text" name="udt_agent" value="{{ object.udt_agent}}" id="id_udt_agent" required pattern="[A-Z]"
+        class="form-control has-feedback-left" placeholder="Udt Agent">
     <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 </div>
 
 
 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-    <label for="id_question_code" class="control-label ">
+    <label for="id_question_code" class="form-control-label  requiredField">
         Question Code
     </label>
-    <select name="question_code" id="id_question_code" required="required" class="select form-control"
-        id="inputSuccess3">
-        <option value="" selected="">---------</option>
-    </select>
+    <div class=""> <select name="question_code" id="id_question_code" class="select form-control">
+            <option value="" selected=""></option>
+            {% for c in form.fields.question_code.queryset %}
+            <option value="{{ c.id|capfirst }}">{{ c.subject_code|capfirst }}</option>
+            {% endfor %}
+
+        </select>
+    </div>
 
 </div>
 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-    <label for="id_lecture_code" class="control-label ">
+    <label for="id_lecture_code" class="form-control-label  requiredField">
         Lecture Code
     </label>
-    <select name="lecture_code" id="id_lecture_code" required="required" class="select form-control" id="inputSuccess3">
-        <option value="" selected="">---------</option>
-    </select>
+    <div class=""> <select name="lecture_code" id="id_lecture_code" class="select form-control">
+            <option value="" selected=""></option>
+            {% for c in form.fields.lecture_code.queryset %}
+            <option value="{{ c.id|capfirst }}">{{ c.lecture_name|capfirst }}</option>
+            {% endfor %}
+
+        </select>
+    </div>
+
 
 </div>
 
@@ -85,9 +95,11 @@
     <label for="id_chapter_code" class="form-control-label  requiredField">
         Chapter Code
     </label>
-    <div class=""> <select name="chapter_code" id="id_chapter_code" required="" class="select form-control">
-            <option value="" selected="">---------</option>
-
+    <div class=""> <select name="chapter_code" id="id_chapter_code" class="select form-control">
+            <option value="" selected=""></option>
+            {% for c in form.fields.chapter_code.queryset %}
+            <option value="{{ c.id|capfirst }}">{{ c.chapter_name|capfirst }}</option>
+            {% endfor %}
 
         </select>
     </div>
@@ -98,13 +110,14 @@
 
 
 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-
     <label for="id_member_code" class="form-control-label  requiredField">
         Member Code
     </label>
-    <div class=""> <select name="member_code" id="id_member_code" required="" class="select form-control">
-            <option value="" selected="">---------</option>
-
+    <div class=""> <select name="member_code" id="id_member_code" class="select form-control">
+            <option value="" selected=""></option>
+            {% for c in form.fields.member_code.queryset %}
+            <option value="{{ c.id|capfirst }}">{{ c.username|capfirst }}</option>
+            {% endfor %}
 
         </select>
     </div>
@@ -126,4 +139,9 @@
 </div>
 </form>
 </div>
+
+<!-- <div class="out">
+    {{form|crispy}}
+</div> -->
+
 {% endblock %}

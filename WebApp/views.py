@@ -44,6 +44,9 @@ from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterCon
 #     form_class = ProfileForm
 #
 
+def ProfileView(request):
+    return render(request, 'WebApp/profile.html')
+
 def login(request, template_name='registration/login.html',
           redirect_field_name=REDIRECT_FIELD_NAME,
           authentication_form=AuthenticationForm,
@@ -135,7 +138,6 @@ def loginsuccess(request):
 class CenterInfoListView(ListView):
     model = CenterInfo
 
-
 class CenterInfoCreateView(CreateView):
     model = CenterInfo
     form_class = CenterInfoForm
@@ -157,6 +159,10 @@ def CenterInfoDeleteView(request, pk):
 
 class MemberInfoListView(ListView):
     model = MemberInfo
+
+    def get_queryset(self):
+        return MemberInfo.objects.filter(centcode=self.request.user.centcode)
+
 
 
 class MemberInfoCreateView(CreateView):

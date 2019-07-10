@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from .models import Topic, Node, Post, Appendix, NodeGroup
+from .models import Thread, Topic, Post, Appendix, NodeGroup
 
 
 class PostInline(admin.TabularInline):
@@ -25,12 +25,12 @@ class AppendixInline(admin.TabularInline):
     extra = 1
 
 
-class TopicAdmin(admin.ModelAdmin):
+class ThreadAdmin(admin.ModelAdmin):
 
-    def is_top_topic(self, obj):
+    def is_top_thread(self, obj):
         return obj.order < 10
 
-    is_top_topic.boolean = True
+    is_top_thread.boolean = True
 
     list_display = (
         'title',
@@ -41,7 +41,7 @@ class TopicAdmin(admin.ModelAdmin):
         'reply_count',
         'hidden',
         'closed',
-        'is_top_topic',
+        'is_top_thread',
     )
     fields = (
         'user',
@@ -65,13 +65,28 @@ class TopicAdmin(admin.ModelAdmin):
     ]
 
 
-class NodeAdmin(admin.ModelAdmin):
+class TopicAdmin(admin.ModelAdmin):
+
+    def number_of_threads(self, obj):
+        threads = Thread.objects.filter(topic=obj)
+        return "{}({})".format(threads.count(), threads.visible().count())
+
+    number_of_threads.short_description = "Number of Threads [total(visible)]"
+
+    list_display = (
+        'title',
+        'number_of_threads'
+    )
+    search_fields = (
+        'title',
+    )
+class NodeGroupAdmin(admin.ModelAdmin):
 
     def number_of_topics(self, obj):
-        topics = Topic.objects.filter(node=obj)
-        return "{}({})".format(topics.count(), topics.visible().count())
+        topics = Topic.objects.filter(node_group=obj)
+        return "{}({})".format(topics.count(),topics.count())
 
-    number_of_topics.short_description = "Number of Topics [total(visible)]"
+    number_of_topics.short_description = "Number of topics [total(visible)]"
 
     list_display = (
         'title',
@@ -80,22 +95,7 @@ class NodeAdmin(admin.ModelAdmin):
     search_fields = (
         'title',
     )
-class NodeGroupAdmin(admin.ModelAdmin):
 
-    def number_of_nodes(self, obj):
-        nodes = Node.objects.filter(node_group=obj)
-        return "{}({})".format(nodes.count())
-
-    number_of_nodes.short_description = "Number of nodes [total(visible)]"
-
-    list_display = (
-        'title',
-        'number_of_nodes'
-    )
-    search_fields = (
-        'title',
-    )
-
-admin.site.register(Topic, TopicAdmin)
+admin.site.register(Thread, ThreadAdmin)
 admin.site.register(NodeGroup, NodeGroupAdmin)
-admin.site.register(Node, NodeAdmin)
+admin.site.register(Topic, TopicAdmin)

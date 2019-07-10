@@ -10,8 +10,8 @@ from django.views.generic import ListView
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from .models import Topic, Node, Post, Notification, ForumAvatar
-from .forms import TopicForm, TopicEditForm, AppendixForm, ForumAvatarForm, ReplyForm
+from .models import Thread, Topic, Post, Notification, ForumAvatar, NodeGroup
+from .forms import ThreadForm, ThreadEditForm, AppendixForm, ForumAvatarForm, ReplyForm, TopicForm, TopicEditForm
 from .misc import get_query
 import re
 
@@ -22,12 +22,12 @@ User = get_user_model()
 def get_default_ordering():
     return getattr(
         settings,
-        "forum_DEFAULT_TOPIC_ORDERING",
+        "forum_DEFAULT_THREAD_ORDERING",
         "-last_replied"
     )
 
 
-def get_topic_ordering(request):
+def get_thread_ordering(request):
     query_order = request.GET.get("order", "")
     if query_order in ["-last_replied", "last_replied", "pub_date", "-pub_date"]:
         return query_order
@@ -36,62 +36,85 @@ def get_topic_ordering(request):
 
 # Create your views here.
 class Index(ListView):
-    model = Topic
+    model = Thread
     paginate_by = 30
     template_name = 'forum/index.html'
-    context_object_name = 'topics'
+    context_object_name = 'threads'
 
     def get_queryset(self):
-        return Topic.objects.visible().select_related(
-            'user', 'node'
+        return Thread.objects.visible().select_related(
+            'user', 'topic'
         ).prefetch_related(
             'user__forum_avatar'
         ).order_by(
-            *['order', get_topic_ordering(self.request)]
+            *['order', get_thread_ordering(self.request)]
         )
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        context['panel_title'] = _('New Topics')
+        context['panel_title'] = _('New Threads')
         context['title'] = _('Index')
         context['show_order'] = True
         return context
 
-
-class NodeView(ListView):
+class NodeGroupView(ListView):
     model = Topic
     paginate_by = 30
-    template_name = 'forum/node.html'
+    template_name = 'forum/nodegroup.html'
     context_object_name = 'topics'
 
     def get_queryset(self):
-        return Topic.objects.visible().filter(
-            node__id=self.kwargs.get('pk')
+        return Topic.objects.filter(
+            node_group__id=self.kwargs.get('pk')
         ).select_related(
-            'user', 'node'
+            'user', 'node_group'
         ).prefetch_related(
             'user__forum_avatar'
-        ).order_by(
-            *['order', get_topic_ordering(self.request)]
         )
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        context['node'] = node = Node.objects.get(pk=self.kwargs.get('pk'))
-        context['title'] = context['panel_title'] = node.title
+        context['node_group'] = nodegroup = NodeGroup.objects.get(pk=self.kwargs.get('pk'))
+        context['title'] = context['panel_title'] = nodegroup.title
+        context['show_order'] = True
+        context['topics']=Topic.objects.filter(node_group__id=self.kwargs.get('pk'))
+        return context
+
+class TopicView(ListView):
+    model = Thread
+    paginate_by = 30
+    template_name = 'forum/topic.html'
+    context_object_name = 'threads'
+
+    def get_queryset(self):
+        return Thread.objects.visible().filter(
+            topic__id=self.kwargs.get('pk')
+        ).select_related(
+            'user', 'topic'
+        ).prefetch_related(
+            'user__forum_avatar'
+        ).order_by(
+            *['order', get_thread_ordering(self.request)]
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        print(self.kwargs.get('pk'))
+        context['topic'] = topic = Topic.objects.get(pk=self.kwargs.get('pk'))
+        context['title'] = context['panel_title'] = topic.title
         context['show_order'] = True
         return context
 
 
-class TopicView(ListView):
+class ThreadView(ListView):
     model = Post
     paginate_by = 30
-    template_name = 'forum/topic.html'
+    template_name = 'forum/thread.html'
     context_object_name = 'posts'
 
     def get_queryset(self):
         return Post.objects.visible().filter(
-            topic_id=self.kwargs.get('pk')
+            thread_id=self.kwargs.get('pk')
         ).select_related(
             'user'
         ).prefetch_related(
@@ -100,29 +123,29 @@ class TopicView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        current = Topic.objects.visible().get(pk=self.kwargs.get('pk'))
+        current = Thread.objects.get(pk=self.kwargs.get('pk'))
         current.increase_view_count()
-        context['topic'] = current
-        context['title'] = context['topic'].title
-        context['node'] = context['topic'].node
+        context['thread'] = current
+        context['title'] = context['thread'].title
+        context['topic'] = context['thread'].topic
         context['form'] = ReplyForm()
         return context
 
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
-        current = Topic.objects.visible().get(pk=self.kwargs.get('pk'))
+        current = Thread.objects.visible().get(pk=self.kwargs.get('pk'))
         if current.closed:
-            return HttpResponseForbidden("Topic closed")
-        topic_id = self.kwargs.get('pk')
+            return HttpResponseForbidden("Thread closed")
+        thread_id = self.kwargs.get('pk')
         form = ReplyForm(
             request.POST,
             user=request.user,
-            topic_id=topic_id
+            thread_id=thread_id
         )
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(
-                reverse('forum:topic', kwargs={'pk': topic_id})
+                reverse('forum:thread', kwargs={'pk': thread_id})
             )
 
 
@@ -131,22 +154,22 @@ def user_info(request, pk):
     return render(request, 'forum/user_info.html', {
         'title': u.username,
         'user': u,
-        'topics': u.topics.visible().select_related('node')[:10],
-        'replies': u.posts.visible().select_related('topic', 'user').order_by('-pub_date')[:30],
+        'threads': u.threads.visible().select_related('topic')[:10],
+        'replies': u.posts.visible().select_related('thread', 'user').order_by('-pub_date')[:30],
     })
 
 
-class UserTopics(ListView):
+class UserThreads(ListView):
     model = Post
     paginate_by = 30
-    template_name = 'forum/user_topics.html'
-    context_object_name = 'topics'
+    template_name = 'forum/user_threads.html'
+    context_object_name = 'threads'
 
     def get_queryset(self):
-        return Topic.objects.visible().filter(
+        return Thread.objects.visible().filter(
             user_id=self.kwargs.get('pk')
         ).select_related(
-            'user', 'node'
+            'user', 'topic'
         ).prefetch_related(
             'user__forum_avatar'
         )
@@ -159,22 +182,22 @@ class UserTopics(ListView):
 
 
 class SearchView(ListView):
-    model = Topic
+    model = Thread
     paginate_by = 30
     template_name = 'forum/search.html'
-    context_object_name = 'topics'
+    context_object_name = 'threads'
 
     def get_queryset(self):
         keywords = self.kwargs.get('keyword')
         query = get_query(keywords, ['title'])
-        return Topic.objects.visible().filter(
+        return Thread.objects.visible().filter(
             query
         ).select_related(
-            'user', 'node'
+            'user', 'topic'
         ).prefetch_related(
             'user__forum_avatar'
         ).order_by(
-            get_topic_ordering(self.request)
+            get_thread_ordering(self.request)
         )
 
     def get_context_data(self, **kwargs):
@@ -193,6 +216,18 @@ def search_redirect(request):
 
 
 @login_required
+def create_thread(request):
+    if request.method == 'POST':
+        form = ThreadForm(request.POST, user=request.user)
+        if form.is_valid():
+            t = form.save()
+            return HttpResponseRedirect(reverse('forum:thread', kwargs={'pk': t.pk}))
+    else:
+        form = ThreadForm()
+
+    return render(request, 'forum/create_thread.html', {'form': form, 'title': _('Create Thread')})
+
+@login_required
 def create_topic(request):
     if request.method == 'POST':
         form = TopicForm(request.POST, user=request.user)
@@ -206,12 +241,27 @@ def create_topic(request):
 
 
 @login_required
+def edit_thread(request, pk):
+    thread = Thread.objects.get(pk=pk)
+    if thread.reply_count > 0:
+        return HttpResponseForbidden(_('Editing is not allowed when thread has been replied'))
+    if not thread.user == request.user:
+        return HttpResponseForbidden(_('You are not allowed to edit other\'s thread'))
+    if request.method == 'POST':
+        form = ThreadEditForm(request.POST, instance=thread)
+        if form.is_valid():
+            t = form.save()
+            return HttpResponseRedirect(reverse('forum:thread', kwargs={'pk': t.pk}))
+    else:
+        form = ThreadEditForm(instance=thread)
+
+    return render(request, 'forum/edit_thread.html', {'form': form, 'title': _('Edit thread')})
+
+@login_required
 def edit_topic(request, pk):
     topic = Topic.objects.get(pk=pk)
-    if topic.reply_count > 0:
-        return HttpResponseForbidden(_('Editing is not allowed when topic has been replied'))
     if not topic.user == request.user:
-        return HttpResponseForbidden(_('You are not allowed to edit other\'s topic'))
+        return HttpResponseForbidden(_('You are not allowed to edit other\'s thread'))
     if request.method == 'POST':
         form = TopicEditForm(request.POST, instance=topic)
         if form.is_valid():
@@ -220,19 +270,19 @@ def edit_topic(request, pk):
     else:
         form = TopicEditForm(instance=topic)
 
-    return render(request, 'forum/edit_topic.html', {'form': form, 'title': _('Edit Topic')})
+    return render(request, 'forum/edit_topic.html', {'form': form, 'title': _('Edit topic')})
 
 
 @login_required
 def create_appendix(request, pk):
-    topic = Topic.objects.get(pk=pk)
-    if not topic.user == request.user:
-        return HttpResponseForbidden(_('You are not allowed to append other\'s topic'))
+    thread = Thread.objects.get(pk=pk)
+    if not thread.user == request.user:
+        return HttpResponseForbidden(_('You are not allowed to append other\'s thread'))
     if request.method == 'POST':
-        form = AppendixForm(request.POST, topic=topic)
+        form = AppendixForm(request.POST, thread=thread)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('forum:topic', kwargs={'pk': topic.pk}))
+            return HttpResponseRedirect(reverse('forum:thread', kwargs={'pk': thread.pk}))
     else:
         form = AppendixForm()
 
@@ -283,9 +333,9 @@ class NotificationView(ListView):
         return Notification.objects.filter(
             to=self.request.user
         ).select_related(
-            'sender', 'topic', 'post'
+            'sender', 'thread', 'post'
         ).prefetch_related(
-            'sender__forum_avatar', 'post__topic'
+            'sender__forum_avatar', 'post__thread'
         ).order_by('-pub_date')
 
     def get_context_data(self, **kwargs):

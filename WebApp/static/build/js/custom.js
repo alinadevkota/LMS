@@ -5121,3 +5121,38 @@ $(document).ready(function () {
     init_autocomplete();
 
 });
+
+$(document).ready(function () {
+
+    $("#messageSidebar").on('click', function () {
+        $('#messageIconTopbar').show();
+
+    })
+
+    $(".discussions").css({ 'display': 'block' })
+    $('#fa-comment').on('click', function () {
+        $(".discussions").show(300);
+        $(".users").hide();
+        $(".notification").hide();
+
+    });
+
+    $('#fa-users').on('click', function () {
+        $('.users').show(300);
+        $(".discussions").hide();
+
+        // Animation complete.
+        $(".notification").hide();
+
+
+    });
+
+
+    $('#fa-bell').on('click', function () {
+        $('.notification').show(300);
+        $(".discussions").hide();
+        $(".users").hide();
+    });
+
+
+});

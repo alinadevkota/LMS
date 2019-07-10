@@ -26,3 +26,9 @@ def quiz(request):
 
 def quizzes(request):
     return render(request, 'student_module/quizzes.html')
+
+
+def calendar(request):
+    return render(request, 'student_module/calendar.html')
+
+

@@ -81,6 +81,12 @@ urlpatterns = (
 # )
 
 urlpatterns += (
+    # urls for Profile
+    path('profile/', views.ProfileView, name='user_profile'),
+
+)
+
+urlpatterns += (
     # urls for CenterInfo
     path('centerinfo/', login_required( views.CenterInfoListView.as_view()), name='centerinfo_list'),
     path('centerinfo/create/', login_required(views.CenterInfoCreateView.as_view()), name='centerinfo_create'),

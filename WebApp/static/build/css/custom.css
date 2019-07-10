@@ -464,9 +464,19 @@ html , body {
     margin: 0
 }
 
-.nav-sm span.fa, .nav-sm .menu_section h3 {
+/* top nav bar edited */
+#topNavSpan{
+    display: inline;
+}
+.nav-sm .menu_section h3 {
+
+}
+
+.nav-sm span.fa{
     display: none
 }
+
+
 
 .nav-sm li li span.fa {
     display: inline-block
@@ -2227,8 +2237,32 @@ h4.graph_title {
     -moz-background-clip: padding;
     border-radius: 5px;
     background-clip: padding-box;
-    background: #FFF;
+    background: rgb(60, 212, 111);
     transition: all 300ms ease-in-out
+}
+.ubl_logo{
+    height: 50px;
+    width: 50px;
+}
+
+#student_icon{
+    margin-bottom: -10px;
+}
+/* custom tile colors for admin dashboard -rajav */
+#teacher_tile{
+    background: rgb(55, 144, 228);
+}
+
+#total_tile{
+    background: rgb(228, 72, 55);
+}
+
+#parent_tile{
+    background: rgb(218, 214, 3);
+}
+
+#adminMessageContainer{
+    margin-left: 0px;
 }
 
 .tile-stats:hover .icon i {
@@ -2253,10 +2287,10 @@ h4.graph_title {
 .tile-stats .icon {
     width: 20px;
     height: 20px;
-    color: #BAB8B8;
+    color: rgb(255, 255, 255);
     position: absolute;
-    right: 53px;
-    top: 22px;
+    right: 65px;
+    top: 35px;
     z-index: 1
 }
 
@@ -2279,11 +2313,12 @@ h4.graph_title {
     margin: 0;
     margin-left: 10px;
     z-index: 5;
-    padding: 0
+    padding: 0;
+    color: white;
 }
 
 .tile-stats h3 {
-    color: #BAB8B8
+    color: rgb(255, 255, 255)
 }
 
 .tile-stats p {
@@ -5065,3 +5100,367 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 .bg-green {
     background-color: #26B99A;
 }
+
+
+
+/* message module */
+.header1{
+    text-align: center;
+
+}
+
+.containerMessage{
+   margin-top: 10px;
+   margin-left: -10px;
+   height: 560px;
+   background-color: #fafafa;
+   border-radius: 5px 5px 5px 5px;
+   box-shadow: 0 0 5px #adadad;   
+}
+
+.containerMessage ul {
+   list-style: none;   
+   
+}
+
+.containerMessage2{
+   margin-top: 10px;
+   margin-left: 10px;
+   height: 560px;
+   background-color: #fafafa   ;
+   border-radius: 5px 5px 5px 5px;
+   box-shadow: 0 0 5px #adadad;
+
+}
+
+.containerMessage2 ul{
+   list-style: none;
+}
+
+.users h4{
+   margin-left: -20px;
+   margin-top: 20px;
+}
+
+.users>li h5 {
+   font-size: 14px;
+   font-weight: 600;
+   line-height: 1.2;
+   color: #212529;
+   margin-top: -60px;
+   margin-right: auto;
+   margin-bottom: 4px;
+}
+
+.onlineUser {
+   width: 20%;
+   background: #fff;  
+
+   margin-top: -30px;
+   padding: 7px;
+   border-radius: 50%;
+}
+
+
+
+/* ===================chating==================== */
+
+.status{
+   width:300px;
+   height:80px;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   padding:5px;
+   margin-left:-30px;
+   margin-top: 30px;
+   
+
+}
+
+.groups :hover{
+   background-color: #e6e6e6;
+}
+
+
+.content{
+   width:170px;
+   margin-top:55px;
+   margin-left: 15px;
+  padding-top: 10px;
+}
+
+.status .content1{
+    width:170px;
+    margin-top:-10px;
+    margin-left: 15px;      
+ }
+
+ 
+.status .content1 span{
+   font-size: 11px;
+}
+
+.onlineUser2 {
+    width: 20%;
+    background: #fff;  
+    margin-top: 0px;
+    padding: 7px;
+    border-radius: 50%;
+ }
+ 
+
+
+.onlineIcon{
+   background-color: #1ABB9C;
+   border-radius: 50%;
+   width:10px;
+   height: 10px;
+   align-content: inline;
+   margin-left:-15px;
+   margin-top: 30px;
+}
+
+/* ====================message area=============================== */
+
+.col-100{ 
+   margin-top: 120px ;
+   font-size: 15px;
+  
+ }
+
+ .inputField{
+     position: relative;
+
+ }
+
+.col-100 input{ 
+  width: 100%;
+  height:50px;  
+  background-color:#dedede; 
+  border: 2px solid #dedede;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px #bdbdbd;
+ 
+}
+
+.fa-location-arrow{
+  
+    margin-right: 20px;
+    position: absolute;
+    top:2px;
+    left:0;
+    margin-left: 660px;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    align-items: center;
+    height:50px;
+    padding:5px; 
+}
+
+.content1{
+   
+   width:170px;
+   margin-top:0px;
+   margin-left: 15px;
+
+}
+
+.onlineUser1 {
+   width: 20%;
+   background: #fff;
+   margin-top: 0px;
+   padding: 7px;
+   border-radius: 50%;
+}
+
+.onlineIcon1{
+   background-color: #1ABB9C;
+   border-radius: 50%;
+   width:10px;
+   height: 10px;
+   align-content: inline;
+   margin-left:-15px;
+   margin-top: 20px;
+}
+
+.status1{
+   width:300px;
+   height:100px;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   padding:10px;
+   margin-left:-30px;
+}
+
+.message12 {
+   background-color: #dedede;
+   width: 30%;
+   height: auto;
+   margin-left: 70px;
+   margin-top: 10px;
+   border: 2px solid #dedede;
+   border-radius: 5px;
+   box-shadow: 2px 2px 4px #bdbdbd;
+}
+
+.message12 p {
+   font-size: 15px;
+   padding-left: 10px;
+   padding-top: 15px;
+}
+
+.message1 {
+
+   background-color: #2d3a52;
+   width: auto;
+   height: auto;
+   margin-left: 400px;
+   border: 2px solid #2d3a52;
+   border-radius: 5px;
+   text-align: relative;
+   font-size: 15px;
+   padding-top: -10px;
+}
+
+
+.fa-comment {
+    padding-top: 20px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.fa-users{
+    padding-top: 20px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.fa-bell{
+    padding-top: 20px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.notifi-lock{
+    background-color:#f0f0f0;
+    border-radius: 5px;
+    width: auto ;
+    height: 20%;
+    margin-top: 10px;
+    text-align: inline;
+}
+
+.notifi-lock .fa-lock {
+   
+    padding-left: 10px;
+    margin-top: 10px;
+ }
+ 
+
+.notifi-lock h5 {
+   
+    padding-left: 40px;
+    margin-top: -30px;
+ }
+
+ .notification h4{
+    margin-left: 20px;
+    margin-top: 20px;
+ }
+
+ .discussions{
+     display: none;
+ }
+
+ .discussions .status{
+    background-color:#f0f0f0;
+    border-radius: 5px;
+    width: auto ;
+    height: auto;
+    margin-left: 10px;
+    margin-right: 5px;
+    margin-top: 10px;
+ }
+
+ .discussions .onlineUser{
+    margin-top: 10px;
+    width: 20%;
+    background: #fff;   
+    padding: 7px;
+    border-radius: 50%;
+ }
+
+ .discussions {
+    margin-bottom: 4px;
+ }
+
+ .discussions h4{
+    margin-left: 20px;
+    margin-top: 20px;
+ }
+ 
+ .discussions .content h5 {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #212529;
+    margin-top: -50px;
+    margin-right: auto;  
+    margin-bottom: 4px;
+ }
+
+ .discussions .content span {
+    font-size: 14px;
+ }
+ 
+ 
+.search-header{
+    width:auto;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-content: center;
+    
+}
+
+#form-btn{
+    width:170px;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding:3px;
+    margin-top: 10px;
+}
+
+
+#form-btn input[type="text"]{
+    width:140px;
+    margin-left: 5px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    padding-left:10px;
+    box-shadow: 1px 1px 3px;
+    border: 2px solid #f2f2f2;
+    
+ }
+
+ #form-btn button{
+    border-radius: 5px;
+     margin:2px;
+     
+ }
+
+ #ubl_logo{
+     height: 50px;
+     width: 50px;
+ }
+ #LMS{
+     margin-left: 30px;
+ }
+
+ 
