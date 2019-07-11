@@ -2,6 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
+{{ form|crispy }}
 
 <link rel="stylesheet" href="{% static 'css/memberinfo_form.css' %}">
 <ol aria-label="breadcrumb" class="breadcrumb navClass">

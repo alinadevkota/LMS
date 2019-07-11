@@ -7,6 +7,11 @@
     {% block before_main_left %}{% endblock %}
     <div class="panel panel-default">
         <div class="panel-body panel-subtitle">
+        <ol class="breadcrumb">
+                <li><a href="{% url 'forum:index' %}">Home</a></li>
+
+                <li class="active">{{ topic.title }}</li>
+            </ol>
             <span class="label label-success">{{ panel_title }}</span>
             {% if show_order %}
               <span class="pull-right ordering">
@@ -22,18 +27,16 @@
         </div>
         <!-- List group -->
         <ul class="list-group thread-list">
-            {% for thread in threads %}
+            {% for topic in topics %}
                 <li class="list-group-item thread-entry">
                     <div class="entry media">
-                        <div class="media-left media-middle">
-                            <a class="list-avatar-link" href="{% url 'forum:user_info' thread.user.pk %}"><img class="user-avatar" src="{% avatar_url thread.user %}"></a>
-                        </div>
+
                         <div class="media-body media-middle">
-                            <a href="{% url 'forum:thread' pk=thread.pk %}" class="entry-link">
-                                {{ thread.title }}
+                            <a href="{% url 'forum:topic' pk=topic.pk %}" class="entry-link">
+                                {{ topic.title }}
                             </a>
                             <p class="entry-meta">
-                                {% if thread.order <= 3 %}
+                                {% if topic.order <= 3 %}
                                 <span class="meta">
                                     <span class="label label-info meta-top">
                                         TOP
@@ -41,28 +44,19 @@
                                 </span>
                                 {% endif %}
                                 <span class="meta">
-                                    <a href="{% url 'forum:topic' thread.topic.pk %}">
+                                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">
                                         <span class="label label-default meta-topic">
-                                        {{ thread.topic.title }}
+                                        {{ topic.node_group.title }}
                                         </span>
                                     </a>
                                 </span>
-                                    <span class="meta meta-username">
-                                        <a href="{% url 'forum:user_info' thread.user.pk %}">
-                                            {{ thread.user.username }}
-                                        </a>
-                                    </span>
-                                    <span class="meta meta-pub_date">
-                                        {{ thread.pub_date | naturaltime }}
-                                    </span>
-                                    <span class="meta meta-last_replied hidden-xs">
-                                        {% trans "Last Replied" %}: {{ thread.last_replied | naturaltime }}
-                                    </span>
+
+
                             </p>
                         </div>
-                        <div class="media-right media-middle">
-                            <span class="badge">{{ thread.reply_count }}</span>
-                        </div>
+{#                        <div class="media-right media-middle">#}
+{#                            <span class="badge">{{ topic.reply_count }}</span>#}
+{#                        </div>#}
                     </div>
                 </li>
             {% endfor %}

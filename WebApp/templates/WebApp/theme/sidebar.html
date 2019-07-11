@@ -1,6 +1,7 @@
 <div class="left_col scroll-view">
   <div class="navbar nav_title" style="border: 0;">
-    <a href="index.html" class="site_title"><i class="fa fa-spinner"></i> <span>u-LMS</span></a>
+    <a href="/" class="site_title"><img src="/static/images/ubl_logo.jpg" alt="..." class="ubl_logo" />
+      <span id="LMS">u-LMS</span></a>
   </div>
 
   <div class="clearfix"></div>
@@ -32,7 +33,7 @@
 
       <h3>Admin Portal Home</h3>
 
-
+      <hr>
 
       <ul class="nav side-menu">
         <li>
@@ -75,12 +76,15 @@
             </li>
           </ul>
         </li>
-        <li>
+        <!-- <li>
           <a href="{% url 'messageinfo_list' %}">
             <i class="fa fa-envelope"></i>Message</a>
-        </li>
-        {% endif %}
+        </li> -->
+      </ul>
+      {% endif %}
 
+      <hr>
+      <ul class="nav side-menu">
         <li>
           <a><i class="fa fa-user"></i>Forum<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">

@@ -67,7 +67,7 @@ def change_page(request, page=1):
 
 
 @register.simple_tag
-def change_topic_ordering(request, ordering):
+def change_thread_ordering(request, ordering):
     return change_url(request, None, {"order": ordering})
 
 

@@ -2,6 +2,162 @@
 {% load static %}
 {% block content %}
 
-This is the main admin homepage.
+<div class="row top_tiles">
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats" id="student_tile">
+            <div class="icon"><img src="/static/images/student_icon.png" id="student_icon"></div>
+            <div class="count">7</div>
+            <h3>Student</h3>
+            <p></p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats" id="teacher_tile">
+            <div class="icon"><img src="/static/images/teacher_icon.png" id="teacher_icon"></div>
+            <div class="count">3</div>
+            <h3>Teacher</h3>
+            <p></p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats" id="parent_tile">
+            <div class="icon"><img src="/static/images/parent_icon.png" id="parent_icon"></div>
+            <div class="count">3</div>
+            <h3>Parent</h3>
+            <p></p>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats" id="total_tile">
+            <div class="icon"><img src="/static/images/total_icon.png" id="total_icon"></div>
+            <div class="count">13</div>
+            <h3>Total Accounts</h3>
+            <p></p>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="containerMessage col-lg-4" id="adminMessageContainer">
+
+    <div class="discussions" style="display: block;">
+        <div class="search-header">
+            <h4>Private chat</h4>
+            <div id="form-btn">
+                <input type="text" placeholder="Search.." name="search">&nbsp;&nbsp;
+                <button type="submit"><i class="fa fa-search fa-lg"></i></button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="status online">
+            <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+            <div class="onlineIcon"></div>
+            <div class="content">
+                <h5>Rojan Bade</h5>
+                <span>Please review and sign the binding agreement</span>
+            </div>
+        </div>
+
+        <div class="status online">
+            <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+            <div class="onlineIcon"></div>
+            <div class="content">
+                <h5>Rojan Bade</h5>
+                <span>Please review and sign the binding agreement</span>
+            </div>
+        </div>
+
+        <div class="status online">
+            <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+            <div class="onlineIcon"></div>
+            <div class="content">
+                <h5>Rojan Bade</h5>
+                <span>Please review and sign the binding agreement</span>
+            </div>
+        </div>
+
+        <div class="status online">
+            <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+            <div class="onlineIcon"></div>
+            <div class="content">
+                <h5>Rojan Bade</h5>
+                <span>Please review and sign the binding agreement</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div>
+        <ul class="users" style="display: none">
+
+            <div class="search-header">
+                <h4>Groups</h4>
+                <div id="form-btn">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search fa-lg"></i></button>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="groups">
+                <li>
+                    <a href="#">
+                        <div class="status online">
+                            <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
+                            <div class="onlineIcon"></div>
+                            <div class="content1">
+                                <h5>Rojan Bade</h5>
+                                <span>Banepa, Nepal</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="status online">
+                            <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
+                            <div class="onlineIcon"></div>
+                            <div class="content1">
+                                <h5>Rojan Bade</h5>
+                                <span>Banepa, Nepal</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="#">
+                        <div class="status online">
+                            <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
+                            <div class="onlineIcon"></div>
+                            <div class="content1">
+                                <h5>Rojan Bade</h5>
+                                <span>Banepa, Nepal</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="status online">
+                            <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
+                            <div class="onlineIcon"></div>
+                            <div class="content1">
+                                <h5>Rojan Bade</h5>
+                                <span>Banepa, Nepal</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </div>
+
+        </ul>
+    </div>
+</div>
 
 {% endblock %}
