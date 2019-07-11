@@ -49,20 +49,26 @@ class MemberInfo(AbstractUser):
     Member_ID = models.CharField(max_length=250, blank=True, null=True)
     # remove this password field
     # Member_Password = models.CharField(max_length=250, blank=True, null=True)
-    Member_Type = models.IntegerField(blank=True, null=True)
+    # Member_Type = models.IntegerField(blank=True, null=True)
     Member_Name = models.CharField(max_length=500, blank=True, null=True)
     Member_Permanent_Address = models.CharField(max_length=500, blank=True, null=True)
     Member_Temporary_Address = models.CharField(max_length=500, blank=True, null=True)
-    Member_BirthDate = models.CharField(max_length=50, blank=True, null=True)
+    Member_BirthDate = models.DateTimeField(blank=True, null=True)
     Member_Email = models.CharField(max_length=150, blank=True, null=True)
     Member_Phone = models.CharField(max_length=150, blank=True, null=True)
-    member_Gender = models.IntegerField(blank=True, null=True)
+    member_Gender = models.CharField(max_length=150, blank=True, null=True)
     Use_Flag = BooleanField(default=True)
-    Register_DateTime = models.DateTimeField(default=datetime.now(), blank=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
     Register_Agent = models.CharField(max_length=200, blank=True, null=True)
     Member_Memo = models.CharField(max_length=500, blank=True, null=True)
 
-    Member_Role = models.CharField(max_length=30, default="Student")
+    Is_Teacher = models.BooleanField(default=False)
+    Is_Student = models.BooleanField(default=False)
+    Is_CenterAdmin = models.BooleanField(default=False)
+    Is_Parent = models.BooleanField(default=False)
+
+    # Member_Role = models.CharField(max_length=30, default="Student")
 
     # Relationship Fields
     centcode = ForeignKey(
@@ -94,13 +100,12 @@ class LectureInfo(models.Model):
     lecture_level = IntegerField(blank=True, null=True)
     lecture_info = TextField(blank=True, null=True)
     teacher = CharField(max_length=120, blank=True, null=True)
-    use_flag = BooleanField(default=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+
     lecture_certification = CharField(max_length=1, blank=True, null=True)
     lecture_provider = CharField(max_length=250, blank=True, null=True)
     cert_crit_prog = IntegerField(blank=True, null=True)
@@ -144,13 +149,12 @@ class ChapterInfo(models.Model):
     bottom_img3 = CharField(max_length=200, blank=True, null=True)
     thum_file = CharField(max_length=200, blank=True, null=True)
     vod_file = CharField(max_length=200, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=100, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=100, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+
     today = TextField(blank=True, null=True)
     chapter_type = CharField(max_length=50, blank=True, null=True)
     prologue_type = CharField(max_length=50, blank=True, null=True)
@@ -203,13 +207,12 @@ class ChapterContentsInfo(models.Model):
     # Fields
     chapter_contents = CharField(max_length=250, blank=True, null=True)
     chapter_audio = CharField(max_length=250, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+
     contents_index = IntegerField(blank=True, null=True)
     chapter_type = CharField(max_length=50, blank=True, null=True)
     thum_file = CharField(max_length=250, blank=True, null=True)
@@ -268,13 +271,11 @@ class ChapterMissonCheckCard(models.Model):
 
     # Fields
     check_card_code = IntegerField(unique=True)
-    use_flag = CharField(max_length=1)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     chapter_code = ForeignKey(
@@ -302,13 +303,11 @@ class ChapterMissonCheckItem(models.Model):
     check_item_code = IntegerField(unique=True)
     item_text = TextField(blank=True, null=True)
     contents_text = TextField(blank=True, null=True)
-    use_flag = CharField(max_length=1)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     check_card_code = ForeignKey(
@@ -340,13 +339,11 @@ class InningInfo(models.Model):
     inning_name = CharField(max_length=500, blank=True, null=True)
     start_date = CharField(max_length=150, blank=True, null=True)
     end_date = CharField(max_length=150, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     lecture_code = ForeignKey(
@@ -376,13 +373,12 @@ class OmrQuestionInfo(models.Model):
 
     # Fields
     subject_code = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+
     question_level = IntegerField(blank=True, null=True)
     question_score = IntegerField(blank=True, null=True)
 
@@ -420,13 +416,12 @@ class QuizInfo(models.Model):
     quiz_media_file = CharField(max_length=200, blank=True, null=True)
     quiz_score = IntegerField(blank=True, null=True)
     quiz_comment = CharField(max_length=1000, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+
     quiz_head = CharField(max_length=1000, blank=True, null=True)
     quiz_media_file2 = CharField(max_length=250, blank=True, null=True)
 
@@ -458,13 +453,10 @@ class AssignHomeworkInfo(models.Model):
 
     # Fields
     subject_code = IntegerField(blank=True, null=True)
-    use_flag = BooleanField(default=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     question_code = ForeignKey(
@@ -503,12 +495,11 @@ class AssignQuestionInfo(models.Model):
     # Fields
     subject_code = IntegerField(blank=True, null=True)
     question_type = CharField(max_length=20, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     question_code = ForeignKey(
@@ -548,15 +539,11 @@ class BoardInfo(models.Model):
     board_new_time = IntegerField(blank=True, null=True)
     board_create_time = CharField(max_length=16, blank=True, null=True)
     admin_id = CharField(max_length=20, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
 
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     class Meta:
         ordering = ('-pk',)
@@ -584,13 +571,11 @@ class BoardContentInfo(models.Model):
     ref_step = CharField(max_length=16, blank=True, null=True)
     ref_level = IntegerField(blank=True, null=True)
     write_time = CharField(max_length=18, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     board_code = ForeignKey(
@@ -616,13 +601,11 @@ class InningGroup(models.Model):
 
     # Fields
     teacher_code = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     center_code = ForeignKey(
@@ -658,13 +641,11 @@ class ChapterContentMedia(models.Model):
     media_type = CharField(max_length=10)
     media_desc = TextField(blank=True, null=True)
     media_filename = CharField(max_length=255)
-    use_flag = CharField(max_length=1)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     chapter_contents_code = ForeignKey(
@@ -690,13 +671,11 @@ class ChapterImgInfo(models.Model):
 
     # Fields
     filename = CharField(max_length=150, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     chapter_code = ForeignKey(
@@ -725,13 +704,11 @@ class ChapterMissonCheck(models.Model):
     student_code = IntegerField()
     check_agent_code = IntegerField()
     is_check_yn = CharField(max_length=1)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     check_item_code = ForeignKey(
@@ -762,13 +739,11 @@ class ChapterWrite(models.Model):
     # Fields
     student_code = IntegerField(blank=True, null=True)
     write_content = TextField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     inning_code = ForeignKey(
@@ -797,13 +772,10 @@ class ChapterWrite(models.Model):
 class GroupMapping(models.Model):
 
     # Fields
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     center_code = ForeignKey(
@@ -838,10 +810,12 @@ class HomeworkInfo(models.Model):
     # Fields
     subject_code = IntegerField(blank=True, null=True)
     level_score = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+
     level = IntegerField(blank=True, null=True)
 
     # Relationship Fields
@@ -910,14 +884,10 @@ class LearningNote(models.Model):
 class LectureUbtInfo(models.Model):
 
     # Fields
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
-
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
     # Relationship Fields
     quiz_code = ForeignKey(
         'QuizInfo',
@@ -949,13 +919,12 @@ class LessonInfo(models.Model):
     start_date = CharField(max_length=150, blank=True, null=True)
     end_date = CharField(max_length=150, blank=True, null=True)
     progress = CharField(max_length=150, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+
     ubt_start = CharField(max_length=50, blank=True, null=True)
     ubt_end = CharField(max_length=50, blank=True, null=True)
     download_count = IntegerField(blank=True, null=True)
@@ -1007,13 +976,12 @@ class LessonLog(models.Model):
     connect_date = CharField(max_length=50, blank=True, null=True)
     connect_time = CharField(max_length=50, blank=True, null=True)
     connect_count = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+
     study_time = IntegerField(blank=True, null=True)
     connect_page = IntegerField(blank=True, null=True)
 
@@ -1053,13 +1021,11 @@ class MemberGroup(models.Model):
 
     # Fields
     group_name = CharField(max_length=500, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     center_code = ForeignKey(
@@ -1087,13 +1053,11 @@ class MessageInfo(models.Model):
     teacher_code = IntegerField(blank=True, null=True)
     message = CharField(max_length=4000, blank=True, null=True)
     message_read = CharField(max_length=1, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     member_code = ForeignKey(
@@ -1123,13 +1087,11 @@ class OmrAnswerInfo(models.Model):
     omr_answer_idx = IntegerField(blank=True, null=True)
     omr_answer_correct = CharField(max_length=200, blank=True, null=True)
     question_score = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     lecture_code = ForeignKey(
@@ -1171,13 +1133,11 @@ class OmrAssignInfo(models.Model):
 
     # Fields
     subject_code = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     question_code = ForeignKey(
@@ -1216,13 +1176,11 @@ class OmrExampleInfo(models.Model):
     # Fields
     omr_example_correct = CharField(max_length=1, blank=True, null=True)
     omr_example_idx = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     question_code = ForeignKey(
@@ -1253,13 +1211,11 @@ class QAnswerInfo(models.Model):
     question_idx = IntegerField(blank=True, null=True)
     question_correct = CharField(max_length=200, blank=True, null=True)
     question_score = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=10, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=10, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     lecture_code = ForeignKey(
@@ -1303,14 +1259,10 @@ class QAnswerLog(models.Model):
     question_answer = CharField(max_length=250, blank=True, null=True)
     question_idx = CharField(max_length=250, blank=True, null=True)
     question_score = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
-
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
     # Relationship Fields
     lecture_code = ForeignKey(
         'LectureInfo',
@@ -1345,13 +1297,10 @@ class QExampleInfo(models.Model):
     q_example = CharField(max_length=1000, blank=True, null=True)
     q_example_correct = CharField(max_length=10, blank=True, null=True)
     q_example_idx = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
     q_example_type = CharField(max_length=50, blank=True, null=True)
 
     # Relationship Fields
@@ -1385,13 +1334,12 @@ class QuestionInfo(models.Model):
     question_score = IntegerField(blank=True, null=True)
     question_head = CharField(max_length=2000, blank=True, null=True)
     question_essay = CharField(max_length=500, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+
     question_media_file2 = CharField(max_length=250, blank=True, null=True)
     question_comment = TextField(blank=True, null=True)
     question_level = IntegerField(blank=True, null=True)
@@ -1431,13 +1379,12 @@ class QuizAnswerInfo(models.Model):
     quiz_answer_idx = IntegerField(blank=True, null=True)
     quiz_correct = CharField(max_length=50, blank=True, null=True)
     quiz_score = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+
     test_type = IntegerField(blank=True, null=True)
 
     # Relationship Fields
@@ -1478,13 +1425,12 @@ class QuizExampleInfo(models.Model):
     quiz_example = CharField(max_length=1000, blank=True, null=True)
     quiz_example_correct = CharField(max_length=10, blank=True, null=True)
     quiz_example_idx = IntegerField(blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+
     quiz_example_type = CharField(max_length=50, blank=True, null=True)
 
     # Relationship Fields
@@ -1516,13 +1462,11 @@ class ScheduleInfo(models.Model):
     start_time = CharField(max_length=8, blank=True, null=True)
     end_date = CharField(max_length=10, blank=True, null=True)
     end_time = CharField(max_length=8, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     member_code = ForeignKey(
@@ -1657,13 +1601,12 @@ class TodoInfo(models.Model):
     # Fields
     todo_comment = CharField(max_length=4000, blank=True, null=True)
     todo_status = CharField(max_length=1, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+
     teacher_code = IntegerField(blank=True, null=True)
     todo_title = CharField(max_length=500, blank=True, null=True)
     start_date = CharField(max_length=50, blank=True, null=True)
@@ -1704,13 +1647,11 @@ class TodoTInfo(models.Model):
     # Fields
     todo_code = IntegerField(blank=True, null=True)
     todo_t_flag = CharField(max_length=10, blank=True, null=True)
-    use_flag = CharField(max_length=1, blank=True, null=True)
-    reg_date = CharField(max_length=10, blank=True, null=True)
-    reg_time = CharField(max_length=8, blank=True, null=True)
-    reg_agent = CharField(max_length=200, blank=True, null=True)
-    udt_date = CharField(max_length=10, blank=True, null=True)
-    udt_time = CharField(max_length=8, blank=True, null=True)
-    udt_agent = CharField(max_length=200, blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
 
     # Relationship Fields
     member_code = ForeignKey(
