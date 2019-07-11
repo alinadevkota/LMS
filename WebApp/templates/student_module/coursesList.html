@@ -1,0 +1,271 @@
+{% extends "student_module/base.html" %}
+{% block title %}
+coursesList
+{% endblock %}
+
+{% block content %}
+
+<div class="clearfix"></div>
+<div class="row">
+    <div class="right_col">
+
+        <div class="coursesSearchBar">
+            <h5>Name</h5>
+            <form>
+                <input type="search" placeholder="Course name...">
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <hr>
+
+        <div class="container" id="listingCourses">
+            <div class="row">
+                <div class="coursesIcons">
+                    <i class="fa fa-th-large"></i>
+                    <i class="fa fa-list"></i>
+                </div>
+
+                <div class="coursesFilteringSearchBar">
+                    <div class="filteringSearchBar">
+                        <h5>SORT RESULTS BY:</h5>
+                        <form>
+                            <input type="search" placeholder="Course name...">
+                            <i class="fa fa-angle-down"></i>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div class="gridView">
+
+                    <ul class="cards">
+                        <li class="cards_item">
+                            <div class="card">
+                                <div class="card_image"><img src="https://picsum.photos/500/300/?image=10"></div>
+                                <div class="card_content">
+                                    <h2 class="card_title">Card Grid Layout</h2>
+                                    <p class="ratingIcons">
+                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                    </p>
+                                    <hr>
+                                    <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid
+                                        layout</p>
+
+                                    <div class="aboutLecturer">
+                                        <div class="lecturerImage">
+                                            <img class="lecturerImg" src="/static/images/suted.jpg" alt="avatar">
+                                        </div>
+                                        <div class="infoLecturer">
+                                            <h4 class="lectureName">Rojan Bade</h4>
+                                            <span>
+                                                Instructor
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="cards_item">
+                            <div class="card">
+                                <div class="card_image"><img src="https://picsum.photos/500/300/?image=5"></div>
+                                <div class="card_content">
+                                    <h2 class="card_title">Card Grid Layout</h2>
+                                    <p class="ratingIcons">
+                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                    </p>
+                                    <hr>
+                                    <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid
+                                        layout</p>
+
+                                    <div class="aboutLecturer">
+                                        <div class="lecturerImage">
+                                            <img class="lecturerImg" src="/static/images/suted.jpg" alt="avatar">
+                                        </div>
+                                        <div class="infoLecturer">
+                                            <h4 class="lectureName">Rojan Bade</h4>
+                                            <span>
+                                                Instructor
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="cards_item">
+                            <div class="card">
+                                <div class="card_image"><img src="https://picsum.photos/500/300/?image=11"></div>
+                                <div class="card_content">
+                                    <h2 class="card_title">Card Grid Layout</h2>
+                                    <p class="ratingIcons">
+                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                    </p>
+                                    <hr>
+                                    <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid
+                                        layout</p>
+
+                                    <div class="aboutLecturer">
+                                        <div class="lecturerImage">
+                                            <img class="lecturerImg" src="/static/images/suted.jpg" alt="avatar">
+                                        </div>
+                                        <div class="infoLecturer">
+                                            <h4 class="lectureName">Rojan Bade</h4>
+                                            <span>
+                                                Instructor
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="listView" style="display: none">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2">
+
+                                <div class="_blogCard mt-5 bg-white ">
+                                    <div class="row">
+                                        <div class="col-lg-7 col-md-12 col-sm-12">
+                                            <div class="row">
+                                                <div class=" col-md-12 ">
+                                                    <img src="https://picsum.photos/500/300/?image=10" alt="" class="img-fluid1 ">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-5 col-md-12 col-sm-12">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="border-bottom">
+                                                        <div class="_blogTitle font-weigth-bold h4 ">
+                                                            Card Grid Layout
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="_content mt-2">
+                                                        Demo of pixel perfect pure CSS simple responsive card grid
+                                                        layout
+                                                    </div>
+
+                                                    <hr>
+
+                                                    <div class="listViewRatingIcons pl-5">
+                                                        <p class="ratingIcons ">
+                                                            <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                                            <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                                            <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="col-md-12 d-inline-flex align-items-center">
+
+                                                        <div class="lecturerImage d-inline-flex">
+                                                            <img class="lecturerImg d-inline-flex" src="/static/images/suted.jpg"
+                                                                alt="avatar">
+
+                                                            <div class=" col-md-9 listViewlLectureName align-self-end ">
+                                                                <h4 class=" lectName d-inline-flex">Rojan Bade</h4>
+                                                                <span>
+                                                                    Instructor
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="_blogCard mt-5 bg-white ">
+                                    <div class="row">
+                                        <div class="col-lg-7 col-md-12 col-sm-12">
+                                            <div class="row">
+                                                <div class=" col-md-12 ">
+                                                    <img src="https://picsum.photos/500/300/?image=5 " alt="" class="img-fluid1 ">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-5 col-md-12 col-sm-12">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="border-bottom">
+                                                        <div class="_blogTitle font-weigth-bold h4 ">
+                                                            Card Grid Layout
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="_content mt-2">
+                                                        Demo of pixel perfect pure CSS simple responsive card grid
+                                                        layout
+                                                    </div>
+
+                                                    <hr>
+
+                                                    <div class="listViewRatingIcons pl-5">
+                                                        <p class="ratingIcons ">
+                                                            <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                                            <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                                            <span class="fa fa-fw fa-star text-yellow-800"></span>
+                                                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="col-md-12 d-inline-flex align-items-center">
+
+                                                        <div class="lecturerImage d-inline-flex">
+                                                            <img class="lecturerImg d-inline-flex" src="/static/images/suted.jpg"
+                                                                alt="avatar">
+
+                                                            <div class=" col-md-9 listViewlLectureName align-self-end ">
+                                                                <h4 class=" lectName d-inline-flex">Rojan Bade</h4>
+                                                                <span>
+                                                                    Instructor
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div> {% endblock %}
