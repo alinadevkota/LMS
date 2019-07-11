@@ -3,7 +3,9 @@ from datetime import datetime
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.models import ContentType
 from django.db import models as models
-from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, TimeField, BooleanField
+from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, TimeField, BooleanField, \
+    ImageField
+
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
 
@@ -15,7 +17,7 @@ class CenterInfo(models.Model):
     Center_Name = CharField(max_length=500, blank=True, null=True)
     Center_Address = CharField(max_length=500, blank=True, null=True)
     Use_Flag = BooleanField(default=True)
-    Register_Agent = CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
 
@@ -59,8 +61,8 @@ class MemberInfo(AbstractUser):
     member_Gender = models.CharField(max_length=150, blank=True, null=True)
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
     Member_Memo = models.CharField(max_length=500, blank=True, null=True)
 
     Is_Teacher = models.BooleanField(default=False)
@@ -93,28 +95,28 @@ class MemberInfo(AbstractUser):
 class LectureInfo(models.Model):
 
     # Fields
-    lecture_name = CharField(max_length=500, blank=True, null=True)
-    lecture_teacher = IntegerField(blank=True, null=True)
-    lecture_cover = CharField(max_length=250, blank=True, null=True)
-    lecture_cover_file = CharField(max_length=250, blank=True, null=True)
-    lecture_level = IntegerField(blank=True, null=True)
-    lecture_info = TextField(blank=True, null=True)
-    teacher = CharField(max_length=120, blank=True, null=True)
+    Lecture_Name = CharField(max_length=500, blank=True, null=True)
+    # lecture_teacher = IntegerField(blank=True, null=True)
+    # Lecture_Cover = CharField(max_length=250, blank=True, null=True)
+    Lecture_Cover_File = ImageField(upload_to="memberImages/", blank=True, null=True)
+    Lecture_Level = IntegerField(blank=True, null=True)
+    Lecture_Info = TextField(blank=True, null=True)
+    # teacher = CharField(max_length=120, blank=True, null=True)
 
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
-    lecture_certification = CharField(max_length=1, blank=True, null=True)
-    lecture_provider = CharField(max_length=250, blank=True, null=True)
-    cert_crit_prog = IntegerField(blank=True, null=True)
-    cert_crit_post = IntegerField(blank=True, null=True)
-    cert_crit_ubt = IntegerField(blank=True, null=True)
-    cert_crit_issue = IntegerField(blank=True, null=True)
+    # Lecture_Certification = CharField(max_length=1, blank=True, null=True)
+    Lecture_Provider = CharField(max_length=250, blank=True, null=True)
+    # cert_crit_prog = IntegerField(blank=True, null=True)
+    # cert_crit_post = IntegerField(blank=True, null=True)
+    # cert_crit_ubt = IntegerField(blank=True, null=True)
+    # cert_crit_issue = IntegerField(blank=True, null=True)
 
     # Relationship Fields
-    center_code = ForeignKey(
+    Center_Code = ForeignKey(
         'CenterInfo',
          related_name="lectureinfos", on_delete=models.DO_NOTHING)
 
@@ -135,55 +137,55 @@ class LectureInfo(models.Model):
 class ChapterInfo(models.Model):
 
     # Fields
-    chapter_no = IntegerField(blank=True, null=True)
-    chapter_name = CharField(max_length=200, blank=True, null=True)
-    topic = TextField(blank=True, null=True)
-    summary = TextField(blank=True, null=True)
-    page_num = IntegerField(blank=True, null=True)
-    vod_size = CharField(max_length=200, blank=True, null=True)
-    intro = TextField(blank=True, null=True)
-    target = TextField(blank=True, null=True)
-    top_img = CharField(max_length=200, blank=True, null=True)
-    bottom_img1 = CharField(max_length=200, blank=True, null=True)
-    bottom_img2 = CharField(max_length=200, blank=True, null=True)
-    bottom_img3 = CharField(max_length=200, blank=True, null=True)
-    thum_file = CharField(max_length=200, blank=True, null=True)
-    vod_file = CharField(max_length=200, blank=True, null=True)
+    Chapter_No = IntegerField(blank=True, null=True)
+    Chapter_Name = CharField(max_length=200, blank=True, null=True)
+    # topic = TextField(blank=True, null=True)
+    Summary = TextField(blank=True, null=True)
+    Page_Num = IntegerField(blank=True, null=True)
+    # vod_size = CharField(max_length=200, blank=True, null=True)
+    # intro = TextField(blank=True, null=True)
+    # target = TextField(blank=True, null=True)
+    # top_img = CharField(max_length=200, blank=True, null=True)
+    # bottom_img1 = CharField(max_length=200, blank=True, null=True)
+    # bottom_img2 = CharField(max_length=200, blank=True, null=True)
+    # bottom_img3 = CharField(max_length=200, blank=True, null=True)
+    # thum_file = CharField(max_length=200, blank=True, null=True)
+    # vod_file = CharField(max_length=200, blank=True, null=True)
 
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
-    today = TextField(blank=True, null=True)
-    chapter_type = CharField(max_length=50, blank=True, null=True)
-    prologue_type = CharField(max_length=50, blank=True, null=True)
-    tabset = CharField(max_length=20, blank=True, null=True)
-    chapter_image = CharField(max_length=100, blank=True, null=True)
-    chapter_use = CharField(max_length=50, blank=True, null=True)
-    offline_file = CharField(max_length=250, blank=True, null=True)
-    pre_test_type = IntegerField(blank=True, null=True)
-    post_test_type = IntegerField(blank=True, null=True)
-    level1_avg = IntegerField(blank=True, null=True)
-    level2_avg = IntegerField(blank=True, null=True)
-    level3_avg = IntegerField(blank=True, null=True)
-    level1_hard_avg = IntegerField(blank=True, null=True)
-    level1_medium_avg = IntegerField(blank=True, null=True)
-    level1_easy_avg = IntegerField(blank=True, null=True)
-    level2_hard_avg = IntegerField(blank=True, null=True)
-    level2_medium_avg = IntegerField(blank=True, null=True)
-    level2_easy_avg = IntegerField(blank=True, null=True)
-    level3_hard_avg = IntegerField(blank=True, null=True)
-    level3_medium_avg = IntegerField(blank=True, null=True)
-    level3_easy_avg = IntegerField(blank=True, null=True)
-    homework_count = IntegerField(blank=True, null=True)
-    epilogue_type = CharField(max_length=50, blank=True, null=True)
-    epilogue_img = CharField(max_length=200, blank=True, null=True)
-    pbl_flag = CharField(max_length=1, blank=True, null=True)
-    chapter_use_time = TimeField(blank=True, null=True)
+    # today = TextField(blank=True, null=True)
+    # chapter_type = CharField(max_length=50, blank=True, null=True)
+    # prologue_type = CharField(max_length=50, blank=True, null=True)
+    # tabset = CharField(max_length=20, blank=True, null=True)
+    # chapter_image = CharField(max_length=100, blank=True, null=True)
+    # chapter_use = CharField(max_length=50, blank=True, null=True)
+    # offline_file = CharField(max_length=250, blank=True, null=True)
+    # pre_test_type = IntegerField(blank=True, null=True)
+    # post_test_type = IntegerField(blank=True, null=True)
+    # level1_avg = IntegerField(blank=True, null=True)
+    # level2_avg = IntegerField(blank=True, null=True)
+    # level3_avg = IntegerField(blank=True, null=True)
+    # level1_hard_avg = IntegerField(blank=True, null=True)
+    # level1_medium_avg = IntegerField(blank=True, null=True)
+    # level1_easy_avg = IntegerField(blank=True, null=True)
+    # level2_hard_avg = IntegerField(blank=True, null=True)
+    # level2_medium_avg = IntegerField(blank=True, null=True)
+    # level2_easy_avg = IntegerField(blank=True, null=True)
+    # level3_hard_avg = IntegerField(blank=True, null=True)
+    # level3_medium_avg = IntegerField(blank=True, null=True)
+    # level3_easy_avg = IntegerField(blank=True, null=True)
+    # homework_count = IntegerField(blank=True, null=True)
+    # epilogue_type = CharField(max_length=50, blank=True, null=True)
+    # epilogue_img = CharField(max_length=200, blank=True, null=True)
+    # pbl_flag = CharField(max_length=1, blank=True, null=True)
+    # chapter_use_time = TimeField(blank=True, null=True)
 
     # Relationship Fields
-    lecture_code = ForeignKey(
+    Lecture_Code = ForeignKey(
         'LectureInfo',
          related_name="chapterinfos", on_delete=models.DO_NOTHING
     )
@@ -205,50 +207,50 @@ class ChapterInfo(models.Model):
 class ChapterContentsInfo(models.Model):
 
     # Fields
-    chapter_contents = CharField(max_length=250, blank=True, null=True)
-    chapter_audio = CharField(max_length=250, blank=True, null=True)
+    # chapter_contents = CharField(max_length=250, blank=True, null=True)
+    # chapter_audio = CharField(max_length=250, blank=True, null=True)
 
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
-
-    contents_index = IntegerField(blank=True, null=True)
-    chapter_type = CharField(max_length=50, blank=True, null=True)
-    thum_file = CharField(max_length=250, blank=True, null=True)
-    vod_file = CharField(max_length=250, blank=True, null=True)
-    today = TextField(blank=True, null=True)
-    front1_img = CharField(max_length=150, blank=True, null=True)
-    front1_text = TextField(blank=True, null=True)
-    back1_img = CharField(max_length=150, blank=True, null=True)
-    back1_text = TextField(blank=True, null=True)
-    pdf_file = CharField(max_length=150, blank=True, null=True)
-    front2_img = CharField(max_length=150, blank=True, null=True)
-    front3_img = CharField(max_length=150, blank=True, null=True)
-    front4_img = CharField(max_length=150, blank=True, null=True)
-    front2_text = TextField(blank=True, null=True)
-    front3_text = TextField(blank=True, null=True)
-    front4_text = TextField(blank=True, null=True)
-    back2_img = CharField(max_length=150, blank=True, null=True)
-    back3_img = CharField(max_length=150, blank=True, null=True)
-    back4_img = CharField(max_length=150, blank=True, null=True)
-    back2_text = TextField(blank=True, null=True)
-    back3_text = TextField(blank=True, null=True)
-    back4_text = TextField(blank=True, null=True)
-    c1_audio = CharField(max_length=150, blank=True, null=True)
-    c2_audio = CharField(max_length=150, blank=True, null=True)
-    c3_audio = CharField(max_length=150, blank=True, null=True)
-    c4_audio = CharField(max_length=150, blank=True, null=True)
-    vod_size = IntegerField(blank=True, null=True)
-    offline_file = CharField(max_length=250, blank=True, null=True)
-    teacher_guide = CharField(max_length=500, blank=True, null=True)
-    today_text = CharField(max_length=500, blank=True, null=True)
-    contents_text = TextField(blank=True, null=True)
-    pbl_allow = CharField(max_length=1, blank=True, null=True)
-    pbl_lec_allow = CharField(max_length=1, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
+    Content_Description = TextField(blank=True, null=True)
+    # contents_index = IntegerField(blank=True, null=True)
+    # chapter_type = CharField(max_length=50, blank=True, null=True)
+    # thum_file = CharField(max_length=250, blank=True, null=True)
+    # vod_file = CharField(max_length=250, blank=True, null=True)
+    # today = TextField(blank=True, null=True)
+    # front1_img = CharField(max_length=150, blank=True, null=True)
+    # front1_text = TextField(blank=True, null=True)
+    # back1_img = CharField(max_length=150, blank=True, null=True)
+    # back1_text = TextField(blank=True, null=True)
+    # pdf_file = CharField(max_length=150, blank=True, null=True)
+    # front2_img = CharField(max_length=150, blank=True, null=True)
+    # front3_img = CharField(max_length=150, blank=True, null=True)
+    # front4_img = CharField(max_length=150, blank=True, null=True)
+    # front2_text = TextField(blank=True, null=True)
+    # front3_text = TextField(blank=True, null=True)
+    # front4_text = TextField(blank=True, null=True)
+    # back2_img = CharField(max_length=150, blank=True, null=True)
+    # back3_img = CharField(max_length=150, blank=True, null=True)
+    # back4_img = CharField(max_length=150, blank=True, null=True)
+    # back2_text = TextField(blank=True, null=True)
+    # back3_text = TextField(blank=True, null=True)
+    # back4_text = TextField(blank=True, null=True)
+    # c1_audio = CharField(max_length=150, blank=True, null=True)
+    # c2_audio = CharField(max_length=150, blank=True, null=True)
+    # c3_audio = CharField(max_length=150, blank=True, null=True)
+    # c4_audio = CharField(max_length=150, blank=True, null=True)
+    # vod_size = IntegerField(blank=True, null=True)
+    # offline_file = CharField(max_length=250, blank=True, null=True)
+    # teacher_guide = CharField(max_length=500, blank=True, null=True)
+    # today_text = CharField(max_length=500, blank=True, null=True)
+    # contents_text = TextField(blank=True, null=True)
+    # pbl_allow = CharField(max_length=1, blank=True, null=True)
+    # pbl_lec_allow = CharField(max_length=1, blank=True, null=True)
 
     # Relationship Fields
-    chapter_code = ForeignKey(
+    Chapter_Code = ForeignKey(
         'ChapterInfo',
          related_name="chaptercontentsinfos", on_delete=models.DO_NOTHING
     )
@@ -275,7 +277,7 @@ class ChapterMissonCheckCard(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     chapter_code = ForeignKey(
@@ -307,7 +309,7 @@ class ChapterMissonCheckItem(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     check_card_code = ForeignKey(
@@ -336,23 +338,27 @@ class ChapterMissonCheckItem(models.Model):
 class InningInfo(models.Model):
 
     # Fields
-    inning_name = CharField(max_length=500, blank=True, null=True)
-    start_date = CharField(max_length=150, blank=True, null=True)
-    end_date = CharField(max_length=150, blank=True, null=True)
+    Inning_Name = CharField(max_length=500, blank=True, null=True)
+    Start_Date = DateTimeField(auto_now=False, auto_now_add=False)
+    End_Date = DateTimeField(auto_now=False, auto_now_add=False)
 
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
-    lecture_code = ForeignKey(
+    Lecture_Code = ForeignKey(
         'LectureInfo',
          related_name="inninginfos", on_delete=models.DO_NOTHING
     )
-    center_code = ForeignKey(
+    Center_Code = ForeignKey(
         'CenterInfo',
          related_name="inninginfos", on_delete=models.DO_NOTHING
+    )
+    Teacher_Code = ForeignKey(
+        'MemberInfo',
+        related_name="inninginfos", on_delete=models.DO_NOTHING
     )
 
     class Meta:
@@ -372,22 +378,22 @@ class InningInfo(models.Model):
 class OmrQuestionInfo(models.Model):
 
     # Fields
-    subject_code = IntegerField(blank=True, null=True)
+    # subject_code = IntegerField(blank=True, null=True)
 
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
-    question_level = IntegerField(blank=True, null=True)
-    question_score = IntegerField(blank=True, null=True)
-
+    Question_Level = IntegerField(blank=True, null=True)
+    Question_Score = IntegerField(blank=True, null=True)
+    Question_Description = TextField(blank=True, null=True)
     # Relationship Fields
-    lecture_code = ForeignKey(
+    Lecture_Code = ForeignKey(
         'LectureInfo',
          related_name="omrquestioninfos", on_delete=models.DO_NOTHING
     )
-    chapter_code = ForeignKey(
+    Chapter_Code = ForeignKey(
         'ChapterInfo',
          related_name="omrquestioninfos", on_delete=models.DO_NOTHING
     )
@@ -420,8 +426,7 @@ class QuizInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
-
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
     quiz_head = CharField(max_length=1000, blank=True, null=True)
     quiz_media_file2 = CharField(max_length=250, blank=True, null=True)
 
@@ -452,26 +457,25 @@ class QuizInfo(models.Model):
 class AssignHomeworkInfo(models.Model):
 
     # Fields
-    subject_code = IntegerField(blank=True, null=True)
+    # Subject_code = IntegerField(blank=True, null=True)
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
-
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
     # Relationship Fields
-    question_code = ForeignKey(
+    Question_Code = ForeignKey(
         'OmrQuestionInfo',
          related_name="assignhomeworkinfos", on_delete=models.DO_NOTHING
     )
-    lecture_code = ForeignKey(
+    Lecture_Code = ForeignKey(
         'LectureInfo',
          related_name="assignhomeworkinfos", on_delete=models.DO_NOTHING
     )
-    chapter_code = ForeignKey(
+    Chapter_Code = ForeignKey(
         'ChapterInfo',
          related_name="assignhomeworkinfos", on_delete=models.DO_NOTHING
     )
-    member_code = ForeignKey(
+    Teacher_Code = ForeignKey(
         'MemberInfo',
          related_name="assignhomeworkinfos", on_delete=models.DO_NOTHING
     )
@@ -499,7 +503,7 @@ class AssignQuestionInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     question_code = ForeignKey(
@@ -543,7 +547,7 @@ class BoardInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     class Meta:
         ordering = ('-pk',)
@@ -575,7 +579,7 @@ class BoardContentInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     board_code = ForeignKey(
@@ -600,23 +604,26 @@ class BoardContentInfo(models.Model):
 class InningGroup(models.Model):
 
     # Fields
-    teacher_code = IntegerField(blank=True, null=True)
+    Teacher_Code = ForeignKey(
+        'MemberInfo',
+        on_delete=models.DO_NOTHING
+    )
 
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
-    center_code = ForeignKey(
+    Center_Code = ForeignKey(
         'CenterInfo',
          related_name="inninggroups", on_delete=models.DO_NOTHING
     )
-    inning_code = ForeignKey(
+    Inning_Code = ForeignKey(
         'InningInfo',
          related_name="inninggroups", on_delete=models.DO_NOTHING
     )
-    lecture_code = ForeignKey(
+    Lecture_Code = ForeignKey(
         'LectureInfo',
          related_name="inninggroups", on_delete=models.DO_NOTHING
     )
@@ -645,7 +652,7 @@ class ChapterContentMedia(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     chapter_contents_code = ForeignKey(
@@ -675,7 +682,7 @@ class ChapterImgInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     chapter_code = ForeignKey(
@@ -708,7 +715,7 @@ class ChapterMissonCheck(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     check_item_code = ForeignKey(
@@ -743,7 +750,7 @@ class ChapterWrite(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     inning_code = ForeignKey(
@@ -775,20 +782,20 @@ class GroupMapping(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
-    center_code = ForeignKey(
+    Center_Code = ForeignKey(
         'CenterInfo',
-         related_name="groupmappings", on_delete=models.DO_NOTHING
+        on_delete=models.DO_NOTHING
     )
-    group_code = ForeignKey(
+    Group_Code = ForeignKey(
         'InningGroup',
-         related_name="groupmappings", on_delete=models.DO_NOTHING
+        on_delete=models.DO_NOTHING
     )
-    member_code = ForeignKey(
+    Member_Code = ForeignKey(
         'MemberInfo',
-         related_name="groupmappings", on_delete=models.DO_NOTHING
+        on_delete=models.DO_NOTHING
     )
 
     class Meta:
@@ -814,7 +821,7 @@ class HomeworkInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     level = IntegerField(blank=True, null=True)
 
@@ -887,7 +894,7 @@ class LectureUbtInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
     # Relationship Fields
     quiz_code = ForeignKey(
         'QuizInfo',
@@ -923,7 +930,7 @@ class LessonInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     ubt_start = CharField(max_length=50, blank=True, null=True)
     ubt_end = CharField(max_length=50, blank=True, null=True)
@@ -980,8 +987,7 @@ class LessonLog(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
-
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
     study_time = IntegerField(blank=True, null=True)
     connect_page = IntegerField(blank=True, null=True)
 
@@ -1025,7 +1031,7 @@ class MemberGroup(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     center_code = ForeignKey(
@@ -1057,7 +1063,7 @@ class MessageInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     member_code = ForeignKey(
@@ -1082,38 +1088,39 @@ class MessageInfo(models.Model):
 class OmrAnswerInfo(models.Model):
 
     # Fields
-    subject_code = IntegerField(blank=True, null=True)
-    omr_answer = IntegerField(blank=True, null=True)
-    omr_answer_idx = IntegerField(blank=True, null=True)
-    omr_answer_correct = CharField(max_length=200, blank=True, null=True)
-    question_score = IntegerField(blank=True, null=True)
+    # subject_code = IntegerField(blank=True, null=True)
+    # omr_answer = IntegerField(blank=True, null=True)
+    # omr_answer_idx = IntegerField(blank=True, null=True)
+    # omr_answer_correct = CharField(max_length=200, blank=True, null=True)
+    # question_score = IntegerField(blank=True, null=True)
 
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
-
+    Answer_Description = models.TextField(blank=True, null=True)
+    Answer_Score = IntegerField(blank=True, null=True)
     # Relationship Fields
-    lecture_code = ForeignKey(
-        'LectureInfo',
-         related_name="omranswerinfos", on_delete=models.DO_NOTHING
-    )
-    chapter_code = ForeignKey(
-        'ChapterInfo',
-         related_name="omranswerinfos", on_delete=models.DO_NOTHING
-    )
-    member_code = ForeignKey(
+    # lecture_code = ForeignKey(
+    #     'LectureInfo',
+    #      related_name="omranswerinfos", on_delete=models.DO_NOTHING
+    # )
+    # chapter_code = ForeignKey(
+    #     'ChapterInfo',
+    #      related_name="omranswerinfos", on_delete=models.DO_NOTHING
+    # )
+    Student_Code = ForeignKey(
         'MemberInfo',
          related_name="omranswerinfos", on_delete=models.DO_NOTHING
     )
-    question_code = ForeignKey(
+    Question_Code = ForeignKey(
         'OmrQuestionInfo',
          related_name="omranswerinfos", on_delete=models.DO_NOTHING
     )
-    lesson_code = ForeignKey(
-        'LessonInfo',
-         related_name="omranswerinfos", on_delete=models.DO_NOTHING
-    )
+
+    # lesson_code = ForeignKey(
+    #     'LessonInfo',
+    #      related_name="omranswerinfos", on_delete=models.DO_NOTHING
+    # )
 
     class Meta:
         ordering = ('-pk',)
@@ -1137,7 +1144,7 @@ class OmrAssignInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     question_code = ForeignKey(
@@ -1180,7 +1187,7 @@ class OmrExampleInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     question_code = ForeignKey(
@@ -1215,7 +1222,7 @@ class QAnswerInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     lecture_code = ForeignKey(
@@ -1262,7 +1269,7 @@ class QAnswerLog(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
     # Relationship Fields
     lecture_code = ForeignKey(
         'LectureInfo',
@@ -1300,7 +1307,7 @@ class QExampleInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
     q_example_type = CharField(max_length=50, blank=True, null=True)
 
     # Relationship Fields
@@ -1338,7 +1345,7 @@ class QuestionInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     question_media_file2 = CharField(max_length=250, blank=True, null=True)
     question_comment = TextField(blank=True, null=True)
@@ -1383,8 +1390,7 @@ class QuizAnswerInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
-
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
     test_type = IntegerField(blank=True, null=True)
 
     # Relationship Fields
@@ -1429,7 +1435,7 @@ class QuizExampleInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     quiz_example_type = CharField(max_length=50, blank=True, null=True)
 
@@ -1466,7 +1472,7 @@ class ScheduleInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     member_code = ForeignKey(
@@ -1605,7 +1611,7 @@ class TodoInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     teacher_code = IntegerField(blank=True, null=True)
     todo_title = CharField(max_length=500, blank=True, null=True)
@@ -1651,7 +1657,7 @@ class TodoTInfo(models.Model):
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = models.CharField(max_length=200, blank=True, null=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
     member_code = ForeignKey(
