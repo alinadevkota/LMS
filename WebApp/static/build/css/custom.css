@@ -513,7 +513,7 @@ html , body {
 }
 
 body .container.body .right_col {
-    background: #F7F7F7
+    background: #FFF
 }
 
 .nav-md .container.body .right_col {
@@ -5174,8 +5174,6 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
    padding:5px;
    margin-left:-30px;
    margin-top: 30px;
-   
-
 }
 
 .groups :hover{

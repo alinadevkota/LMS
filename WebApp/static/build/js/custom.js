@@ -5124,11 +5124,6 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-    $("#messageSidebar").on('click', function () {
-        $('#messageIconTopbar').show();
-
-    })
-
     $(".discussions").css({ 'display': 'block' })
     $('#fa-comment').on('click', function () {
         $(".discussions").show(300);
@@ -5156,3 +5151,22 @@ $(document).ready(function () {
 
 
 });
+
+$(document).ready(function () {
+
+    $('.fa-list').on('click', function () {
+        $('.listView').show(300);
+        //$(this).css('color', 'white');
+        $('.gridView').hide();
+
+    });
+
+
+    $('.fa-th-large').on('click', function () {
+        $('.gridView').show(300)
+        // $(this).css('color', 'white');
+        $('.listView').hide();
+    });
+});
+
+
