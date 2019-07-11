@@ -2237,8 +2237,32 @@ h4.graph_title {
     -moz-background-clip: padding;
     border-radius: 5px;
     background-clip: padding-box;
-    background: #FFF;
+    background: rgb(60, 212, 111);
     transition: all 300ms ease-in-out
+}
+.ubl_logo{
+    height: 50px;
+    width: 50px;
+}
+
+#student_icon{
+    margin-bottom: -10px;
+}
+/* custom tile colors for admin dashboard -rajav */
+#teacher_tile{
+    background: rgb(55, 144, 228);
+}
+
+#total_tile{
+    background: rgb(228, 72, 55);
+}
+
+#parent_tile{
+    background: rgb(218, 214, 3);
+}
+
+#adminMessageContainer{
+    margin-left: 0px;
 }
 
 .tile-stats:hover .icon i {
@@ -2263,10 +2287,10 @@ h4.graph_title {
 .tile-stats .icon {
     width: 20px;
     height: 20px;
-    color: #BAB8B8;
+    color: rgb(255, 255, 255);
     position: absolute;
-    right: 53px;
-    top: 22px;
+    right: 65px;
+    top: 35px;
     z-index: 1
 }
 
@@ -2289,11 +2313,12 @@ h4.graph_title {
     margin: 0;
     margin-left: 10px;
     z-index: 5;
-    padding: 0
+    padding: 0;
+    color: white;
 }
 
 .tile-stats h3 {
-    color: #BAB8B8
+    color: rgb(255, 255, 255)
 }
 
 .tile-stats p {
@@ -5149,8 +5174,6 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
    padding:5px;
    margin-left:-30px;
    margin-top: 30px;
-   
-
 }
 
 .groups :hover{
@@ -5437,3 +5460,5 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
  #LMS{
      margin-left: 30px;
  }
+
+ 
