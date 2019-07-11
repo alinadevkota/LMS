@@ -58,10 +58,9 @@ class LectureInfoAdminForm(forms.ModelForm):
 
 class LectureInfoAdmin(admin.ModelAdmin):
     form = LectureInfoAdminForm
-    list_display = ['lecture_name', 'lecture_teacher', 'lecture_cover', 'lecture_cover_file', 'lecture_level',
-                    'lecture_info', 'teacher', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent',
-                    'lecture_certification', 'lecture_provider', 'cert_crit_prog', 'cert_crit_post', 'cert_crit_ubt',
-                    'cert_crit_issue']
+    list_display = ['Lecture_Name', 'Lecture_Cover_File', 'Lecture_Level',
+                    'Lecture_Info', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent',
+                    'Lecture_Provider', 'Center_Code']
     # readonly_fields = ['lecture_name', 'lecture_teacher', 'lecture_cover', 'lecture_cover_file', 'lecture_level', 'lecture_info', 'teacher', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'lecture_certification', 'lecture_provider', 'cert_crit_prog', 'cert_crit_post', 'cert_crit_ubt', 'cert_crit_issue']
 
 admin.site.register(LectureInfo, LectureInfoAdmin)
@@ -76,14 +75,8 @@ class ChapterInfoAdminForm(forms.ModelForm):
 
 class ChapterInfoAdmin(admin.ModelAdmin):
     form = ChapterInfoAdminForm
-    list_display = ['chapter_no', 'chapter_name', 'topic', 'summary', 'page_num', 'vod_size', 'intro', 'target',
-                    'top_img', 'bottom_img1', 'bottom_img2', 'bottom_img3', 'thum_file', 'vod_file', 'Use_Flag',
-                    'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'today', 'chapter_type', 'prologue_type',
-                    'tabset', 'chapter_image', 'chapter_use', 'offline_file', 'pre_test_type', 'post_test_type',
-                    'level1_avg', 'level2_avg', 'level3_avg', 'level1_hard_avg', 'level1_medium_avg', 'level1_easy_avg',
-                    'level2_hard_avg', 'level2_medium_avg', 'level2_easy_avg', 'level3_hard_avg', 'level3_medium_avg',
-                    'level3_easy_avg', 'homework_count', 'epilogue_type', 'epilogue_img', 'pbl_flag',
-                    'chapter_use_time']
+    list_display = ['Chapter_No', 'Chapter_Name', 'Summary', 'Page_Num', 'Use_Flag',
+                    'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'Lecture_Code']
     #readonly_fields = ['chapter_no', 'chapter_name', 'topic', 'summary', 'page_num', 'vod_size', 'intro', 'target', 'top_img', 'bottom_img1', 'bottom_img2', 'bottom_img3', 'thum_file', 'vod_file', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'today', 'chapter_type', 'prologue_type', 'tabset', 'chapter_image', 'chapter_use', 'offline_file', 'pre_test_type', 'post_test_type', 'level1_avg', 'level2_avg', 'level3_avg', 'level1_hard_avg', 'level1_medium_avg', 'level1_easy_avg', 'level2_hard_avg', 'level2_medium_avg', 'level2_easy_avg', 'level3_hard_avg', 'level3_medium_avg', 'level3_easy_avg', 'homework_count', 'epilogue_type', 'epilogue_img', 'pbl_flag', 'chapter_use_time']
 
 admin.site.register(ChapterInfo, ChapterInfoAdmin)
@@ -98,12 +91,8 @@ class ChapterContentsInfoAdminForm(forms.ModelForm):
 
 class ChapterContentsInfoAdmin(admin.ModelAdmin):
     form = ChapterContentsInfoAdminForm
-    list_display = ['chapter_contents', 'chapter_audio', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
-                    'Register_Agent', 'contents_index', 'chapter_type', 'thum_file', 'vod_file', 'today', 'front1_img',
-                    'front1_text', 'back1_img', 'back1_text', 'pdf_file', 'front2_img', 'front3_img', 'front4_img',
-                    'front2_text', 'front3_text', 'front4_text', 'back2_img', 'back3_img', 'back4_img', 'back2_text',
-                    'back3_text', 'back4_text', 'c1_audio', 'c2_audio', 'c3_audio', 'c4_audio', 'vod_size',
-                    'offline_file', 'teacher_guide', 'today_text', 'contents_text', 'pbl_allow', 'pbl_lec_allow']
+    list_display = ['Chapter_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
+                    'Register_Agent', 'Content_Description']
     #readonly_fields = ['chapter_contents', 'chapter_audio', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'contents_index', 'chapter_type', 'thum_file', 'vod_file', 'today', 'front1_img', 'front1_text', 'back1_img', 'back1_text', 'pdf_file', 'front2_img', 'front3_img', 'front4_img', 'front2_text', 'front3_text', 'front4_text', 'back2_img', 'back3_img', 'back4_img', 'back2_text', 'back3_text', 'back4_text', 'c1_audio', 'c2_audio', 'c3_audio', 'c4_audio', 'vod_size', 'offline_file', 'teacher_guide', 'today_text', 'contents_text', 'pbl_allow', 'pbl_lec_allow']
 
 admin.site.register(ChapterContentsInfo, ChapterContentsInfoAdmin)
@@ -149,8 +138,9 @@ class InningInfoAdminForm(forms.ModelForm):
 
 class InningInfoAdmin(admin.ModelAdmin):
     form = InningInfoAdminForm
-    list_display = ['inning_name', 'start_date', 'end_date', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
-                    'Register_Agent']
+    list_display = ['Inning_Name', 'Teacher_Code', 'Start_Date', 'End_Date', 'Use_Flag', 'Register_DateTime',
+                    'Updated_DateTime',
+                    'Register_Agent', 'Lecture_Code', 'Center_Code']
     #readonly_fields = ['inning_name', 'start_date', 'end_date', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
 
 admin.site.register(InningInfo, InningInfoAdmin)
@@ -165,8 +155,9 @@ class OmrQuestionInfoAdminForm(forms.ModelForm):
 
 class OmrQuestionInfoAdmin(admin.ModelAdmin):
     form = OmrQuestionInfoAdminForm
-    list_display = ['subject_code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent',
-                    'question_level', 'question_score']
+    list_display = ['Lecture_Code', 'Chapter_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
+                    'Register_Agent',
+                    'Question_Level', 'Question_Score', 'Question_Description']
     #readonly_fields = ['subject_code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'question_level', 'question_score']
 
 admin.site.register(OmrQuestionInfo, OmrQuestionInfoAdmin)
@@ -198,7 +189,8 @@ class AssignHomeworkInfoAdminForm(forms.ModelForm):
 
 class AssignHomeworkInfoAdmin(admin.ModelAdmin):
     form = AssignHomeworkInfoAdminForm
-    list_display = ['subject_code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
+    list_display = ['Question_Code', 'Lecture_Code', 'Chapter_Code', 'Teacher_Code', 'Use_Flag', 'Register_DateTime',
+                    'Updated_DateTime', 'Register_Agent']
     #readonly_fields = ['subject_code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
 
 admin.site.register(AssignHomeworkInfo, AssignHomeworkInfoAdmin)
@@ -262,7 +254,8 @@ class InningGroupAdminForm(forms.ModelForm):
 
 class InningGroupAdmin(admin.ModelAdmin):
     form = InningGroupAdminForm
-    list_display = ['teacher_code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
+    list_display = ['Teacher_Code', 'Center_Code', 'Inning_Code', 'Lecture_Code', 'Use_Flag', 'Register_DateTime',
+                    'Updated_DateTime', 'Register_Agent']
     #readonly_fields = ['teacher_code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
 
 admin.site.register(InningGroup, InningGroupAdmin)
@@ -340,7 +333,8 @@ class GroupMappingAdminForm(forms.ModelForm):
 
 class GroupMappingAdmin(admin.ModelAdmin):
     form = GroupMappingAdminForm
-    list_display = ['Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
+    list_display = ['Center_Code', 'Group_Code', 'Member_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
+                    'Register_Agent']
     #readonly_fields = ['use_flag', 'reg_date', 'reg_time', 'reg_agent', 'udt_date', 'udt_time', 'udt_agent']
 
 admin.site.register(GroupMapping, GroupMappingAdmin)
@@ -465,8 +459,8 @@ class OmrAnswerInfoAdminForm(forms.ModelForm):
 
 class OmrAnswerInfoAdmin(admin.ModelAdmin):
     form = OmrAnswerInfoAdminForm
-    list_display = ['subject_code', 'omr_answer', 'omr_answer_idx', 'omr_answer_correct', 'question_score', 'Use_Flag',
-                    'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
+    list_display = ['Answer_Description', 'Student_Code', 'Question_Code', 'Answer_Score', 'Use_Flag',
+                    'Register_DateTime', 'Updated_DateTime']
     #readonly_fields = ['subject_code', 'omr_answer', 'omr_answer_idx', 'omr_answer_correct', 'question_score', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
 
 admin.site.register(OmrAnswerInfo, OmrAnswerInfoAdmin)

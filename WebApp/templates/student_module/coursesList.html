@@ -27,14 +27,36 @@ coursesList
 
                 <div class="coursesFilteringSearchBar">
                     <div class="filteringSearchBar">
-                        <h5>SORT RESULTS BY:</h5>
-                        <form>
-                            <input type="search" placeholder="Course name...">
-                            <i class="fa fa-angle-down"></i>
-                        </form>
+                        <h5 class="listingSearch">SORT RESULTS BY:</h5>
+                        <div class="dropdown">
+                            <input type="text" placeholder="Course name..." id="myInput" onkeyup="filterFunction()">
+                            <i class="fa fa-angle-down" onclick="myFunction()"></i>
+
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="#name">Name</a>
+                                <a href="#average rating">Average rating</a>
+                                <a href="#recent to old">Recent to old</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filteringSearchBar1">
+                        <h5 class="listingSearch1">FILTER:</h5>
+                        <div class="dropdown1">
+                            <input type="text" placeholder="Course name..." id="myInput" onkeyup="filterFunction()">
+                            <i class="fa fa-angle-down" onclick="myFunction1()"></i>
+
+                            <div id="myDropdown1" class="dropdown-content">
+                                <a href="#name">React Js</a>
+                                <a href="#average rating">Python</a>
+                                <a href="#recent to old">Computer Network</a>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
+
+                <hr>
 
                 <div class="gridView">
 
@@ -139,19 +161,20 @@ coursesList
 
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-8 offset-md-2">
+                            <div class="col-md-11 offset-md-2">
 
-                                <div class="_blogCard mt-5 bg-white ">
+                                <div class="_blogCard bg-white ">
                                     <div class="row">
-                                        <div class="col-lg-7 col-md-12 col-sm-12">
+                                        <div class="col-lg-7 col-md-7 col-sm-7">
                                             <div class="row">
-                                                <div class=" col-md-12 ">
+                                                <div class=" col-md-7 ">
                                                     <img src="https://picsum.photos/500/300/?image=10" alt="" class="img-fluid1 ">
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-5 col-md-12 col-sm-12">
+
+                                        <div class=" descriptionListView col-lg-5 col-md-12 col-sm-12">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="border-bottom">
@@ -197,6 +220,8 @@ coursesList
                                                 </div>
                                             </div>
                                         </div>
+
+
                                     </div>
                                 </div>
 
@@ -204,13 +229,13 @@ coursesList
                                     <div class="row">
                                         <div class="col-lg-7 col-md-12 col-sm-12">
                                             <div class="row">
-                                                <div class=" col-md-12 ">
+                                                <div class="col-md-7 ">
                                                     <img src="https://picsum.photos/500/300/?image=5 " alt="" class="img-fluid1 ">
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-5 col-md-12 col-sm-12">
+                                        <div class=" descriptionListView col-lg-5 col-md-12 col-sm-12">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="border-bottom">
