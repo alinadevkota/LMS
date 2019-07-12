@@ -5,8 +5,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView
-from .models import  CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
+from django.views.generic import DetailView, ListView, UpdateView, CreateView
+
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
     ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, \
     AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardInfoForm, BoardContentInfoForm, InningGroupForm, \
@@ -98,6 +98,17 @@ def start(request):
     """Start page with a documentation.
     """
     # return render(request,"start.html")
+
+    if request.user.is_authenticated:
+        if request.user.Is_Student:
+            redirect('students_dashboard')
+        if request.user.Is_Teacher:
+            redirect('teacher_home')
+        if request.user.Is_Parent:
+            redirect('parent_home')
+        if request.user.Is_CenterAdmin:
+            return redirect('/admin/')
+
     return render(request, "WebApp/homepage.html")
 
 
