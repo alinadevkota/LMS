@@ -90,6 +90,9 @@ def logout(request, next_page=None,
 
 _sentinel = object()
 
+def calendar(request):
+    return render(request, 'WebApp/calendar.html')
+
 
 def start(request):
     """Start page with a documentation.

@@ -433,4 +433,7 @@ urlpatterns += (
     path('todotinfo/detail/<int:pk>/', views.TodoTInfoDetailView.as_view(), name='todotinfo_detail'),
     path('todotinfo/update/<int:pk>/', views.TodoTInfoUpdateView.as_view(), name='todotinfo_update'),
 )
+urlpatterns += (
+    path('calendar/', views.calendar, name="admin_calendar"),
+)
 

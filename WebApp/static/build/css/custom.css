@@ -1155,7 +1155,7 @@ footer {
 }
 
 .top_tiles {
-    margin-bottom: 0
+    margin-bottom: -15px;
 }
 
 .top_tiles .tile h2 {
@@ -2263,6 +2263,8 @@ h4.graph_title {
 
 #adminMessageContainer{
     margin-left: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .tile-stats:hover .icon i {
@@ -5110,12 +5112,14 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 }
 
 .containerMessage{
-   margin-top: 10px;
+   /* margin-top: 10px; */
    margin-left: -10px;
-   height: 560px;
-   background-color: #fafafa;
+   height: auto;
+   /* background-color: #fafafa; */
+   border-color: #ddd;
    border-radius: 5px 5px 5px 5px;
-   box-shadow: 0 0 5px #adadad;   
+  
+   /* box-shadow: 0 0 5px #adadad;    */
 }
 
 .containerMessage ul {
@@ -5463,7 +5467,7 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 
  
  #calendarDivAdmin{
-     
-     height: 65vh;
+     margin-bottom: 10px;
+     height: 35vh;
      overflow: auto;
  }
