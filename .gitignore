@@ -136,7 +136,7 @@ dmypy.json
 
 # Vscode and Pycharm
 .vscode
-.idea
+.idea/
 
 # migrations
 migrations
