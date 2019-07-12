@@ -30,11 +30,11 @@
                     <td>ID</td>
                     <!-- <td>Link</td> -->
                     <td>Member ID</td>
-                    <!-- <td>Member_Password</td> -->
-                    <td>Member Role</td>
-                    <td>Member Name</td>
+                    <td>Member Username</td>
+                    <td>First Name</td>
+                    <td>Last Name</td>
                     <td>Member Permanent Address</td>
-                    <!-- <td>Member_Temporary_Address</td> -->
+                    <td>Member_Temporary_Address</td>
                     <td>Member BirthDate</td>
                     <td>Member Email</td>
                     <td>Member Phone</td>
@@ -49,19 +49,19 @@
             {% for object in object_list %}
 
             <tr>
-                <td>{{object.pk}}</td>
-                <!-- <td><a href="{{object.get_absolute_url}}">{{object}}</a></td> -->
+                <td>{{ forloop.counter }}</td>
                 <td>{{ object.Member_ID }}</td>
+                <td>{{ object.username }}</td>
                 <!-- <td>{{ object.Member_Password }}</td> -->
-                <td>{{ object.Member_Role }}, </td>
-                <td><a href="{{object.get_absolute_url}}">{{ object.username }}</a></td>
+                <td>{{ object.first_name }}</td>
+                <td>{{ object.last_name}}</td>
                 <td>{{ object.Member_Permanent_Address }}</td>
-                <!-- <td>{{ object.Member_Temporary_Address }}</td> -->
+                <td>{{ object.Member_Temporary_Address }}</td>
                 <td>{{ object.Member_BirthDate }}</td>
-                <td>{{ object.Member_Email }}</td>
+                <td>{{ object.email }}</td>
                 <td>{{ object.Member_Phone }}</td>
                 <!-- <td>{{ object.member_Avatar }}</td> -->
-                <td>{{ object.member_Gender }}</td>
+                <td>{{ object.Member_Gender }}</td>
                 <!-- <td>{{ object.Use_Flag }}</td>
             <td>{{ object.Register_DateTime }}</td>
             <td>{{ object.Register_Agent }}</td>

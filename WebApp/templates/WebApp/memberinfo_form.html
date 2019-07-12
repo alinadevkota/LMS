@@ -179,14 +179,14 @@
 
         <div class="col-md-6 col-sm-6 col-xs-12">
 
-            <label for="id_center_code" class="form-control-label  requiredField">
+            <label for="id_Center_Code" class="form-control-label  requiredField">
                 Center code
             </label>
             <div class="">
-                <select name="centcode" id="id_center_code" value="{{ object.center_code}}" required="required"
+                <select name="Center_Code" id="id_Center_Code" value="{{ object.Center_Code}}" required="required"
                     class="select form-control">
                     <option value="" selected=""></option>
-                    {% for c in form.fields.centcode.queryset %}
+                    {% for c in form.fields.Center_Code.queryset %}
                     <option value="{{ c.id|capfirst }}">{{ c.Center_Name|capfirst }}</option>
                     {% endfor %}
 

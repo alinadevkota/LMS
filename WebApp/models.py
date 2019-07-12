@@ -24,6 +24,9 @@ class CenterInfo(models.Model):
 
     class Meta:
         ordering = ('-pk',)
+    
+    def __str__(self):
+        return self.Center_Name
 
     def __unicode__(self):
         return u'%s' % self.pk
@@ -52,18 +55,19 @@ class MemberInfo(AbstractUser):
     # remove this password field
     # Member_Password = models.CharField(max_length=250, blank=True, null=True)
     # Member_Type = models.IntegerField(blank=True, null=True)
-    Member_Name = models.CharField(max_length=500, blank=True, null=True)
+    # Member_Name = models.CharField(max_length=500, blank=True, null=True)
     Member_Permanent_Address = models.CharField(max_length=500, blank=True, null=True)
     Member_Temporary_Address = models.CharField(max_length=500, blank=True, null=True)
     Member_BirthDate = models.DateTimeField(blank=True, null=True)
-    Member_Email = models.CharField(max_length=150, blank=True, null=True)
+    # Member_Email = models.CharField(max_length=150, blank=True, null=True)
     Member_Phone = models.CharField(max_length=150, blank=True, null=True)
-    member_Gender = models.CharField(max_length=150, blank=True, null=True)
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
+    Member_Gender = models.CharField(max_length=150, blank=True, null=True)
+    # Use_Flag = BooleanField(default=True)
+    # Register_DateTime = DateTimeField(auto_now_add=True)
     Register_Agent = CharField(max_length=500, blank=True, null=True)
     Updated_DateTime = DateTimeField(auto_now=True)
     Member_Memo = models.CharField(max_length=500, blank=True, null=True)
+    Member_Avatar = models.ImageField(upload_to="Member_images/", blank=True, null=True)
 
     Is_Teacher = models.BooleanField(default=False)
     Is_Student = models.BooleanField(default=False)
@@ -73,7 +77,7 @@ class MemberInfo(AbstractUser):
     # Member_Role = models.CharField(max_length=30, default="Student")
 
     # Relationship Fields
-    centcode = ForeignKey(
+    Center_Code = ForeignKey(
         'CenterInfo',
          related_name="memberinfos", on_delete=models.DO_NOTHING, null=True
     )
@@ -96,9 +100,8 @@ class LectureInfo(models.Model):
 
     # Fields
     Lecture_Name = CharField(max_length=500, blank=True, null=True)
-    # lecture_teacher = IntegerField(blank=True, null=True)
-    # Lecture_Cover = CharField(max_length=250, blank=True, null=True)
-    Lecture_Cover_File = ImageField(upload_to="memberImages/", blank=True, null=True)
+    Lecture_Description = TextField(blank=True, null=True)
+    Lecture_Cover_File = ImageField(upload_to="Lecture_images/", blank=True, null=True)
     Lecture_Level = IntegerField(blank=True, null=True)
     Lecture_Info = TextField(blank=True, null=True)
     # teacher = CharField(max_length=120, blank=True, null=True)
@@ -119,7 +122,9 @@ class LectureInfo(models.Model):
     Center_Code = ForeignKey(
         'CenterInfo',
          related_name="lectureinfos", on_delete=models.DO_NOTHING)
-
+    Teacher_Code = ForeignKey(
+        'MemberInfo',
+         related_name="lectureinfos", on_delete=models.DO_NOTHING)
     class Meta:
         ordering = ('-pk',)
 

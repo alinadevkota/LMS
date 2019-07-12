@@ -175,7 +175,7 @@ class MemberInfoListView(ListView):
     model = MemberInfo
 
     def get_queryset(self):
-        return MemberInfo.objects.filter(centcode=self.request.user.centcode)
+        return MemberInfo.objects.filter(Center_Code=self.request.user.Center_Code)
 
 
 
