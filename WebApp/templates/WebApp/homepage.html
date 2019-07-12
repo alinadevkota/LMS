@@ -1,163 +1,308 @@
 {% extends "base.html" %}
 {% load static %}
+{% block stylesheets %}
+<link href="{% static 'vendorsx/fullcalendar/dist/fullcalendar.min.css' %}" rel='stylesheet'>
+<link href="{% static 'vendorsx/fullcalendar/dist/fullcalendar.print.css' %}" rel="stylesheet" media="print">
+{% endblock %}
 {% block content %}
+<div class="container_main" id="adminHome">
+    <div class="row top_tiles">
+        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="tile-stats" id="student_tile">
+                <div class="icon"><img src="/static/images/student_icon.png" id="student_icon"></div>
+                <div class="count">7</div>
+                <h3>Student</h3>
+                <p></p>
+            </div>
+        </div>
+        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="tile-stats" id="teacher_tile">
+                <div class="icon"><img src="/static/images/teacher_icon.png" id="teacher_icon"></div>
+                <div class="count">3</div>
+                <h3>Teacher</h3>
+                <p></p>
+            </div>
+        </div>
+        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="tile-stats" id="parent_tile">
+                <div class="icon"><img src="/static/images/parent_icon.png" id="parent_icon"></div>
+                <div class="count">3</div>
+                <h3>Parent</h3>
+                <p></p>
+            </div>
+        </div>
+        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="tile-stats" id="total_tile">
+                <div class="icon"><img src="/static/images/total_icon.png" id="total_icon"></div>
+                <div class="count">13</div>
+                <h3>Total Accounts</h3>
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="containerMessage col-lg-4" id="adminMessageContainer">
 
-<div class="row top_tiles">
-    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="tile-stats" id="student_tile">
-            <div class="icon"><img src="/static/images/student_icon.png" id="student_icon"></div>
-            <div class="count">7</div>
-            <h3>Student</h3>
-            <p></p>
-        </div>
-    </div>
-    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="tile-stats" id="teacher_tile">
-            <div class="icon"><img src="/static/images/teacher_icon.png" id="teacher_icon"></div>
-            <div class="count">3</div>
-            <h3>Teacher</h3>
-            <p></p>
-        </div>
-    </div>
-    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="tile-stats" id="parent_tile">
-            <div class="icon"><img src="/static/images/parent_icon.png" id="parent_icon"></div>
-            <div class="count">3</div>
-            <h3>Parent</h3>
-            <p></p>
-        </div>
-    </div>
-    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="tile-stats" id="total_tile">
-            <div class="icon"><img src="/static/images/total_icon.png" id="total_icon"></div>
-            <div class="count">13</div>
-            <h3>Total Accounts</h3>
-            <p></p>
-        </div>
-    </div>
-</div>
-<hr>
-<div class="containerMessage col-lg-4" id="adminMessageContainer">
+            <div class="discussions" style="display: block;">
+                <div class="search-header">
+                    <h4>Private chat</h4>
+                    <div id="form-btn">
+                        <input type="text" placeholder="Search.." name="search">&nbsp;&nbsp;
+                        <button type="submit"><i class="fa fa-search fa-lg"></i></button>
+                    </div>
+                </div>
 
-    <div class="discussions" style="display: block;">
-        <div class="search-header">
-            <h4>Private chat</h4>
-            <div id="form-btn">
-                <input type="text" placeholder="Search.." name="search">&nbsp;&nbsp;
-                <button type="submit"><i class="fa fa-search fa-lg"></i></button>
+                <hr>
+
+                <div class="status online">
+                    <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+                    <div class="onlineIcon"></div>
+                    <div class="content">
+                        <h5>Rojan Bade</h5>
+                        <span>Please review and sign the binding agreement</span>
+                    </div>
+                </div>
+
+                <div class="status online">
+                    <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+                    <div class="onlineIcon"></div>
+                    <div class="content">
+                        <h5>Rojan Bade</h5>
+                        <span>Please review and sign the binding agreement</span>
+                    </div>
+                </div>
+
+                <div class="status online">
+                    <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+                    <div class="onlineIcon"></div>
+                    <div class="content">
+                        <h5>Rojan Bade</h5>
+                        <span>Please review and sign the binding agreement</span>
+                    </div>
+                </div>
+
+                <div class="status online">
+                    <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+                    <div class="onlineIcon"></div>
+                    <div class="content">
+                        <h5>Rojan Bade</h5>
+                        <span>Please review and sign the binding agreement</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <ul class="users" style="display: none">
+
+                    <div class="search-header">
+                        <h4>Groups</h4>
+                        <div id="form-btn">
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search fa-lg"></i></button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="groups">
+                        <li>
+                            <a href="#">
+                                <div class="status online">
+                                    <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
+                                    <div class="onlineIcon"></div>
+                                    <div class="content1">
+                                        <h5>Rojan Bade</h5>
+                                        <span>Banepa, Nepal</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <div class="status online">
+                                    <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
+                                    <div class="onlineIcon"></div>
+                                    <div class="content1">
+                                        <h5>Rojan Bade</h5>
+                                        <span>Banepa, Nepal</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="#">
+                                <div class="status online">
+                                    <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
+                                    <div class="onlineIcon"></div>
+                                    <div class="content1">
+                                        <h5>Rojan Bade</h5>
+                                        <span>Banepa, Nepal</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <div class="status online">
+                                    <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
+                                    <div class="onlineIcon"></div>
+                                    <div class="content1">
+                                        <h5>Rojan Bade</h5>
+                                        <span>Banepa, Nepal</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </div>
+
+                </ul>
             </div>
         </div>
 
-        <hr>
+        <div class="x-panel col-lg-8">
+            <div class="x_title">
+                <h2>Calendar Events</h2>
 
-        <div class="status online">
-            <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
-            <div class="onlineIcon"></div>
-            <div class="content">
-                <h5>Rojan Bade</h5>
-                <span>Please review and sign the binding agreement</span>
+                <div class="clearfix"></div>
             </div>
-        </div>
+            <div class="x_content" id="calendarDivAdmin">
+                <div id="calendar" class="fc fc-unthemed fc-ltr">
+                    <!-- <div class="fc-toolbar fc-header-toolbar"><div class="fc-left"><div class="fc-button-group"><button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left"><span class="fc-icon fc-icon-left-single-arrow"></span></button><button type="button" class="fc-next-button fc-button fc-state-default fc-corner-right"><span class="fc-icon fc-icon-right-single-arrow"></span></button></div><button type="button" class="fc-today-button fc-button fc-state-default fc-corner-left fc-corner-right fc-state-disabled" disabled="">today</button></div><div class="fc-right"><div class="fc-button-group"><button type="button" class="fc-month-button fc-button fc-state-default fc-corner-left fc-state-active">month</button><button type="button" class="fc-agendaWeek-button fc-button fc-state-default">week</button><button type="button" class="fc-agendaDay-button fc-button fc-state-default">day</button><button type="button" class="fc-listMonth-button fc-button fc-state-default fc-corner-right">list</button></div></div><div class="fc-center"><h2>July 2019</h2></div><div class="fc-clear"></div></div> -->
+                    <div class="fc-view fc-listMonth-view fc-list-view fc-widget-content" style="">
+                        <div class="fc-scroller" style="overflow: hidden auto; height: 898px;">
+                            <table class="fc-list-table">
+                                <tbody>
+                                    <tr class="fc-list-heading" data-date="2019-07-01">
+                                        <td class="fc-widget-header" colspan="3"><span class="fc-list-heading-main">July
+                                                1, 2019</span><span class="fc-list-heading-alt">Monday</span></td>
+                                    </tr>
+                                    <tr class="fc-list-item">
+                                        <td class="fc-list-item-time fc-widget-content">12:00am</td>
+                                        <td class="fc-list-item-marker fc-widget-content"><span
+                                                class="fc-event-dot"></span></td>
+                                        <td class="fc-list-item-title fc-widget-content"><a>All Day Event</a></td>
+                                    </tr>
+                                    <tr class="fc-list-heading" data-date="2019-07-06">
+                                        <td class="fc-widget-header" colspan="3"><span class="fc-list-heading-main">July
+                                                6, 2019</span><span class="fc-list-heading-alt">Saturday</span></td>
+                                    </tr>
+                                    <tr class="fc-list-item">
+                                        <td class="fc-list-item-time fc-widget-content">12:00am - 12:00am</td>
+                                        <td class="fc-list-item-marker fc-widget-content"><span
+                                                class="fc-event-dot"></span></td>
+                                        <td class="fc-list-item-title fc-widget-content"><a>Long Event</a></td>
+                                    </tr>
+                                    <tr class="fc-list-heading" data-date="2019-07-07">
+                                        <td class="fc-widget-header" colspan="3"><span class="fc-list-heading-main">July
+                                                7, 2019</span><span class="fc-list-heading-alt">Sunday</span></td>
+                                    </tr>
+                                    <tr class="fc-list-item">
+                                        <td class="fc-list-item-time fc-widget-content">all-day</td>
+                                        <td class="fc-list-item-marker fc-widget-content"><span
+                                                class="fc-event-dot"></span></td>
+                                        <td class="fc-list-item-title fc-widget-content"><a>Long Event</a></td>
+                                    </tr>
+                                    <tr class="fc-list-heading" data-date="2019-07-07">
+                                        <td class="fc-widget-header" colspan="3"><span class="fc-list-heading-main">July
+                                                7, 2019</span><span class="fc-list-heading-alt">Sunday</span></td>
+                                    </tr>
+                                    <tr class="fc-list-item">
+                                        <td class="fc-list-item-time fc-widget-content">all-day</td>
+                                        <td class="fc-list-item-marker fc-widget-content"><span
+                                                class="fc-event-dot"></span></td>
+                                        <td class="fc-list-item-title fc-widget-content"><a>Long Event</a></td>
+                                    </tr>
+                                    <tr class="fc-list-heading" data-date="2019-07-07">
+                                        <td class="fc-widget-header" colspan="3"><span class="fc-list-heading-main">July
+                                                7, 2019</span><span class="fc-list-heading-alt">Sunday</span></td>
+                                    </tr>
+                                    <tr class="fc-list-item">
+                                        <td class="fc-list-item-time fc-widget-content">all-day</td>
+                                        <td class="fc-list-item-marker fc-widget-content"><span
+                                                class="fc-event-dot"></span></td>
+                                        <td class="fc-list-item-title fc-widget-content"><a>Long Event</a></td>
+                                    </tr>
+                                    <tr class="fc-list-heading" data-date="2019-07-07">
+                                        <td class="fc-widget-header" colspan="3"><span class="fc-list-heading-main">July
+                                                7, 2019</span><span class="fc-list-heading-alt">Sunday</span></td>
+                                    </tr>
+                                    <tr class="fc-list-item">
+                                        <td class="fc-list-item-time fc-widget-content">all-day</td>
+                                        <td class="fc-list-item-marker fc-widget-content"><span
+                                                class="fc-event-dot"></span></td>
+                                        <td class="fc-list-item-title fc-widget-content"><a>Long Event</a></td>
+                                    </tr>
 
-        <div class="status online">
-            <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
-            <div class="onlineIcon"></div>
-            <div class="content">
-                <h5>Rojan Bade</h5>
-                <span>Please review and sign the binding agreement</span>
-            </div>
-        </div>
-
-        <div class="status online">
-            <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
-            <div class="onlineIcon"></div>
-            <div class="content">
-                <h5>Rojan Bade</h5>
-                <span>Please review and sign the binding agreement</span>
-            </div>
-        </div>
-
-        <div class="status online">
-            <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
-            <div class="onlineIcon"></div>
-            <div class="content">
-                <h5>Rojan Bade</h5>
-                <span>Please review and sign the binding agreement</span>
-            </div>
-        </div>
-
-    </div>
-
-    <div>
-        <ul class="users" style="display: none">
-
-            <div class="search-header">
-                <h4>Groups</h4>
-                <div id="form-btn">
-                    <input type="text" placeholder="Search.." name="search">
-                    <button type="submit"><i class="fa fa-search fa-lg"></i></button>
+                                    <tr class="fc-list-heading" data-date="2019-07-08">
+                                        <td class="fc-widget-header" colspan="3"><span class="fc-list-heading-main">July
+                                                8, 2019</span><span class="fc-list-heading-alt">Monday</span></td>
+                                    </tr>
+                                    <tr class="fc-list-item">
+                                        <td class="fc-list-item-time fc-widget-content">12:00am - 12:00am</td>
+                                        <td class="fc-list-item-marker fc-widget-content"><span
+                                                class="fc-event-dot"></span></td>
+                                        <td class="fc-list-item-title fc-widget-content"><a>Long Event</a></td>
+                                    </tr>
+                                    <tr class="fc-list-heading" data-date="2019-07-11">
+                                        <td class="fc-widget-header" colspan="3"><span class="fc-list-heading-main">July
+                                                11, 2019</span><span class="fc-list-heading-alt">Thursday</span></td>
+                                    </tr>
+                                    <tr class="fc-list-item">
+                                        <td class="fc-list-item-time fc-widget-content">10:30am</td>
+                                        <td class="fc-list-item-marker fc-widget-content"><span
+                                                class="fc-event-dot"></span></td>
+                                        <td class="fc-list-item-title fc-widget-content"><a>Meeting</a></td>
+                                    </tr>
+                                    <tr class="fc-list-heading" data-date="2019-07-12">
+                                        <td class="fc-widget-header" colspan="3"><span class="fc-list-heading-main">July
+                                                12, 2019</span><span class="fc-list-heading-alt">Friday</span></td>
+                                    </tr>
+                                    <tr class="fc-list-item">
+                                        <td class="fc-list-item-time fc-widget-content">7:00pm - 10:30pm</td>
+                                        <td class="fc-list-item-marker fc-widget-content"><span
+                                                class="fc-event-dot"></span></td>
+                                        <td class="fc-list-item-title fc-widget-content"><a>Birthday Party</a></td>
+                                    </tr>
+                                    <tr class="fc-list-heading" data-date="2019-07-25">
+                                        <td class="fc-widget-header" colspan="3"><span class="fc-list-heading-main">July
+                                                25, 2019</span><span class="fc-list-heading-alt">Thursday</span></td>
+                                    </tr>
+                                    <tr class="fc-list-item">
+                                        <td class="fc-list-item-time fc-widget-content">12:00pm</td>
+                                        <td class="fc-list-item-marker fc-widget-content"><span
+                                                class="fc-event-dot"></span></td>
+                                        <td class="fc-list-item-title fc-widget-content"><a>Lunch</a></td>
+                                    </tr>
+                                    <tr class="fc-list-heading" data-date="2019-07-28">
+                                        <td class="fc-widget-header" colspan="3"><span class="fc-list-heading-main">July
+                                                28, 2019</span><span class="fc-list-heading-alt">Sunday</span></td>
+                                    </tr>
+                                    <tr class="fc-list-item fc-has-url">
+                                        <td class="fc-list-item-time fc-widget-content">12:00am - 12:00am</td>
+                                        <td class="fc-list-item-marker fc-widget-content"><span
+                                                class="fc-event-dot"></span></td>
+                                        <td class="fc-list-item-title fc-widget-content"><a
+                                                href="http://google.com/">Click for Google</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <hr>
-
-            <div class="groups">
-                <li>
-                    <a href="#">
-                        <div class="status online">
-                            <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
-                            <div class="onlineIcon"></div>
-                            <div class="content1">
-                                <h5>Rojan Bade</h5>
-                                <span>Banepa, Nepal</span>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <div class="status online">
-                            <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
-                            <div class="onlineIcon"></div>
-                            <div class="content1">
-                                <h5>Rojan Bade</h5>
-                                <span>Banepa, Nepal</span>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="#">
-                        <div class="status online">
-                            <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
-                            <div class="onlineIcon"></div>
-                            <div class="content1">
-                                <h5>Rojan Bade</h5>
-                                <span>Banepa, Nepal</span>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <div class="status online">
-                            <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
-                            <div class="onlineIcon"></div>
-                            <div class="content1">
-                                <h5>Rojan Bade</h5>
-                                <span>Banepa, Nepal</span>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            </div>
-
-        </ul>
+        </div>
     </div>
-</div>
 
-{% endblock %}
+
+
+    {% endblock %}
+    {% block javascripts %}
+    <script src="{% static 'vendorsx/fullcalendar/dist/fullcalendar.min.js' %}"></script>
+
+    {% endblock %}

@@ -5124,11 +5124,6 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-    $("#messageSidebar").on('click', function () {
-        $('#messageIconTopbar').show();
-
-    })
-
     $(".discussions").css({ 'display': 'block' })
     $('#fa-comment').on('click', function () {
         $(".discussions").show(300);
@@ -5156,3 +5151,65 @@ $(document).ready(function () {
 
 
 });
+
+$(document).ready(function () {
+
+    $('.fa-list').on('click', function () {
+        $('.listView').show(300);
+        //$(this).css('color', 'white');
+        $('.gridView').hide();
+
+    });
+
+
+    $('.fa-th-large').on('click', function () {
+        $('.gridView').show(300)
+        // $(this).css('color', 'white');
+        $('.listView').hide();
+    });
+});
+
+
+
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+        txtValue = a[i].textContent || a[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+}
+
+function myFunction1() {
+    document.getElementById("myDropdown1").classList.toggle("show");
+}
+
+function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown1");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+        txtValue = a[i].textContent || a[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+}

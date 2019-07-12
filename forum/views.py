@@ -54,6 +54,7 @@ class Index(ListView):
         context = super(ListView, self).get_context_data(**kwargs)
         context['panel_title'] = _('New Threads')
         context['title'] = _('Index')
+        context['topics']= Topic.objects.all()
         context['show_order'] = True
         return context
 
