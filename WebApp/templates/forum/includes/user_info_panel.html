@@ -2,9 +2,9 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <div class="row">
-            <div class="col-xs-2 col-sm-1">
-                <img class="user-avatar" src="{% avatar_url user %}" alt=""/>
-            </div>
+            <div class="profile_pic">
+                        <img src="/media/{{ user.Member_Avatar }}" alt="..." class="img-circle profile_img"/>
+                    </div>
             <div class="col-xs-9 col-sm-10">
                 <p>{{ user.username }}</p>
                 <p>UID: {{ user.pk }}</p>

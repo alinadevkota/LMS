@@ -2,12 +2,12 @@ import random
 
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView, ListView, TemplateView, FormView
+from django.views.generic import DetailView, ListView, TemplateView, FormView, CreateView, UpdateView
 
-from .forms import QuestionForm, EssayForm
-from .models import Quiz, Category, Progress, Sitting, Question, Essay_Question
+from .forms import QuestionForm, EssayForm, QuizForm, MCQuestionForm, TFQuestionForm, EssayQuestionForm
+from .models import Quiz, Category, Progress, Sitting, Question, Essay_Question, MCQuestion, TF_Question
 
 
 class QuizMarkerMixin(object):
@@ -25,6 +25,10 @@ class SittingFilterTitleMixin(object):
             queryset = queryset.filter(quiz__title__icontains=quiz_filter)
 
         return queryset
+
+class QuizCreateView(CreateView):
+    model = Quiz
+    form_class = QuizForm
 
 
 class QuizListView(ListView):
@@ -382,3 +386,74 @@ def anon_session_score(session, to_add=0, possible=0):
         session["session_score_possible"] += possible
 
     return session["session_score"], session["session_score_possible"]
+
+
+
+
+class QuestionCreateView(CreateView):
+    model = MCQuestion
+    form_class = QuestionForm
+
+
+# ------------------------- MC_Question Views------------------
+
+class MCQuestionListView(ListView):
+    model = MCQuestion
+
+class MCQuestionCreateView(CreateView):
+    model = MCQuestion
+    form_class = MCQuestionForm
+
+class MCQuestionUpdateView(UpdateView):
+    model = MCQuestion
+    form_class = MCQuestionForm
+
+class MCQuestionDetailView(DetailView):
+    model = MCQuestion
+
+def MCQuestionDeleteView(request, pk):
+    MCQuestion.objects.filter(pk=pk).delete()
+    return redirect("mcquestion_list")
+
+
+# -------------------------TF_Question Views------------------
+
+class TFQuestionListView(ListView):
+    model = TF_Question
+
+class TFQuestionCreateView(CreateView):
+    model = TF_Question
+    form_class = TFQuestionForm
+
+class TFQuestionUpdateView(UpdateView):
+    model = TF_Question
+    form_class = TFQuestionForm
+
+class TFQuestionDetailView(DetailView):
+    model = TF_Question
+
+def TFQuestionDeleteView(request, pk):
+    TF_Question.objects.filter(pk=pk).delete()
+    return redirect("tfquestion_list")
+
+
+
+# ------------------------- Essay_Question Views------------------
+
+class EssayQuestionListView(ListView):
+    model = Essay_Question
+
+class EssayQuestionCreateView(CreateView):
+    model = Essay_Question
+    form_class = EssayQuestionForm
+
+class EssayQuestionUpdateView(UpdateView):
+    model = Essay_Question
+    form_class = EssayQuestionForm
+
+class EssayQuestionDetailView(DetailView):
+    model = Essay_Question
+
+def EssayQuestionDeleteView(request, pk):
+    Essay_Question.objects.filter(pk=pk).delete()
+    return redirect("essayquestion_list")

@@ -10,14 +10,14 @@ logger = get_task_logger(__name__)
 
 @shared_task
 def notify(sender, to, thread=None, post=None):
-    from forum.models import Notification, thread, Post
+    from forum.models import Notification, Thread, Post
     User = MemberInfo
     print("hello")
     if not any([thread, post]):
         logger.warning('No thread or post provided, ignored')
 
     ntf, created = Notification.objects.get_or_create(
-        thread=thread.objects.filter(pk=thread).first(),
+        thread=Thread.objects.filter(pk=thread).first(),
         post=Post.objects.filter(pk=post).first(),
         sender=User.objects.get(username=sender),
         to=User.objects.get(username=to)

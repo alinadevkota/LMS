@@ -9,6 +9,7 @@ from django.core.validators import (
     MaxValueValidator, validate_comma_separated_integer_list,
 )
 from django.db import models
+from django.urls import reverse
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
@@ -116,10 +117,10 @@ class Quiz(models.Model):
                     " Non users cannot sit this exam."),
         verbose_name=_("Single Attempt"))
 
-    time_limit = models.DurationField(
-        blank=False, default=None,
-        help_text=_("Set the time limit for the quiz"),
-        verbose_name=_("Time Limit"))
+    # time_limit = models.DurationField(
+    #     blank=False, default=None,
+    #     help_text=_("Set the time limit for the quiz"),
+    #     verbose_name=_("Time Limit"))
 
 
     pass_mark = models.SmallIntegerField(
@@ -627,6 +628,12 @@ class Essay_Question(Question):
         verbose_name = _("Essay style question")
         verbose_name_plural = _("Essay style questions")
 
+    def get_absolute_url(self):
+        return reverse('essayquestion_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('essayquestion_update', args=(self.pk,))
+
 
 #multichoice modelss___________________________________________________________
 
@@ -677,6 +684,12 @@ class MCQuestion(Question):
     class Meta:
         verbose_name = _("Multiple Choice Question")
         verbose_name_plural = _("Multiple Choice Questions")
+
+    def get_absolute_url(self):
+        return reverse('mcquestion_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('mcquestion_update', args=(self.pk,))
 
 
 @python_2_unicode_compatible
@@ -742,3 +755,9 @@ class TF_Question(Question):
         verbose_name = _("True/False Question")
         verbose_name_plural = _("True/False Questions")
         ordering = ['category']
+
+    def get_absolute_url(self):
+        return reverse('tfquestion_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('tfquestion_update', args=(self.pk,))
