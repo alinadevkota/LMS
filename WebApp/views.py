@@ -97,6 +97,7 @@ def start(request):
     # return render(request,"start.html")
 
     if request.user.is_authenticated:
+
         if request.user.Is_Student:
             return redirect('students_dashboard')
         if request.user.Is_Teacher:
