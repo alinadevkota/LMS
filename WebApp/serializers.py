@@ -31,27 +31,30 @@ class MemberInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.MemberInfo
         fields = (
-            'pk', 
-            'Member_ID', 
-            'Member_Password', \
- \
-            'Member_Name', 
+            'id',
+            'Member_ID',
+            'username',
+            'password',
+            'first_name',
+            'last_name', 
+            'email',
             'Member_Permanent_Address', 
             'Member_Temporary_Address', 
             'Member_BirthDate', 
-            'Member_Email', 
             'Member_Phone', 
-            'forum_avatar', 
-            'member_Gender', 
-            'Use_Flag', 
-            'Register_DateTime', 
+            'Member_Avatar', 
+            'Member_Gender', 
+            'date_joined',
+            'Updated_DateTime',
             'Register_Agent',
             'Member_Memo',
             'Is_Teacher',
-            'Is_CenterAdmin'
+            'Is_CenterAdmin',
             'Is_Student',
-            'Is_Parent'
+            'Is_Parent',
+            'Center_Code'
         )
+
 
 
 class LectureInfoSerializer(serializers.ModelSerializer):

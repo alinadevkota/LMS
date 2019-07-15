@@ -90,6 +90,9 @@ def logout(request, next_page=None,
 
 _sentinel = object()
 
+def calendar(request):
+    return render(request, 'WebApp/calendar.html')
+
 
 def start(request):
     """Start page with a documentation.
@@ -174,7 +177,7 @@ class MemberInfoListView(ListView):
     model = MemberInfo
 
     def get_queryset(self):
-        return MemberInfo.objects.filter(centcode=self.request.user.centcode)
+        return MemberInfo.objects.filter(Center_Code=self.request.user.Center_Code)
 
 
 
