@@ -72,7 +72,7 @@ html , body {
     margin-top:40px;
 }
 .table-responsive{
-    padding:1em;
+    /* padding:1em; */
 }
 .tableHeader{
     font-weight: bold;
@@ -1620,7 +1620,7 @@ table.jambo_table tbody tr.selected td {
 }
 
 .dataTables_filter {
-    width: 50%;
+    /* width: 50%; */
     float: right;
     text-align: right
 }

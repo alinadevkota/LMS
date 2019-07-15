@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-{{ form|crispy }}
+
 
 <link rel="stylesheet" href="{% static 'css/memberinfo_form.css' %}">
 <ol aria-label="breadcrumb" class="breadcrumb navClass">
@@ -30,7 +30,7 @@
 <div class="x_content">
     <form method="post" id="demo-form2" data-parsley-validate="">
         {% csrf_token %}
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+        <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
             <label for="id_Member_ID" class="control-label ">
                 Member ID
             </label>
@@ -39,28 +39,52 @@
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
         </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" id="div_id_password">
-            <label for="id_password" class="control-label ">
-                Member Password
-            </label>
-            <input type="password" value="{{ object.password}}" name="password" id="id_password" required="required"
-                class="form-control has-feedback-left" placeholder="Member Password">
-            <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
-        </div>
-
-
-
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+        <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
             <label for="id_username" class="control-label ">
-                Member Name
+                Username
             </label>
             <input type="text" value="{{ object.username}}" name="username" id="id_username" required="required"
                 class="form-control has-feedback-left" placeholder="Member Name">
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
         </div>
 
+
+        <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback" id="div_id_password">
+            <label for="id_password" class="control-label ">
+                Password
+            </label>
+            <input type="password" value="{{ object.password}}" name="password" id="id_password" required="required"
+                class="form-control has-feedback-left" placeholder="Member Password">
+            <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <label for="id_first_name" class="control-label ">
+                First Name
+            </label>
+            <input type="text" value="{{ object.first_name}}" name="first_name" id="id_first_name" required="required"
+                class="form-control has-feedback-left" placeholder="First Name">
+            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+        </div>
+
+
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" id="div_id_password">
+            <label for="id_last_name" class="control-label ">
+                Last Name
+            </label>
+            <input type="text" value="{{ object.last_name}}" name="last_name" id="id_last_name" required="required"
+                class="form-control has-feedback-left" placeholder="Last Name">
+            <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <label for="id_email" class="control-label ">
+                Member Email
+            </label>
+            <input type="email" name="email" value="{{ object.email}}" id="id_email" required="required"
+                class="form-control has-feedback-left" placeholder="Member Email">
+            <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+        </div>
 
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             <label for="id_date_joined" class="control-label ">
@@ -70,7 +94,6 @@
                 required="required" class="form-control has-feedback-left" placeholder="Date joined">
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
         </div>
-
 
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             <label for="id_Member_Permanent_Address" class="control-label ">
@@ -83,6 +106,7 @@
 
         </div>
 
+
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             <label for="id_Member_Temporary_Address" class="control-label ">
                 Member Temporary Address
@@ -93,7 +117,6 @@
             <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
         </div>
 
-
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             <label for="id_Member_BirthDate" class="control-label ">
                 Member BirthDate
@@ -102,15 +125,6 @@
                 required="required" class="form-control has-feedback-left">
             <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
 
-        </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_Member_Email" class="control-label ">
-                Member Email
-            </label>
-            <input type="email" name="Member_Email" value="{{ object.Member_Email}}" id="id_Member_Email"
-                required="required" class="form-control has-feedback-left" placeholder="Member Email">
-            <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
         </div>
 
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -124,26 +138,24 @@
         </div>
 
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_member_Avatar" class="control-label ">
+            <label for="id_Member_Avatar" class="control-label ">
                 Member Avatar
             </label>
-            <input type="file" name="member_Avatar" value="{{ object.member_Avatar}}" id="id_member_Avatar"
-                required="required" class="form-control has-feedback-left" placeholder="Member Avatar">
+            <input type="file" name="Member_Avatar" value="{{ object.Member_Avatar}}" id="id_Member_Avatar" required=""
+                class="form-control has-feedback-left" placeholder="Member Avatar">
             <span class="fa fa-image form-control-feedback left" aria-hidden="true"></span>
         </div>
 
 
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_member_Gender" class="control-label ">
+            <label for="id_Member_Gender" class="control-label ">
                 Member Gender
             </label>
-            <select name="member_Gender" id="id_member_Gender" value="{{ object.member_Gender}}" required=""
+            <select name="Member_Gender" id="id_Member_Gender" value="{{ object.Member_Gender}}" required=""
                 class="select form-control">
                 <option value="" selected="">Select Gender</option>
                 <option value="1">Male</option>
                 <option value="2">Female</option>
-                <option value="3">Others</option>
-
 
                 <span class="fa fa-child form-control-feedback left" aria-hidden="true"></span>
             </select>
@@ -158,8 +170,7 @@
             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
         </div>
 
-        <div class="col-md-6 col-sm-6 col-xs-12">
-
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             <label for="id_Center_Code" class="form-control-label  requiredField">
                 Center code
             </label>
@@ -170,15 +181,10 @@
                     {% for c in form.fields.Center_Code.queryset %}
                     <option value="{{ c.id|capfirst }}">{{ c.Center_Name|capfirst }}</option>
                     {% endfor %}
-
-
                 </select>
-
             </div>
-
         </div>
-
-        <div class="col-md-12 form-group has-feedback">
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             <label>
                 Status
             </label>
@@ -186,15 +192,34 @@
                 checked {% endif %}>
         </div>
 
-
-
-        <div class="col-md-9 col-sm-9 col-xs-12">
-            <label class="" for="id_Is_Teacher">
-                <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox" class="flat"
-                        name="Is_Teacher">
-                </div> teacher
-            </label>
+        <div class="col-md-6">
+            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                <b>Member Type</b>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <label class="" for="id_Is_Teacher">
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox"
+                            class="flat" name="Is_Teacher">
+                    </div> Teacher
+                </label>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <label class="" for="id_Is_Student">
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox"
+                            class="flat" name="Is_Student">
+                    </div> Student
+                </label>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <label class="" for="id_Is_Parent">
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox"
+                            class="flat" name="Is_Parent">
+                    </div> Parent
+                </label>
+            </div>
         </div>
+
+
 
 
 
@@ -204,7 +229,6 @@
                     name="Is_Teacher" class="checkboxinput" id="id_Is_Teacher">
                 Is Teacher
             </label> </div> -->
-
 
         <div class="submitButton col-md-12" id="buttonID">
             <button class="btn btn-success" type="submit">Submit</button>
