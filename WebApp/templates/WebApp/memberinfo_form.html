@@ -50,26 +50,7 @@
         </div>
 
 
-        <div class="col-md-6 col-sm-6 col-xs-12">
 
-            <label for="id_Member_Role" class="form-control-label  requiredField">
-                Member Role
-            </label>
-            <div class="Member_Role">
-                <select name="Member_Role" value="{{ object.Member_Role}}" id="id_Member_Role" required=""
-                    class="form-control">
-                    <option value="" selected="true" disabled="true">Select Role</option>
-                    <option value="1">Student</option>
-                    <option value="2">Teacher</option>
-                    <option value="3">Parent</option>
-                    <option value="4">CenterAdmin</option>
-
-
-                </select>
-
-            </div>
-
-        </div>
 
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             <label for="id_username" class="control-label ">
@@ -207,6 +188,22 @@
 
 
 
+        <div class="col-md-9 col-sm-9 col-xs-12">
+            <label class="" for="id_Is_Teacher">
+                <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox" class="flat"
+                        name="Is_Teacher">
+                </div> teacher
+            </label>
+        </div>
+
+
+
+
+
+        <!-- <div id="div_id_Is_Teacher" class="checkbox"> <label for="id_Is_Teacher" class=""> <input type="checkbox"
+                    name="Is_Teacher" class="checkboxinput" id="id_Is_Teacher">
+                Is Teacher
+            </label> </div> -->
 
 
         <div class="submitButton col-md-12" id="buttonID">
