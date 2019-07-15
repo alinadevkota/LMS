@@ -57,7 +57,7 @@
 
 
             <div class="media-right">
-                <a href="app-forum-thread.html" class="btn btn-white text-light"><i class="fa fa-comments fa-fw"></i>
+                <a href="{% url 'forum:thread' pk=thread.pk %}" class="btn btn-white text-light"><i class="fa fa-comments fa-fw"></i>
                     {{ thread.reply_count }}</a>
             </div>
         </li>
