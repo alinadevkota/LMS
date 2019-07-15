@@ -22,7 +22,7 @@
                     <h4 class="text-headline margin-none">
                         <a href="{% url 'forum:nodegroup' nodegroup.pk %}">{{ nodegroup.title }}</a></h4>
                     {% endfor %}
-                
+
                 </div>
                 <div class="media-right">
                     <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic'%}"><i
@@ -83,7 +83,7 @@
             </div>
             <div class="media-right">
                 <a href="app-forum-thread.html" class="btn btn-white text-light"><i class="fa fa-comments fa-fw"></i>
-                    14</a>
+                    {{ thread.reply_count }}</a>
             </div>
         </li>
 
