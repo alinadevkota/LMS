@@ -1,14 +1,9 @@
 
 /* =========================== Courses List ============================== */
 
-.coursesSearchBar h5{
-    margin-left: 20%;
-  
-}
-
 form{
     display: inline-flex;
-    width:40%;
+    width:60%;
     border-radius: 0.2em;
     position: relative;
     top: 0px;
@@ -29,13 +24,14 @@ input[type=search]{
     margin-left:5px;   
 }
 
+
 .coursesIcons .fa{
-    margin: 20px 10px;
     font-size: 25px !important;
     cursor: pointer;
+    padding-right: 30px;
+    display: inline-flex;
+    padding-top: 10px;
     float: right;
-    padding-right: 20px;
-    border: 5px;      
 }
 
 .coursesIcons .fa:hover{
@@ -44,52 +40,8 @@ input[type=search]{
 
 #listingCourses{
     background-color:  #e3e3e3 ;  
-    width: 100%;
-    height: 650px;
-    border-radius: 0.6em 0 0 0.6em;
-    margin-top: -10px;
-}
-
-#listingCourses h5{
-    margin-left: 3%;
-    margin-top: 20px;
-}
-
-#listingCourses form{
-    display: inline-flex;
-    width:80%;
-    border-radius: 0.2em;
-    position: relative;
-    top: 0px;
-    left: 20%;
-}
-
-#listingCourses input[type=search]{
-    background-color: white;
-    width: 30%;
-    height: 35px;
-    padding: 10px;
-    border: none;
-    border-radius: 0.3em 0 0 0.3em;
-
-}
-
-
-#listingCourses  .fa-angle-down{
-    color: #5675a6;
-    position: relative;
-    font-size: 25px !important;
-    cursor: pointer;
-    float: right;
-    margin-right: 2%;
-    margin-top: -12%;
-    align-items: center;
-    /* transform: rotate(90deg);   */
-}
-
-#listingCourses  .fa-angle-down:hover{
-    color: #28374f;
-    /* transform: rotate(0deg);    */
+    height: auto;
+    border-radius: 0.6em 0 0 0.6em; 
 }
 
 .filteringSearchBar{
@@ -116,40 +68,32 @@ input[type=search]{
 .listingSearch1 {
     padding-top: 2%;
 }
-
-
-
 /* ======================= GRID VIEW ======================== */
-
 .gridView{
-    max-width: 1200px;
-    margin: 0 auto;
-    margin: 2%;
-    
-  }
+    margin-left: 4%;
+    margin: 1-px auto;   
+}
 
-
-  .card-title{
+.card-title{
     padding: 1rem;
     letter-spacing: 1px;
     text-transform: capitalize;
     margin-top: 1%;
     margin-left: 2%;
-  }
+}
 
-  .card-text {
+.card-text {
     padding-left: 6%;
     padding-right: 5%;
     line-height: 1.5;
     margin-bottom: 1.25rem;    
 
-  }
+}
 
 .ratingIcons{
     margin-top: -3%;
     margin-left: 5%;
 }
-
 
 .text-yellow-800 {
     color: #f9a825;
@@ -177,16 +121,16 @@ input[type=search]{
    
 }
 
+
 .col-md-2{
     padding-left: 12%;
 }
+
 
 .col-md-10{
     padding-left: 12%;
     margin-top: -2.5%;
 }
-
-
   
 .gridContents {
     display: flex;
@@ -212,7 +156,6 @@ input[type=search]{
       width: 33.3333%;
   }
 }
-
  
 .card {
     background-color: white;
@@ -221,30 +164,24 @@ input[type=search]{
     display: flex;
     flex-direction: column;
     overflow: hidden;
-  }
-
-
-
+}
  /* ======================= LIST VIEW ======================== */
-
      
  img {
     height: auto;
     max-width: 100%;
     vertical-align: middle;
-  }
-
+}
   
- .listView .card{
+.listView .card{
     padding: 1%;
     padding-top: 1%;
     margin-bottom: 2%;
- }
+}
 
- .listView h2{
+.listView h2{
     margin-top: -0.5%;
-    margin-left: 1%;
-    
+    margin-left: 1%;    
 }
 
 .ratingIcons1{
@@ -253,10 +190,8 @@ input[type=search]{
     margin-bottom: -2%;
 }
 
-
 .listView .card-text{
-    padding-left: 0.5%;
-    
+    padding-left: 0.5%;    
 }
 
 .listView .col-md-2{
@@ -267,65 +202,17 @@ input[type=search]{
     padding-left: 0%;
     padding-top: 1%;
 }
-/* 
-._blogCard{
-    margin-left: 5%;
-    margin-right: 10px;
-    margin-top: 4%;
-    border-radius: 5px;
-    width: 100%;
-    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    
-}
- 
-._blogTitle{
-    margin-top: 2%;    
-}
 
-.img-fluid1 {
-    margin: 2%;
-    
-}
-
-.descriptionListView{
-    margin-left: -23%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-}
-
-._content{
-    margin-bottom: 0.5%;
-}
-
-.listViewRatingIcons{
-    margin-left: 5% ;
-    margin-top: -2%;
-} 
-
-.listViewlLectureName{
-    padding-left: 5%; 
-}
-
-.listViewlLectureName h4{
-    margin-bottom: 2%;
-} */
-
-  /* The search field */
-  #myInput {
-    box-sizing: border-box;
-    background-image: url('searchicon.png');
-    background-position: 14px 12px;
-    background-repeat: no-repeat;
+#myInput {  
     font-size: 14px;
     padding: 10px;
     border: none;
-    border-bottom: 1px solid #ddd;
     border-radius: 5px;
     height: 30px;
-    margin-left: 7%;
-    margin-top: 9%;
-  }
-  
+    margin-left: 4%;
+    margin-top: 2%;
+}
+
   /* The search field when it gets focus/clicked on */
   #myInput:focus {outline: 3px solid #ddd;}
   

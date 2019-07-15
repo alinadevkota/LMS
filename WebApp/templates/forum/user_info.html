@@ -18,11 +18,12 @@
         {% for thread in threads %}
         <li class="list-group-item thread-entry">
             <div class="entry media">
-                <div class="media-body media-middle">
+                <div class="media-body media-middle"> thread:
                     <a href="{% url 'forum:thread' pk=thread.pk %}" class="entry-link">
                         {{ thread.title }}
                     </a>
                     <p class="entry-meta">
+                        topic:
                         <a href="{% url 'forum:topic' thread.topic.pk %}">
                             <span class="label label-default meta-topic">
                                 {{ thread.topic.title }}
@@ -53,14 +54,14 @@
     {% for topic in topics %}
     <li class="list-group-item topic-entry">
         <div class="entry media">
-            <div class="media-body media-middle">
+            <div class="media-body media-middle">topic:
                 <a href="{% url 'forum:topic' pk=topic.pk %}" class="entry-link">
                     {{ topic.title }}
                 </a>
-                <p class="entry-meta">
-                    <a href="{% url 'forum:node' topic.node.pk %}">
+                <p class="entry-meta">node group:
+                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">
                         <span class="label label-default meta-node">
-                            {{ topic.node.title }}
+                            {{ topic.node_group.title }}
                         </span>
                     </a>
                     <span class="meta meta-pub_date">
@@ -77,10 +78,6 @@
         </div>
     </li>
     {% endfor %}
-    <li class="list-group-item">
-        <a href="{% url 'forum:user_topics' user.pk %}"
-            class="text-success">{% trans "More topics from this user" %}</a>
-    </li>
 </ul>
 </div>
 
@@ -97,7 +94,8 @@
         {% for reply in replies %}
         <li class="list-group-item reply-entry reply-entry-title">
             {% trans "Replied to" %}
-            <a href="{% url 'forum:topic' pk=reply.topic.pk %}">{{ reply.topic.title }}</a>
+            thread:
+            <a href="{% url 'forum:thread' pk=reply.thread.pk %}">{{ reply.thread.title }}</a>
             <span class="pull-right">{{ reply.pub_date | naturaltime }}</span>
         </li>
         <li class="list-group-item reply-entry reply-entry-content">
