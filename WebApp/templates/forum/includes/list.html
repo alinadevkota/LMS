@@ -26,8 +26,11 @@
         <li class="list-group-item thread-entry">
             <div class="entry media">
                 <div class="media-left media-middle">
-                    <a class="list-avatar-link" href="{% url 'forum:user_info' thread.user.pk %}"><img
-                            class="user-avatar" src="{% avatar_url thread.user %}"></a>
+                    <a class="list-avatar-link" href="{% url 'forum:user_info' thread.user.pk %}">
+                        <div class="profile_pic">
+                        <img src="/media/{{ thread.user.Member_Avatar }}" alt="..." class="img-circle profile_img"/>
+                    </div>
+                    </a>
                 </div>
                 <div class="media-body media-middle">
                     <a href="{% url 'forum:thread' pk=thread.pk %}" class="entry-link">

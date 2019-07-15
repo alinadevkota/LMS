@@ -13,15 +13,17 @@
             {% for notification in notifications %}
                 <li class="list-group-item notification-entry">
                     <div class="row">
-                        <div class="col-xs-3">
-                            <img src="{% avatar_url notification.sender 28 %}">
+                    <div class=""
+                        <div class="profile_pic">
+                            <img src="/media/{{ notification.sender.Member_Avatar }}" alt="..."
+                                 class="img-circle profile_img"/>
                         </div>
                         <div class="col-xs-9">
                             <div class="notification-meta">
                                 {% url 'forum:user_info' notification.sender_id as user_url %}
                                 {% if notification.thread %}
                                     {% url 'forum:thread' notification.thread_id as thread_url %}
-                                    {%blocktrans with username=notification.sender.username thread_title=notification.thread.title%}
+                                    {% blocktrans with username=notification.sender.username thread_title=notification.thread.title %}
                                         <a href="{{ user_url }}">
                                             {{ username }}
                                         </a>
@@ -32,7 +34,7 @@
                                     {% endblocktrans %}
                                 {% else %}
                                     {% url 'forum:thread' notification.post.thread_id as thread_url %}
-                                    {% blocktrans with username=notification.sender.username thread_title=notification.post.thread.title%}
+                                    {% blocktrans with username=notification.sender.username thread_title=notification.post.thread.title %}
                                         <a href="{{ user_url }}">
                                             {{ username }}
                                         </a>
