@@ -61,6 +61,7 @@ coursesList
                             <i class="fa fa-angle-down" onclick="myFunction1()"></i>
 
                             <div id="myDropdown1" class="dropdown-content">
+
                                 <a href="#name">React Js</a>
                                 <a href="#average rating">Python</a>
                                 <a href="#recent to old">Computer Network</a>
@@ -74,11 +75,13 @@ coursesList
 
                 <div class="gridView">
                     <div class="gridContents">
+                        {% for course in Courses %}
                         <div class="gridContentsList">
                             <div class="card" style="width: 33rem;">
-                                <img class="card-img-top" src="https://picsum.photos/500/300/?image=10" alt="Card image cap">
+                                <img class="card-img-top" src="/media/{{ course.Lecture_Cover_File }}"
+                                     alt="Card image cap">
                                 <div class="card-body">
-                                    <h2 class="card-title "><strong>Card title</strong></h2>
+                                    <h2 class="card-title "><strong>{{ course.Lecture_Name }}</strong></h2>
 
                                     <p class="ratingIcons">
                                         <span class="fa fa-fw fa-star text-yellow-800"></span>
@@ -89,20 +92,16 @@ coursesList
                                     </p>
 
                                     <hr>
-                                    <h5 class="card-text text-justify">Some quick example text to build on the card
-                                        title
-                                        and
-                                        make up the
-                                        bulk of the card's content.</h5>
+                                    <h5 class="card-text text-justify">{{ course.Lecture_Description }}</h5>
 
                                     <div class="row d-flex flex-row">
                                         <div class="col-md-2">
                                             <span class="avatar avatar-48 img-circle">
-                                                <img src="/static/images/suted.jpg">
+                                                <img src="/media/{{ course.Teacher_Code.Member_Avatar }}">
                                             </span>
                                         </div>
                                         <div class="col-md-10 ">
-                                            <h4>Rojan Bade</h4>
+                                            <h4>{{ course.Teacher_Code }}</h4>
                                             <p>Instructor</p>
                                         </div>
                                     </div>
@@ -110,82 +109,13 @@ coursesList
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
 
-                        <div class="gridContentsList">
-                            <div class="card" style="width: 33rem;">
-                                <img class="card-img-top" src="https://picsum.photos/500/300/?image=5" alt="Card image cap">
-                                <div class="card-body">
-                                    <h2 class="card-title "><strong>Card title</strong></h2>
 
-                                    <p class="ratingIcons">
-                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
-                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
-                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
-                                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
-                                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
-                                    </p>
 
-                                    <hr>
-                                    <h5 class="card-text text-justify">Some quick example text to build on the card
-                                        title
-                                        and
-                                        make up the
-                                        bulk of the card's content.</h5>
-
-                                    <div class="row d-flex flex-row">
-                                        <div class="col-md-2">
-                                            <span class="avatar avatar-48 img-circle">
-                                                <img src="/static/images/suted.jpg">
-                                            </span>
-                                        </div>
-                                        <div class="col-md-10 ">
-                                            <h4>Rojan Bade</h4>
-                                            <p>Instructor</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="gridContentsList">
-                            <div class="card" style="width: 33rem;">
-                                <img class="card-img-top" src="https://picsum.photos/500/300/?image=11" alt="Card image cap">
-                                <div class="card-body">
-                                    <h2 class="card-title "><strong>Card title</strong></h2>
-
-                                    <p class="ratingIcons">
-                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
-                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
-                                        <span class="fa fa-fw fa-star text-yellow-800"></span>
-                                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
-                                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
-                                    </p>
-
-                                    <hr>
-                                    <h5 class="card-text text-justify">Some quick example text to build on the card
-                                        title
-                                        and
-                                        make up the
-                                        bulk of the card's content.</h5>
-
-                                    <div class="row d-flex flex-row">
-                                        <div class="col-md-2">
-                                            <span class="avatar avatar-48 img-circle">
-                                                <img src="/static/images/suted.jpg">
-                                            </span>
-                                        </div>
-                                        <div class="col-md-10 ">
-                                            <h4>Rojan Bade</h4>
-                                            <p>Instructor</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
+
 
             </div>
 

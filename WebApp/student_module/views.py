@@ -11,6 +11,8 @@ from django.shortcuts import render
 
 
 # Create your views here.
+from WebApp.models import LectureInfo
+
 
 def dashboard(request):
     return render(request, 'student_module/dashboard.html')
@@ -37,4 +39,4 @@ def coursedetail(request):
 
 
 def coursesList(request):
-    return render(request, 'student_module/coursesList.html')
+    return render(request, 'student_module/coursesList.html', {'Courses': LectureInfo.objects.all()})
