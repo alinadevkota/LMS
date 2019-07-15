@@ -31,5 +31,10 @@ def quizzes(request):
 def calendar(request):
     return render(request, 'student_module/calendar.html')
 
+def coursedetail(request):
+    return render(request, 'student_module/course_detail.html')
+
+
+
 def coursesList(request):
     return render(request, 'student_module/coursesList.html')

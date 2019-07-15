@@ -70,16 +70,16 @@
             </div>
             {% endblock top_navigation %}
             <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
 
-                        {% block content %}
-                        <!-- {{ content }} -->
-                        {% endblock content %}
+                <div class="page-title">
+
+                    {% block content %}
+                    <!-- {{ content }} -->
+                    {% endblock content %}
 
 
-                    </div>
                 </div>
+
             </div>
 
             <!-- <div class="footer">
@@ -141,6 +141,7 @@
 
     <!-- Custom Theme Scripts -->
     <script src=" {% static "/build/js/custom.js" %}"></script>
+    <script src="{% static 'vendorsx/fullcalendar/dist/fullcalendar.min.js' %}"></script>
 
     {% block customjss %}
     {% endblock %}

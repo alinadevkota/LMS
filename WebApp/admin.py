@@ -40,9 +40,10 @@ class MemberInfoAdminForm(forms.ModelForm):
 
 class MemberInfoAdmin(admin.ModelAdmin):
     form = MemberInfoAdminForm
-    list_display = ['pk', 'username', 'Member_ID', 'Member_Name', 'Member_Permanent_Address',
-                    'Member_Temporary_Address', 'Member_BirthDate', 'Member_Email', 'Member_Phone', 'forum_avatar',
-                    'member_Gender', 'Use_Flag', 'Register_DateTime', 'Register_Agent', 'Member_Memo']
+    list_display = ['id', 'username','first_name','last_name','email', 'Member_ID', 'Member_Permanent_Address',
+                    'Member_Temporary_Address', 'Member_BirthDate', 'Member_Phone', 'Member_Avatar',
+                    'Member_Gender','Updated_DateTime', 'Register_Agent', 'Member_Memo']
+    list_display_links = ['id','username']
     # list_display =  [field.name for field in MemberInfo._meta.get_fields()]
     #readonly_fields = ['Member_ID', 'Member_Name', 'Member_Permanent_Address', 'Member_Temporary_Address', 'Member_BirthDate', 'Member_Email', 'Member_Phone', 'forum_avatar', 'member_Gender', 'Use_Flag', 'Register_DateTime', 'Register_Agent', 'Member_Memo']
 
