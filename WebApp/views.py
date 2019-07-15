@@ -98,14 +98,15 @@ def start(request):
 
     if request.user.is_authenticated:
         if request.user.Is_Student:
-            redirect('students_dashboard')
+            return redirect('students_dashboard')
         if request.user.Is_Teacher:
-            redirect('teacher_home')
+            return redirect('teacher_home')
         if request.user.Is_Parent:
-            redirect('parent_home')
+            return redirect('parent_home')
         if request.user.Is_CenterAdmin:
             return redirect('/admin/')
 
+    # return HttpResponse("default home")
     return render(request, "WebApp/homepage.html")
 
 
