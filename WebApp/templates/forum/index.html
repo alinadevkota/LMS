@@ -19,38 +19,35 @@
 <div class="panel panel-default paper-shadow" data-z="0.5">
     <ul class="list-group">
 
+
+                <li class="list-group-item">
+            <div class="media v-middle">
+                <div class="media-body">
+
+
+                </div>
+                <div class="media-right">
+                    <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic'%}"><i
+                            class="fa fa-fw fa-plus"></i> New
+                        Topic</a>
+                </div>
+                <div class="media-right">
+                    <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread'%}"><i
+                            class="fa fa-fw fa-plus"></i>
+                        New
+                        Thread</a>
+                </div>
+
+
+            </div>
+        </li>
+
+
         {% for thread in threads %}
-        {#            <li class="list-group-item">#}
-        {#            <div class="media v-middle">#}
-        {#                <div class="media-body">#}
-        {##}
-        {#                    <a href="{% url 'forum:nodegroup' thread.topic.node_group.pk %}"></a>#}
-        {#                    <h4 class="text-headline margin-none">#}
-        {#                        <a href="{% url 'forum:nodegroup' thread.topic.node_group.pk %}">{{ thread.topic.node_group.title }}</a></h4>#}
-        {##}
-        {##}
-        {#                </div>#}
-        {#                <div class="media-right">#}
-        {#                    <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic'%}"><i#}
-        {#                            class="fa fa-fw fa-plus"></i> New#}
-        {#                        Topic</a>#}
-        {#                </div>#}
-        {#                <div class="media-right">#}
-        {#                    <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread'%}"><i#}
-        {#                            class="fa fa-fw fa-plus"></i>#}
-        {#                        New#}
-        {#                        Thread</a>#}
-        {#                </div>#}
-        {##}
-        {##}
-        {#            </div>#}
-        {#        </li>#}
-
-
         <li class="list-group-item media v-middle">
             <div class="media-left">
                 <div class="icon-block half img-circle bg-grey-300">
-                    <i class="fa fa-file-text text-white"></i>
+                    <i class="fa fa-{{ thread.topic.topic_icon }}"></i>
                 </div>
             </div>
 
