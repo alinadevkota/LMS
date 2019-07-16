@@ -3,7 +3,11 @@
 {% load forum_tags %}
 {% load humanize %}
 
-
+{% block breadcrumb %}
+    <ol class="breadcrumb navClass">
+         <li class="active"><a href="{% url 'forum:index' %}">Home</a></li>
+    </ol>
+{% endblock %}
 
 {% block main_contain %}
 
@@ -14,32 +18,35 @@
 
 <div class="panel panel-default paper-shadow" data-z="0.5">
     <ul class="list-group">
-        <li class="list-group-item">
-            <div class="media v-middle">
-                <div class="media-body">
-                    {% for nodegroup in node_groups %}
-                    <a href="{% url 'forum:nodegroup' nodegroup.pk %}"></a>
-                    <h4 class="text-headline margin-none">
-                        <a href="{% url 'forum:nodegroup' nodegroup.pk %}">{{ nodegroup.title }}</a></h4>
-                    {% endfor %}
 
-                </div>
-                <div class="media-right">
-                    <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic'%}"><i
-                            class="fa fa-fw fa-plus"></i> New
-                        Topic</a>
-                </div>
-                <div class="media-right">
-                    <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread'%}"><i
-                            class="fa fa-fw fa-plus"></i>
-                        New
-                        Thread</a>
-                </div>
-
-
-            </div>
-        </li>
         {% for thread in threads %}
+{#            <li class="list-group-item">#}
+{#            <div class="media v-middle">#}
+{#                <div class="media-body">#}
+{##}
+{#                    <a href="{% url 'forum:nodegroup' thread.topic.node_group.pk %}"></a>#}
+{#                    <h4 class="text-headline margin-none">#}
+{#                        <a href="{% url 'forum:nodegroup' thread.topic.node_group.pk %}">{{ thread.topic.node_group.title }}</a></h4>#}
+{##}
+{##}
+{#                </div>#}
+{#                <div class="media-right">#}
+{#                    <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic'%}"><i#}
+{#                            class="fa fa-fw fa-plus"></i> New#}
+{#                        Topic</a>#}
+{#                </div>#}
+{#                <div class="media-right">#}
+{#                    <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread'%}"><i#}
+{#                            class="fa fa-fw fa-plus"></i>#}
+{#                        New#}
+{#                        Thread</a>#}
+{#                </div>#}
+{##}
+{##}
+{#            </div>#}
+{#        </li>#}
+
+
         <li class="list-group-item media v-middle">
             <div class="media-left">
                 <div class="icon-block half img-circle bg-grey-300">
@@ -55,13 +62,11 @@
 
 
                 <div class="text-light text-caption">
-                    {% for nodegroup in node_groups %}
-                    <a href="{% url 'forum:nodegroup' nodegroup.pk %}">{{ nodegroup.title }}</a> |
-                    {% endfor %}
 
-                    {% for topic in topics %}
-                    <a href="{% url 'forum:topic' pk=topic.pk %}">{{ topic.title }}</a>
-                    {% endfor %}
+                    <a href="{% url 'forum:nodegroup' thread.topic.node_group.pk %}">{{ thread.topic.node_group.title }}</a> |
+
+
+                    <a href="{% url 'forum:topic' pk=thread.topic.pk %}">{{ thread.topic.title }}</a>
 
 
                     posted by
