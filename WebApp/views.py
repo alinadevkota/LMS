@@ -47,6 +47,7 @@ from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterCon
 def ProfileView(request):
     return render(request, 'WebApp/profile.html')
 
+
 def login(request, template_name='registration/login.html',
           redirect_field_name=REDIRECT_FIELD_NAME,
           authentication_form=AuthenticationForm,
@@ -89,6 +90,7 @@ def logout(request, next_page=None,
 
 
 _sentinel = object()
+
 
 def calendar(request):
     return render(request, 'WebApp/calendar.html')
@@ -154,6 +156,7 @@ def loginsuccess(request):
 class CenterInfoListView(ListView):
     model = CenterInfo
 
+
 class CenterInfoCreateView(CreateView):
     model = CenterInfo
     form_class = CenterInfoForm
@@ -180,7 +183,6 @@ class MemberInfoListView(ListView):
         return MemberInfo.objects.filter(Center_Code=self.request.user.Center_Code)
 
 
-
 class MemberInfoCreateView(CreateView):
     model = MemberInfo
     form_class = MemberInfoForm
@@ -199,8 +201,11 @@ def MemberInfoDeleteView(request, pk):
     MemberInfo.objects.filter(pk=pk).delete()
     return redirect("memberinfo_list")
 
+
 class LectureInfoListView(ListView):
     model = LectureInfo
+
+
 
 
 class LectureInfoCreateView(CreateView):

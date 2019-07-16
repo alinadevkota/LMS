@@ -3,6 +3,17 @@
 {% load forum_tags %}
 {% load humanize %}
 
+
+{% block breadcrumb %}
+    <ol class="breadcrumb navClass">
+         <li><a href="{% url 'forum:index' %}">Home</a></li>
+        <li>
+            <a href="{% url 'forum:nodegroup' pk=threads.0.topic.node_group.pk %}">{{ threads.0.topic.node_group.title }}</a>
+        </li>
+        <li class="active"><a href="{% url 'forum:topic' pk=threads.0.topic.pk %}">{{ threads.0.topic.title }}</a></li>
+    </ol>
+{% endblock %}
+
 {% block left %}
 {% block before_main_left %}{% endblock %}
 <div class="panel panel-default">
@@ -28,7 +39,7 @@
                 <div class="media-left media-middle">
                     <a class="list-avatar-link" href="{% url 'forum:user_info' thread.user.pk %}">
                         <div class="profile_pic">
-                        <img src="/media/{{ thread.user.Member_Avatar }}" alt="..." class="img-circle profile_img"/>
+                        <img src="/media/{{ thread.user.Member_Avatar }}" alt="..." class="img-circle profile_img" style="height:60px;width:60px;"/>
                     </div>
                     </a>
                 </div>

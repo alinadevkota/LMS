@@ -24,6 +24,8 @@
 
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
+
+        {% block breadcrumb %}{% endblock %}
         <li class=""><a href="{% url 'forum:index' %}">
                 <h1>forum</h1>
             </a></li>
@@ -39,7 +41,10 @@
         {% block main_contain %}
         {% endblock %}
         <div>
-            {% block left %}{% endblock %}
+
+            {% block left %}
+
+            {% endblock %}
         </div>
 
     </div>
