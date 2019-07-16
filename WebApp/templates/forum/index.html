@@ -28,10 +28,15 @@
                     <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic'%}"><i
                             class="fa fa-fw fa-plus"></i> New
                         Topic</a>
+                </div>
+                <div class="media-right">
                     <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread'%}"><i
-                            class="fa fa-fw fa-plus"></i> New
+                            class="fa fa-fw fa-plus"></i>
+                        New
                         Thread</a>
                 </div>
+
+
             </div>
         </li>
         {% for thread in threads %}
@@ -57,12 +62,13 @@
 
 
             <div class="media-right">
-                <a href="{% url 'forum:thread' pk=thread.pk %}" class="btn btn-white text-light"><i class="fa fa-comments fa-fw"></i>
+                <a href="{% url 'forum:thread' pk=thread.pk %}" class="btn btn-white text-light"><i
+                        class="fa fa-comments fa-fw"></i>
                     {{ thread.reply_count }}</a>
             </div>
         </li>
         {% endfor %}
-        <li class="list-group-item media v-middle">
+        <!-- <li class="list-group-item media v-middle">
             <div class="media-left">
                 <div class="icon-block half img-circle bg-grey-300">
                     <i class="fa fa-file-text text-white"></i>
@@ -266,7 +272,7 @@
             </div>
         </li>
 
-    </ul>
+    </ul> -->
 </div>
 <br>
 
