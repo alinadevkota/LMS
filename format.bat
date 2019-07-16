@@ -4,4 +4,4 @@ rmdir /s /q forum\migrations
 del db.sqlite3
 python manage.py makemigrations forum WebApp quiz
 python manage.py migrate
-echo "python manage.py createsuperuserwithpassword    --username nsdevil --password nsdevil --email admin@example.org    --preserve" | python manage.py shell
+python manage.py createsuperuserwithpassword    --username nsdevil --password nsdevil --email admin@example.org    --preserve
