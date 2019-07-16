@@ -5,10 +5,11 @@
     <div class="panel-body user-panel">
         <div class="panel-user-info">
             <div class="avatar-name">
-                <a href="{% url "forum:upload_avatar" %}">
+                <a href="{% url 'forum:user_info' request.user.pk %}">
                     <div class="profile_pic">
                         <img src="/media/{{ request.user.Member_Avatar }}" alt="..." class="img-circle profile_img"/>
                     </div>
+
                 </a>
                 <span class="panel-username"><a
                         href="{% url 'forum:user_info' request.user.pk %}">{{ request.user.username }}</a></span>

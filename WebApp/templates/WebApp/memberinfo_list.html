@@ -14,6 +14,7 @@
             <li><a class="navbar-brand" id="teacher_button" href="#">Teacher</a></li>
             <li><a class="navbar-brand" id="student_button" href="#">Student</a></li>
             <li><a class="navbar-brand" id="parent_button" href="#">Parent</a></li>
+
         </ul>
     </nav>
     <hr class="header_hr">
@@ -30,16 +31,19 @@
                     <td>ID</td>
                     <!-- <td>Link</td> -->
                     <td>Member ID</td>
-                    <td>Member Username</td>
+                    <td>Username</td>
                     <td>First Name</td>
                     <td>Last Name</td>
-                    <td>Member Permanent Address</td>
-                    <td>Member_Temporary_Address</td>
-                    <td>Member BirthDate</td>
-                    <td>Member Email</td>
-                    <td>Member Phone</td>
+                    <td>Permanent Address</td>
+                    <td>Temporary Address</td>
+                    <td>BirthDate</td>
+                    <td>Email</td>
+                    <td>Phone</td>
                     <!-- <td>member_Avatar</td> -->
-                    <td>member Gender</td>
+                    <td>Gender</td>
+                    <td>Student</td>
+                    <td>Teacher</td>
+                    <td>Parent</td>
                     <!-- <td>Use_Flag</td>
             <td>Register_DateTime</td>
             <td>Register_Agent</td>
@@ -51,7 +55,8 @@
             <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>{{ object.Member_ID }}</td>
-                <td>{{ object.username }}</td>
+                <!-- <td>{{ object.username }}</td> -->
+                <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
                 <!-- <td>{{ object.Member_Password }}</td> -->
                 <td>{{ object.first_name }}</td>
                 <td>{{ object.last_name}}</td>
@@ -62,6 +67,9 @@
                 <td>{{ object.Member_Phone }}</td>
                 <!-- <td>{{ object.member_Avatar }}</td> -->
                 <td>{{ object.Member_Gender }}</td>
+                <td>{{ object.Is_Student }}</td>
+                <td>{{ object.Is_Teacher }}</td>
+                <td>{{ object.Is_Parent }}</td>
                 <!-- <td>{{ object.Use_Flag }}</td>
             <td>{{ object.Register_DateTime }}</td>
             <td>{{ object.Register_Agent }}</td>
@@ -103,24 +111,25 @@
             $("#student_button").css("color", "black");
             $("#parent_button").css("color", "white");
             $("#teacher_button").css("color", "white");
-            table_main.column(2).search("1").draw();
-            $('td:nth-child(3)').hide();
+            table_main.column(11).search("True").draw();
+
 
         });
         $("#parent_button").bind("click", function () {
             $("#student_button").css("color", "white");
             $("#parent_button").css("color", "black");
             $("#teacher_button").css("color", "white");
-            table_main.column(2).search("3").draw();
-            $('td:nth-child(3)').hide();
+            table_main.column(13).search("True").draw();
+
         });
         $("#teacher_button").bind("click", function () {
             $("#student_button").css("color", "white");
             $("#parent_button").css("color", "white");
             $("#teacher_button").css("color", "black");
-            table_main.column(2).search("2").draw();
-            $('td:nth-child(3)').hide();
+            table_main.column(12).search("True").draw();
+
         });
+
 
     });
 </script>

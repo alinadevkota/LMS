@@ -27,7 +27,7 @@
     <hr class="header_hr">
 </div>
 
-
+{{form|crispy}}
 
 <form method="post" id="demo-form2" data-parsley-validate="">
     {% csrf_token %}
@@ -185,12 +185,13 @@
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12">
 
-        <label for="id_center_code" class="form-control-label  requiredField">
+        <label for="id_Center_Code" class="form-control-label  requiredField">
             Center code
         </label>
-        <div class=""> <select name="center_code" id="id_center_code" class="select form-control" required="required">
+        <div class=""> <select name="Center_Code" id="id_Center_Code" class="select form-control" required="required"
+                value="{{ object.Center_Code}}">
                 <option value="" selected=""></option>
-                {% for c in form.fields.center_code.queryset %}
+                {% for c in form.fields.Center_Code.queryset %}
                 <option value="{{ c.id|capfirst }}">{{ c.Center_Name|capfirst }}</option>
                 {% endfor %}
 
