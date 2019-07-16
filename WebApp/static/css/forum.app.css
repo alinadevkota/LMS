@@ -48563,6 +48563,6 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 
 
 
-.text-caption{
-  color: #42a5f5;
-}
+a {
+    color: #42a5f5;
+    }
