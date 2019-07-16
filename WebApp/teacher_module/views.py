@@ -6,3 +6,6 @@ def start(request):
     """
     # return render(request,"start.html")
     return render(request, "teacher_module/homepage.html")
+
+def lecturelist(request):
+    return render(request,"teacher_module/lecturelist.html")
