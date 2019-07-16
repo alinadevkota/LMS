@@ -20,54 +20,26 @@
             <thead class="thead-light bg-primary">
                 <tr class="tableTitleRow">
                     <td>ID</td>
-                    <!-- <td>Link</td> -->
                     <td>Lecture Name</td>
                     <td>Teacher</td>
+                    <td>Center</td>
                     <td>Lecture Cover</td>
-                    <td>lecture_cover_file</td>
-                    <td>lecture_level</td>
-                    <td>Lecture Info</td>
-                    <!-- <td>teacher</td> -->
-                    <!-- <td>use_flag</td> -->
-                    <td>reg_date</td>
-                    <td>reg_time</td>
-                    <td>Reg Agent</td>
-                    <!-- <td>udt_date</td>
-                    <td>udt_time</td>
-                    <td>UDT Agent</td>
-                    <td>lecture_certification</td>
+                    <td>Lecture Level</td>
+                    <td>Register Agent</td>
                     <td>Lecture Provider</td>
-                    <td>cert_crit_prog</td>
-                    <td>cert_crit_post</td>
-                    <td>cert_crit_ubt</td>
-                    <td>cert_crit_issue</td> -->
 
                 </tr>
             </thead>
             {% for object in object_list %}
             <tr>
-                <td>{{object.pk}}</td>
-                <!-- <td><a href="{{object.get_absolute_url}}">{{object}}</a></td> -->
-                <td><a href="{{object.get_absolute_url}}">{{ object.lecture_name }}</a></td>
-                <td>{{ object.lecture_teacher }}</td>
-                <td>{{ object.lecture_cover }}</td>
-                <td>{{ object.lecture_cover_file }}</td>
-                <td>{{ object.lecture_level }}</td>
-                <td>{{ object.lecture_info }}</td>
-                <!-- <td>{{ object.teacher }}</td> -->
-                <!-- <td>{{ object.use_flag }}</td> -->
-                <td>{{ object.reg_date }}</td>
-                <td>{{ object.reg_time }}</td>
-                <td>{{ object.reg_agent }}</td>
-                <!-- <td>{{ object.udt_date }}</td>
-                <td>{{ object.udt_time }}</td>
-                <td>{{ object.udt_agent }}</td>
-                <td>{{ object.lecture_certification }}</td>
-                <td>{{ object.lecture_provider }}</td>
-                <td>{{ object.cert_crit_prog }}</td>
-                <td>{{ object.cert_crit_post }}</td>
-                <td>{{ object.cert_crit_ubt }}</td>
-                <td>{{ object.cert_crit_issue }}</td> -->
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{{object.get_absolute_url}}">{{ object.Lecture_Name }}</a></td>
+                <td>{{ object.Teacher_Code }}</td>
+                <td>{{ object.Center_Code }}</td>
+                <td>{{ object.Lecture_Cover_File }}</td>
+                <td>{{ object.Lecture_Level }}</td>
+                <td>{{ object.Register_Agent }}</td>
+                <td>{{ object.Lecture_Provider }}</td>
             </tr>
             {% endfor %}
         </table>

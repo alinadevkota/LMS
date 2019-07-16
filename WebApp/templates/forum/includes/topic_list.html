@@ -3,18 +3,22 @@
 {% load forum_tags %}
 {% load humanize %}
 
+
+{% block breadcrumb %}
+    <ol class="breadcrumb navClass">
+        <li><a href="{% url 'forum:index' %}">Home</a></li>
+        <li class="active">{{ topic.node_group.title }}</li>
+    </ol>
+{% endblock %}
+
 {% block left %}
     {% block before_main_left %}{% endblock %}
     <div class="panel panel-default">
         <div class="panel-body panel-subtitle">
-        <ol class="breadcrumb">
-                <li><a href="{% url 'forum:index' %}">Home</a></li>
 
-                <li class="active">{{ topic.title }}</li>
-            </ol>
             <span class="label label-success">{{ panel_title }}</span>
             {% if show_order %}
-              <span class="pull-right ordering">
+                <span class="pull-right ordering">
                 Order:
                 <span>
                   <a href="{% change_thread_ordering request '-last_replied' %}">Last Replied</a>
@@ -37,7 +41,7 @@
                             </a>
                             <p class="entry-meta">
                                 {% if topic.order <= 3 %}
-                                <span class="meta">
+                                    <span class="meta">
                                     <span class="label label-info meta-top">
                                         TOP
                                     </span>
@@ -54,9 +58,9 @@
 
                             </p>
                         </div>
-{#                        <div class="media-right media-middle">#}
-{#                            <span class="badge">{{ topic.reply_count }}</span>#}
-{#                        </div>#}
+                        {#                        <div class="media-right media-middle">#}
+                        {#                            <span class="badge">{{ topic.reply_count }}</span>#}
+                        {#                        </div>#}
                     </div>
                 </li>
             {% endfor %}

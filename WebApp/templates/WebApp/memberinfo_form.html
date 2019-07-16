@@ -3,8 +3,6 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-
-<link rel="stylesheet" href="{% static 'css/memberinfo_form.css' %}">
 <ol aria-label="breadcrumb" class="breadcrumb navClass">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
     <li class="breadcrumb-item" aria-current="page"><a href="{% url 'memberinfo_list' %}">Member</a></li>
@@ -141,7 +139,7 @@
             <label for="id_Member_Avatar" class="control-label ">
                 Member Avatar
             </label>
-            <input type="file" name="Member_Avatar" value="{{ object.Member_Avatar}}" id="id_Member_Avatar" required=""
+            <input type="file" name="Member_Avatar" value="{{ object.Member_Avatar}}" id="id_Member_Avatar"
                 class="form-control has-feedback-left" placeholder="Member Avatar">
             <span class="fa fa-image form-control-feedback left" aria-hidden="true"></span>
         </div>
@@ -175,7 +173,7 @@
                 Center code
             </label>
             <div class="">
-                <select name="Center_Code" id="id_Center_Code" value="{{ object.Center_Code}}" required="required"
+                <select name="Center_Code" id="id_Center_Code" value="{{ object.Center_Code}}"
                     class="select form-control">
                     <option value="" selected=""></option>
                     {% for c in form.fields.Center_Code.queryset %}

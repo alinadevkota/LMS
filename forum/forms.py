@@ -72,11 +72,12 @@ class TopicForm(ModelForm):
 
     class Meta:
         model = Topic
-        fields = ['node_group','title','description' ]
+        fields = ['node_group','title','description','topic_icon' ]
         labels = {
             'node_group':_('NodeGroup'),
             'description': _('Description'),
             'title': _('Title'),
+            'topic_icon': _('Topic Icon'),
         }
 
     def save(self, commit=True):
@@ -100,9 +101,10 @@ class TopicEditForm(ModelForm):
 
     class Meta:
         model = Topic
-        fields = ('description', )
+        fields = ('description','topic_icon', )
         labels = {
             'description': _('Description'),
+            'topic_icon': _('Topic Icon'),
         }
 
 
