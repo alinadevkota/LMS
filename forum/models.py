@@ -103,7 +103,7 @@ class Thread(models.Model):
         super(Thread, self).save(*args, **kwargs)
         self.raw_content_hash = new_hash
         for to in mentioned_users:
-                notify.delay(to=to.username, sender=self.user.username, thread=self.pk)
+                notify(to=to.username, sender=self.user.username, thread=self.pk)
 
     class Meta:
         ordering = ['order', '-pub_date']
@@ -214,6 +214,7 @@ class Topic(models.Model):
     description = models.TextField(default='', blank=True, verbose_name=_("description"))
     node_group = models.ForeignKey(NodeGroup, verbose_name=_("nodegroup"), on_delete=models.CASCADE)
     thread_count = models.IntegerField(default=0, verbose_name=_("thread count"))
+    topic_icon = models.CharField(max_length=30,verbose_name=_("topic_icon"))
 
     def __str__(self):
         return self.title

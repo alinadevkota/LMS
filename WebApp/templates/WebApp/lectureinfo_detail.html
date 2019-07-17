@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/lectureinfo_detail.css' %}">
 <ol aria-label="breadcrumb" class="breadcrumb navClass">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
     <li class="breadcrumb-item"><a href="{% url 'lectureinfo_list' %}">Lecture</a></li>
@@ -13,85 +12,42 @@
     <hr class="header_hr"><br>
     <table class="table">
         <tr>
-            <td>lecture_name</td>
-            <td>{{ object.lecture_name }}</td>
+            <td>Lecture Name</td>
+            <td>{{ object.Lecture_Name }}</td>
         </tr>
         <tr>
-            <td>lecture_teacher</td>
-            <td>{{ object.lecture_teacher }}</td>
+            <td>Lecture Description</td>
+            <td>{{ object.Lecture_Description }}</td>
         </tr>
         <tr>
-            <td>lecture_cover</td>
-            <td>{{ object.lecture_cover }}</td>
+            <td>Lecture Cover</td>
+            <td>{{ object.Lecture_Cover_File }}</td>
         </tr>
         <tr>
-            <td>lecture_cover_file</td>
-            <td>{{ object.lecture_cover_file }}</td>
+            <td>Lecture Level</td>
+            <td>{{ object.Lecture_Level }}</td>
         </tr>
         <tr>
-            <td>lecture_level</td>
-            <td>{{ object.lecture_level }}</td>
+            <td>Register Agent</td>
+            <td>{{ object.Register_Agent }}</td>
         </tr>
         <tr>
-            <td>lecture_info</td>
-            <td>{{ object.lecture_info }}</td>
+            <td>Lecture Provider</td>
+            <td>{{ object.Lecture_Provider }}</td>
         </tr>
         <tr>
-            <td>teacher</td>
-            <td>{{ object.teacher }}</td>
+            <td>Center Code</td>
+            <td>{{ object.Center_Code }}</td>
         </tr>
         <tr>
-            <td>use_flag</td>
-            <td>{{ object.use_flag }}</td>
+            <td>Teacher Code</td>
+            <td>{{ object.Teacher_Code }}</td>
         </tr>
         <tr>
-            <td>reg_date</td>
-            <td>{{ object.reg_date }}</td>
+            <td>Use Flag</td>
+            <td>{{ object.Use_Flag }}</td>
         </tr>
-        <tr>
-            <td>reg_time</td>
-            <td>{{ object.reg_time }}</td>
-        </tr>
-        <tr>
-            <td>reg_agent</td>
-            <td>{{ object.reg_agent }}</td>
-        </tr>
-        <tr>
-            <td>udt_date</td>
-            <td>{{ object.udt_date }}</td>
-        </tr>
-        <tr>
-            <td>udt_time</td>
-            <td>{{ object.udt_time }}</td>
-        </tr>
-        <tr>
-            <td>udt_agent</td>
-            <td>{{ object.udt_agent }}</td>
-        </tr>
-        <tr>
-            <td>lecture_certification</td>
-            <td>{{ object.lecture_certification }}</td>
-        </tr>
-        <tr>
-            <td>lecture_provider</td>
-            <td>{{ object.lecture_provider }}</td>
-        </tr>
-        <tr>
-            <td>cert_crit_prog</td>
-            <td>{{ object.cert_crit_prog }}</td>
-        </tr>
-        <tr>
-            <td>cert_crit_post</td>
-            <td>{{ object.cert_crit_post }}</td>
-        </tr>
-        <tr>
-            <td>cert_crit_ubt</td>
-            <td>{{ object.cert_crit_ubt }}</td>
-        </tr>
-        <tr>
-            <td>cert_crit_issue</td>
-            <td>{{ object.cert_crit_issue }}</td>
-        </tr>
+
     </table>
     <a class="btn btn-primary" href="{{object.get_update_url}}">Edit Lecture</a>
     <a class="btn btn-danger" href="{{object.get_delete_url}}">Delete Lecture</a>

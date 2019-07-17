@@ -42,7 +42,8 @@ class MemberInfoAdmin(admin.ModelAdmin):
     form = MemberInfoAdminForm
     list_display = ['id', 'username','first_name','last_name','email', 'Member_ID', 'Member_Permanent_Address',
                     'Member_Temporary_Address', 'Member_BirthDate', 'Member_Phone', 'Member_Avatar',
-                    'Member_Gender','Updated_DateTime', 'Register_Agent', 'Member_Memo']
+                    'Member_Gender', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent',
+                    'Member_Memo']
     list_display_links = ['id','username']
     # list_display =  [field.name for field in MemberInfo._meta.get_fields()]
     #readonly_fields = ['Member_ID', 'Member_Name', 'Member_Permanent_Address', 'Member_Temporary_Address', 'Member_BirthDate', 'Member_Email', 'Member_Phone', 'forum_avatar', 'member_Gender', 'Use_Flag', 'Register_DateTime', 'Register_Agent', 'Member_Memo']
@@ -139,9 +140,9 @@ class InningInfoAdminForm(forms.ModelForm):
 
 class InningInfoAdmin(admin.ModelAdmin):
     form = InningInfoAdminForm
-    list_display = ['Inning_Name', 'Teacher_Code', 'Start_Date', 'End_Date', 'Use_Flag', 'Register_DateTime',
+    list_display = ['Inning_Name', 'Start_Date', 'End_Date', 'Use_Flag', 'Register_DateTime',
                     'Updated_DateTime',
-                    'Register_Agent', 'Lecture_Code', 'Center_Code']
+                    'Register_Agent', 'Center_Code']
     #readonly_fields = ['inning_name', 'start_date', 'end_date', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
 
 admin.site.register(InningInfo, InningInfoAdmin)
@@ -156,7 +157,7 @@ class OmrQuestionInfoAdminForm(forms.ModelForm):
 
 class OmrQuestionInfoAdmin(admin.ModelAdmin):
     form = OmrQuestionInfoAdminForm
-    list_display = ['Lecture_Code', 'Chapter_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
+    list_display = ['Homework_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
                     'Register_Agent',
                     'Question_Level', 'Question_Score', 'Question_Description']
     #readonly_fields = ['subject_code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'question_level', 'question_score']
@@ -190,7 +191,7 @@ class AssignHomeworkInfoAdminForm(forms.ModelForm):
 
 class AssignHomeworkInfoAdmin(admin.ModelAdmin):
     form = AssignHomeworkInfoAdminForm
-    list_display = ['Question_Code', 'Lecture_Code', 'Chapter_Code', 'Teacher_Code', 'Use_Flag', 'Register_DateTime',
+    list_display = ['Homework_Code', 'Inning_Code', 'Use_Flag', 'Register_DateTime',
                     'Updated_DateTime', 'Register_Agent']
     #readonly_fields = ['subject_code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
 
@@ -255,7 +256,7 @@ class InningGroupAdminForm(forms.ModelForm):
 
 class InningGroupAdmin(admin.ModelAdmin):
     form = InningGroupAdminForm
-    list_display = ['Teacher_Code', 'Center_Code', 'Inning_Code', 'Lecture_Code', 'Use_Flag', 'Register_DateTime',
+    list_display = ['Teacher_Code', 'Inning_Code', 'Lecture_Code', 'Use_Flag', 'Register_DateTime',
                     'Updated_DateTime', 'Register_Agent']
     #readonly_fields = ['teacher_code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
 
@@ -334,7 +335,7 @@ class GroupMappingAdminForm(forms.ModelForm):
 
 class GroupMappingAdmin(admin.ModelAdmin):
     form = GroupMappingAdminForm
-    list_display = ['Center_Code', 'Group_Code', 'Member_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
+    list_display = ['Inning_Code', 'Student_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
                     'Register_Agent']
     #readonly_fields = ['use_flag', 'reg_date', 'reg_time', 'reg_agent', 'udt_date', 'udt_time', 'udt_agent']
 
@@ -350,8 +351,8 @@ class HomeworkInfoAdminForm(forms.ModelForm):
 
 class HomeworkInfoAdmin(admin.ModelAdmin):
     form = HomeworkInfoAdminForm
-    list_display = ['subject_code', 'level_score', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
-                    'Register_Agent', 'level']
+    list_display = ['Chapter_Code', 'Homework_Topic', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
+                    'Register_Agent']
     #readonly_fields = ['subject_code', 'level_score', 'use_flag', 'reg_date', 'reg_time', 'reg_agent', 'level']
 
 admin.site.register(HomeworkInfo, HomeworkInfoAdmin)

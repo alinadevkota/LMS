@@ -1,19 +1,47 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'inninginfo_list' %}">InningInfo Listing</a></p>
-<table class="table">
-<tr><td>inning_name</td><td>{{ object.inning_name }}</td></tr>
-<tr><td>start_date</td><td>{{ object.start_date }}</td></tr>
-<tr><td>end_date</td><td>{{ object.end_date }}</td></tr>
-<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
-<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
-<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
-<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
-<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
-<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
-<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit InningInfo</a>
+    <ol aria-label="breadcrumb" class="breadcrumb navClass">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'inninginfo_list' %}">Session</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ object.Inning_Name }}</li>
+    </ol>
+    <div class="outerdiv">
 
+        <h2 class="detailListHeader">Session Information</h2>
+        <hr class="header_hr">
+        <br>
+        <table class="table">
+            <tr>
+                <td>Session Name</td>
+                <td>{{ object.Inning_Name }}</td>
+            </tr>
+            <tr>
+                <td>Start Date</td>
+                <td>{{ object.Start_Date }}</td>
+            </tr>
+            <tr>
+                <td>End Date</td>
+                <td>{{ object.End_Date }}</td>
+            </tr>
+            <tr>
+                <td>Use Flag</td>
+                <td>{{ object.Use_Flag }}</td>
+            </tr>
+            {#<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>#}
+            {#<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>#}
+            <tr>
+                <td>Register Agent</td>
+                <td>{{ object.Register_Agent }}</td>
+            </tr>
+            <tr>
+                <td>Center Code</td>
+                <td>{{ object.Center_Code }}</td>
+            </tr>
+            {#<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>#}
+            {#<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>#}
+        </table>
+        <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Lecture</a>
+        <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Lecture</a>
+    </div>
 {% endblock %}

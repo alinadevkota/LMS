@@ -6,6 +6,7 @@ from WebApp.teacher_module import views
 urlpatterns = (
     # urls for TodoTInfo
     path('', login_required(views.start), name='teacher_home'),
+    path('lecturelist/', views.lecturelist, name='lecture_list')
 )
 
 

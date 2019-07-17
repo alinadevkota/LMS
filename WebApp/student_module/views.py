@@ -9,8 +9,11 @@
 
 from django.shortcuts import render
 
-
 # Create your views here.
+from django.views.generic import DetailView
+
+from WebApp.models import LectureInfo, GroupMapping
+
 
 def dashboard(request):
     return render(request, 'student_module/dashboard.html')
@@ -31,10 +34,18 @@ def quizzes(request):
 def calendar(request):
     return render(request, 'student_module/calendar.html')
 
-def coursedetail(request):
-    return render(request, 'student_module/course_detail.html')
 
+# def coursedetail(request):
+#     return render(request, 'student_module/course_detail.html')
+# #
+class LectureInfoDetailView(DetailView):
+    model = LectureInfo
+    template_name = 'student_module/course_detail.html'
+
+
+def coursedetail(request, pk=''):
+    return render(request, 'student_module/course_detail.html', {'Course': LectureInfo.objects.get(id=pk)})
 
 
 def coursesList(request):
-    return render(request, 'student_module/coursesList.html')
+    return render(request, 'student_module/coursesList.html', {'Courses': LectureInfo.objects.all()})

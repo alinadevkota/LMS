@@ -1,325 +1,304 @@
 {% extends "base.html" %}
 {% load static %}
 {% block stylesheets %}
-<link href="{% static 'vendorsx/fullcalendar/dist/fullcalendar.min.css' %}" rel='stylesheet'>
-<link href="{% static 'vendorsx/fullcalendar/dist/fullcalendar.print.css' %}" rel="stylesheet" media="print">
+    <link href="{% static 'vendorsx/fullcalendar/dist/fullcalendar.min.css' %}" rel='stylesheet'>
+    <link href="{% static 'vendorsx/fullcalendar/dist/fullcalendar.print.css' %}" rel="stylesheet" media="print">
 {% endblock %}
 {% block content %}
-<div class="container_main" id="adminHome">
-    <div class="row top_tiles">
-        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="tile-stats" id="student_tile">
-                <div class="icon"><img src="/static/images/student_icon.png" id="student_icon"></div>
-                <div class="count">7</div>
-                <h3>Student</h3>
-                <p></p>
-            </div>
-        </div>
-        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="tile-stats" id="teacher_tile">
-                <div class="icon"><img src="/static/images/teacher_icon.png" id="teacher_icon"></div>
-                <div class="count">3</div>
-                <h3>Teacher</h3>
-                <p></p>
-            </div>
-        </div>
-        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="tile-stats" id="parent_tile">
-                <div class="icon"><img src="/static/images/parent_icon.png" id="parent_icon"></div>
-                <div class="count">3</div>
-                <h3>Parent</h3>
-                <p></p>
-            </div>
-        </div>
-        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="tile-stats" id="total_tile">
-                <div class="icon"><img src="/static/images/total_icon.png" id="total_icon"></div>
-                <div class="count">13</div>
-                <h3>Total Accounts</h3>
-                <p></p>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-xs-8 col-lg-4">
-            <div class="panel panel-default">
-                <div class="row title">
-                    <div class="col-md-12">
-                        <h3>FORUM </h3>
-                        <h5></h5>
-                    </div>
+
+
+
+    <div class="container_main" id="adminHome">
+        <div class="row top_tiles">
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats" id="student_tile">
+                    <div class="icon"><img src="/static/images/student_icon.png" id="student_icon"></div>
+                    <div class="count">{{ studentcount }}</div>
+                    <h3>Student</h3>
+                    <p></p>
                 </div>
-                <ul class="list-group relative paper-shadow" data-hover-z="0.5" data-animated="">
-                    <li class="list-group-item paper-shadow">
-                        <div class="media v-middle">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img src="../static/images/user.png" alt="person" class="img-circle width-40">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <a href="app-forum-thread.html" class="text-subhead link-text-color">Can
-                                    someone help me with AngularJS?</a>
-                                <div class="text-light">
-                                    Topic: <a href="app-forum-category.html">AngularJS</a> &nbsp; By: <a href="#">Adrian
-                                        Demian</a>
-                                </div>
-                            </div>
-                            <div class="media-right">
-                                <div class="width-60 text-right">
-                                    <span class="text-caption text-light">1 hr ago</span>
-                                </div>
-                            </div>
+            </div>
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats" id="teacher_tile">
+                    <div class="icon"><img src="/static/images/teacher_icon.png" id="teacher_icon"></div>
+                    <div class="count">{{ teachercount }}</div>
+                    <h3>Teacher</h3>
+                    <p></p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats" id="parent_tile">
+                    <div class="icon"><img src="/static/images/parent_icon.png" id="parent_icon"></div>
+                    <div class="count">{{ parentcount }}</div>
+                    <h3>Parent</h3>
+                    <p></p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats" id="total_tile">
+                    <div class="icon"><img src="/static/images/total_icon.png" id="total_icon"></div>
+                    <div class="count">{{ totalcount }}</div>
+                    <h3>Total Accounts</h3>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-8 col-lg-4">
+                <div class="panel panel-default">
+                    <div class="row title">
+                        <div class="col-md-12">
+                            <h3>FORUM </h3>
+                            <h5></h5>
                         </div>
-                    </li>
-                    <li class="list-group-item paper-shadow">
-                        <div class="media v-middle">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img src="../static/images/user.png" alt="person" class="img-circle width-40">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <a href="app-forum-thread.html" class="text-subhead link-text-color">Can
-                                    someone help me with AngularJS?</a>
-                                <div class="text-light">
-                                    Topic: <a href="app-forum-category.html">AngularJS</a> &nbsp; By: <a href="#">Adrian
+                    </div>
+                    <ul class="list-group relative paper-shadow" data-hover-z="0.5" data-animated="">
+                        <li class="list-group-item paper-shadow">
+                            <div class="media v-middle">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img src="../static/images/user.png" alt="person" class="img-circle width-40">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <a href="app-forum-thread.html" class="text-subhead link-text-color">Can
+                                        someone help me with AngularJS?</a>
+                                    <div class="text-light">
+                                        Topic: <a href="app-forum-category.html">AngularJS</a> &nbsp; By: <a href="#">Adrian
                                         Demian</a>
+                                    </div>
+                                </div>
+                                <div class="media-right">
+                                    <div class="width-60 text-right">
+                                        <span class="text-caption text-light">1 hr ago</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="media-right">
-                                <div class="width-60 text-right">
-                                    <span class="text-caption text-light">2 hrs ago</span>
+                        </li>
+                        <li class="list-group-item paper-shadow">
+                            <div class="media v-middle">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img src="../static/images/user.png" alt="person" class="img-circle width-40">
+                                    </a>
                                 </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item paper-shadow">
-                        <div class="media v-middle">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img src="../static/images/user.png" alt="person" class="img-circle width-40">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <a href="app-forum-thread.html" class="text-subhead link-text-color">Can
-                                    someone help me with AngularJS?</a>
-                                <div class="text-light">
-                                    Topic: <a href="app-forum-category.html">AngularJS</a> &nbsp; By: <a href="#">Adrian
+                                <div class="media-body">
+                                    <a href="app-forum-thread.html" class="text-subhead link-text-color">Can
+                                        someone help me with AngularJS?</a>
+                                    <div class="text-light">
+                                        Topic: <a href="app-forum-category.html">AngularJS</a> &nbsp; By: <a href="#">Adrian
                                         Demian</a>
+                                    </div>
+                                </div>
+                                <div class="media-right">
+                                    <div class="width-60 text-right">
+                                        <span class="text-caption text-light">2 hrs ago</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="media-right">
-                                <div class="width-60 text-right">
-                                    <span class="text-caption text-light">3 hr ago</span>
+                        </li>
+                        <li class="list-group-item paper-shadow">
+                            <div class="media v-middle">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img src="../static/images/user.png" alt="person" class="img-circle width-40">
+                                    </a>
                                 </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item paper-shadow">
-                        <div class="media v-middle">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img src="../static/images/user.png" alt="person" class="img-circle width-40">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <a href="app-forum-thread.html" class="text-subhead link-text-color">Can
-                                    someone help me with AngularJS?</a>
-                                <div class="text-light">
-                                    Topic: <a href="app-forum-category.html">AngularJS</a> &nbsp; By: <a href="#">Adrian
+                                <div class="media-body">
+                                    <a href="app-forum-thread.html" class="text-subhead link-text-color">Can
+                                        someone help me with AngularJS?</a>
+                                    <div class="text-light">
+                                        Topic: <a href="app-forum-category.html">AngularJS</a> &nbsp; By: <a href="#">Adrian
                                         Demian</a>
+                                    </div>
+                                </div>
+                                <div class="media-right">
+                                    <div class="width-60 text-right">
+                                        <span class="text-caption text-light">3 hr ago</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="media-right">
-                                <div class="width-60 text-right">
-                                    <span class="text-caption text-light">4 hr ago</span>
+                        </li>
+                        <li class="list-group-item paper-shadow">
+                            <div class="media v-middle">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img src="../static/images/user.png" alt="person" class="img-circle width-40">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <a href="app-forum-thread.html" class="text-subhead link-text-color">Can
+                                        someone help me with AngularJS?</a>
+                                    <div class="text-light">
+                                        Topic: <a href="app-forum-category.html">AngularJS</a> &nbsp; By: <a href="#">Adrian
+                                        Demian</a>
+                                    </div>
+                                </div>
+                                <div class="media-right">
+                                    <div class="width-60 text-right">
+                                        <span class="text-caption text-light">4 hr ago</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
             </div>
-        </div>
-        <div class="containerMessage col-lg-4 panel panel-default" id="adminMessageContainer">
+            <div class="containerMessage col-lg-4 panel panel-default" id="adminMessageContainer">
 
-            <div class="discussions" style="display: block;">
-                <div class="search-header">
-                    <h4>Private chat</h4>
-
-                </div>
-
-                <hr>
-
-                <div class="status online">
-                    <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
-                    <div class="onlineIcon"></div>
-                    <div class="content">
-                        <h5>Rojan Bade</h5>
-                        <span>Please review and sign the binding agreement</span>
-                    </div>
-                </div>
-
-                <div class="status online">
-                    <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
-                    <div class="onlineIcon"></div>
-                    <div class="content">
-                        <h5>Rojan Bade</h5>
-                        <span>Please review and sign the binding agreement</span>
-                    </div>
-                </div>
-
-                <div class="status online">
-                    <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
-                    <div class="onlineIcon"></div>
-                    <div class="content">
-                        <h5>Rojan Bade</h5>
-                        <span>Please review and sign the binding agreement</span>
-                    </div>
-                </div>
-
-                <div class="status online">
-                    <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
-                    <div class="onlineIcon"></div>
-                    <div class="content">
-                        <h5>Rojan Bade</h5>
-                        <span>Please review and sign the binding agreement</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div>
-                <ul class="users" style="display: none">
-
+                <div class="discussions" style="display: block;">
                     <div class="search-header">
-                        <h4>Groups</h4>
-                        <div id="form-btn">
-                            <input type="text" placeholder="Search.." name="search">
-                            <button type="submit"><i class="fa fa-search fa-lg"></i></button>
-                        </div>
+                        <h4>Private chat</h4>
+
                     </div>
 
                     <hr>
 
-                    <div class="groups">
-                        <li>
-                            <a href="#">
-                                <div class="status online">
-                                    <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
-                                    <div class="onlineIcon"></div>
-                                    <div class="content1">
-                                        <h5>Rojan Bade</h5>
-                                        <span>Banepa, Nepal</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <div class="status online">
-                                    <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
-                                    <div class="onlineIcon"></div>
-                                    <div class="content1">
-                                        <h5>Rojan Bade</h5>
-                                        <span>Banepa, Nepal</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-
-
-                        <li>
-                            <a href="#">
-                                <div class="status online">
-                                    <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
-                                    <div class="onlineIcon"></div>
-                                    <div class="content1">
-                                        <h5>Rojan Bade</h5>
-                                        <span>Banepa, Nepal</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <div class="status online">
-                                    <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
-                                    <div class="onlineIcon"></div>
-                                    <div class="content1">
-                                        <h5>Rojan Bade</h5>
-                                        <span>Banepa, Nepal</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                    <div class="status online">
+                        <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+                        <div class="onlineIcon"></div>
+                        <div class="content">
+                            <h5>Rojan Bade</h5>
+                            <span>Please review and sign the binding agreement</span>
+                        </div>
                     </div>
 
-                </ul>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="title">
-                    <h2>Courses </h2>
-                    <h5>Your recent courses</h5>
+                    <div class="status online">
+                        <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+                        <div class="onlineIcon"></div>
+                        <div class="content">
+                            <h5>Rojan Bade</h5>
+                            <span>Please review and sign the binding agreement</span>
+                        </div>
+                    </div>
+
+                    <div class="status online">
+                        <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+                        <div class="onlineIcon"></div>
+                        <div class="content">
+                            <h5>Rojan Bade</h5>
+                            <span>Please review and sign the binding agreement</span>
+                        </div>
+                    </div>
+
+                    <div class="status online">
+                        <img class="onlineUser" src="/static/images/suted.jpg" alt="avatar">
+                        <div class="onlineIcon"></div>
+                        <div class="content">
+                            <h5>Rojan Bade</h5>
+                            <span>Please review and sign the binding agreement</span>
+                        </div>
+                    </div>
+
                 </div>
-                <ul class="list-group">
-                    <li class="list-group-item ">
-                        <div class="media-body">
-                            <a href="app-take-course.html" class="text-subhead list-group-link">Basics of
-                                HTML</a>
-                        </div>
-                        <div class="media-right">
-                            <div class="progress progress-mini width-100 margin-none">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45"
-                                    aria-valuemin="0" aria-valuemax="100" style="width:45%;">
-                                </div>
+
+                <div>
+                    <ul class="users" style="display: none">
+
+                        <div class="search-header">
+                            <h4>Groups</h4>
+                            <div id="form-btn">
+                                <input type="text" placeholder="Search.." name="search">
+                                <button type="submit"><i class="fa fa-search fa-lg"></i></button>
                             </div>
                         </div>
-                    </li>
-                    <li class="list-group-item ">
-                        <div class="media-body">
-                            <a href="app-take-course.html" class="text-subhead list-group-link">Angular in
-                                Steps</a>
+
+                        <hr>
+
+                        <div class="groups">
+                            <li>
+                                <a href="#">
+                                    <div class="status online">
+                                        <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
+                                        <div class="onlineIcon"></div>
+                                        <div class="content1">
+                                            <h5>Rojan Bade</h5>
+                                            <span>Banepa, Nepal</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="status online">
+                                        <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
+                                        <div class="onlineIcon"></div>
+                                        <div class="content1">
+                                            <h5>Rojan Bade</h5>
+                                            <span>Banepa, Nepal</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <a href="#">
+                                    <div class="status online">
+                                        <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
+                                        <div class="onlineIcon"></div>
+                                        <div class="content1">
+                                            <h5>Rojan Bade</h5>
+                                            <span>Banepa, Nepal</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="status online">
+                                        <img class="onlineUser2" src="/static/images/suted.jpg" alt="avatar">
+                                        <div class="onlineIcon"></div>
+                                        <div class="content1">
+                                            <h5>Rojan Bade</h5>
+                                            <span>Banepa, Nepal</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
                         </div>
-                        <div class="media-right">
-                            <div class="progress progress-mini width-100 margin-none">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="75"
-                                    aria-valuemin="0" aria-valuemax="100" style="width:75%;">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="media-body">
-                            <a href="app-take-course.html" class="text-subhead list-group-link">Bootstrap
-                                Foundations</a>
-                        </div>
-                        <div class="media-right">
-                            <div class="progress progress-mini width-100 margin-none">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100" style="width:25%;">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
+
+                    </ul>
+                </div>
             </div>
-        </div>
-        <!-- <div class="col-lg-4" id='calendar'></div> -->
-        <div class="col-lg-4">
-            <div class="fc-view-container panel-default" style="">
-                <div class="fc-view fc-listMonth-view fc-list-view fc-widget-content" style="">
-                    <div class="fc-scroller" style="overflow: hidden auto; height: 293px;">
-                        <table class="fc-list-table">
-                            <tbody>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="title">
+                        <h2>Courses </h2>
+                        <!-- <h5>Your recent courses</h5> -->
+                    </div>
+                    <ul class="list-group">
+                        {% for object in course %}
+
+                            <li class="list-group-item ">
+
+                                <div class="media-body">
+                                    <a href="app-take-course.html" class="text-subhead list-group-link">
+                                        {{ object.Lecture_Name }}
+
+                                    </a>
+                                </div>
+
+
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+            </div>
+            <!-- <div class="col-lg-4" id='calendar'></div> -->
+            <div class="col-lg-4">
+                <div class="fc-view-container" style="">
+                    <div class="fc-view fc-listMonth-view fc-list-view fc-widget-content" style="">
+                        <div class="fc-scroller" style="overflow: hidden auto; height: 317px;">
+                            <table class="fc-list-table">
+                                <tbody>
                                 <tr class="fc-list-heading" data-date="2019-07-01">
                                     <td class="fc-widget-header" colspan="3"><span class="fc-list-heading-main">July 1,
                                             2019</span><span class="fc-list-heading-alt">Monday</span></td>
@@ -399,24 +378,23 @@
                                     <td class="fc-list-item-marker fc-widget-content"><span class="fc-event-dot"></span>
                                     </td>
                                     <td class="fc-list-item-title fc-widget-content"><a href="http://google.com/">Click
-                                            for Google</a></td>
+                                        for Google</a></td>
                                 </tr>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
 
-
-
     </div>
-
-</div>
 
 
 {% endblock %}
 {% block javascripts %}
-<script src="{% static 'vendorsx/fullcalendar/dist/fullcalendar.min.js' %}"></script>
+    <script src="{% static 'vendorsx/fullcalendar/dist/fullcalendar.min.js' %}"></script>
 
 {% endblock %}

@@ -3,272 +3,125 @@
 {% load forum_tags %}
 {% load humanize %}
 
-
+{% block breadcrumb %}
+    <ol class="breadcrumb navClass">
+        <li class="active"><a href="{% url 'forum:index' %}">Home</a></li>
+    </ol>
+{% endblock %}
 
 {% block main_contain %}
 
 
-{% block before_main_left %}{% endblock %}
+    {% block before_main_left %}{% endblock %}
 
 
 
-<div class="panel panel-default paper-shadow" data-z="0.5">
-    <ul class="list-group">
+    <div class="panel panel-default paper-shadow" data-z="0.5">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="media v-middle">
+                    <div class="media-body">
+                        <h4 class="text-headline margin-none">
+                            Recent Threads
+                        </h4>
+
+                    </div>
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.Is_Teacher or request.user.Is_CenterAdmin %}
+                            <div class="media-right">
+                                <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic' %}"><i
+                                        class="fa fa-fw fa-plus"></i> New
+                                    Topic</a>
+                            </div>
+                        {% endif %}
+                        <div class="media-right">
+                            <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread' %}"><i
+                                    class="fa fa-fw fa-plus"></i>
+                                New
+                                Thread</a>
+                        </div>
+                    {% endif %}
+
+
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    {% for nodegroup in node_groups %}
+
         <li class="list-group-item">
             <div class="media v-middle">
                 <div class="media-body">
-                    {% for nodegroup in node_groups %}
                     <a href="{% url 'forum:nodegroup' nodegroup.pk %}"></a>
                     <h4 class="text-headline margin-none">
                         <a href="{% url 'forum:nodegroup' nodegroup.pk %}">{{ nodegroup.title }}</a></h4>
-                    {% endfor %}
-                
-                </div>
-                <div class="media-right">
-                    <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic'%}"><i
-                            class="fa fa-fw fa-plus"></i> New
-                        Topic</a>
-                    <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread'%}"><i
-                            class="fa fa-fw fa-plus"></i> New
-                        Thread</a>
-                </div>
-            </div>
-        </li>
-        {% for thread in threads %}
-        <li class="list-group-item media v-middle">
-            <div class="media-left">
-                <div class="icon-block half img-circle bg-grey-300">
-                    <i class="fa fa-file-text text-white"></i>
-                </div>
-            </div>
-
-            <div class="media-body">
-                <h4 class="text-subhead margin-none">
-                    <a href="{% url 'forum:thread' pk=thread.pk %}" class="link-text-color">{{thread.title}}</a>
-                </h4>
-                <div class="text-light text-caption">s
-                    posted by
-                    <a href="#">
-                        <img src="img/person/guy-6.jpg" alt="person" class="img-circle width-20">
-                        {{ thread.user.username }}</a>
-                    &nbsp; | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }}
-                </div>
-            </div>
 
 
-            <div class="media-right">
-                <a href="app-forum-thread.html" class="btn btn-white text-light"><i class="fa fa-comments fa-fw"></i>
-                    {{ thread.reply_count }}</a>
-            </div>
-        </li>
-        {% endfor %}
-        <li class="list-group-item media v-middle">
-            <div class="media-left">
-                <div class="icon-block half img-circle bg-grey-300">
-                    <i class="fa fa-file-text text-white"></i>
                 </div>
-            </div>
-            <div class="media-body">
-                <h4 class="text-subhead margin-none">
-                    <a href="app-forum-thread.html" class="link-text-color">Can someone help me? I need a design
-                        advice</a>
-                </h4>
-                <div class="text-light text-caption">
-                    posted by
-                    <a href="#">
-                        <img src="img/person/woman-6.jpg" alt="person" class="img-circle width-20"> Jennifer
-                        Hudson</a> &nbsp; | <i class="fa fa-clock-o fa-fw"></i>
-                    {% trans "Last Replied" %}: {{ thread.last_replied  }}
-                </div>
-            </div>
-            <div class="media-right">
-                <a href="app-forum-thread.html" class="btn btn-white text-light"><i class="fa fa-comments fa-fw"></i>
-                    14</a>
+
+
             </div>
         </li>
 
-        <li class="list-group-item media v-middle">
-            <div class="media-left">
-                <div class="icon-block half img-circle bg-grey-300">
-                    <i class="fa fa-file-text text-white"></i>
-                </div>
-            </div>
-            <div class="media-body">
-                <h4 class="text-subhead margin-none">
-                    <a href="app-forum-thread.html" class="link-text-color">I think this is the right way?</a>
-                </h4>
-                <div class="text-light text-caption">
-                    posted by
-                    <a href="#">
-                        <img src="img/person/woman-4.jpg" alt="person" class="img-circle width-20"> Michelle
-                        Gustav</a> &nbsp; | <i class="fa fa-clock-o fa-fw"></i> 5 mins
-                </div>
-            </div>
-            <div class="media-right">
-                <a href="app-forum-thread.html" class="btn btn-white text-light"><i class="fa fa-comments fa-fw"></i>
-                    16</a>
-            </div>
-        </li>
+        <div class="panel panel-default paper-shadow" data-z="0.5">
+            {% for thread in threads %}
+                {% if thread.topic.node_group == nodegroup %}
+                    <li class="list-group-item media v-middle">
+                        <div class="media-left">
+                            <div class="icon-block half img-circle bg-grey-300">
+                                <i class="fa fa-{{ thread.topic.topic_icon }}"></i>
+                            </div>
+                        </div>
 
-    </ul>
-</div>
-
-<div class="panel panel-default paper-shadow" data-z="0.5">
-    <ul class="list-group">
-        <li class="list-group-item">
-            <div class="media v-middle">
-                <div class="media-body">
-                    <h4 class="text-headline margin-none">Lessons</h4>
-                    <p class="text-subhead text-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Dolores, illo.</p>
-                </div>
-                <div class="media-right">
-                    <a href="{% url 'forum:create_topic'%}" class="btn btn-white btn-flat"><i
-                            class="fa fa-fw fa-plus"></i> New Topic</a>
-                </div>
-            </div>
-        </li>
-
-        <li class="list-group-item media v-middle">
-            <div class="media-left">
-                <div class="icon-block half img-circle bg-grey-300">
-                    <i class="fa fa-file-text text-white"></i>
-                </div>
-            </div>
-            <div class="media-body">
-                <h4 class="text-subhead margin-none">
-                    <a href="app-forum-thread.html" class="link-text-color">Getting around AngularJS</a>
-                </h4>
-                <div class="text-light text-caption">
-                    posted by
-                    <a href="#">
-                        <img src="img/person/guy-4.jpg" alt="person" class="img-circle width-20"> Jonny
-                        Francine</a>
-                    &nbsp; | <i class="fa fa-clock-o fa-fw"></i> 5 mins
-                </div>
-            </div>
-            <div class="media-right">
-                <a href="app-forum-thread.html" class="btn btn-white text-light"><i class="fa fa-comments fa-fw"></i>
-                    5</a>
-            </div>
-        </li>
-
-        <li class="list-group-item media v-middle">
-            <div class="media-left">
-                <div class="icon-block half img-circle bg-grey-300">
-                    <i class="fa fa-file-text text-white"></i>
-                </div>
-            </div>
-            <div class="media-body">
-                <h4 class="text-subhead margin-none">
-                    <a href="app-forum-thread.html" class="link-text-color">I think this is the right way?</a>
-                </h4>
-                <div class="text-light text-caption">
-                    posted by
-                    <a href="#">
-                        <img src="img/person/woman-4.jpg" alt="person" class="img-circle width-20"> Michelle
-                        Gustav</a> &nbsp; | <i class="fa fa-clock-o fa-fw"></i> 5 mins
-                </div>
-            </div>
-            <div class="media-right">
-                <a href="app-forum-thread.html" class="btn btn-white text-light"><i class="fa fa-comments fa-fw"></i>
-                    16</a>
-            </div>
-        </li>
-
-        <li class="list-group-item media v-middle">
-            <div class="media-left">
-                <div class="icon-block half img-circle bg-grey-300">
-                    <i class="fa fa-file-text text-white"></i>
-                </div>
-            </div>
-            <div class="media-body">
-                <h4 class="text-subhead margin-none">
-                    <a href="app-forum-thread.html" class="link-text-color">Responsive Bootstrap Question</a>
-                </h4>
-                <div class="text-light text-caption">
-                    posted by
-                    <a href="#">
-                        <img src="/static/image/mn.jpg" alt="person" class="img-circle width-20"> Mary Deb</a>
-                    &nbsp; | <i class="fa fa-clock-o fa-fw"></i> 5 mins
-                </div>
-            </div>
-            <div class="media-right">
-                <a href="app-forum-thread.html" class="btn btn-white text-light"><i class="fa fa-comments fa-fw"></i>
-                    16</a>
-            </div>
-        </li>
-
-    </ul>
-</div>
+                        <div class="media-body">
+                            <h4 class="text-subhead margin-none">
+                                <a href="{% url 'forum:thread' pk=thread.pk %}"
+                                   class="link-text-color">{{ thread.title }}</a>
+                            </h4>
 
 
-<div class="panel panel-default paper-shadow" data-z="0.5">
-    <ul class="list-group">
-        <li class="list-group-item">
-            <div class="media v-middle">
-                <div class="media-body">
-                    <h4 class="text-headline margin-none">Support</h4>
-                    <p class="text-subhead text-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Dolores, illo.</p>
-                </div>
-                <div class="media-right">
-                    <a href="{% url 'forum:create_topic'%}" class="btn btn-white btn-flat"><i
-                            class="fa fa-fw fa-plus"></i> New Topic</a>
-                </div>
-            </div>
-        </li>
+                            <div class="text-light text-caption">
+                                Category:
+                                <a href="{% url 'forum:nodegroup' thread.topic.node_group.pk %}"
+                                   style="color:blue">{{ thread.topic.node_group.title }}</a>
+                                |
 
-        <li class="list-group-item media v-middle">
-            <div class="media-left">
-                <div class="icon-block half img-circle bg-grey-300">
-                    <i class="fa fa-file-text text-white"></i>
-                </div>
-            </div>
-            <div class="media-body">
-                <h4 class="text-subhead margin-none">
-                    <a href="app-forum-thread.html" class="link-text-color">Am I learning the right way?</a>
-                </h4>
-                <div class="text-light text-caption">
-                    posted by
-                    <a href="#">
-                        <img src="img/person/guy-6.jpg" alt="person" class="img-circle width-20"> Adrian
-                        Demian</a>
-                    &nbsp; | <i class="fa fa-clock-o fa-fw"></i> 5 mins
-                </div>
-            </div>
-            <div class="media-right">
-                <a href="app-forum-thread.html" class="btn btn-white text-light"><i class="fa fa-comments fa-fw"></i>
-                    1</a>
-            </div>
-        </li>
+                                Topic:
+                                <a href="{% url 'forum:topic' pk=thread.topic.pk %}"
+                                   style="color:blue">{{ thread.topic.title }}</a>
 
-        <li class="list-group-item media v-middle">
-            <div class="media-left">
-                <div class="icon-block half img-circle bg-grey-300">
-                    <i class="fa fa-file-text text-white"></i>
-                </div>
-            </div>
-            <div class="media-body">
-                <h4 class="text-subhead margin-none">
-                    <a href="app-forum-thread.html" class="link-text-color">Responsive Bootstrap Question</a>
-                </h4>
-                <div class="text-light text-caption">
-                    posted by
-                    <a href="#">
-                        <img src="img/person/woman-5.jpg" alt="person" class="img-circle width-20"> Mary Deb</a>
-                    &nbsp; | <i class="fa fa-clock-o fa-fw"></i> 5 mins
-                </div>
-            </div>
-            <div class="media-right">
-                <a href="app-forum-thread.html" class="btn btn-white text-light"><i class="fa fa-comments fa-fw"></i>
-                    15</a>
-            </div>
-        </li>
+                                <br>
+                                posted by
+                                <a href="#" style="color:blue">
+                                    <img src="/media/{{ request.user.Member_Avatar }}" class="img-circle width-20">
+                                    {{ thread.user.username }}</a>
+                                &nbsp; | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }}
 
-    </ul>
-</div>
-<br>
+                            </div>
+
+                        </div>
+
+
+                        <div class="media-right">
+                            <a href="{% url 'forum:thread' pk=thread.pk %}" class="btn btn-white text-light"><i
+                                    class="fa fa-comments fa-fw"></i>
+                                {{ thread.reply_count }}</a>
+                        </div>
+
+
+                    </li>
+                    </div>
+                {% endif %}
+            {% endfor %}
+    {% endfor %}
+
+
+
+    <br>
+
+
 
 
 {% endblock %}

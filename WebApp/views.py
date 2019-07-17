@@ -119,8 +119,20 @@ def start(request):
         if request.user.Is_CenterAdmin:
             return redirect('/admin/')
 
+
+    if request.user.is_authenticated:
+        course = LectureInfo.objects.order_by('Register_DateTime')[:3]
+        studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
+        teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
+        parentcount = MemberInfo.objects.filter(Is_Parent=True, Center_Code=request.user.Center_Code).count
+        totalcount = MemberInfo.objects.filter(Center_Code=request.user.Center_Code).count
+
     # return HttpResponse("default home")
-    return render(request, "WebApp/homepage.html")
+        return render(request, "WebApp/homepage.html",
+                      {'course': course, 'studentcount': studentcount, 'teachercount': teachercount,
+                       'parentcount': parentcount, 'totalcount': totalcount})
+
+    return render(request,"WebApp/splash_page.html")
 
 
 def editprofile(request):

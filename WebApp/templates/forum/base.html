@@ -24,18 +24,14 @@
 
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
+
+        {% block breadcrumb %}{% endblock %}
         <li class=""><a href="{% url 'forum:index' %}">
-                <h1>forum</h1>
+                <h1>Forum</h1>
             </a></li>
     </ul>
 </div>
-<!-- 
-<form class="navbar-form navbar-left" role="search" action="{% url 'forum:search_redirect' %}">
-    <div class="form-group">
-        <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="{% trans 'Search' %}">
-    </div>
-    <button type="submit" id="navSearchBtn" class="btn btn-default">{% trans 'Search' %}</button>
-</form> -->
+
 
 <br> <br>
 
@@ -45,7 +41,20 @@
         {% block main_contain %}
         {% endblock %}
         <div>
-            {% block left %}{% endblock %}
+
+            {% block left %}
+
+            {% endblock %}
+
+        </div>
+
+
+        <div>
+            {% block user_left %}
+
+            {% endblock %}
+
+
         </div>
 
     </div>
@@ -85,12 +94,7 @@
                 </div>
 
 
-
             </div>
-
-
-
-
 
 
             <div class="panel panel-default">
@@ -121,27 +125,19 @@
             </div>
 
 
-
-
-
-
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">Categories</h4>
                 </div>
                 <ul class="list-group list-group-menu">
                     <li class="list-group-item active">
-                        <a href="website-forum.html"><i class="fa fa-chevron-right fa-fw"></i> All</a>
+                        <a href="website-forum.html"> All</a>
                     </li>
+                    {% for nodegroup in node_groups %}
                     <li class="list-group-item">
-                        <a href="website-forum-category.html"><i class="fa fa-chevron-right fa-fw"></i> General</a>
+                        <a href="{% url 'forum:nodegroup' nodegroup.pk %}"> {{ nodegroup.title }}</a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="website-forum-category.html"><i class="fa fa-chevron-right fa-fw"></i> Lessons</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="website-forum-category.html"><i class="fa fa-chevron-right fa-fw"></i> Support</a>
-                    </li>
+                    {% endfor %}
                 </ul>
             </div>
 
@@ -163,4 +159,5 @@
         });
     });
 </script>
+{% block footer_ext %}{% endblock %}
 {% endblock %}

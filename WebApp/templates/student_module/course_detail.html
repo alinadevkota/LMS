@@ -6,20 +6,114 @@ CourseDetail
 
 {% block content %}
 
+<div class="outerdiv right_col">
+    <h2 class="detailListHeader">Lecture Information</h2>
+    {{ object.Lecture_Name }}
+    <hr class="header_hr"><br>
+    <table class="table">
+        <tr>
+            <td>lecture_name</td>
+            <td>{{ object.lecture_name }}</td>
+        </tr>
+        <tr>
+            <td>lecture_teacher</td>
+            <td>{{ object.lecture_teacher }}</td>
+        </tr>
+        <tr>
+            <td>lecture_cover</td>
+            <td>{{ object.lecture_cover }}</td>
+        </tr>
+        <tr>
+            <td>lecture_cover_file</td>
+            <td>{{ object.lecture_cover_file }}</td>
+        </tr>
+        <tr>
+            <td>lecture_level</td>
+            <td>{{ object.lecture_level }}</td>
+        </tr>
+        <tr>
+            <td>lecture_info</td>
+            <td>{{ object.lecture_info }}</td>
+        </tr>
+        <tr>
+            <td>teacher</td>
+            <td>{{ object.teacher }}</td>
+        </tr>
+        <tr>
+            <td>use_flag</td>
+            <td>{{ object.use_flag }}</td>
+        </tr>
+        <tr>
+            <td>reg_date</td>
+            <td>{{ object.reg_date }}</td>
+        </tr>
+        <tr>
+            <td>reg_time</td>
+            <td>{{ object.reg_time }}</td>
+        </tr>
+        <tr>
+            <td>reg_agent</td>
+            <td>{{ object.reg_agent }}</td>
+        </tr>
+        <tr>
+            <td>udt_date</td>
+            <td>{{ object.udt_date }}</td>
+        </tr>
+        <tr>
+            <td>udt_time</td>
+            <td>{{ object.udt_time }}</td>
+        </tr>
+        <tr>
+            <td>udt_agent</td>
+            <td>{{ object.udt_agent }}</td>
+        </tr>
+        <tr>
+            <td>lecture_certification</td>
+            <td>{{ object.lecture_certification }}</td>
+        </tr>
+        <tr>
+            <td>lecture_provider</td>
+            <td>{{ object.lecture_provider }}</td>
+        </tr>
+        <tr>
+            <td>cert_crit_prog</td>
+            <td>{{ object.cert_crit_prog }}</td>
+        </tr>
+        <tr>
+            <td>cert_crit_post</td>
+            <td>{{ object.cert_crit_post }}</td>
+        </tr>
+        <tr>
+            <td>cert_crit_ubt</td>
+            <td>{{ object.cert_crit_ubt }}</td>
+        </tr>
+        <tr>
+            <td>cert_crit_issue</td>
+            <td>{{ object.cert_crit_issue }}</td>
+        </tr>
+    </table>
+    <a class="btn btn-primary" href="{{object.get_update_url}}">Edit Lecture</a>
+    <a class="btn btn-danger" href="{{object.get_delete_url}}">Delete Lecture</a>
+</div>
+
+
     <div class="right_col " role="main">
         <div class="container-fluid">
             <div style="margin-bottom: 20px">
                 <div class="row" style=" color: white;background-color:#2A3F54;margin-bottom: 30px; margin-top: 60px; padding-left: 15px">
-                    <h1 class="courseHeader">Intermediate Reactjs </h1>
+                    <h1 class="courseHeader">{{ Course.Lecture_Name|safe }} </h1>
                 </div>
-
 
                 <div class="row">
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                        <img class="img-responsive" src="{% static 'images/react.jpg' %}" style="" alt="courseImage">
+                        <img class="img-responsive" src="/media/{{ Course.Lecture_Cover_File }}" style=""
+                             alt="courseImage">
                         <div class="courseDetailStyle1 row" style="margin: 20px">
                             <div class="col-lg-4" style="border-right: 1px solid lightgrey;display: flex;flex-direction: row;">
-                                <img src="{% static 'images/suted.jpg' %}" class="profile_img img-responsive"
+
+
+                                <img src="/media/{{ Course.Teacher_Code.Member_Avatar }}"
+                                     class="profile_img img-responsive"
                                              style="height: 50px;width: 50px;">
                                 <div style="padding-left: 10px;font-size: 15px;">
                                     <ul class="list-unstyled">
@@ -27,7 +121,7 @@ CourseDetail
                                             Instructor
                                         </li>
                                         <li style="font-weight: bold;color: black;">
-                                            Shyam Paudel
+                                            {{ Course.Teacher_Code }}
                                         </li>
                                     </ul>
                                 </div>
@@ -91,15 +185,7 @@ CourseDetail
             <div class="row" >
                 <div class="" style="padding: 10px;">
                     <h2 class="text-display-1" style="margin-bottom: 20px">COURSE DESCRIPTION</h2>
-                    <p>React has been designed from the start for gradual adoption, and you can use as
-                        little or as much React as you need. Whether you want to get a taste of React, add some interactivity
-                        to a simple HTML page, or start a complex React-powered app, the links in this section will help you
-                        get started. In addition to taking input data (accessed via this.props), a component can maintain internal state data (accessed
-                        via this.state). When a component’s state data changes, the rendered markup will be updated by re-invoking render().
-                         little or as much React as you need. Whether you want to get a taste of React, add some interactivity
-                            to a simple HTML page, or start a complex React-powered app, the links in this section will help you
-                            get started. In addition to taking input data (accessed via this.props), a component can maintain internal state data (accessed
-                                via this.state). When a component’s state data changes, the rendered markup will be updated by re-invoking render().
+                    <p>{{ Course.Lecture_Description }}
                     </p>
                 </div>
 
@@ -112,10 +198,11 @@ CourseDetail
                 <li>
                     <div class="panel boxShadow" >
                               <div class="panel-body" style="padding: 30px">
-                                <div class="courseDetailStyle lectureList" data-toggle="collapse" data-display-toggle="tooltip"
-                                     title="Extend" data-target="#chapteronelectures">
+                                <div class="courseDetailStyle lectureList" data-toggle="collapse"
+                                     data-display-toggle="tooltip" title="Extend" data-target="#chapteronelectures">
                                     <h5 style="color: black">CHAPTER 1</h5>
-                                    <i class="fa fa-caret-down" style="font-size: 25px" data-toggle="collapse" data-target="#lectures"></i>
+                                    <i class="fa fa-caret-down" style="font-size: 25px" data-toggle="collapse"
+                                       data-target="#lectures"></i>
                                 </div>
 
                                 <h2 style="color:black;font-weight: bold">The component Lifecycle</h2>

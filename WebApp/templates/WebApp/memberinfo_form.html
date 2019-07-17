@@ -2,219 +2,248 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-{{ form|crispy }}
-p
-<link rel="stylesheet" href="{% static 'css/memberinfo_form.css' %}">
-<ol aria-label="breadcrumb" class="breadcrumb navClass">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'memberinfo_list' %}">Member</a></li>
-    <li class="breadcrumb-item active" aria-current="page">
-        {% if '/memberinfo/create/' == request.path %}
-        Create New Member
-        {% else %}
-        Edit Member Info
-        {% endif %}
-    </li>
-</ol>
-<div class="headerDiv">
-    <h2 class="infoFormHeader">
-        {% if '/memberinfo/create/' == request.path %}
-        Create New Member
-        {% else %}
-        Edit Member Info
-        {% endif %}
-    </h2>
-    <hr class="header_hr">
-</div>
+    {% include 'WebApp/theme/alerts.html' %}
 
-<div class="x_content">
-    <form method="post" id="demo-form2" data-parsley-validate="">
-        {% csrf_token %}
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_Member_ID" class="control-label ">
-                Member ID
-            </label>
-            <input type="text" value="{{ object.Member_ID}}" name="Member_ID" id="id_Member_ID" required="required"
-                class="form-control has-feedback-left" placeholder="Member ID">
-            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+    <ol aria-label="breadcrumb" class="breadcrumb navClass">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="{% url 'memberinfo_list' %}">Member</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+            {% if '/memberinfo/create/' == request.path %}
+                Create New Member
+            {% else %}
+                Edit Member Info
+            {% endif %}
+        </li>
+    </ol>
+    <div class="headerDiv">
+        <h2 class="infoFormHeader">
+            {% if '/memberinfo/create/' == request.path %}
+                Create New Member
+            {% else %}
+                Edit Member Info
+            {% endif %}
+        </h2>
+        <hr class="header_hr">
+    </div>
 
-        </div>
+    <div class="x_content">
+        <form method="post" id="demo-form2" data-parsley-validate="">
+            {% csrf_token %}
+            <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+                <label for="id_Member_ID" class="control-label ">
+                    Member ID
+                </label>
+                <input type="text" value="{{ object.Member_ID }}" name="Member_ID" id="id_Member_ID" required="required"
+                       class="form-control has-feedback-left" placeholder="Member ID">
+                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
 
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" id="div_id_password">
-            <label for="id_password" class="control-label ">
-                Member Password
-            </label>
-            <input type="password" value="{{ object.password}}" name="password" id="id_password" required="required"
-                class="form-control has-feedback-left" placeholder="Member Password">
-            <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
-        </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+                <label for="id_username" class="control-label ">
+                    Username
+                </label>
+                <input type="text" value="{{ object.username }}" name="username" id="id_username" required="required"
+                       class="form-control has-feedback-left" placeholder="Member Name">
+                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+            </div>
 
 
+            <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback" id="div_id_password">
+                <label for="id_password" class="control-label ">
+                    Password
+                </label>
+                <input type="password" value="{{ object.password }}" name="password" id="id_password"
+                       required="required"
+                       class="form-control has-feedback-left" placeholder="Member Password">
+                <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_first_name" class="control-label ">
+                    First Name
+                </label>
+                <input type="text" value="{{ object.first_name }}" name="first_name" id="id_first_name"
+                       required="required"
+                       class="form-control has-feedback-left" placeholder="First Name">
+                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+            </div>
 
 
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_username" class="control-label ">
-                Member Name
-            </label>
-            <input type="text" value="{{ object.username}}" name="username" id="id_username" required="required"
-                class="form-control has-feedback-left" placeholder="Member Name">
-            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-        </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" id="div_id_password">
+                <label for="id_last_name" class="control-label ">
+                    Last Name
+                </label>
+                <input type="text" value="{{ object.last_name }}" name="last_name" id="id_last_name" required="required"
+                       class="form-control has-feedback-left" placeholder="Last Name">
+                <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
+            </div>
 
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_email" class="control-label ">
+                    Member Email
+                </label>
+                <input type="email" name="email" value="{{ object.email }}" id="id_email" required="required"
+                       class="form-control has-feedback-left" placeholder="Member Email">
+                <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+            </div>
 
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_date_joined" class="control-label ">
-                Date joined
-            </label>
-            <input type="date" name="date_joined" value="{{ object.date_joined}}" id="id_date_joined"
-                required="required" class="form-control has-feedback-left" placeholder="Date joined">
-            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-        </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_date_joined" class="control-label ">
+                    Date joined
+                </label>
+                <input type="date" name="date_joined" value="{{ object.date_joined }}" id="id_date_joined"
+                       required="required" class="form-control has-feedback-left" placeholder="Date joined">
+                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+            </div>
 
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_Member_Permanent_Address" class="control-label ">
-                Member Permanent Address
-            </label>
-            <input type="text" name="Member_Permanent_Address" value="{{ object.Member_Permanent_Address}}"
-                id="id_Member_Permanent_Address" required="required" class="form-control has-feedback-left"
-                placeholder="Member Permanent Address">
-            <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
-
-        </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_Member_Temporary_Address" class="control-label ">
-                Member Temporary Address
-            </label>
-            <input type="text" name="Member_Temporary_Address" value="{{ object.Member_Temporary_Address}}"
-                id="id_Member_Temporary_Address" required="required" class="form-control has-feedback-left"
-                placeholder="Member Temporary Address">
-            <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
-        </div>
-
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_Member_BirthDate" class="control-label ">
-                Member BirthDate
-            </label>
-            <input type="date" name="Member_BirthDate" value="{{ object.Member_BirthDate}}" id="id_Member_BirthDate"
-                required="required" class="form-control has-feedback-left">
-            <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
-
-        </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_Member_Email" class="control-label ">
-                Member Email
-            </label>
-            <input type="email" name="Member_Email" value="{{ object.Member_Email}}" id="id_Member_Email"
-                required="required" class="form-control has-feedback-left" placeholder="Member Email">
-            <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
-        </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_Member_Phone" class="control-label ">
-                Member Phone
-            </label>
-            <input type="tel" name="Member_Phone" value="{{ object.Member_Phone}}" id="id_Member_Phone"
-                required="required" class="form-control has-feedback-left" placeholder="Member_Phone">
-            <span class="fa fa-volume-control-phone form-control-feedback left" aria-hidden="true"></span>
-
-        </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_member_Avatar" class="control-label ">
-                Member Avatar
-            </label>
-            <input type="file" name="member_Avatar" value="{{ object.member_Avatar}}" id="id_member_Avatar"
-                required="required" class="form-control has-feedback-left" placeholder="Member Avatar">
-            <span class="fa fa-image form-control-feedback left" aria-hidden="true"></span>
-        </div>
-
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_member_Gender" class="control-label ">
-                Member Gender
-            </label>
-            <select name="member_Gender" id="id_member_Gender" value="{{ object.member_Gender}}" required=""
-                class="select form-control">
-                <option value="" selected="">Select Gender</option>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-                <option value="3">Others</option>
-
-
-                <span class="fa fa-child form-control-feedback left" aria-hidden="true"></span>
-            </select>
-        </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <label for="id_Member_Memo" class="control-label ">
-                Member Memo
-            </label>
-            <input type="text" name="Member_Memo" value="{{ object.Member_Memo}}" id="id_Member_Memo"
-                required="required" class="form-control has-feedback-left" placeholder="Member Memo">
-            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-        </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12">
-
-            <label for="id_Center_Code" class="form-control-label  requiredField">
-                Center code
-            </label>
-            <div class="">
-                <select name="Center_Code" id="id_Center_Code" value="{{ object.Center_Code}}" required="required"
-                    class="select form-control">
-                    <option value="" selected=""></option>
-                    {% for c in form.fields.Center_Code.queryset %}
-                    <option value="{{ c.id|capfirst }}">{{ c.Center_Name|capfirst }}</option>
-                    {% endfor %}
-
-
-                </select>
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_Member_Permanent_Address" class="control-label ">
+                    Member Permanent Address
+                </label>
+                <input type="text" name="Member_Permanent_Address" value="{{ object.Member_Permanent_Address }}"
+                       id="id_Member_Permanent_Address" required="required" class="form-control has-feedback-left"
+                       placeholder="Member Permanent Address">
+                <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
 
             </div>
 
-        </div>
 
-        <div class="col-md-12 form-group has-feedback">
-            <label>
-                Status
-            </label>
-            <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag" {% if object.Use_Flag == True %}
-                checked {% endif %}>
-        </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_Member_Temporary_Address" class="control-label ">
+                    Member Temporary Address
+                </label>
+                <input type="text" name="Member_Temporary_Address" value="{{ object.Member_Temporary_Address }}"
+                       id="id_Member_Temporary_Address" required="required" class="form-control has-feedback-left"
+                       placeholder="Member Temporary Address">
+                <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_Member_BirthDate" class="control-label ">
+                    Member BirthDate
+                </label>
+                <input type="date" name="Member_BirthDate" value="{{ object.Member_BirthDate }}"
+                       id="id_Member_BirthDate"
+                       required="required" class="form-control has-feedback-left">
+                <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_Member_Phone" class="control-label ">
+                    Member Phone
+                </label>
+                <input type="tel" name="Member_Phone" value="{{ object.Member_Phone }}" id="id_Member_Phone"
+                       required="required" class="form-control has-feedback-left" placeholder="Member_Phone">
+                <span class="fa fa-volume-control-phone form-control-feedback left" aria-hidden="true"></span>
+
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_Member_Avatar" class="control-label ">
+                    Member Avatar
+                </label>
+                <input type="file" name="Member_Avatar" value="{{ object.Member_Avatar }}" id="id_Member_Avatar"
+                       class="form-control has-feedback-left" placeholder="Member Avatar">
+                <span class="fa fa-image form-control-feedback left" aria-hidden="true"></span>
+            </div>
 
 
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_Member_Gender" class="control-label ">
+                    Member Gender
+                </label>
+                <select name="Member_Gender" id="id_Member_Gender" value="{{ object.Member_Gender }}" required=""
+                        class="select form-control">
+                    <option value="" selected="">Select Gender</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
 
-        <div class="col-md-9 col-sm-9 col-xs-12">
-            <label class="" for="id_Is_Teacher">
-                <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox" class="flat"
-                        name="Is_Teacher">
-                </div> teacher
-            </label>
-        </div>
+                    <span class="fa fa-child form-control-feedback left" aria-hidden="true"></span>
+                </select>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_Member_Memo" class="control-label ">
+                    Member Memo
+                </label>
+                <input type="text" name="Member_Memo" value="{{ object.Member_Memo }}" id="id_Member_Memo"
+                       required="required" class="form-control has-feedback-left" placeholder="Member Memo">
+                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label for="id_Center_Code" class="form-control-label  requiredField">
+                    Center code
+                </label>
+                <div class="">
+                    <select name="Center_Code" id="id_Center_Code" value="{{ object.Center_Code }}"
+                            class="select form-control">
+                        <option value="" selected=""></option>
+                        {% for c in form.fields.Center_Code.queryset %}
+                            <option value="{{ c.id|capfirst }}">{{ c.Center_Name|capfirst }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <label>
+                    Status
+                </label>
+                <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
+                        {% if object.Use_Flag == True %}
+                       checked {% endif %}>
+            </div>
+
+            <div class="col-md-6">
+                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                    <b>Member Type</b>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <label class="" for="id_Is_Teacher">
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox"
+                                                                                                    class="flat"
+                                                                                                    name="Is_Teacher">
+                        </div>
+                        Teacher
+                    </label>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <label class="" for="id_Is_Student">
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox"
+                                                                                                    class="flat"
+                                                                                                    name="Is_Student">
+                        </div>
+                        Student
+                    </label>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <label class="" for="id_Is_Parent">
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox"
+                                                                                                    class="flat"
+                                                                                                    name="Is_Parent">
+                        </div>
+                        Parent
+                    </label>
+                </div>
+            </div>
 
 
+            <!-- <div id="div_id_Is_Teacher" class="checkbox"> <label for="id_Is_Teacher" class=""> <input type="checkbox"
+                        name="Is_Teacher" class="checkboxinput" id="id_Is_Teacher">
+                    Is Teacher
+                </label> </div> -->
 
+            <div class="submitButton col-md-12" id="buttonID">
+                <button class="btn btn-success" type="submit">Submit</button>
+            </div>
 
+        </form>
+    </div>
+    {% include 'WebApp/theme/alerts.html' %}
 
-        <!-- <div id="div_id_Is_Teacher" class="checkbox"> <label for="id_Is_Teacher" class=""> <input type="checkbox"
-                    name="Is_Teacher" class="checkboxinput" id="id_Is_Teacher">
-                Is Teacher
-            </label> </div> -->
+    <!-- <div class="out">
 
-
-        <div class="submitButton col-md-12" id="buttonID">
-            <button class="btn btn-success" type="submit">Submit</button>
-        </div>
-
-    </form>
-</div>
-
-<!-- <div class="out">
-    {{form|crispy}}
-</div> -->
+    </div> -->
 
 {% endblock %}
