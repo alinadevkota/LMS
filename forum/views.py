@@ -11,7 +11,7 @@ from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .models import Thread, Topic, Post, Notification, ForumAvatar, NodeGroup
-from .forms import ThreadForm, ThreadEditForm, AppendixForm, ForumAvatarForm, ReplyForm, TopicForm, TopicEditForm
+from .forms import ThreadForm, ThreadEditForm, AppendixForm, ForumAvatarForm, ReplyForm, TopicForm, TopicEditForm, PostEditForm
 from .misc import get_query
 import re
 
@@ -244,7 +244,7 @@ def create_topic(request):
 @login_required
 def edit_thread(request, pk):
     thread = Thread.objects.get(pk=pk)
-    if thread.reply_count > 0:
+    if thread.reply_count < 0:
         return HttpResponseForbidden(_('Editing is not allowed when thread has been replied'))
     if not thread.user == request.user:
         return HttpResponseForbidden(_('You are not allowed to edit other\'s thread'))
@@ -257,6 +257,22 @@ def edit_thread(request, pk):
         form = ThreadEditForm(instance=thread)
 
     return render(request, 'forum/edit_thread.html', {'form': form, 'title': _('Edit thread')})
+
+@login_required
+def edit_post(request, pk):
+    post = Post.objects.get(pk=pk)
+    if not post.user == request.user:
+        return HttpResponseForbidden(_('You are not allowed to edit other\'s thread'))
+    if request.method == 'POST':
+        form = PostEditForm(request.POST, instance=post)
+        if form.is_valid():
+            t = form.save()
+            return HttpResponseRedirect(reverse('forum:thread', kwargs={'pk': t.thread.pk}))
+    else:
+        form = PostEditForm(instance=post)
+
+    return render(request, 'forum/edit_post.html', {'form': form, 'title': _('Edit Post')})
+
 
 @login_required
 def edit_topic(request, pk):

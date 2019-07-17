@@ -19,6 +19,7 @@ urlpatterns = [
     path(r'^n/(?P<pk>\d+)/page/(?P<page>[0-9]+)/$', views.NodeGroupView.as_view(), name='nodegroup'),
     path(r'^n/(?P<pk>\d+)/$', views.NodeGroupView.as_view(), name='nodegroup'),
     url(r'^t/(?P<pk>\d+)/edit/$', views.edit_thread, name='edit_thread'),
+    url(r'^post/(?P<pk>\d+)/edit/$', views.edit_post, name='edit_post'),
     url(r'^topic/(?P<pk>\d+)/edit/$', views.edit_topic, name='edit_topic'),
     url(r'^t/(?P<pk>\d+)/append/$', views.create_appendix, name='create_appendix'),
     path(r'^t/(?P<pk>\d+)/page/(?P<page>[0-9]+)/$', views.ThreadView.as_view(), name='thread'),
