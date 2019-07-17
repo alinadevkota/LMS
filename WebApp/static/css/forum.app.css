@@ -48612,3 +48612,9 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   justify-content:flex-end;
   align-items:flex-end;
 }
+
+
+
+.topic_meta{
+  margin-left: 5px;
+}

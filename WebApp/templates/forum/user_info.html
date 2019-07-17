@@ -7,48 +7,57 @@
 
 <div>
 
-    <div class="panel panel-default">
-        <div class="panel-body panel-subtitle">
-            <span class="label label-success">
-                {% blocktrans with username=user.username %}
-                threads created by {{ username }}
-                {% endblocktrans %}
-            </span>
+    <div class="panel panel-default paper-shadow">
+        <div class="panel panel-heading">
+            <h2>{% blocktrans with username=user.username %}
+                Threads created by {{ username }}
+                {% endblocktrans %}</h2>
         </div>
         <!-- List group -->
         <ul class="list-group thread-list">
             {% for thread in threads %}
             <li class="list-group-item thread-entry">
-                <div class="entry media">
-                    <div class="media-body media-middle"> thread:
-                        <a href="{% url 'forum:thread' pk=thread.pk %}" class="entry-link">
-                            {{ thread.title }}
-                        </a>
-                        <p class="entry-meta">
-                            topic:
-                            <a href="{% url 'forum:topic' thread.topic.pk %}">
-                                <span class="label label-default meta-topic">
-                                    {{ thread.topic.title }}
-                                </span>
+                <div class="entry media"><a>
+                        <img src="https://randomuser.me/api/portraits/men/65.jpg" width="96" height="96" alt=""
+                            class="avatar avatar-96wp-user-avatar wp-user-avatar-96 alignnone photo avatar-default ">
+                    </a>
+                    <h2 class="thread_title">
+                        <div class="media-body media-middle"> &nbsp;
+                            <a href="{% url 'forum:thread' pk=thread.pk %}" class="entry-link">
+                                {{ thread.title }}
                             </a>
-                            <span class="meta meta-pub_date">
-                                {{ thread.pub_date | naturaltime }}
-                            </span>
-                            <span class="meta meta-last_replied hidden-xs">
-                                {% trans "Last Replied" %}: {{ thread.last_replied | naturaltime }}
-                            </span>
-                        </p>
-                    </div>
-                    <div class="media-right media-middle">
-                        <span class="badge">{{ thread.reply_count }}</span>
-                    </div>
+
+                            <div class="topic_meta text-light text-caption">
+                                <p class="topic-meta">
+                                    &nbsp; Topic:
+                                    <a href="{% url 'forum:topic' thread.topic.pk %}">
+                                        <span class="label label-success meta-topic">
+                                            {{ thread.topic.title }}
+                                        </span>
+                                    </a>
+                                    <span class="meta meta-pub_date"> posted
+                                        {{ thread.pub_date | naturaltime }}
+                                    </span> |
+                                    <span class="meta meta-last_replied hidden-xs">
+                                        {% trans "Last Replied" %}: {{ thread.last_replied | naturaltime }}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="media-right media-middle">
+                            <span class="badge">{{ thread.reply_count }}</span>
+                        </div>
+                    </h2>
                 </div>
             </li>
             {% endfor %}
             <li class="list-group-item">
-                <a href="{% url 'forum:user_threads' user.pk %}"
-                    class="text-success">{% trans "More threads from this user" %}</a>
+                <h4>
+                    <a href="{% url 'forum:user_threads' user.pk %}"
+                        class="text-success">{% trans "More threads from this user" %}</a>
+                </h4>
             </li>
+
         </ul>
     </div>
     <!-- List group -->
@@ -84,19 +93,19 @@
 </div>
 
 <div class="panel panel-default">
-    <div class="panel-body panel-subtitle">
-        <span class="label label-success">
-            {% blocktrans with username=user.username %}
+    <div class="panel panel-heading">
+        <h2>{% blocktrans with username=user.username %}
             Replies from {{ username }}
-            {% endblocktrans %}
-        </span>
+            {% endblocktrans %}</h2>
+
     </div>
     <!-- List group -->
+
     <ul class="list-group topic-list">
         {% for reply in replies %}
         <li class="list-group-item reply-entry reply-entry-title">
             {% trans "Replied to" %}
-            thread:
+            Thread:
             <a href="{% url 'forum:thread' pk=reply.thread.pk %}">{{ reply.thread.title }}</a>
             <span class="pull-right">{{ reply.pub_date | naturaltime }}</span>
         </li>
