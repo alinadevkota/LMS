@@ -115,6 +115,7 @@ def start(request):
 
     if request.user.is_authenticated:
         course = LectureInfo.objects.order_by('Register_DateTime')[:3]
+        coursecount = LectureInfo.objects.count()
         studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
         teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
         parentcount = MemberInfo.objects.filter(Is_Parent=True, Center_Code=request.user.Center_Code).count
@@ -122,7 +123,7 @@ def start(request):
 
     # return HttpResponse("default home")
         return render(request, "WebApp/homepage.html",
-                      {'course': course, 'studentcount': studentcount, 'teachercount': teachercount,
+                      {'course': course, 'coursecount': coursecount, 'studentcount': studentcount, 'teachercount': teachercount,
                        'parentcount': parentcount, 'totalcount': totalcount})
 
     return render(request,"WebApp/splash_page.html")

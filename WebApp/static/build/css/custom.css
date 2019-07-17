@@ -2248,6 +2248,8 @@ h4.graph_title {
 #student_icon{
     margin-bottom: -10px;
 }
+
+
 /* custom tile colors for admin dashboard -rajav */
 #teacher_tile{
     background: rgb(55, 144, 228);
@@ -2257,8 +2259,8 @@ h4.graph_title {
     background: rgb(228, 72, 55);
 }
 
-#parent_tile{
-    background: rgb(218, 214, 3);
+#course_tile{
+    background: #ffca4f;
 }
 
 #adminMessageContainer{
