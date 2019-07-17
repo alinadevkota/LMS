@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import Select
+from django.forms import ModelForm, TextInput
 
 from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
     ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, \
@@ -21,11 +21,11 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = MemberInfo
-        fields = ('username', 'email','Member_Role')
+        fields = ('username', 'email', 'Member_Role')
 
 
 class UserUpdateForm(forms.ModelForm):
-    role = forms.MultipleChoiceField(choices=USER_ROLES,)
+    role = forms.MultipleChoiceField(choices=USER_ROLES, )
 
     class Meta:
         model = MemberInfo
@@ -51,6 +51,7 @@ class MemberInfoForm(forms.ModelForm):
     class Meta:
         model = MemberInfo
         fields = '__all__'
+
 
 class LectureInfoForm(forms.ModelForm):
     class Meta:
@@ -296,3 +297,10 @@ class TodoTInfoForm(forms.ModelForm):
     class Meta:
         model = TodoTInfo
         fields = '__all__'
+
+
+class ChangeOthersPasswordForm(ModelForm):
+    class Meta:
+        model = MemberInfo
+        fields = ('password',)
+

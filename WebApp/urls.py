@@ -81,7 +81,8 @@ urlpatterns = (
 urlpatterns += (
     # urls for Profile
     path('profile/', login_required(views.ProfileView), name='user_profile'),
-
+    path('change-password/', views.PasswordChangeView.as_view()),
+    path('change-password/<int:pk>/', views.change_password_others),
 )
 
 urlpatterns += (

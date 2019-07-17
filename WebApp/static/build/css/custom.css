@@ -2438,7 +2438,9 @@ button, .buttons, .btn, .modal-footer .btn+.btn {
 
 .btn-group-vertical .btn, .btn-group .btn {
     margin-bottom: 0;
-    margin-right: 0
+    margin-right: 0;
+    padding-left: 14px;
+    padding-right: 14px;
 }
 
 .mail_list_column {
@@ -2615,8 +2617,8 @@ span.section {
 }
 
 .form-control {
-    border-radius: 0;
-    width: 100%
+    border-radius: 5px;
+    width: 453px;
 }
 
 .form-horizontal .control-label {

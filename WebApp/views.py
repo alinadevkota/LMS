@@ -1,11 +1,18 @@
-from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.views import LogoutView, LoginView
+from django.contrib import messages
+from django.contrib.auth import REDIRECT_FIELD_NAME, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.views import LogoutView, LoginView, PasswordContextMixin
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.utils.translation import gettext as _
 from django.views import generic
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
+from django.views.generic.edit import FormView
 
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
     ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, \
@@ -162,6 +169,23 @@ class register(generic.CreateView):
     template_name = 'registration/register.html'
 
 
+def change_password_others(request, pk):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html', {
+        'form': form
+    })
+
+
 def loginsuccess(request):
     return render(request, "registration/registrationsuccessful.html")
 
@@ -199,6 +223,38 @@ class MemberInfoListView(ListView):
 class MemberInfoCreateView(CreateView):
     model = MemberInfo
     form_class = MemberInfoForm
+
+
+# ________________________________________________________
+
+
+class PasswordChangeView(PasswordContextMixin, FormView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('user_profile')
+    template_name = 'registration/password_change_form.html'
+    title = _('Password change')
+
+    @method_decorator(sensitive_post_parameters())
+    @method_decorator(csrf_protect)
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        form.save()
+        # Updating the password logs out all other sessions for the user
+        # except the current one.
+        update_session_auth_hash(self.request, form.user)
+
+        messages.success(self.request,
+                         'Your password was successfully updated! You can login with your new credentials')
+
+        return super().form_valid(form)
 
 
 class MemberInfoDetailView(DetailView):

@@ -184,3 +184,21 @@ class ReplyForm(ModelForm):
             inst.save()
             self.save_m2m()
         return inst
+
+
+class PostEditForm(ModelForm):
+
+    if use_pagedown:
+        content_raw = forms.CharField(label=_('Content'), widget=PagedownWidget())
+
+    def __init__(self, *args, **kwargs):
+        super(PostEditForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.add_input(Submit('submit', _('Submit')))
+
+    class Meta:
+        model = Post
+        fields = ('content_raw', )
+        labels = {
+            'content_raw': _('Content'),
+        }
