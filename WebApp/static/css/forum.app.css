@@ -48563,3 +48563,46 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 
 
 
+#chat_id{
+  display: flex;
+}
+
+/* ===============for reply content============ */
+.reply-content{
+  widows: 100px;
+  height:70px;
+  border:1px solid #eee;
+  padding:5px;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+  align-items:center;
+  
+}
+
+.profile_pic{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+ 
+  margin-left:2px
+}
+
+.profile_pic img{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+}
+.reply-content-detail{
+  margin-left:10px;
+}
+
+.chat-reply{
+    width:100%;
+   display:flex;
+    padding:4px;
+    justify-content:flex-start;
+    align-items:flex-start;
+    margin-top:10px;
+    font-weight:300;
+}
