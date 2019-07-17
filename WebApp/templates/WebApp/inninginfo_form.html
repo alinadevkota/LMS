@@ -27,7 +27,42 @@
 
     <form method="post">
         {% csrf_token %}
-        {{ form|crispy }}
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            {{ form.Inning_Name|as_crispy_field }}
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <div id="div_id_Start_Date" class="form-group">
+                <label for="id_Start_Date" class="control-label  requiredField">
+                    Start Date *</span>
+                </label>
+                <div class="controls ">
+                    <input type="date" name="Start_Date" required="" id="id_Start_Date"
+                           class="datetimeinput form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <div id="div_id_End_Date" class="form-group">
+                <label for="id_End_Date" class="control-label  requiredField">
+                    End Date *</span>
+                </label>
+                <div class="controls ">
+                    <input type="date" name="End_Date" required="" id="id_End_Date" class="datetimeinput form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            {{ form.Use_Flag|as_crispy_field }}
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            {{ form.Register_Agent|as_crispy_field }}
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <input type="hidden" name="Center_Code" id="id_Center_Code" value="{{ request.user.Center_Code.id }}"
+                   class="select form-control">
+        </div>
+
 
         <div class="submitButton  col-md-12">
             <button class="btn btn-success" type="submit">Submit</button>

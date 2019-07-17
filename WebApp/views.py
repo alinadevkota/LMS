@@ -22,7 +22,7 @@ from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterCont
     MessageInfoForm, OmrAnswerInfoForm, OmrAssignInfoForm, OmrExampleInfoForm, QAnswerInfoForm, QAnswerLogForm, \
     QExampleInfoForm, QuestionInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, ScheduleInfoForm, TalkMemberForm, \
     TalkRoomForm, TalkMessageForm, TalkMessageReadForm, TodoInfoForm, TodoTInfoForm, UserUpdateForm, UserRegisterForm, \
-    MemberInfoForm
+    MemberInfoForm, ChangeOthersPasswordForm
 from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
     ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
@@ -122,6 +122,7 @@ def start(request):
 
     if request.user.is_authenticated:
         course = LectureInfo.objects.order_by('Register_DateTime')[:3]
+        coursecount = LectureInfo.objects.count()
         studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
         teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
         parentcount = MemberInfo.objects.filter(Is_Parent=True, Center_Code=request.user.Center_Code).count
@@ -129,7 +130,7 @@ def start(request):
 
     # return HttpResponse("default home")
         return render(request, "WebApp/homepage.html",
-                      {'course': course, 'studentcount': studentcount, 'teachercount': teachercount,
+                      {'course': course, 'coursecount': coursecount, 'studentcount': studentcount, 'teachercount': teachercount,
                        'parentcount': parentcount, 'totalcount': totalcount})
 
     return render(request,"WebApp/splash_page.html")
@@ -170,16 +171,23 @@ class register(generic.CreateView):
 
 def change_password_others(request, pk):
     if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
+        form = ChangeOthersPasswordForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # Important!
+            # user = form.save()
+            user  = MemberInfo.objects.get(pk=pk)
+            print(form.cleaned_data.get("password"), "  of user", user.username )
+            user.set_password(form.cleaned_data.get("password"))
+            user.save()
+
+            # update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('change_password')
+
+
+            return redirect('user_profile')
         else:
             messages.error(request, 'Please correct the error below.')
     else:
-        form = PasswordChangeForm(request.user)
+        form = ChangeOthersPasswordForm()
     return render(request, 'registration/change_password.html', {
         'form': form
     })
