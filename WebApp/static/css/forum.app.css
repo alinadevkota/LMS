@@ -48606,3 +48606,9 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
     margin-top:10px;
     font-weight:300;
 }
+
+.top_button{
+  display:flex;
+  justify-content:flex-end;
+  align-items:flex-end;
+}
