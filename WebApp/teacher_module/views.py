@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.views.generic import ListView
+
+from WebApp.models import LectureInfo
 
 
 def start(request):
@@ -7,5 +10,7 @@ def start(request):
     # return render(request,"start.html")
     return render(request, "teacher_module/homepage.html")
 
-def lecturelist(request):
-    return render(request,"teacher_module/lecturelist.html")
+
+class LectureInfoListView(ListView):
+    model = LectureInfo
+    template_name = 'teacher_module/lectureinfo_list.html'
