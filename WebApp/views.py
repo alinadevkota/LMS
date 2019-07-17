@@ -125,8 +125,7 @@ def start(request):
                       {'course': course, 'studentcount': studentcount, 'teachercount': teachercount,
                        'parentcount': parentcount, 'totalcount': totalcount})
 
-    return render(request, "WebApp/splash_page.html",
-                  {})
+    return render(request,"WebApp/splash_page.html")
 
 
 def editprofile(request):
