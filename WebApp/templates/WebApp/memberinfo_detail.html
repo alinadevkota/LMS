@@ -81,6 +81,7 @@
             <td>{{ object.Is_Parent }}</td>
         </tr>
     </table>
+    <a href="/change-password/{{ object.id }}/" > Change Password </a>
     <br>
     <a class="btn btn-primary" href="{{object.get_update_url}}">Edit Member</a>
     <a class="btn btn-danger" href="{% url 'memberinfo_delete' pk=object.pk %}"

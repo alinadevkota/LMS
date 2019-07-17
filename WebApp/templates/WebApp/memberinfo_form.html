@@ -48,15 +48,17 @@
             </div>
 
 
-            <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback" id="div_id_password">
-                <label for="id_password" class="control-label ">
-                    Password
-                </label>
-                <input type="password" value="{{ object.password }}" name="password" id="id_password"
-                       required="required"
-                       class="form-control has-feedback-left" placeholder="Member Password">
-                <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
-            </div>
+
+{#        --------------Removed by Saloni; password not provided from frontend form--------------------#}
+
+{#            <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback" id="div_id_password">#}
+{#                <label for="id_password" class="control-label ">#}
+{#                    Password#}
+{#                </label>#}
+{#                <input type="password" value="{{ object.password }}" name="password" id="id_password"#}
+{#                       class="form-control has-feedback-left" placeholder="Member Password">#}
+{#                <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>#}
+{#            </div>#}
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <label for="id_first_name" class="control-label ">
@@ -241,6 +243,8 @@
         </form>
     </div>
     {% include 'WebApp/theme/alerts.html' %}
+
+
 
     <!-- <div class="out">
 
