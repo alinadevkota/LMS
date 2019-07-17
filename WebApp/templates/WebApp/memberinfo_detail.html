@@ -78,8 +78,8 @@
                 <td>{{ object.Is_Parent }}</td>
             </tr>
         </table>
-        <a href="/change-password/{{ object.id }}/" > Change Password </a>
     <br>
+        <a class="btn btn-primary" href="/change-password/{{ object.id }}/" > Change Password </a>
         <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Member</a>
         <a class="btn btn-danger" href="{% url 'memberinfo_delete' pk=object.pk %}"
            onclick="return confirm('Are you sure you want to delete the member:\n'+ '{{ object.Member_Name|safe }}' +'\n\nThis cannot be undone.')">
