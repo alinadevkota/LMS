@@ -103,7 +103,7 @@ class Thread(models.Model):
         super(Thread, self).save(*args, **kwargs)
         self.raw_content_hash = new_hash
         for to in mentioned_users:
-                notify.delay(to=to.username, sender=self.user.username, thread=self.pk)
+                notify(to=to.username, sender=self.user.username, thread=self.pk)
 
     class Meta:
         ordering = ['order', '-pub_date']
