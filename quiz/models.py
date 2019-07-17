@@ -117,12 +117,6 @@ class Quiz(models.Model):
                     " Non users cannot sit this exam."),
         verbose_name=_("Single Attempt"))
 
-    # time_limit = models.DurationField(
-    #     blank=False, default=None,
-    #     help_text=_("Set the time limit for the quiz"),
-    #     verbose_name=_("Time Limit"))
-
-
     pass_mark = models.SmallIntegerField(
         blank=True, default=0,
         verbose_name=_("Pass Mark"),
