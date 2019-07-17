@@ -5,210 +5,334 @@
 {% load crispy_forms_tags %}
 
 {% block breadcrumb %}
-    <ol class="breadcrumb navClass">
-        <li><a href="{% url 'forum:index' %}">Home</a></li>
-        <li>
-            <a href="{% url 'forum:nodegroup' pk=thread.topic.node_group.pk %}">{{ thread.topic.node_group.title }}</a>
-        </li>
-        <li class="active"><a href="{% url 'forum:topic' pk=thread.topic.pk %}">{{ thread.topic.title }}</a></li>
-    </ol>
+<ol class="breadcrumb navClass">
+    <li><a href="{% url 'forum:index' %}">Home</a></li>
+    <li>
+        <a href="{% url 'forum:nodegroup' pk=thread.topic.node_group.pk %}">{{ thread.topic.node_group.title }}</a>
+    </li>
+    <li class="active"><a href="{% url 'forum:topic' pk=thread.topic.pk %}">{{ thread.topic.title }}</a></li>
+</ol>
 {% endblock %}
 
 {% block left %}
 
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-body">
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-body">
 
 
-            <h1 class="thread-title">{{ thread.title }}</h1>
+        <h1 class="thread-title">{{ thread.title }}</h1>
+        <div class="thread-meta row">
+            <div class="profile_pic">
+                <img src="/media/{{ thread.user.Member_Avatar }}" alt="..." class="img-circle profile_img"
+                    style="height:60px;width:60px;" />
+            </div>
+            <div class="col-xs-9 col-sm-10">
+                <p class="text-muted">
+                    <a href="{% url 'forum:user_info' thread.user.pk %}">{{ thread.user.username }}</a>
+                    <br />
+                    <span>Posted {{ thread.pub_date | naturaltime }} in <a class="text-primary"
+                            href="{% url 'forum:topic' pk=thread.topic.pk %}">{{ thread.topic.title }}</a>, </span>
+                    <span>{% blocktrans with view_count=thread.view_count %}viewed {{ view_count }}
+                        times{% endblocktrans %}</span>
+                </p>
+            </div>
+        </div>
+        <div class="thread-content">
+            <p>{{ thread.content_rendered | safe }}</p>
+        </div>
+    </div>
+    {% if thread.appendix_set %}
+    <ul class="list-group">
+        {% for appendix in thread.appendix_set.all %}
+        <div class="list-group-item list-appendix-item">
+            <p class="appendix-meta">
+                {% blocktrans with number=forloop.counter %}appendix
+                {{ number }}{% endblocktrans %} {{ appendix.pub_date|naturaltime }}
+            </p>
+            {{ appendix.content_rendered | safe }}
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if request.user == thread.user %}
+    <div class="panel-footer">
+        {% if thread.reply_count == 0 %}
+        <a href="{% url 'forum:edit_thread' pk=thread.pk %}"><span
+                class="label label-success">{% trans 'Edit' %}</span></a>
+        {% endif %}
+        <a href="{% url 'forum:create_appendix' pk=thread.pk %}"><span
+                class="label label-warning">{% trans 'Append' %}</span></a>
+    </div>
+    {% endif %}
+    {% if request.user.is_superuser %}
+    <div class="panel-footer">
+        <span>{% trans 'Moderations' %}: </span>
+        <a href="#" class="moderate-action move-thread-up" data-toggle="modal" data-target="#moderation-modal"
+            data-pk="{{ thread.pk }}" data-action="move-thread-up"
+            data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+            <span class="label label-success">Up</span>
+        </a>
+        {% if thread.closed %}
+        <a href="#" class="moderate-action open-thread" data-toggle="modal" data-target="#moderation-modal"
+            data-pk="{{ thread.pk }}" data-action="open-thread"
+            data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+            <span class="label label-info">Open</span>
+        </a>
+        {% else %}
+        <a href="#" class="moderate-action close-thread" data-toggle="modal" data-target="#moderation-modal"
+            data-pk="{{ thread.pk }}" data-action="close-thread"
+            data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+            <span class="label label-warning">Close</span>
+        </a>
+        {% endif %}
+        <a href="#" class="moderate-action hide-thread" data-toggle="modal" data-target="#moderation-modal"
+            data-pk="{{ thread.pk }}" data-action="hide-thread"
+            data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+            <span class="label label-danger">Hide</span>
+        </a>
+    </div>
+    {% endif %}
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {% if thread.reply_count %}
+        {% blocktrans count reply_count=thread.reply_count %}{{ reply_count }} Reply
+        {% plural %}{{ reply_count }} Replies{% endblocktrans %}
+        {% else %}
+        {% trans "No Replies" %}
+        {% endif %}
+    </div>
+    <!-- List group -->
+    <ul class="list-group reply-list">
+        {% for post in posts %}
+        <li class="list-group-item reply-item">
             <div class="thread-meta row">
                 <div class="profile_pic">
-                    <img src="/media/{{ thread.user.Member_Avatar }}" alt="..." class="img-circle profile_img"
-                         style="height:60px;width:60px;"/>
+                    <img src="/media/{{ post.user.Member_Avatar }}" alt="..." class="img-circle profile_img"
+                        style="height:60px;width:60px;" />
                 </div>
                 <div class="col-xs-9 col-sm-10">
                     <p class="text-muted">
-                        <a href="{% url 'forum:user_info' thread.user.pk %}">{{ thread.user.username }}</a>
-                        <br/>
-                        <span>Posted {{ thread.pub_date | naturaltime }} in <a class="text-primary"
-                                                                               href="{% url 'forum:topic' pk=thread.topic.pk %}">{{ thread.topic.title }}</a>, </span>
-                        <span>{% blocktrans with view_count=thread.view_count %}viewed {{ view_count }}
-                            times{% endblocktrans %}</span>
+                        <a href="{% url 'forum:user_info' post.user_id %}">{{ post.user }}</a> <br />
+                        <span>{{ post.pub_date | naturaltime }}</span>
                     </p>
                 </div>
             </div>
-            <div class="thread-content">
-                <p>{{ thread.content_rendered | safe }}</p>
+            <div class="reply-content">
+                <p>
+                    {{ post.content_rendered | safe }}
+                </p>
             </div>
-        </div>
-        {% if thread.appendix_set %}
-            <ul class="list-group">
-                {% for appendix in thread.appendix_set.all %}
-                    <div class="list-group-item list-appendix-item">
-                        <p class="appendix-meta">
-                            {% blocktrans with number=forloop.counter %}appendix
-                                {{ number }}{% endblocktrans %} {{ appendix.pub_date|naturaltime }}
-                        </p>
-                        {{ appendix.content_rendered | safe }}
-                    </div>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        {% if request.user == thread.user %}
-            <div class="panel-footer">
-                {% if thread.reply_count == 0 %}
-                    <a href="{% url 'forum:edit_thread' pk=thread.pk %}"><span
-                            class="label label-success">{% trans 'Edit' %}</span></a>
-                {% endif %}
-                <a href="{% url 'forum:create_appendix' pk=thread.pk %}"><span
-                        class="label label-warning">{% trans 'Append' %}</span></a>
-            </div>
-        {% endif %}
-        {% if request.user.is_superuser %}
-            <div class="panel-footer">
-                <span>{% trans 'Moderations' %}: </span>
-                <a href="#" class="moderate-action move-thread-up" data-toggle="modal" data-target="#moderation-modal"
-                   data-pk="{{ thread.pk }}" data-action="move-thread-up"
-                   data-api-url="{% url 'forum:thread-detail' thread.pk %}">
-                    <span class="label label-success">Up</span>
-                </a>
-                {% if thread.closed %}
-                    <a href="#" class="moderate-action open-thread" data-toggle="modal" data-target="#moderation-modal"
-                       data-pk="{{ thread.pk }}" data-action="open-thread"
-                       data-api-url="{% url 'forum:thread-detail' thread.pk %}">
-                        <span class="label label-info">Open</span>
-                    </a>
-                {% else %}
-                    <a href="#" class="moderate-action close-thread" data-toggle="modal" data-target="#moderation-modal"
-                       data-pk="{{ thread.pk }}" data-action="close-thread"
-                       data-api-url="{% url 'forum:thread-detail' thread.pk %}">
-                        <span class="label label-warning">Close</span>
-                    </a>
-                {% endif %}
-                <a href="#" class="moderate-action hide-thread" data-toggle="modal" data-target="#moderation-modal"
-                   data-pk="{{ thread.pk }}" data-action="hide-thread"
-                   data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+            <p class="reply-link">
+                <a href="#" data-username="{{ post.user.username }}" class="reply-to">{% trans "Reply" %}</a>
+            </p>
+            {% if request.user.is_superuser %}
+            <hr>
+            <p class="moderation-links">
+                <a href="#" class="moderate-action hide-reply" data-toggle="modal" data-target="#moderation-modal"
+                    data-pk="{{ thread.pk }}" data-action="hide-reply"
+                    data-api-url="{% url 'forum:post-detail' post.pk %}">
                     <span class="label label-danger">Hide</span>
                 </a>
-            </div>
+            </p>
+            {% endif %}
+        </li>
+        {% endfor %}
+        {% if not posts %}
+        <li class="list-group-item reply-item">
+            <p>{% trans "Be the first to reply!" %}</p>
+        </li>
+        {% endif %}
+    </ul>
+    <div class="panel-footer">
+        {% get_pagination %}
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">{% trans "Leave a Reply" %}</div>
+    <div class="panel-body">
+        {% if thread.closed %}
+        <div class="alert alert-warning" role="alert">
+            <p>{% trans "This thread is closed" %}</p>
+        </div>
+        {% else %}
+        {% if request.user.is_authenticated %}
+        <form action="{% url 'forum:thread' pk=thread.pk %}" method="POST">
+            {% crispy form %}
+        </form>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            {% url forum_login_url_name as login_url %}
+            {% url forum_reg_url_name as reg_url %}
+            {% blocktrans %}
+            Please <a href="{{ login_url }}">Login</a> or <a href="{{ reg_url }}">Create a New User</a>
+            to reply
+            {% endblocktrans %}
+        </div>
+        {% endif %}
         {% endif %}
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            {% if thread.reply_count %}
-                {% blocktrans count reply_count=thread.reply_count %}{{ reply_count }} Reply
-                    {% plural %}{{ reply_count }} Replies{% endblocktrans %}
-            {% else %}
-                {% trans "No Replies" %}
-            {% endif %}
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Recent posts </h2>
+            <div class="col-md-8">
+
+
+                {% if thread.reply_count == 0 %}
+                <a href="{% url 'forum:edit_thread' pk=thread.pk %}"><span
+                        class="label label-success">{% trans 'Edit' %}</span></a>
+                {% endif %}
+                <a href="{% url 'forum:create_appendix' pk=thread.pk %}"><span
+                        class="label label-success">{% trans 'Append' %}</span></a>
+
+
+            </div>
+            <!-- <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
+                            class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul> -->
+            <div class="clearfix"></div>
         </div>
-        <!-- List group -->
-        <ul class="list-group reply-list">
-            {% for post in posts %}
-                <li class="list-group-item reply-item">
-                    <div class="thread-meta row">
-                        <div class="profile_pic">
-                            <img src="/media/{{ post.user.Member_Avatar }}" alt="..." class="img-circle profile_img"
-                                 style="height:60px;width:60px;"/>
+        <div class="x_content">
+            <ul class="list-unstyled timeline">
+                <li>
+                    <div class="block">
+                        <div class="tags">
+                            <a href="" class="tag">
+                                <span>{{ thread.topic.title }}</span>
+                            </a>
                         </div>
-                        <div class="col-xs-9 col-sm-10">
-                            <p class="text-muted">
-                                <a href="{% url 'forum:user_info' post.user_id %}">{{ post.user }}</a> <br/>
-                                <span>{{ post.pub_date | naturaltime }}</span>
+                        <div class="block_content">
+                            <h2 class="thread-title"><a>{{ thread.title }}</a></h2>
+                            <div class="byline">
+                                <span>{{ thread.pub_date }}</span> by <a>{{ thread.user.username }}</a>
+                            </div>
+                            <p class="excerpt">{{ thread.content_rendered | safe }} <a>Read&nbsp;More</a>
+
+                                <div>
+                                    <button class="btn btn-sm btn-primary" id="chat_id" type="button"><i
+                                            class="fa fa-reply"></i>
+                                        Reply</button>
+                                    <input type="text" id="chat_id">
+                                </div>
+
+
+                                <div class="btn-group">
+                                    <div class="controls "> <textarea name="content_raw" id="id_content_raw" cols="0"
+                                            class="textarea form-control" rows="1" required=""
+                                            spellcheck="false"></textarea> </div>
+                                </div>
+                                <div class="controls "> <input type="submit" name="submit" value="Submit"
+                                        class="btn btn-primary" id="submit-id-submit"> </div>
+
+                            </p>
+
+
+                        </div>
+                    </div>
+                </li>
+                <!-- <li>
+                    <div class="block">
+                        <div class="tags">
+                            <a href="" class="tag">
+                                <span>Entertainment</span>
+                            </a>
+                        </div>
+                        <div class="block_content">
+                            <h2 class="title">
+                                <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                            </h2>
+                            <div class="byline">
+                                <span>13 hours ago</span> by <a>Jane Smith</a>
+                            </div>
+                            <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were
+                                where you met the producers that could fund your project, and if the buyers liked your
+                                flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
                             </p>
                         </div>
                     </div>
-                    <div class="reply-content">
-                        <p>
-                            {{ post.content_rendered | safe }}
-                        </p>
-                    </div>
-                    <p class="reply-link">
-                        <a href="#" data-username="{{ post.user.username }}" class="reply-to">{% trans "Reply" %}</a>
-                    </p>
-                    {% if request.user.is_superuser %}
-                        <hr>
-                        <p class="moderation-links">
-                            <a href="#" class="moderate-action hide-reply" data-toggle="modal"
-                               data-target="#moderation-modal" data-pk="{{ thread.pk }}" data-action="hide-reply"
-                               data-api-url="{% url 'forum:post-detail' post.pk %}">
-                                <span class="label label-danger">Hide</span>
-                            </a>
-                        </p>
-                    {% endif %}
                 </li>
-            {% endfor %}
-            {% if not posts %}
-                <li class="list-group-item reply-item"><p>{% trans "Be the first to reply!" %}</p></li>
-            {% endif %}
-        </ul>
-        <div class="panel-footer">
-            {% get_pagination %}
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">{% trans "Leave a Reply" %}</div>
-        <div class="panel-body">
-            {% if thread.closed %}
-                <div class="alert alert-warning" role="alert">
-                    <p>{% trans "This thread is closed" %}</p>
-                </div>
-            {% else %}
-                {% if request.user.is_authenticated %}
-                    <form action="{% url 'forum:thread' pk=thread.pk %}" method="POST">
-                        {% crispy form %}
-                    </form>
-                {% else %}
-                    <div class="alert alert-warning" role="alert">
-                        {% url forum_login_url_name as login_url %}
-                        {% url forum_reg_url_name as reg_url %}
-                        {% blocktrans %}
-                            Please <a href="{{ login_url }}">Login</a> or <a href="{{ reg_url }}">Create a New User</a>
-                            to reply
-                        {% endblocktrans %}
+                <li>
+                    <div class="block">
+                        <div class="tags">
+                            <a href="" class="tag">
+                                <span>Entertainment</span>
+                            </a>
+                        </div>
+                        <div class="block_content">
+                            <h2 class="title">
+                                <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                            </h2>
+                            <div class="byline">
+                                <span>13 hours ago</span> by <a>{{ thread.user.username }}</a>
+                            </div>
+                            <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were
+                                where you met the producers that could fund your project, and if the buyers liked your
+                                flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                            </p>
+                        </div>
                     </div>
-                {% endif %}
-            {% endif %}
+                </li> -->
+            </ul>
         </div>
     </div>
+</div>
+
+
+
 {% endblock %}
 
 {% block widget_after %}
-    {% include 'forum/widgets/topic_info.html' %}
+{% include 'forum/widgets/topic_info.html' %}
 {% endblock %}
 
 {% block footer_ext %}
-    <script>
-        $(document).ready(function () {
-            $('.reply-to').click(function (e) {
-                e.preventDefault();
-                var box = $("#reply-content-input, #id_content_raw");
-                box.val(box.val() + "@" + $(this).data('username') + "\n");
-            });
+<script>
+    $(document).ready(function () {
+        $('.reply-to').click(function (e) {
+            e.preventDefault();
+            var box = $("#reply-content-input, #id_content_raw");
+            box.val(box.val() + "@" + $(this).data('username') + "\n");
         });
-    </script>
-    {% if request.user.is_superuser %}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.12.0/babel.min.js"></script>
-        <div id="moderation-modal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Modal title</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>One fine body&hellip;</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-warning modal-confirm">Confirm</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-        <script type="text/babel">
+    });
+</script>
+{% if request.user.is_superuser %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.12.0/babel.min.js"></script>
+<div id="moderation-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning modal-confirm">Confirm</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/babel">
             let patchthread = function (url, data) {
                 $.ajax({
                     dataType: 'json',
@@ -295,5 +419,6 @@
                 modal.find('.modal-body').html(modalBody);
             })
         </script>
-    {% endif %}
+{% endif %}
+
 {% endblock %}
