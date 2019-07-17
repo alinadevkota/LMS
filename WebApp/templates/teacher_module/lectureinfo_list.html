@@ -22,11 +22,13 @@
                         <div class="panel panel-default boxShadow">
                             <div class="panel-body" style="padding: 0%;">
                                 <div>
-                                    <img src="/media/{{ object.Lecture_Cover_File }}" class="img-responsive">
+                                    <a href="{% url 'lecture_detail' pk=object.pk %}"> <img
+                                            src="/media/{{ object.Lecture_Cover_File }}" class="img-responsive"></a>
                                 </div>
                                 <div style="padding-left: 20px;padding-right:10px;"
                                      data-toggle="collapse" data-target="#description">
-                                    <h2>{{ object.Lecture_Name }}</h2>
+                                    <h2><a href="{% url 'lecture_detail' pk=object.pk %}">{{ object.Lecture_Name }}</a>
+                                    </h2>
                                     <div class="courseDetailStyle">
                                         <div class="">
                                             <p class="" style="color: #f9a825">

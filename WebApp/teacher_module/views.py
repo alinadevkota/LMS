@@ -14,3 +14,7 @@ def start(request):
 class LectureInfoListView(ListView):
     model = LectureInfo
     template_name = 'teacher_module/lectureinfo_list.html'
+
+
+def lecturedetail(request, pk=''):
+    return render(request, 'teacher_module/course_detail.html', {'Course': LectureInfo.objects.get(id=pk)})
