@@ -6,8 +6,12 @@ from django.conf import settings
 
 def forum_processor(request):
     node_groups = NodeGroup.objects.all()
+    if (request.user.is_authenticated):
+        user=request.user
+    else:
+        user=None
     notification = Notification.objects.filter(
-        to=request.user
+        to=user
         ).select_related(
             'sender', 'thread', 'post'
         ).prefetch_related(
