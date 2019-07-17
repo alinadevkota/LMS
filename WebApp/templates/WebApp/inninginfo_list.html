@@ -1,64 +1,64 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="inningInfoListClass">
+    <div class="inningInfoListClass">
 
-    <ol aria-label="breadcrumb" class="breadcrumb navClass">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Sessions</li>
-    </ol>
+        <ol aria-label="breadcrumb" class="breadcrumb navClass">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Sessions</li>
+        </ol>
 
-    <h2 class="tableHeader">List of Sessions</h2>
-    <hr class="header_hr">
+        <h2 class="tableHeader">List of Sessions</h2>
+        <hr class="header_hr">
 
-    <div class="btn-createnew">
-        <a class="btn btn-success" href="{% url 'inninginfo_create' %}">Create new Session</a>
-    </div>
-    <br><br><br>
+        <div class="btn-createnew">
+            <a class="btn btn-success" href="{% url 'inninginfo_create' %}">Create new Session</a>
+        </div>
+        <br><br><br>
 
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered bg-white">
-            <thead class="thead-light bg-primary">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered bg-white">
+                <thead class="thead-light bg-primary">
                 <tr class="tableTitleRow">
                     <td>ID</td>
-                    <td>Link</td>
+                    {#                    <td>Link</td>#}
                     <td>Session Name</td>
                     <td>Start Date</td>
                     <td>End Date</td>
                     <!-- <td>use_flag</td> -->
-                    <td>Reg Date</td>
-                    <td>Reg Time</td>
-                    <td>Reg Agent</td>
-                    <td>Udt Date</td>
-                    <td>Udt Time</td>
+{#                    <td>Reg Date</td>#}
+{#                    <td>Reg Time</td>#}
+                    <td>Register Agent</td>
+                    <td>Center Code</td>
+{#                    <td>Udt Time</td>#}
                     <!-- <td>udt_agent</td> -->
                     <!-- <td>Register Date</td>
                     <td>Updated Date</td> -->
                 </tr>
-            </thead>
-            {% for object in object_list %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-                <td>{{ object.inning_name }}</td>
-                <td>{{ object.start_date }}</td>
-                <td>{{ object.end_date }}</td>
-                <!-- <td>{{ object.use_flag }}</td> -->
-                <td>{{ object.reg_date }}</td>
-                <td>{{ object.reg_time }}</td>
-                <td>{{ object.reg_agent }}</td>
-                <td>{{ object.udt_date }}</td>
-                <td>{{ object.udt_time }}</td>
-                <!-- <td>{{ object.udt_agent }}</td> -->
-            </tr>
-            {% endfor %}
-        </table>
+                </thead>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        {# <td>{{ object.inning_name }}</td>#}
+                        <td><a href="{{ object.get_absolute_url }}">{{ object.Inning_Name }}</a></td>
+                        <td>{{ object.Start_Date }}</td>
+                        <td>{{ object.End_Date }}</td>
+{#                        <td>{{ object.use_flag }}</td>#}
+{#                        <td>{{ object.reg_date }}</td>#}
+{#                        <td>{{ object.reg_time }}</td>#}
+                        <td>{{ object.Register_Agent }}</td>
+                        <td>{{ object.Center_Code }}</td>
+{#                        <td>{{ object.udt_time }}</td>#}
+                        {#                        <td>{{ object.udt_agent }}</td>#}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <br>
+        <br>
+
     </div>
-
-    <br>
-    <br>
-
-</div>
 
 
 {% endblock %}
@@ -66,23 +66,23 @@
 
 
 {% block customjss %}
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.table').DataTable({
-            dom: 'lBfrtip',
-            responsive: true,
-            buttons: [
-                {
-                    extend: 'csv',
-                    text: '<span class="exportcsv"><i class="fa fa-paper-plane-o"></i> Export to CSV </span>'
-                },
-                {
-                    extend: 'print',
-                    text: '<span class="print"><i class="fa fa-print"></i> Print </span>',
-                    fieldSeparator: '\t'
-                }]
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.table').DataTable({
+                dom: 'lBfrtip',
+                responsive: true,
+                buttons: [
+                    {
+                        extend: 'csv',
+                        text: '<span class="exportcsv"><i class="fa fa-paper-plane-o"></i> Export to CSV </span>'
+                    },
+                    {
+                        extend: 'print',
+                        text: '<span class="print"><i class="fa fa-print"></i> Print </span>',
+                        fieldSeparator: '\t'
+                    }]
+            });
         });
-    });
-</script>
+    </script>
 
 {% endblock %}
