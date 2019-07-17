@@ -2248,6 +2248,8 @@ h4.graph_title {
 #student_icon{
     margin-bottom: -10px;
 }
+
+
 /* custom tile colors for admin dashboard -rajav */
 #teacher_tile{
     background: rgb(55, 144, 228);
@@ -2257,8 +2259,8 @@ h4.graph_title {
     background: rgb(228, 72, 55);
 }
 
-#parent_tile{
-    background: rgb(218, 214, 3);
+#course_tile{
+    background: #ffca4f;
 }
 
 #adminMessageContainer{
@@ -2436,7 +2438,9 @@ button, .buttons, .btn, .modal-footer .btn+.btn {
 
 .btn-group-vertical .btn, .btn-group .btn {
     margin-bottom: 0;
-    margin-right: 0
+    margin-right: 0;
+    padding-left: 14px;
+    padding-right: 14px;
 }
 
 .mail_list_column {
@@ -2613,8 +2617,8 @@ span.section {
 }
 
 .form-control {
-    border-radius: 0;
-    width: 100%
+    border-radius: 5px;
+    width: 453px;
 }
 
 .form-horizontal .control-label {

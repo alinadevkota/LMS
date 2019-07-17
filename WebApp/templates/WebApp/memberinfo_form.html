@@ -48,15 +48,17 @@
             </div>
 
 
-            <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback" id="div_id_password">
-                <label for="id_password" class="control-label ">
-                    Password
-                </label>
-                <input type="password" value="{{ object.password }}" name="password" id="id_password"
-                       required="required"
-                       class="form-control has-feedback-left" placeholder="Member Password">
-                <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
-            </div>
+
+{#        --------------Removed by Saloni; password not provided from frontend form--------------------#}
+
+{#            <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback" id="div_id_password">#}
+{#                <label for="id_password" class="control-label ">#}
+{#                    Password#}
+{#                </label>#}
+{#                <input type="password" name="password" id="id_password"#}
+{#                       class="form-control has-feedback-left" placeholder="Member Password">#}
+{#                <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>#}
+{#            </div>#}
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <label for="id_first_name" class="control-label ">
@@ -155,9 +157,9 @@
                 </label>
                 <select name="Member_Gender" id="id_Member_Gender" value="{{ object.Member_Gender }}" required=""
                         class="select form-control">
-                    <option value="" selected="">Select Gender</option>
-                    <option value="1">Male</option>
-                    <option value="2">Female</option>
+                    <option value="" {% if not object.Member_Gender %}selected{% endif %}>Select Gender</option>
+                    <option value="1" {% if object.Member_Gender == "1" %}selected{% endif %}>Male</option>
+                    <option value="2" {% if object.Member_Gender == "2" %}selected{% endif %}>Female</option>
 
                     <span class="fa fa-child form-control-feedback left" aria-hidden="true"></span>
                 </select>
@@ -172,20 +174,7 @@
                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
             </div>
 
-            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <label for="id_Center_Code" class="form-control-label  requiredField">
-                    Center code
-                </label>
-                <div class="">
-                    <select name="Center_Code" id="id_Center_Code" value="{{ object.Center_Code }}"
-                            class="select form-control">
-                        <option value="" selected=""></option>
-                        {% for c in form.fields.Center_Code.queryset %}
-                            <option value="{{ c.id|capfirst }}">{{ c.Center_Name|capfirst }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
+
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <label>
                     Status
@@ -201,30 +190,40 @@
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12">
                     <label class="" for="id_Is_Teacher">
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox"
-                                                                                                    class="flat"
-                                                                                                    name="Is_Teacher">
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;">
+                            <input type="checkbox"
+                                   class="flat"
+                                   name="Is_Teacher" {% if object.Is_Teacher == True %}
+                                   checked {% endif %}>
                         </div>
                         Teacher
                     </label>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12">
                     <label class="" for="id_Is_Student">
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox"
-                                                                                                    class="flat"
-                                                                                                    name="Is_Student">
+                        <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;">
+                            <input type="checkbox"
+                                   class="flat" name="Is_Student" {% if object.Is_Student == True %}
+                                   checked {% endif %}>
                         </div>
                         Student
                     </label>
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <label class="" for="id_Is_Parent">
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox"
-                                                                                                    class="flat"
-                                                                                                    name="Is_Parent">
-                        </div>
-                        Parent
-                    </label>
+                {#                <div class="col-md-3 col-sm-3 col-xs-12">#}
+                {#                    <label class="" for="id_Is_Parent">#}
+                {#                        <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;">#}
+                {#                            <input type="checkbox"#}
+                {#                                   class="flat"#}
+                {#                                   name="Is_Parent" {% if object.Is_Parent == True %}#}
+                {#                                   checked {% endif %}>#}
+                {#                        </div>#}
+                {#                        Parent#}
+                {#                    </label>#}
+                {#                </div>#}
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    <input type="hidden" name="Center_Code" id="id_Center_Code"
+                           value="{{ request.user.Center_Code.id }}"
+                           class="select form-control">
                 </div>
             </div>
 
@@ -241,6 +240,8 @@
         </form>
     </div>
     {% include 'WebApp/theme/alerts.html' %}
+
+
 
     <!-- <div class="out">
 
