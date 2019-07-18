@@ -1013,3 +1013,14 @@ class TodoTInfoDetailView(DetailView):
 class TodoTInfoUpdateView(UpdateView):
     model = TodoTInfo
     form_class = TodoTInfoForm
+
+
+def question(request):
+    return render(request, 'WebApp/question.html')
+
+
+def polls(request):
+    return render(request, 'WebApp/polls.html')
+
+def survey(request):
+    return render(request, 'WebApp/survey.html')

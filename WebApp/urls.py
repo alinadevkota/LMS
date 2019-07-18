@@ -455,3 +455,14 @@ urlpatterns += (
 urlpatterns += (
     path('calendar/', views.calendar, name="admin_calendar"),
 )
+
+urlpatterns += (
+    path('question/', views.question, name="questions"),
+   
+)
+urlpatterns += (
+    path('polls/', views.polls, name="polls"),
+)
+urlpatterns += (
+    path('survey/', views.survey, name="survey"),
+)
