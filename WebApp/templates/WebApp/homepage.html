@@ -26,11 +26,11 @@
                     <p></p>
                 </div>
             </div>
-             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats" id="total_tile">
                     <div class="icon"><img src="/static/images/total_icon.png" id="total_icon"></div>
                     <div class="count">{{ totalcount }}</div>
-                    <h3>Total Accounts</h3>
+                    <a href="{% url 'memberinfo_list' %}"><h3>Total Members</h3></a>
                     <p></p>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <div class="tile-stats" id="course_tile">
                     <div class="icon"><img src="/static/images/courses.png" id="course_icon"></div>
                     <div class="count">{{ coursecount }}</div>
-                    <h3>Courses</h3>
+                    <a href="{% url 'lectureinfo_list' %}"><h3>Courses</h3></a>
                     <p></p>
                 </div>
             </div>
@@ -279,10 +279,7 @@
                             <li class="list-group-item ">
 
                                 <div class="media-body">
-                                    <a href="app-take-course.html" class="text-subhead list-group-link">
-                                        {{ object.Lecture_Name }}
-
-                                    </a>
+                                    <a href="{{ object.get_absolute_url }}">{{ object.Lecture_Name }}</a>
                                 </div>
 
 
