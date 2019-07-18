@@ -121,7 +121,7 @@ def start(request):
 
 
     if request.user.is_authenticated:
-        course = LectureInfo.objects.order_by('Register_DateTime')[:3]
+        course = LectureInfo.objects.order_by('Register_DateTime')[:4]
         coursecount = LectureInfo.objects.count()
         studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
         teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
