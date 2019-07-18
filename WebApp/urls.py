@@ -9,7 +9,6 @@ from . import views
 
 router = routers.DefaultRouter()
 
-
 # router.register(r'profile', api.ProfileViewSet)
 router.register(r'centerinfo', api.CenterInfoViewSet)
 router.register(r'memberinfo', api.MemberInfoViewSet)
@@ -55,13 +54,12 @@ router.register(r'talkmessageread', api.TalkMessageReadViewSet)
 router.register(r'todoinfo', api.TodoInfoViewSet)
 router.register(r'todotinfo', api.TodoTInfoViewSet)
 
-
 urlpatterns = (
     # urls for Django Rest Framework API
     path('api/v1/', include(router.urls)),
     url(r'^$', views.start, name='start'),
     url(r'^login/$', views.login, {'template_name': 'registration/login.html',
-                             'redirect_authenticated_user': True}, name='login' ),
+                                   'redirect_authenticated_user': True}, name='login'),
 
     url(r'^.*logout/$', views.logout, {'template_name': 'registration/logout.html', 'next_page': '/'}, name='logout'),
 
@@ -82,18 +80,19 @@ urlpatterns = (
 
 urlpatterns += (
     # urls for Profile
-    path('profile/', views.ProfileView, name='user_profile'),
-
+    path('profile/', login_required(views.ProfileView), name='user_profile'),
+    path('change-password/', views.PasswordChangeView.as_view()),
+    path('change-password/<int:pk>/', views.change_password_others),
 )
 
 urlpatterns += (
     # urls for CenterInfo
-    path('centerinfo/', login_required( views.CenterInfoListView.as_view()), name='centerinfo_list'),
+    path('centerinfo/', login_required(views.CenterInfoListView.as_view()), name='centerinfo_list'),
     path('centerinfo/create/', login_required(views.CenterInfoCreateView.as_view()), name='centerinfo_create'),
     path('centerinfo/detail/<int:pk>/', views.CenterInfoDetailView.as_view(), name='centerinfo_detail'),
     path('centerinfo/update/<int:pk>/', views.CenterInfoUpdateView.as_view(), name='centerinfo_update'),
     path('centerinfo/delete/<int:pk>/', views.CenterInfoDeleteView, name='centerinfo_delete'),
-#url(r'^deletethread/(?P<pk>\d+)/$', views.thread_delete, name='smart_forum_thread_delete'),
+    # url(r'^deletethread/(?P<pk>\d+)/$', views.thread_delete, name='smart_forum_thread_delete'),
 
 )
 
@@ -125,25 +124,34 @@ urlpatterns += (
 urlpatterns += (
     # urls for ChapterContentsInfo
     path('chaptercontentsinfo/', views.ChapterContentsInfoListView.as_view(), name='chaptercontentsinfo_list'),
-    path('chaptercontentsinfo/create/', views.ChapterContentsInfoCreateView.as_view(), name='chaptercontentsinfo_create'),
-    path('chaptercontentsinfo/detail/<int:pk>/', views.ChapterContentsInfoDetailView.as_view(), name='chaptercontentsinfo_detail'),
-    path('chaptercontentsinfo/update/<int:pk>/', views.ChapterContentsInfoUpdateView.as_view(), name='chaptercontentsinfo_update'),
+    path('chaptercontentsinfo/create/', views.ChapterContentsInfoCreateView.as_view(),
+         name='chaptercontentsinfo_create'),
+    path('chaptercontentsinfo/detail/<int:pk>/', views.ChapterContentsInfoDetailView.as_view(),
+         name='chaptercontentsinfo_detail'),
+    path('chaptercontentsinfo/update/<int:pk>/', views.ChapterContentsInfoUpdateView.as_view(),
+         name='chaptercontentsinfo_update'),
 )
 
 urlpatterns += (
     # urls for ChapterMissonCheckCard
     path('chaptermissoncheckcard/', views.ChapterMissonCheckCardListView.as_view(), name='chaptermissoncheckcard_list'),
-    path('chaptermissoncheckcard/create/', views.ChapterMissonCheckCardCreateView.as_view(), name='chaptermissoncheckcard_create'),
-    path('chaptermissoncheckcard/detail/<int:pk>/', views.ChapterMissonCheckCardDetailView.as_view(), name='chaptermissoncheckcard_detail'),
-    path('chaptermissoncheckcard/update/<int:pk>/', views.ChapterMissonCheckCardUpdateView.as_view(), name='chaptermissoncheckcard_update'),
+    path('chaptermissoncheckcard/create/', views.ChapterMissonCheckCardCreateView.as_view(),
+         name='chaptermissoncheckcard_create'),
+    path('chaptermissoncheckcard/detail/<int:pk>/', views.ChapterMissonCheckCardDetailView.as_view(),
+         name='chaptermissoncheckcard_detail'),
+    path('chaptermissoncheckcard/update/<int:pk>/', views.ChapterMissonCheckCardUpdateView.as_view(),
+         name='chaptermissoncheckcard_update'),
 )
 
 urlpatterns += (
     # urls for ChapterMissonCheckItem
     path('chaptermissoncheckitem/', views.ChapterMissonCheckItemListView.as_view(), name='chaptermissoncheckitem_list'),
-    path('chaptermissoncheckitem/create/', views.ChapterMissonCheckItemCreateView.as_view(), name='chaptermissoncheckitem_create'),
-    path('chaptermissoncheckitem/detail/<int:pk>/', views.ChapterMissonCheckItemDetailView.as_view(), name='chaptermissoncheckitem_detail'),
-    path('chaptermissoncheckitem/update/<int:pk>/', views.ChapterMissonCheckItemUpdateView.as_view(), name='chaptermissoncheckitem_update'),
+    path('chaptermissoncheckitem/create/', views.ChapterMissonCheckItemCreateView.as_view(),
+         name='chaptermissoncheckitem_create'),
+    path('chaptermissoncheckitem/detail/<int:pk>/', views.ChapterMissonCheckItemDetailView.as_view(),
+         name='chaptermissoncheckitem_detail'),
+    path('chaptermissoncheckitem/update/<int:pk>/', views.ChapterMissonCheckItemUpdateView.as_view(),
+         name='chaptermissoncheckitem_update'),
 )
 
 urlpatterns += (
@@ -174,16 +182,20 @@ urlpatterns += (
     # urls for AssignHomeworkInfo
     path('assignhomeworkinfo/', views.AssignHomeworkInfoListView.as_view(), name='assignhomeworkinfo_list'),
     path('assignhomeworkinfo/create/', views.AssignHomeworkInfoCreateView.as_view(), name='assignhomeworkinfo_create'),
-    path('assignhomeworkinfo/detail/<int:pk>/', views.AssignHomeworkInfoDetailView.as_view(), name='assignhomeworkinfo_detail'),
-    path('assignhomeworkinfo/update/<int:pk>/', views.AssignHomeworkInfoUpdateView.as_view(), name='assignhomeworkinfo_update'),
+    path('assignhomeworkinfo/detail/<int:pk>/', views.AssignHomeworkInfoDetailView.as_view(),
+         name='assignhomeworkinfo_detail'),
+    path('assignhomeworkinfo/update/<int:pk>/', views.AssignHomeworkInfoUpdateView.as_view(),
+         name='assignhomeworkinfo_update'),
 )
 
 urlpatterns += (
     # urls for AssignQuestionInfo
     path('assignquestioninfo/', views.AssignQuestionInfoListView.as_view(), name='assignquestioninfo_list'),
     path('assignquestioninfo/create/', views.AssignQuestionInfoCreateView.as_view(), name='assignquestioninfo_create'),
-    path('assignquestioninfo/detail/<int:pk>/', views.AssignQuestionInfoDetailView.as_view(), name='assignquestioninfo_detail'),
-    path('assignquestioninfo/update/<int:pk>/', views.AssignQuestionInfoUpdateView.as_view(), name='assignquestioninfo_update'),
+    path('assignquestioninfo/detail/<int:pk>/', views.AssignQuestionInfoDetailView.as_view(),
+         name='assignquestioninfo_detail'),
+    path('assignquestioninfo/update/<int:pk>/', views.AssignQuestionInfoUpdateView.as_view(),
+         name='assignquestioninfo_update'),
 )
 
 urlpatterns += (
@@ -198,8 +210,10 @@ urlpatterns += (
     # urls for BoardContentInfo
     path('boardcontentinfo/', views.BoardContentInfoListView.as_view(), name='boardcontentinfo_list'),
     path('boardcontentinfo/create/', views.BoardContentInfoCreateView.as_view(), name='boardcontentinfo_create'),
-    path('boardcontentinfo/detail/<int:pk>/', views.BoardContentInfoDetailView.as_view(), name='boardcontentinfo_detail'),
-    path('boardcontentinfo/update/<int:pk>/', views.BoardContentInfoUpdateView.as_view(), name='boardcontentinfo_update'),
+    path('boardcontentinfo/detail/<int:pk>/', views.BoardContentInfoDetailView.as_view(),
+         name='boardcontentinfo_detail'),
+    path('boardcontentinfo/update/<int:pk>/', views.BoardContentInfoUpdateView.as_view(),
+         name='boardcontentinfo_update'),
 )
 
 urlpatterns += (
@@ -213,9 +227,12 @@ urlpatterns += (
 urlpatterns += (
     # urls for ChapterContentMedia
     path('chaptercontentmedia/', views.ChapterContentMediaListView.as_view(), name='chaptercontentmedia_list'),
-    path('chaptercontentmedia/create/', views.ChapterContentMediaCreateView.as_view(), name='chaptercontentmedia_create'),
-    path('chaptercontentmedia/detail/<int:pk>/', views.ChapterContentMediaDetailView.as_view(), name='chaptercontentmedia_detail'),
-    path('chaptercontentmedia/update/<int:pk>/', views.ChapterContentMediaUpdateView.as_view(), name='chaptercontentmedia_update'),
+    path('chaptercontentmedia/create/', views.ChapterContentMediaCreateView.as_view(),
+         name='chaptercontentmedia_create'),
+    path('chaptercontentmedia/detail/<int:pk>/', views.ChapterContentMediaDetailView.as_view(),
+         name='chaptercontentmedia_detail'),
+    path('chaptercontentmedia/update/<int:pk>/', views.ChapterContentMediaUpdateView.as_view(),
+         name='chaptercontentmedia_update'),
 )
 
 urlpatterns += (
@@ -230,8 +247,10 @@ urlpatterns += (
     # urls for ChapterMissonCheck
     path('chaptermissoncheck/', views.ChapterMissonCheckListView.as_view(), name='chaptermissoncheck_list'),
     path('chaptermissoncheck/create/', views.ChapterMissonCheckCreateView.as_view(), name='chaptermissoncheck_create'),
-    path('chaptermissoncheck/detail/<int:pk>/', views.ChapterMissonCheckDetailView.as_view(), name='chaptermissoncheck_detail'),
-    path('chaptermissoncheck/update/<int:pk>/', views.ChapterMissonCheckUpdateView.as_view(), name='chaptermissoncheck_update'),
+    path('chaptermissoncheck/detail/<int:pk>/', views.ChapterMissonCheckDetailView.as_view(),
+         name='chaptermissoncheck_detail'),
+    path('chaptermissoncheck/update/<int:pk>/', views.ChapterMissonCheckUpdateView.as_view(),
+         name='chaptermissoncheck_update'),
 )
 
 urlpatterns += (
@@ -436,6 +455,7 @@ urlpatterns += (
 urlpatterns += (
     path('calendar/', views.calendar, name="admin_calendar"),
 )
+<<<<<<< HEAD
 
 urlpatterns += (
     path('question/', views.question, name="questions"),
@@ -447,3 +467,5 @@ urlpatterns += (
 urlpatterns += (
     path('survey/', views.survey, name="survey"),
 )
+=======
+>>>>>>> a2df03cb792cc32990b7a788b44047c9899753dc

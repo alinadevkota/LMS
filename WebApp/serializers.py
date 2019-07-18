@@ -62,27 +62,18 @@ class LectureInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.LectureInfo
         fields = (
-            'pk', 
-            'lecture_name', 
-            'lecture_teacher', 
-            'lecture_cover', 
-            'lecture_cover_file', 
-            'lecture_level', 
-            'lecture_info', 
-            'teacher', 
-            'use_flag', 
-            'reg_date', 
-            'reg_time', 
-            'reg_agent', 
-            'udt_date', 
-            'udt_time', 
-            'udt_agent', 
-            'lecture_certification', 
-            'lecture_provider', 
-            'cert_crit_prog', 
-            'cert_crit_post', 
-            'cert_crit_ubt', 
-            'cert_crit_issue', 
+            'pk',
+            'Lecture_Name',
+            'Teacher_Code',
+            'Lecture_Cover_File',
+            'Lecture_Level',
+            'Lecture_Description',
+            'Lecture_Level',
+            'Use_Flag',
+            'Center_Code',
+            'Register_Agent',
+            'Lecture_Provider',
+
         )
 
 

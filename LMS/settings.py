@@ -143,6 +143,7 @@ INSTALLED_APPS += [
     'channels'
 ]
 
+INSTALLED_APPS += ("django_createsuperuserwithpassword",)
 
 STATICFILES_DIRS = (
 

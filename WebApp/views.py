@@ -1,11 +1,18 @@
-from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.views import LogoutView, LoginView
+from django.contrib import messages
+from django.contrib.auth import REDIRECT_FIELD_NAME, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.views import LogoutView, LoginView, PasswordContextMixin
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.utils.translation import gettext as _
 from django.views import generic
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
+from django.views.generic.edit import FormView
 
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
     ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, \
@@ -15,7 +22,7 @@ from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterCont
     MessageInfoForm, OmrAnswerInfoForm, OmrAssignInfoForm, OmrExampleInfoForm, QAnswerInfoForm, QAnswerLogForm, \
     QExampleInfoForm, QuestionInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, ScheduleInfoForm, TalkMemberForm, \
     TalkRoomForm, TalkMessageForm, TalkMessageReadForm, TodoInfoForm, TodoTInfoForm, UserUpdateForm, UserRegisterForm, \
-    MemberInfoForm
+    MemberInfoForm, ChangeOthersPasswordForm
 from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
     ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
@@ -112,8 +119,21 @@ def start(request):
         if request.user.Is_CenterAdmin:
             return redirect('/admin/')
 
+
+    if request.user.is_authenticated:
+        course = LectureInfo.objects.order_by('Register_DateTime')[:4]
+        coursecount = LectureInfo.objects.count()
+        studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
+        teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
+        parentcount = MemberInfo.objects.filter(Is_Parent=True, Center_Code=request.user.Center_Code).count
+        totalcount = MemberInfo.objects.filter(Center_Code=request.user.Center_Code).count
+
     # return HttpResponse("default home")
-    return render(request, "WebApp/homepage.html")
+        return render(request, "WebApp/homepage.html",
+                      {'course': course, 'coursecount': coursecount, 'studentcount': studentcount, 'teachercount': teachercount,
+                       'parentcount': parentcount, 'totalcount': totalcount})
+
+    return render(request,"WebApp/splash_page.html")
 
 
 def editprofile(request):
@@ -147,6 +167,30 @@ class register(generic.CreateView):
     form_class = UserRegisterForm
     success_url = reverse_lazy('loginsuccess')
     template_name = 'registration/register.html'
+
+
+def change_password_others(request, pk):
+    if request.method == 'POST':
+        form = ChangeOthersPasswordForm(request.POST)
+        if form.is_valid():
+            # user = form.save()
+            user  = MemberInfo.objects.get(pk=pk)
+            print(form.cleaned_data.get("password"), "  of user", user.username )
+            user.set_password(form.cleaned_data.get("password"))
+            user.save()
+
+            # update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+
+
+            return redirect('user_profile')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = ChangeOthersPasswordForm()
+    return render(request, 'registration/change_password.html', {
+        'form': form
+    })
 
 
 def loginsuccess(request):
@@ -186,6 +230,38 @@ class MemberInfoListView(ListView):
 class MemberInfoCreateView(CreateView):
     model = MemberInfo
     form_class = MemberInfoForm
+
+
+# ________________________________________________________
+
+
+class PasswordChangeView(PasswordContextMixin, FormView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('user_profile')
+    template_name = 'registration/password_change_form.html'
+    title = _('Password change')
+
+    @method_decorator(sensitive_post_parameters())
+    @method_decorator(csrf_protect)
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        form.save()
+        # Updating the password logs out all other sessions for the user
+        # except the current one.
+        update_session_auth_hash(self.request, form.user)
+
+        messages.success(self.request,
+                         'Your password was successfully updated! You can login with your new credentials')
+
+        return super().form_valid(form)
 
 
 class MemberInfoDetailView(DetailView):

@@ -4,215 +4,78 @@
 {% block content %}
 
 
-<ol aria-label="breadcrumb" class="breadcrumb navClass">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'lectureinfo_list' %}">Lecture</a></li>
-    <li class="breadcrumb-item active" aria-current="page">
-        {% if '/lectureinfo/create/' == request.path %}
-        Create New Lecture
-        {% else %}
-        Edit Lecture Info
-        {% endif %}
-    </li>
-</ol>
+    <ol aria-label="breadcrumb" class="breadcrumb navClass">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="{% url 'lectureinfo_list' %}">Lecture</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+            {% if '/lectureinfo/create/' == request.path %}
+                Create New Lecture
+            {% else %}
+                Edit Lecture Info
+            {% endif %}
+        </li>
+    </ol>
 
-<div class="headerDiv">
-    <h2 class="infoFormHeader">
-        {% if '/lectureinfo/create/' == request.path %}
-        Create New Lecture
-        {% else %}
-        Edit Lecture Info
-        {% endif %}
-    </h2>
-    <hr class="header_hr">
-</div>
-
-{{form|crispy}}
-
-<form method="post" id="demo-form2" data-parsley-validate="">
-    {% csrf_token %}
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_name" class="control-label ">
-            Lecture Name
-        </label>
-        <input type="text" name="lecture_name" value="{{ object.lecture_name}}" id="id_lecture_name" required="required"
-            class="form-control has-feedback-left" placeholder="Lecture Name">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_teacher" class="control-label ">
-            Lecture Teacher
-        </label>
-        <input type="number" name="lecture_teacher" value="{{ object.lecture_teacher}}" id="id_lecture_teacher"
-            required="required" class="form-control has-feedback-left" placeholder="Lecture Teacher">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+    <div class="headerDiv">
+        <h2 class="infoFormHeader">
+            {% if '/lectureinfo/create/' == request.path %}
+                Create New Lecture
+            {% else %}
+                Edit Lecture Info
+            {% endif %}
+        </h2>
+        <hr class="header_hr">
     </div>
 
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_cover" class="control-label ">
-            Lecture Cover
-        </label>
-        <input type="text" name="lecture_cover" value="{{ object.lecture_cover}}" id="id_lecture_cover"
-            required="required" class="form-control has-feedback-left" placeholder="Lecture Cover">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_cover_file" class="control-label ">
-            Lecture Cover File
-        </label>
-        <input type="file" name="lecture_cover_file" value="{{ object.lecture_cover_file}}" id="id_lecture_cover_file"
-            required="required" class="form-control has-feedback-left" placeholder="Lecture Cover File">
-        <span class="fa fa-file-pdf-o form-control-feedback left" aria-hidden="true"></span>
-    </div>
-
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_level" class="control-label ">
-            Lecture Level
-        </label>
-        <input type="number" name="lecture_level" value="{{ object.lecture_level}}" id="id_lecture_level"
-            required="required" class="form-control has-feedback-left" placeholder="Lecture Level">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_info" class="control-label ">
-            Lecture Information
-        </label>
-        <textarea name="lecture_info" id="id_lecture_info" value="{{ object.lecture_info}}" required="required"
-            class="form-control has-feedback right" placeholder="Lecture Information"></textarea>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_teacher" class="control-label ">
-            Teacher
-        </label>
-        <input type="text" name="teacher" value="{{ object.teacher}}" id="id_teacher" required="required"
-            class="form-control has-feedback-left" placeholder="Teacher">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-
-    </div>
-    <!-- <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <label for="id_lecture_cover_file" class="control-label ">
-                          Use Flag
-                </label>
-                <input type="text" name="use_flag" id="id_use_flag" required="required"  class="form-control has-feedback right"  placeholder="Use Flag">
-                <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span> -->
-    <!-- {% for error in form.use_flag.errors %}
-                    <p id="error_1_id_Register_DateTime" class="has-error control-label"><strong>
-          
-                        {{ error|escape }}
-        
-                                             </strong></p>
-           
-
-                {% endfor %} -->
-    <!-- </div> -->
-
-
-
-
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_reg_agent" class="control-label ">
-            Registration Agent
-        </label>
-        <input type="text" name="reg_agent" value="{{ object.reg_agent}}" id="id_reg_agent" required="required"
-            class="form-control has-feedback-left" placeholder="Registration Agent">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-
-    </div>
-
-
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_udt_agent" class="control-label ">
-            Updated Agent
-        </label>
-        <input type="text" name="udt_agent" value="{{ object.udt_agent}}" id="id_udt_agent" required="required"
-            class="form-control has-feedback-left" placeholder="Updated Agent">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_certification" class="control-label ">
-            Lecture Certification
-        </label>
-        <input type="text" name="lecture_certification" value="{{ object.lecture_certification}}"
-            id="id_lecture_certification" required="required" class="form-control has-feedback-left"
-            placeholder="Lecture Certification">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_lecture_provider" class="control-label ">
-            Lecture Provider
-        </label>
-        <input type="text" name="lecture_provider" value="{{ object.lecture_provider}}" id="id_lecture_provider"
-            required="required" class="form-control has-feedback-left" placeholder="Lecture Provider">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_cert_crit_prog" class="control-label ">
-            cert_crit_prog
-        </label>
-        <input type="number" name="cert_crit_prog" value="{{ object.cert_crit_prog}}" id="id_cert_crit_prog"
-            required="required" class="form-control has-feedback-left" placeholder="cert_crit_prog">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_cert_crit_post" class="control-label ">
-            cert_crit_post
-        </label>
-        <input type="number" name="cert_crit_post" value="{{ object.cert_crit_post}}" id="id_cert_crit_post"
-            required="required" class="form-control has-feedback-left" placeholder="cert_crit_post">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_cert_crit_ubt" class="control-label ">
-            cert_crit_ubt
-        </label>
-        <input type="number" name="cert_crit_ubt" value="{{ object.cert_crit_ubt}}" id="id_cert_crit_ubt"
-            required="required" class="form-control has-feedback-left" placeholder="cert_crit_ubt">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_cert_crit_issue" class="control-label ">
-            cert_crit_issue
-        </label>
-        <input type="number" name="cert_crit_issue" value="{{ object.cert_crit_issue}}" id="id_cert_crit_issue"
-            required="required" class="form-control has-feedback-left" placeholder="cert_crit_issue">
-        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-
-        <label for="id_Center_Code" class="form-control-label  requiredField">
-            Center code
-        </label>
-        <div class=""> <select name="Center_Code" id="id_Center_Code" class="select form-control" required="required"
-                value="{{ object.Center_Code}}">
-                <option value="" selected=""></option>
-                {% for c in form.fields.Center_Code.queryset %}
-                <option value="{{ c.id|capfirst }}">{{ c.Center_Name|capfirst }}</option>
-                {% endfor %}
-
-            </select>
+    <form method="POST" id="FormID">
+        {% csrf_token %}
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            {{ form.Lecture_Name|as_crispy_field }}
         </div>
-    </div>
-    <div class="col-md-12 form-group has-feedback">
-        <label>
-            Status
-        </label>
-        <input type="checkbox" id="id_Use_Flag" class="js-switch" required="required" name="Use_Flag"
-            {% if object.Use_Flag == True %} checked {% endif %}>
-    </div>
-    <div class="submitButton  col-md-12">
-        <button class="btn btn-success" type="submit">Submit</button>
-    </div>
-</form>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <div id="div_id_Lecture_Description" class="form-group">
+                <label for="id_Lecture_Description" class="control-label ">
+                    Lecture Description
+                </label>
+                <div class="controls ">
+                    <textarea name="Lecture_Description" cols="40" rows="1" id="id_Lecture_Description"
+                              class="textarea form-control"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            {{ form.Lecture_Cover_File|as_crispy_field }}
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            {{ form.Lecture_Level|as_crispy_field }}
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            {{ form.Register_Agent|as_crispy_field }}
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            {{ form.Lecture_Provider|as_crispy_field }}
+        </div>
 
-<!-- <div class="out">
-    {{form|crispy}}
-</div> -->
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            {{ form.Teacher_Code|as_crispy_field }}
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            {{ form.Use_Flag|as_crispy_field }}
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <input type="hidden" name="Center_Code" id="id_Center_Code" value="{{ request.user.Center_Code.id }}"
+                   class="select form-control">
+        </div>
+
+
+        <div class="submitButton  col-md-12">
+            <button class="btn btn-success" type="submit">Submit</button>
+        </div>
+
+
+    </form>
+
+
 
 
 

@@ -402,13 +402,13 @@ html , body {
     margin-left: 15%;
     z-index: 1000;
     position: inherit;
-    margin-top: 20px;
+    margin-top: 10px;
     border: 1px solid rgba(52, 73, 94, 0.44);
     padding: 4px
 }
 
 .profile_info {
-    padding: 25px 10px 10px;
+    padding: 10px 10px 10px;
     width: 65%;
     float: left
 }
@@ -1312,7 +1312,7 @@ h2 {
 }
 
 .x_title span {
-    color: #BDBDBD
+    color: white;
 }
 
 .x_content {
@@ -2103,8 +2103,8 @@ span.right {
 }
 
 .dashboard_graph {
-    background: mintcream;
-    padding: 7px 10px
+    background: white;
+    margin: 5px;
 }
 
 .dashboard_graph .col-md-9, .dashboard_graph .col-md-3 {
@@ -2245,9 +2245,26 @@ h4.graph_title {
     width: 50px;
 }
 
+.splashDiv{
+    width:100%;
+    height:80vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#ubl_logo_orange{
+   width:40%;
+}
+
+
 #student_icon{
     margin-bottom: -10px;
 }
+
+
 /* custom tile colors for admin dashboard -rajav */
 #teacher_tile{
     background: rgb(55, 144, 228);
@@ -2257,8 +2274,8 @@ h4.graph_title {
     background: rgb(228, 72, 55);
 }
 
-#parent_tile{
-    background: rgb(218, 214, 3);
+#course_tile{
+    background: #ffca4f;
 }
 
 #adminMessageContainer{
@@ -2436,7 +2453,9 @@ button, .buttons, .btn, .modal-footer .btn+.btn {
 
 .btn-group-vertical .btn, .btn-group .btn {
     margin-bottom: 0;
-    margin-right: 0
+    margin-right: 0;
+    padding-left: 14px;
+    padding-right: 14px;
 }
 
 .mail_list_column {
@@ -2613,8 +2632,8 @@ span.section {
 }
 
 .form-control {
-    border-radius: 0;
-    width: 100%
+    border-radius: 5px;
+
 }
 
 .form-horizontal .control-label {
@@ -3476,11 +3495,11 @@ ul.messages li, .tasks li {
 }
 
 ul.messages li img.avatar, img.avatar {
-    height: 32px;
-    width: 32px;
+    height: 50px;
+    width: 50px;
     float: left;
     display: inline-block;
-    border-radius: 2px;
+    border-radius: 50%;
     padding: 2px;
     background: #f7f7f7;
     border: 1px solid #e6e6e6
@@ -5489,24 +5508,89 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 .courseTextColor{
     color: #0a0a0a;
 }
+.courseimagediv {
+    position: relative;
+
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+
+.courseimage {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.courseimagediv:hover .courseimage {
+    opacity: 0.7;
+}
+.courseimagediv:hover .middle{
+    opacity: 1;
+}
+.coursetext{
+    background-color: mediumseagreen;
+    color: white;
+    font-size: 30px;
+    padding: 16px 32px;
+    font-weight: 900;
+}
+.courseextend:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(143, 204, 234, 1);
+}
 
 
 
 
 /* Course_detail end*/
  #ubl_logo{
+
      height: 50px;
      width: 50px;
  }
  #LMS{
-     margin-left: 30px;
+     margin-left: 20px;
+     padding-top: 20px;
  }
 
 
  #calendarDivAdmin{
      margin-bottom: 10px;
-     
-
      height: 65vh;
      overflow: auto;
  }
+
+ /*teacher lecturelist*/
+.cardgrid {
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+/*  teacher lecturelist end*/
+
+#FormID{
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    background: #f5f5f5;
+    margin-bottom: 10px;
+
+}
