@@ -5123,33 +5123,23 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-
     $(".discussions").css({ 'display': 'block' })
     $('#fa-comment').on('click', function () {
         $(".discussions").show(300);
         $(".users").hide();
         $(".notification").hide();
-
     });
-
     $('#fa-users').on('click', function () {
         $('.users').show(300);
         $(".discussions").hide();
-
         // Animation complete.
         $(".notification").hide();
-
-
     });
-
-
     $('#fa-bell').on('click', function () {
         $('.notification').show(300);
         $(".discussions").hide();
         $(".users").hide();
     });
-
-
 });
 
 $(document).ready(function () {
@@ -5158,19 +5148,13 @@ $(document).ready(function () {
         $('.listView').show(300);
         //$(this).css('color', 'white');
         $('.gridView').hide();
-
     });
-
-
     $('.fa-th-large').on('click', function () {
         $('.gridView').show(300)
         // $(this).css('color', 'white');
         $('.listView').hide();
     });
 });
-
-
-
 
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
@@ -5214,3 +5198,25 @@ function filterFunction() {
     }
 }
 
+$(document).ready(function () {
+    // $(".discussions").css({ 'display': 'block' })
+    $('#submitButton').on('click', function () {
+        $("#progressResult").css({ 'display': 'block' })
+    });
+});
+
+$(function () {
+    //----- OPEN
+    $('[data-popup-open]').on('click', function (e) {
+        var targeted_popup_class = jQuery(this).attr('data-popup-open');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+        e.preventDefault();
+    });
+
+    //----- CLOSE
+    $('[data-popup-close]').on('click', function (e) {
+        var targeted_popup_class = jQuery(this).attr('data-popup-close');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+        e.preventDefault();
+    });
+});

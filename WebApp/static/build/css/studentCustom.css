@@ -1,6 +1,4 @@
-
 /* =========================== Courses List ============================== */
-
 form{
     display: inline-flex;
     width:60%;
@@ -17,13 +15,11 @@ input[type=search]{
     padding: 10px;
     border: none;
     border-radius: 0.3em 0 0 0.3em;
-
 }
 
 .coursesSearchBar .btn{
     margin-left:5px;   
 }
-
 
 .coursesIcons .fa{
     font-size: 25px !important;
@@ -121,11 +117,9 @@ input[type=search]{
    
 }
 
-
 .col-md-2{
     padding-left: 12%;
 }
-
 
 .col-md-10{
     padding-left: 12%;
@@ -245,3 +239,293 @@ input[type=search]{
   
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block;}
+
+   /* ======================= POLLS ======================== */
+
+#mainSurveyPage{
+    background-color: #f3f3f3;
+    margin-top: 50px;
+    margin-left:-150px;
+    padding-bottom: 80px;
+    width: auto;
+    height: auto;   
+    padding-left: 40px; 
+}
+
+.pollsContainer{
+    border-radius: 5px;
+    background-color: #e3e3e3 ;
+    padding: 5px 50px;
+    margin-top: 100px;
+    margin-left: -150px;
+}
+.bs-chart-container strong {
+    font-weight: 400;
+    margin-bottom: 5px;
+    display: block;
+    overflow: hidden;   
+}
+.progress{
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.pollsContainer h2 {
+    font-size: 3em;
+    line-height: 1.285em;
+    font-weight: 500;
+    color: #1ebeb4;
+}
+form{
+    word-spacing: 0.2em;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+.bs-chart-container{
+    margin-left: 2%;
+}
+.bs-chart-container h4{
+    padding-bottom: 10px;
+}
+.surveyResults{
+    padding-left: 3%;
+}
+.pollButtons .btn-info{
+    background-color:#354254;
+    border: none;
+    margin-top:5px;
+    margin-bottom: 20px;
+    transition-property:  background-color;
+    transition-duration: 0.5s;
+}
+
+.pollButtons .btn-info:hover{
+    background-color:#f2f2f2;
+    color: #354254;
+}
+
+.questionLists .pollButtons {
+   width:100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+
+.questionLists {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 1rem;
+    margin-top: 20px;
+}
+
+@media (min-width: 40rem) {
+    .questionLists {
+      width: 50%;
+  }
+}
+  
+@media (min-width: 56rem) {
+    .questionLists {
+      width: 33.3333%;
+  }
+}
+
+.categoryContainer .card{
+    margin-top: 30px;
+    float: center;
+}
+
+.categoryContainer .card-body{
+    text-align: center;  
+    
+}
+.categoryContainer .card-title{
+    padding-top: 25px;
+}
+.categoryContainer .card-text{
+    padding-top: 20px; 
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 40px;
+    align-items: center;    
+}
+
+.btn-success{
+    background-color: #5BB75B;
+    float: right;
+    height: 25px;
+    align-items: center;
+    padding-top: 2px;
+}
+.btn-success a{
+    color: white;
+}
+
+.categoryContainer .card-text:hover{
+    background-color: #f5f5f5;
+    text-align: center;
+    
+}
+.btn-default.btn-on.active{
+    background-color: #5BB75B;
+    color: white;
+}
+.btn-default.btn-off.active{
+    background-color: #DA4F49;
+    color: white;
+}
+.searchBarSurvey{
+    margin-top: 40px;
+}
+.searchBarSurvey .btn-primary{
+    margin-left:5px;
+}
+
+.searchBarSurvey input[type=search]{
+    background-color: #e3e3e3;
+    width: 40rem;
+    height: 35px;
+    border: none;
+    border-radius: 0.3em 0 0 0.3em;
+}
+.hR{
+    width: 100rem;
+    height: 2px;
+    display: flex;
+    flex-direction: auto;
+    background-color: white;
+}
+.btn-group{
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+/* ===================================SURVEY FORM================================ */
+
+.index-form{
+    width: 100%;
+    height: auto;
+    margin-left: -125px;
+    margin-top: -100px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    opacity: 1;
+}
+
+.form-group .form-control{
+    border-radius: 5px;
+    background: transparent;
+    min-width: 40rem;
+  
+}
+.label_inputs{
+    
+    padding: 20px;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+}
+.questionContainer{
+    
+    padding: 20px;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+}
+.queContainer{
+    display: flex;
+    justify-items: auto;
+}
+.queContainer .form-control{
+    min-width: 40rem;
+}
+.questionContainer .btn-success{
+    width: auto;
+    height: 35px;
+    background-color: #5BB75B;
+    align-content: center;
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
+#switchButtons{
+    margin-bottom: -20px;
+}
+#addButtons {
+    color: white;    
+}
+#option_Button{
+    display: flex;
+    margin-bottom: 10px;
+}
+#option_Button .btn-success{
+    margin-top: 0px;
+    margin-left: 10px;
+}
+.index-form .btn-info{
+    margin-top: 10px;
+    font-size: 18px;
+    width: 120px;
+    margin-left: 110px;
+    margin-bottom: 20px;   
+}
+.index-form .btn-warning{
+    margin-top: 10px;
+    font-size: 18px;
+    width: 140px;
+    margin-bottom: 20px;   
+}
+
+
+/* Outer */
+.popup {
+	width:100%;
+    height:100%;
+	display:none;
+	position:fixed;
+	top:0px;
+	left:0px;
+	background:rgba(0,0,0,0.75);
+}
+
+/* Inner */
+.popup-inner {
+	max-width:600px;
+    width:60%;
+    height: 90%;
+	padding:40px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	-webkit-transform:translate(-50%, -50%);
+	transform:translate(-50%, -50%);
+	box-shadow:0px 2px 6px rgba(0,0,0,1);
+	border-radius:3px;
+	background:#fff;
+}
+
+/* Close Button */
+.popup-close {
+	width:30px;
+	height:30px;
+	padding-top:4px;
+	display:inline-block;
+	position:absolute;
+	top:0px;
+	right:0px;
+	transition:ease 0.25s all;
+	-webkit-transform:translate(50%, -50%);
+	transform:translate(50%, -50%);
+	border-radius:1000px;
+	background:rgba(0,0,0,0.8);
+	font-family:Arial, Sans-Serif;
+	font-size:20px;
+	text-align:center;
+	line-height:100%;
+	color:#fff;
+}
+
+.popup-close:hover {
+	-webkit-transform:translate(50%, -50%) rotate(180deg);
+	transform:translate(50%, -50%) rotate(180deg);
+	background:rgba(0,0,0,1);
+	text-decoration:none;
+}
