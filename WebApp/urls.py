@@ -455,7 +455,6 @@ urlpatterns += (
 urlpatterns += (
     path('calendar/', views.calendar, name="admin_calendar"),
 )
-<<<<<<< HEAD
 
 urlpatterns += (
     path('question/', views.question, name="questions"),
@@ -467,5 +466,3 @@ urlpatterns += (
 urlpatterns += (
     path('survey/', views.survey, name="survey"),
 )
-=======
->>>>>>> a2df03cb792cc32990b7a788b44047c9899753dc
