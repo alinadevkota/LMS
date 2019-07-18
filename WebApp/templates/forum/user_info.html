@@ -28,20 +28,22 @@
                             </a>
 
                             <div class="topic_meta text-light text-caption">
-                                <p class="topic-meta">
-                                    &nbsp; Topic:
-                                    <a href="{% url 'forum:topic' thread.topic.pk %}">
-                                        <span class="label label-success meta-topic">
-                                            {{ thread.topic.title }}
+                                <h5>
+                                    <p class="topic-meta">
+                                        &nbsp; Topic:
+                                        <a href="{% url 'forum:topic' thread.topic.pk %}">
+                                            <span class="label label-success meta-topic">
+                                                {{ thread.topic.title }}
+                                            </span>
+                                        </a>
+                                        <span class="meta meta-pub_date"> posted
+                                            {{ thread.pub_date | naturaltime }}
+                                        </span> |
+                                        <span class="meta meta-last_replied hidden-xs">
+                                            {% trans "Last Replied" %}: {{ thread.last_replied | naturaltime }}
                                         </span>
-                                    </a>
-                                    <span class="meta meta-pub_date"> posted
-                                        {{ thread.pub_date | naturaltime }}
-                                    </span> |
-                                    <span class="meta meta-last_replied hidden-xs">
-                                        {% trans "Last Replied" %}: {{ thread.last_replied | naturaltime }}
-                                    </span>
-                                </p>
+                                    </p>
+                                </h5>
                             </div>
                         </div>
 
