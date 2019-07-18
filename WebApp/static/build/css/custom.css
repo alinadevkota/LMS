@@ -5594,3 +5594,23 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     margin-bottom: 10px;
 
 }
+
+#avatarDiv{
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#editButton{
+    margin-left: 30%;
+}
+#changePW{
+    margin-left: 27%;
+}
+
+
+
+

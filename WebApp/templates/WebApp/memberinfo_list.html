@@ -3,29 +3,29 @@
 {% block content %}
 
 
-<div class="memberInfoListClass">
-    <ol aria-label="breadcrumb" class="breadcrumb navClass">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Members</li>
-    </ol>
+    <div class="memberInfoListClass">
+        <ol aria-label="breadcrumb" class="breadcrumb navClass">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Members</li>
+        </ol>
 
-    <nav id="navbar_parent" class="navbar navbar-light" style="background-color: grey">
-        <ul class="nav navbar-nav navbar-center member-list">
-            <li><a class="navbar-brand" id="teacher_button" href="#">Teacher</a></li>
-            <li><a class="navbar-brand" id="student_button" href="#">Student</a></li>
+        <nav id="navbar_parent" class="navbar navbar-light" style="background-color: grey">
+            <ul class="nav navbar-nav navbar-center member-list">
+                <li><a class="navbar-brand" id="teacher_button" href="#">Teacher</a></li>
+                <li><a class="navbar-brand" id="student_button" href="#">Student</a></li>
 
-        </ul>
-    </nav>
-    <hr class="header_hr">
-    <h2 class="tableHeader">List of Members</h2>
-    <hr class="header_hr">
-    <div class="btn-createnew">
-        <a class="btn btn-success" href="{% url 'memberinfo_create' %}">Create new Member</a>
-    </div>
-    <br><br><br>
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered bg-white nowrap">
-            <thead class="thead-light bg-primary">
+            </ul>
+        </nav>
+        <hr class="header_hr">
+        <h2 class="tableHeader">List of Members</h2>
+        <hr class="header_hr">
+        <div class="btn-createnew">
+            <a class="btn btn-success" href="{% url 'memberinfo_create' %}">Create new Member</a>
+        </div>
+        <br><br><br>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered bg-white nowrap">
+                <thead class="thead-light bg-primary">
                 <tr class="tableTitleRow">
                     <td>ID</td>
                     <!-- <td>Link</td> -->
@@ -42,88 +42,90 @@
                     <td>Gender</td>
                     <td>Student</td>
                     <td>Teacher</td>
-{#                    <td>Parent</td>#}
+                    {#                    <td>Parent</td>#}
                     <!-- <td>Use_Flag</td>
             <td>Register_DateTime</td>
             <td>Register_Agent</td>
             <td>Member_Memo</td> -->
                 </tr>
-            </thead>
-            {% for object in object_list %}
+                </thead>
+                {% for object in object_list %}
 
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ object.Member_ID }}</td>
-                <!-- <td>{{ object.username }}</td> -->
-                <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
-                <!-- <td>{{ object.password }}</td> -->
-                <td>{{ object.first_name }}</td>
-                <td>{{ object.last_name }}</td>
-                <td>{{ object.Member_Permanent_Address }}</td>
-                <td>{{ object.Member_Temporary_Address }}</td>
-                <td>{{ object.Member_BirthDate }}</td>
-                <td>{{ object.email }}</td>
-                <td>{{ object.Member_Phone }}</td>
-                <!-- <td>{{ object.member_Avatar }}</td> -->
-                <td>{{ object.Member_Gender }}</td>
-                <td>{{ object.Is_Student }}</td>
-                <td>{{ object.Is_Teacher }}</td>
-{#                <td>{{ object.Is_Parent }}</td>#}
-                <!-- <td>{{ object.Use_Flag }}</td>
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ object.Member_ID }}</td>
+                        <!-- <td>{{ object.username }}</td> -->
+                        <td><b><a href="{{ object.get_absolute_url }}">{{ object }}</a></b></td>
+                        <!-- <td>{{ object.password }}</td> -->
+                        <td>{{ object.first_name }}</td>
+                        <td>{{ object.last_name }}</td>
+                        <td>{{ object.Member_Permanent_Address }}</td>
+                        <td>{{ object.Member_Temporary_Address }}</td>
+                        <td>{{ object.Member_BirthDate }}</td>
+                        <td>{{ object.email }}</td>
+                        <td>{{ object.Member_Phone }}</td>
+                        <!-- <td>{{ object.member_Avatar }}</td> -->
+                        <td>{{ object.Member_Gender }}</td>
+                        <td>{{ object.Is_Student }}</td>
+                        <td>{{ object.Is_Teacher }}</td>
+                        {#                <td>{{ object.Is_Parent }}</td>#}
+                        <!-- <td>{{ object.Use_Flag }}</td>
             <td>{{ object.Register_DateTime }}</td>
             <td>{{ object.Register_Agent }}</td>
             <td>{{ object.Member_Memo }}</td> -->
-            </tr>
+                    </tr>
 
-            {% endfor %}
-        </table>
+                {% endfor %}
+            </table>
+        </div>
     </div>
-</div>
-<br>
-<br>
+    <br>
+    <br>
 
 
 {% endblock %}
 {% block customjss %}
-<script type="text/javascript">
-    $(document).ready(function () {
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-        var table_main = $('.table').DataTable({
-            dom: 'lBfrtip',
-            responsive: true,
-            buttons: [
-                {
-                    extend: 'csv',
-                    text: '<span class="exportcsv"><i class="fa fa-paper-plane-o"></i> Export to CSV </span>'
-                },
-                {
-                    extend: 'print',
-                    text: '<span class="print"><i class="fa fa-print"></i> Print </span>',
-                    fieldSeparator: '\t'
-                }]
+            var table_main = $('.table').DataTable({
+                dom: 'lBfrtip',
+                responsive: true,
+                buttons: [
+                    {
+                        extend: 'csv',
+                        text: '<span class="exportcsv"><i class="fa fa-paper-plane-o"></i> Export to CSV </span>'
+                    },
+                    {
+                        extend: 'print',
+                        text: '<span class="print"><i class="fa fa-print"></i> Print </span>',
+                        fieldSeparator: '\t'
+                    }]
+
+            });
+
+
+            $("#student_button").bind("click", function () {
+
+                $("#student_button").css("color", "black");
+                $("#parent_button").css("color", "white");
+                $("#teacher_button").css("color", "white");
+                table_main.columns().search('').draw();
+                table_main.column(11).search("True").draw();
+
+
+            });
+            $("#teacher_button").bind("click", function () {
+                $("#student_button").css("color", "white");
+                $("#parent_button").css("color", "white");
+                $("#teacher_button").css("color", "black");
+                table_main.columns().search('').draw();
+                table_main.column(12).search("True").draw();
+
+            });
+
 
         });
-
-
-        $("#student_button").bind("click", function () {
-
-            $("#student_button").css("color", "black");
-            $("#parent_button").css("color", "white");
-            $("#teacher_button").css("color", "white");
-            table_main.column(11).search("True").draw();
-
-
-        });
-        $("#teacher_button").bind("click", function () {
-            $("#student_button").css("color", "white");
-            $("#parent_button").css("color", "white");
-            $("#teacher_button").css("color", "black");
-            table_main.column(12).search("True").draw();
-
-        });
-
-
-    });
-</script>
+    </script>
 
 {% endblock %}
