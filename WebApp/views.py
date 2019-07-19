@@ -119,7 +119,6 @@ def start(request):
         if request.user.Is_CenterAdmin:
             return redirect('/admin/')
 
-
     if request.user.is_authenticated:
         course = LectureInfo.objects.order_by('Register_DateTime')[:4]
         coursecount = LectureInfo.objects.count()
@@ -128,12 +127,13 @@ def start(request):
         parentcount = MemberInfo.objects.filter(Is_Parent=True, Center_Code=request.user.Center_Code).count
         totalcount = MemberInfo.objects.filter(Center_Code=request.user.Center_Code).count
 
-    # return HttpResponse("default home")
+        # return HttpResponse("default home")
         return render(request, "WebApp/homepage.html",
-                      {'course': course, 'coursecount': coursecount, 'studentcount': studentcount, 'teachercount': teachercount,
+                      {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
+                       'teachercount': teachercount,
                        'parentcount': parentcount, 'totalcount': totalcount})
 
-    return render(request,"WebApp/splash_page.html")
+    return render(request, "WebApp/splash_page.html")
 
 
 def editprofile(request):
@@ -174,14 +174,13 @@ def change_password_others(request, pk):
         form = ChangeOthersPasswordForm(request.POST)
         if form.is_valid():
             # user = form.save()
-            user  = MemberInfo.objects.get(pk=pk)
-            print(form.cleaned_data.get("password"), "  of user", user.username )
+            user = MemberInfo.objects.get(pk=pk)
+            print(form.cleaned_data.get("password"), "  of user", user.username)
             user.set_password(form.cleaned_data.get("password"))
             user.save()
 
             # update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-
 
             return redirect('user_profile')
         else:
@@ -189,7 +188,7 @@ def change_password_others(request, pk):
     else:
         form = ChangeOthersPasswordForm()
     return render(request, 'registration/change_password.html', {
-        'form': form
+        'form': form, 'usr': MemberInfo.objects.get(pk=pk)
     })
 
 

@@ -53,7 +53,7 @@
                     <!-------------------------------- Replies ------------------------------------------>
 
 
-                    <div class="panel">
+                    <div class="panel user_infos">
                         <ul class="children">
                             <a class="panel-heading collapsed" role="tab" id="heading{{ forloop.counter }}"
                                 data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}"
@@ -106,6 +106,7 @@
 
 
 
+
                 </div>
             </li>
             {% endfor %}
@@ -118,39 +119,77 @@
 
         </ul>
     </div>
+</div>
 
 
+<div class="panel panel-default">
+    <div class="panel panel-heading">
+        <h2>{% blocktrans with username=user.username %}
+            Replies from {{ username }}
+            {% endblocktrans %}</h2>
+
+    </div>
     <!-- List group -->
-    <ul class="list-group topic-list">
-        {% for topic in topics %}
-        <li class="list-group-item topic-entry">
-            <div class="entry media">
-                <div class="media-body media-middle">topic:
-                    <a href="{% url 'forum:topic' pk=topic.pk %}" class="entry-link">
-                        {{ topic.title }}
-                    </a>
-                    <p class="entry-meta">node group:
-                        <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">
-                            <span class="label label-default meta-node">
-                                {{ topic.node_group.title }}
-                            </span>
-                        </a>
-                        <span class="meta meta-pub_date">
-                            {{ topic.pub_date | naturaltime }}
-                        </span>
-                        <span class="meta meta-last_replied hidden-xs">
-                            {% trans "Last Replied" %}: {{ topic.last_replied | naturaltime }}
-                        </span>
-                    </p>
-                </div>
-                <div class="media-right media-middle">
-                    <span class="badge">{{ topic.reply_count }}</span>
-                </div>
 
-            </div>
+    <ul class="list-group topic-list">
+        {% for reply in replies %}
+        <li class="list-group-item reply-entry reply-entry-title">
+            <h5>
+                {% trans "Replied to:" %}
+            </h5>
+
+            <p>
+                <h2>
+
+                    <a href="{% url 'forum:thread' pk=reply.thread.pk %}"
+                        class="entry-link">{{ reply.thread.title }}</a>
+                    <span class="pull-right">{{ reply.pub_date | naturaltime }}</span>
+                </h2>
+            </p>
+
+        </li>
+        <li class="list-group-item reply-entry reply-entry-content">
+
+            <h5>
+                <p>{{ reply.content_rendered | safe }}</p>
+            </h5>
         </li>
         {% endfor %}
     </ul>
+</div>
+
+
+<!-- List group -->
+<ul class="list-group topic-list">
+    {% for topic in topics %}
+    <li class="list-group-item topic-entry">
+        <div class="entry media">
+            <div class="media-body media-middle">topic:
+                <a href="{% url 'forum:topic' pk=topic.pk %}" class="entry-link">
+                    {{ topic.title }}
+                </a>
+                <p class="entry-meta">node group:
+                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">
+                        <span class="label label-default meta-node">
+                            {{ topic.node_group.title }}
+                        </span>
+                    </a>
+                    <span class="meta meta-pub_date">
+                        {{ topic.pub_date | naturaltime }}
+                    </span>
+                    <span class="meta meta-last_replied hidden-xs">
+                        {% trans "Last Replied" %}: {{ topic.last_replied | naturaltime }}
+                    </span>
+                </p>
+            </div>
+            <div class="media-right media-middle">
+                <span class="badge">{{ topic.reply_count }}</span>
+            </div>
+
+        </div>
+    </li>
+    {% endfor %}
+</ul>
 
 
 </div>

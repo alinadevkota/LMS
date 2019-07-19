@@ -33,7 +33,7 @@
             {% for object in object_list %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td><a href="{{object.get_absolute_url}}">{{ object.Lecture_Name }}</a></td>
+                <td><B><a href="{{object.get_absolute_url}}">{{ object.Lecture_Name }}</a></B></td>
                 <td>{{ object.Teacher_Code }}</td>
                 <td>{{ object.Center_Code }}</td>
                 <td>{{ object.Lecture_Cover_File }}</td>
