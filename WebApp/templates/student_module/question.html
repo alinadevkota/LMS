@@ -1,0 +1,139 @@
+{% extends "student_module/base.html" %}
+{% block title %}
+Polls
+{% endblock %}
+{% block content %}
+
+<div class="right_col " role="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="searchBarSurvey">
+                    <form>
+                        <input type="search" placeholder="Course name...">
+                        <button class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+
+                <div class="btn-group" id="status" data-toggle="buttons">
+                    <label class="btn btn-default btn-on btn-lg active">
+                        <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">Active</label>
+                    <label class="btn btn-default btn-off btn-lg ">
+                        <input type="radio" value="0" name="multifeatured_module[module_id][status]">Expire</label>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="questionLists col-md-3">
+                    <div class="card" style="width: 33rem;">
+                        <div class="card-body">
+                            <h2 class="card-title "><strong>1. Why is JavaScript popular?</strong></h2>
+                            <hr>
+                            <h5 class="card-text text-justify"><a href=" {% url 'polls' %}">
+                                    <div class="pollButtons">
+                                        <button type="button" class="btn btn-info">Text survey</button>
+                                    </div>
+                                </a></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="questionLists col-md-3">
+                    <div class="card" style="width: 33rem;">
+                        <div class="card-body">
+                            <h2 class="card-title "><strong>2. What is hadoop?</strong></h2>
+                            <hr>
+                            <h5 class="card-text text-justify"><a href=" {% url 'polls' %}">
+                                    <div class="pollButtons">
+                                        <button type="button" class="btn btn-info">Text survey</button>
+                                    </div>
+                                </a></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="questionLists col-md-3">
+                    <div class="card" style="width: 33rem;">
+                        <div class="card-body">
+                            <h2 class="card-title "><strong>3. Why graphics is important?</strong></h2>
+                            <hr>
+                            <h5 class="card-text text-justify"><a href=" {% url 'polls' %}">
+                                    <div class="pollButtons">
+                                        <button type="button" class="btn btn-info">Text survey</button>
+                                    </div>
+                                </a></h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="questionLists col-md-4">
+                    <div class="card" style="width: 33rem;">
+                        <div class="card-body">
+                            <h2 class="card-title "><strong>1. Why is JavaScript popular?</strong></h2>
+                            <hr>
+                            <h5 class="card-text text-justify"><a href=" {% url 'polls' %}">
+                                    <div class="pollButtons">
+                                        <button type="button" class="btn btn-info">Text survey</button>
+                                    </div>
+                                </a></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="questionLists col-md-4">
+                    <div class="card" style="width: 33rem;">
+                        <div class="card-body">
+                            <h2 class="card-title "><strong>2. What is hadoop?</strong></h2>
+                            <hr>
+                            <h5 class="card-text text-justify"><a href=" {% url 'polls' %}">
+                                    <div class="pollButtons">
+                                        <button type="button" class="btn btn-info">Text survey</button>
+                                    </div>
+                                </a></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="questionLists col-md-4">
+                    <div class="card" style="width: 33rem;">
+                        <div class="card-body">
+                            <h2 class="card-title "><strong>1. Why graphics is important?</strong></h2>
+                            <hr>
+                            <h5 class="card-text text-justify"><a href=" {% url 'polls' %}">
+                                    <div class="pollButtons">
+                                        <button type="button" class="btn btn-info">Text survey</button>
+                                    </div>
+                                </a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="categoryContainer">
+                    <div class="card" style="width: 20rem; height: 30rem;">
+                        <div class="card-body">
+                            <h2 class="card-title "><strong>Category</strong></h2>
+                            <hr>
+                            <h5 class="card-text">
+                                <a href="">General</a><button class="btn btn-success">Add</button>
+                            </h5>
+                            <h5 class="card-text">
+                                <a href="">Session</a><button class="btn btn-success">Add</button>
+                            </h5>
+                            <h5 class="card-text">
+                                <a href="">Course</a><button class="btn btn-success">Add</button>
+                            </h5>
+                            <h5 class="card-text">
+                                <a href="">System</a><button class="btn btn-success">Add</button>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

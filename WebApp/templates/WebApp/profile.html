@@ -1,16 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block content%}
+{% block content %}
 
     <div class="container-fluid">
         <div>
-            <h1>User Profile</h1>
+            <hr class="header_hr">
+            <h2 class="detailListHeader">User Profile</h2>
+            <hr class="header_hr">
         </div>
         <div class="panel">
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-3 col-xs-12">
+                    <div class="col-lg-3 col-xs-12" id="avatarDiv">
+
                         <img class="img-circle" src="
                                     {% if request.user.Member_Avatar %}
                                         /media/{{ request.user.Member_Avatar }}
@@ -21,53 +24,98 @@
                                     {% else %}
                                         {% static 'images/profile/profile.png' %}
                                     {% endif %}"
-                                    alt="user" width="50%"
-                             height="50%">
+                             alt="user" width="50%"
+                             height="50%"><br>
                         <h3>{{ user.username }}</h3>
-                        <ul class="list-unstyled ">
-                            <li><i class="fa fa-map-marker user-profile-icon"></i> Dhulikhel, Kavre
-                            </li>
-                            <li>
-                            <i class="fa fa-briefcase user-profile-icon"></i> Admin
-                            </li>
-                        </ul>
+                        <h4>
+                            <ul class="list-unstyled ">
+                                <li>
+                                    {% if request.user.Is_Student == true %}
+                                        <i class="fa fa-user"> Student</i>
+                                    {% endif %}
+                                    {% if request.user.Is_Teacher == true %}
+                                        <i class="fa fa-user"> Teacher</i>
+                                    {% endif %}
+                                </li>
+
+                                <br>
+                                <li>
+
+                                    {% if request.user.Member_Gender == '1' %}
+                                        <i class="fa fa-male"></i>&nbsp; Male
+                                    {% elif request.user.Member_Gender == '2' %}
+                                        <i class="fa fa-female"></i>&nbsp; Female
+                                    {% endif %}
+
+                                </li>
+                                <br>
+                                <li>
+                                    <i class="fa fa-map-marker "></i>
+                                    &nbsp;&nbsp;{{ request.user.Member_Permanent_Address }}
+                                </li>
+                                <br>
+
+                                <li>
+                                    <i class="fa fa-envelope-o"></i> {{ request.user.email }}
+                                </li>
+                                <br>
+                                <li>
+                                    <i class="fa fa-phone"></i>&nbsp; {{ request.user.Member_Phone }}
+                                </li>
+                                <br>
+                                <li>
+                                    <i class="fa fa-calendar"></i>&nbsp; {{ request.user.Member_Phone }}
+                                </li>
+                            </ul>
+                        </h4>
                     </div>
+                    <br>
+                    <br>
+                    <br>
 
 
-                    <div class="col-lg-9 col-xs-12" >
-                        <div class="btn btn-success" id="editButton">Edit Profile</div>
-                        <div class="x_panel"  id="editContent" style="display: none">
+                    <div class="col-lg-9 col-xs-12" id="editDiv">
+                        <div class="btn btn-success" id="editButton"><h2>Edit Profile</h2></div>
+
+                        <div class="x_panel" id="editContent" style="display: none">
                             <div class="x_content">
-                                <form method="post" id="profileForm" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                                <form method="post" id="profileForm" data-parsley-validate=""
+                                      class="form-horizontal form-label-left" novalidate="">
                                     {% csrf_token %}
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">UserName
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <label><input type="text" id="Username" value="{{ user.username }}" class="form-control col-md-7 col-xs-12" required></label>
+                                            <label><input type="text" id="Username" value="{{ user.username }}"
+                                                          class="form-control col-md-7 col-xs-12" required></label>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Permanent Address
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Permanent
+                                            Address
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <label><input type="text" id="Address" value="{{ user.Member_Permanent_Address }}" class="form-control col-md-7 col-xs-12"></label>
+                                            <label><input type="text" id="Address"
+                                                          value="{{ user.Member_Permanent_Address }}"
+                                                          class="form-control col-md-7 col-xs-12"></label>
                                         </div>
                                     </div>
 
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <label><input type="email" id="Email" value="{{ user.email }}" class="form-control col-md-7 col-xs-12"></label>
+                                            <label><input type="email" id="Email" value="{{ user.email }}"
+                                                          class="form-control col-md-7 col-xs-12"></label>
                                         </div>
                                     </div>
 
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Phone
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <label><input type="tel" id="Phone" value="{{ user.Member_Phone }}" class="form-control col-md-7 col-xs-12"></label>
+                                            <label><input type="tel" id="Phone" value="{{ user.Member_Phone }}"
+                                                          class="form-control col-md-7 col-xs-12"></label>
                                         </div>
                                     </div>
 
@@ -79,15 +127,19 @@
                                                                     btn-primary
                                                                   {% else %}
                                                                     btn-default
-                                                                  {% endif %}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                                    <input type="radio" name="gender" value="male" data-parsley-multiple="gender"> &nbsp; Male &nbsp;
+                                                                  {% endif %}" data-toggle-class="btn-primary"
+                                                       data-toggle-passive-class="btn-default">
+                                                    <input type="radio" name="gender" value="male"
+                                                           data-parsley-multiple="gender"> &nbsp; Male &nbsp;
                                                 </label>
                                                 <label class="btn {% if user.Member_Gender == '2' %}
                                                                     btn-primary
                                                                 {% else %}
                                                                     btn-default
-                                                                {% endif %}" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                                    <input type="radio" name="gender" value="female" data-parsley-multiple="gender"> Female
+                                                                {% endif %}" data-toggle-class="btn-primary"
+                                                       data-toggle-passive-class="btn-default">
+                                                    <input type="radio" name="gender" value="female"
+                                                           data-parsley-multiple="gender"> Female
                                                 </label>
                                             </div>
                                         </div>
@@ -96,39 +148,52 @@
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input id="birthday" value="{{ user.date_joined}}" class="form-control col-md-7 col-xs-12" type="date">
+                                            <input id="birthday" value="{{ user.date_joined }}"
+                                                   class="form-control col-md-7 col-xs-12" type="date">
                                         </div>
                                     </div>
                                     <div class="ln_solid"></div>
                                     <div class="form-group">
                                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <button class="btn btn-primary" type="button" id="cancelButton">Cancel</button>
-                                        <button class="btn btn-primary" type="reset">Reset</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                            <button class="btn btn-primary" type="button" id="cancelButton">Cancel
+                                            </button>
+                                            <button class="btn btn-primary" type="reset">Reset</button>
+                                            <button type="submit" class="btn btn-success">Submit</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="btn btn-default" id="changePW">
+                            <a href="/change-password"><h2>Change Password</h2></a>
+                        </div>
+
                     </div>
                 </div>
-
             </div>
 
         </div>
     </div>
+
     <script>
-        document.querySelector("#cancelButton").addEventListener('click',cancelEdit);
-        document.querySelector("#editButton").addEventListener('click',editProfile);
-        function editProfile(){
-            document.querySelector('#editContent').style.display="inline-block";
+        document.querySelector("#cancelButton").addEventListener('click', cancelEdit);
+        document.querySelector("#editButton").addEventListener('click', editProfile);
+
+
+        function editProfile() {
+            document.querySelector('#editContent').style.display = "inline-block";
         }
 
         function cancelEdit() {
-            document.querySelector('#editContent').style.display="none";
+            document.querySelector('#editContent').style.display = "none";
         }
+
+
     </script>
-   <a href="/change-password/{{ user.id }}/" > Change Password </a>
+
 
 {% endblock %}
 
