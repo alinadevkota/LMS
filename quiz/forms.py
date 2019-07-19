@@ -18,6 +18,7 @@ class QuestionForm(forms.Form):
                                                    widget=RadioSelect)
 
 
+
 class EssayForm(forms.Form):
     def __init__(self, question, *args, **kwargs):
         super(EssayForm, self).__init__(*args, **kwargs)
@@ -80,13 +81,15 @@ class QuizForm(forms.ModelForm):
 # ----------------------------------------------------------------------------------------------------
 
 class MCQuestionForm(forms.ModelForm):
-    # choice_list = [x for x in question.get_answers_list()]
-    # self.fields["answers"] = forms.ChoiceField(choices=choice_list,
-    #                                            widget=RadioSelect)
-
     class Meta:
         model = MCQuestion
         fields = '__all__'
+
+    quiz = forms.ModelMultipleChoiceField(
+        queryset=Quiz.objects.all(),
+        required=False,
+        # label=_("Questions"),
+        widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
 
 
 class TFQuestionForm(forms.ModelForm):
@@ -94,25 +97,20 @@ class TFQuestionForm(forms.ModelForm):
         model = TF_Question
         fields = '__all__'
 
-
-
-# class MCQuestionForm(forms.ModelForm):
-#      def __init__(self, question, *args, **kwargs):
-#             super(MCQuestionForm, self).__init__(*args, **kwargs)
-#             choice_list = [x for x in question.get_answers_list()]
-#             self.fields["answers"] = forms.ChoiceField(choices=choice_list,
-#                                                        widget=RadioSelect)
-#
-#
-# class TFQuestionForm(forms.ModelForm):
-#     def __init__(self, question, *args, **kwargs):
-#         super(TFQuestionForm, self).__init__(*args, **kwargs)
-#         choice_list = [x for x in question.get_answers_list()]
-#         self.fields["answers"] = forms.ChoiceField(choices=choice_list,
-#                                                    widget=RadioSelect)
+    quiz = forms.ModelMultipleChoiceField(
+        queryset=Quiz.objects.all(),
+        required=False,
+        # label=_("Questions"),
+        widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
 
 
 class EssayQuestionForm(forms.ModelForm):
     class Meta:
         model = Essay_Question
         fields = '__all__'
+
+    quiz = forms.ModelMultipleChoiceField(
+        queryset=Quiz.objects.all(),
+        required=False,
+        # label=_("Questions"),
+        widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
