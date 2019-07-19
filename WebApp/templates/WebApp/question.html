@@ -8,28 +8,30 @@ Polls
 {% endblock stylesheets %}
 {% block content %}
 
-<div class="right_col " role="main">
+<div class="clearfix"></div>
+<ol aria-label="breadcrumb" class="breadcrumb navClass">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Survey</li>
+</ol>
 
-    <div class="container" id="mainSurveyPage">
-        <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="searchBarSurvey col-sm-4">
-                <form>
-                    <input type="search" placeholder="Course name...">
-                    <button class="btn btn-primary">Search</button>
-                </form>
-            </div>
-            <div class="col-sm-4"></div>
+<div class="container" id="mainSurveyPage">
+    <div class="row">
+        <div class="searchBarSurvey col-sm-5">
+            <form>
+                <input type="search" placeholder="Course name...">
+                <button class="btn btn-primary">Search</button>
+            </form>
         </div>
-        <div class="row">
+        <div class="col-sm-7">
             <div class="btn-group" id="status" data-toggle="buttons">
-                <label class="btn btn-default btn-on btn-md active">
+                <label class="btn btn-default btn-on-3 btn-sm active">
                     <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">Active</label>
-                <label class="btn btn-default btn-off btn-md ">
+                <label class="btn btn-default btn-off-3 btn-sm ">
                     <input type="radio" value="0" name="multifeatured_module[module_id][status]">Expire</label>
             </div>
         </div>
-
+    </div>
+    <div class="row">
         <div class="row">
             <div class="col-md-9">
                 <div class="hR"></div>
@@ -132,16 +134,20 @@ Polls
                             <h2 class="card-title "><strong>Category</strong></h2>
                             <hr>
                             <h5 class="card-text">
-                                <a href="">General</a><button class="btn btn-success" data-popup-open="popup-1"><a href="#">Add</a></button>
+                                <a href="">General</a><button class="general btn btn-success" data-popup-open="popup-1"><a
+                                        href="#">Add</a></button>
                             </h5>
                             <h5 class="card-text">
-                                <a href="">Session</a><button class="btn btn-success" data-popup-open="popup-1"><a href="#">Add</a></button>
+                                <a href="">Session</a><button class="session btn btn-success" data-popup-open="popup-1"><a
+                                        href="#">Add</a></button>
                             </h5>
                             <h5 class="card-text">
-                                <a href="">Course</a><button class="btn btn-success" data-popup-open="popup-1"><a href="#">Add</a></button>
+                                <a href="">Course</a><button class="courseAdd btn btn-success" data-popup-open="popup-1"><a
+                                        href="#">Add</a></button>
                             </h5>
                             <h5 class="card-text">
-                                <a href="">System</a><button data-modal-target="" class="btn btn-success"><a href=" {% url 'survey' %}">Add</a></button>
+                                <a href="">System</a><button class="system btn btn-success" data-popup-open="popup-1"><a
+                                        href="#">Add</a></button>
                             </h5>
                         </div>
                     </div>
@@ -159,14 +165,14 @@ Polls
                                     <form>
                                         <div class="row">
                                             <div class="label_inputs">
-                                                <div class="form-group ">
+                                                <div class="form-group " id="chooseSession" style="display: none;">
                                                     <label for="inputState">Choose Session</label>
                                                     <select id="inputState" class="form-control">
                                                         <option selected>Choose...</option>
                                                         <option>...</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group ">
+                                                <div class="form-group " id="chooseCourse" style="display: none;">
                                                     <label for="inputState">Choose Course</label>
                                                     <select id="inputState" class="form-control">
                                                         <option selected>Choose...</option>
@@ -178,49 +184,77 @@ Polls
                                                     <input class="form-control" type="text" name="title">
                                                 </div>
                                                 <div class="btn-group" id="switchButtons" data-toggle="buttons">
-                                                    <label class="btn btn-default btn-on btn-md active">
+                                                    <label class="mcq_question btn btn-default btn-on btn-md active">
                                                         <input type="radio" value="1" name="multifeatured_module[module_id][switchButtons]"
                                                             checked="checked">MCQ</label>
-                                                    <label class="btn btn-default btn-off btn-md ">
+                                                    <label class="short_question btn btn-default btn-off btn-md ">
                                                         <input type="radio" value="0" name="multifeatured_module[module_id][switchButtons]">SAQ</label>
                                                 </div>
 
-                                            </div>
-
-                                            <div class="questionContainer">
-
-                                                <div class="queContainer">
-                                                    <div class="form-group ">
-                                                        <label for="questions">Questions:</label>
-                                                        <input class="form-control" type="text" name="questions">
-                                                    </div>
-                                                    <button class="btn btn-success"><a href="" id="addButtons">+ Que</a></button>
-                                                </div>
-                                                <div class="optionContainer">
-                                                    <div id="option_Button">
-                                                        <div class="form-group ">
-                                                            <label for="option">Option:</label>
-                                                            <button class="btn btn-success"><a href="" id="addButtons">+</a></button>
+                                                <div class="questionContainer">
+                                                    <div id="mcq_que">
+                                                        <div class="queContainer">
+                                                            <div class="form-group ">
+                                                                <label for="questions">Questions:</label>
+                                                                <input class="form-control" type="text" name="questions">
+                                                            </div>
+                                                            <button class="btn btn-success"><a href="" id="addButtons">+
+                                                                    Que</a></button>
                                                         </div>
+                                                        <div class="optionContainer">
+                                                            <div id="option_Button">
+                                                                <div class="form-group ">
+                                                                    <label for="option">Option:</label>
+                                                                    <button class="btn btn-success"><a href="" id="addButtons">+</a></button>
+                                                                </div>
+                                                            </div>
+
+                                                            <ul style="list-style: none;">
+                                                                <li><input type="radio" name="gender" value="Versatile">
+                                                                    Option-1<br></li>
+                                                                <li><input type="radio" name="gender" value="Available">
+                                                                    Option-2<br></li>
+                                                                <li><input type="radio" name="gender" value="Reusable">
+                                                                    Option-3<br></li>
+                                                            </ul>
+                                                        </div>
+                                                        <a href="">
+                                                            <div class="btn btn-info">Save</div>
+                                                        </a>
+                                                        <a href="">
+                                                            <div class="btn btn-warning">Save As New</div>
+                                                        </a>
                                                     </div>
 
-                                                    <ul style="list-style: none;">
-                                                        <li><input type="radio" name="gender" value="Versatile">
-                                                            Option-1<br></li>
-                                                        <li><input type="radio" name="gender" value="Available">
-                                                            Option-2<br></li>
-                                                        <li><input type="radio" name="gender" value="Reusable">
-                                                            Option-3<br></li>
-                                                    </ul>
+                                                    <div id="short_que" style="display: none;">
+                                                        <div class="queContainer">
+                                                            <div class="form-group ">
+                                                                <label for="questions">Questions:</label>
+                                                                <input class="form-control" type="text" name="questions">
+                                                            </div>
+                                                            <button class="btn btn-success"><a href="" id="addButtons">+
+                                                                    Que</a></button>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlTextarea1">Answer:</label>
+                                                            <textarea class="form-control rounded-0" id="exampleFormControlTextarea1"
+                                                                rows="4"></textarea>
+                                                        </div>
+
+                                                        <a href="">
+                                                            <div class="btn btn-info">Save</div>
+                                                        </a>
+                                                        <a href="">
+                                                            <div class="btn btn-warning">Save As New</div>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                                <a href="">
-                                                    <div class="btn btn-info">Save</div>
-                                                </a>
-                                                <a href="">
-                                                    <div class="btn btn-warning">Save As New</div>
-                                                </a>
                                             </div>
+
+
                                         </div>
+
                                     </form>
                                 </div>
                                 <div class="col-sm-3"></div>
