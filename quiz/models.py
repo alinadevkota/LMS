@@ -139,6 +139,13 @@ class Quiz(models.Model):
                     " taken by users who can edit"
                     " quizzes."))
 
+
+    def get_absolute_url(self):
+        return reverse('quiz_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('quiz_update', args=(self.pk,))
+
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         self.url = re.sub('\s+', '-', self.url).lower()
 

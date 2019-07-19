@@ -8,7 +8,6 @@
 
     {{ form.media }}
 
-<p><a class="btn btn-default" href="{% url 'quiz_create' %}">Create Quiz</a></p>
 <form method="post">
 {% csrf_token %}
 {{form|crispy}}
