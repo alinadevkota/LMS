@@ -5220,3 +5220,39 @@ $(function () {
         e.preventDefault();
     });
 });
+
+$(document).ready(function () {
+
+    $('.mcq_question').on('click', function () {
+        $('#mcq_que').show(200);
+        $('#short_que').hide();
+    });
+
+    $('.short_question').on('click', function () {
+        $("#short_que").show(200);
+        $('#mcq_que').hide();
+    });
+});
+
+$(document).ready(function () {
+
+    $('.general').on('click', function () {
+        $("#chooseSession").hide();
+        $('#chooseCourse').hide();
+    });
+
+    $('.system').on('click', function () {
+        $("#chooseSession").hide();
+        $('#chooseCourse').hide();
+    });
+
+
+    $('.session').on('click', function () {
+        $("#chooseSession").show();
+        $('#chooseCourse').hide();
+    });
+    $('.courseAdd').on('click', function () {
+        $("#chooseSession").show();
+        $('#chooseCourse').show();
+    });
+});

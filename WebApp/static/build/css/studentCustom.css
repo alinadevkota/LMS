@@ -245,7 +245,6 @@ input[type=search]{
 #mainSurveyPage{
     background-color: #f3f3f3;
     margin-top: 50px;
-    margin-left:-150px;
     padding-bottom: 80px;
     width: auto;
     height: auto;   
@@ -366,16 +365,19 @@ form{
     text-align: center;
     
 }
-.btn-default.btn-on.active{
+#status{
+    z-index:0;
+}
+#switchButtons .btn-default.btn-on.active{
     background-color: #5BB75B;
     color: white;
 }
-.btn-default.btn-off.active{
+#switchButtons .btn-default.btn-off.active{
     background-color: #DA4F49;
     color: white;
 }
 .searchBarSurvey{
-    margin-top: 40px;
+    margin-top: 30px;
 }
 .searchBarSurvey .btn-primary{
     margin-left:5px;
@@ -396,8 +398,6 @@ form{
     background-color: white;
 }
 .btn-group{
-    display: flex;
-    justify-content: center;
     padding-top: 30px;
     padding-bottom: 30px;
 }
@@ -407,7 +407,7 @@ form{
 .index-form{
     width: 100%;
     height: auto;
-    margin-left: -125px;
+    margin-left: -145px;
     margin-top: -100px;
     padding-top: 60px;
     padding-bottom: 60px;
@@ -425,10 +425,10 @@ form{
     padding: 20px;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
 }
+
 .questionContainer{
-    
+    display: flex;
     padding: 20px;
-    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
 }
 .queContainer{
     display: flex;
@@ -474,7 +474,6 @@ form{
     margin-bottom: 20px;   
 }
 
-
 /* Outer */
 .popup {
 	width:100%;
@@ -499,7 +498,7 @@ form{
 	transform:translate(-50%, -50%);
 	box-shadow:0px 2px 6px rgba(0,0,0,1);
 	border-radius:3px;
-	background:#fff;
+    background:#fff;
 }
 
 /* Close Button */

@@ -5610,7 +5610,18 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 #changePW{
     margin-left: 27%;
 }
+.changePW{
+    margin-top: 10%;
+    margin-left: 20%;
+    text-align: center;
+}
+.forumDiv{
+    margin-top: -5px;
+}
 
-
-
-
+.forum{
+    float: left;}
+.thread{
+   float: right;
+    margin-right: 5px;
+}

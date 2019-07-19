@@ -14,6 +14,8 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from django.views.generic.edit import FormView
 
+from forum.models import Thread
+
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
     ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, \
     AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardInfoForm, BoardContentInfoForm, InningGroupForm, \
@@ -120,6 +122,7 @@ def start(request):
             return redirect('/admin/')
 
     if request.user.is_authenticated:
+        thread = Thread.objects.filter()
         course = LectureInfo.objects.order_by('Register_DateTime')[:4]
         coursecount = LectureInfo.objects.count()
         studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
@@ -131,7 +134,9 @@ def start(request):
         return render(request, "WebApp/homepage.html",
                       {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
                        'teachercount': teachercount,
-                       'parentcount': parentcount, 'totalcount': totalcount})
+                       'parentcount': parentcount, 'totalcount': totalcount,'thread': thread})
+
+
 
     return render(request, "WebApp/splash_page.html")
 
