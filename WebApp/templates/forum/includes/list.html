@@ -5,8 +5,8 @@
 
 
 {% block breadcrumb %}
-<ol class="breadcrumb navClass">
-    <li><a href="{% url 'forum:index' %}">Home</a></li>
+<ol aria-label="breadcrumb" class="breadcrumb navClass">
+    <li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Home</a></li>
     <li>
         <a
             href="{% url 'forum:nodegroup' pk=threads.0.topic.node_group.pk %}">{{ threads.0.topic.node_group.title }}</a>

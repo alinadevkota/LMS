@@ -21,9 +21,9 @@
         <li class="list-group-item">
             <div class="media v-middle">
                 <div class="media-body">
-                    <h4 class="text-headline margin-none" style="color:MediumSeaGreen">
+                    <h2 class="text-headline margin-none" style="color:MediumSeaGreen">
                         Recent Threads
-                    </h4>
+                    </h2>
 
 
                 </div>
@@ -31,8 +31,8 @@
                 {% if not request.user.Is_Student %}
                 <div class="media-right">
                     <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic' %}"><i
-                            class="fa fa-fw fa-plus"></i> New
-                        Topic</a>
+                            class="fa fa-fw fa-plus"></i> Sub Category
+                    </a>
                 </div>
                 {% endif %}
                 <div class="media-right">
@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="media-body">
-                    <h4 class="text-subhead margin-none">
+                    <h4 class="text-subhead margin-none thread_title">
                         <a href="{% url 'forum:thread' pk=thread.pk %}" class="link-text-color">{{ thread.title }}</a>
                     </h4>
 
