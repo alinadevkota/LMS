@@ -14,6 +14,8 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from django.views.generic.edit import FormView
 
+from forum.models import Thread
+
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
     ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, \
     AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardInfoForm, BoardContentInfoForm, InningGroupForm, \
@@ -119,21 +121,24 @@ def start(request):
         if request.user.Is_CenterAdmin:
             return redirect('/admin/')
 
-
     if request.user.is_authenticated:
-        course = LectureInfo.objects.order_by('Register_DateTime')[:3]
+        thread = Thread.objects.filter()
+        course = LectureInfo.objects.order_by('Register_DateTime')[:4]
         coursecount = LectureInfo.objects.count()
         studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
         teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
         parentcount = MemberInfo.objects.filter(Is_Parent=True, Center_Code=request.user.Center_Code).count
         totalcount = MemberInfo.objects.filter(Center_Code=request.user.Center_Code).count
 
-    # return HttpResponse("default home")
+        # return HttpResponse("default home")
         return render(request, "WebApp/homepage.html",
-                      {'course': course, 'coursecount': coursecount, 'studentcount': studentcount, 'teachercount': teachercount,
-                       'parentcount': parentcount, 'totalcount': totalcount})
+                      {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
+                       'teachercount': teachercount,
+                       'parentcount': parentcount, 'totalcount': totalcount,'thread': thread})
 
-    return render(request,"WebApp/splash_page.html")
+
+
+    return render(request, "WebApp/splash_page.html")
 
 
 def editprofile(request):
@@ -174,14 +179,13 @@ def change_password_others(request, pk):
         form = ChangeOthersPasswordForm(request.POST)
         if form.is_valid():
             # user = form.save()
-            user  = MemberInfo.objects.get(pk=pk)
-            print(form.cleaned_data.get("password"), "  of user", user.username )
+            user = MemberInfo.objects.get(pk=pk)
+            print(form.cleaned_data.get("password"), "  of user", user.username)
             user.set_password(form.cleaned_data.get("password"))
             user.save()
 
             # update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-
 
             return redirect('user_profile')
         else:
@@ -189,7 +193,7 @@ def change_password_others(request, pk):
     else:
         form = ChangeOthersPasswordForm()
     return render(request, 'registration/change_password.html', {
-        'form': form
+        'form': form, 'usr': MemberInfo.objects.get(pk=pk)
     })
 
 
@@ -1014,3 +1018,14 @@ class TodoTInfoDetailView(DetailView):
 class TodoTInfoUpdateView(UpdateView):
     model = TodoTInfo
     form_class = TodoTInfoForm
+
+
+def question(request):
+    return render(request, 'WebApp/question.html')
+
+
+def polls(request):
+    return render(request, 'WebApp/polls.html')
+
+def survey(request):
+    return render(request, 'WebApp/survey.html')

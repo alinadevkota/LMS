@@ -5,12 +5,13 @@
 {% load crispy_forms_tags %}
 
 {% block breadcrumb %}
-<ol class="breadcrumb navClass">
-    <li><a href="{% url 'forum:index' %}">Home</a></li>
-    <li>
+<ol aria-label="breadcrumb" class="breadcrumb navClass">
+    <li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Home</a></li>
+    <li class="breadcrumb-item">
         <a href="{% url 'forum:nodegroup' pk=thread.topic.node_group.pk %}">{{ thread.topic.node_group.title }}</a>
     </li>
-    <li class="active"><a href="{% url 'forum:topic' pk=thread.topic.pk %}">{{ thread.topic.title }}</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'forum:topic' pk=thread.topic.pk %}">{{ thread.topic.title }}</a>
+    </li>
 </ol>
 {% endblock %}
 
@@ -25,11 +26,11 @@
 
 
 
-<div class="col-md-6 col-sm-6 col-xs-12">
+<div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
             <h2>{{ thread.topic.node_group }} </h2>
-            <div class="col-md-8">
+            <div class="top_button ">
 
 
                 {% if thread.reply_count == 0 %}
@@ -49,7 +50,7 @@
                 <li>
                     <div class="block">
                         <div class="tags">
-                            <a href="" class="tag">
+                            <a href="{% url 'forum:topic' pk=thread.topic.pk %}" class="tag">
                                 <span>{{ thread.topic.title }}</span>
                             </a>
 
@@ -81,7 +82,7 @@
 
 
 
-                            <h2 class="thread-title"><a>{{ thread.title }}</a></h2>
+                            <h3 class="thread-title"><a>{{ thread.title }}</a></h3>
 
 
 
@@ -99,79 +100,80 @@
                                     {% endif %}
                                 </span>
                             </div>
-                            <p class="excerpt">{{ thread.content_rendered | safe }}
+                            <h5>
+                                <p class="excerpt">{{ thread.content_rendered | safe }}
+                            </h5>
+                            <ul class="list-group reply-list">
+                                {% for post in posts %}
+                                <li class="list-group-item reply-item">
+                                    <div class="thread-meta row">
 
-                                <ul class="list-group reply-list">
-                                    {% for post in posts %}
-                                    <li class="list-group-item reply-item">
-                                        <div class="thread-meta row">
-
-                                            <div class="col-xs-9 col-sm-10" id="comment-section">
-                                                <div class="reply-content">
-                                                    <div class="profile_pic">
-                                                        <img src="https://randomuser.me/api/portraits/men/65.jpg"
-                                                            alt="..." />
-                                                    </div>
-                                                    <div class="reply-content-detail">
-                                                        <a
-                                                            href="{% url 'forum:user_info' post.user_id %}">{{ post.user }}</a>
-                                                        <br />
-                                                        <span>{{ post.pub_date | naturaltime }}</span>
-                                                    </div>
-
+                                        <div class="col-xs-9 col-sm-10" id="comment-section">
+                                            <div class="reply-content">
+                                                <div class="profile_pic">
+                                                    <img src="https://randomuser.me/api/portraits/men/65.jpg"
+                                                        alt="..." />
                                                 </div>
-
-
-                                                <div class="chat-reply">
-                                                    -{{ post.content_rendered | safe }}
-                                                    <!-- Reply from myself -->
+                                                <div class="reply-content-detail">
+                                                    <a
+                                                        href="{% url 'forum:user_info' post.user_id %}">{{ post.user }}</a>
+                                                    <br />
+                                                    <span>{{ post.pub_date | naturaltime }}</span>
                                                 </div>
-
 
                                             </div>
-                                        </div>
-
-                                        <p class="reply-link">
-                                            <a href="#" data-username="{{ post.user.username }}"
-                                                class="reply-to">{% trans "Reply" %}</a>
-                                        </p>
-                                        {% if request.user.is_superuser %}
-                                        <hr>
-                                        <p class="moderation-links">
-                                            <a href="#" class="moderate-action hide-reply" data-toggle="modal"
-                                                data-target="#moderation-modal" data-pk="{{ thread.pk }}"
-                                                data-action="hide-reply"
-                                                data-api-url="{% url 'forum:post-detail' post.pk %}">
-                                                <span class="label label-danger">Hide</span>
-                                            </a>
-                                        </p>
-                                        {% endif %}
-                                    </li>
-                                    {% endfor %}
-                                </ul>
 
 
+                                            <div class="chat-reply">
+                                                -{{ post.content_rendered | safe }}
 
-
-                                <form method="POST">
-                                    {% csrf_token %}
-                                    <h2>Your Comments</h2>
-                                    <div class="btn-group">
-
-                                        <div class="controls"> <textarea name="content_raw" id="id_content_raw"
-                                                class="textarea form-control" rows="1" required=""
-                                                placeholder="Write your comment here"></textarea>
-
-                                        </div>
-                                        <br>
-                                        <div class="reply_button">
-                                            <button class="btn btn-sm btn-primary" type="submit" name="submit"><i
-                                                    class="fa fa-reply"></i> Reply</button>
+                                            </div>
 
 
                                         </div>
+                                    </div>
 
-                                </form>
+                                    <p class="reply-link">
+                                        <a href="#" data-username="{{ post.user.username }}"
+                                            class="reply-to">{% trans "Reply" %}</a>
+                                    </p>
+                                    {% if request.user.is_superuser %}
+                                    <hr>
+                                    <p class="moderation-links">
+                                        <a href="#" class="moderate-action hide-reply" data-toggle="modal"
+                                            data-target="#moderation-modal" data-pk="{{ thread.pk }}"
+                                            data-action="hide-reply"
+                                            data-api-url="{% url 'forum:post-detail' post.pk %}">
+                                            <span class="label label-danger">Hide</span>
+                                        </a>
+                                    </p>
+                                    {% endif %}
+                                </li>
+                                {% endfor %}
+                            </ul>
+
+
+
+
+                            <form method="POST">
+                                {% csrf_token %}
+                                <h2>Your Comments</h2>
+                                <div class="btn-group">
+
+                                    <div class="controls"> <textarea name="content_raw" id="id_content_raw"
+                                            class="textarea form-control" rows="4" cols="80" required=""
+                                            placeholder="Write your comment here"></textarea>
+
+                                    </div>
+                                    <br>
+                                    <div class="reply_button">
+                                        <button class="btn btn-sm btn-primary" type="submit" name="submit"><i
+                                                class="fa fa-reply"></i> Reply</button>
+
+
+                                    </div>
+
+                            </form>
                             </p>
 
 

@@ -402,7 +402,7 @@ html , body {
     margin-left: 15%;
     z-index: 1000;
     position: inherit;
-    margin-top: 20px;
+    margin-top: 10px;
     border: 1px solid rgba(52, 73, 94, 0.44);
     padding: 4px
 }
@@ -2245,6 +2245,21 @@ h4.graph_title {
     width: 50px;
 }
 
+.splashDiv{
+    width:100%;
+    height:80vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#ubl_logo_orange{
+   width:40%;
+}
+
+
 #student_icon{
     margin-bottom: -10px;
 }
@@ -2618,7 +2633,7 @@ span.section {
 
 .form-control {
     border-radius: 5px;
-    width: 453px;
+
 }
 
 .form-horizontal .control-label {
@@ -3480,11 +3495,11 @@ ul.messages li, .tasks li {
 }
 
 ul.messages li img.avatar, img.avatar {
-    height: 32px;
-    width: 32px;
+    height: 50px;
+    width: 50px;
     float: left;
     display: inline-block;
-    border-radius: 2px;
+    border-radius: 50%;
     padding: 2px;
     background: #f7f7f7;
     border: 1px solid #e6e6e6
@@ -5542,11 +5557,13 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 
 /* Course_detail end*/
  #ubl_logo{
+
      height: 50px;
      width: 50px;
  }
  #LMS{
-     margin-left: 30px;
+     margin-left: 20px;
+     padding-top: 20px;
  }
 
 
@@ -5566,3 +5583,45 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     overflow: hidden;
 }
 /*  teacher lecturelist end*/
+
+#FormID{
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    background: #f5f5f5;
+    margin-bottom: 10px;
+
+}
+
+#avatarDiv{
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#editButton{
+    margin-left: 30%;
+}
+#changePW{
+    margin-left: 27%;
+}
+.changePW{
+    margin-top: 10%;
+    margin-left: 20%;
+    text-align: center;
+}
+.forumDiv{
+    margin-top: -5px;
+}
+
+.forum{
+    float: left;}
+.thread{
+   float: right;
+    margin-right: 5px;
+}

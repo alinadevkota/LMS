@@ -49,3 +49,11 @@ def coursedetail(request, pk=''):
 
 def coursesList(request):
     return render(request, 'student_module/coursesList.html', {'Courses': LectureInfo.objects.all()})
+
+
+def question(request):
+    return render(request, 'student_module/question.html')
+
+
+def polls(request):
+    return render(request, 'student_module/polls.html')
