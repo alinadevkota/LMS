@@ -7,7 +7,7 @@
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Sessions</li>
         </ol>
-
+        <hr class="header_hr">
         <h2 class="tableHeader">List of Sessions</h2>
         <hr class="header_hr">
 
@@ -17,7 +17,7 @@
         <br><br><br>
 
         <div class="table-responsive">
-            <table class="table table-striped table-bordered bg-white">
+            <table class="table table-striped table-bordered bg-white nowrap">
                 <thead class="thead-light bg-primary">
                 <tr class="tableTitleRow">
                     <td>ID</td>
@@ -26,11 +26,11 @@
                     <td>Start Date</td>
                     <td>End Date</td>
                     <!-- <td>use_flag</td> -->
-{#                    <td>Reg Date</td>#}
-{#                    <td>Reg Time</td>#}
+                    {#                    <td>Reg Date</td>#}
+                    {#                    <td>Reg Time</td>#}
                     <td>Register Agent</td>
                     <td>Center Code</td>
-{#                    <td>Udt Time</td>#}
+                    {#                    <td>Udt Time</td>#}
                     <!-- <td>udt_agent</td> -->
                     <!-- <td>Register Date</td>
                     <td>Updated Date</td> -->
@@ -40,15 +40,15 @@
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         {# <td>{{ object.inning_name }}</td>#}
-                        <td><a href="{{ object.get_absolute_url }}">{{ object.Inning_Name }}</a></td>
+                        <td><B><a href="{{ object.get_absolute_url }}">{{ object.Inning_Name }}</a></B></td>
                         <td>{{ object.Start_Date }}</td>
                         <td>{{ object.End_Date }}</td>
-{#                        <td>{{ object.use_flag }}</td>#}
-{#                        <td>{{ object.reg_date }}</td>#}
-{#                        <td>{{ object.reg_time }}</td>#}
+                        {#                        <td>{{ object.use_flag }}</td>#}
+                        {#                        <td>{{ object.reg_date }}</td>#}
+                        {#                        <td>{{ object.reg_time }}</td>#}
                         <td>{{ object.Register_Agent }}</td>
                         <td>{{ object.Center_Code }}</td>
-{#                        <td>{{ object.udt_time }}</td>#}
+                        {#                        <td>{{ object.udt_time }}</td>#}
                         {#                        <td>{{ object.udt_agent }}</td>#}
                     </tr>
                 {% endfor %}

@@ -31,11 +31,8 @@
                     <!-- <td>Link</td> -->
                     <td>Member ID</td>
                     <td>Username</td>
-                    <td>First Name</td>
-                    <td>Last Name</td>
-                    <td>Permanent Address</td>
-                    <td>Temporary Address</td>
-                    <td>BirthDate</td>
+                    <td>Name</td>
+                    <td>Current Address</td>
                     <td>Email</td>
                     <td>Phone</td>
                     <!-- <td>member_Avatar</td> -->
@@ -57,22 +54,25 @@
                         <!-- <td>{{ object.username }}</td> -->
                         <td><b><a href="{{ object.get_absolute_url }}">{{ object }}</a></b></td>
                         <!-- <td>{{ object.password }}</td> -->
-                        <td>{{ object.first_name }}</td>
-                        <td>{{ object.last_name }}</td>
-                        <td>{{ object.Member_Permanent_Address }}</td>
+                        <td>{{ object.first_name }}&nbsp;{{ object.last_name }}</td>
                         <td>{{ object.Member_Temporary_Address }}</td>
-                        <td>{{ object.Member_BirthDate }}</td>
                         <td>{{ object.email }}</td>
                         <td>{{ object.Member_Phone }}</td>
                         <!-- <td>{{ object.member_Avatar }}</td> -->
-                        <td>{{ object.Member_Gender }}</td>
+                        <td>
+                            {% if object.Member_Gender == '1' %}
+                                Male
+                            {% elif object.Member_Gender == '2' %}
+                                Female
+                            {% endif %}
+                        </td>
                         <td>{{ object.Is_Student }}</td>
                         <td>{{ object.Is_Teacher }}</td>
                         {#                <td>{{ object.Is_Parent }}</td>#}
                         <!-- <td>{{ object.Use_Flag }}</td>
-            <td>{{ object.Register_DateTime }}</td>
-            <td>{{ object.Register_Agent }}</td>
-            <td>{{ object.Member_Memo }}</td> -->
+                        <td>{{ object.Register_DateTime }}</td>
+                        <td>{{ object.Register_Agent }}</td>
+                        <td>{{ object.Member_Memo }}</td> -->
                     </tr>
 
                 {% endfor %}
@@ -111,7 +111,7 @@
                 $("#parent_button").css("color", "white");
                 $("#teacher_button").css("color", "white");
                 table_main.columns().search('').draw();
-                table_main.column(11).search("True").draw();
+                table_main.column(8).search("True").draw();
 
 
             });
@@ -120,7 +120,7 @@
                 $("#parent_button").css("color", "white");
                 $("#teacher_button").css("color", "black");
                 table_main.columns().search('').draw();
-                table_main.column(12).search("True").draw();
+                table_main.column(9).search("True").draw();
 
             });
 
