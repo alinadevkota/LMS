@@ -203,10 +203,13 @@ class Appendix(models.Model):
 class NodeGroup(models.Model):
     title = models.CharField(max_length=30, verbose_name=_("title"))
     description = models.TextField(default='', blank=True, verbose_name=_("description"))
+    topic_count = models.IntegerField(default=0, verbose_name=_("topic count"))
 
 
     def __str__(self):
         return self.title
+    def get_topic_count(self):
+        return self.topic.count()
 
 @python_2_unicode_compatible
 class Topic(models.Model):

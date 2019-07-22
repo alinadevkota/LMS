@@ -38,6 +38,10 @@ class QuizListView(ListView):
         queryset = super(QuizListView, self).get_queryset()
         return queryset.filter(draft=False)
 
+class QuizUpdateView(UpdateView):
+    model = Quiz
+    form_class = QuizForm
+
 
 class QuizDetailView(DetailView):
     model = Quiz
@@ -51,6 +55,10 @@ class QuizDetailView(DetailView):
 
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
+
+def QuizDeleteView(request, pk):
+    Quiz.objects.filter(pk=pk).delete()
+    return redirect("quiz_list")
 
 
 class CategoriesListView(ListView):

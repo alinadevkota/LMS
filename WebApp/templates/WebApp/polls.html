@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Polls
+{% endblock %}
+{% block stylesheets %}
+<link href="{% static 'build/css/studentCustom.css' %}" rel="stylesheet">
+{% endblock stylesheets %}
+{% block content %}
+
+<div class="right_col " role="main">
+    <div class="container">
+        <div class="row">
+
+            <div class="pollsContainer">
+                <h2>Poll</h2>
+                <hr>
+                <h3>1. Why is JavaScript popular?</h3>
+                <form>
+                    <ul style="list-style: none;">
+                        <li><input type="radio" name="gender" value="Versatile"> Versatile<br></li>
+                        <li><input type="radio" name="gender" value="Available"> Available<br></li>
+                        <li><input type="radio" name="gender" value="Reusable"> Reusable<br></li>
+                    </ul>
+                </form>
+                <div class="pollButtons">
+                    <button type="button" id="submitButton" class="btn btn-info">Vote</button>
+                </div>
+
+                <div class="bs-chart-container" id="progressResult" style="display: none; width: 80%;">
+                    <h4>Results:</h4>
+                    <div class="surveyResults">
+                        <strong>Option A</strong>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                                aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                <span class>60% </span>
+                            </div>
+                        </div>
+                        <strong>Option B</strong>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                aria-valuemin="0" aria-valuemax="100" style="width: 15%">
+                                <span class>15%</span>
+                            </div>
+                        </div>
+                        <strong>Option C</strong>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
+                                aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                                <span class>25% </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

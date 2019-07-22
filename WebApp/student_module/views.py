@@ -44,8 +44,17 @@ class LectureInfoDetailView(DetailView):
 
 
 def coursedetail(request, pk=''):
-    return render(request, 'student_module/course_detail.html', {'Course': LectureInfo.objects.get(id=pk)})
+    return render(request, 'student_module/course_detail.html')
+# ,{'Course': LectureInfo.objects.get(id=pk)}
 
 
 def coursesList(request):
     return render(request, 'student_module/coursesList.html', {'Courses': LectureInfo.objects.all()})
+
+
+def question(request):
+    return render(request, 'student_module/question.html')
+
+
+def polls(request):
+    return render(request, 'student_module/polls.html')

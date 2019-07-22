@@ -27,7 +27,7 @@
     </div>
 
     <div class="x_content">
-        <form method="post" id="demo-form2" data-parsley-validate="">
+        <form method="post" id="FormID" data-parsley-validate="">
             {% csrf_token %}
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -49,16 +49,16 @@
                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
             </div>
 
-        {#        --------------Removed by Saloni; password not provided from frontend form--------------------#}
+            {#        --------------Removed by Saloni; password not provided from frontend form--------------------#}
 
-{#            <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback" id="div_id_password">#}
-{#                <label for="id_password" class="control-label ">#}
-{#                    Password#}
-{#                </label>#}
-{#                <input type="password" value="{{ object.password }}" name="password" id="id_password"#}
-{#                       class="form-control has-feedback-left" placeholder="Member Password">#}
-{#                <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>#}
-{#            </div>#}
+            {#            <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback" id="div_id_password">#}
+            {#                <label for="id_password" class="control-label ">#}
+            {#                    Password#}
+            {#                </label>#}
+            {#                <input type="password" value="{{ object.password }}" name="password" id="id_password"#}
+            {#                       class="form-control has-feedback-left" placeholder="Member Password">#}
+            {#                <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>#}
+            {#            </div>#}
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <label for="id_first_name" class="control-label ">
@@ -174,20 +174,7 @@
                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
             </div>
 
-            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <label for="id_Center_Code" class="form-control-label  requiredField">
-                    Center code
-                </label>
-                <div class="">
-                    <select name="Center_Code" id="id_Center_Code" value="{{ object.Center_Code }}"
-                            class="select form-control">
-                        <option value="" selected=""></option>
-                        {% for c in form.fields.Center_Code.queryset %}
-                            <option value="{{ c.id|capfirst }}">{{ c.Center_Name|capfirst }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
+
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <label>
                     Status
@@ -202,34 +189,23 @@
                     <b>Member Type</b>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12">
-                    <label class="" for="id_Is_Teacher">
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox"
-                                                                                                    class="flat"
-                                                                                                    name="Is_Teacher">
-                        </div>
-                        Teacher
-                    </label>
+                   {{ form.Is_Teacher }}<br>
+                    <b>Teacher</b>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12">
-                    <label class="" for="id_Is_Student">
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox"
-                                                                                                    class="flat"
-                                                                                                    name="Is_Student">
-                        </div>
-                        Student
-                    </label>
+
+                    {{ form.Is_Student }}<br>
+                   <b>Student</b>
+
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <label class="" for="id_Is_Parent">
-                        <div class="col-md-6 col-sm-6 col-xs-12" style="position: relative;"><input type="checkbox"
-                                                                                                    class="flat"
-                                                                                                    name="Is_Parent">
-                        </div>
-                        Parent
-                    </label>
-                </div>
+
+
             </div>
 
+            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input type="hidden" name="Center_Code" id="id_Center_Code" value="{{ request.user.Center_Code.id }}"
+                       class="select form-control">
+            </div>
 
             <!-- <div id="div_id_Is_Teacher" class="checkbox"> <label for="id_Is_Teacher" class=""> <input type="checkbox"
                         name="Is_Teacher" class="checkboxinput" id="id_Is_Teacher">

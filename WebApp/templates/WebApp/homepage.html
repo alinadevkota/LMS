@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 {% load static %}
 {% block stylesheets %}
     <link href="{% static 'vendorsx/fullcalendar/dist/fullcalendar.min.css' %}" rel='stylesheet'>
@@ -26,11 +27,11 @@
                     <p></p>
                 </div>
             </div>
-             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats" id="total_tile">
                     <div class="icon"><img src="/static/images/total_icon.png" id="total_icon"></div>
                     <div class="count">{{ totalcount }}</div>
-                    <h3>Total Accounts</h3>
+                    <a href="{% url 'memberinfo_list' %}"><h3>Total Members</h3></a>
                     <p></p>
                 </div>
             </div>
@@ -38,7 +39,7 @@
                 <div class="tile-stats" id="course_tile">
                     <div class="icon"><img src="/static/images/courses.png" id="course_icon"></div>
                     <div class="count">{{ coursecount }}</div>
-                    <h3>Courses</h3>
+                    <a href="{% url 'lectureinfo_list' %}"><h3>Courses</h3></a>
                     <p></p>
                 </div>
             </div>
@@ -46,104 +47,23 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-xs-8 col-lg-4">
+            <div class="col-xs-12 col-lg-4">
                 <div class="panel panel-default">
                     <div class="row title">
-                        <div class="col-md-12">
-                            <h3>FORUM </h3>
+                        <div class="col-md-12 forumDiv">
+                            <h3><span class="forum">FORUM</span><span class="thread">{{ thread.count }}</span></h3>
                             <h5></h5>
                         </div>
                     </div>
                     <ul class="list-group relative paper-shadow" data-hover-z="0.5" data-animated="">
-                        <li class="list-group-item paper-shadow">
-                            <div class="media v-middle">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img src="../static/images/user.png" alt="person" class="img-circle width-40">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <a href="app-forum-thread.html" class="text-subhead link-text-color">Can
-                                        someone help me with AngularJS?</a>
-                                    <div class="text-light">
-                                        Topic: <a href="app-forum-category.html">AngularJS</a> &nbsp; By: <a href="#">Adrian
-                                        Demian</a>
-                                    </div>
-                                </div>
-                                <div class="media-right">
-                                    <div class="width-60 text-right">
-                                        <span class="text-caption text-light">1 hr ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item paper-shadow">
-                            <div class="media v-middle">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img src="../static/images/user.png" alt="person" class="img-circle width-40">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <a href="app-forum-thread.html" class="text-subhead link-text-color">Can
-                                        someone help me with AngularJS?</a>
-                                    <div class="text-light">
-                                        Topic: <a href="app-forum-category.html">AngularJS</a> &nbsp; By: <a href="#">Adrian
-                                        Demian</a>
-                                    </div>
-                                </div>
-                                <div class="media-right">
-                                    <div class="width-60 text-right">
-                                        <span class="text-caption text-light">2 hrs ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item paper-shadow">
-                            <div class="media v-middle">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img src="../static/images/user.png" alt="person" class="img-circle width-40">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <a href="app-forum-thread.html" class="text-subhead link-text-color">Can
-                                        someone help me with AngularJS?</a>
-                                    <div class="text-light">
-                                        Topic: <a href="app-forum-category.html">AngularJS</a> &nbsp; By: <a href="#">Adrian
-                                        Demian</a>
-                                    </div>
-                                </div>
-                                <div class="media-right">
-                                    <div class="width-60 text-right">
-                                        <span class="text-caption text-light">3 hr ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item paper-shadow">
-                            <div class="media v-middle">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img src="../static/images/user.png" alt="person" class="img-circle width-40">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <a href="app-forum-thread.html" class="text-subhead link-text-color">Can
-                                        someone help me with AngularJS?</a>
-                                    <div class="text-light">
-                                        Topic: <a href="app-forum-category.html">AngularJS</a> &nbsp; By: <a href="#">Adrian
-                                        Demian</a>
-                                    </div>
-                                </div>
-                                <div class="media-right">
-                                    <div class="width-60 text-right">
-                                        <span class="text-caption text-light">4 hr ago</span>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </li>
+                        {% for object in thread %}
+                            <li class="list-group-item ">
+                                <div class="media-body">
+                                    <B><span class="forum"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></span><span class="thread">{{ object.pub_date|naturaltime }}</span></B>
+                                </div>
+                            </li>
+                        {% endfor %}
                     </ul>
                     <div class="clearfix"></div>
                 </div>
@@ -270,22 +190,16 @@
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="title">
-                        <h2>Courses </h2>
+                        <h2>Courses</h2>
                         <!-- <h5>Your recent courses</h5> -->
                     </div>
                     <ul class="list-group">
                         {% for object in course %}
 
                             <li class="list-group-item ">
-
                                 <div class="media-body">
-                                    <a href="app-take-course.html" class="text-subhead list-group-link">
-                                        {{ object.Lecture_Name }}
-
-                                    </a>
+                                    <B><a href="{{ object.get_absolute_url }}">{{ object.Lecture_Name }}</a></B>
                                 </div>
-
-
                             </li>
                         {% endfor %}
 
@@ -294,8 +208,8 @@
                 </div>
             </div>
             <!-- <div class="col-lg-4" id='calendar'></div> -->
-            <div class="col-lg-4">
-                <div class="fc-view-container" style="">
+            <div class="col-lg-4 col-xs-12">
+                <div class="fc-view-container " style="">
                     <div class="fc-view fc-listMonth-view fc-list-view fc-widget-content" style="">
                         <div class="fc-scroller" style="overflow: hidden auto; height: 317px;">
                             <table class="fc-list-table">

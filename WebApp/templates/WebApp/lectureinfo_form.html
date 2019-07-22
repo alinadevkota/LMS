@@ -27,7 +27,7 @@
         <hr class="header_hr">
     </div>
 
-    <form method="POST">
+    <form method="POST" id="FormID">
         {% csrf_token %}
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             {{ form.Lecture_Name|as_crispy_field }}
@@ -55,15 +55,16 @@
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             {{ form.Lecture_Provider|as_crispy_field }}
         </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <input type="hidden" name="Center_Code" id="id_Center_Code" value="{{ request.user.Center_Code.id }}"
-                   class="select form-control">
-            </div>
+
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             {{ form.Teacher_Code|as_crispy_field }}
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             {{ form.Use_Flag|as_crispy_field }}
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <input type="hidden" name="Center_Code" id="id_Center_Code" value="{{ request.user.Center_Code.id }}"
+                   class="select form-control">
         </div>
 
 
@@ -73,6 +74,11 @@
 
 
     </form>
+
+
+    <div class="second-row">
+        <iframe width="100%" height="730px" src="http://ubl-lecture.netlify.com"></iframe>
+    </div>
 
 
 
