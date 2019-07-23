@@ -26,8 +26,7 @@
                             {% static 'images/profile/female.png' %}
                         {% else %}
                             {% static 'images/profile/profile.png' %}
-                        {% endif %}"
-                alt="..." class="img-circle profile_img" />
+                        {% endif %}" alt="..." class="img-circle profile_img" />
         </div>
 
         <div class="profile_info">
@@ -91,7 +90,10 @@
                     <ul class="nav child_menu">
                         <li><a href="{% url 'inninginfo_list' %}">List of Sessions</a></li>
                         <li>
-                            <a href="{% url 'inninginfo_create' %}">Create New Session</a>
+                            <a href="{% url 'inninggroup_list' %}">Session Mapping</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'groupmapping_list' %}">Group Mapping</a>
                         </li>
                     </ul>
                 </li>
@@ -110,9 +112,11 @@
                     <a><i class="fa fa-user"></i>Forum<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="{% url 'forum:index' %}">Home</a></li>
+                        <li><a href="{% url 'forum:user_info' request.user.pk %}">profile</a></li>
                         {% for nodegroup in node_groups %}
                         <li><a href="{% url 'forum:nodegroup' nodegroup.pk %}">{{ nodegroup.title }}</a></li>
                         {% endfor %}
+
                     </ul>
                 </li>
 

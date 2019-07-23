@@ -7,7 +7,11 @@
 {% block breadcrumb %}
 <ol aria-label="breadcrumb" class="breadcrumb navClass">
     <li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Home</a></li>
-    <li class="active">Search</li>
+    <li>
+        <a
+            href="{% url 'forum:nodegroup' pk=topic.node_group.pk %}">{{ topic.node_group.title }}</a>
+    </li>
+    <li class="active"><a href="{% url 'forum:topic' pk=topic.pk %}">{{ topic.title }}</a></li>
 </ol>
 {% endblock %}
 
@@ -16,6 +20,7 @@
 <div class="panel panel-default paper-shadow">
     <div class="panel panel-heading">
         <h2> {{ panel_title }} </h2>
+        
     </div>
 
     {% if show_order %}
@@ -33,7 +38,6 @@
 
     <!-- List group -->
     <ul class="list-group thread-list">
-    {% if threads %}
         {% for thread in threads %}
         <li class="list-group-item thread-entry">
             <div class="entry media">
@@ -89,9 +93,6 @@
             </div>
         </li>
         {% endfor %}
-    {% else %}
-        No results found
-    {% endif %}
     </ul>
     <div class="panel-footer">
         {% get_pagination %}

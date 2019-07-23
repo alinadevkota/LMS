@@ -30,9 +30,9 @@ from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterCon
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
     HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, \
     OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, \
-    ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
-
-
+    ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, Events
+from datetime import datetime
+import json
 #
 #
 # class ProfileListView(ListView):
@@ -102,7 +102,29 @@ _sentinel = object()
 
 
 def calendar(request):
-    return render(request, 'WebApp/calendar.html')
+    all_events = Events.objects.all()
+    
+    get_event_types = Events.objects.only('event_type')
+    # if filters applied then get parameter and filter based on condition else return object
+    if request.GET:  
+        event_arr = []
+        if request.GET.get('event_type') == "all":
+            all_events = Events.objects.all()
+        else:   
+            all_events = Events.objects.filter(event_type__icontains=request.GET.get('event_type'))
+
+        for i in all_events:
+            event_sub_arr = {}
+            event_sub_arr['title'] = i.event_name
+            start_date = datetime.strptime(str(i.start_date.date()), "%Y-%m-%d").strftime("%Y-%m-%d")
+            end_date = datetime.strptime(str(i.end_date.date()), "%Y-%m-%d").strftime("%Y-%m-%d")
+            event_sub_arr['start'] = start_date
+            event_sub_arr['end'] = end_date
+            event_arr.append(event_sub_arr)
+        return HttpResponse(json.dumps(event_arr))
+
+    # print(context['events'])
+    return render(request, 'WebApp/calendar.html', {'events':all_events,"get_event_types":get_event_types})
 
 
 def start(request):

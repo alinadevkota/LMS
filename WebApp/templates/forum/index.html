@@ -21,7 +21,7 @@
         <li class="list-group-item">
             <div class="media v-middle">
                 <div class="media-body">
-                    <h2 class="text-headline margin-none" style="color:MediumSeaGreen">
+                    <h2 class="text-headline margin-none" style="color:#368BC1">
                         Recent Threads
                     </h2>
 
@@ -57,7 +57,7 @@
                     <a href="{% url 'forum:nodegroup' nodegroup.pk %}"></a>
                     <h6 class="text-headline margin-none">
                         <a href="{% url 'forum:nodegroup' nodegroup.pk %}"
-                            style="color:lightseagreen">{{ nodegroup.title }}</a>
+                            style="color:#43BFC7">{{ nodegroup.title }}</a>
                     </h6>
 
 
@@ -67,7 +67,8 @@
             </div>
         </li>
 
-        <div class="panel panel-default paper-shadow" data-z="0.5">
+
+        <div class="paper-shadow" data-z="0.5" style="margin-top: -15px">
             {% for thread in threads %}
             {% if thread.topic.node_group == nodegroup %}
             <li class="list-group-item media v-middle">

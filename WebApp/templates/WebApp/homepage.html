@@ -60,7 +60,9 @@
                         {% for object in thread %}
                             <li class="list-group-item ">
                                 <div class="media-body">
-                                    <B><span class="forum"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></span><span class="thread">{{ object.pub_date|naturaltime }}</span></B>
+                                    <B><span class="forum"><a
+                                            href="{{ object.get_absolute_url }}">{{ object.title }}</a></span><span
+                                            class="thread">{{ object.pub_date|naturaltime }}</span></B>
                                 </div>
                             </li>
                         {% endfor %}
@@ -190,7 +192,8 @@
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="title">
-                        <h2>Courses</h2>
+                        <a href="{% url 'lectureinfo_list' %}"><h2 style="font-size: 23px ">Courses</h2></a>
+
                         <!-- <h5>Your recent courses</h5> -->
                     </div>
                     <ul class="list-group">
@@ -198,7 +201,8 @@
 
                             <li class="list-group-item ">
                                 <div class="media-body">
-                                    <B><a href="{{ object.get_absolute_url }}">{{ object.Lecture_Name }}</a></B>
+                                    <B style="font-size: 14px"><a
+                                            href="{{ object.get_absolute_url }}">{{ object.Lecture_Name }}</a></B>
                                 </div>
                             </li>
                         {% endfor %}

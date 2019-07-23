@@ -29,11 +29,11 @@
 
 {% block content %}
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-
+{% block breadcrumb %}{% endblock %}
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
 
-        {% block breadcrumb %}{% endblock %}
+
         <li class=""><a href="{% url 'forum:index' %}">
                 <h1>Forum</h1>
             </a></li>
@@ -123,7 +123,7 @@
                         {{ unread_count }} new notifications
                         {% endblocktrans %}
                         {% else %}
-                        <span class="text-muted">{% trans 'No new nofitications' %}</span>
+                        <span class="text-info">{% trans 'No new nofitications' %}</span>
                         {% endif %}
                     </a>
 
@@ -133,7 +133,7 @@
             </div>
 
 
-            <div class="panel panel-default">
+            <div class="panel panel-default" id=" Categories ">
                 <div class="panel-heading">
                     <h4 class="panel-title">Categories</h4>
                 </div>

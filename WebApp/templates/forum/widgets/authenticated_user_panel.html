@@ -6,8 +6,9 @@
         <div class="panel-user-info">
             <div class="avatar-name">
                 <a href="{% url 'forum:user_info' request.user.pk %}">
-                    <div class="profile_pic">
-                        <img src="/media/{{ request.user.Member_Avatar }}" alt="..." class="img-circle profile_img" style="height:30px;width:30px;"/>
+                    <div class="profile_pic_forum">
+                        <img src="/media/{{ request.user.Member_Avatar }}" alt="..."
+                            class="img-circle profile_img_forum" style="height:30px;width:30px;" />
                     </div>
 
                 </a>
@@ -26,7 +27,7 @@
                     </a>
                 </div>
                 <div class="col-xs-4 panel-user-meta-item">
-                    <a href="{% url 'forum:user_info' request.user.pk %}">
+                    <a href="{% url 'forum:user_posts' request.user.pk %}">
                         <div class="text-center">
                             <p class="panel-user-meta-item-value">{{ request.user.posts.count }}</p>
                             <p class="panel-user-meta-item-title">Replies</p>

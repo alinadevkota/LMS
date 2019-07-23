@@ -181,6 +181,26 @@ class UserThreads(ListView):
         context['panel_title'] = context['title'] = context['user'].username
         return context
 
+class UserPosts(ListView):
+    model = Post
+    paginate_by = 30
+    template_name = 'forum/user_replies.html'
+    context_object_name = 'replies'
+
+    def get_queryset(self):
+        return Post.objects.visible().filter(
+            user_id=self.kwargs.get('pk')
+        ).select_related(
+            'user', 'thread'
+        ).prefetch_related(
+            'user__forum_avatar'
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        context['user'] = User.objects.get(pk=self.kwargs.get('pk'))
+        context['panel_title'] = context['title'] = context['user'].username
+        return context
 
 class SearchView(ListView):
     model = Thread

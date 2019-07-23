@@ -33,12 +33,10 @@
             <div class="top_button ">
 
 
-                {% if thread.reply_count == 0 %}
+                {% if request.user == thread.user %}
                 <a href="{% url 'forum:edit_thread' pk=thread.pk %}"><span
                         class="label label-success">{% trans 'Edit' %}</span></a>
                 {% endif %}
-                <a href="{% url 'forum:create_appendix' pk=thread.pk %}"><span
-                        class="label label-success">{% trans 'Append' %}</span></a>
 
 
             </div>
@@ -58,9 +56,8 @@
                         <div class="block_content">
 
 
-
-
                             <div class="top_button">
+                                {% if request.user.is_superuser %}
                                 <a href="#" class="moderate-action move-thread-up" data-toggle="modal"
                                     data-target="#moderation-modal" data-pk="1" data-action="move-thread-up"
                                     data-api-url="/forum/api/threads/1/">
@@ -78,20 +75,22 @@
                                     data-api-url="/forum/api/threads/1/">
                                     <span class="label label-danger">Hide</span>
                                 </a>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <!-- <div class="profile_pic_forum">
+                                    <img src="/media/{{ thread.user.Member_Avatar }}" alt="..." />
+                                </div> -->
+
+                                <h3 class="thread-title"><a>{{ thread.title }}</a></h3>
                             </div>
 
 
-
-                            <h3 class="thread-title"><a>{{ thread.title }}</a></h3>
-
-
-
-
-
-
                             <div class="byline">
-                                <span>{{ thread.pub_date }}</span> by <a>{{ thread.user.username }}</a> |
-                                <span>{% blocktrans with view_count=thread.view_count %}viewed {{ view_count }}
+                                <span>{{ thread.pub_date }}</span> by <a
+                                    href="{% url 'forum:user_info' request.user.pk %}">{{ thread.user.username }}</a> |
+                                <span>{% blocktrans with view_count=thread.view_count %} <i class="fa fa-eye"></i>viewed
+                                    {{ view_count }}
                                     times{% endblocktrans %}</span> | <span>{% if thread.reply_count %}
                                     {% blocktrans count reply_count=thread.reply_count %}{{ reply_count }} Reply
                                     {% plural %}{{ reply_count }} Replies{% endblocktrans %}
@@ -110,9 +109,8 @@
 
                                         <div class="col-xs-9 col-sm-10" id="comment-section">
                                             <div class="reply-content">
-                                                <div class="profile_pic">
-                                                    <img src="https://randomuser.me/api/portraits/men/65.jpg"
-                                                        alt="..." />
+                                                <div class="profile_pic_forum">
+                                                    <img src="/media/{{ post.user.Member_Avatar }}" alt="..." />
                                                 </div>
                                                 <div class="reply-content-detail">
                                                     <a
@@ -153,8 +151,6 @@
                             </ul>
 
 
-
-
                             <form method="POST">
                                 {% csrf_token %}
                                 <h2>Your Comments</h2>
@@ -168,7 +164,8 @@
                                     <br>
                                     <div class="reply_button">
                                         <button class="btn btn-sm btn-primary" type="submit" name="submit"><i
-                                                class="fa fa-reply"></i> Reply</button>
+                                                class="fa fa-reply"></i> Reply
+                                        </button>
 
 
                                     </div>
@@ -177,17 +174,11 @@
                             </p>
 
 
-
                         </div>
                     </div>
 
 
-
-
-
                 </li>
-
-
 
 
             </ul>
