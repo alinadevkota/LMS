@@ -29,11 +29,11 @@
 
 {% block content %}
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-
+{% block breadcrumb %}{% endblock %}
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
 
-        {% block breadcrumb %}{% endblock %}
+
         <li class=""><a href="{% url 'forum:index' %}">
                 <h1>Forum</h1>
             </a></li>
