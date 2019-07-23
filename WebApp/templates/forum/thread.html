@@ -89,7 +89,8 @@
                             <div class="byline">
                                 <span>{{ thread.pub_date }}</span> by <a
                                     href="{% url 'forum:user_info' request.user.pk %}">{{ thread.user.username }}</a> |
-                                <span>{% blocktrans with view_count=thread.view_count %}viewed {{ view_count }}
+                                <span>{% blocktrans with view_count=thread.view_count %} <i class="fa fa-eye"></i>viewed
+                                    {{ view_count }}
                                     times{% endblocktrans %}</span> | <span>{% if thread.reply_count %}
                                     {% blocktrans count reply_count=thread.reply_count %}{{ reply_count }} Reply
                                     {% plural %}{{ reply_count }} Replies{% endblocktrans %}
