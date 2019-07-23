@@ -26,7 +26,7 @@
                 <div class="col-lg-4" style="border-right: 1px solid lightgrey;display: flex;flex-direction: row;">
 
 
-                    <img src="/media/{{ Course.Teacher_Code.Member_Avatar }}"
+                    <img src="{{ object.Teacher_Code.Member_Avatar.url }}"
                          class="profile_img img-responsive"
                          style="height: 50px;width: 50px;">
                     <div style="padding-left: 10px;font-size: 15px;">
@@ -58,18 +58,20 @@
                         <a href="">FORUM</a>
                     </h4>
                 </div>
+
+            </div>
+
+            <h4 align="center">Lecture Description</h4>
+            <br>
+            {{ object.Lecture_Description }}
+            <div id="buttons">
+                <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Lecture</a>
+                <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Lecture</a>
+
             </div>
         </div>
-    </div>
-        <br>
-        <br>
-        <div class="row">
-            <table class="table" >
-
-                <tr>
-                    <td>Lecture Description</td>
-                    <td>{{ object.Lecture_Description }}</td>
-                </tr>
+        <div class="col-md-12 col-sm-12 col-xs-12" id="tabs">
+            <table class="table">
 
                 <tr>
                     <td>Lecture Level</td>
@@ -98,8 +100,20 @@
 
             </table>
         </div>
-        <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Lecture</a>
-        <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Lecture</a>
+        <div class="col-md-12 col-sm-12 xol-xs-12">
+            <a href="{% url 'chapterinfo_list' %}">
+                <h2 class="detailListHeader">Chapters</h2>
+            </a>
+            <hr class="header_hr">
+
+            <a class="btn btn-success" href="{% url 'chapterinfo_create' %}">Create new Chapter</a>
+
+        </div>
+    </div>
+
+
+
+
 
 
 {% endblock %}

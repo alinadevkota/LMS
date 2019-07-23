@@ -77,7 +77,6 @@ html, body {
 }
 
 
-
 .table-responsive {
     /* padding:1em; */
 }
@@ -511,6 +510,7 @@ html, body {
     min-height: 100%;
     width: 230px;
     padding: 0;
+    /*overflow: auto;*/
     position: fixed;
     /* display: -ms-flexbox; */
     display: flex;
@@ -5672,11 +5672,24 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 !important;
 
 }
-.lectureDescription{
+
+.lectureDescription {
     padding-left: 10px;
 }
 
-#avatar{
+#avatar {
     padding-top: 10px;
     padding-left: 15px;
+}
+
+/*coursedetailpage made by rajav*/
+#buttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#tabs {
+    margin-top: 20px;
+    font-size: 13px;
+    padding-right: 50px;
 }
