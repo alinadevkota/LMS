@@ -6,8 +6,9 @@
         <div class="panel-user-info">
             <div class="avatar-name">
                 <a href="{% url 'forum:user_info' request.user.pk %}">
-                    <div class="profile_pic">
-                        <img src="/media/{{ request.user.Member_Avatar }}" alt="..." class="img-circle profile_img" style="height:30px;width:30px;"/>
+                    <div class="profile_pic_forum">
+                        <img src="/media/{{ request.user.Member_Avatar }}" alt="..."
+                            class="img-circle profile_img_forum" style="height:30px;width:30px;" />
                     </div>
 
                 </a>
