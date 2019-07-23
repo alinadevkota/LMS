@@ -4,14 +4,14 @@
     <div class="inninggroupListClass">
         <ol aria-label="breadcrumb" class="breadcrumb navClass">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">SessionMapping</li>
+            <li class="breadcrumb-item active" aria-current="page">Session Mapping</li>
         </ol>
         <hr class="header_hr">
-        <h2 class="tableHeader">List of SessionMapping</h2>
+        <h2 class="tableHeader">List of Session Mapping</h2>
         <hr class="header_hr">
 
         <div class="btn-createnew">
-            <a class="btn btn-success" href="{% url 'inninggroup_create' %}">Create new SessionMapping</a>
+            <a class="btn btn-success" href="{% url 'inninggroup_create' %}">Create new Session Mapping</a>
         </div>
         <br><br><br>
         <div class="table-responsive">
@@ -21,28 +21,23 @@
                 <tr>
                     <td>ID</td>
                     <td>Link</td>
-                    <td>teacher_code</td>
-                    <td>use_flag</td>
-                    <td>reg_date</td>
-                    <td>reg_time</td>
-                    <td>reg_agent</td>
-                    <td>udt_date</td>
-                    <td>udt_time</td>
-                    <td>udt_agent</td>
+                    <td>Teacher Code</td>
+                    <td>Register Agent</td>
+                    <td>Inning Code</td>
+                    <td>Lecture Code</td>
+                    <td>Use Flag</td>
                 </tr>
                 </thead>
                 {% for object in object_list %}
                     <tr>
-                        <td>{{ object.pk }}</td>
-                        <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
-                        <td>{{ object.teacher_code }}</td>
-                        <td>{{ object.use_flag }}</td>
-                        <td>{{ object.reg_date }}</td>
-                        <td>{{ object.reg_time }}</td>
-                        <td>{{ object.reg_agent }}</td>
-                        <td>{{ object.udt_date }}</td>
-                        <td>{{ object.udt_time }}</td>
-                        <td>{{ object.udt_agent }}</td>
+                        <td>{{ forloop.counter }}</td>
+                        <td><b><a href="{{ object.get_absolute_url }}">{{ object }}</a></b></td>
+                        <td>{{ object.Teacher_Code }}</td>
+                        <td>{{ object.Register_Agent }}</td>
+                        <td>{{ object.Inning_Code }}</td>
+                        <td>{{ object.Lecture_Code }}</td>
+                        <td>{{ object.Use_Flag }}</td>
+
                     </tr>
                 {% endfor %}
             </table>
