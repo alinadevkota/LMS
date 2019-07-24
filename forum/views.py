@@ -74,11 +74,19 @@ class NodeGroupView(ListView):
         )
 
     def get_context_data(self, **kwargs):
+        topics = Topic.objects.filter(node_group__id=self.kwargs.get('pk'))
+        latest_threads = []
+        for topic in topics:
+            try:
+                thread = Thread.objects.filter(topic=topic.pk).order_by('pub_date')[0]
+            except:
+                threads=None
+            latest_threads.append([topic,thread])
         context = super(ListView, self).get_context_data(**kwargs)
         context['node_group'] = nodegroup = NodeGroup.objects.get(pk=self.kwargs.get('pk'))
         context['title'] = context['panel_title'] = nodegroup.title
         context['show_order'] = True
-        context['topics']=Topic.objects.filter(node_group__id=self.kwargs.get('pk'))
+        context['latest_thread_for_topics']=latest_threads
         return context
 
 class TopicView(ListView):
