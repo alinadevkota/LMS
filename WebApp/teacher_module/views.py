@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView
 
+from WebApp.forms import LectureInfoForm
 from WebApp.models import LectureInfo
 
 
@@ -22,3 +23,19 @@ def lecturedetail(request, pk=''):
 
 def Dashboard(request):
     return render(request, 'teacher_module/homepage.html', )
+
+
+
+class LectureInfoCreateView(CreateView):
+    model = LectureInfo
+    form_class = LectureInfoForm
+
+
+class LectureInfoDetailView(DetailView):
+    model = LectureInfo
+    template_name = 'lecture/lectureinfo_detail.html'
+
+
+class LectureInfoUpdateView(UpdateView):
+    model = LectureInfo
+    form_class = LectureInfoForm

@@ -9,18 +9,18 @@
     <div class="right_col">
 
 
-        <div class="lectureInfoListClass">
-            <ol aria-label="breadcrumb" class="breadcrumb navClass">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Lecture</li>
-            </ol>
-
-            <h2 class="tableHeader">List of Lectures</h2>
-            <hr class="header_hr">
-            <div class="btn-createnew">
-                <a class="btn btn-success" href="{% url 'lectureinfo_create' %}">Create new Lecture</a>
-            </div>
-            <br><br><br>
+{#        <div class="lectureInfoListClass">#}
+{#            <ol aria-label="breadcrumb" class="breadcrumb navClass">#}
+{#                <li class="breadcrumb-item"><a href="/">Home</a></li>#}
+{#                <li class="breadcrumb-item active" aria-current="page">Lecture</li>#}
+{#            </ol>#}
+{##}
+{#            <h2 class="tableHeader">List of Lectures</h2>#}
+{#            <hr class="header_hr">#}
+{#            <div class="btn-createnew">#}
+{#                <a class="btn btn-success" href="{% url 'lectureinfo_create' %}">Create new Lecture</a>#}
+{#            </div>#}
+{#            <br><br><br>#}
             {#    <div class="table-responsive">#}
             {#        <table class="table table-striped table-bordered bg-white">#}
             {#            <thead class="thead-light bg-primary">#}
@@ -51,22 +51,22 @@
             {#        </table>#}
             {##}
             {#    </div>#}
-            <div id="divID">
-                {% for object in object_list %}
-                    <div class="gridContentsList col-md-4 col-sm-6 col-xs-12" id="listCard">
-                        <a href="{{ object.get_absolute_url }}">
-                            <img class="card-img-top" src="
-                            {% if object.Lecture_Cover_File %}
-                                /media/{{ object.Lecture_Cover_File }}
-                            {% else %}
-                                {% static 'images/course.jpg' %}
-                            {% endif %}"
-                                 alt="Card image cap" width="100%">
-                        </a>
-                        <div class="card-body" id="cardInfo">
-                            <h2 class="card-title"><strong><a
-                                    href="{{ object.get_absolute_url }}">{{ object.Lecture_Name }}</a></strong></h2>
-
+{#            <div id="divID">#}
+{#                {% for object in object_list %}#}
+{#                    <div class="gridContentsList col-md-4 col-sm-6 col-xs-12" id="listCard">#}
+{#                        <a href="{{ object.get_absolute_url }}">#}
+{#                            <img class="card-img-top" src="#}
+{#                            {% if object.Lecture_Cover_File %}#}
+{#                                /media/{{ object.Lecture_Cover_File }}#}
+{#                            {% else %}#}
+{#                                {% static 'images/course.jpg' %}#}
+{#                            {% endif %}"#}
+{#                                 alt="Card image cap" width="100%">#}
+{#                        </a>#}
+{#                        <div class="card-body" id="cardInfo">#}
+{#                            <h2 class="card-title"><strong><a#}
+{#                                    href="{{ object.get_absolute_url }}">{{ object.Lecture_Name }}</a></strong></h2>#}
+{##}
                             {#                        <p class="ratingIcons">#}
                             {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
                             {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
@@ -74,36 +74,36 @@
                             {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
                             {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
                             {#                        </p>#}
-
-                            <hr>
-
-                            <h5 class="lectureDescription">
-                                {% if object.Lecture_Description %}
-                                    {{ object.Lecture_Description }}
-                                {% else %}
-                                    No Description
-                                {% endif %}
-                            </h5>
-
-
-                            <div class="row d-flex flex-row">
-                                <div class="col-md-3">
-                                            <span class="">
-                                                <img width="60px" id="avatar"
-                                                     src="{{ object.Teacher_Code.Member_Avatar.url }}">
-                                            </span>
-                                </div>
-
-                                <div class="col-md-9 ">
-                                    <h4>{{ object.Teacher_Code }}</h4>
-                                    <p>Instructor</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
+{##}
+{#                            <hr>#}
+{##}
+{#                            <h5 class="lectureDescription">#}
+{#                                {% if object.Lecture_Description %}#}
+{#                                    {{ object.Lecture_Description }}#}
+{#                                {% else %}#}
+{#                                    No Description#}
+{#                                {% endif %}#}
+{#                            </h5>#}
+{##}
+{##}
+{#                            <div class="row d-flex flex-row">#}
+{#                                <div class="col-md-3">#}
+{#                                            <span class="">#}
+{#                                                <img width="60px" id="avatar"#}
+{#                                                     src="{{ object.Teacher_Code.Member_Avatar.url }}">#}
+{#                                            </span>#}
+{#                                </div>#}
+{##}
+{#                                <div class="col-md-9 ">#}
+{#                                    <h4>{{ object.Teacher_Code }}</h4>#}
+{#                                    <p>Instructor</p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
 {#        <div class="container">#}
 {#            <div>#}
 {#                <form style="display:inline-flex">#}
