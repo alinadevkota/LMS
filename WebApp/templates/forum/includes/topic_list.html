@@ -6,7 +6,7 @@
 
 {% block breadcrumb %}
     <ol class="breadcrumb navClass">
-        <li><a>Forum</a></li>
+        <li><a href="{% url 'forum:index' %}">Home</a></li>
         <li class="active">{{ node_group }}</li>
     </ol>
 {% endblock %}
