@@ -10,7 +10,8 @@ except ImportError:
 from .views import QuizListView, QuizCreateView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
     QuizMarkingDetail, QuizTake, MCQuestionCreateView, TFQuestionCreateView, \
-    EssayQuestionCreateView, MCQuestionUpdateView, TFQuestionUpdateView, EssayQuestionUpdateView
+    EssayQuestionCreateView, MCQuestionUpdateView, TFQuestionUpdateView, \
+    EssayQuestionUpdateView, QuizDetailView, QuizUpdateView, QuizDeleteView
 
 urlpatterns = [
 
@@ -27,15 +28,22 @@ urlpatterns = [
     url(r'^marking/(?P<pk>[\d.]+)/$', view=QuizMarkingDetail.as_view(), name='quiz_marking_detail'),
 
      # passes variable 'quiz_name' to quiz_take view
-    # url(r'^(?P<slug>[\w-]+)/$', view=QuizDetailView.as_view(), name='quiz_start_page'),
+    url(r'^(?P<slug>[\w-]+)/$', view=QuizDetailView.as_view(), name='quiz_start_page'),
 
     url(r'^(?P<quiz_name>[\w-]+)/take/$', view=QuizTake.as_view(), name='quiz_question'),
 ]
 
+
+
+
+
 urlpatterns += (
-    # urls for LectureInfo
-    # path('lectureinfo/', views.LectureInfoListView.as_view(), name='lectureinfo_list'),
-    path('create/', QuizCreateView.as_view(), name='quiz_create'),
+
+    path('quiz/', QuizListView.as_view(), name='quiz_list'),
+    path('quiz/create/', QuizCreateView.as_view(), name='quiz_create'),
+    path('quiz/update/<int:pk>', QuizUpdateView.as_view(), name = 'quiz_update'),
+    path('quiz/detail/<int:pk>', QuizDetailView.as_view(), name = 'quiz_detail'),
+    path('quiz/delete/<int:pk>', QuizDeleteView, name = 'quiz_delete'),
 
     path('mcquestion/', views.MCQuestionListView.as_view(), name='mcquestion_list'),
     path('mcquestion/create/', MCQuestionCreateView.as_view(), name='mcquestion_create'),

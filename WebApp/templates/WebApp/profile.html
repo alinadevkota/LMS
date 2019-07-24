@@ -12,9 +12,9 @@
         <div class="panel">
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-3 col-xs-12" id="avatarDiv">
+                    <div class="col-lg-3 col-xs-12 boxShadow" id="avatarDiv">
 
-                        <img class="img-circle" src="
+                        <img style="margin-top: 15px;" class="img-circle" src="
                                     {% if request.user.Member_Avatar %}
                                         /media/{{ request.user.Member_Avatar }}
                                     {% elif request.user.Member_Gender == '1' %}
@@ -50,21 +50,29 @@
                                 </li>
                                 <br>
                                 <li>
-                                    <i class="fa fa-map-marker "></i>
-                                    &nbsp;&nbsp;{{ request.user.Member_Permanent_Address }}
+                                    {% if request.user.Member_Permanent_Address %}
+                                        <i class="fa fa-map-marker "></i>
+                                        &nbsp;&nbsp;{{ request.user.Member_Permanent_Address }}
+                                    {% endif %}
                                 </li>
                                 <br>
 
                                 <li>
-                                    <i class="fa fa-envelope-o"></i> {{ request.user.email }}
+                                    {% if request.user.email %}
+                                        <i class="fa fa-envelope-o"></i> {{ request.user.email }}
+                                    {% endif %}
                                 </li>
                                 <br>
                                 <li>
-                                    <i class="fa fa-phone"></i>&nbsp; {{ request.user.Member_Phone }}
+                                    {% if request.user.Member_Phone %}
+                                        <i class="fa fa-phone"></i>&nbsp; {{ request.user.Member_Phone }}
+                                    {% endif %}
                                 </li>
                                 <br>
                                 <li>
-                                    <i class="fa fa-calendar"></i>&nbsp; {{ request.user.Member_Phone }}
+                                    {% if request.user.Member_BirthDate %}
+                                        <i class="fa fa-calendar"></i>&nbsp; {{ request.user.Member_BirthDate }}
+                                    {% endif %}
                                 </li>
                             </ul>
                         </h4>
@@ -148,7 +156,7 @@
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input id="birthday" value="{{ user.date_joined }}"
+                                            <input id="birthday" value="{{ user.Member_BirthDate }}"
                                                    class="form-control col-md-7 col-xs-12" type="date">
                                         </div>
                                     </div>

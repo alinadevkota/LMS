@@ -29,15 +29,13 @@
     <div class="x_content">
         <form method="post" id="FormID" data-parsley-validate="">
             {% csrf_token %}
-
-            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <label for="id_Member_ID" class="control-label ">
                     Member ID
                 </label>
                 <input type="text" value="{{ object.Member_ID }}" name="Member_ID" id="id_Member_ID" required="required"
                        class="form-control has-feedback-left" placeholder="Member ID">
                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -211,6 +209,8 @@
                         name="Is_Teacher" class="checkboxinput" id="id_Is_Teacher">
                     Is Teacher
                 </label> </div> -->
+
+
 
             <div class="submitButton col-md-12" id="buttonID">
                 <button class="btn btn-success" type="submit">Submit</button>

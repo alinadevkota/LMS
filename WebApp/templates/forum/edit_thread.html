@@ -2,12 +2,20 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-{% block left %}
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form method="post" action="{% url "forum:edit_thread" pk=form.instance.pk %}">
-                {% crispy form %}
-            </form>
-        </div>
-    </div>
+{% block breadcrumb %}
+<ol aria-label="breadcrumb" class="breadcrumb navClass">
+
+    <li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Home</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'forum:edit_thread' pk=form.instance.pk %}"> Edit Thread</a>
+    </li>
+</ol>
+{% endblock %}
+
+{% block main_contain %}
+<div class="panel-body topic_create" data-z="0.5">
+    <form method="post" action="{% url 'forum:edit_thread' pk=form.instance.pk %}">
+        {% crispy form %}
+    </form>
+</div>
+
 {% endblock %}

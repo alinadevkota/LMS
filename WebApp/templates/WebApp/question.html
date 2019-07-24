@@ -18,7 +18,7 @@ Polls
     <div class="row">
         <div class="searchBarSurvey col-sm-5">
             <form>
-                <input type="search" placeholder="Course name...">
+                <input type="search" placeholder="Survey...">
                 <button class="btn btn-primary">Search</button>
             </form>
         </div>
@@ -194,29 +194,17 @@ Polls
                                                 <div class="questionContainer">
                                                     <div id="mcq_que">
                                                         <div class="queContainer">
-                                                            <div class="form-group ">
+                                                            <div class="questionSection ">
                                                                 <label for="questions">Questions:</label>
-                                                                <input class="form-control" type="text" name="questions">
+                                                                <button class="btn btn-success" id="newQuestion">+
+                                                                    Questions</button>
                                                             </div>
-                                                            <button class="btn btn-success"><a href="" id="addButtons">+
-                                                                    Que</a></button>
                                                         </div>
                                                         <div class="optionContainer">
-                                                            <div id="option_Button">
-                                                                <div class="form-group ">
-                                                                    <label for="option">Option:</label>
-                                                                    <button class="btn btn-success"><a href="" id="addButtons">+</a></button>
-                                                                </div>
-                                                            </div>
+                                                            <ul id="mySelect">
 
-                                                            <ul style="list-style: none;">
-                                                                <li><input type="radio" name="gender" value="Versatile">
-                                                                    Option-1<br></li>
-                                                                <li><input type="radio" name="gender" value="Available">
-                                                                    Option-2<br></li>
-                                                                <li><input type="radio" name="gender" value="Reusable">
-                                                                    Option-3<br></li>
                                                             </ul>
+
                                                         </div>
                                                         <a href="">
                                                             <div class="btn btn-info">Save</div>
@@ -233,7 +221,7 @@ Polls
                                                                 <input class="form-control" type="text" name="questions">
                                                             </div>
                                                             <button class="btn btn-success"><a href="" id="addButtons">+
-                                                                    Que</a></button>
+                                                                    Questions</a></button>
                                                         </div>
 
                                                         <div class="form-group">
@@ -242,12 +230,15 @@ Polls
                                                                 rows="4"></textarea>
                                                         </div>
 
-                                                        <a href="">
-                                                            <div class="btn btn-info">Save</div>
-                                                        </a>
-                                                        <a href="">
-                                                            <div class="btn btn-warning">Save As New</div>
-                                                        </a>
+                                                        <div class="sticky">
+                                                            <a href="">
+                                                                <div class="btn btn-info">Save</div>
+                                                            </a>
+                                                            <a href="">
+                                                                <div class="btn btn-warning">Save As New</div>
+                                                            </a>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>

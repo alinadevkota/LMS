@@ -256,7 +256,6 @@ input[type=search]{
     background-color: #e3e3e3 ;
     padding: 5px 50px;
     margin-top: 100px;
-    margin-left: -150px;
 }
 .bs-chart-container strong {
     font-weight: 400;
@@ -406,7 +405,6 @@ form{
 
 .index-form{
     width: 100%;
-    height: auto;
     margin-left: -145px;
     margin-top: -100px;
     padding-top: 60px;
@@ -420,30 +418,22 @@ form{
     min-width: 40rem;
   
 }
-.label_inputs{
-    
-    padding: 20px;
-    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+.label_inputs{    
+    padding: 20px;  
 }
 
 .questionContainer{
-    display: flex;
     padding: 20px;
 }
-.queContainer{
+.questionSection{
     display: flex;
     justify-items: auto;
-}
-.queContainer .form-control{
-    min-width: 40rem;
 }
 .questionContainer .btn-success{
     width: auto;
     height: 35px;
     background-color: #5BB75B;
-    align-content: center;
-    margin-top: 25px;
-    margin-left: 10px;
+    margin-left: 50px;
 }
 
 #switchButtons{
@@ -454,30 +444,34 @@ form{
 }
 #option_Button{
     display: flex;
-    margin-bottom: 10px;
 }
 #option_Button .btn-success{
     margin-top: 0px;
     margin-left: 10px;
 }
 .index-form .btn-info{
-    margin-top: 10px;
+    margin-top: 20px;
     font-size: 18px;
     width: 120px;
-    margin-left: 110px;
     margin-bottom: 20px;   
 }
 .index-form .btn-warning{
-    margin-top: 10px;
+    margin-top: 20px;
     font-size: 18px;
     width: 140px;
     margin-bottom: 20px;   
 }
-
+.optionContainer{
+    margin-top: 5px;
+}
+#mySelect{
+    background-color: #f3f3f3;
+    padding: 10px;
+}
 /* Outer */
 .popup {
 	width:100%;
-    height:100%;
+    height:100vh;
 	display:none;
 	position:fixed;
 	top:0px;
@@ -489,7 +483,8 @@ form{
 .popup-inner {
 	max-width:600px;
     width:60%;
-    height: 90%;
+    height: 100vh;
+    overflow-y: auto;
 	padding:40px;
 	position:absolute;
 	top:50%;
@@ -505,7 +500,9 @@ form{
 .popup-close {
 	width:30px;
 	height:30px;
-	padding-top:4px;
+    padding-top:4px;
+    margin-right: 20px;
+    margin-top: 20px;
 	display:inline-block;
 	position:absolute;
 	top:0px;

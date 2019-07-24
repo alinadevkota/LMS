@@ -2,7 +2,16 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-{% block left %}
+{% block breadcrumb %}
+<ol aria-label="breadcrumb" class="breadcrumb navClass">
+
+    <li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Home</a></li>
+    <li class="breadcrumb-item active"><a href="{% url "forum:edit_topic" pk=form.instance.pk %}"> Edit Topic</a>
+    </li>
+</ol>
+{% endblock %}
+
+{% block main_contain %}
     <div class="panel panel-default">
         <div class="panel-body">
             <form method="post" action="{% url "forum:edit_topic" pk=form.instance.pk %}">

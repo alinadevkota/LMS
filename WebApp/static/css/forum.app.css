@@ -29,7 +29,7 @@ body.login .lock-container {
 }
 body.login .lock-container .panel {
   max-width: 300px !important;
-  background: #fff;
+  background: fff;
   position: relative;
 }
 body.login .lock-container .panel img {
@@ -1028,6 +1028,7 @@ fieldset[disabled] .btn-inverse.active {
 }
 .panel {
   box-shadow: none;
+ 
 }
 .panel-group .panel-heading {
   padding: 15px;
@@ -10732,6 +10733,8 @@ div.list-group > .list-group-item {
 .list-group-menu > .list-group-item > a {
   display: block;
   padding: 10px 15px;
+  font-size: 15px;
+  color:#368BC1;
 }
 .list-group-menu > .list-group-item > a:hover {
   text-decoration: none;
@@ -48580,7 +48583,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   
 }
 
-.profile_pic{
+.profile_pic_forum{
   width:50px;
   height:50px;
   border-radius:50%;
@@ -48588,7 +48591,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   margin-left:2px
 }
 
-.profile_pic img{
+.profile_pic_forum img{
   width:50px;
   height:50px;
   border-radius:50%;
@@ -48619,7 +48622,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   margin-left: 5px;
 }
 
-.create_topic{
+/* .create_topic{
   margin-left: 5%;
   margin-right: 5%;
 }
@@ -48630,9 +48633,22 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   border: 2px solid lightgrey;
   margin-top: 5%;
  
-}
+} */
 
 .user_infos{
   margin-bottom: -20px;
   margin-top: -40px;
 }
+
+.panel-username{
+  
+  margin-right:150px;
+  margin-top: -40px;
+  float: right;
+    
+}
+
+.form-control{
+  background-color: #F3F2EE;
+}
+
