@@ -5,6 +5,7 @@
 {% block left %}
 <div class="panel panel-default topic_create">
     <div class="panel-body create_topic">
+        {{ topic }}
         <form method="post" action="{% url "forum:create_thread" %}">
             {% crispy form %}
         </form>

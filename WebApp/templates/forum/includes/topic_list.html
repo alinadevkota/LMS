@@ -22,8 +22,11 @@
             </p>
         </div>
         <!-- List group -->
+        <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic' nodegroup_pk=node_group.pk %}"><i
+                class="fa fa-fw fa-plus"></i> Sub Category
+        </a>
         <ul class="list-group thread-list">
- <!-- latest_thread_for_topics consists of list of list of [topic, corresponding_latest_thread, reply_count] -->
+            <!-- latest_thread_for_topics consists of list of list of [topic, corresponding_latest_thread, reply_count] -->
             {% for list in latest_thread_for_topics %}
                 <li class="list-group-item thread-entry">
                     <div class="entry media">
@@ -35,25 +38,25 @@
                             <a href="{% url 'forum:topic' pk=list.0.pk %}" class="entry-link">
                                 {{ list.0.title }}
                             </a>
-                        <br>
-                        {{ list.0.description }}
+                            <br>
+                            {{ list.0.description }}
                             <br>
                             Latest Thread :<a href="{% url 'forum:thread' pk=list.1.pk %}">{{ list.1.title }}</a>
                             Reply count: {{ list.2 }}
 
-{#                                <span class="meta">#}
-{#                                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">#}
-{#                                        <span class="label label-default meta-topic">#}
-{#                                        {{ topic.node_group.title }}#}
-{#                                        </span>#}
-{#                                    </a>#}
-{#                                </span>#}
+                            {#                                <span class="meta">#}
+                            {#                                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">#}
+                            {#                                        <span class="label label-default meta-topic">#}
+                            {#                                        {{ topic.node_group.title }}#}
+                            {#                                        </span>#}
+                            {#                                    </a>#}
+                            {#                                </span>#}
 
                         </div>
-                                                <div class="media-right media-middle">
-                                                    total threads:
-                                                    <span class="badge">{{ list.0.thread_count }}</span>
-                                                </div>
+                        <div class="media-right media-middle">
+                            total threads:
+                            <span class="badge">{{ list.0.thread_count }}</span>
+                        </div>
                     </div>
                 </li>
             {% endfor %}
