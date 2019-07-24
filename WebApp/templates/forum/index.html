@@ -97,8 +97,8 @@
 
                         <br>
                         posted by
-                        <a href="#" style="color:blue">
-                            <img src="/media/{{ request.user.Member_Avatar }}" class="img-circle width-20">
+                        <a href="{% url 'forum:user_info' pk=thread.user.pk %}" style="color:blue">
+                            <img src="/media/{{ thread.user.Member_Avatar }}" class="img-circle width-20">
                             {{ thread.user.username }}</a>
                         &nbsp; | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }}
 

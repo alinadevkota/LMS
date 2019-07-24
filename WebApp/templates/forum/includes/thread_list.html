@@ -42,8 +42,8 @@
         <li class="list-group-item thread-entry">
             <div class="entry media">
 
-                <a>
-                    <img src="https://randomuser.me/api/portraits/men/65.jpg" alt=""
+                <a href="{% url 'forum:user_info' pk=thread.user.pk %}">
+                    <img src="/media/{{ thread.user.Member_Avatar }}" alt=""
                         class="avatar avatar-96wp-user-avatar wp-user-avatar-96 alignnone photo avatar-default ">
                 </a>
 

@@ -4,11 +4,11 @@
     <div class="groupmappingListClass">
         <ol aria-label="breadcrumb" class="breadcrumb navClass">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">GroupMapping</li>
+            <li class="breadcrumb-item active" aria-current="page">Group Mapping</li>
         </ol>
 
         <hr class="header_hr">
-        <h2 class="tableHeader">List of GroupMappings</h2>
+        <h2 class="tableHeader">List of Group Mappings</h2>
         <hr class="header_hr">
         <div class="btn-createnew">
             <a class="btn btn-success" href="{% url 'groupmapping_create' %}">Create New GroupMapping</a>
@@ -20,26 +20,21 @@
                 <tr>
                     <td>ID</td>
                     <td>Link</td>
-                    <td>use_flag</td>
-                    <td>reg_date</td>
-                    <td>reg_time</td>
-                    <td>reg_agent</td>
-                    <td>udt_date</td>
-                    <td>udt_time</td>
-                    <td>udt_agent</td>
+                    <td>Register Agent</td>
+                    <td>Inning Code</td>
+                    <td>Use Flag</td>
+                    <td>Student Code</td>
                 </tr>
                 </thead>
                 {% for object in object_list %}
                     <tr>
-                        <td>{{ object.pk }}</td>
-                        <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
-                        <td>{{ object.use_flag }}</td>
-                        <td>{{ object.reg_date }}</td>
-                        <td>{{ object.reg_time }}</td>
-                        <td>{{ object.reg_agent }}</td>
-                        <td>{{ object.udt_date }}</td>
-                        <td>{{ object.udt_time }}</td>
-                        <td>{{ object.udt_agent }}</td>
+                        <td>{{ forloop.counter }}</td>
+                        <td><b><a href="{{ object.get_absolute_url }}">{{ object }}</a></b></td>
+                        <td>{{ object.Register_Agent }}</td>
+                        <td>{{ object.Inning_Code }}</td>
+                        <td>{{ object.Use_Flag }}</td>
+                        <td>{{ object.Student_Code }}</td>
+
                     </tr>
                 {% endfor %}
             </table>
