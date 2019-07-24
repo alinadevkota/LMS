@@ -315,6 +315,7 @@ class LectureInfoCreateView(CreateView):
 
 class LectureInfoDetailView(DetailView):
     model = LectureInfo
+    template_name = 'lecture/lectureinfo_detail.html'
 
 
 class LectureInfoUpdateView(UpdateView):
