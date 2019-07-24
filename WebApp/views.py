@@ -33,8 +33,6 @@ from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterCon
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, Events
 from datetime import datetime
 import json
-
-
 #
 #
 # class ProfileListView(ListView):
@@ -105,14 +103,14 @@ _sentinel = object()
 
 def calendar(request):
     all_events = Events.objects.all()
-
+    
     get_event_types = Events.objects.only('event_type')
     # if filters applied then get parameter and filter based on condition else return object
-    if request.GET:
+    if request.GET:  
         event_arr = []
         if request.GET.get('event_type') == "all":
             all_events = Events.objects.all()
-        else:
+        else:   
             all_events = Events.objects.filter(event_type__icontains=request.GET.get('event_type'))
 
         for i in all_events:
@@ -126,7 +124,7 @@ def calendar(request):
         return HttpResponse(json.dumps(event_arr))
 
     # print(context['events'])
-    return render(request, 'WebApp/calendar.html', {'events': all_events, "get_event_types": get_event_types})
+    return render(request, 'WebApp/calendar.html', {'events':all_events,"get_event_types":get_event_types})
 
 
 def start(request):
@@ -135,20 +133,6 @@ def start(request):
     # return render(request,"start.html")
 
     if request.user.is_authenticated:
-        if request.user.Is_CenterAdmin:
-            thread = Thread.objects.filter()
-            course = LectureInfo.objects.order_by('Register_DateTime')[:4]
-            coursecount = LectureInfo.objects.count()
-            studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
-            teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
-            parentcount = MemberInfo.objects.filter(Is_Parent=True, Center_Code=request.user.Center_Code).count
-            totalcount = MemberInfo.objects.filter(Center_Code=request.user.Center_Code).count
-
-            # return HttpResponse("default home")
-            return render(request, "WebApp/homepage.html",
-                          {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
-                           'teachercount': teachercount,
-                           'parentcount': parentcount, 'totalcount': totalcount, 'thread': thread})
 
         if request.user.Is_Student:
             return redirect('students_dashboard')
@@ -156,8 +140,8 @@ def start(request):
             return redirect('teacher_home')
         if request.user.Is_Parent:
             return redirect('parent_home')
-        if not request.user.is_authenticated:
-            return render(request, "WebApp/splash_page.html")
+        if request.user.Is_CenterAdmin:
+            return redirect('/admin/')
 
     if request.user.is_authenticated:
         thread = Thread.objects.filter()
@@ -172,7 +156,9 @@ def start(request):
         return render(request, "WebApp/homepage.html",
                       {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
                        'teachercount': teachercount,
-                       'parentcount': parentcount, 'totalcount': totalcount, 'thread': thread})
+                       'parentcount': parentcount, 'totalcount': totalcount,'thread': thread})
+
+
 
     return render(request, "WebApp/splash_page.html")
 
@@ -1062,7 +1048,6 @@ def question(request):
 
 def polls(request):
     return render(request, 'WebApp/polls.html')
-
 
 def survey(request):
     return render(request, 'WebApp/survey.html')

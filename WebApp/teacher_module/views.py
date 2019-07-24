@@ -18,7 +18,3 @@ class LectureInfoListView(ListView):
 
 def lecturedetail(request, pk=''):
     return render(request, 'teacher_module/course_detail.html', {'Course': LectureInfo.objects.get(id=pk)})
-
-
-def Dashboard(request):
-    return render(request, 'teacher_module/homepage.html', )

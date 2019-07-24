@@ -13,7 +13,6 @@ from django.contrib.auth.decorators import login_required
 from .models import Thread, Topic, Post, Notification, ForumAvatar, NodeGroup
 from .forms import ThreadForm, ThreadEditForm, AppendixForm, ForumAvatarForm, ReplyForm, TopicForm, TopicEditForm, PostEditForm
 from .misc import get_query
-from django.db.models import Sum
 import re
 
 EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
@@ -75,22 +74,11 @@ class NodeGroupView(ListView):
         )
 
     def get_context_data(self, **kwargs):
-        topics = Topic.objects.filter(node_group__id=self.kwargs.get('pk'))
-        latest_threads = []
-        for topic in topics:
-            reply_count=0
-            try:
-                thread = Thread.objects.filter(topic=topic.pk).order_by('pub_date')[0]
-                reply_count=reply_count+Thread.objects.aggregate(Sum('reply_count'))['reply_count__sum']
-            except:
-                thread=None
-                reply_count = 0
-            latest_threads.append([topic,thread,reply_count])
         context = super(ListView, self).get_context_data(**kwargs)
         context['node_group'] = nodegroup = NodeGroup.objects.get(pk=self.kwargs.get('pk'))
         context['title'] = context['panel_title'] = nodegroup.title
         context['show_order'] = True
-        context['latest_thread_for_topics']=latest_threads
+        context['topics']=Topic.objects.filter(node_group__id=self.kwargs.get('pk'))
         return context
 
 class TopicView(ListView):
