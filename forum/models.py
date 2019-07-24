@@ -68,7 +68,7 @@ class Thread(models.Model):
     content_rendered = models.TextField(default='', blank=True, verbose_name=_("rendered content"))
     view_count = models.IntegerField(default=0, verbose_name=_("view count"))
     reply_count = models.IntegerField(default=0, verbose_name=_("reply count"))
-    topic = models.ForeignKey('Topic', related_name='threads', verbose_name=_("topic"),on_delete=models.CASCADE)
+    topic = models.ForeignKey('topic', related_name='threads', verbose_name=_("topic"),on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name=_("published time"))
     last_replied = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name=_("last replied time"))
     order = models.IntegerField(default=10, verbose_name=_("order"))
@@ -102,8 +102,18 @@ class Thread(models.Model):
             self.content_rendered, mentioned_users = render_content(self.content_raw, sender=self.user.username)
         super(Thread, self).save(*args, **kwargs)
         self.raw_content_hash = new_hash
+        t = self.topic
+        t.thread_count = t.get_thread_count()
+        t.save(update_fields=['thread_count'])
         for to in mentioned_users:
                 notify(to=to.username, sender=self.user.username, thread=self.pk)
+
+
+    def delete(self, *args, **kwargs):
+        super(Thread, self).delete(*args, **kwargs)
+        t = self.topic
+        t.thread_count = t.get_thread_count()
+        t.save(update_fields=[ 'thread_count'])
 
     class Meta:
         ordering = ['order', '-pub_date']
@@ -209,13 +219,13 @@ class NodeGroup(models.Model):
     def __str__(self):
         return self.title
     def get_topic_count(self):
-        return self.topic.count()
+        return self.topics.count()
 
 @python_2_unicode_compatible
 class Topic(models.Model):
     title = models.CharField(max_length=30, verbose_name=_("title"))
     description = models.TextField(default='', blank=True, verbose_name=_("description"))
-    node_group = models.ForeignKey(NodeGroup, verbose_name=_("nodegroup"), on_delete=models.CASCADE)
+    node_group = models.ForeignKey(NodeGroup, verbose_name=_("nodegroup"),related_name='topics', on_delete=models.CASCADE)
     thread_count = models.IntegerField(default=0, verbose_name=_("thread count"))
     topic_icon = models.CharField(max_length=30,verbose_name=_("topic_icon"))
 
@@ -224,6 +234,19 @@ class Topic(models.Model):
 
     def get_thread_count(self):
         return self.threads.visible().count()
+    def save(self, *args, **kwargs):
+        super(Topic, self).save(*args, **kwargs)
+        t = self.node_group
+        t.topic_count = t.get_topic_count()
+        t.save(update_fields=['topic_count'])
+
+
+
+    def delete(self, *args, **kwargs):
+        super(Topic, self).delete(*args, **kwargs)
+        t = self.topic
+        t.topic_count = t.get_topic_count()
+        t.save(update_fields=[ 'topic_count'])
 
 
 @python_2_unicode_compatible

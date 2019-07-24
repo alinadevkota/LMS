@@ -23,19 +23,22 @@
         </div>
         <!-- List group -->
         <ul class="list-group thread-list">
-            {% for topic in topics %}
+ <!-- latest_thread_for_topics consists of list of list of [topic, corresponding_latest_thread] -->
+            {% for list in latest_thread_for_topics %}
                 <li class="list-group-item thread-entry">
                     <div class="entry media">
 
                         <div class="media-body media-middle">
                             <div class="icon-block half img-circle bg-grey-300">
-                                <i class="fa fa-{{ thread.topic.topic_icon }}"></i>
+                                <i class="fa fa-{{ list.0.topic_icon }}"></i>
                             </div>
-                            <a href="{% url 'forum:topic' pk=topic.pk %}" class="entry-link">
-                                {{ topic.title }}
+                            <a href="{% url 'forum:topic' pk=list.0.pk %}" class="entry-link">
+                                {{ list.0.title }}
                             </a>
                         <br>
-                        {{ topic.description }}
+                        {{ list.0.description }}
+                            <br>
+                            Latest Thread :<a href="{% url 'forum:thread' pk=list.1.pk %}">{{ list.1.title }}</a>
 
 {#                                <span class="meta">#}
 {#                                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">#}
@@ -48,7 +51,7 @@
                         </div>
                                                 <div class="media-right media-middle">
                                                     total threads:
-                                                    <span class="badge">{{ topic.thread_count }}</span>
+                                                    <span class="badge">{{ list.0.thread_count }}</span>
                                                 </div>
                     </div>
                 </li>
