@@ -48622,7 +48622,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   margin-left: 5px;
 }
 
-.create_topic{
+/* .create_topic{
   margin-left: 5%;
   margin-right: 5%;
 }
@@ -48633,7 +48633,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   border: 2px solid lightgrey;
   margin-top: 5%;
  
-}
+} */
 
 .user_infos{
   margin-bottom: -20px;
@@ -48646,5 +48646,9 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   margin-top: -40px;
   float: right;
     
+}
+
+.form-control{
+  background-color: #F3F2EE;
 }
 

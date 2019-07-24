@@ -2,7 +2,8 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-{% block left %}
+
+{% block main_contain %}
     <div class="panel panel-default">
         <div class="panel-body">
             <form method="post" action="{% url "forum:edit_post" pk=form.instance.pk %}">
