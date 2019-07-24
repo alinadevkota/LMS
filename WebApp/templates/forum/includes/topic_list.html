@@ -23,7 +23,7 @@
         </div>
         <!-- List group -->
         <ul class="list-group thread-list">
- <!-- latest_thread_for_topics consists of list of list of [topic, corresponding_latest_thread] -->
+ <!-- latest_thread_for_topics consists of list of list of [topic, corresponding_latest_thread, reply_count] -->
             {% for list in latest_thread_for_topics %}
                 <li class="list-group-item thread-entry">
                     <div class="entry media">
@@ -39,6 +39,7 @@
                         {{ list.0.description }}
                             <br>
                             Latest Thread :<a href="{% url 'forum:thread' pk=list.1.pk %}">{{ list.1.title }}</a>
+                            Reply count: {{ list.2 }}
 
 {#                                <span class="meta">#}
 {#                                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">#}
