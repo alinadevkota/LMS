@@ -6,13 +6,12 @@
 
 {% block breadcrumb %}
     <ol class="breadcrumb navClass">
-        <li><a href="{% url 'forum:index' %}">Home</a></li>
+        <li><a>Forum</a></li>
         <li class="active">{{ node_group }}</li>
     </ol>
 {% endblock %}
 
-{% block left %}
-    {% block before_main_left %}{% endblock %}
+{% block main_contain %}
     <div class="panel panel-default">
         <div class="panel-body panel-subtitle">
             <span class="label label-success">{{ panel_title }}</span>
@@ -21,38 +20,40 @@
                 Total number of topics: {{ node_group.topic_count }}
             </p>
         </div>
+        <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic' nodegroup_pk=node_group.pk %}"><i
+                class="fa fa-fw fa-plus"></i>
+            New
+            Topic</a>
+
         <!-- List group -->
         <ul class="list-group thread-list">
- <!-- latest_thread_for_topics consists of list of list of [topic, corresponding_latest_thread] -->
-            {% for list in latest_thread_for_topics %}
+            {% for topic in topics %}
                 <li class="list-group-item thread-entry">
                     <div class="entry media">
 
                         <div class="media-body media-middle">
                             <div class="icon-block half img-circle bg-grey-300">
-                                <i class="fa fa-{{ list.0.topic_icon }}"></i>
+                                <i class="fa fa-{{ thread.topic.topic_icon }}"></i>
                             </div>
-                            <a href="{% url 'forum:topic' pk=list.0.pk %}" class="entry-link">
-                                {{ list.0.title }}
+                            <a href="{% url 'forum:topic' pk=topic.pk %}" class="entry-link">
+                                {{ topic.title }}
                             </a>
-                        <br>
-                        {{ list.0.description }}
                             <br>
-                            Latest Thread :<a href="{% url 'forum:thread' pk=list.1.pk %}">{{ list.1.title }}</a>
+                            {{ topic.description }}
 
-{#                                <span class="meta">#}
-{#                                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">#}
-{#                                        <span class="label label-default meta-topic">#}
-{#                                        {{ topic.node_group.title }}#}
-{#                                        </span>#}
-{#                                    </a>#}
-{#                                </span>#}
+                            {#                                <span class="meta">#}
+                            {#                                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">#}
+                            {#                                        <span class="label label-default meta-topic">#}
+                            {#                                        {{ topic.node_group.title }}#}
+                            {#                                        </span>#}
+                            {#                                    </a>#}
+                            {#                                </span>#}
 
                         </div>
-                                                <div class="media-right media-middle">
-                                                    total threads:
-                                                    <span class="badge">{{ list.0.thread_count }}</span>
-                                                </div>
+                        <div class="media-right media-middle">
+                            total threads:
+                            <span class="badge">{{ topic.thread_count }}</span>
+                        </div>
                     </div>
                 </li>
             {% endfor %}

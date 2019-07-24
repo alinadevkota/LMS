@@ -74,19 +74,11 @@ class NodeGroupView(ListView):
         )
 
     def get_context_data(self, **kwargs):
-        topics = Topic.objects.filter(node_group__id=self.kwargs.get('pk'))
-        latest_threads = []
-        for topic in topics:
-            try:
-                thread = Thread.objects.filter(topic=topic.pk).order_by('pub_date')[0]
-            except:
-                threads=None
-            latest_threads.append([topic,thread])
         context = super(ListView, self).get_context_data(**kwargs)
         context['node_group'] = nodegroup = NodeGroup.objects.get(pk=self.kwargs.get('pk'))
         context['title'] = context['panel_title'] = nodegroup.title
         context['show_order'] = True
-        context['latest_thread_for_topics']=latest_threads
+        context['topics']=Topic.objects.filter(node_group__id=self.kwargs.get('pk'))
         return context
 
 class TopicView(ListView):
@@ -245,7 +237,8 @@ def search_redirect(request):
 
 
 @login_required
-def create_thread(request):
+def create_thread(request, topic_pk=None):
+    topic = Topic.objects.filter(pk=topic_pk)
     if request.method == 'POST':
         form = ThreadForm(request.POST, user=request.user)
         if form.is_valid():
@@ -254,10 +247,11 @@ def create_thread(request):
     else:
         form = ThreadForm()
 
-    return render(request, 'forum/create_thread.html', {'form': form, 'title': _('Create Thread')})
+    return render(request, 'forum/create_thread.html', {'form': form, 'title': _('Create Thread'),'topic':topic})
 
 @login_required
-def create_topic(request):
+def create_topic(request,nodegroup_pk=None ):
+    node_group = NodeGroup.objects.filter(pk=nodegroup_pk)
     if request.method == 'POST':
         form = TopicForm(request.POST, user=request.user)
         if form.is_valid():
@@ -266,7 +260,7 @@ def create_topic(request):
     else:
         form = TopicForm()
 
-    return render(request, 'forum/create_topic.html', {'form': form, 'title': _('Create Topic')})
+    return render(request, 'forum/create_topic.html', {'form': form, 'title': _('Create Topic'),'node_group':node_group})
 
 
 @login_required
