@@ -3,7 +3,16 @@
 {% load forum_tags %}
 {% load humanize %}
 
-{% block left %}
+{% block breadcrumb %}
+<ol aria-label="breadcrumb" class="breadcrumb navClass">
+
+    <li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Home</a></li>
+    <li class="breadcrumb-item active"><a href="{% url "forum:notifications" %}"> Notifications</a>
+    </li>
+</ol>
+{% endblock %}
+
+{% block main_contain %}
     <div class="panel panel-default">
         <div class="panel-body panel-subtitle">
             <span class="label label-success">{% trans "Notifications" %}</span>
