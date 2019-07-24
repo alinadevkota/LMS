@@ -15,6 +15,7 @@
 {% block main_contain %}
 <div class="panel panel-default">
     <div class="panel-body">
+        {{ topic }}
         <form method="post" action="{% url 'forum:create_thread' %}">
             {% crispy form %}
         </form>

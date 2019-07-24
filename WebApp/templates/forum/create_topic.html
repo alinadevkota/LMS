@@ -15,6 +15,7 @@
 {% block main_contain %}
 <div class="panel panel-default  topic_create">
     <div class="panel-body create_topic">
+        {{ node_group }}
         <form method="post" action="{% url 'forum:create_topic' %}">
             {% crispy form %}
         </form>
