@@ -1,17 +1,20 @@
-{#{% if request.path == '' %}#}
-
-{% extends 'base.html' %}
-
 {% load static %}
-{% block content %}
     <ol aria-label="breadcrumb" class="breadcrumb navClass">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'lectureinfo_list' %}">Lecture</a></li>
+        <li class="breadcrumb-item"><a href="{% if '/teachers' in request.path %}
+            {% url 'teacher_home' %}
+        {% else %}
+            {% url 'start' %}
+        {% endif %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% if '/teachers' in request.path %}
+            {% url 'teacher_lectureinfo_list' %}
+        {% else %}
+            {% url 'lectureinfo_list' %}
+        {% endif %}">Lecture</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ object.Lecture_Name }}</li>
     </ol>
     <div class="outerdiv">
 
-        <h2 class="detailListHeader">Lecture Information <h1>path ={{ request.path }}</h1></h2>
+        <h2 class="detailListHeader">Lecture Information</h2>
         <hr class="header_hr">
         <div class="col-md-6 col-xs-12">
             <img class="card-img-top" src="
@@ -68,7 +71,11 @@
             <br>
             {{ object.Lecture_Description }}
             <div id="buttons">
-                <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Lecture</a>
+                <a class="btn btn-primary" href="{% if '/teachers' in request.path %}
+                /teachers{{ object.get_update_url }}
+            {% else %}
+                {{ object.get_update_url }}
+            {% endif %}">Edit Lecture</a>
                 <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Lecture</a>
 
             </div>
@@ -104,7 +111,11 @@
             </table>
         </div>
         <div class="col-md-12 col-sm-12 xol-xs-12">
-            <a href="{% url 'chapterinfo_list' %}">
+            <a href="{% if '/teachers' in request.path %}
+                        {% url 'chapterinfo_list' %}
+                    {% else %}
+                        {% url 'chapterinfo_list' %}
+                    {% endif %}">
                 <h2 class="detailListHeader">Chapters</h2>
             </a>
             <hr class="header_hr">
@@ -116,7 +127,3 @@
 
 
 
-
-
-
-{% endblock %}

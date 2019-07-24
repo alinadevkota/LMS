@@ -71,10 +71,11 @@
                 {% include "teacher_module/theme/top_navigation.html" %}
             </div>
             {% endblock top_navigation %}
-
-            {% block content %}
-            <!-- {{ content }} -->
-            {% endblock content %}
+            <div class="right_col">
+                {% block content %}
+                <!-- {{ content }} -->
+                {% endblock content %}
+            </div>
 
             {% block footer %}
             <footer>

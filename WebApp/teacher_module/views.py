@@ -29,13 +29,15 @@ def Dashboard(request):
 class LectureInfoCreateView(CreateView):
     model = LectureInfo
     form_class = LectureInfoForm
+    template_name = 'teacher_module/lectureinfo_form.html'
 
 
 class LectureInfoDetailView(DetailView):
     model = LectureInfo
-    template_name = 'lecture/lectureinfo_detail.html'
+    template_name = 'teacher_module/lectureinfo_detail.html'
 
 
 class LectureInfoUpdateView(UpdateView):
     model = LectureInfo
     form_class = LectureInfoForm
+    template_name = 'teacher_module/lectureinfo_form.html'

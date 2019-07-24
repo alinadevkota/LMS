@@ -1,14 +1,20 @@
 
 {% load static %}
 {% load crispy_forms_tags %}
-{% block content %}
-
 
     <ol aria-label="breadcrumb" class="breadcrumb navClass">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item" aria-current="page"><a href="{% url 'lectureinfo_list' %}">Lecture</a></li>
+        <li class="breadcrumb-item"><a href="{% if '/teachers' in request.path %}
+            {% url 'teacher_home' %}
+        {% else %}
+            {% url 'start' %}
+        {% endif %}">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="{% if '/teachers' in request.path %}
+                    {% url 'teacher_lectureinfo_list' %}
+                {% else %}
+                    {% url 'lectureinfo_list' %}
+                {% endif %}">Lecture</a></li>
         <li class="breadcrumb-item active" aria-current="page">
-            {% if '/lectureinfo/create/' == request.path %}
+            {% if '/create/' in request.path %}
                 Create New Lecture
             {% else %}
                 Edit Lecture Info
@@ -18,7 +24,7 @@
 
     <div class="headerDiv">
         <h2 class="infoFormHeader">
-            {% if '/lectureinfo/create/' == request.path %}
+            {% if '/create/' in request.path %}
                 Create New Lecture
             {% else %}
                 Edit Lecture Info
@@ -74,11 +80,3 @@
 
 
     </form>
-
-
-
-
-
-
-
-{% endblock %}

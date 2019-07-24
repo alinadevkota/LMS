@@ -134,33 +134,34 @@ def start(request):
 
     if request.user.is_authenticated:
 
+        if request.user.Is_CenterAdmin:
+            
+            thread = Thread.objects.filter()
+            course = LectureInfo.objects.order_by('Register_DateTime')[:4]
+            coursecount = LectureInfo.objects.count()
+            studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
+            teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
+            parentcount = MemberInfo.objects.filter(Is_Parent=True, Center_Code=request.user.Center_Code).count
+            totalcount = MemberInfo.objects.filter(Center_Code=request.user.Center_Code).count
+
+            # return HttpResponse("default home")
+            return render(request, "WebApp/homepage.html",
+                        {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
+                        'teachercount': teachercount,
+                        'parentcount': parentcount, 'totalcount': totalcount,'thread': thread})
         if request.user.Is_Student:
             return redirect('students_dashboard')
         if request.user.Is_Teacher:
             return redirect('teacher_home')
         if request.user.Is_Parent:
             return redirect('parent_home')
-        if request.user.Is_CenterAdmin:
-            return redirect('/admin/')
-
-    if request.user.is_authenticated:
-        thread = Thread.objects.filter()
-        course = LectureInfo.objects.order_by('Register_DateTime')[:4]
-        coursecount = LectureInfo.objects.count()
-        studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
-        teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
-        parentcount = MemberInfo.objects.filter(Is_Parent=True, Center_Code=request.user.Center_Code).count
-        totalcount = MemberInfo.objects.filter(Center_Code=request.user.Center_Code).count
-
-        # return HttpResponse("default home")
-        return render(request, "WebApp/homepage.html",
-                      {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
-                       'teachercount': teachercount,
-                       'parentcount': parentcount, 'totalcount': totalcount,'thread': thread})
+        
 
 
 
-    return render(request, "WebApp/splash_page.html")
+    
+    else:
+        return render(request, "WebApp/splash_page.html")
 
 
 def editprofile(request):
@@ -315,8 +316,6 @@ class LectureInfoCreateView(CreateView):
 
 class LectureInfoDetailView(DetailView):
     model = LectureInfo
-    template_name = 'lecture/lectureinfo_detail.html'
-
 
 class LectureInfoUpdateView(UpdateView):
     model = LectureInfo
