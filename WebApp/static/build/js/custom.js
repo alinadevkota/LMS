@@ -5199,6 +5199,8 @@ function filterFunction() {
 }
 
 $(document).ready(function () {
+
+
     // $(".discussions").css({ 'display': 'block' })
     $('#submitButton').on('click', function () {
         $("#progressResult").css({ 'display': 'block' })
@@ -5221,7 +5223,46 @@ $(function () {
     });
 });
 
+function Myfunctionbtn(event, obj) {
+
+    event.preventDefault();
+
+    // console.log(obj.id)
+    // if (obj.id === $("#mySelect ").attr('id1')) {
+
+    $("#mySelect").append(`
+                <li  margin-left: 20px;">
+                    <input class="form-control" type="text" name="questions" placeholder="option ">
+                </li>
+       <br>`)
+
+    // } else {
+    //     console.log("logic mistaken")
+    // }
+}
+
 $(document).ready(function () {
+
+    var count = 0;
+    var increase = 0;
+
+    $("#Options_id ").on("click", function (e) {
+        e.preventDefault();
+        $("#mySelect ").append(`<li style="list-style:none; margin-left: 20px;">
+        <input class="form-control" type="text" name="questions ${(Math.floor(Math.random() * 100)) + 1}" placeholder="option "></li><br>`)
+    });
+
+    $("#newQuestion ").on("click", function (e) {
+        e.preventDefault();
+        var id1 = parseInt(count++)
+        var id2 = parseInt(increase++)
+        $("#mySelect").append(`
+            <li id="${id1}">
+            <input class="form-control" placeholder="Enter Questions here..." type="text" style=" list-style: none; margin-top: 10px;" name="questions">
+             <label for="option">Option:</label> <button id=" ${id2}" onclick="Myfunctionbtn(event,this)" class="btn btn-success">+</button>
+             </li>
+             `)
+    });
 
     $('.mcq_question').on('click', function () {
         $('#mcq_que').show(200);
@@ -5245,7 +5286,6 @@ $(document).ready(function () {
         $("#chooseSession").hide();
         $('#chooseCourse').hide();
     });
-
 
     $('.session').on('click', function () {
         $("#chooseSession").show();
