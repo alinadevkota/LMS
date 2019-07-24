@@ -5,56 +5,61 @@
 
 
 {% block breadcrumb %}
-<ol class="breadcrumb navClass">
-    <li><a>Forum</a></li>
-    <li class="active">{{ node_group }}</li>
-</ol>
+    <ol class="breadcrumb navClass">
+        <li><a href="{% url 'forum:index' %}">Home</a></li>
+        <li class="active">{{ node_group }}</li>
+    </ol>
 {% endblock %}
 
 {% block main_contain %}
-<div class="panel panel-default">
-    <div class="panel-body panel-subtitle">
-        <span class="label label-success">{{ panel_title }}</span>
-        <p>
-            {{ node_group.description }}<br>
-            Total number of topics: {{ node_group.topic_count }}
-        </p>
-    </div>
-    <!-- List group -->
-    <ul class="list-group thread-list">
-        {% for topic in topics %}
-        <li class="list-group-item thread-entry">
-            <div class="entry media">
+    <div class="panel panel-default">
+        <div class="panel-body panel-subtitle">
+            <span class="label label-success">{{ panel_title }}</span>
+            <p>
+                {{ node_group.description }}<br>
+                Total number of topics: {{ node_group.topic_count }}
+            </p>
+        </div>
+        <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic' nodegroup_pk=node_group.pk %}"><i
+                class="fa fa-fw fa-plus"></i>
+            New
+            Topic</a>
 
-                <div class="media-body media-middle">
-                    <div class="icon-block half img-circle bg-grey-300">
-                        <i class="fa fa-{{ thread.topic.topic_icon }}"></i>
+        <!-- List group -->
+        <ul class="list-group thread-list">
+            {% for topic in topics %}
+                <li class="list-group-item thread-entry">
+                    <div class="entry media">
+
+                        <div class="media-body media-middle">
+                            <div class="icon-block half img-circle bg-grey-300">
+                                <i class="fa fa-{{ thread.topic.topic_icon }}"></i>
+                            </div>
+                            <a href="{% url 'forum:topic' pk=topic.pk %}" class="entry-link">
+                                {{ topic.title }}
+                            </a>
+                            <br>
+                            {{ topic.description }}
+
+                            {#                                <span class="meta">#}
+                            {#                                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">#}
+                            {#                                        <span class="label label-default meta-topic">#}
+                            {#                                        {{ topic.node_group.title }}#}
+                            {#                                        </span>#}
+                            {#                                    </a>#}
+                            {#                                </span>#}
+
+                        </div>
+                        <div class="media-right media-middle">
+                            total threads:
+                            <span class="badge">{{ topic.thread_count }}</span>
+                        </div>
                     </div>
-                    <a href="{% url 'forum:topic' pk=topic.pk %}" class="entry-link">
-                        {{ topic.title }}
-                    </a>
-                    <br>
-                    {{ topic.description }}
-
-                    {#                                <span class="meta">#}
-                    {#                                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">#}
-                    {#                                        <span class="label label-default meta-topic">#}
-                    {#                                        {{ topic.node_group.title }}#}
-                    {#                                        </span>#}
-                    {#                                    </a>#}
-                    {#                                </span>#}
-
-                </div>
-                <div class="media-right media-middle">
-                    total threads:
-                    <span class="badge">{{ topic.thread_count }}</span>
-                </div>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-    <div class="panel-footer">
-        {% get_pagination %}
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="panel-footer">
+            {% get_pagination %}
+        </div>
     </div>
-</div>
 {% endblock %}

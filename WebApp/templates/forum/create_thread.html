@@ -15,6 +15,7 @@
 {% block main_contain %}
 <div class="panel panel-default paper-shadow" data-z="2">
     <div class="panel-body">
+        {{ topic }}
         <form method="post" action="{% url 'forum:create_thread' %}">
             {% csrf_token %}
 
