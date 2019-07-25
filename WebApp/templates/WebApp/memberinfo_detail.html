@@ -13,11 +13,7 @@
         <table class="table">
             <tr>
                 <td>Member ID</td>
-                <td>{{ object.Member_ID }}</td>
-            </tr>
-            <tr>
-                <td>Username</td>
-                <td>{{ object.username }}</td>
+                   <td>{{ object.username }}</td>
             </tr>
 
             <tr>
@@ -42,7 +38,7 @@
             </tr>
             <tr>
                 <td>Member BirthDate</td>
-                <td>{{ object.Member_BirthDate }}</td>
+                <td>{{ object.Member_BirthDate|date:"m/d/Y" }}</td>
             </tr>
             <tr>
                 <td>Member Phone</td>
@@ -63,7 +59,7 @@
             </tr>
             <tr>
                 <td>Register DateTime</td>
-                <td>{{ object.date_joined }}</td>
+                <td>{{ object.date_joined|date:"m/d/Y" }}</td>
             </tr>
             <tr>
                 <td>Teacher</td>

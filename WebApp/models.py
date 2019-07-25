@@ -85,7 +85,7 @@ class MemberInfo(AbstractUser):
     )
 
     # Fields
-    Member_ID = models.CharField(max_length=250, blank=True, null=True)
+    # Member_ID = models.CharField(max_length=250, blank=True, null=True)
     password = models.CharField(_('password'), max_length=128, )
     # remove this password field
     # Member_Password = models.CharField(max_length=250, blank=True, null=True)
@@ -175,6 +175,10 @@ class LectureInfo(models.Model):
 
     def get_update_url(self):
         return reverse('lectureinfo_update', args=(self.pk,))
+
+    def __str__(self):
+        return self.Lecture_Name
+
 
 
 class ChapterInfo(models.Model):
@@ -338,6 +342,9 @@ class InningInfo(models.Model):
     def get_update_url(self):
         return reverse('inninginfo_update', args=(self.pk,))
 
+    def __str__(self):
+        return self.Inning_Name
+
 
 class HomeworkInfo(models.Model):
     Homework_Topic = CharField(max_length=500, blank=True, null=True)
@@ -497,6 +504,7 @@ class InningGroup(models.Model):
         return reverse('inninggroup_update', args=(self.pk,))
 
 
+
 class GroupMapping(models.Model):
     # Fields
     Use_Flag = BooleanField(default=True)
@@ -506,7 +514,7 @@ class GroupMapping(models.Model):
 
     # Relationship Fields
     Inning_Code = ForeignKey(
-        'InningGroup',
+        'InningInfo',
         on_delete=models.DO_NOTHING
     )
     Student_Code = ForeignKey(

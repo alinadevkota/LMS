@@ -40,7 +40,7 @@ class MemberInfoAdminForm(forms.ModelForm):
 
 class MemberInfoAdmin(admin.ModelAdmin):
     form = MemberInfoAdminForm
-    list_display = ['id', 'username','first_name','last_name','email', 'Member_ID', 'Member_Permanent_Address',
+    list_display = ['id', 'username','first_name','last_name','email', 'Member_Permanent_Address',
                     'Member_Temporary_Address', 'Member_BirthDate', 'Member_Phone', 'Member_Avatar',
                     'Member_Gender', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent',
                     'Member_Memo']

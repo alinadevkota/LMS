@@ -1,5 +1,9 @@
 {% extends "base.html" %}
-{%load static %}
+{%load static %
+
+{% block title %}
+    | Courses
+{% endblock %}
 
 {% block content %}
     {% include 'lecture/lectureinfo_list.html'%}
