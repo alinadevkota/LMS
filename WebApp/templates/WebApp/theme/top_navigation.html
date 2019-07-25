@@ -7,6 +7,13 @@
             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
         </div>
 
+        <span class="centerNameTopNav">
+            {% if user.Center_Code %}
+                Center : <b>{{ user.Center_Code }}</b>
+            {% endif %}
+        </span>
+
+
         <ul class="nav navbar-nav navbar-right">
 
             {% if request.user.is_authenticated %}
@@ -25,11 +32,7 @@
                                     {% else %}
                                         {% static 'images/profile/profile.png' %}
                                     {% endif %}" alt="">
-
-
                         {{ request.user.username }}
-
-
                         <span class="fa fa-angle-down" id="topNavSpan"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -136,4 +139,5 @@
 
         </ul>
     </nav>
+
 </div>

@@ -27,7 +27,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% endblock meta %}
 
-    <title>Student | {% block title %}{% endblock %}</title>
+    <title>Student {% block title %}{% endblock %}</title>
 
 
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
@@ -77,9 +77,11 @@
             </div>
             {% endblock top_navigation %}
 
+            <div class="right_col">
             {% block content %}
             <!-- {{ content }} -->
             {% endblock content %}
+            </div>
 
             {% block footer %}
             <footer>
