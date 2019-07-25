@@ -30,12 +30,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'rest_framework',
     'rest_framework.authtoken',
-
     'rest_auth',
-
     'django_filters',
     'WebApp',
-
     'django.contrib.humanize',
     'forum',
     'quiz',
@@ -69,6 +66,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 # Media related settings are required for avatar uploading to function properly
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -151,11 +149,12 @@ STATICFILES_DIRS = (
 
     os.path.join(BASE_DIR, 'WebApp/static'),
 
-)  # /opt/soundshelter/soundshelter/soundshelter/static
+) #/opt/soundshelter/soundshelter/soundshelter/static
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 django_heroku.settings(locals())
+
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = '/'
@@ -164,18 +163,14 @@ AUTH_USER_MODEL = 'WebApp.MemberInfo'
 
 # Django Messages
 from django.contrib.messages import constants as messages
-
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
-REST_FRAMEWORK = {
+REST_FRAMEWORK = {   
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    ],
-    'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
-
-    ),
+    ]
 }
