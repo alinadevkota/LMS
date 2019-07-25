@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'rest_auth',
     'django_filters',
     'WebApp',
-
     'django.contrib.humanize',
     'forum',
     'quiz',
