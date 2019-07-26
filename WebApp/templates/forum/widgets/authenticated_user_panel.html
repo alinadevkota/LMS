@@ -2,67 +2,45 @@
 {% load i18n %}
 
 
-{#<div class="panel panel-default">#}
-{#    <div class="panel-body">#}
-<div class="profile_details">
-    <div class="well profile_view">
-        <div class="col-sm-12">
-            <h4 class="brief"><i>Your Profile</i></h4>
-            <div class="left col-xs-7">
-                <h2><a class="btn-white btn-flat"
-                       href="{% url 'forum:user_info' request.user.pk %}">{{ request.user.username }}</a></h2>
-                <br>
-                <p><strong>About: </strong></p>
-                <ul class="list-unstyled">
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="profile_pic_forum">
+            <a href="{% url 'forum:user_info' request.user.pk %}">
+                <img src="/media/{{ request.user.Member_Avatar }}"
+                     alt="..."/>
+            </a>
+        </div>
+        <a class="btn-white btn-flat" href="{% url 'forum:user_info' request.user.pk %}"><h3>{{ request.user.username }}</h3></a>
+        <ul class="list-unstyled user_data">
+            <li><a class="btn-white btn-flat" href="{% url 'forum:user_threads' request.user.pk %}"><i class="fa fa-question-circle user-profile-icon"></i> Questions
+                Asked: {{ request.user.threads.count }}</a>
+            </li>
+            <li><a class="btn-white btn-flat" href="{% url 'forum:user_posts' request.user.pk %}">
+                <i class="fa fa-reply-all user-profile-icon"></i> Replies: {{ request.user.posts.count }}</a>
+            </li>
 
+            <li>
+                <p>
                     {% if request.user.is_superuser %}
-                        <li> Super User</li>
+                        Super User
+                    {% elif request.user.Is_Teacher %}
+                        , Teacher
+                    {% elif request.user.Is_Student %}
+                        , Student
+                    {% elif request.user.Is_CenterAdmin %}
+                        , Center Admin
+                    {% elif request.user.Is_Parent %}
+                        , Parent
                     {% endif %}
-                    {% if request.user.Is_Teacher %}
-                        <li> Teacher</li>
-                    {% endif %}
-                    {% if request.user.Is_Student %}
-                        <li> Student</li>
-                    {% endif %}
-                    {% if request.user.Is_CenterAdmin %}
-                        <li> Center Admin</li>
-                    {% endif %}
-                    {% if request.user.Is_Parent %}
-                        <li> Parent</li>
-                    {% endif %}
-                    </li>
-                </ul>
-            </div>
-            <div class="right col-xs-5 text-center">
-                <img src="/media/{{ request.user.Member_Avatar }}" alt="" class="img-circle img-responsive">
-            </div>
-        </div>
-        <div class="col-xs-12 bottom text-center">
-            <div class="col-xs-12 col-sm-6 emphasis">
-                <a href="{% url 'forum:user_threads' request.user.pk %}">
-                    <button type="button" class="btn btn-success btn-xs">
-                        <i class="fa fa-comments-o"></i> Threads: {{ request.user.threads.count }}</button>
-                </a>
+                </p>
+            </li>
 
+        </ul>
+        <a class="btn btn-success" href="{% url 'forum:user_info' request.user.pk %}">
+            <i class="fa fa-user-md m-right-xs"></i> View Profile</a>
+        <br>
 
-            </div>
-
-            <div class="col-xs-12 col-sm-6 emphasis">
-                <a href="{% url 'forum:user_posts' request.user.pk %}">
-                    <button type="button" class="btn btn-success btn-xs">
-                        <i class="fa fa-comments-o"></i> Replies: {{ request.user.posts.count }}</button>
-                </a>
-                <a  href="{% url 'forum:user_info' request.user.pk %}">
-                    <button type="button" class="btn btn-primary btn-xs">
-                        <i class="fa fa-user"> </i> View Profile
-                    </button>
-                </a>
-            </div>
-        </div>
     </div>
 </div>
-{##}
-{#    </div>#}
-{#</div>#}
 
 
