@@ -93,13 +93,20 @@
                         Topic:
                         <a href="{% url 'forum:topic' pk=thread.topic.pk %}"
                             style="color:blue">{{ thread.topic.title }}</a>
+                    | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }}
 
                         <br>
                         posted by
                         <a href="{% url 'forum:user_info' pk=thread.user.pk %}" style="color:blue">
                             <img src="/media/{{ thread.user.Member_Avatar }}" class="img-circle width-20">
                             {{ thread.user.username }}</a>
-                        &nbsp; | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }}
+                        |<span>{% blocktrans with view_count=thread.view_count %}
+                                            <i class="fa fa-eye"></i>
+                                            viewed
+                                            {{ view_count }}
+                                            times{% endblocktrans %}</span>&nbsp;
+                    |<i class="fa fa-clock-o fa-fw"></i> Last Replied: {{ thread.last_replied }}
+
 
                     </div>
 

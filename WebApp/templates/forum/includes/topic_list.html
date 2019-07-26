@@ -17,6 +17,11 @@
 <div class="x_panel">
     <div class="x_title">
         <h2>Detail of Category: {{ panel_title }}</h2>
+        <br>
+        <h4>{{ node_group.description }}</h4>
+        <p>
+            No of Topics: {{ node_group.topic_count }}
+        </p>
         <div class=" pull-right">
             <a href="{% url 'forum:create_topic' %}"><i class="fa fa-fw fa-plus"></i>
                 Sub Category
