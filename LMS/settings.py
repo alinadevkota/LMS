@@ -25,17 +25,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'django_extensions',
     'crispy_forms',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'django_filters',
     'WebApp',
-
     'django.contrib.humanize',
     'forum',
     'quiz',
+    'survey',
 ]
 
 MIDDLEWARE = [
@@ -171,5 +171,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    ]
+        ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
 }

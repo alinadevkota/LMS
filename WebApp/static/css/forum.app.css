@@ -48622,30 +48622,22 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   margin-left: 5px;
 }
 
-/* .create_topic{
-  margin-left: 5%;
-  margin-right: 5%;
+
+.panel-username{
+  widows: 100px;
+  height:70px;
+  padding:5px;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+  align-items:center;
+  
 }
 
-.topic_create{
-  margin-left: 15%;
-  margin-right: 15%;
-  border: 2px solid lightgrey;
-  margin-top: 5%;
- 
-} */
 
 .user_infos{
   margin-bottom: -20px;
   margin-top: -40px;
-}
-
-.panel-username{
-  
-  margin-right:150px;
-  margin-top: -40px;
-  float: right;
-    
 }
 
 .form-control{

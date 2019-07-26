@@ -19,9 +19,8 @@
                 <thead class="thead-light bg-primary">
                 <tr>
                     <td>ID</td>
-                    <td>Link</td>
-                    <td>Register Agent</td>
                     <td>Inning Code</td>
+                    <td>Register Agent</td>
                     <td>Use Flag</td>
                     <td>Student Code</td>
                 </tr>
@@ -29,9 +28,8 @@
                 {% for object in object_list %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td><b><a href="{{ object.get_absolute_url }}">{{ object }}</a></b></td>
+                        <td><b><a href="{{ object.get_absolute_url }}">{{ object.Inning_Code }}</a></b></td>
                         <td>{{ object.Register_Agent }}</td>
-                        <td>{{ object.Inning_Code }}</td>
                         <td>{{ object.Use_Flag }}</td>
                         <td>{{ object.Student_Code }}</td>
 

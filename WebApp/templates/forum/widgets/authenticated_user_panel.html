@@ -8,16 +8,14 @@
     <!--<div class="panel-heading">forum APP</div>-->
     <div class="panel-body user-panel">
         <div class="panel-user-info">
-            <div class="avatar-name">
-                <a href="{% url 'forum:user_info' request.user.pk %}">
-                    <div class="profile_pic_forum">
-                        <img src="/media/{{ request.user.Member_Avatar }}" alt="..."
-                            class="img-circle profile_img_forum" style="height:30px;width:30px;" />
-                    </div>
+            <div class="panel-username">
+                <div class="profile_pic_forum">
+                    <img src="/media/Images/ubl_logo.jpg" alt="...">
+                </div>
+                <div class="reply-content-detail">
+                    <a href="{% url 'forum:user_info' request.user.pk %}">{{ request.user.username }}</a>
+                </div>
 
-                </a>
-                <span class="panel-username"><a
-                        href="{% url 'forum:user_info' request.user.pk %}">{{ request.user.username }}</a></span>
             </div>
             <div class="row panel-user-meta">
                 <div class="col-xs-4 panel-user-meta-item">

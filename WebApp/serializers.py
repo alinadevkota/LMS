@@ -26,10 +26,10 @@ class MemberInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.MemberInfo
         fields = (
-            'pk','username','first_name','last_name','email','password', 'Member_ID', 'Member_Permanent_Address',
+            'pk','username','first_name','last_name','email','password', 'Member_Permanent_Address',
                     'Member_Temporary_Address', 'Member_BirthDate', 'Member_Phone', 'Member_Avatar',
                     'Member_Gender', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent',
-                    'Member_Memo','Is_Teacher','Is_Student','Is_CenterAdmin','Is_Parent','Member_Avatar'
+                    'Member_Memo','Is_Teacher','Is_Student','Is_CenterAdmin','Is_Parent','Member_Avatar', 'Center_Code'
         )
 
 
@@ -39,7 +39,7 @@ class LectureInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.LectureInfo
         fields = (
-            'pk','Lecture_Name', 'Lecture_Cover_File', 'Lecture_Level',
+            'pk','Lecture_Name', 'Lecture_Description', 'Lecture_Cover_File', 'Lecture_Level',
                     'Lecture_Info', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent',
                     'Lecture_Provider', 'Center_Code'
         )

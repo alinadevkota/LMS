@@ -1,6 +1,11 @@
 {% extends "teacher_module/base.html" %}
-{% load static %}
+{%load static %}
+
 {% block title %}
-    Lecture Detail
+    | Course Detail
 {% endblock %}
+
+{% block content %}
+    {% include 'lecture/lectureinfo_detail.html'%}
+{% endblock content %}
 

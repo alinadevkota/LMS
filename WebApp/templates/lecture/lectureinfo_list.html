@@ -1,0 +1,86 @@
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+    <div class="lectureInfoListClass">
+        <ol aria-label="breadcrumb" class="breadcrumb navClass">
+            <li class="breadcrumb-item"><a href="{% if '/teachers' in request.path %}
+                {% url 'teacher_home' %}
+            {% else %}
+                {% url 'start' %}
+            {% endif %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Lecture</li>
+        </ol>
+
+        <h2 class="tableHeader">List of Lectures</h2>
+        <hr class="header_hr">
+        <div class="btn-createnew">
+            <a class="btn btn-success" href="
+            {% if '/teachers' in request.path %}
+                {% url 'teacher_lectureinfo_create' %}
+            {% else %}
+                {% url 'lectureinfo_create' %}
+            {% endif %}">Create new Lecture</a>
+        </div>
+        <br><br><br>
+        <div class="container" id="divID">
+            {% for object in object_list %}
+                <div class="gridContentsList col-md-3 col-sm-6 col-xs-12" id="listCard">
+                    <a href="{% if '/teachers' in request.path %}
+                                /teachers{{ object.get_absolute_url }}
+                            {% else %}
+                               {{ object.get_absolute_url }}
+                            {% endif %}">
+                        <img class="card-img-top" src="
+                            {% if object.Lecture_Cover_File %}
+                                /media/{{ object.Lecture_Cover_File }}
+                            {% else %}
+                                {% static 'images/course.jpg' %}
+                            {% endif %}"
+                             alt="Card image cap" width="100%">
+                    </a>
+                    <div class="card-body" id="cardInfo">
+                        <h2 class="card-title"><strong><a
+                                href="{% if '/teachers' in request.path %}
+                                        /teachers{{ object.get_absolute_url }}
+                                      {% else %}
+                                        {{ object.get_absolute_url }}
+                                      {% endif %}">{{ object.Lecture_Name }}</a></strong></h2>
+
+                        {#                        <p class="ratingIcons">#}
+                        {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
+                        {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
+                        {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
+                        {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
+                        {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
+                        {#                        </p>#}
+
+                        <hr>
+
+                        <h5 class="lectureDescription">
+                            {% if object.Lecture_Description %}
+                                {{ object.Lecture_Description }}
+                            {% else %}
+                                No Description
+                            {% endif %}
+                        </h5>
+
+
+                        <div class="row d-flex flex-row">
+                            <div class="col-md-3">
+                                            <span class="">
+                                                <img width="60px" id="avatar"
+                                                     src="{{ object.Teacher_Code.Member_Avatar.url }}">
+                                            </span>
+                            </div>
+
+                            <div class="col-md-9 ">
+                                <h4>{{ object.Teacher_Code }}</h4>
+                                <p>Instructor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>

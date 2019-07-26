@@ -46,14 +46,14 @@
             <ul class="nav side-menu">
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url 'teacher_dashboard' %}"><i class="fa fa-home"></i> Dashboard
+                        <a href="{% url 'teacher_home' %}"><i class="fa fa-home"></i> Dashboard
                         </a>
                     </li>
 
                     <li><a><i class="fa fa-book"></i> Lectures <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="{% url 'lecture_list' %}">Lecture List</a></li>
-                            <li><a href="#">Create New Lecture</a></li>
+                            <li><a href="{% url 'teacher_lectureinfo_list' %}">Lecture List</a></li>
+                            <li><a href="{% url 'teacher_lectureinfo_create' %}">Create New Lecture</a></li>
 
                         </ul>
                     </li>
@@ -66,8 +66,8 @@
                     </li>
                     <li><a><i class="fa fa-list-ol"></i> Chapters <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="#">Chapter List</a></li>
-                            <li><a href="#">Insert New Chapter</a></li>
+                            <li><a href="{% url 'teacher_chapterinfo_list' %}">Chapter List</a></li>
+                            <li><a href="{% url 'teacher_chapterinfo_create' %}">Insert New Chapter</a></li>
                         </ul>
                     </li>
                     <li><a href="#"><i class="fa fa-question"></i> Questions </a>
