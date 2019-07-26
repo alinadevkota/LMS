@@ -134,8 +134,7 @@ def start(request):
 
     if request.user.is_authenticated:
 
-        if request.user.Is_CenterAdmin:
-            
+        if request.user.Is_CenterAdmin:        
             thread = Thread.objects.filter()
             course = LectureInfo.objects.order_by('Register_DateTime')[:4]
             coursecount = LectureInfo.objects.count()
@@ -155,10 +154,9 @@ def start(request):
             return redirect('teacher_home')
         if request.user.Is_Parent:
             return redirect('parent_home')
-        
-
-
-
+        else:
+            return HttpResponse("Sorry you aren't assigned to any member type. User must be assigned to a member type\
+                to go to their respective dashboard.Please request your center admin or super admin to assign you as one type of member")
     
     else:
         return render(request, "WebApp/splash_page.html")
