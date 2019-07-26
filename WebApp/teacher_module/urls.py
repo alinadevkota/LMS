@@ -21,8 +21,17 @@ urlpatterns += (
     # urls for ChapterInfo
     path('chapterinfo/', views.ChapterInfoListView.as_view(), name='teacher_chapterinfo_list'),
     path('chapterinfo/create/', views.ChapterInfoCreateView.as_view(), name='teacher_chapterinfo_create'),
+    path('chapterinfo/build/', views.ChapterInfoBuildView, name='teacher_chapterinfo_build'),
+
     path('chapterinfo/detail/<int:pk>/', views.ChapterInfoDetailView.as_view(), name='teacher_chapterinfo_detail'),
     path('chapterinfo/update/<int:pk>/', views.ChapterInfoUpdateView.as_view(), name='teacher_chapterinfo_update'),
 )
+
+urlpatterns += (
+    # urls for Profile
+    path('profile/', login_required(views.ProfileView), name='teacher_user_profile'),
+
+)
+
 
 

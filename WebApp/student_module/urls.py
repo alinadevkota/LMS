@@ -34,3 +34,9 @@ urlpatterns += (
     path('lectureinfo/', views.LectureInfoListView.as_view(), name='student_lectureinfo_list'),
     path('lectureinfo/detail/<int:pk>/', views.LectureInfoDetailView.as_view(), name='student_lectureinfo_detail'),
 )
+
+urlpatterns += (
+    # urls for Profile
+    path('profile/', login_required(views.ProfileView), name='student_user_profile'),
+)
+
