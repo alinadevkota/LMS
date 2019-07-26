@@ -40,16 +40,22 @@
                         <i class="fa fa-{{ list.0.topic_icon }}"></i>
                     </div>
 
-                    <a href="{% url 'forum:topic' pk=list.0.pk %}" class="entry-link"></a>
+                    <a href="{% url 'forum:topic' pk=list.0.pk %}" class="entry-link">
                     {{ list.0.title }}
                     </a>
                     <br>
 
                     {{ list.0.description }}
                     <br>
+                    {% if list.1 %}
+                            Latest Thread :<a href="{% url 'forum:thread' pk=list.1.pk %}">
+                            {{ list.1.title }}
+                        </a>
+                            {% else %}
+                            No thread added yet
+                            {% endif %}
 
-                    {{ list.1.title }}
-                    </a>
+
                     Reply count: {{ list.2 }}
 
 
@@ -120,17 +126,22 @@
                             </thead>
                             <tbody>
 
-                                <tr role="row" class="odd">
+
                                     {% for list in latest_thread_for_topics %}
+                                        <tr role="row" class="odd">
                                     <td class="sor%ting_1">{{ list.0 }}</td>
 
-                                    <td> {{  list.1 }} </td>
+                                    <td> {{ list.0.thread_count }} </td>
+                                        <td> {{ list.2 }} </td>
+                                        {% if list.1 %}
+                                        <td> {{ list.1.title }} </td>
+                                        {% else %}
+                                        <td> no threads yet</td>
+                                        {% endif %}
+                                        </tr>
                                     {% endfor %}
-                                    <td>Tokyo</td>
-                                    <td>33</td>
-                                    <td>2008/11/28</td>
-                                    <td>$162,700</td>
-                                </tr>
+
+
                             </tbody>
                         </table>
                     </div>
