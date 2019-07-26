@@ -6716,7 +6716,7 @@ ul.icon-list.icon-list-block li:not(:last-of-type) {
   text-align: right;
   margin-right: 10px;
 }
-.dataTables_wrapper .dataTables_filter input {
+/* .dataTables_wrapper .dataTables_filter input {
   margin-left: 10px;
 }
 .dataTables_wrapper .dataTables_paginate {
@@ -6748,7 +6748,7 @@ ul.icon-list.icon-list-block li:not(:last-of-type) {
 }
 .dataTables_wrapper table tfoot tr th {
   border-top: 2px solid #e2e9e6;
-}
+} */
 .pagination > li > a {
   margin-right: 5px;
 }
@@ -7075,40 +7075,8 @@ ul.icon-list.icon-list-block li:not(:last-of-type) {
 .bg-body {
   background-color: #f5f5f5;
 }
-.bg-primary {
-  background: #42a5f5;
-  color: #fff;
-}
-.bg-white {
-  background: #ffffff;
-}
-.bg-default {
-  background: #f6f6f6;
-  color: #808080;
-}
-.bg-purple {
-  background: #9d8ac7;
-  color: #fff;
-}
-.bg-brown {
-  background: #c3a961;
-  color: #fff;
-}
-.bg-danger {
-  background: #bd362f;
-  color: #fff;
-}
-.bg-lightred {
-  background: #e15258;
-  color: #fff;
-}
-.bg-gray-dark {
-  background: #555;
-  color: #fff;
-}
-.bg-transparent {
-  background: transparent !important;
-}
+
+
 .link-text-color {
   color: #212121;
 }
@@ -48644,3 +48612,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   background-color: #F3F2EE;
 }
 
+.dataTables_info {
+    padding-top: 8px;
+    white-space: nowrap;
+}

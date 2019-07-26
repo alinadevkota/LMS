@@ -21,14 +21,13 @@
 
     </div>
 
-        </div>
-        <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread' topic_pk=topic.pk %}"><i
-                class="fa fa-fw fa-plus"></i>
-            New
-            Thread</a>
+    <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread' topic_pk=topic.pk %}"><i
+            class="fa fa-fw fa-plus"></i>
+        New
+        Thread</a>
 
-        {% if show_order %}
-            <span class="pull-right ordering">
+    {% if show_order %}
+    <span class="pull-right ordering">
         Order:
         <span>
             <a href="{% change_thread_ordering request '-last_replied' %}">Last Replied</a>
@@ -37,35 +36,35 @@
             <a href="{% change_thread_ordering request '-pub_date' %}">thread Date</a>
         </span>
     </span>
-        {% endif %}
+    {% endif %}
 
 
-        <!-- List group -->
-        <ul class="list-group thread-list">
-            {% for thread in threads %}
-                <li class="list-group-item thread-entry">
-                    <div class="entry media">
+    <!-- List group -->
+    <ul class="list-group thread-list">
+        {% for thread in threads %}
+        <li class="list-group-item thread-entry">
+            <div class="entry media">
 
-                        <a href="{% url 'forum:user_info' pk=thread.user.pk %}">
-                            <img src="/media/{{ thread.user.Member_Avatar }}" alt=""
-                                 class="avatar avatar-96wp-user-avatar wp-user-avatar-96 alignnone photo avatar-default ">
+                <a href="{% url 'forum:user_info' pk=thread.user.pk %}">
+                    <img src="/media/{{ thread.user.Member_Avatar }}" alt=""
+                        class="avatar avatar-96wp-user-avatar wp-user-avatar-96 alignnone photo avatar-default ">
+                </a>
+
+                <h2 class="thread_title">
+                    <div class="media-body media-middle"> &nbsp;
+                        <a href="{% url 'forum:thread' pk=thread.pk %}" class="entry-link">
+                            {{ thread.title }}
                         </a>
-
-                        <h2 class="thread_title">
-                            <div class="media-body media-middle"> &nbsp;
-                                <a href="{% url 'forum:thread' pk=thread.pk %}" class="entry-link">
-                                    {{ thread.title }}
-                                </a>
-                                <p class="entry-meta">
-                                    {% if thread.order <= 3 %}
-                                        <span class="meta">
+                        <p class="entry-meta">
+                            {% if thread.order <= 3 %}
+                            <span class="meta">
                                 <span class="label label-info meta-top">
                                     TOP
                                 </span>
                             </span>
-                                    {% endif %}
-                                <div class="topic_meta text-light text-caption">
-                                    <h5>
+                            {% endif %}
+                            <div class="topic_meta text-light text-caption">
+                                <h5>
                                     <span class="meta">
                                         Topic:
                                         <a href="{% url 'forum:topic' thread.topic.pk %}">
@@ -74,32 +73,34 @@
                                             </span>
                                         </a>
                                     </span>
-                                        <span class="meta meta-username">
+                                    <span class="meta meta-username">
                                         <a href="{% url 'forum:user_info' thread.user.pk %}">
                                             posted by {{ thread.user.username }}
                                         </a>
                                     </span>
-                                        <span class="meta meta-pub_date">
+                                    <span class="meta meta-pub_date">
                                         {{ thread.pub_date | naturaltime }}
                                     </span>
-                                        <span class="meta meta-last_replied hidden-xs">|
+                                    <span class="meta meta-last_replied hidden-xs">|
                                         {% trans "Last Replied" %}: {{ thread.last_replied | naturaltime }}
                                     </span>
-                                </div>
-                                </p>
-
-                                <div class="media-right media-middle">
-                                    <span class="pull-right badge">{{ thread.reply_count }} Reply</span>
-                                </div>
                             </div>
-                            </h5>
-                        </h2>
+                        </p>
+
+                        <div class="media-right media-middle">
+                            <span class="pull-right badge">{{ thread.reply_count }} Reply</span>
+                        </div>
                     </div>
-                </li>
-            {% endfor %}
-        </ul>
-        <div class="panel-footer">
-            {% get_pagination %}
-        </div>
+                    </h5>
+                </h2>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="panel-footer">
+        {% get_pagination %}
     </div>
+</div>
 {% endblock %}
+
+
