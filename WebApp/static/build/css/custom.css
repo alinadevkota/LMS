@@ -848,7 +848,7 @@ a:hover, a:focus {
 
 .top_nav .navbar-right {
     margin: 0;
-    width: 70%;
+    width: 30%;
     float: right
 }
 
@@ -5650,7 +5650,7 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 }
 
 #listCard {
-    background: #f5f5f5;
+
     border: grey;
     padding: 30px;
 }
@@ -5692,4 +5692,17 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     margin-top: 20px;
     font-size: 13px;
     padding-right: 50px;
+}
+#divID{
+    background: #f5f5f5;
+    margin-bottom: 10px;
+}
+
+/*top nav center name Rajav*/
+
+.centerNameTopNav{
+
+    line-height: 60px;
+    margin-left: 600px;
+    font-size: 25px;
 }

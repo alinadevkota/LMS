@@ -8,8 +8,6 @@ from WebApp.teacher_module.views import LectureInfoListView
 urlpatterns = (
     # urls for TodoTInfo
     path('', login_required(views.start), name='teacher_home'),
-    path('lectureinfolist/', LectureInfoListView.as_view(), name='lecture_list'),
-    url(r'^lectureinfolist/(?P<pk>\d+)/$', views.lecturedetail, name='lecture_detail'),
 )
 urlpatterns += (
     # urls for LectureInfo
@@ -19,6 +17,12 @@ urlpatterns += (
     path('lectureinfo/update/<int:pk>/', views.LectureInfoUpdateView.as_view(), name='teacher_lectureinfo_update'),
 )
 
-
+urlpatterns += (
+    # urls for ChapterInfo
+    path('chapterinfo/', views.ChapterInfoListView.as_view(), name='teacher_chapterinfo_list'),
+    path('chapterinfo/create/', views.ChapterInfoCreateView.as_view(), name='teacher_chapterinfo_create'),
+    path('chapterinfo/detail/<int:pk>/', views.ChapterInfoDetailView.as_view(), name='teacher_chapterinfo_detail'),
+    path('chapterinfo/update/<int:pk>/', views.ChapterInfoUpdateView.as_view(), name='teacher_chapterinfo_update'),
+)
 
 

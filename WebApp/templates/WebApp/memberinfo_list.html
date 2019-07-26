@@ -30,7 +30,6 @@
                     <td>ID</td>
                     <!-- <td>Link</td> -->
                     <td>Member ID</td>
-                    <td>Username</td>
                     <td>Name</td>
                     <td>Current Address</td>
                     <td>Email</td>
@@ -50,10 +49,8 @@
 
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ object.Member_ID }}</td>
-                        <!-- <td>{{ object.username }}</td> -->
-                        <td><b><a href="{{ object.get_absolute_url }}">{{ object }}</a></b></td>
-                        <!-- <td>{{ object.password }}</td> -->
+                        <td><b><a href="{{ object.get_absolute_url }}">{{ object.username }}</a></b></td>
+
                         <td>{{ object.first_name }}&nbsp;{{ object.last_name }}</td>
                         <td>{{ object.Member_Temporary_Address }}</td>
                         <td>{{ object.email }}</td>

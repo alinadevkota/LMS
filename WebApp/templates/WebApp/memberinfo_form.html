@@ -29,18 +29,11 @@
     <div class="x_content">
         <form method="post" id="FormID" data-parsley-validate="">
             {% csrf_token %}
-              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <label for="id_Member_ID" class="control-label ">
-                    Member ID
-                </label>
-                <input type="text" value="{{ object.Member_ID }}" name="Member_ID" id="id_Member_ID" required="required"
-                       class="form-control has-feedback-left" placeholder="Member ID">
-                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-            </div>
+
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <label for="id_username" class="control-label ">
-                    Username
+                    Member ID
                 </label>
                 <input type="text" value="{{ object.username }}" name="username" id="id_username" required="required"
                        class="form-control has-feedback-left" placeholder="Member Name">
@@ -87,14 +80,6 @@
                 <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
             </div>
 
-            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <label for="id_date_joined" class="control-label ">
-                    Date joined
-                </label>
-                <input type="date" name="date_joined" value="{{ object.date_joined }}" id="id_date_joined"
-                       required="required" class="form-control has-feedback-left" placeholder="Date joined">
-                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-            </div>
 
             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <label for="id_Member_Permanent_Address" class="control-label ">
@@ -104,7 +89,6 @@
                        id="id_Member_Permanent_Address" required="required" class="form-control has-feedback-left"
                        placeholder="Member Permanent Address">
                 <span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
-
             </div>
 
 
@@ -122,7 +106,7 @@
                 <label for="id_Member_BirthDate" class="control-label ">
                     Member BirthDate
                 </label>
-                <input type="date" name="Member_BirthDate" value="{{ object.Member_BirthDate }}"
+                <input type="date" name="Member_BirthDate" value="{{ object.Member_BirthDate|date:"m/d/Y" }}"
                        id="id_Member_BirthDate"
                        required="required" class="form-control has-feedback-left">
                 <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
@@ -178,8 +162,12 @@
                     Status
                 </label>
                 <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
-                        {% if object.Use_Flag == True %}
-                       checked {% endif %}>
+                        {% if object.Use_Flag == False %}
+                            &nbsp;
+                        {% else %}
+                            checked
+                        {% endif %}
+                        >
             </div>
 
             <div class="col-md-6">
