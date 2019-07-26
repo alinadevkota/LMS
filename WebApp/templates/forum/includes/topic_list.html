@@ -45,9 +45,13 @@
 
                         {{ list.0.description }}
                             <br>
+                            {% if list.1 %}
                             Latest Thread :<a href="{% url 'forum:thread' pk=list.1.pk %}">
                             {{ list.1.title }}
                         </a>
+                            {% else %}
+                            No thread added yet
+                            {% endif %}
                             Reply count: {{ list.2 }}
 
 
