@@ -157,7 +157,6 @@ input[type=search]{
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 }
  /* ======================= LIST VIEW ======================== */
      
@@ -246,9 +245,11 @@ input[type=search]{
     background-color: #f3f3f3;
     margin-top: 50px;
     padding-bottom: 80px;
-    width: auto;
+    width: 100%;
     height: auto;   
     padding-left: 40px; 
+    display: flex;
+    flex-wrap: wrap;    
 }
 
 .pollsContainer{
@@ -300,6 +301,16 @@ form{
     background-color:#f2f2f2;
     color: #354254;
 }
+
+.questionLists .card{
+    padding: 16px;
+    text-align: center;
+}
+  #rowCards {
+    margin: 0 -5px;
+    display: flex;
+    flex-wrap: wrap;
+    }
 
 .questionLists .pollButtons {
    width:100%;
@@ -366,20 +377,24 @@ form{
 }
 #status{
     z-index:0;
+    margin-left: 70px;
 }
 #switchButtons .btn-default.btn-on.active{
     background-color: #5BB75B;
     color: white;
 }
 #switchButtons .btn-default.btn-off.active{
-    background-color: #DA4F49;
+    background-color: #5BB75B;
     color: white;
 }
 .searchBarSurvey{
+    display: flex;
     margin-top: 30px;
 }
-.searchBarSurvey .btn-primary{
+.searchBarSurvey .btn-info{
+    background-color: #5BB75B;
     margin-left:5px;
+    margin-top: 0px;
 }
 
 .searchBarSurvey input[type=search]{
@@ -405,7 +420,7 @@ form{
 
 .index-form{
     width: 100%;
-    margin-left: -145px;
+    margin-left: -250px;
     margin-top: -100px;
     padding-top: 60px;
     padding-bottom: 60px;
@@ -415,15 +430,14 @@ form{
 .form-group .form-control{
     border-radius: 5px;
     background: transparent;
-    min-width: 40rem;
-  
+    min-width: 70rem; 
 }
 .label_inputs{    
-    padding: 20px;  
+    padding: 20px; 
 }
 
 .questionContainer{
-    padding: 20px;
+    padding: 10px;
 }
 .questionSection{
     display: flex;
@@ -455,7 +469,7 @@ form{
     width: 120px;
     margin-bottom: 20px;   
 }
-.index-form .btn-warning{
+.index-form .btn-primary{
     margin-top: 20px;
     font-size: 18px;
     width: 140px;
@@ -465,6 +479,10 @@ form{
     margin-top: 5px;
 }
 #mySelect{
+    background-color: #f3f3f3;
+    padding: 10px;
+}
+.short_que_Container{
     background-color: #f3f3f3;
     padding: 10px;
 }
@@ -481,7 +499,7 @@ form{
 
 /* Inner */
 .popup-inner {
-	max-width:600px;
+	max-width:900px;
     width:60%;
     height: 100vh;
     overflow-y: auto;
