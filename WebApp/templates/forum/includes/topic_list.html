@@ -5,66 +5,183 @@
 
 
 {% block breadcrumb %}
-    <ol class="breadcrumb navClass">
-        <li><a href="{% url 'forum:index' %}">Home</a></li>
-        <li class="active">{{ node_group }}</li>
-    </ol>
+<ol class="breadcrumb navClass">
+    <li><a href="{% url 'forum:index' %}">Home</a></li>
+    <li class="active">{{ node_group }}</li>
+</ol>
 {% endblock %}
 
 {% block main_contain %}
-    <div class="panel panel-default">
-        <div class="panel-body panel-subtitle">
-            <span class="label label-success">{{ panel_title }}</span>
-            <p>
-                {{ node_group.description }}<br>
-                Total number of topics: {{ node_group.topic_count }}
-            </p>
-        </div>
-        <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic' nodegroup_pk=node_group.pk %}"><i
-                class="fa fa-fw fa-plus"></i>
-            New
-            Topic</a>
+<div class="panel panel-default">
+    <div class="panel-body panel-subtitle">
+        <span class="label label-success">{{ panel_title }}</span>
+        <p>
+            {{ node_group.description }}<br>
+            Total number of topics: {{ node_group.topic_count }}
+        </p>
+    </div>
+    <a class="btn btn-white btn-flat" href="{% url 'forum:create_topic' nodegroup_pk=node_group.pk %}"><i
+            class="fa fa-fw fa-plus"></i>
+        New
+        Topic</a>
 
-        <!-- List group -->
-        <ul class="list-group thread-list">
-         <!-- latest_thread_for_topics consists of list of list of [topic, corresponding_latest_thread, reply_count] -->
-                {% for list in latest_thread_for_topics %}
-                <li class="list-group-item thread-entry">
-                    <div class="entry media">
+    <!-- List group -->
+    <ul class="list-group thread-list">
+        <!-- latest_thread_for_topics consists of list of list of [topic, corresponding_latest_thread, reply_count] -->
+        {% for list in latest_thread_for_topics %}
+        {{ list.1 }}
+        <li class="list-group-item thread-entry">
+            <div class="entry media">
 
-                        <div class="media-body media-middle">
-                            <div class="icon-block half img-circle bg-grey-300">
+                <div class="media-body media-middle">
+                    <div class="icon-block half img-circle bg-grey-300">
 
-                                <i class="fa fa-{{ list.0.topic_icon }}"></i>
-                            </div>
-
-                            <a href="{% url 'forum:topic' pk=list.0.pk %}" class="entry-link">
-                                {{ list.0.title }}
-                            </a>
-                        <br>
-
-                        {{ list.0.description }}
-                            <br>
-                            Latest Thread :<a href="{% url 'forum:thread' pk=list.1.pk %}">
-                            {{ list.1.title }}
-                        </a>
-                            Reply count: {{ list.2 }}
-
-
-{#                                <span class="meta">#}
-{#                                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">#}
-                        </div>
-                                                <div class="media-right media-middle">
-                                                    total threads:
-                                                    <span class="badge">{{ list.0.thread_count }}</span>
-                                                </div>
+                        <i class="fa fa-{{ list.0.topic_icon }}"></i>
                     </div>
-                </li>
 
-            {% endfor %}
-        </ul>
-        <div class="panel-footer">
-            {% get_pagination %}
+                    <a href="{% url 'forum:topic' pk=list.0.pk %}" class="entry-link"></a>
+                    {{ list.0.title }}
+                    </a>
+                    <br>
+
+                    {{ list.0.description }}
+                    <br>
+
+                    {{ list.1.title }}
+                    </a>
+                    Reply count: {{ list.2 }}
+
+
+                    {#                                <span class="meta">#}
+                    {#                                    <a href="{% url 'forum:nodegroup' topic.node_group.pk %}">#}
+                </div>
+                <div class="media-right media-middle">
+                    total threads:
+                    <span class="badge">{{ list.0.thread_count }}</span>
+                </div>
+            </div>
+        </li>
+
+        {% endfor %}
+    </ul>
+    <div class="panel-footer">
+        {% get_pagination %}
+    </div>
+</div>
+
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Detail Of Category: {{ panel_title }}</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="dataTables_length" id="datatable_length"><label>Show <select name="datatable_length"
+                                    aria-controls="datatable" class="form-control input-sm">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select> entries</label></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div id="datatable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                    class="form-control input-sm" placeholder="" aria-controls="datatable"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid"
+                            aria-describedby="datatable_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1"
+                                        colspan="1" aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending" style="width: 157px;">Sub
+                                        category
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending" style="width: 259px;">
+                                        Posts</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                        aria-label="Office: activate to sort column ascending" style="width: 117px;">
+                                        Replies</th>
+                                    <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                        aria-label="Age: activate to sort column ascending" style="width: 60px;">Last
+                                        thread
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr role="row" class="odd">
+                                    {% for list in latest_thread_for_topics %}
+                                    <td class="sor%ting_1">{{ list.0 }}</td>
+
+                                    <td> {{  list.1 }} </td>
+                                    {% endfor %}
+                                    <td>Tokyo</td>
+                                    <td>33</td>
+                                    <td>2008/11/28</td>
+                                    <td>$162,700</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing 1 to
+                            10 of 57 entries</div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+                            <ul class="pagination">
+                                <li class="paginate_button previous disabled" id="datatable_previous"><a href="#"
+                                        aria-controls="datatable" data-dt-idx="0" tabindex="0">Previous</a></li>
+                                <li class="paginate_button active"><a href="#" aria-controls="datatable" data-dt-idx="1"
+                                        tabindex="0">1</a></li>
+                                <li class="paginate_button "><a href="#" aria-controls="datatable" data-dt-idx="2"
+                                        tabindex="0">2</a></li>
+                                <li class="paginate_button "><a href="#" aria-controls="datatable" data-dt-idx="3"
+                                        tabindex="0">3</a></li>
+                                <li class="paginate_button "><a href="#" aria-controls="datatable" data-dt-idx="4"
+                                        tabindex="0">4</a></li>
+                                <li class="paginate_button "><a href="#" aria-controls="datatable" data-dt-idx="5"
+                                        tabindex="0">5</a></li>
+                                <li class="paginate_button "><a href="#" aria-controls="datatable" data-dt-idx="6"
+                                        tabindex="0">6</a></li>
+                                <li class="paginate_button next" id="datatable_next"><a href="#"
+                                        aria-controls="datatable" data-dt-idx="7" tabindex="0">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
