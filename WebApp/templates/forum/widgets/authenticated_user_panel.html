@@ -2,70 +2,67 @@
 {% load i18n %}
 
 
+{#<div class="panel panel-default">#}
+{#    <div class="panel-body">#}
+<div class="profile_details">
+    <div class="well profile_view">
+        <div class="col-sm-12">
+            <h4 class="brief"><i>Your Profile</i></h4>
+            <div class="left col-xs-7">
+                <h2><a class="btn-white btn-flat"
+                       href="{% url 'forum:user_info' request.user.pk %}">{{ request.user.username }}</a></h2>
+                <br>
+                <p><strong>About: </strong></p>
+                <ul class="list-unstyled">
 
+                    {% if request.user.is_superuser %}
+                        <li> Super User</li>
+                    {% endif %}
+                    {% if request.user.Is_Teacher %}
+                        <li> Teacher</li>
+                    {% endif %}
+                    {% if request.user.Is_Student %}
+                        <li> Student</li>
+                    {% endif %}
+                    {% if request.user.Is_CenterAdmin %}
+                        <li> Center Admin</li>
+                    {% endif %}
+                    {% if request.user.Is_Parent %}
+                        <li> Parent</li>
+                    {% endif %}
+                    </li>
+                </ul>
+            </div>
+            <div class="right col-xs-5 text-center">
+                <img src="/media/{{ request.user.Member_Avatar }}" alt="" class="img-circle img-responsive">
+            </div>
+        </div>
+        <div class="col-xs-12 bottom text-center">
+            <div class="col-xs-12 col-sm-6 emphasis">
+                <a href="{% url 'forum:user_threads' request.user.pk %}">
+                    <button type="button" class="btn btn-success btn-xs">
+                        <i class="fa fa-comments-o"></i> Threads: {{ request.user.threads.count }}</button>
+                </a>
 
-<div class="panel panel-default">
-    <!--<div class="panel-heading">forum APP</div>-->
-    <div class="panel-body user-panel">
-        <div class="panel-user-info">
-            <div class="panel-username">
-                <div class="profile_pic_forum">
-                    <img src="/media/Images/ubl_logo.jpg" alt="...">
-                </div>
-                <div class="reply-content-detail">
-                    <a href="{% url 'forum:user_info' request.user.pk %}">{{ request.user.username }}</a>
-                </div>
 
             </div>
-            <div class="row panel-user-meta">
-                <div class="col-xs-4 panel-user-meta-item">
-                    <a href="{% url 'forum:user_threads' request.user.pk %}">
-                        <div class="text-center">
-                            <p class="panel-user-meta-item-value">
-                                {{ request.user.threads.count }}
-                            </p>
-                            <p class="panel-user-meta-item-title">threads</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-4 panel-user-meta-item">
-                    <a href="{% url 'forum:user_posts' request.user.pk %}">
-                        <div class="text-center">
-                            <p class="panel-user-meta-item-value">{{ request.user.posts.count }}</p>
-                            <p class="panel-user-meta-item-title">Replies</p>
-                        </div>
-                    </a>
-                </div>
-                <!-- <div class="col-xs-4 panel-user-meta-item">
-                    <a href="{% url 'forum:user_info' request.user.pk %}">
-                        <div class="text-center">
-                            <p class="panel-user-meta-item-value">{{ request.user.pk }}</p>
-                            <p class="panel-user-meta-item-title">UID</p>
-                        </div>
-                    </a>
-                </div> -->
+
+            <div class="col-xs-12 col-sm-6 emphasis">
+                <a href="{% url 'forum:user_posts' request.user.pk %}">
+                    <button type="button" class="btn btn-success btn-xs">
+                        <i class="fa fa-comments-o"></i> Replies: {{ request.user.posts.count }}</button>
+                </a>
+                <a  href="{% url 'forum:user_info' request.user.pk %}">
+                    <button type="button" class="btn btn-primary btn-xs">
+                        <i class="fa fa-user"> </i> View Profile
+                    </button>
+                </a>
             </div>
         </div>
     </div>
-    <ul class="list-group">
-        <!-- <li class="list-group-item">
-            <a href="{% url 'forum:create_topic' %}">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                {% trans 'Add Topic' %}
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="{% url 'forum:create_thread' %}">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                {% trans 'Create Thread' %}
-            </a>
-        </li> -->
-
-        <!-- <li class="list-group-item">
-            <a href="{% url 'forum:logout' %}">
-                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                {% trans "Log out" %}
-            </a>
-        </li> -->
-    </ul>
 </div>
+{##}
+{#    </div>#}
+{#</div>#}
+
+
