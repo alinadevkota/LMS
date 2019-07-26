@@ -73,7 +73,7 @@
                                                 <span class="label label-warning">Close</span>
                                             </a>
                                         {% else %}
-                                             <a href="#" class="moderate-action open-thread" data-toggle="modal"
+                                            <a href="#" class="moderate-action open-thread" data-toggle="modal"
                                                data-target="#moderation-modal" data-pk="1" data-action="open-thread"
                                                data-api-url="/forum/api/threads/1/">
                                                 <span class="label label-warning">Reopen</span>
@@ -182,6 +182,7 @@
 
 
                                         </div>
+                                    </div>
 
                                 </form>
                                 </p>
@@ -243,8 +244,9 @@
                     dataType: 'json',
                     method: 'PATCH',
                     url: url,
-                    data: data
-                }).done(() => {
+                    data: data,
+                }).done((r) => {
+                    console.log(r);
                     $('#moderation-modal').find('.modal-body').html(`<p class="text-success">{% trans 'Operation successful' %}</p>`);
                 }).fail((xhr, status, error) => {
                     $('#moderation-modal').find('.modal-body').html(`<p class="text-danger">${status}</p>`);
