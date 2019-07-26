@@ -62,27 +62,30 @@
                                 <div class="top_button">
                                     {% if request.user.is_superuser %}
                                         <a href="#" class="moderate-action move-thread-up" data-toggle="modal"
-                                           data-target="#moderation-modal" data-pk="1" data-action="move-thread-up"
-                                           data-api-url="/forum/api/threads/1/">
+                                           data-target="#moderation-modal" data-pk="{{ thread.pk }}"
+                                           data-action="move-thread-up"
+                                           data-api-url="{% url 'forum:thread-detail' thread.pk %}">
                                             <span class="label label-success">Up</span>
                                         </a>
-                                        {% if not thread.closed %}
-                                            <a href="#" class="moderate-action close-thread" data-toggle="modal"
-                                               data-target="#moderation-modal" data-pk="1" data-action="close-thread"
-                                               data-api-url="/forum/api/threads/1/">
-                                                <span class="label label-warning">Close</span>
+                                        {% if thread.closed %}
+                                            <a href="#" class="moderate-action open-thread" data-toggle="modal"
+                                               data-target="#moderation-modal" data-pk="{{ thread.pk }}"
+                                               data-action="open-thread"
+                                               data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+                                                <span class="label label-info">Open</span>
                                             </a>
                                         {% else %}
-                                             <a href="#" class="moderate-action open-thread" data-toggle="modal"
-                                               data-target="#moderation-modal" data-pk="1" data-action="open-thread"
-                                               data-api-url="/forum/api/threads/1/">
-                                                <span class="label label-warning">Reopen</span>
+                                            <a href="#" class="moderate-action close-thread" data-toggle="modal"
+                                               data-target="#moderation-modal" data-pk="{{ thread.pk }}"
+                                               data-action="close-thread"
+                                               data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+                                                <span class="label label-warning">Close</span>
                                             </a>
                                         {% endif %}
-
                                         <a href="#" class="moderate-action hide-thread" data-toggle="modal"
-                                           data-target="#moderation-modal" data-pk="1" data-action="hide-thread"
-                                           data-api-url="/forum/api/threads/1/">
+                                           data-target="#moderation-modal" data-pk="{{ thread.pk }}"
+                                           data-action="hide-thread"
+                                           data-api-url="{% url 'forum:thread-detail' thread.pk %}">
                                             <span class="label label-danger">Hide</span>
                                         </a>
                                     {% endif %}
@@ -182,6 +185,7 @@
 
 
                                         </div>
+                                    </div>
 
                                 </form>
                                 </p>
@@ -243,8 +247,9 @@
                     dataType: 'json',
                     method: 'PATCH',
                     url: url,
-                    data: data
-                }).done(() => {
+                    data: data,
+                }).done((r) => {
+                    {#console.log(r);#}
                     $('#moderation-modal').find('.modal-body').html(`<p class="text-success">{% trans 'Operation successful' %}</p>`);
                 }).fail((xhr, status, error) => {
                     $('#moderation-modal').find('.modal-body').html(`<p class="text-danger">${status}</p>`);
