@@ -103,10 +103,11 @@
                                             {% endif %}
                                         {% endif %}
                                     </div>
-                                    <div>
-                                        <!-- <div class="profile_pic_forum">
-                                    <img src="/media/{{ thread.user.Member_Avatar }}" alt="..." />
-                                </div> -->
+                                    <div class="inline-related">
+{#                                         <div class="profile_pic_forum">#}
+{#                                                            <img src="/media/{{ thread.user.Member_Avatar }}"#}
+{#                                                                 alt="..."/>#}
+{#                                                        </div>#}
 
                                         <h3 class="thread-title"><a>{{ thread.title }}</a></h3>
                                     </div>
@@ -131,31 +132,50 @@
                                     <h5>
                                         <p class="excerpt">{{ thread.content_rendered | safe }}
                                     </h5>
+                                    <br>
                                     <ul class="list-group reply-list">
                                         {% for post in posts %}
                                             <li class="list-group-item reply-item">
                                                 <div class="thread-meta row">
 
                                                     <div class="col-xs-9 col-sm-10" id="comment-section">
-                                                        <div class="reply-content">
-                                                            <div class="profile_pic_forum">
-                                                                <img src="/media/{{ post.user.Member_Avatar }}"
-                                                                     alt="..."/>
-                                                            </div>
-                                                            <div class="reply-content-detail">
-                                                                <a
-                                                                        href="{% url 'forum:user_info' post.user_id %}">{{ post.user }}</a>
-                                                                <br/>
+
+                                                    <div class="reply-content">
+                                                        <div class="profile_pic_forum">
+                                                            <img src="/media/{{ post.user.Member_Avatar }}"
+                                                                 alt="..."/>
+                                                        </div>
+                                                        <div class="reply-content-detail">
+                                                            <a
+                                                                    href="{% url 'forum:user_info' post.user_id %}">{{ post.user }}</a>
+                                                            <br/>
+                                                            <div class="byline">
                                                                 <span>{{ post.pub_date | naturaltime }}</span>
                                                             </div>
-
+                                                        </div>
+                                                        {% if request.user.is_superuser %}
+                                                                <div class="col-xs-12 col-sm-6 emphasis">
+                                                                    <div class="top_button">
+                                                                        <p class="moderation-links">
+                                                                            <a href="#"
+                                                                               class="moderate-action hide-reply"
+                                                                               data-toggle="modal"
+                                                                               data-target="#moderation-modal"
+                                                                               data-pk="{{ thread.pk }}"
+                                                                               data-action="hide-reply"
+                                                                               data-api-url="{% url 'forum:post-detail' post.pk %}">
+                                                                                <span class="label label-danger">Hide</span>
+                                                                            </a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            {% endif %}
                                                         </div>
 
 
                                                         <div class="chat-reply">
-                                                            -{{ post.content_rendered | safe }}
-
-                                                        </div>
+                                                            <p class="excerpt">
+                                                                {{ post.content_rendered | safe }}</p></div>
 
 
                                                     </div>
@@ -165,18 +185,7 @@
                                                     <a href="#" data-username="{{ post.user.username }}"
                                                        class="reply-to">{% trans "Reply" %}</a>
                                                 </p>
-                                                {% if request.user.is_superuser %}
-                                                    <hr>
-                                                    <p class="moderation-links">
-                                                        <a href="#" class="moderate-action hide-reply"
-                                                           data-toggle="modal"
-                                                           data-target="#moderation-modal" data-pk="{{ thread.pk }}"
-                                                           data-action="hide-reply"
-                                                           data-api-url="{% url 'forum:post-detail' post.pk %}">
-                                                            <span class="label label-danger">Hide</span>
-                                                        </a>
-                                                    </p>
-                                                {% endif %}
+
                                             </li>
                                         {% endfor %}
                                     </ul>
@@ -230,9 +239,9 @@
 
 {% endblock %}
 
-{% block widget_after %}
-    {% include 'forum/widgets/topic_info.html' %}
-{% endblock %}
+{#{% block widget_after %}#}
+{#    {% include 'forum/widgets/topic_info.html' %}#}
+{#{% endblock %}#}
 
 {% block footer_ext %}
     <script>
