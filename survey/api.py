@@ -35,3 +35,19 @@ class OptionInfoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
+class SubmitSurveyViewSet(viewsets.ModelViewSet):
+    """ViewSet for the SubmitSurvey class"""
+
+    queryset = models.SubmitSurvey.objects.all()
+    serializer_class = serializers.SubmitSurveySerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class AnswerInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the AnswerInfo class"""
+
+    queryset = models.AnswerInfo.objects.all()
+    serializer_class = serializers.AnswerInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+

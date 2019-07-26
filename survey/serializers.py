@@ -19,11 +19,7 @@ class SurveyInfoSerializer(serializers.ModelSerializer):
         model = models.SurveyInfo
         fields = (
             'pk', 
-            'Survey_Title', 
-            'Start_Date', 
-            'End_Date', 
-            'Survey_Cover', 
-            'Use_Flag', 
+            'Survey_Title', 'Start_Date', 'End_Date', 'Survey_Cover', 'Use_Flag','Added_By','Category_Code','Assigned_To'
         )
 
 
@@ -33,7 +29,7 @@ class QuestionInfoSerializer(serializers.ModelSerializer):
         model = models.QuestionInfo
         fields = (
             'pk', 
-            'Question_Name', 
+            'Question_Name','Survey_Code','Question_Type'
         )
 
 
@@ -43,7 +39,27 @@ class OptionInfoSerializer(serializers.ModelSerializer):
         model = models.OptionInfo
         fields = (
             'pk', 
-            'Option_Name', 
+            'Option_Name','Question_Code'
+        )
+
+
+class SubmitSurveySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.SubmitSurvey
+        fields = (
+            'pk',
+            'Survey_Code', 'Student_Code'
+        )
+
+
+class AnswerInfoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.AnswerInfo
+        fields = (
+            'pk',
+            'Answer_Value','Question_Code','Submit_Code'
         )
 
 

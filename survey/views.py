@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
-from .models import CategoryInfo, SurveyInfo, QuestionInfo, OptionInfo
-from .forms import CategoryInfoForm, SurveyInfoForm, QuestionInfoForm, OptionInfoForm
+from .models import CategoryInfo, SurveyInfo, QuestionInfo, OptionInfo, SubmitSurvey, AnswerInfo
+from .forms import CategoryInfoForm, SurveyInfoForm, QuestionInfoForm, OptionInfoForm, SubmitSurveyForm, AnswerInfoForm
 
 
 class CategoryInfoListView(ListView):
@@ -73,4 +73,39 @@ class OptionInfoDetailView(DetailView):
 class OptionInfoUpdateView(UpdateView):
     model = OptionInfo
     form_class = OptionInfoForm
+
+class SubmitSurveyListView(ListView):
+    model = SubmitSurvey
+
+
+class SubmitSurveyCreateView(CreateView):
+    model = SubmitSurvey
+    form_class = SubmitSurveyForm
+
+
+class SubmitSurveyDetailView(DetailView):
+    model = SubmitSurvey
+
+
+class SubmitSurveyUpdateView(UpdateView):
+    model = SubmitSurvey
+    form_class = SubmitSurveyForm
+
+
+class AnswerInfoListView(ListView):
+    model = AnswerInfo
+
+
+class AnswerInfoCreateView(CreateView):
+    model = AnswerInfo
+    form_class = AnswerInfoForm
+
+
+class AnswerInfoDetailView(DetailView):
+    model = AnswerInfo
+
+
+class AnswerInfoUpdateView(UpdateView):
+    model = AnswerInfo
+    form_class = AnswerInfoForm
 
