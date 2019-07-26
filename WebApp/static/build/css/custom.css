@@ -848,7 +848,7 @@ a:hover, a:focus {
 
 .top_nav .navbar-right {
     margin: 0;
-    width: 30%;
+    /*width: 30%;*/
     float: right
 }
 
@@ -5575,7 +5575,6 @@ article {
 
 #calendarDivAdmin {
     margin-bottom: 10px;
-    height: 65vh;
     overflow: auto;
 }
 
@@ -5612,6 +5611,7 @@ article {
 }
 
 #editButton {
+    margin-top: 20px;
     margin-left: 30%;
 }
 
@@ -5692,6 +5692,6 @@ article {
 .centerNameTopNav{
 
     line-height: 60px;
-    margin-left: 600px;
+    margin-left: 200;
     font-size: 25px;
 }

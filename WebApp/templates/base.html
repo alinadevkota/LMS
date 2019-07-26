@@ -14,9 +14,11 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
         {% endblock meta %}
 
-        <title>LMS  {% block title %}{% endblock %}</title>
+        <title>LMS {% block title %}{% endblock %}</title>
+
 
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
         <!-- Bootstrap -->
         <link href="{% static 'vendorsx/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
         <!-- Font Awesome -->
@@ -68,12 +70,20 @@
                     {% include "WebApp/theme/top_navigation.html" %}
                 </div>
             {% endblock top_navigation %}
+
+
             <div class="right_col" role="main">
 
                 <div class="page-title">
 
 
                 </div>
+                <ol aria-label="breadcrumb" class="breadcrumb navClass">
+                    <li class="breadcrumb-item"><a href="{% url 'start' %}">Home</a></li>
+                    {% block breadcrumb %}
+
+                    {% endblock %}
+                </ol>
                 {% block content %}
                     <!-- {{ content }} -->
                 {% endblock content %}

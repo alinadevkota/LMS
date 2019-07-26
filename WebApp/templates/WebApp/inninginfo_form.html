@@ -1,19 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'inninginfo_list' %}">Session</a></li>
+    <li class="breadcrumb-item active" aria-current="page">
+        {% if '/inninginfo/create/' == request.path %}
+            Create New Session
+        {% else %}
+            Edit Session Info
+        {% endif %}
+    </li>
+{% endblock %}
 {% block content %}
-    <ol aria-label="breadcrumb" class="breadcrumb navClass">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item" aria-current="page"><a href="{% url 'inninginfo_list' %}">Session</a></li>
-        <li class="breadcrumb-item active" aria-current="page">
-            {% if '/inninginfo/create/' == request.path %}
-                Create New Session
-            {% else %}
-                Edit Session Info
-            {% endif %}
-        </li>
-    </ol>
-
     <div class="headerDiv">
         <h2 class="infoFormHeader">
             {% if '/inninginfo/create/' == request.path %}

@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active" aria-current="page">Session Mapping</li>
+{% endblock %}
 {% block content %}
     <div class="inninggroupListClass">
-        <ol aria-label="breadcrumb" class="breadcrumb navClass">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Session Mapping</li>
-        </ol>
-        <hr class="header_hr">
+               <hr class="header_hr">
         <h2 class="tableHeader">List of Session Mapping</h2>
         <hr class="header_hr">
 

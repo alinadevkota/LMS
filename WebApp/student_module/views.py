@@ -53,3 +53,7 @@ def question(request):
 
 def polls(request):
     return render(request, 'student_module/polls.html')
+
+def ProfileView(request):
+    return render(request, 'student_module/profile.html')
+

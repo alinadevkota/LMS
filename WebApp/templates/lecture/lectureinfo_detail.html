@@ -1,17 +1,7 @@
 {% load static %}
-<ol aria-label="breadcrumb" class="breadcrumb navClass">
-    <li class="breadcrumb-item"><a href="{% if '/teachers' in request.path %}
-            {% url 'teacher_home' %}
-        {% else %}
-            {% url 'start' %}
-        {% endif %}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% if '/teachers' in request.path %}
-            {% url 'teacher_lectureinfo_list' %}
-        {% else %}
-            {% url 'lectureinfo_list' %}
-        {% endif %}">Lecture</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ object.Lecture_Name }}</li>
-</ol>
+
+
+
 <div class="outerdiv">
 
     <h2 class="detailListHeader">Lecture Information</h2>
