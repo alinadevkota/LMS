@@ -48634,6 +48634,12 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   
 }
 
+
+.user_infos{
+  margin-bottom: -20px;
+  margin-top: -40px;
+}
+
 .form-control{
   background-color: #F3F2EE;
 }
