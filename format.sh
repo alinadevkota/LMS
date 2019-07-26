@@ -1,7 +1,7 @@
-rm -r WebApp\migrations
-rm -r  quiz\migrations
-rm -r  forum\migrations
-rm -r  survey\migrations
+rm -r WebApp/migrations
+rm -r  quiz/migrations
+rm -r  forum/migrations
+rm -r  survey/migrations
 
 fuser -k -n tcp 9002
 rm db.sqlite3
