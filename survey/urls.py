@@ -9,7 +9,8 @@ router.register(r'categoryinfo', api.CategoryInfoViewSet)
 router.register(r'surveyinfo', api.SurveyInfoViewSet)
 router.register(r'questioninfo', api.QuestionInfoViewSet)
 router.register(r'optioninfo', api.OptionInfoViewSet)
-
+router.register(r'submitsurvey', api.SubmitSurveyViewSet)
+router.register(r'answerinfo', api.AnswerInfoViewSet)
 
 urlpatterns = (
     # urls for Django Rest Framework API
@@ -48,3 +49,18 @@ urlpatterns += (
     path('optioninfo/update/<int:pk>/', views.OptionInfoUpdateView.as_view(), name='optioninfo_update'),
 )
 
+urlpatterns += (
+    # urls for SubmitSurvey
+    path('submitsurvey/', views.SubmitSurveyListView.as_view(), name='submitsurvey_list'),
+    path('submitsurvey/create/', views.SubmitSurveyCreateView.as_view(), name='submitsurvey_create'),
+    path('submitsurvey/detail/<int:pk>/', views.SubmitSurveyDetailView.as_view(), name='submitsurvey_detail'),
+    path('submitsurvey/update/<int:pk>/', views.SubmitSurveyUpdateView.as_view(), name='submitsurvey_update'),
+)
+
+urlpatterns += (
+    # urls for AnswerInfo
+    path('answerinfo/', views.AnswerInfoListView.as_view(), name='answerinfo_list'),
+    path('answerinfo/create/', views.AnswerInfoCreateView.as_view(), name='answerinfo_create'),
+    path('answerinfo/detail/<int:pk>/', views.AnswerInfoDetailView.as_view(), name='answerinfo_detail'),
+    path('answerinfo/update/<int:pk>/', views.AnswerInfoUpdateView.as_view(), name='answerinfo_update'),
+)

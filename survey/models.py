@@ -21,6 +21,9 @@ class CategoryInfo(models.Model):
     def __unicode__(self):
         return u'%s' % self.pk
 
+    def __str__(self):
+        return self.Category_Name
+
     def get_absolute_url(self):
         return reverse('categoryinfo_detail', args=(self.pk,))
 
@@ -56,6 +59,10 @@ class SurveyInfo(models.Model):
     def __unicode__(self):
         return u'%s' % self.pk
 
+    def __str__(self):
+        return self.Survey_Title
+
+
     def get_absolute_url(self):
         return reverse('surveyinfo_detail', args=(self.pk,))
 
@@ -82,6 +89,9 @@ class QuestionInfo(models.Model):
     def __unicode__(self):
         return u'%s' % self.pk
 
+    def __str__(self):
+        return self.Question_Name
+
     def get_absolute_url(self):
         return reverse('questioninfo_detail', args=(self.pk,))
 
@@ -105,6 +115,9 @@ class OptionInfo(models.Model):
     def __unicode__(self):
         return u'%s' % self.pk
 
+    def __str__(self):
+        return self.Option_Name
+
     def get_absolute_url(self):
         return reverse('optioninfo_detail', args=(self.pk,))
 
@@ -112,4 +125,53 @@ class OptionInfo(models.Model):
     def get_update_url(self):
         return reverse('optioninfo_update', args=(self.pk,))
 
+class SubmitSurvey(models.Model):
 
+    # Fields
+    Survey_Code = ForeignKey(
+        'SurveyInfo',
+        related_name="submitsurvey", on_delete=models.CASCADE
+    )
+    Student_Code = ForeignKey(
+        'WebApp.MemberInfo',
+        related_name="submitsurvey", on_delete=models.DO_NOTHING
+    )
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('submitsurvey_detail', args=(self.pk,))
+
+
+    def get_update_url(self):
+        return reverse('submitsurvey_update', args=(self.pk,))
+
+class AnswerInfo(models.Model):
+
+
+    # Fields
+    Answer_Value = CharField(max_length=500, blank=True, null=True)
+    Question_Code = ForeignKey(
+        'QuestionInfo',
+        related_name="answerinfo", on_delete=models.CASCADE
+    )
+    Submit_Code = ForeignKey(
+        'SubmitSurvey',
+        related_name="answerinfo", on_delete=models.CASCADE
+    )
+
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('answerinfo_detail', args=(self.pk,))
+
+
+    def get_update_url(self):
+        return reverse('answerinfo_update', args=(self.pk,))
