@@ -33,5 +33,9 @@ urlpatterns += (
 
 )
 
+urlpatterns += (
+    # urls for Profile
+    path('makequery/', login_required(views.makequery), name='teacher_makequery'),
 
+)
 

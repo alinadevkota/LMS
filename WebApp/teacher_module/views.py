@@ -74,3 +74,7 @@ class ChapterInfoUpdateView(UpdateView):
 
 def ProfileView(request):
     return render(request, 'teacher_module/profile.html')
+
+
+def makequery(request):
+    return render(request, 'teacher_module/makequery.html')
