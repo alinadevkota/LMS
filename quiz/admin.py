@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Quiz, Category, SubCategory, Progress, Question, Answer, MCQuestion, TF_Question, Essay_Question
+from .models import Quiz, Category, SubCategory, Progress, Answer, MCQuestion, TF_Question
 
 
 class AnswerInline(admin.TabularInline):
@@ -22,33 +22,33 @@ class QuizAdminForm(forms.ModelForm):
         model = Quiz
         exclude = []
 
-    questions = forms.ModelMultipleChoiceField(
-        queryset=Question.objects.all().select_subclasses(),
+        mcquestion = forms.ModelMultipleChoiceField(
+        queryset=MCQuestion.objects.all().select_subclasses(),
         required=False,
-        label=_("Questions"),
+        # label=_("Questions"),
         widget=FilteredSelectMultiple(
-            verbose_name=_("Questions"),
+            verbose_name=_("mcquestion"),
             is_stacked=False))
 
     def __init__(self, *args, **kwargs):
         super(QuizAdminForm, self).__init__(*args, **kwargs)
         if self.instance.pk:
-            self.fields['questions'].initial =\
+            self.fields['mcquestion'].initial =\
                 self.instance.question_set.all().select_subclasses()
-
-    def save(self, commit=True):
-        quiz = super(QuizAdminForm, self).save(commit=False)
-        quiz.save()
-        quiz.question_set.set(self.cleaned_data['questions'])
-        self.save_m2m()
-        return quiz
+#
+#     def save(self, commit=True):
+#         quiz = super(QuizAdminForm, self).save(commit=False)
+#         quiz.save()
+#         quiz.question_set.set(self.cleaned_data['questions'])
+#         self.save_m2m()
+#         return quiz
 
 
 class QuizAdmin(admin.ModelAdmin):
     form = QuizAdminForm
 
-    list_display = ('title', 'category', )
-    list_filter = ('category',)
+    #list_display = ('title', 'category', )
+    #list_filter = ('category',)
     search_fields = ('description', 'category', )
 
 
@@ -58,18 +58,17 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class SubCategoryAdmin(admin.ModelAdmin):
     search_fields = ('sub_category', )
-    list_display = ('sub_category', 'category',)
-    list_filter = ('category',)
+    #list_display = ('sub_category', 'category',)
+    #list_filter = ('category',)
 
 
 class MCQuestionAdmin(admin.ModelAdmin):
-    list_display = ('content', 'category', )
-    list_filter = ('category',)
-    fields = ('content', 'category', 'sub_category',
-              'figure', 'quiz', 'explanation', 'answer_order')
+    #list_display = ('content', 'category', )
+    #list_filter = ('category',)
+    fields = ('content', 'figure', 'explanation', 'answer_order')
 
     search_fields = ('content', 'explanation')
-    filter_horizontal = ('quiz',)
+    # filter_horizontal = ('quiz',)
 
     inlines = [AnswerInline]
 
@@ -83,21 +82,20 @@ class ProgressAdmin(admin.ModelAdmin):
 
 
 class TFQuestionAdmin(admin.ModelAdmin):
-    list_display = ('content', 'category', )
-    list_filter = ('category',)
-    fields = ('content', 'category', 'sub_category',
-              'figure', 'quiz', 'explanation', 'correct',)
+    #list_display = ('content', 'category', )
+    #list_filter = ('category',)
+    fields = ('content', 'figure', 'explanation', 'correct',)
 
     search_fields = ('content', 'explanation')
-    filter_horizontal = ('quiz',)
+    # filter_horizontal = ('quiz',)
 
 
 class EssayQuestionAdmin(admin.ModelAdmin):
-    list_display = ('content', 'category', )
-    list_filter = ('category',)
-    fields = ('content', 'category', 'sub_category', 'quiz', 'explanation', )
+    #list_display = ('content', 'category', )
+    #list_filter = ('category',)
+    fields = ('content', 'quiz', 'explanation', )
     search_fields = ('content', 'explanation')
-    filter_horizontal = ('quiz',)
+    # filter_horizontal = ('quiz',)
 
 admin.site.register(Quiz, QuizAdmin)
 admin.site.register(Category, CategoryAdmin)
@@ -105,4 +103,4 @@ admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(MCQuestion, MCQuestionAdmin)
 admin.site.register(Progress, ProgressAdmin)
 admin.site.register(TF_Question, TFQuestionAdmin)
-admin.site.register(Essay_Question, EssayQuestionAdmin)
+

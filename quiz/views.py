@@ -6,8 +6,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView, FormView, CreateView, UpdateView
 
-from .forms import QuestionForm, EssayForm, QuizForm, MCQuestionForm, TFQuestionForm, EssayQuestionForm
-from .models import Quiz, Category, Progress, Sitting, Question, Essay_Question, MCQuestion, TF_Question
+from .forms import QuestionForm, EssayForm, QuizForm, MCQuestionForm, TFQuestionForm
+from .models import Quiz, Category, Progress, Sitting, MCQuestion, TF_Question, Question
 
 
 class QuizMarkerMixin(object):
@@ -160,8 +160,7 @@ class QuizTake(FormView):
             self.logged_in_user = self.request.user.is_authenticated
 
         if self.logged_in_user:
-            self.sitting = Sitting.objects.user_sitting(request.user,
-                                                        self.quiz)
+            self.sitting = Sitting.objects.user_sitting(request.user, self.quiz)
         else:
             self.sitting = self.anon_load_sitting()
 
@@ -178,10 +177,12 @@ class QuizTake(FormView):
             self.question = self.anon_next_question()
             self.progress = self.anon_sitting_progress()
 
-        if self.question.__class__ is Essay_Question:
-            form_class = EssayForm
-        else:
-            form_class = self.form_class
+        # if self.question.__class__ is Essay_Question:
+        #     form_class = EssayForm
+        # else:
+        #     form_class = self.form_class
+        form_class = self.form_class
+
 
         return form_class(**self.get_form_kwargs())
 
@@ -447,21 +448,21 @@ def TFQuestionDeleteView(request, pk):
 
 
 # ------------------------- Essay_Question Views------------------
-
-class EssayQuestionListView(ListView):
-    model = Essay_Question
-
-class EssayQuestionCreateView(CreateView):
-    model = Essay_Question
-    form_class = EssayQuestionForm
-
-class EssayQuestionUpdateView(UpdateView):
-    model = Essay_Question
-    form_class = EssayQuestionForm
-
-class EssayQuestionDetailView(DetailView):
-    model = Essay_Question
-
-def EssayQuestionDeleteView(request, pk):
-    Essay_Question.objects.filter(pk=pk).delete()
-    return redirect("essayquestion_list")
+#
+# class EssayQuestionListView(ListView):
+#     model = Essay_Question
+#
+# class EssayQuestionCreateView(CreateView):
+#     model = Essay_Question
+#     form_class = EssayQuestionForm
+#
+# class EssayQuestionUpdateView(UpdateView):
+#     model = Essay_Question
+#     form_class = EssayQuestionForm
+#
+# class EssayQuestionDetailView(DetailView):
+#     model = Essay_Question
+#
+# def EssayQuestionDeleteView(request, pk):
+#     Essay_Question.objects.filter(pk=pk).delete()
+#     return redirect("essayquestion_list")

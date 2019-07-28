@@ -4,7 +4,7 @@ from django.forms.widgets import RadioSelect, Textarea
 from django.utils.translation import gettext as _
 
 # from quiz import admin
-from quiz.models import Quiz, Question, MCQuestion, TF_Question, Essay_Question, Answer
+from quiz.models import Quiz,  MCQuestion, TF_Question,  Answer
 
 
 # class AnswerInline(admin.TabularInline):
@@ -32,11 +32,6 @@ class QuizForm(forms.ModelForm):
         model = Quiz
         fields = '__all__'
 
-    questions = forms.ModelMultipleChoiceField(
-        queryset=Question.objects.all().select_subclasses(),
-        required=False,
-        # label=_("Questions"),
-        widget=FilteredSelectMultiple( verbose_name=_("Questions"), is_stacked=False))
 
     def __init__(self, *args, **kwargs):
         super(QuizForm, self).__init__(*args, **kwargs)
@@ -103,14 +98,3 @@ class TFQuestionForm(forms.ModelForm):
         # label=_("Questions"),
         widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
 
-
-class EssayQuestionForm(forms.ModelForm):
-    class Meta:
-        model = Essay_Question
-        fields = '__all__'
-
-    quiz = forms.ModelMultipleChoiceField(
-        queryset=Quiz.objects.all(),
-        required=False,
-        # label=_("Questions"),
-        widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
