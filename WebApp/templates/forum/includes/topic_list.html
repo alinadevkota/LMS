@@ -23,7 +23,7 @@
             No of Topics: {{ node_group.topic_count }}
         </p>
         <div class=" pull-right">
-            <a href="{% url 'forum:create_topic' %}"><i class="fa fa-fw fa-plus"></i>
+            <a href="{% url 'forum:create_topic' nodegroup_pk=node_group.pk %}"><i class="fa fa-fw fa-plus"></i>
                 Sub Category
             </a></i>
 
