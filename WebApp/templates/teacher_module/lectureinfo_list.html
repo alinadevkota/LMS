@@ -1,8 +1,11 @@
 {% extends "teacher_module/base.html" %}
-{%load static %}
+{% load static %}
 {% block title %}
     | Courses
 {% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item active" aria-current="page">Lecture</li>
+{% endblock %}
 {% block content %}
-    {% include 'lecture/lectureinfo_list.html'%}
+    {% include 'lecture/lectureinfo_list.html' %}
 {% endblock content %}

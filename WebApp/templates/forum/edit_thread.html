@@ -3,12 +3,12 @@
 {% load crispy_forms_tags %}
 
 {% block breadcrumb %}
-<ol aria-label="breadcrumb" class="breadcrumb navClass">
 
-    <li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Home</a></li>
-    <li class="breadcrumb-item active"><a href="{% url 'forum:edit_thread' pk=form.instance.pk %}"> Edit Thread</a>
-    </li>
-</ol>
+
+<li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Home</a></li>
+<li class="breadcrumb-item active"><a href="{% url 'forum:edit_thread' pk=form.instance.pk %}"> Edit Thread</a>
+</li>
+
 {% endblock %}
 
 {% block main_contain %}

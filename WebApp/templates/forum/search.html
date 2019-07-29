@@ -5,10 +5,10 @@
 
 
 {% block breadcrumb %}
-<ol aria-label="breadcrumb" class="breadcrumb navClass">
-    <li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Home</a></li>
-    <li class="active">Search</li>
-</ol>
+
+<li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Forum</a></li>
+<li class="active">Search</li>
+
 {% endblock %}
 
 {% block left %}
@@ -33,7 +33,7 @@
 
     <!-- List group -->
     <ul class="list-group thread-list">
-    {% if threads %}
+        {% if threads %}
         {% for thread in threads %}
         <li class="list-group-item thread-entry">
             <div class="entry media">
@@ -89,9 +89,9 @@
             </div>
         </li>
         {% endfor %}
-    {% else %}
+        {% else %}
         No results found
-    {% endif %}
+        {% endif %}
     </ul>
     <div class="panel-footer">
         {% get_pagination %}

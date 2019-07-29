@@ -5,8 +5,8 @@
     | Course Detail
 {% endblock %}
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{% url 'lectureinfo_list' %}">Lecture</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ object.Lecture_Name }}</li>
+        <li class="breadcrumb-item"><a href="{% url 'lectureinfo_list' %}">Lecture</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ object.Lecture_Name }}</li>
 {% endblock %}
 
 {% block content %}
