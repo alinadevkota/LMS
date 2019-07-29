@@ -33,6 +33,8 @@ from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterCon
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, Events
 from datetime import datetime
 import json
+
+
 #
 #
 # class ProfileListView(ListView):
@@ -54,7 +56,12 @@ import json
 #
 
 def ProfileView(request):
-    return render(request, 'WebApp/profile.html')
+    try:
+        center = CenterInfo.objects.get( Center_Name =request.user.Center_Code)
+    except:
+        center = None
+        pass
+    return render(request, 'WebApp/profile.html',{"center":center})
 
 
 def login(request, template_name='registration/login.html',
@@ -103,14 +110,14 @@ _sentinel = object()
 
 def calendar(request):
     all_events = Events.objects.all()
-    
+
     get_event_types = Events.objects.only('event_type')
     # if filters applied then get parameter and filter based on condition else return object
-    if request.GET:  
+    if request.GET:
         event_arr = []
         if request.GET.get('event_type') == "all":
             all_events = Events.objects.all()
-        else:   
+        else:
             all_events = Events.objects.filter(event_type__icontains=request.GET.get('event_type'))
 
         for i in all_events:
@@ -124,7 +131,7 @@ def calendar(request):
         return HttpResponse(json.dumps(event_arr))
 
     # print(context['events'])
-    return render(request, 'WebApp/calendar.html', {'events':all_events,"get_event_types":get_event_types})
+    return render(request, 'WebApp/calendar.html', {'events': all_events, "get_event_types": get_event_types})
 
 
 def start(request):
@@ -134,7 +141,7 @@ def start(request):
 
     if request.user.is_authenticated:
 
-        if request.user.Is_CenterAdmin:        
+        if request.user.Is_CenterAdmin:
             thread = Thread.objects.filter()
             course = LectureInfo.objects.order_by('Register_DateTime')[:4]
             coursecount = LectureInfo.objects.count()
@@ -145,9 +152,9 @@ def start(request):
 
             # return HttpResponse("default home")
             return render(request, "WebApp/homepage.html",
-                        {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
-                        'teachercount': teachercount,
-                        'parentcount': parentcount, 'totalcount': totalcount,'thread': thread})
+                          {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
+                           'teachercount': teachercount,
+                           'parentcount': parentcount, 'totalcount': totalcount, 'thread': thread})
         if request.user.Is_Student:
             return redirect('students_dashboard')
         if request.user.Is_Teacher:
@@ -157,8 +164,8 @@ def start(request):
         else:
             msg = "Sorry you aren't assigned to any member type. User must be assigned to a member type\
                 to go to their respective dashboard. Please request your center admin or super admin to assign you as one type of member"
-            return render(request, "WebApp/splash_page.html", { 'msg':msg })
-    
+            return render(request, "WebApp/splash_page.html", {'msg': msg})
+
     else:
         return render(request, "WebApp/splash_page.html")
 
@@ -301,11 +308,22 @@ class MemberInfoUpdateView(UpdateView):
 
 def MemberInfoDeleteView(request, pk):
     MemberInfo.objects.filter(pk=pk).delete()
-    return redirect("memberinfo_list")
 
 
 class LectureInfoListView(ListView):
     model = LectureInfo
+
+    def get_queryset(self):
+        qs = self.model.objects.all()
+        query = self.request.GET.get('query')
+        if query:
+            qs = qs.filter(Lecture_Name__contains=query)
+            if not len(qs):
+                messages.error(self.request, 'Search not found')
+        qs = qs.order_by("-id")  # you don't need this if you set up your ordering on the model
+        return qs
+
+
 
 
 class LectureInfoCreateView(CreateView):
@@ -315,6 +333,7 @@ class LectureInfoCreateView(CreateView):
 
 class LectureInfoDetailView(DetailView):
     model = LectureInfo
+
 
 class LectureInfoUpdateView(UpdateView):
     model = LectureInfo
@@ -1047,6 +1066,7 @@ def question(request):
 
 def polls(request):
     return render(request, 'WebApp/polls.html')
+
 
 def survey(request):
     return render(request, 'WebApp/survey.html')

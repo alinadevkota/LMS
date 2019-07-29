@@ -75,17 +75,21 @@
                     <td>{{ object.date_joined|date:"m/d/Y" }}</td>
                 </tr>
                 <tr>
-                    <td>Teacher</td>
-                    <td>{{ object.Is_Teacher }}</td>
+                    <td>Member Type</td>
+                    <td>
+                        {% if object.Is_CenterAdmin %}
+                            &nbsp;Admin
+                        {% endif %}
+                        {% if object.Is_Teacher %}
+                            &nbsp;Teacher
+                        {% endif %}
+                        {% if object.Is_Student %}
+                            &nbsp;Student
+                        {% endif %}
+
+                    </td>
                 </tr>
-                <tr>
-                    <td> Student</td>
-                    <td>{{ object.Is_Student }}</td>
-                </tr>
-                <tr>
-                    <td> Parent</td>
-                    <td>{{ object.Is_Parent }}</td>
-                </tr>
+
             </table>
         </div>
 

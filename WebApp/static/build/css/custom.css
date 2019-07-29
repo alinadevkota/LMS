@@ -5613,7 +5613,7 @@ article {
 
 #editButton {
     margin-top: 20px;
-    margin-left: 30%;
+
 }
 
 #changePW {
@@ -5695,4 +5695,9 @@ article {
     line-height: 60px;
     margin-left: 200;
     font-size: 25px;
+}
+
+.errorMessage{
+    font-size: medium;
+    color: red;
 }
