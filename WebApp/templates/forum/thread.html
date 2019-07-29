@@ -254,15 +254,25 @@
                     method: 'PATCH',
                     url: url,
                     data: data,
+                    beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+                },
+                success: function (arg) {
+
+
+                }
                 }).done((r) => {
                     {#console.log(r);#}
-                    $('#moderation-modal').find('.modal-body').html(`<p class="text-success">{% trans 'Operation successful' %}</p>`);
+                    {#$('#moderation-modal').find('.modal-body').html(`<p class="text-success">{% trans 'Operation successful' %}</p>`);#}
+                    location.reload();
                 }).fail((xhr, status, error) => {
                     $('#moderation-modal').find('.modal-body').html(`<p class="text-danger">${status}</p>`);
                     console.log(xhr.responseText);
                     console.log(error);
                 }).always(() => {
                     $('.modal-confirm').hide();
+                    $('#moderation-modal').hide();
+
                 });
             };
             $('#moderation-modal').on('show.bs.modal', function (event) {
