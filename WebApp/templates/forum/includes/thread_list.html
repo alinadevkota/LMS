@@ -17,14 +17,19 @@
 {% block main_contain %}
 <div class="panel panel-default paper-shadow">
     <div class="panel panel-heading">
-        <h2> {{ panel_title }} </h2>
+        <h2> {{ panel_title }}
 
+            <span class="pull-right new_thread">
+                <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread' topic_pk=topic.pk %}"><i
+                        class="fa fa-fw fa-plus"></i>
+                    New
+                    Thread</a>
+
+            </span>
+        </h2>
     </div>
 
-    <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread' topic_pk=topic.pk %}"><i
-            class="fa fa-fw fa-plus"></i>
-        New
-        Thread</a>
+
 
     {% if show_order %}
     <span class="pull-right ordering">
@@ -68,14 +73,15 @@
                                     <span class="meta">
                                         Topic:
                                         <a href="{% url 'forum:topic' thread.topic.pk %}">
-                                            <span class="label label-success topic-meta">
+                                            <span class="topic-meta" style="color: blue">
                                                 {{ thread.topic.title }}
-                                            </span>
+                                            </span> |
                                         </a>
                                     </span>
                                     <span class="meta meta-username">
-                                        <a href="{% url 'forum:user_info' thread.user.pk %}">
-                                            posted by {{ thread.user.username }}
+                                        posted by<a href="{% url 'forum:user_info' thread.user.pk %}"
+                                            style="color: blue">
+                                            {{ thread.user.username }}
                                         </a>
                                     </span>
                                     <span class="meta meta-pub_date">
@@ -88,7 +94,7 @@
                         </p>
 
                         <div class="media-right media-middle">
-                            <span class="pull-right badge">{{ thread.reply_count }} Reply</span>
+                            <span class="btn btn-primary btn-xs">{{ thread.reply_count }} Reply</span>
                         </div>
                     </div>
                     </h5>
@@ -102,5 +108,3 @@
     </div>
 </div>
 {% endblock %}
-
-
