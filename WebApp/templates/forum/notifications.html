@@ -4,72 +4,71 @@
 {% load humanize %}
 
 {% block breadcrumb %}
-<ol aria-label="breadcrumb" class="breadcrumb navClass">
 
-    <li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Home</a></li>
-    <li class="breadcrumb-item active"><a href="{% url "forum:notifications" %}"> Notifications</a>
-    </li>
-</ol>
+
+<li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Forum</a></li>
+<li class="breadcrumb-item active"><a href="{% url "forum:notifications" %}"> Notifications</a>
+</li>
+
 {% endblock %}
 
 {% block main_contain %}
-    <div class="panel panel-default">
-        <div class="panel-body panel-subtitle">
-            <span class="label label-success">{% trans "Notifications" %}</span>
-        </div>
-        <!-- List group -->
-        <ul class="list-group thread-list">
-            {% for notification in notifications %}
-                <li class="list-group-item notification-entry">
-                    <div class="row">
-                    <div class=""
-                        <div class="profile_pic">
-                            <img src="/media/{{ notification.sender.Member_Avatar }}" alt="..."
-                                 class="img-circle profile_img" style="height:60px;width:60px;"/>
-                        </div>
-                        <div class="col-xs-9">
-                            <div class="notification-meta">
-                                {% url 'forum:user_info' notification.sender_id as user_url %}
-                                {% if notification.thread %}
-                                    {% url 'forum:thread' notification.thread_id as thread_url %}
-                                    {% blocktrans with username=notification.sender.username thread_title=notification.thread.title %}
-                                        <a href="{{ user_url }}">
-                                            {{ username }}
-                                        </a>
-                                        mentioned you in thread
-                                        <a href="{{ thread_url }}">
-                                            {{ thread_title }}
-                                        </a>
-                                    {% endblocktrans %}
-                                {% else %}
-                                    {% url 'forum:thread' notification.post.thread_id as thread_url %}
-                                    {% blocktrans with username=notification.sender.username thread_title=notification.post.thread.title %}
-                                        <a href="{{ user_url }}">
-                                            {{ username }}
-                                        </a>
-                                        mentioned you when replying to
-                                        <a href="{{ thread_url }}">
-                                            {{ thread_title }}
-                                        </a>
-                                    {% endblocktrans %}
-                                {% endif %}
-                            </div>
-                            <div class="notification-content">
-                                {% if notification.thread_id %}
-                                    {{ notification.thread.content_rendered | safe | truncatewords_html:30 }}
-                                {% endif %}
-                                {% if notification.post_id %}
-                                    {{ notification.post.content_rendered | safe | truncatewords_html:30 }}
-                                {% endif %}
-                            </div>
-                        <i class="fa fa-clock-o fa-fw"></i> {{ notification.pub_date }}
-                        </div>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-        <div class="panel-footer">
-            {% get_pagination %}
-        </div>
+<div class="panel panel-default">
+    <div class="panel-body panel-subtitle">
+        <span class="label label-success">{% trans "Notifications" %}</span>
     </div>
+    <!-- List group -->
+    <ul class="list-group thread-list">
+        {% for notification in notifications %}
+        <li class="list-group-item notification-entry">
+            <div class="row">
+                <div class="" <div class="profile_pic">
+                    <img src="/media/{{ notification.sender.Member_Avatar }}" alt="..." class="img-circle profile_img"
+                        style="height:60px;width:60px;" />
+                </div>
+                <div class="col-xs-9">
+                    <div class="notification-meta">
+                        {% url 'forum:user_info' notification.sender_id as user_url %}
+                        {% if notification.thread %}
+                        {% url 'forum:thread' notification.thread_id as thread_url %}
+                        {% blocktrans with username=notification.sender.username thread_title=notification.thread.title %}
+                        <a href="{{ user_url }}">
+                            {{ username }}
+                        </a>
+                        mentioned you in thread
+                        <a href="{{ thread_url }}">
+                            {{ thread_title }}
+                        </a>
+                        {% endblocktrans %}
+                        {% else %}
+                        {% url 'forum:thread' notification.post.thread_id as thread_url %}
+                        {% blocktrans with username=notification.sender.username thread_title=notification.post.thread.title %}
+                        <a href="{{ user_url }}">
+                            {{ username }}
+                        </a>
+                        mentioned you when replying to
+                        <a href="{{ thread_url }}">
+                            {{ thread_title }}
+                        </a>
+                        {% endblocktrans %}
+                        {% endif %}
+                    </div>
+                    <div class="notification-content">
+                        {% if notification.thread_id %}
+                        {{ notification.thread.content_rendered | safe | truncatewords_html:30 }}
+                        {% endif %}
+                        {% if notification.post_id %}
+                        {{ notification.post.content_rendered | safe | truncatewords_html:30 }}
+                        {% endif %}
+                    </div>
+                    <i class="fa fa-clock-o fa-fw"></i> {{ notification.pub_date }}
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="panel-footer">
+        {% get_pagination %}
+    </div>
+</div>
 {% endblock %}
