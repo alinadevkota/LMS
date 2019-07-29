@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'groupmapping_list' %}">Group Mapping</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Group Mapping Information</li>
+{% endblock %}
 {% block content %}
-    <ol aria-label="breadcrumb" class="breadcrumb navClass">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'groupmapping_list' %}">Group Mapping</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Group Mapping Information</li>
-    </ol>
+
     <div class="outerdiv">
 
         <h2 class="detailListHeader">Group Mapping Information</h2>

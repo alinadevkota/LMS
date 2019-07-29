@@ -1,11 +1,13 @@
 {% extends "base.html" %}
-{%load static %}
+{% load static %}
 
 {% block title %}
     | Profile
 {% endblock %}
-
+{% block breadcrumb %}
+    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+{% endblock %}
 {% block content %}
-    {% include 'profile.html'%}
+    {% include 'profile.html' %}
 {% endblock content %}
 
