@@ -125,7 +125,7 @@ class ThreadView(ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        return Post.objects.visible().filter(
+        return Post.objects.filter(
             thread_id=self.kwargs.get('pk')
         ).select_related(
             'user'
