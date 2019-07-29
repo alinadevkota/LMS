@@ -86,7 +86,7 @@ class MemberInfo(AbstractUser):
 
     # Fields
     # Member_ID = models.CharField(max_length=250, blank=True, null=True)
-    password = models.CharField(_('password'), max_length=128, )
+    password = models.CharField(_('password'), max_length=128)
     # remove this password field
     # Member_Password = models.CharField(max_length=250, blank=True, null=True)
     # Member_Type = models.IntegerField(blank=True, null=True)

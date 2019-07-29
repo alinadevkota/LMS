@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item active" aria-current="page">Sessions</li>
+{% endblock %}
 {% block content %}
     <div class="inningInfoListClass">
-
-        <ol aria-label="breadcrumb" class="breadcrumb navClass">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Sessions</li>
-        </ol>
         <hr class="header_hr">
         <h2 class="tableHeader">List of Sessions</h2>
         <hr class="header_hr">

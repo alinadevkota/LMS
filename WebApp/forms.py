@@ -52,7 +52,7 @@ class MemberInfoForm(forms.ModelForm):
         model = MemberInfo
         # fields = 'username', 'first_name', 'last_name', 'email', 'date_joined', 'Member_Permanent_Address', 'Member_Temporary_Address', 'Member_BirthDate', 'Member_Phone', 'Member_Avatar', 'Member_Gender', 'Member_Memo','Center_Code'
         fields = '__all__'
-        exclude = ('password','is_staff','is_active','is_superuser')
+        exclude = ('last_login','date_joined','password','is_staff','is_active','is_superuser')
 
 
 

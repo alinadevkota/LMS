@@ -2,70 +2,45 @@
 {% load i18n %}
 
 
-
-
 <div class="panel panel-default">
-    <!--<div class="panel-heading">forum APP</div>-->
-    <div class="panel-body user-panel">
-        <div class="panel-user-info">
-            <div class="panel-username">
-                <div class="profile_pic_forum">
-                    <img src="/media/Images/ubl_logo.jpg" alt="...">
-                </div>
-                <div class="reply-content-detail">
-                    <a href="{% url 'forum:user_info' request.user.pk %}">{{ request.user.username }}</a>
-                </div>
-
-            </div>
-            <div class="row panel-user-meta">
-                <div class="col-xs-4 panel-user-meta-item">
-                    <a href="{% url 'forum:user_threads' request.user.pk %}">
-                        <div class="text-center">
-                            <p class="panel-user-meta-item-value">
-                                {{ request.user.threads.count }}
-                            </p>
-                            <p class="panel-user-meta-item-title">threads</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-xs-4 panel-user-meta-item">
-                    <a href="{% url 'forum:user_posts' request.user.pk %}">
-                        <div class="text-center">
-                            <p class="panel-user-meta-item-value">{{ request.user.posts.count }}</p>
-                            <p class="panel-user-meta-item-title">Replies</p>
-                        </div>
-                    </a>
-                </div>
-                <!-- <div class="col-xs-4 panel-user-meta-item">
-                    <a href="{% url 'forum:user_info' request.user.pk %}">
-                        <div class="text-center">
-                            <p class="panel-user-meta-item-value">{{ request.user.pk }}</p>
-                            <p class="panel-user-meta-item-title">UID</p>
-                        </div>
-                    </a>
-                </div> -->
-            </div>
+    <div class="panel-body">
+        <div class="profile_pic_forum">
+            <a href="{% url 'forum:user_info' request.user.pk %}">
+                <img src="/media/{{ request.user.Member_Avatar }}"
+                     alt="..."/>
+            </a>
         </div>
-    </div>
-    <ul class="list-group">
-        <!-- <li class="list-group-item">
-            <a href="{% url 'forum:create_topic' %}">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                {% trans 'Add Topic' %}
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="{% url 'forum:create_thread' %}">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                {% trans 'Create Thread' %}
-            </a>
-        </li> -->
+        <a class="btn-white btn-flat" href="{% url 'forum:user_info' request.user.pk %}"><h3>{{ request.user.username }}</h3></a>
+        <ul class="list-unstyled user_data">
+            <li><a class="btn-white btn-flat" href="{% url 'forum:user_threads' request.user.pk %}"><i class="fa fa-question-circle user-profile-icon"></i> Questions
+                Asked: {{ request.user.threads.count }}</a>
+            </li>
+            <li><a class="btn-white btn-flat" href="{% url 'forum:user_posts' request.user.pk %}">
+                <i class="fa fa-reply-all user-profile-icon"></i> Replies: {{ request.user.posts.count }}</a>
+            </li>
 
-        <!-- <li class="list-group-item">
-            <a href="{% url 'forum:logout' %}">
-                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                {% trans "Log out" %}
-            </a>
-        </li> -->
-    </ul>
+            <li>
+                <p>
+                    {% if request.user.is_superuser %}
+                        Super User
+                    {% elif request.user.Is_Teacher %}
+                        , Teacher
+                    {% elif request.user.Is_Student %}
+                        , Student
+                    {% elif request.user.Is_CenterAdmin %}
+                        , Center Admin
+                    {% elif request.user.Is_Parent %}
+                        , Parent
+                    {% endif %}
+                </p>
+            </li>
+
+        </ul>
+        <a class="btn btn-success" href="{% url 'forum:user_info' request.user.pk %}">
+            <i class="fa fa-user-md m-right-xs"></i> View Profile</a>
+        <br>
+
+    </div>
 </div>
+
+
