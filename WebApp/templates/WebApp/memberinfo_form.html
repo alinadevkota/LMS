@@ -98,7 +98,7 @@
                                 <select name="Member_Gender" id="id_Member_Gender" value="{{ object.Member_Gender }}"
                                         required="required"
                                         class="select form-control">
-                                    <option value="" selected="">Select Gender</option>
+                                    <option value="" selected="{{ object.Member_Gender }}">Select Gender</option>
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>
 
@@ -179,10 +179,11 @@
                                 <label for="id_Member_BirthDate" class="control-label ">
                                     Member BirthDate
                                 </label>
-                                <input type="date" name="Member_BirthDate"
+                                <input type="text" name="Member_BirthDate"
                                        value="{{ object.Member_BirthDate|date:"m/d/Y" }}"
                                        id="id_Member_BirthDate"
-                                       class="form-control has-feedback-left">
+                                       class="form-control has-feedback-left"
+                                placeholder="mm/dd/YYYY">
                                 <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
 
                             </div>
@@ -231,7 +232,7 @@
                 </label> </div> -->
 
 
-            <div class="submitButton col-md-12" id="buttonID">
+            <div class="text-center col-md-12 col-sm-12 col-xs-12" id="editButton">
                 <button class="btn btn-success" type="submit">Submit</button>
             </div>
 
