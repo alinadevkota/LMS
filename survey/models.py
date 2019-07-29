@@ -36,9 +36,9 @@ class SurveyInfo(models.Model):
 
     # Fields
     Survey_Title = CharField(max_length=500, blank=True, null=True)
-    Start_Date = DateTimeField(auto_now=False, auto_now_add=False)
-    End_Date = DateTimeField(auto_now=False, auto_now_add=False)
-    Survey_Cover = ImageField(upload_to="Survey_Covers/", blank=True, null=False)
+    Start_Date = DateTimeField(auto_now=False, auto_now_add=False,null=True)
+    End_Date = DateTimeField(auto_now=False, auto_now_add=False,null=True)
+    Survey_Cover = ImageField(upload_to="Survey_Covers/", blank=True, null=True)
     Use_Flag = BooleanField(default=True)
     Assigned_To = ForeignKey(
         'WebApp.InningInfo',
@@ -50,7 +50,7 @@ class SurveyInfo(models.Model):
     )
     Category_Code = ForeignKey(
         'CategoryInfo',
-        related_name="surveyinfo", on_delete=models.DO_NOTHING
+        related_name="surveyinfo", on_delete=models.DO_NOTHING,null=True
     )
 
     class Meta:
