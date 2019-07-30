@@ -35,9 +35,9 @@ class CategoryInfo(models.Model):
 class SurveyInfo(models.Model):
 
     # Fields
-    Survey_Title = CharField(max_length=500, blank=True, null=True)
-    Start_Date = DateField(auto_now=False, auto_now_add=False,null=True)
-    End_Date = DateField(auto_now=False, auto_now_add=False,null=True)
+    Survey_Title = CharField(max_length=500, blank=True, null=False)
+    Start_Date = DateField(auto_now=False, auto_now_add=False,null=False)
+    End_Date = DateField(auto_now=False, auto_now_add=False,null=False)
     Survey_Cover = ImageField(upload_to="Survey_Covers/", blank=True, null=True)
     Use_Flag = BooleanField(default=True)
     Assigned_To = ForeignKey(

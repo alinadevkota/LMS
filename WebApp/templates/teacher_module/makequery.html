@@ -355,14 +355,15 @@
                     xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
                 },
                 success: function (arg) {
-                    alert("hahahah");
+                    alert("success");
                     //location.reload()
                 }
             }).done(function (server_data) {
                 console.log(server_data)
             }).fail(function (res) {
                 console.log(res);
-                console.log("failed")
+                console.log("failed");
+                alert("failed data entry");
             });
         });
     </script>
