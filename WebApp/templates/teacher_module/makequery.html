@@ -204,7 +204,7 @@
                                                         class="select form-control">
                                                     <option value="" selected="">----</option>
                                                     {% for c in sessions %}
-                                                        <option value="{{ c.Inning_Name|capfirst }}">{{ c.Inning_Name|capfirst }}</option>
+                                                        <option value="{{ c.id|capfirst }}">{{ c.Inning_Name|capfirst }}</option>
                                                     {% endfor %}
 
 
@@ -213,11 +213,11 @@
                                             </div>
                                             <div class="form-group " id="chooseCourse" style="display: none;">
                                                 <label for="inputState">Choose Course</label>
-                                                   <select name="session" id="id_course" required="required"
+                                                <select name="session" id="id_course" required="required"
                                                         class="select form-control">
                                                     <option value="" selected="">----</option>
                                                     {% for l in courses %}
-                                                        <option value="{{ l.Lecture_Name|capfirst }}">{{ l.Lecture_Name|capfirst }}</option>
+                                                        <option value="{{ l.id|capfirst }}">{{ l.Lecture_Name|capfirst }}</option>
                                                     {% endfor %}
 
 
@@ -351,6 +351,12 @@
             var title = document.getElementById("id_title").value;
             var start_date = document.getElementById("Start_date").value;
             var end_date = document.getElementById("id_End_date").value;
+            var session_index = document.getElementById("id_session");
+            var Session_Code = session_index.options[session_index.selectedIndex].value;
+            var course_index = document.getElementById("id_course");
+            var Course_Code = course_index.options[course_index.selectedIndex].value;
+            console.log(Course_Code+"subject");
+            console.log(Session_Code+"session");
 
             var data = {
                 "Survey_Title": title,
@@ -360,7 +366,8 @@
                 "Use_Flag": 'True',
                 "Added_By": '{{ user.id }}',
                 "Category_Code": null,
-                "Assigned_To": null
+                "Assigned_To": Session_Code,
+                "Lecture_Code": Course_Code,
 
             }
 
@@ -372,7 +379,7 @@
                     xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
                 },
                 success: function (arg) {
-                    alert("data entry success");
+                    alert("data entry success"+Session_Code+" "+Course_Code);
                 }
             }).done(function (server_data) {
                 console.log(server_data)
