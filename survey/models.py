@@ -7,7 +7,7 @@ from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField,
     ImageField, DateField
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from WebApp.models import MemberInfo,InningInfo
+from WebApp.models import MemberInfo,InningInfo,LectureInfo
 
 class CategoryInfo(models.Model):
 
@@ -51,6 +51,10 @@ class SurveyInfo(models.Model):
     Category_Code = ForeignKey(
         'CategoryInfo',
         related_name="surveyinfo", on_delete=models.DO_NOTHING,null=True
+    )
+    Lecture_Code=ForeignKey(
+        'WebApp.LectureInfo',
+        related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
 
     class Meta:
