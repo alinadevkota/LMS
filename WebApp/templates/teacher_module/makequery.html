@@ -334,19 +334,50 @@
 
         $("#nextButton").click(function () {
             var title = document.getElementById("id_title").value;
+            var name = document.getElementById("id_name").value;
             var start_date = document.getElementById("Start_date").value;
             var end_date = document.getElementById("id_End_date").value;
+            var survey_cover = document.getElementById("id_Survery_Cover").value;
+            {#var use_flag=document.getElementById("id_Use_Flag").value;#}
+
             var data = {
                 "Survey_Title": title,
                 "Start_Date": start_date,
                 "End_Date": end_date,
-                "Survey_Cover": null,
+                "Survey_Cover": survey_cover,
                 "Use_Flag": 'True',
                 "Added_By": '{{ user.id }}',
                 "Category_Code": null,
                 "Assigned_To": null
-            }
 
+            }
+            {#var token_survey = document.getElementsByName("csrfmiddlewaretoken").input.value;#}
+            {#token={% csrf_token %}.value;#}
+            {#    console.log(token)#}
+            {#    console.log(token_survey);#}
+            {#var token =  $('input[name="csrfToken"]').attr('value')#}
+            {#    $.ajaxSetup({#}
+            {#        beforeSend: function(xhr) {#}
+            {#            xhr.setRequestHeader('Csrf-Token', token);#}
+            {#        }#}
+            {#    });#}
+            {#console.log(token);#}
+            {#    var token = Cookies.get('csrftoken');#}
+            {#    console.log(token)#}
+            {#    $.ajax({#}
+            {#        method: 'post',#}
+            {#        datatype: 'json',#}
+            {#        headers: {#}
+            {#            'Accept': 'application/json, text/plain, */*',#}
+            {#            'Content-Type': 'application/json',#}
+            {#            'Authorization': 'd2d4c2fb1d3a353fcd36015be792ba510e532055',#}
+            {#        },#}
+            {#        url: '/survey/api/v1/surveyinfo/',#}
+            {#        body: JSON.stringify({data: data})#}
+            {#    }).then(res => console.log(res))#}
+            {#        .then(res => console.log(res));#}
+            {##}
+            //{#});#}
             $.ajax({
                 url: '/survey/api/v1/surveyinfo/',
                 type: 'POST',
@@ -355,16 +386,28 @@
                     xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
                 },
                 success: function (arg) {
-                    alert("success");
+                    alert("hahahah");
                     //location.reload()
                 }
             }).done(function (server_data) {
                 console.log(server_data)
             }).fail(function (res) {
                 console.log(res);
-                console.log("failed");
-                alert("failed data entry");
+                console.log("failed")
             });
         });
+
+        {#        function csrfSafeMethod(method) {#}
+        {#// these HTTP methods do not require CSRF protection#}
+        {#            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));#}
+        {#        }#}
+        {##}
+        {#        $.ajaxSetup({#}
+        {#            beforeSend: function (xhr, settings) {#}
+        {#                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {#}
+        {#                    xhr.setRequestHeader("X-CSRFToken", csrftoken);#}
+        {#                }#}
+        {#            }#}
+        {#        });#}
     </script>
 {% endblock %}

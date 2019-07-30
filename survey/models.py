@@ -4,10 +4,10 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.files.storage import FileSystemStorage
 from django.db import models as models
 from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, BooleanField, \
-    ImageField, DateField
+    ImageField
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from WebApp.models import MemberInfo,InningInfo,LectureInfo
+from WebApp.models import MemberInfo,InningInfo
 
 class CategoryInfo(models.Model):
 
@@ -35,9 +35,9 @@ class CategoryInfo(models.Model):
 class SurveyInfo(models.Model):
 
     # Fields
-    Survey_Title = CharField(max_length=500, blank=True, null=False)
-    Start_Date = DateField(auto_now=False, auto_now_add=False,null=False)
-    End_Date = DateField(auto_now=False, auto_now_add=False,null=False)
+    Survey_Title = CharField(max_length=500, blank=True, null=True)
+    Start_Date = DateTimeField(auto_now=False, auto_now_add=False,null=True)
+    End_Date = DateTimeField(auto_now=False, auto_now_add=False,null=True)
     Survey_Cover = ImageField(upload_to="Survey_Covers/", blank=True, null=True)
     Use_Flag = BooleanField(default=True)
     Assigned_To = ForeignKey(
@@ -51,10 +51,6 @@ class SurveyInfo(models.Model):
     Category_Code = ForeignKey(
         'CategoryInfo',
         related_name="surveyinfo", on_delete=models.DO_NOTHING,null=True
-    )
-    Lecture_Code=ForeignKey(
-        'WebApp.LectureInfo',
-        related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
 
     class Meta:
@@ -80,8 +76,8 @@ class QuestionInfo(models.Model):
 
     # Fields
     Question_Name = CharField(max_length=500, blank=True, null=True)
-    # Question_Answer = CharField(max_length=500, blank=True, null=True)
-    Question_Type = CharField(max_length=500, blank=True, null=True)
+    Question_Answer = CharField(max_length=500, blank=True, null=True)
+    Question_Type=CharField(max_length=500, blank=True, null=True)
     Survey_Code = ForeignKey(
         'SurveyInfo',
         related_name="questioninfo", on_delete=models.CASCADE
