@@ -35,17 +35,29 @@
 
     $("#nextButton").click(function () {
         var title = document.getElementById("id_title").value;
-        var description = document.getElementById("Start_date").value;
-        var end_date = document.getElementById("id_End_date").value;
+        var description = document.getElementById("id_description").value;
+        var url = document.getElementById("id_url").value;
+        var random_order = document.getElementById("id_random_order").value;
+        var max_questions = document.getElementById("id_max_questions").value;
+        var answers_at_end = document.getElementById("id_answers_at_end").value;
+        var exam_paper = document.getElementById("id_exam_paper").value;
+        var single_attempt = document.getElementById("id_single_attempt").value;
+        var pass_mark = document.getElementById("id_pass_mark").value;
+        var success_text = document.getElementById("id_success_text").value;
+        var fail_text = document.getElementById("id_fail_text").value;
+
         var data = {
-            "Survey_Title": title,
-            "Start_Date": start_date,
-            "End_Date": end_date,
-            "Survey_Cover": null,
-            "Use_Flag": 'True',
-            "Added_By": '{{ user.id }}',
-            "Category_Code": null,
-            "Assigned_To": null
+            "title": id_title,
+            "description": id_description,
+            "url": id_url,
+            "random_order": id_random_order,
+            "max_questions": id_max_questions,
+            "answers_at_end":id_answers_at_end,
+            "exam_paper": id_exam_paper,
+            "single_attempt": id_single_attempt,
+            "pass_mark": id_pass_mark,
+            "success_text": id_success_text,
+            "fail_text": id_fail_text,
         }
 
         $.ajax({
