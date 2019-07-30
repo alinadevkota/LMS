@@ -26,7 +26,7 @@ class SurveyInfoAdminForm(forms.ModelForm):
 
 class SurveyInfoAdmin(admin.ModelAdmin):
     form = SurveyInfoAdminForm
-    list_display = ['Survey_Title', 'Start_Date', 'End_Date', 'Survey_Cover', 'Use_Flag','Added_By','Category_Code','Assigned_To']
+    list_display = ['Survey_Title', 'Start_Date', 'End_Date', 'Survey_Cover', 'Use_Flag','Added_By','Category_Code','Assigned_To','Lecture_Code']
     # readonly_fields = ['Survey_Title', 'Start_Date', 'End_Date', 'Survey_Cover', 'Use_Flag']
 
 admin.site.register(SurveyInfo, SurveyInfoAdmin)
