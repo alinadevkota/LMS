@@ -37,28 +37,16 @@
 
 
             {% if threads %}
-                {% for nodegroup in node_groups %}
+{#                {% for nodegroup in node_groups %}#}
 
                     <li class="list-group-item">
-                        <div class="media v-middle">
-                            <div class="media-body">
-                                <a href="{% url 'forum:nodegroup' nodegroup.pk %}"></a>
-                                <h6 class="text-headline margin-none">
-                                    <a href="{% url 'forum:nodegroup' nodegroup.pk %}"
-                                       style="color:#43BFC7">{{ nodegroup.title }}</a>
-                                </h6>
 
-
-                            </div>
-
-
-                        </div>
                     </li>
 
 
                     <div class="paper-shadow" data-z="0.5" style="margin-top: -15px">
                         {% for thread in threads %}
-                            {% if thread.topic.node_group == nodegroup %}
+{#                            {% if thread.topic.node_group == nodegroup %}#}
                                 <li class="list-group-item media v-middle">
                                 <div class="media-left">
                                     <div class="icon-block half img-circle bg-grey-300">
@@ -111,7 +99,7 @@
 
 
 
-                            {% endif %}
+{#                            {% endif %}#}
                         {% endfor %}
 
 
@@ -121,7 +109,7 @@
 
 
 
-                {% endfor %}
+{#                {% endfor %}#}
             {% else %}
                 <li class="list-group-item">
                     <div class="media v-middle">
