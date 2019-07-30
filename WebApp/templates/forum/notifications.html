@@ -6,102 +6,66 @@
 {% block breadcrumb %}
 
 
-    <li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Forum</a></li>
-    <li class="breadcrumb-item active"><a href="{% url "forum:notifications" %}"> Notifications</a>
-    </li>
+<li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Forum</a></li>
+<li class="breadcrumb-item active"><a href="{% url "forum:notifications" %}"> Notifications</a>
+</li>
 
 {% endblock %}
 
 {% block main_contain %}
-
-    <div class="panel panel-default">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-
-
-            <label id="compose" class="btn btn-sm btn-success btn-block">Notifications</label>
-            {% for notification in notifications %}
-                {% url 'forum:user_info' notification.sender_id as user_url %}
-                {% if notification.thread %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="fa fa-bell"></i>Notifications</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <ul class="list-unstyled msg_list">
+                {% for notification in notifications %}
+                <li>
+                    {% if notification.thread %}
                     {% url 'forum:thread' notification.thread_id as thread_url %}
                     <a href="{{ thread_url }}">
-                        <div class="mail_list">
-                            <div class="left">
-                                <div class="profile_pic">
-                                    <img src="/media/{{ notification.sender.Member_Avatar }}" alt="..."
-                                         class="img-circle profile_img"
-                                         style="height:60px;width:60px;"/>
-                                </div>
-                            </div>
+                        <span class="image"><img src="/media/{{ notification.sender.Member_Avatar }}" alt="" /></span>
+                        <span>
+                            <span>{{ notification.sender }} </span>
+                            <span class="time">{{ notification.pub_date }}</span>
+                        </span>
+                        <span class="message">
+                            {% blocktrans with username=notification.sender.username thread_title=notification.thread.title %}
+                            mentioned you in thread:
+                            <strong> {{ thread_title }}</strong>
 
-                            <div class="right">
 
-
-                                <h3>{{ notification.sender.username }}
-                                    <small><i class="fa fa-clock-o fa-fw"></i> {{ notification.pub_date|time }}</small>
-                                </h3>
-
-                                <p>
-                                    {{ notification.sender.username }} mentioned you in thread
-
-                                    {{ notification.post.thread.title }}
-                                    <br>
-                                    {% if notification.thread_id %}
-                                        {{ notification.thread.content_rendered | safe | truncatewords_html:30 }}
-                                    {% endif %}
-                                    {% if notification.post_id %}
-                                        {{ notification.post.content_rendered | safe | truncatewords_html:30 }}
-                                    {% endif %}
-                                </p>
-
-                            </div>
-                        </div>
+                            {% endblocktrans %}
+                        </span>
                     </a>
-
-                {% else %}
+                    {% else %}
                     {% url 'forum:thread' notification.post.thread_id as thread_url %}
                     <a href="{{ thread_url }}">
-                        <div class="mail_list">
-                            <div class="left">
-                                <div class="profile_pic">
-                                    <img src="/media/{{ notification.sender.Member_Avatar }}" alt="..."
-                                         class="img-circle profile_img"
-                                         style="height:60px;width:60px;"/>
-                                </div>
-                            </div>
-                            <div class="right">
+                        <span class="image"><img src="/media/{{ notification.sender.Member_Avatar }}" alt="" /></span>
+                        <span>
+                            <span>{{ notification.sender }} </span>
+                            <span class="time">{{ notification.pub_date }}</span>
+                        </span>
+                        <span class="message">
+                            {% blocktrans with username=notification.sender.username thread_title=notification.post.thread.title %}
+                            mentioned you when replying to
 
+                            <strong> {{ thread_title }}</strong>
 
-                                <h3>{{ notification.sender.username }}
-                                    <small><i class="fa fa-clock-o fa-fw"></i> {{ notification.pub_date|time }}</small>
-                                </h3>
-
-
-                                <p>
-                                    {{ notification.sender.username }}
-
-
-                                    mentioned you when replying to
-
-                                    {{ notification.post.thread.title }}
-                                    <br>
-                                    {% if notification.thread_id %}
-                                        {{ notification.thread.content_rendered | safe | truncatewords_html:30 }}
-                                    {% endif %}
-                                    {% if notification.post_id %}
-                                        {{ notification.post.content_rendered | safe | truncatewords_html:30 }}
-                                    {% endif %}
-
-                                </p>
-
-                            </div>
-                        </div>
+                            {% endblocktrans %}
+                        </span>
                     </a>
+                    {% endif %}
+                </li>
+                {% endfor %}
 
-                {% endif %}
-        {% endfor %}
-    </div>
 
+            </ul>
+        </div>
     </div>
+</div>
 
 
 
