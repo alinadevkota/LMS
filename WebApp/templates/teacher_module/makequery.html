@@ -196,16 +196,31 @@
                                             </div>
                                             <div class="form-group " id="chooseSession" style="display: none;">
                                                 <label for="inputState">Choose Session</label>
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>Choose...</option>
-                                                    <option>...</option>
+                                                {#                                                <select id="inputState" class="form-control">#}
+                                                {#                                                    <option selected>Choose...</option>#}
+                                                {#                                                    <option>...</option>#}
+                                                {#                                                </select>#}
+                                                <select name="session" id="id_session" required="required"
+                                                        class="select form-control">
+                                                    <option value="" selected="">----</option>
+                                                    {% for c in sessions %}
+                                                        <option value="{{ c.Inning_Name|capfirst }}">{{ c.Inning_Name|capfirst }}</option>
+                                                    {% endfor %}
+
+
                                                 </select>
+
                                             </div>
                                             <div class="form-group " id="chooseCourse" style="display: none;">
                                                 <label for="inputState">Choose Course</label>
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>Choose...</option>
-                                                    <option>...</option>
+                                                   <select name="session" id="id_course" required="required"
+                                                        class="select form-control">
+                                                    <option value="" selected="">----</option>
+                                                    {% for l in courses %}
+                                                        <option value="{{ l.Lecture_Name|capfirst }}">{{ l.Lecture_Name|capfirst }}</option>
+                                                    {% endfor %}
+
+
                                                 </select>
                                             </div>
                                             <div class="form-group has-feedback">

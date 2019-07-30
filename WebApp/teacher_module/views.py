@@ -11,7 +11,8 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, FormView
 
 from WebApp.forms import LectureInfoForm, ChapterInfoForm
-from WebApp.models import LectureInfo, ChapterInfo
+from WebApp.models import LectureInfo, ChapterInfo, InningInfo
+from survey.models import SurveyInfo
 
 
 def start(request):
@@ -77,4 +78,10 @@ def ProfileView(request):
 
 
 def makequery(request):
-    return render(request, 'teacher_module/makequery.html')
+    # model=SurveyInfo
+    Course=LectureInfo.objects.all()
+    Session=InningInfo.objects.all()
+    return render(request, 'teacher_module/makequery.html',{
+    'courses': Course,
+    'sessions': Session
+})
