@@ -5,22 +5,27 @@
 
 
 {% block breadcrumb %}
-<ol aria-label="breadcrumb" class="breadcrumb navClass">
-    <li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Home</a></li>
-    <li>
-        <a href="{% url 'forum:nodegroup' pk=topic.node_group.pk %}">{{ topic.node_group.title }}</a>
-    </li>
-    <li class="active"><a href="{% url 'forum:topic' pk=topic.pk %}">{{ topic.title }}</a></li>
-</ol>
+
+<li class="breadcrumb-item"><a href="{% url 'forum:index' %}">Forum</a></li>
+<li>
+    <a href="{% url 'forum:nodegroup' pk=topic.node_group.pk %}">{{ topic.node_group.title }}</a>
+</li>
+<li class="active"><a href="{% url 'forum:topic' pk=topic.pk %}">{{ topic.title }}</a></li>
+
 {% endblock %}
 
 {% block main_contain %}
 <div class="panel panel-default paper-shadow">
     <div class="panel panel-heading">
-        <div class="icon-block half img-circle bg-grey-300">
-            <i class="fa fa-{{ topic.topic_icon }}"></i>
-        </div>
-        <h2> {{ panel_title }}
+
+        <h2>
+            <div class="icon-block half img-circle bg-grey-300">
+                <i class="fa fa-{{ topic.topic_icon }}"></i>
+            </div> {{ panel_title }}
+
+            <br> {{ topic.description }}
+
+
 
             <span class="pull-right new_thread">
                 <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread' topic_pk=topic.pk %}"><i
@@ -45,7 +50,6 @@
                     <img src="/media/{{ thread.user.Member_Avatar }}" alt=""
                         class="avatar avatar-96wp-user-avatar wp-user-avatar-96 alignnone photo avatar-default ">
                 </a>
-
                 <h2 class="thread_title">
                     <div class="media-body media-middle"> &nbsp;
                         <a href="{% url 'forum:thread' pk=thread.pk %}" class="entry-link">
@@ -64,14 +68,14 @@
                                     <span class="meta">
                                         Topic:
                                         <a href="{% url 'forum:topic' thread.topic.pk %}">
-                                            <span class="topic-meta" style="color: blue">
+                                            <span class="topic-meta" style="color: darkblue">
                                                 {{ thread.topic.title }}
                                             </span> |
                                         </a>
                                     </span>
                                     <span class="meta meta-username">
                                         posted by<a href="{% url 'forum:user_info' thread.user.pk %}"
-                                            style="color: blue">
+                                            style="color: darkblue">
                                             {{ thread.user.username }}
                                         </a>
                                     </span>
