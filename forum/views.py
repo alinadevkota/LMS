@@ -81,7 +81,7 @@ class NodeGroupView(ListView):
             reply_count = 0
             try:
                 thread = Thread.objects.filter(topic=topic.pk).order_by('pub_date')[0]
-                reply_count = reply_count + Thread.objects.aggregate(Sum('reply_count'))['reply_count__sum']
+                reply_count = Thread.objects.filter(topic=topic.pk).aggregate(Sum('reply_count'))['reply_count__sum']
             except:
                 thread = None
             latest_threads.append([topic, thread, reply_count])
@@ -125,7 +125,7 @@ class ThreadView(ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        return Post.objects.visible().filter(
+        return Post.objects.filter(
             thread_id=self.kwargs.get('pk')
         ).select_related(
             'user'

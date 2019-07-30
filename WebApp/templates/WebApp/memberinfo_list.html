@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item active" aria-current="page">Members</li>
+{% endblock %}
 {% block content %}
 
 
     <div class="memberInfoListClass">
-        <ol aria-label="breadcrumb" class="breadcrumb navClass">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Members</li>
-        </ol>
+        <hr class="header_hr">
+        <h2 class="tableHeader">List of Members</h2>
 
         <nav id="navbar_parent" class="navbar navbar-light" style="background-color: grey">
             <ul class="nav navbar-nav navbar-center member-list">
@@ -16,8 +17,6 @@
 
             </ul>
         </nav>
-        <hr class="header_hr">
-        <h2 class="tableHeader">List of Members</h2>
         <hr class="header_hr">
         <div class="btn-createnew">
             <a class="btn btn-success" href="{% url 'memberinfo_create' %}">Create new Member</a>
@@ -66,10 +65,10 @@
                         <td>{{ object.Is_Student }}</td>
                         <td>{{ object.Is_Teacher }}</td>
                         {#                <td>{{ object.Is_Parent }}</td>#}
-                        <!-- <td>{{ object.Use_Flag }}</td>
-                        <td>{{ object.Register_DateTime }}</td>
-                        <td>{{ object.Register_Agent }}</td>
-                        <td>{{ object.Member_Memo }}</td> -->
+                        {#                      <td>{{ object.Use_Flag }}</td>#}
+                        {#                        <td>{{ object.Register_DateTime }}</td>#}
+                        {#                        <td>{{ object.Register_Agent }}</td>#}
+                        {#                        <td>{{ object.Member_Memo }}</td>#}
                     </tr>
 
                 {% endfor %}
@@ -97,7 +96,19 @@
                         extend: 'print',
                         text: '<span class="print"><i class="fa fa-print"></i> Print </span>',
                         fieldSeparator: '\t'
-                    }]
+                    }],
+                "columnDefs": [
+                    {
+                        "targets": [7, 8],
+                        "visible": false,
+                        "searchable": true
+                    },
+                    {
+                        "targets": [7, 8],
+                        "visible": false,
+                        "searchable": true
+                    }
+                ]
 
             });
 
@@ -108,7 +119,7 @@
                 $("#parent_button").css("color", "white");
                 $("#teacher_button").css("color", "white");
                 table_main.columns().search('').draw();
-                table_main.column(8).search("True").draw();
+                table_main.column(7).search("True").draw();
 
 
             });
@@ -117,7 +128,7 @@
                 $("#parent_button").css("color", "white");
                 $("#teacher_button").css("color", "black");
                 table_main.columns().search('').draw();
-                table_main.column(9).search("True").draw();
+                table_main.column(8).search("True").draw();
 
             });
 

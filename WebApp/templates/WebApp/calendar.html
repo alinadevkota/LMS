@@ -6,13 +6,18 @@
 <link href="{% static 'vendorsx/fullcalendar/dist/fullcalendar.print.css' %}" rel="stylesheet" media="print">
 {% endblock %}
 
+{% block breadcrumb %}
+        <li class="breadcrumb-item active" aria-current="page">Calendar</li>
+
+{% endblock %}
+
 {% block content %}
 <div class="clearfix"></div>
 <div class="row">
     <div id="calendarDiv">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Calendar Events</h2>
+                <h2>Calendar Events</h2><br><br>
             </div>
             <div class="x_content">
                 <div id='calendar'></div>

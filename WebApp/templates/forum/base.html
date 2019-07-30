@@ -29,7 +29,6 @@
 
 {% block content %}
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-{% block breadcrumb %}{% endblock %}
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
 
@@ -90,29 +89,10 @@
 
 
             <div class="panel panel-default">
-                <div class="panel-heading">
-
-                    <span class="glyphicon glyphicon-gift left" aria-hidden="true"></span>
-                    <h4>Notification</h4>
-
-                </div>
-                <ul class="list-group list-group-menu">
-
-                    <a class="text-success" href="{% url 'forum:notifications' %}">
-                        {% if unread_count %}
-
-                        {% blocktrans count unread_count=unread_count %}
-                        {{ unread_count }} new notification
-                        {% plural %}
-                        {{ unread_count }} new notifications
-                        {% endblocktrans %}
-                        {% else %}
-                        <span class="text-info">{% trans 'No new nofitications' %}</span>
-                        {% endif %}
-                    </a>
-
-                </ul>
-
+                <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread' %}"><i
+                        class="fa fa-fw fa-plus"></i>
+                    Ask New
+                    Question</a>
 
             </div>
 

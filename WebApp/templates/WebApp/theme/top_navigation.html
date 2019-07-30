@@ -75,8 +75,8 @@
                                         <span class="message">
                                 {% blocktrans with username=notification.sender.username thread_title=notification.thread.title %}
                                     mentioned you in thread:
+                                    <strong> {{ thread_title }}</strong>
 
-                                    {{ thread_title }}
 
                                 {% endblocktrans %}
                             </span>
@@ -94,7 +94,7 @@
                                 {% blocktrans with username=notification.sender.username thread_title=notification.post.thread.title %}
                                     mentioned you when replying to
 
-                                    {{ thread_title }}
+                                    <strong> {{ thread_title }}</strong>
 
                                 {% endblocktrans %}
                             </span>

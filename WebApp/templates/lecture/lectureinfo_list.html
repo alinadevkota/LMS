@@ -1,86 +1,108 @@
-
 {% load static %}
 {% load crispy_forms_tags %}
 
-    <div class="lectureInfoListClass">
-        <ol aria-label="breadcrumb" class="breadcrumb navClass">
-            <li class="breadcrumb-item"><a href="{% if '/teachers' in request.path %}
-                {% url 'teacher_home' %}
-            {% else %}
-                {% url 'start' %}
-            {% endif %}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Lecture</li>
-        </ol>
+<div class="lectureInfoListClass">
+    <h2 class="tableHeader">List of Lectures</h2>
 
-        <h2 class="tableHeader">List of Lectures</h2>
-        <hr class="header_hr">
-        <div class="btn-createnew">
-            <a class="btn btn-success" href="
+
+    <hr class="header_hr">
+    <div class="col-md-8 col-sm-6 col-xs-12">
+        <form method="get" action="">
+            <div class="col-md-4">
+                <input type="text" name="query" placeholder="Search Lecture" value="{{ request.GET.query }}"
+                       class="form-control">
+            </div>
+            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i>&nbsp;Search</button>
+
+        </form>
+    </div>
+
+    <div class="col-md-4 col-sm-6 col-xs-12 btn-createnew">
+        <a class="btn btn-success" style="float: right;" href="
             {% if '/teachers' in request.path %}
                 {% url 'teacher_lectureinfo_create' %}
             {% else %}
                 {% url 'lectureinfo_create' %}
             {% endif %}">Create new Lecture</a>
-        </div>
-        <br><br><br>
-        <div class="container" id="divID">
-            {% for object in object_list %}
-                <div class="gridContentsList col-md-3 col-sm-6 col-xs-12" id="listCard">
-                    <a href="{% if '/teachers' in request.path %}
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="text-center errorMessage">
+                <strong>
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                        ERROR!!
+                    {% else %}
+                        {{ message.tags|title }}
+                    {% endif %}
+                </strong>
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <br><br><br>
+    <div class="container" id="divID">
+
+        {% for object in object_list %}
+            <div class="gridContentsList col-md-3 col-sm-6 col-xs-12" id="listCard">
+                <a href="{% if '/teachers' in request.path %}
                                 /teachers{{ object.get_absolute_url }}
                             {% else %}
                                {{ object.get_absolute_url }}
                             {% endif %}">
-                        <img class="card-img-top" src="
+                    <img class="card-img-top" src="
                             {% if object.Lecture_Cover_File %}
                                 /media/{{ object.Lecture_Cover_File }}
                             {% else %}
                                 {% static 'images/course.jpg' %}
                             {% endif %}"
-                             alt="Card image cap" width="100%">
-                    </a>
-                    <div class="card-body" id="cardInfo">
-                        <h2 class="card-title"><strong><a
-                                href="{% if '/teachers' in request.path %}
+                         alt="Card image cap" width="100%">
+                </a>
+                <div class="card-body" id="cardInfo">
+                    <h2 class="card-title"><strong><a
+                            href="{% if '/teachers' in request.path %}
                                         /teachers{{ object.get_absolute_url }}
                                       {% else %}
                                         {{ object.get_absolute_url }}
                                       {% endif %}">{{ object.Lecture_Name }}</a></strong></h2>
 
-                        {#                        <p class="ratingIcons">#}
-                        {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
-                        {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
-                        {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
-                        {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
-                        {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
-                        {#                        </p>#}
+                    {#                        <p class="ratingIcons">#}
+                    {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
+                    {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
+                    {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
+                    {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
+                    {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
+                    {#                        </p>#}
 
-                        <hr>
+                    <hr>
 
-                        <h5 class="lectureDescription">
-                            {% if object.Lecture_Description %}
-                                {{ object.Lecture_Description }}
-                            {% else %}
-                                No Description
-                            {% endif %}
-                        </h5>
+                    <h5 class="lectureDescription">
+                        {% if object.Lecture_Description %}
+                            {{ object.Lecture_Description }}
+                        {% else %}
+                            No Description
+                        {% endif %}
+                    </h5>
 
 
-                        <div class="row d-flex flex-row">
-                            <div class="col-md-3">
+                    <div class="row d-flex flex-row">
+                        <div class="col-md-3">
                                             <span class="">
                                                 <img width="60px" id="avatar"
                                                      src="{{ object.Teacher_Code.Member_Avatar.url }}">
                                             </span>
-                            </div>
+                        </div>
 
-                            <div class="col-md-9 ">
-                                <h4>{{ object.Teacher_Code }}</h4>
-                                <p>Instructor</p>
-                            </div>
+                        <div class="col-md-9 ">
+                            <h4>{{ object.Teacher_Code }}</h4>
+                            <p>Instructor</p>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
     </div>
+</div>

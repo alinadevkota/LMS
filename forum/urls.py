@@ -8,8 +8,12 @@ from . import views
 
 app_name = "forum"
 api_router = routers.DefaultRouter()
-api_router.register(r'threads', api.ThreadApiView)
-api_router.register(r'post', api.PostApiView)
+router = routers.DefaultRouter()
+router.register(r'thread', api.ThreadViewSet)
+router.register(r'post', api.PostViewSet)
+router.register(r'notification', api.NotificationViewSet)
+router.register(r'nodegroup', api.NodeGroupViewSet)
+router.register(r'topic', api.TopicViewSet)
 
 urlpatterns = [
     # path(r'^page/(?P<page>[0-9]+)/$', views.Index.as_view(), name='index'),
@@ -34,12 +38,12 @@ urlpatterns = [
     path(r'logout/', views.logout_view, name="logout"),
     path(r'search/', views.search_redirect, name='search_redirect'),
     # path(r'^search/(?P<keyword>.*?)/page/(?P<page>[0-9]+)/$', views.SearchView.as_view(), name='search'),
-    path(r'search/(P<keyword>.*)/', views.SearchView.as_view(), name='search'),
+    path(r'search/(?P<keyword>.*)/', views.SearchView.as_view(), name='search'),
     path(r't/create/', views.create_thread, name='create_thread'),
     path(r't/create/(?P<topic_pk>\d+)', views.create_thread, name='create_thread'),
     path(r'topic/create/', views.create_topic, name='create_topic'),
     path(r'topic/create/(?P<nodegroup_pk>\d+)', views.create_topic, name='create_topic'),
     path(r'notifications/', views.NotificationView.as_view(), name='notifications'),
     path(r'avatar/', views.upload_avatar, name="upload_avatar"),
-    path(r'api/', include(api_router.urls)),
+    path(r'api/v1/', include(router.urls)),
 ]
