@@ -150,17 +150,18 @@ class Progress(models.Model):
 
         Does not return anything.
         """
-        category_test = Category.objects.filter(category=question.category) \
-            .exists()
+        # category_test = Category.objects.filter(category=question.category) \
+        #     .exists()
 
-        if any([item is False for item in [category_test,
-                                           score_to_add,
-                                           possible_to_add,
-                                           isinstance(score_to_add, int),
-                                           isinstance(possible_to_add, int)]]):
+        # if any([item is False for item in [category_test,
+        if any([item is False for item in [ \
+                score_to_add,
+            possible_to_add,
+            isinstance(score_to_add, int),
+            isinstance(possible_to_add, int)]]):
             return _("error"), _("category does not exist or invalid score")
 
-        to_find = re.escape(str(question.category)) + \
+        to_find = re.escape(str("")) + \
                   r",(?P<score>\d+),(?P<possible>\d+),"
 
         match = re.search(to_find, self.score, re.IGNORECASE)
@@ -172,7 +173,7 @@ class Progress(models.Model):
 
             new_score = ",".join(
                 [
-                    str(question.category),
+
                     str(updated_score),
                     str(updated_possible), ""
                 ])
@@ -185,7 +186,7 @@ class Progress(models.Model):
             #  if not present but existing, add with the points passed in
             self.score += ",".join(
                 [
-                    str(question.category),
+
                     str(score_to_add),
                     str(possible_to_add),
                     ""
@@ -200,32 +201,316 @@ class Progress(models.Model):
         return Sitting.objects.filter(user=self.user, complete=True)
 
 
+@python_2_unicode_compatible
+class Question(models.Model):
+    """
+    Base class for all question types.
+    Shared properties placed here.
+    """
+
+    # quiz = models.ManyToManyField(Quiz,
+    #                               verbose_name=_("Quiz"),
+    #                               blank=True)
+
+    figure = models.ImageField(upload_to='uploads/%Y/%m/%d',
+                               blank=True,
+                               null=True,
+                               verbose_name=_("Figure"))
+
+    content = models.CharField(max_length=1000,
+                               blank=False,
+                               help_text=_("Enter the question text that "
+                                           "you want displayed"),
+                               verbose_name=_('Question'))
+
+    explanation = models.TextField(max_length=2000,
+                                   blank=True,
+                                   help_text=_("Explanation to be shown "
+                                               "after the question has "
+                                               "been answered."),
+                                   verbose_name=_('Explanation'))
+
+    objects = InheritanceManager()
+
+    class Meta:
+        verbose_name = _("Question")
+        verbose_name_plural = _("Questions")
+        # ordering = ['category']
+
+    def __str__(self):
+        return self.content
+
+
+class MCQuestion(Question):
+    answer_order = models.CharField(
+        max_length=30, null=True, blank=True,
+        choices=ANSWER_ORDER_OPTIONS,
+        help_text=_("The order in which multichoice "
+                    "answer options are displayed "
+                    "to the user"),
+        verbose_name=_("Answer Order"))
+
+    def check_if_correct(self, guess):
+        answer = Answer.objects.get(id=guess)
+
+        if answer.correct is True:
+            return True
+        else:
+            return False
+
+    def order_answers(self, queryset):
+        if self.answer_order == 'content':
+            return queryset.order_by('content')
+        if self.answer_order == 'random':
+            return queryset.order_by('?')
+        if self.answer_order == 'none':
+            return queryset.order_by()
+        return queryset
+
+    def get_answers(self):
+        return self.order_answers(Answer.objects.filter(question=self))
+
+    def get_answers_list(self):
+        return [(answer.id, answer.content) for answer in
+                self.order_answers(Answer.objects.filter(question=self))]
+
+    def answer_choice_to_string(self, guess):
+        return Answer.objects.get(id=guess).content
+
+    class Meta:
+        verbose_name = _("Multiple Choice Question")
+        verbose_name_plural = _("Multiple Choice Questions")
+
+    def get_absolute_url(self):
+        return reverse('mcquestion_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('mcquestion_update', args=(self.pk,))
+
+
+class TF_Question(Question):
+    correct = models.BooleanField(blank=False,
+                                  default=False,
+                                  help_text=_("Tick this if the question "
+                                              "is true. Leave it blank for"
+                                              " false."),
+                                  verbose_name=_("Correct"))
+
+    def check_if_correct(self, guess):
+        if guess == "True":
+            guess_bool = True
+        elif guess == "False":
+            guess_bool = False
+        else:
+            return False
+
+        if guess_bool == self.correct:
+            return True
+        else:
+            return False
+
+    def get_answers(self):
+        return [{'correct': self.check_if_correct("True"),
+                 'content': 'True'},
+                {'correct': self.check_if_correct("False"),
+                 'content': 'False'}]
+
+    def get_answers_list(self):
+        return [(True, True), (False, False)]
+
+    def answer_choice_to_string(self, guess):
+        return str(guess)
+
+    class Meta:
+        verbose_name = _("True/False Question")
+        verbose_name_plural = _("True/False Questions")
+        # ordering = ['category']
+
+    def get_absolute_url(self):
+        return reverse('tfquestion_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('tfquestion_update', args=(self.pk,))
+
+
+@python_2_unicode_compatible
+class Quiz(models.Model):
+    mcquestion = models.ManyToManyField(MCQuestion)
+    tfquestion = models.ManyToManyField(TF_Question)
+
+    # start_time=
+    title = models.CharField(
+        verbose_name=_("Title"),
+        max_length=60, blank=False)
+
+    description = models.TextField(
+        verbose_name=_("Description"),
+        blank=True, help_text=_("a description of the quiz"))
+
+    url = models.SlugField(
+        max_length=60, blank=False,
+        help_text=_("a user friendly url"),
+        verbose_name=_("user friendly url"))
+
+    # category = models.ForeignKey(
+    #     Category, null=True, blank=True,
+    #     verbose_name=_("Category"), on_delete=models.CASCADE)
+
+    random_order = models.BooleanField(
+        blank=False, default=False,
+        verbose_name=_("Random Order"),
+        help_text=_("Display the questions in "
+                    "a random order or as they "
+                    "are set?"))
+
+    max_questions = models.PositiveIntegerField(
+        blank=True, null=True, verbose_name=_("Max Questions"),
+        help_text=_("Number of questions to be answered on each attempt."))
+
+    answers_at_end = models.BooleanField(
+        blank=False, default=False,
+        help_text=_("Correct answer is NOT shown after question."
+                    " Answers displayed at the end."),
+        verbose_name=_("Answers at end"))
+
+    exam_paper = models.BooleanField(
+        blank=False, default=False,
+        help_text=_("If yes, the result of each"
+                    " attempt by a user will be"
+                    " stored. Necessary for marking."),
+        verbose_name=_("Exam Paper"))
+
+    single_attempt = models.BooleanField(
+        blank=False, default=False,
+        help_text=_("If yes, only one attempt by"
+                    " a user will be permitted."
+                    " Non users cannot sit this exam."),
+        verbose_name=_("Single Attempt"))
+
+    pass_mark = models.SmallIntegerField(
+        blank=True, default=0,
+        verbose_name=_("Pass Mark"),
+        help_text=_("Percentage required to pass exam."),
+        validators=[MaxValueValidator(100)])
+
+    success_text = models.TextField(
+        blank=True, help_text=_("Displayed if user passes."),
+        verbose_name=_("Success Text"))
+
+    fail_text = models.TextField(
+        verbose_name=_("Fail Text"),
+        blank=True, help_text=_("Displayed if user fails."))
+
+    draft = models.BooleanField(
+        blank=True, default=False,
+        verbose_name=_("Draft"),
+        help_text=_("If yes, the quiz is not displayed"
+                    " in the quiz list and can only be"
+                    " taken by users who can edit"
+                    " quizzes."))
+
+    def get_absolute_url(self):
+        return reverse('quiz_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('quiz_update', args=(self.pk,))
+
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        self.url = re.sub('\s+', '-', self.url).lower()
+
+        self.url = ''.join(letter for letter in self.url if
+                           letter.isalnum() or letter == '-')
+
+        if self.single_attempt is True:
+            self.exam_paper = True
+
+        if self.pass_mark > 100:
+            raise ValidationError('%s is above 100' % self.pass_mark)
+
+        super(Quiz, self).save(force_insert, force_update, *args, **kwargs)
+
+    class Meta:
+        verbose_name = _("Quiz")
+        verbose_name_plural = _("Quizzes")
+
+    def __str__(self):
+        return self.title
+
+    # def question_set(self):
+    #     return Question.objects.filter(quiz = self.pk)
+
+    def get_mcquestions(self):
+        return self.mcquestion_set.all().select_subclasses()
+
+    def tfget_question(self):
+        return self.tfquestion_set.all().select_subclasses()
+
+    @property
+    def get_max_score(self):
+        return self.get_mcquestions().count()+self.get_tfquestions().count()
+
+    def anon_score_id(self):
+        return str(self.id) + "_score"
+
+    def anon_q_list(self):
+        return str(self.id) + "_q_list"
+
+    def anon_q_data(self):
+        return str(self.id) + "_data"
+
+
+@python_2_unicode_compatible
+class Answer(models.Model):
+    question = models.ForeignKey(MCQuestion, verbose_name=_("Question"), on_delete=models.CASCADE)
+
+    content = models.CharField(max_length=1000,
+                               blank=False,
+                               help_text=_("Enter the answer text that "
+                                           "you want displayed"),
+                               verbose_name=_("Content"))
+
+    correct = models.BooleanField(blank=False,
+                                  default=False,
+                                  help_text=_("Is this a correct answer?"),
+                                  verbose_name=_("Correct"))
+
+    def __str__(self):
+        return self.content
+
+    class Meta:
+        verbose_name = _("Answer")
+        verbose_name_plural = _("Answers")
+
+
 class SittingManager(models.Manager):
 
     def new_sitting(self, user, quiz):
         if quiz.random_order is True:
-            question_set = quiz.question_set.all() \
-                .select_subclasses() \
-                .order_by('?')
+            mcquestion_set = quiz.mcquestion.all().order_by('?')
+            tfquestion_set = quiz.tfquestion.all().order_by('?')
         else:
-            question_set = quiz.question_set.all() \
-                .select_subclasses()
+            mcquestion_set = quiz.mcquestion.all()
+            tfquestion_set = quiz.tfquestion.all()
 
-        question_set = [item.id for item in question_set]
+        mcquestion_set = [item.id for item in mcquestion_set]
+        tfquestion_set = [item.id for item in tfquestion_set]
 
-        if len(question_set) == 0:
+        if (len(mcquestion_set) == 0 or len(tfquestion_set) == 0):
             raise ImproperlyConfigured('Question set of the quiz is empty. '
                                        'Please configure questions properly')
 
-        if quiz.max_questions and quiz.max_questions < len(question_set):
-            question_set = question_set[:quiz.max_questions]
+        if quiz.max_questions and quiz.max_questions < len(mcquestion_set):
+            mcquestion_set = mcquestion_set[:quiz.max_questions]
+        if quiz.max_questions and quiz.max_questions < len(tfquestion_set):
+            tfquestion_set = tfquestion_set[:quiz.max_questions]
 
-        questions = ",".join(map(str, question_set)) + ","
+        mcquestions = ",".join(map(str, mcquestion_set)) + ","
+        tfquestions = ",".join(map(str, tfquestion_set)) + ","
 
         new_sitting = self.create(user=user,
                                   quiz=quiz,
-                                  question_order=questions,
-                                  question_list=questions,
+                                  question_order=tfquestions + mcquestions,
+                                  question_list=tfquestions + mcquestions,
                                   incorrect_questions="",
                                   current_score=0,
                                   complete=False,
@@ -410,7 +695,7 @@ class Sitting(models.Model):
     def get_questions(self, with_answers=False):
         question_ids = self._question_ids()
         questions = sorted(
-            self.quiz.question_set.filter(id__in=question_ids)
+            self.quiz.mcquestion_set.filter(id__in=question_ids)
                 .select_subclasses(),
             key=lambda q: question_ids.index(q.id))
 
@@ -439,290 +724,3 @@ class Sitting(models.Model):
         answered = len(json.loads(self.user_answers))
         total = self.get_max_score
         return answered, total
-
-
-@python_2_unicode_compatible
-class Question(models.Model):
-    """
-    Base class for all question types.
-    Shared properties placed here.
-    """
-
-    # quiz = models.ManyToManyField(Quiz,
-    #                               verbose_name=_("Quiz"),
-    #                               blank=True)
-
-    figure = models.ImageField(upload_to='uploads/%Y/%m/%d',
-                               blank=True,
-                               null=True,
-                               verbose_name=_("Figure"))
-
-    content = models.CharField(max_length=1000,
-                               blank=False,
-                               help_text=_("Enter the question text that "
-                                           "you want displayed"),
-                               verbose_name=_('Question'))
-
-    explanation = models.TextField(max_length=2000,
-                                   blank=True,
-                                   help_text=_("Explanation to be shown "
-                                               "after the question has "
-                                               "been answered."),
-                                   verbose_name=_('Explanation'))
-
-    objects = InheritanceManager()
-
-    class Meta:
-        verbose_name = _("Question")
-        verbose_name_plural = _("Questions")
-        # ordering = ['category']
-
-    def __str__(self):
-        return self.content
-
-
-class MCQuestion(Question):
-    answer_order = models.CharField(
-        max_length=30, null=True, blank=True,
-        choices=ANSWER_ORDER_OPTIONS,
-        help_text=_("The order in which multichoice "
-                    "answer options are displayed "
-                    "to the user"),
-        verbose_name=_("Answer Order"))
-
-    def check_if_correct(self, guess):
-        answer = Answer.objects.get(id=guess)
-
-        if answer.correct is True:
-            return True
-        else:
-            return False
-
-    def order_answers(self, queryset):
-        if self.answer_order == 'content':
-            return queryset.order_by('content')
-        if self.answer_order == 'random':
-            return queryset.order_by('?')
-        if self.answer_order == 'none':
-            return queryset.order_by()
-        return queryset
-
-    def get_answers(self):
-        return self.order_answers(Answer.objects.filter(question=self))
-
-    def get_answers_list(self):
-        return [(answer.id, answer.content) for answer in
-                self.order_answers(Answer.objects.filter(question=self))]
-
-    def answer_choice_to_string(self, guess):
-        return Answer.objects.get(id=guess).content
-
-    class Meta:
-        verbose_name = _("Multiple Choice Question")
-        verbose_name_plural = _("Multiple Choice Questions")
-
-    def get_absolute_url(self):
-        return reverse('mcquestion_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('mcquestion_update', args=(self.pk,))
-
-class TF_Question(Question):
-    correct = models.BooleanField(blank=False,
-                                  default=False,
-                                  help_text=_("Tick this if the question "
-                                              "is true. Leave it blank for"
-                                              " false."),
-                                  verbose_name=_("Correct"))
-
-    def check_if_correct(self, guess):
-        if guess == "True":
-            guess_bool = True
-        elif guess == "False":
-            guess_bool = False
-        else:
-            return False
-
-        if guess_bool == self.correct:
-            return True
-        else:
-            return False
-
-    def get_answers(self):
-        return [{'correct': self.check_if_correct("True"),
-                 'content': 'True'},
-                {'correct': self.check_if_correct("False"),
-                 'content': 'False'}]
-
-    def get_answers_list(self):
-        return [(True, True), (False, False)]
-
-    def answer_choice_to_string(self, guess):
-        return str(guess)
-
-    class Meta:
-        verbose_name = _("True/False Question")
-        verbose_name_plural = _("True/False Questions")
-        # ordering = ['category']
-
-    def get_absolute_url(self):
-        return reverse('tfquestion_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('tfquestion_update', args=(self.pk,))
-
-
-
-@python_2_unicode_compatible
-class Quiz(models.Model):
-    # question = models.ManyToManyField(Question,
-    #                               verbose_name=_("Quiz"),
-    #                               blank=True)
-    mcquestion = models.ManyToManyField(MCQuestion)
-    tfquestion = models.ManyToManyField(TF_Question)
-
-
-    # start_time=
-    title = models.CharField(
-        verbose_name=_("Title"),
-        max_length=60, blank=False)
-
-    description = models.TextField(
-        verbose_name=_("Description"),
-        blank=True, help_text=_("a description of the quiz"))
-
-    url = models.SlugField(
-        max_length=60, blank=False,
-        help_text=_("a user friendly url"),
-        verbose_name=_("user friendly url"))
-
-    category = models.ForeignKey(
-        Category, null=True, blank=True,
-        verbose_name=_("Category"), on_delete=models.CASCADE)
-
-    random_order = models.BooleanField(
-        blank=False, default=False,
-        verbose_name=_("Random Order"),
-        help_text=_("Display the questions in "
-                    "a random order or as they "
-                    "are set?"))
-
-    max_questions = models.PositiveIntegerField(
-        blank=True, null=True, verbose_name=_("Max Questions"),
-        help_text=_("Number of questions to be answered on each attempt."))
-
-    answers_at_end = models.BooleanField(
-        blank=False, default=False,
-        help_text=_("Correct answer is NOT shown after question."
-                    " Answers displayed at the end."),
-        verbose_name=_("Answers at end"))
-
-    exam_paper = models.BooleanField(
-        blank=False, default=False,
-        help_text=_("If yes, the result of each"
-                    " attempt by a user will be"
-                    " stored. Necessary for marking."),
-        verbose_name=_("Exam Paper"))
-
-    single_attempt = models.BooleanField(
-        blank=False, default=False,
-        help_text=_("If yes, only one attempt by"
-                    " a user will be permitted."
-                    " Non users cannot sit this exam."),
-        verbose_name=_("Single Attempt"))
-
-    pass_mark = models.SmallIntegerField(
-        blank=True, default=0,
-        verbose_name=_("Pass Mark"),
-        help_text=_("Percentage required to pass exam."),
-        validators=[MaxValueValidator(100)])
-
-    success_text = models.TextField(
-        blank=True, help_text=_("Displayed if user passes."),
-        verbose_name=_("Success Text"))
-
-    fail_text = models.TextField(
-        verbose_name=_("Fail Text"),
-        blank=True, help_text=_("Displayed if user fails."))
-
-    draft = models.BooleanField(
-        blank=True, default=False,
-        verbose_name=_("Draft"),
-        help_text=_("If yes, the quiz is not displayed"
-                    " in the quiz list and can only be"
-                    " taken by users who can edit"
-                    " quizzes."))
-
-    def get_absolute_url(self):
-        return reverse('quiz_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('quiz_update', args=(self.pk,))
-
-    def save(self, force_insert=False, force_update=False, *args, **kwargs):
-        self.url = re.sub('\s+', '-', self.url).lower()
-
-        self.url = ''.join(letter for letter in self.url if
-                           letter.isalnum() or letter == '-')
-
-        if self.single_attempt is True:
-            self.exam_paper = True
-
-        if self.pass_mark > 100:
-            raise ValidationError('%s is above 100' % self.pass_mark)
-
-        super(Quiz, self).save(force_insert, force_update, *args, **kwargs)
-
-    class Meta:
-        verbose_name = _("Quiz")
-        verbose_name_plural = _("Quizzes")
-
-    def __str__(self):
-        return self.title
-
-    def get_questions(self):
-        return self.question_set.all().select_subclasses()
-
-    @property
-    def get_max_score(self):
-        return self.get_questions().count()
-
-    def anon_score_id(self):
-        return str(self.id) + "_score"
-
-    def anon_q_list(self):
-        return str(self.id) + "_q_list"
-
-    def anon_q_data(self):
-        return str(self.id) + "_data"
-
-
-
-
-
-@python_2_unicode_compatible
-class Answer(models.Model):
-    question = models.ForeignKey(MCQuestion, verbose_name=_("Question"), on_delete=models.CASCADE)
-
-    content = models.CharField(max_length=1000,
-                               blank=False,
-                               help_text=_("Enter the answer text that "
-                                           "you want displayed"),
-                               verbose_name=_("Content"))
-
-    correct = models.BooleanField(blank=False,
-                                  default=False,
-                                  help_text=_("Is this a correct answer?"),
-                                  verbose_name=_("Correct"))
-
-    def __str__(self):
-        return self.content
-
-    class Meta:
-        verbose_name = _("Answer")
-        verbose_name_plural = _("Answers")
-
-
-# truefalse modelss___________________________________________________________
-
-

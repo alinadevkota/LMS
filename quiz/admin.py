@@ -22,26 +22,31 @@ class QuizAdminForm(forms.ModelForm):
         model = Quiz
         exclude = []
 
-        mcquestion = forms.ModelMultipleChoiceField(
-        queryset=MCQuestion.objects.all().select_subclasses(),
-        required=False,
-        # label=_("Questions"),
-        widget=FilteredSelectMultiple(
-            verbose_name=_("mcquestion"),
-            is_stacked=False))
-
-    def __init__(self, *args, **kwargs):
-        super(QuizAdminForm, self).__init__(*args, **kwargs)
-        if self.instance.pk:
-            self.fields['mcquestion'].initial =\
-                self.instance.question_set.all().select_subclasses()
-#
-#     def save(self, commit=True):
-#         quiz = super(QuizAdminForm, self).save(commit=False)
-#         quiz.save()
-#         quiz.question_set.set(self.cleaned_data['questions'])
-#         self.save_m2m()
-#         return quiz
+        # mcquestion = forms.ModelMultipleChoiceField(
+        # queryset=MCQuestion.objects.all().select_subclasses(),
+        # required=False,
+        # # label=_("Questions"),
+        # widget=FilteredSelectMultiple(
+        #     verbose_name=_("mcquestion"),
+        #     is_stacked=False))
+    #
+    # def __init__(self, *args, **kwargs):
+    #     super(QuizAdminForm, self).__init__(*args, **kwargs)
+    #     if self.instance.pk:
+    #         self.fields['mcquestion'].initial =\
+    #             self.instance.mcquestion_set.all().select_subclasses()
+    #         self.fields['tfquestion'].initial = \
+    #             self.instance.tfquestion_set.all().select_subclasses()
+    #
+    # def save(self, commit=True):
+    #     quiz = super(QuizAdminForm, self).save(commit=False)
+    #     quiz.save()
+    #     print(self.cleaned_data['mcquestion'])
+    #     quiz.mcquestion_set.set(self.cleaned_data['mcquestion'])
+    #     quiz.tfquestion_set.set(self.cleaned_data['tfquestion'])
+    #     # quiz.question_set.set(self.cleaned_data['mcquestion'])
+    #     self.save_m2m()
+    #     return quiz
 
 
 class QuizAdmin(admin.ModelAdmin):

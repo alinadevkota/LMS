@@ -9,8 +9,8 @@ except ImportError:
 
 from .views import QuizListView, QuizCreateView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, \
-     QuizTake, MCQuestionCreateView, TFQuestionCreateView, MCQuestionUpdateView, TFQuestionUpdateView, \
-    QuizDetailView, QuizUpdateView, QuizDeleteView
+    QuizTake, MCQuestionCreateView, TFQuestionCreateView, MCQuestionUpdateView, TFQuestionUpdateView, \
+    QuizDetailView, QuizUpdateView, QuizDeleteView, QuizMarkingList
 
 urlpatterns = [
 
@@ -23,8 +23,8 @@ urlpatterns = [
 
     url(r'^progress/$', view=QuizUserProgressView.as_view(), name='quiz_progress'),
 
-    # url(r'^marking/$', view=QuizMarkingList.as_view(), name='quiz_marking'),
-    #
+    url(r'^marking/$', view=QuizMarkingList.as_view(), name='quiz_marking'),
+
     # url(r'^marking/(?P<pk>[\d.]+)/$', view=QuizMarkingDetail.as_view(), name='quiz_marking_detail'),
 
     # passes variable 'quiz_name' to quiz_take view

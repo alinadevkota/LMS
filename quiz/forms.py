@@ -33,17 +33,17 @@ class QuizForm(forms.ModelForm):
         fields = '__all__'
 
 
-    def __init__(self, *args, **kwargs):
-        super(QuizForm, self).__init__(*args, **kwargs)
-        if self.instance.pk:
-            self.fields['questions'].initial = self.instance.question_set.all().select_subclasses()
-
-    def save(self, commit=True):
-        quiz = super(QuizForm, self).save(commit=False)
-        quiz.save()
-        quiz.question_set.set(self.cleaned_data['questions'])
-        self.save_m2m()
-        return quiz
+    # def __init__(self, *args, **kwargs):
+    #     super(QuizForm, self).__init__(*args, **kwargs)
+    #     if self.instance.pk:
+    #         self.fields['questions'].initial = self.instance.question_set.all().select_subclasses()
+    #
+    # def save(self, commit=True):
+    #     quiz = super(QuizForm, self).save(commit=False)
+    #     quiz.save()
+    #     quiz.question_set.set(self.cleaned_data['questions'])
+    #     self.save_m2m()
+    #     return quiz
 
 # -----------------------------------------
 
