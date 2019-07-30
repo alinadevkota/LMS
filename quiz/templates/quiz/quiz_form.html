@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
@@ -16,8 +17,59 @@
 
 {{form|crispy}}
 
-<button class="btn btn-primary" type="submit">Submit</button>
+<button type="button" class="btn btn-primary" id="nextButton">Next</button>
+
+
+{#<button class="btn btn-primary" type="submit">Submit</button>#}
 </form>
+
+
+{##--------------------------------------------------------------------------------------------------------#}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+<script>
+
+
+    $("#nextButton").click(function () {
+        var title = document.getElementById("id_title").value;
+        var description = document.getElementById("Start_date").value;
+        var end_date = document.getElementById("id_End_date").value;
+        var data = {
+            "Survey_Title": title,
+            "Start_Date": start_date,
+            "End_Date": end_date,
+            "Survey_Cover": null,
+            "Use_Flag": 'True',
+            "Added_By": '{{ user.id }}',
+            "Category_Code": null,
+            "Assigned_To": null
+        }
+
+        $.ajax({
+            url: '/survey/api/v1/surveyinfo/',
+            type: 'POST',
+            data: data,
+            beforeSend: function (xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+            },
+            success: function (arg) {
+                alert("success");
+                //location.reload()
+            }
+        }).done(function (server_data) {
+            console.log(server_data)
+        }).fail(function (res) {
+            console.log(res);
+            console.log("failed");
+            alert("failed data entry");
+        });
+    });
+</script>
 {% endblock %}
 
 
+</body>
+</html>

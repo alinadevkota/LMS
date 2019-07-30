@@ -401,13 +401,13 @@ class Quiz(models.Model):
         verbose_name=_("Fail Text"),
         blank=True, help_text=_("Displayed if user fails."))
 
-    draft = models.BooleanField(
-        blank=True, default=False,
-        verbose_name=_("Draft"),
-        help_text=_("If yes, the quiz is not displayed"
-                    " in the quiz list and can only be"
-                    " taken by users who can edit"
-                    " quizzes."))
+    # draft = models.BooleanField(
+    #     blank=True, default=False,
+    #     verbose_name=_("Draft"),
+    #     help_text=_("If yes, the quiz is not displayed"
+    #                 " in the quiz list and can only be"
+    #                 " taken by users who can edit"
+    #                 " quizzes."))
 
     def get_absolute_url(self):
         return reverse('quiz_detail', args=(self.pk,))
