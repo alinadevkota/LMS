@@ -13,7 +13,7 @@
     <hr class="header_hr">
 </div>
 
-<form method="POST" id="FormID">
+<form method="POST" id="FormID" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         {{ form.Lecture_Name|as_crispy_field }}
