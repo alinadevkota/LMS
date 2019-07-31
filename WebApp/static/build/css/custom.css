@@ -5675,7 +5675,10 @@ article {
 /*coursedetailpage made by rajav*/
 #buttons {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
+}
+#button.col-md-3.text-right{
+    margin-top: 15px;!important;
 }
 
 #tabs {
