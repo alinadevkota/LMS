@@ -48621,11 +48621,12 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 }
 
 .new_thread{
-  margin-top: -35px; 
+  margin-top: -50px; 
 }
 
 .user_reply{
   margin-left: 24px;
+  padding-bottom: 10px;
 }
 
 
@@ -48637,3 +48638,31 @@ a:hover{
   color:#00719b;
 }
 
+.content_reply{
+  margin-left: 0px;
+  
+
+}
+.content_render{
+  padding-left: 70px;
+}
+.content_render h4.heading{
+  font-weight: 600;
+    margin: 0 0 10px;
+    cursor: pointer;
+    line-height: 100%;
+
+}
+
+.reply_title{
+padding-left: 60px;
+}
+
+.topic_des{
+  margin-left: 55px;
+}
+
+.topic_header{
+  margin-bottom: -8px;
+  
+}

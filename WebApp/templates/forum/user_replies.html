@@ -32,24 +32,44 @@
         {% for reply in replies %}
         <li class="list-group-item reply-entry reply-entry-title">
 
+            <ul class=" messages">
+                <li>
+                    <p>
+                        <h2>
+                            <div class="content_reply">
+                                <img src="/media/{{ reply.user.Member_Avatar }}" alt=""
+                                    class="image avatar-96wp-user-avatar wp-user-avatar-96 alignnone photo avatar-default ">
 
-            <p>
-                <h2>
+                            </div>
+                            <div class="reply_title">
+                                <a href="{% url 'forum:thread' pk=reply.thread.pk %}"
+                                    class="entry-link">{{ reply.thread.title }}</a>
+                            </div>
 
-                    Question: <a href="{% url 'forum:thread' pk=reply.thread.pk %}"
-                        class="entry-link">{{ reply.thread.title }}</a>
+                        </h2>
 
-                </h2>
+                    </p>
 
-            </p>
-            <div class="user_reply">
-                <span class="pull-right">{{ reply.pub_date | naturaltime }}</span>
+                    <div class="message_date">
+                        <h3 class="date text-info">{{ reply.pub_date|date:"d" }}</h3>
+                        <p class="month">{{ reply.pub_date|date:"M" }}</p>
+                    </div>
 
-                <span class="text-primary"> Reply
-                </span>
-                {{ reply.content_rendered | safe }}
-            </div>
-            {% endfor %}
+
+                    <div class="content_render">
+                        <h4 class="heading"> {{ reply.user.username }} </h4>
+
+                        <blockquote class="message"> {{ reply.content_rendered | safe }} </blockquote>
+                        <p>{{ reply.pub_date | naturaltime }}</p>
+                    </div>
+
+
+
+
+                    {% endfor %}
+                </li>
+            </ul>
+
         </li>
     </ul>
 </div>

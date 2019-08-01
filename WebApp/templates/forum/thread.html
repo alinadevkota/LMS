@@ -126,7 +126,7 @@
                                 </span>
                                 </div>
                                 <h5>
-                                    <p class="excerpt">{{ thread.content_rendered | safe }}
+                                    <p class="excerpt">{{ thread.content_raw|safe }}
                                 </h5>
                                 <ul class="list-group reply-list">
                                     {% for post in posts %}
