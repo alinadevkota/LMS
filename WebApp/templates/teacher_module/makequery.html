@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="col-sm-9" id="test">
+      <!--  <div class="col-sm-9" id="test">
             <div class="hR"></div>
             <div class="row" id="rowCards">
                 <div class="col-xs-12 col-sm-12 col-md-4">
@@ -142,6 +142,7 @@
             </div>
 
         </div>
+        -->
         <div class="col-xs-12 col-sm-12 col-md-3">
             <div class="categoryContainer">
                 <div class="card" style="width: 20rem; height: 30rem;">
@@ -184,6 +185,7 @@
                                     {% csrf_token %}
                                     <div class="row">
                                         <div class="label_inputs">
+                                            <div id="HideOnNext">
                                             <div class="form-group has-feedback">
                                                 <label for="id_Title" class="control-label ">
                                                     Title
@@ -271,7 +273,7 @@
                                                    name="Use_Flag"><br>
 
                                             <button type="button" class="btn btn-primary" id="nextButton">Next</button>
-
+                                            </div>
 
                                             <div class="selectQuestionType" style="display: none;">
                                                 <div class="btn-group" id="switchButtons" data-toggle="buttons">
@@ -379,6 +381,7 @@
                     xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
                 },
                 success: function (arg) {
+                    document.getElementById('HideOnNext').style.display ='none';
                     alert("data entry success" + Session_Code + " " + Course_Code);
                 }
             }).done(function (server_data) {
@@ -391,15 +394,15 @@
 
 
         });
-        $("#save-btn").click(function () {
-            q=document.getElementById('outerform').querySelectorAll('[id^="options-"]');
+        {#$("#save-btn").click(function () {#}
+        {#    q=document.getElementById('outerform').querySelectorAll('[id^="options-"]');#}
             {#var dates = document.querySelectorAll('[id^="options-"]');#}
-            console.log(q.length);
-            q.forEach(function (e, i) {
-                console.log(document.querySelector("#outerform").e.questions.value);
-            });
-
-        });
+        {#    console.log(q.length);#}
+        {#    q.forEach(function (e, i) {#}
+        {#        console.log(document.querySelector("#outerform").e.questions.value);#}
+        {#    });#}
+        {##}
+        //{#});#}
 
 
     </script>
