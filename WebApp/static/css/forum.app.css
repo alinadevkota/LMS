@@ -456,6 +456,8 @@ h6 {
 }
 .text-primary {
   color: #42a5f5;
+    font-size: 15px;
+
 }
 .buttons-spacing-vertical .btn + .btn {
   margin: 3px 2px;
@@ -48622,4 +48624,16 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   margin-top: -35px; 
 }
 
+.user_reply{
+  margin-left: 24px;
+}
+
+
+.reply-entry-title{
+  padding-top: 0px;
+}
+
+a:hover{
+  color:#00719b;
+}
 

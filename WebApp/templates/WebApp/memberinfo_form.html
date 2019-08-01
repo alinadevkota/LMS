@@ -27,7 +27,7 @@
     </div>
 
     <div class="x_content">
-        <form method="post" id="FormID" data-parsley-validate="">
+        <form method="post" id="FormID" data-parsley-validate="" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
@@ -101,9 +101,9 @@
                                 <select name="Member_Gender" id="id_Member_Gender" value="{{ object.Member_Gender }}"
                                         required="required"
                                         class="select form-control">
-                                    <option value="" selected="{{ object.Member_Gender }}">Select Gender</option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
+                                    <option value="">Select Gender</option>
+                                    <option value="1" {% if object.Member_Gender == '1' %}selected{% endif %}>Male</option>
+                                    <option value="2" {% if object.Member_Gender == '2' %}selected{% endif %}>Female</option>
 
                                     <span class="fa fa-child form-control-feedback left" aria-hidden="true"></span>
                                 </select>
@@ -183,7 +183,7 @@
                                     Member BirthDate
                                 </label>
                                 <input type="date" name="Member_BirthDate"
-                                       value="{{ object.Member_BirthDate|date:"m/d/Y" }}"
+                                       value="{{ object.Member_BirthDate|date:"Y-m-d" }}"
                                        id="id_Member_BirthDate"
                                        class="form-control has-feedback-left"
                                        placeholder="mm/dd/YYYY">
@@ -210,6 +210,9 @@
                                 <input type="file" name="Member_Avatar" value="{{ object.Member_Avatar }}"
                                        id="id_Member_Avatar"
                                        class="form-control has-feedback-left" placeholder="Member Avatar">
+                                {% if object.Member_Avatar %}
+                                    <a href="{{ object.Member_Avatar.url }}">{{ object.Member_Avatar }}</a>
+                                {% endif %}
                                 <span class="fa fa-image form-control-feedback left" aria-hidden="true"></span>
                             </div>
 

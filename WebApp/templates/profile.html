@@ -12,8 +12,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-3 col-xs-12 boxShadow" id="avatarDiv">
-                        <div id="profile-container" style="margin-top: 15px;">
-
+                        <div class="profile-container" id="profile-container" style="margin-top: 15px;">
                             <img id="profileImage" class="img-circle" src="
                                     {% if request.user.Member_Avatar %}
                                         /media/{{ request.user.Member_Avatar }}
@@ -26,7 +25,9 @@
                                     {% endif %}"
                                  alt="user" width="50%"
                                  height="50%"/>
-
+                            <div class="middle">
+                                <div class="text" style="margin-top: -70px;">Change Picture</div>
+                            </div>
                         </div>
                         <br>
                         <h3>{{ user.username }}</h3>
@@ -227,6 +228,25 @@
         });
     </script>
     <style>
+        .middle {
+
+            color: #000000;
+           
+        }
+
+        .profile-container:hover .img-circle {
+            opacity: 0.3;
+            box-shadow: 0 0 5px #fff;
+        {#filter: grayscale(100%);#}
+
+        }
+
+        .profile-container:hover .middle {
+            opacity: 1;
+
+        }
+
+
         #imageUpload {
             display: none;
         }

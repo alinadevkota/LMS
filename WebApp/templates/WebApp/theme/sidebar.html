@@ -19,7 +19,7 @@
             <div class="profile_pic">
                 <img src="
                         {% if request.user.Member_Avatar %}
-                            /media/{{ request.user.Member_Avatar }}
+                            {{ request.user.Member_Avatar.url }}
                         {% elif request.user.Member_Gender == '1' %}
                             {% static 'images/profile/male.jpg' %}
                         {% elif request.user.Member_Gender == '2' %}
