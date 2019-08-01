@@ -57,11 +57,11 @@ import json
 
 def ProfileView(request):
     try:
-        center = CenterInfo.objects.get( Center_Name =request.user.Center_Code)
+        center = CenterInfo.objects.get(Center_Name=request.user.Center_Code)
     except:
         center = None
         pass
-    return render(request, 'WebApp/profile.html',{"center":center})
+    return render(request, 'WebApp/profile.html', {"center": center})
 
 
 def login(request, template_name='registration/login.html',
@@ -324,8 +324,6 @@ class LectureInfoListView(ListView):
         return qs
 
 
-
-
 class LectureInfoCreateView(CreateView):
     model = LectureInfo
     form_class = LectureInfoForm
@@ -333,6 +331,11 @@ class LectureInfoCreateView(CreateView):
 
 class LectureInfoDetailView(DetailView):
     model = LectureInfo
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk'))
+        return context
 
 
 class LectureInfoUpdateView(UpdateView):

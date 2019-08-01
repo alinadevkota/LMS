@@ -25,23 +25,24 @@
                 {% url 'lectureinfo_create' %}
             {% endif %}">Create new Lecture</a>
     </div>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="text-center errorMessage">
-                <strong>
-                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                        ERROR!!
-                    {% else %}
-                        {{ message.tags|title }}
-                    {% endif %}
-                </strong>
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endfor %}
-    {% endif %}
+{% include 'WebApp/theme/alerts.html' %}
+{#    {% if messages %}#}
+{#        {% for message in messages %}#}
+{#            <div class="text-center errorMessage">#}
+{#                <strong>#}
+{#                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}#}
+{#                        ERROR!!#}
+{#                    {% else %}#}
+{#                        {{ message.tags|title }}#}
+{#                    {% endif %}#}
+{#                </strong>#}
+{#                {{ message }}#}
+{#                <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+{#                    <span aria-hidden="true">&times;</span>#}
+{#                </button>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
 
     <br><br><br>
     <div class="container" id="divID">
@@ -97,8 +98,9 @@
                         </div>
 
                         <div class="col-md-9 ">
-                            <h4>{{ object.Teacher_Code }}</h4>
+
                             <p>Instructor</p>
+                            <h4>{{ object.Teacher_Code }}</h4>
                         </div>
                     </div>
                 </div>
