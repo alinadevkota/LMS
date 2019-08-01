@@ -379,7 +379,7 @@
                     xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
                 },
                 success: function (arg) {
-                    alert("data entry success" + Session_Code + " " + Course_Code);
+                    // alert("data entry success" + Session_Code + " " + Course_Code);
                 }
             }).done(function (server_data) {
                 console.log(server_data)
@@ -392,12 +392,38 @@
 
         });
         $("#save-btn").click(function () {
-            q=document.getElementById('outerform').querySelectorAll('[id^="options-"]');
+            q = document.querySelectorAll('[id^="options-"]');
             {#var dates = document.querySelectorAll('[id^="options-"]');#}
-            console.log(q.length);
             q.forEach(function (e, i) {
-                console.log(document.querySelector("#outerform").e.questions.value);
+
+                var elm = document.getElementById(e.id).querySelectorAll('[id="optionid"]');
+                var q_id=e.id[e.id.length - 1];
+                var question_content;
+
+                var questioncontainer = document.querySelectorAll('[id="question-'+q_id+'"]');
+                //console.log(question);
+                questioncontainer.forEach(function (que,index) {
+                    var question = document.getElementById(que.id).querySelectorAll('[id="questionid"]');
+                    question.forEach(function (ques,i) {
+                        question_content=ques.value;
+                    });
+                });
+
+
+                // use ajax to post question here
+                console.log(question_content);
+
+
+
+
+                elm.forEach(function (elem, i) {
+
+                    //use ajax to post options here
+                    console.log(elem.value,question_content);
+
+                });
             });
+
 
         });
 

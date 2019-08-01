@@ -5226,8 +5226,8 @@ $(function () {
 function Myfunctionbtn(event, obj) {
     event.preventDefault();
     console.log(obj.id)
-    $("#options-" + obj.id).append(`<li id="questionlist" style="list-style:none; margin-left: 20px;">
-        <input class="form-control" type="text" id="question" name="questions" placeholder="option "></li><br>`)
+    $("#options-" + obj.id).append(`<li id="optionlist" style="list-style:none; margin-left: 20px;">
+        <input class="form-control" type="text" id="optionid" name="options" placeholder="option "></li><br>`)
 }
 
 $(document).ready(function () {
@@ -5238,7 +5238,7 @@ $(document).ready(function () {
         var id1 = parseInt(count++)
         $("#mySelect").append(`
             <li id="question-${id1}">
-            <p>${id1}</p><input class="form-control" placeholder="Enter Questions here..." type="text" style="list-style:none; margin-top: 10px;" name="questions" id="tempid">
+            <p>${id1}</p><input class="form-control" placeholder="Enter Questions here..." type="text" style="list-style:none; margin-top: 10px;" name="questions" id="questionid">
              <label for="option">Option:</label> <button id="${id1} " onclick="Myfunctionbtn(event,this)" class="btn btn-success">+</button>
              </li><li id="options-${id1}" style="list-style:none;"></li>`)
     });
