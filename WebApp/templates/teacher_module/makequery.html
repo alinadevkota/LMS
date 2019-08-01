@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="col-sm-9" id="test">
+      <!--  <div class="col-sm-9" id="test">
             <div class="hR"></div>
             <div class="row" id="rowCards">
                 <div class="col-xs-12 col-sm-12 col-md-4">
@@ -142,6 +142,7 @@
             </div>
 
         </div>
+        -->
         <div class="col-xs-12 col-sm-12 col-md-3">
             <div class="categoryContainer">
                 <div class="card" style="width: 20rem; height: 30rem;">
@@ -180,10 +181,11 @@
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-6">
-                                <form>
+                                <form id="outerform">
                                     {% csrf_token %}
                                     <div class="row">
                                         <div class="label_inputs">
+                                            <div id="HideOnNext">
                                             <div class="form-group has-feedback">
                                                 <label for="id_Title" class="control-label ">
                                                     Title
@@ -271,7 +273,7 @@
                                                    name="Use_Flag"><br>
 
                                             <button type="button" class="btn btn-primary" id="nextButton">Next</button>
-
+                                            </div>
 
                                             <div class="selectQuestionType" style="display: none;">
                                                 <div class="btn-group" id="switchButtons" data-toggle="buttons">
@@ -298,9 +300,9 @@
                                                             <ul id="mySelect" style="list-style: none;">
                                                             </ul>
                                                         </div>
-                                                        <a href="">
-                                                            <div class="btn btn-info">Save</div>
-                                                        </a>
+
+                                                        <div class="btn btn-info" id="save-btn">Save</div>
+
                                                         <a href="">
                                                             <div class="btn btn-primary">Save As New</div>
                                                         </a>
@@ -318,9 +320,9 @@
                                                                 <ul id="short_que_add" style="list-style: none;">
                                                                 </ul>
                                                             </div>
-                                                            <a href="">
-                                                                <div class="btn btn-info">Save</div>
-                                                            </a>
+
+                                                            <div class="btn btn-info">Save</div>
+
                                                             <a href="">
                                                                 <div class="btn btn-primary">Save As New</div>
                                                             </a>
@@ -355,8 +357,8 @@
             var Session_Code = session_index.options[session_index.selectedIndex].value;
             var course_index = document.getElementById("id_course");
             var Course_Code = course_index.options[course_index.selectedIndex].value;
-            console.log(Course_Code+"subject");
-            console.log(Session_Code+"session");
+            console.log(Course_Code + "subject");
+            console.log(Session_Code + "session");
 
             var data = {
                 "Survey_Title": title,
@@ -379,7 +381,8 @@
                     xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
                 },
                 success: function (arg) {
-                    alert("data entry success"+Session_Code+" "+Course_Code);
+                    document.getElementById('HideOnNext').style.display ='none';
+                    alert("data entry success" + Session_Code + " " + Course_Code);
                 }
             }).done(function (server_data) {
                 console.log(server_data)
@@ -388,7 +391,19 @@
                 console.log("failed");
                 alert('data entry failed');
             });
+
+
         });
+        {#$("#save-btn").click(function () {#}
+        {#    q=document.getElementById('outerform').querySelectorAll('[id^="options-"]');#}
+            {#var dates = document.querySelectorAll('[id^="options-"]');#}
+        {#    console.log(q.length);#}
+        {#    q.forEach(function (e, i) {#}
+        {#        console.log(document.querySelector("#outerform").e.questions.value);#}
+        {#    });#}
+        {##}
+        //{#});#}
+
 
     </script>
 {% endblock %}
