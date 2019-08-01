@@ -48621,7 +48621,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 }
 
 .new_thread{
-  margin-top: -35px; 
+  margin-top: -50px; 
 }
 
 .user_reply{
@@ -48656,4 +48656,13 @@ a:hover{
 
 .reply_title{
 padding-left: 60px;
+}
+
+.topic_des{
+  margin-left: 55px;
+}
+
+.topic_header{
+  margin-bottom: -8px;
+  
 }

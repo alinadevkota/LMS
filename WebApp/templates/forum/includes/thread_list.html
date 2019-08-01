@@ -16,16 +16,16 @@
 
 {% block main_contain %}
 <div class="panel panel-default paper-shadow">
-    <div class="panel panel-heading">
+    <div class="panel panel-heading ">
 
-        <h2>
+        <h2 class="topic_header">
             <div class="icon-block half img-circle bg-grey-300">
                 <i class="fa fa-{{ topic.topic_icon }}"></i>
             </div> {{ panel_title }}
-
-            <small> {{ topic.description }} </small>
-
         </h2>
+        <div class="topic_des">
+            <small> {{ topic.description }} </small>
+        </div>
 
         <span class="pull-right new_thread">
             <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread' topic_pk=topic.pk %}"><i
