@@ -19,7 +19,7 @@
         <form method="post" action="{% url 'forum:create_thread' %}">
             {% csrf_token %}
 
-            <div class="x-title">
+            <div class=" x-title">
                 <h2 align="center">Create Thread</h2>
 
             </div>
@@ -167,6 +167,7 @@
                 </div>
 
 
+
             </div>
 
             <div class="form-group">
@@ -179,6 +180,12 @@
 
 
 </div>
+<script>
+    $('#submit-id-submit').click(function () {
+        $('#id_content_raw').val($('.editor-wrapper').html());
+    });
+</script>
+
 
 
 
