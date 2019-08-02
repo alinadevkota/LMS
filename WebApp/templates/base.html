@@ -47,7 +47,10 @@
         <!-- Custom Theme Style -->
         <link href="{% static '/build/css/custom.css' %}" rel="stylesheet">
 
-        <link rel="icon" href="{% static 'images/icon.jpg' %}" type="image/x-icon"/>
+        <link rel="icon" hreextrastylef="{% static 'images/icon.jpg' %}" type="image/x-icon"/>
+        {% block extrastyle %}{% endblock %}
+        {% block extrahead %}{% endblock %}
+
         {% block stylesheets %}{% endblock stylesheets %}
 
     {% endblock head %}
@@ -74,10 +77,10 @@
 
             <div class="right_col" role="main">
 
-                <div class="page-title">
-
-
-                </div>
+                {#                <div class="page-title">#}
+                {##}
+                {##}
+                {#                </div>#}
                 <ol aria-label="breadcrumb" class="breadcrumb navClass">
                     <li class="breadcrumb-item"><a href="{% url 'start' %}">Home</a></li>
                     {% block breadcrumb %}
@@ -88,11 +91,13 @@
                     <!-- {{ content }} -->
                 {% endblock content %}
 
-            </div>
 
-            <!-- <div class="footer">
-                {% include "WebApp/theme/footer.html" %}
-            </div> -->
+            </div>
+            {% block footer %}
+                <footer>
+                    {% include "WebApp/theme/footer.html" %}
+                </footer>
+            {% endblock footer %}
         </div>
     </div>
 
@@ -130,7 +135,7 @@
     <script src="{% static 'vendorsx/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
     <!-- starrr -->
     <script src="{% static 'vendorsx/starrr/dist/starrr.js' %}"></script>
-
+    extrahead
 
     <script src="{% static 'vendorsx/datatables.net/js/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'vendorsx/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
@@ -148,12 +153,13 @@
 
 
     <!-- Custom Theme Scripts -->
-    <script src=" {% static 'build/js/custom.js' %}"></script>
+
     <script src="{% static 'vendorsx/fullcalendar/dist/fullcalendar.min.js' %}"></script>
 
     {% block customjss %}
-    {% endblock %}
 
+    {% endblock %}
+ <script src=" {% static 'build/js/custom.js' %}"></script>
 {% endblock body %}
 
 </body>

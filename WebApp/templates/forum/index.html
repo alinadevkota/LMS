@@ -4,17 +4,13 @@
 {% load humanize %}
 
 {% block breadcrumb %}
-<ol class="breadcrumb navClass">
 
-    <li class="active"><a href="{% url 'forum:index' %}">Home</a></li>
-</ol>
+
+<li class="active"><a href="{% url 'forum:index' %}">Forum</a></li>
+
 {% endblock %}
 
 {% block main_contain %}
-
-
-
-
 
 
 <div class="panel panel-default paper-shadow" data-z="0.5">
@@ -57,7 +53,7 @@
                     <a href="{% url 'forum:nodegroup' nodegroup.pk %}"></a>
                     <h6 class="text-headline margin-none">
                         <a href="{% url 'forum:nodegroup' nodegroup.pk %}"
-                            style="color:#43BFC7">{{ nodegroup.title }}</a>
+                            class="link-text-color">{{ nodegroup.title }}</a>
                     </h6>
 
 
@@ -87,25 +83,25 @@
                     <div class="text-light text-caption">
                         Category:
                         <a href="{% url 'forum:nodegroup' thread.topic.node_group.pk %}"
-                            style="color:blue">{{ thread.topic.node_group.title }}</a>
+                            class="link-text-color">{{ thread.topic.node_group.title }}</a>
                         |
 
                         Topic:
                         <a href="{% url 'forum:topic' pk=thread.topic.pk %}"
-                            style="color:blue">{{ thread.topic.title }}</a>
-                    | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }}
+                            class="link-text-color">{{ thread.topic.title }}</a>
+                        | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }}
 
                         <br>
                         posted by
-                        <a href="{% url 'forum:user_info' pk=thread.user.pk %}" style="color:blue">
+                        <a href="{% url 'forum:user_info' pk=thread.user.pk %}" class="link-text-color">
                             <img src="/media/{{ thread.user.Member_Avatar }}" class="img-circle width-20">
                             {{ thread.user.username }}</a>
                         |<span>{% blocktrans with view_count=thread.view_count %}
-                                            <i class="fa fa-eye"></i>
-                                            viewed
-                                            {{ view_count }}
-                                            times{% endblocktrans %}</span>&nbsp;
-                    |<i class="fa fa-clock-o fa-fw"></i> Last Replied: {{ thread.last_replied }}
+                            <i class="fa fa-eye"></i>
+                            viewed
+                            {{ view_count }}
+                            times{% endblocktrans %}</span>&nbsp;
+                        |<i class="fa fa-clock-o fa-fw"></i> Last Replied: {{ thread.last_replied }}
 
 
                     </div>
@@ -134,11 +130,7 @@
         {% endfor %}
 
     </ul>
+    <div class="clearfix"></div>
 </div>
-
-<br>
-
-
-
 
 {% endblock %}

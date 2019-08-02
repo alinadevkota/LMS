@@ -1,17 +1,21 @@
 {% extends "base.html" %}
 {% load static %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'inninggroup_list' %}">Session Mapping</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Session Mapping Information</li>
+{% endblock %}
 {% block content %}
-    <ol aria-label="breadcrumb" class="breadcrumb navClass">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'inninggroup_list' %}">Session Mapping</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Session Mapping Information</li>
-    </ol>
+
     <div class="outerdiv">
 
-        <h2 class="detailListHeader">Session Information</h2>
+        <h2 class="detailListHeader">Session Mapping Information</h2>
         <hr class="header_hr">
         <br>
         <table class="table">
+            <tr>
+                <td>Session</td>
+                <td>{{ object.Inning_Code }}</td>
+            </tr>
             <tr>
                 <td>Teacher Code</td>
                 <td>{{ object.Teacher_Code }}</td>
@@ -24,10 +28,7 @@
                 <td>Register Agent</td>
                 <td>{{ object.Register_Agent }}</td>
             </tr>
-            <tr>
-                <td>Inning Code</td>
-                <td>{{ object.Inning_Code }}</td>
-            </tr>
+
             <tr>
                 <td>Lecture Code</td>
                 <td>{{ object.Lecture_Code }}</td>

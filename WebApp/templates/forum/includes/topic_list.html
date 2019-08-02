@@ -5,10 +5,10 @@
 
 
 {% block breadcrumb %}
-<ol class="breadcrumb navClass">
-    <li><a href="{% url 'forum:index' %}">Home</a></li>
-    <li class="active">{{ node_group }} </li>
-</ol>
+
+<li><a href="{% url 'forum:index' %}">Forum</a></li>
+<li class="active">{{ node_group }} </li>
+
 
 {% endblock %}
 
@@ -16,18 +16,18 @@
 
 <div class="x_panel">
     <div class="x_title">
-        <h2>Detail of Category: {{ panel_title }}</h2>
-        <br>
-        <h4>{{ node_group.description }}</h4>
-        <p>
-            No of Topics: {{ node_group.topic_count }}
-        </p>
+        <h2>
+            Detail of Category: {{ panel_title }}
+            <br>
+            <small>
+                {{ node_group.description }}</small>
+        </h2>
+
         <div class=" pull-right">
-            <a href="{% url 'forum:create_topic' %}"><i class="fa fa-fw fa-plus"></i>
+            <p> <i class="fa fa-star"></i> No of Topics: {{ node_group.topic_count }} </p>
+            <a href="{% url 'forum:create_topic' nodegroup_pk=node_group.pk %}"><i class="fa fa-fw fa-plus"></i>
                 Sub Category
             </a></i>
-
-
         </div>
         <div class="clearfix"></div>
     </div>

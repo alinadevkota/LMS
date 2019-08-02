@@ -86,7 +86,7 @@ class MemberInfo(AbstractUser):
 
     # Fields
     # Member_ID = models.CharField(max_length=250, blank=True, null=True)
-    password = models.CharField(_('password'), max_length=128, )
+    password = models.CharField(_('password'), max_length=128)
     # remove this password field
     # Member_Password = models.CharField(max_length=250, blank=True, null=True)
     # Member_Type = models.IntegerField(blank=True, null=True)
@@ -248,6 +248,9 @@ class ChapterInfo(models.Model):
     def get_update_url(self):
         return reverse('chapterinfo_update', args=(self.pk,))
 
+    def __str__(self):
+        return self.Chapter_Name
+
 
 class ChapterContentsInfo(models.Model):
     # Fields
@@ -357,6 +360,9 @@ class HomeworkInfo(models.Model):
         'ChapterInfo',
         related_name="homeworkinfos", on_delete=models.DO_NOTHING
     )
+
+    def __str__(self):
+        return self.Homework_Topic
 
 
 class AssignHomeworkInfo(models.Model):

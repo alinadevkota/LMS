@@ -1,13 +1,15 @@
 import random
 
+from django_addanother.views import CreatePopupMixin
+
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView, FormView, CreateView, UpdateView
 
-from .forms import QuestionForm, EssayForm, QuizForm, MCQuestionForm, TFQuestionForm, EssayQuestionForm
-from .models import Quiz, Category, Progress, Sitting, Question, Essay_Question, MCQuestion, TF_Question
+from .forms import QuestionForm, QuizForm, MCQuestionForm, TFQuestionForm
+from .models import Quiz, Category, Progress, Sitting, MCQuestion, TF_Question, Question
 
 
 class QuizMarkerMixin(object):
@@ -26,9 +28,13 @@ class SittingFilterTitleMixin(object):
 
         return queryset
 
-class QuizCreateView(CreateView):
+
+class QuizCreateView(CreatePopupMixin, CreateView):
     model = Quiz
     form_class = QuizForm
+
+
+
 
 
 class QuizListView(ListView):
@@ -37,6 +43,7 @@ class QuizListView(ListView):
     def get_queryset(self):
         queryset = super(QuizListView, self).get_queryset()
         return queryset.filter(draft=False)
+
 
 class QuizUpdateView(UpdateView):
     model = Quiz
@@ -55,6 +62,7 @@ class QuizDetailView(DetailView):
 
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
+
 
 def QuizDeleteView(request, pk):
     Quiz.objects.filter(pk=pk).delete()
@@ -75,11 +83,11 @@ class ViewQuizListByCategory(ListView):
             category=self.kwargs['category_name']
         )
 
-        return super(ViewQuizListByCategory, self).\
+        return super(ViewQuizListByCategory, self). \
             dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(ViewQuizListByCategory, self)\
+        context = super(ViewQuizListByCategory, self) \
             .get_context_data(**kwargs)
 
         context['category'] = self.category
@@ -95,7 +103,7 @@ class QuizUserProgressView(TemplateView):
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(QuizUserProgressView, self)\
+        return super(QuizUserProgressView, self) \
             .dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -110,8 +118,8 @@ class QuizMarkingList(QuizMarkerMixin, SittingFilterTitleMixin, ListView):
     model = Sitting
 
     def get_queryset(self):
-        queryset = super(QuizMarkingList, self).get_queryset()\
-                                               .filter(complete=True)
+        queryset = super(QuizMarkingList, self).get_queryset() \
+            .filter(complete=True)
 
         user_filter = self.request.GET.get('user_filter')
         if user_filter:
@@ -138,7 +146,7 @@ class QuizMarkingDetail(QuizMarkerMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(QuizMarkingDetail, self).get_context_data(**kwargs)
-        context['questions'] =\
+        context['questions'] = \
             context['sitting'].get_questions(with_answers=True)
         return context
 
@@ -160,8 +168,7 @@ class QuizTake(FormView):
             self.logged_in_user = self.request.user.is_authenticated
 
         if self.logged_in_user:
-            self.sitting = Sitting.objects.user_sitting(request.user,
-                                                        self.quiz)
+            self.sitting = Sitting.objects.user_sitting(request.user, self.quiz)
         else:
             self.sitting = self.anon_load_sitting()
 
@@ -178,10 +185,11 @@ class QuizTake(FormView):
             self.question = self.anon_next_question()
             self.progress = self.anon_sitting_progress()
 
-        if self.question.__class__ is Essay_Question:
-            form_class = EssayForm
-        else:
-            form_class = self.form_class
+        # if self.question.__class__ is Essay_Question:
+        #     form_class = EssayForm
+        # else:
+        #     form_class = self.form_class
+        form_class = self.form_class
 
         return form_class(**self.get_form_kwargs())
 
@@ -232,7 +240,7 @@ class QuizTake(FormView):
                              'previous_question': self.question,
                              'answers': self.question.get_answers(),
                              'question_type': {self.question
-                                               .__class__.__name__: True}}
+                                                   .__class__.__name__: True}}
         else:
             self.previous = {}
 
@@ -252,9 +260,9 @@ class QuizTake(FormView):
         self.sitting.mark_quiz_complete()
 
         if self.quiz.answers_at_end:
-            results['questions'] =\
+            results['questions'] = \
                 self.sitting.get_questions(with_answers=True)
-            results['incorrect_questions'] =\
+            results['incorrect_questions'] = \
                 self.sitting.get_incorrect_questions
 
         if self.quiz.exam_paper is False:
@@ -319,8 +327,8 @@ class QuizTake(FormView):
             anon_session_score(self.request.session, 1, 1)
         else:
             anon_session_score(self.request.session, 0, 1)
-            self.request\
-                .session[self.quiz.anon_q_data()]['incorrect_questions']\
+            self.request \
+                .session[self.quiz.anon_q_data()]['incorrect_questions'] \
                 .append(self.question.id)
 
         self.previous = {}
@@ -330,9 +338,9 @@ class QuizTake(FormView):
                              'previous_question': self.question,
                              'answers': self.question.get_answers(),
                              'question_type': {self.question
-                                               .__class__.__name__: True}}
+                                                   .__class__.__name__: True}}
 
-        self.request.session[self.quiz.anon_q_list()] =\
+        self.request.session[self.quiz.anon_q_list()] = \
             self.request.session[self.quiz.anon_q_list()][1:]
 
     def final_result_anon(self):
@@ -357,7 +365,7 @@ class QuizTake(FormView):
         if self.quiz.answers_at_end:
             results['questions'] = sorted(
                 self.quiz.question_set.filter(id__in=q_order)
-                                      .select_subclasses(),
+                    .select_subclasses(),
                 key=lambda q: q_order.index(q.id))
 
             results['incorrect_questions'] = (
@@ -396,8 +404,6 @@ def anon_session_score(session, to_add=0, possible=0):
     return session["session_score"], session["session_score_possible"]
 
 
-
-
 class QuestionCreateView(CreateView):
     model = MCQuestion
     form_class = QuestionForm
@@ -405,19 +411,26 @@ class QuestionCreateView(CreateView):
 
 # ------------------------- MC_Question Views------------------
 
+
 class MCQuestionListView(ListView):
     model = MCQuestion
+
+
 
 class MCQuestionCreateView(CreateView):
     model = MCQuestion
     form_class = MCQuestionForm
 
+
+
 class MCQuestionUpdateView(UpdateView):
     model = MCQuestion
     form_class = MCQuestionForm
 
+
 class MCQuestionDetailView(DetailView):
     model = MCQuestion
+
 
 def MCQuestionDeleteView(request, pk):
     MCQuestion.objects.filter(pk=pk).delete()
@@ -429,39 +442,41 @@ def MCQuestionDeleteView(request, pk):
 class TFQuestionListView(ListView):
     model = TF_Question
 
+
 class TFQuestionCreateView(CreateView):
     model = TF_Question
     form_class = TFQuestionForm
+
 
 class TFQuestionUpdateView(UpdateView):
     model = TF_Question
     form_class = TFQuestionForm
 
+
 class TFQuestionDetailView(DetailView):
     model = TF_Question
+
 
 def TFQuestionDeleteView(request, pk):
     TF_Question.objects.filter(pk=pk).delete()
     return redirect("tfquestion_list")
 
-
-
 # ------------------------- Essay_Question Views------------------
-
-class EssayQuestionListView(ListView):
-    model = Essay_Question
-
-class EssayQuestionCreateView(CreateView):
-    model = Essay_Question
-    form_class = EssayQuestionForm
-
-class EssayQuestionUpdateView(UpdateView):
-    model = Essay_Question
-    form_class = EssayQuestionForm
-
-class EssayQuestionDetailView(DetailView):
-    model = Essay_Question
-
-def EssayQuestionDeleteView(request, pk):
-    Essay_Question.objects.filter(pk=pk).delete()
-    return redirect("essayquestion_list")
+#
+# class EssayQuestionListView(ListView):
+#     model = Essay_Question
+#
+# class EssayQuestionCreateView(CreateView):
+#     model = Essay_Question
+#     form_class = EssayQuestionForm
+#
+# class EssayQuestionUpdateView(UpdateView):
+#     model = Essay_Question
+#     form_class = EssayQuestionForm
+#
+# class EssayQuestionDetailView(DetailView):
+#     model = Essay_Question
+#
+# def EssayQuestionDeleteView(request, pk):
+#     Essay_Question.objects.filter(pk=pk).delete()
+#     return redirect("essayquestion_list")

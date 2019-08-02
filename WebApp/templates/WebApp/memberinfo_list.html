@@ -7,17 +7,15 @@
 
 
     <div class="memberInfoListClass">
-
+        <hr class="header_hr">
+        <h2 class="tableHeader">List of Members</h2>
 
         <nav id="navbar_parent" class="navbar navbar-light" style="background-color: grey">
             <ul class="nav navbar-nav navbar-center member-list">
                 <li><a class="navbar-brand" id="teacher_button" href="#">Teacher</a></li>
                 <li><a class="navbar-brand" id="student_button" href="#">Student</a></li>
-
             </ul>
         </nav>
-        <hr class="header_hr">
-        <h2 class="tableHeader">List of Members</h2>
         <hr class="header_hr">
         <div class="btn-createnew">
             <a class="btn btn-success" href="{% url 'memberinfo_create' %}">Create new Member</a>
@@ -28,25 +26,18 @@
                 <thead class="thead-light bg-primary">
                 <tr class="tableTitleRow">
                     <td>ID</td>
-                    <!-- <td>Link</td> -->
                     <td>Member ID</td>
                     <td>Name</td>
                     <td>Current Address</td>
                     <td>Email</td>
                     <td>Phone</td>
-                    <!-- <td>member_Avatar</td> -->
                     <td>Gender</td>
                     <td>Student</td>
                     <td>Teacher</td>
-                    {#                    <td>Parent</td>#}
-                    <!-- <td>Use_Flag</td>
-            <td>Register_DateTime</td>
-            <td>Register_Agent</td>
-            <td>Member_Memo</td> -->
                 </tr>
                 </thead>
                 {% for object in object_list %}
-
+                    {% if object.id != request.user.id %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td><b><a href="{{ object.get_absolute_url }}">{{ object.username }}</a></b></td>
@@ -55,7 +46,6 @@
                         <td>{{ object.Member_Temporary_Address }}</td>
                         <td>{{ object.email }}</td>
                         <td>{{ object.Member_Phone }}</td>
-                        <!-- <td>{{ object.member_Avatar }}</td> -->
                         <td>
                             {% if object.Member_Gender == '1' %}
                                 Male
@@ -65,12 +55,8 @@
                         </td>
                         <td>{{ object.Is_Student }}</td>
                         <td>{{ object.Is_Teacher }}</td>
-                        {#                <td>{{ object.Is_Parent }}</td>#}
-                        {#                      <td>{{ object.Use_Flag }}</td>#}
-                        {#                        <td>{{ object.Register_DateTime }}</td>#}
-                        {#                        <td>{{ object.Register_Agent }}</td>#}
-                        {#                        <td>{{ object.Member_Memo }}</td>#}
                     </tr>
+                    {% endif %}
 
                 {% endfor %}
             </table>
@@ -117,7 +103,6 @@
             $("#student_button").bind("click", function () {
 
                 $("#student_button").css("color", "black");
-                $("#parent_button").css("color", "white");
                 $("#teacher_button").css("color", "white");
                 table_main.columns().search('').draw();
                 table_main.column(7).search("True").draw();
@@ -126,7 +111,6 @@
             });
             $("#teacher_button").bind("click", function () {
                 $("#student_button").css("color", "white");
-                $("#parent_button").css("color", "white");
                 $("#teacher_button").css("color", "black");
                 table_main.columns().search('').draw();
                 table_main.column(8).search("True").draw();

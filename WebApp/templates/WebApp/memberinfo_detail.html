@@ -2,7 +2,7 @@
 {% load static %}
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{% url 'memberinfo_list' %}">Member</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ object.Member_Name }}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ object.username }}</li>
 {% endblock %}
 
 {% block content %}
@@ -12,8 +12,15 @@
         <hr class="header_hr">
         <div class="col-md-5 col-sm-12 col-xs-12">
             <div class="text-center">
-                <img src="{{ object.Member_Avatar.url }}" align="middle"
-                     style="width: 400px; margin-top: 50px; margin-bottom: 50px;">
+                <img src="{% if object.Member_Avatar %}
+                    {{ object.Member_Avatar.url }}
+                {% elif object.Member_Gender == '1' %}
+                    {% static 'images/profile/male.jpg' %}
+                {% elif object.Member_Gender == '2' %}
+                    {% static 'images/profile/female.png' %}
+                {% else %}
+                    {% static 'images/profile/profile.png' %}
+                {% endif %}" align="middle" style="width: 400px; margin-top: 50px; margin-bottom: 50px;">
             </div>
         </div>
         <div class="col-md-7 col-sm-12 col-xs-12">
@@ -75,17 +82,21 @@
                     <td>{{ object.date_joined|date:"m/d/Y" }}</td>
                 </tr>
                 <tr>
-                    <td>Teacher</td>
-                    <td>{{ object.Is_Teacher }}</td>
+                    <td>Member Type</td>
+                    <td>
+                        {% if object.Is_CenterAdmin %}
+                            &nbsp;Admin
+                        {% endif %}
+                        {% if object.Is_Teacher %}
+                            &nbsp;Teacher
+                        {% endif %}
+                        {% if object.Is_Student %}
+                            &nbsp;Student
+                        {% endif %}
+
+                    </td>
                 </tr>
-                <tr>
-                    <td> Student</td>
-                    <td>{{ object.Is_Student }}</td>
-                </tr>
-                <tr>
-                    <td> Parent</td>
-                    <td>{{ object.Is_Parent }}</td>
-                </tr>
+
             </table>
         </div>
 

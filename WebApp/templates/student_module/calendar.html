@@ -8,6 +8,10 @@
     <link href="{% static 'vendorsx/fullcalendar/dist/fullcalendar.min.css' %}" rel='stylesheet'>
     <link href="{% static 'vendorsx/fullcalendar/dist/fullcalendar.print.css' %}" rel="stylesheet" media="print">
 {% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item active" aria-current="page">Calendar</li>
+{% endblock %}
+
 
 {% block content %}
     <div class="clearfix"></div>

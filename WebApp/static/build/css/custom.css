@@ -2871,18 +2871,19 @@ a.btn-success, a.btn-primary, a.btn-warning, a.btn-danger {
 
 .btn.btn-app {
     position: relative;
-    padding: 15px 5px;
-    margin: 0 0 10px 10px;
-    min-width: 80px;
-    height: 60px;
+    /* padding: 15px 5px; */
+    margin: -7px 0 -4px 0px;
+    min-width: 60px;
+    height: 50px;
     box-shadow: none;
     border-radius: 0;
     text-align: center;
     color: #666;
     border: 1px solid #ddd;
     background-color: #fafafa;
-    font-size: 12px
+    font-size: 12px;
 }
+
 
 .btn.btn-app > .fa, .btn.btn-app > .glyphicon, .btn.btn-app > .ion {
     font-size: 20px;
@@ -3515,8 +3516,23 @@ ul.messages li img.avatar, img.avatar {
     border-radius: 50%;
     padding: 2px;
     background: #f7f7f7;
-    border: 1px solid #e6e6e6
+    border: 1px solid #e6e6e6;
+    
 }
+                                      /* user-replies */
+ul.messages li img.image, img.image {
+    height: 50px;
+    width: 50px;
+    float: left;
+    display: inline-block;
+    border-radius: 50%;
+    padding: 2px;
+    background: #f7f7f7;
+    border: 1px solid #e6e6e6;
+    margin-top: -14px;
+    
+}
+
 
 ul.messages li .message_date {
     float: right;
@@ -5612,7 +5628,7 @@ article {
 
 #editButton {
     margin-top: 20px;
-    margin-left: 30%;
+
 }
 
 #changePW {
@@ -5667,14 +5683,17 @@ article {
 }
 
 #avatar {
-    padding-top: 10px;
+    padding-top: 5px;
     padding-left: 15px;
 }
 
 /*coursedetailpage made by rajav*/
 #buttons {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
+}
+#button.col-md-3.text-right{
+    margin-top: 15px;!important;
 }
 
 #tabs {
