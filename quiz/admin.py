@@ -1,7 +1,5 @@
 from django import forms
 from django.contrib import admin
-from django.contrib.admin.widgets import FilteredSelectMultiple
-from django.utils.translation import ugettext_lazy as _
 
 from .models import Quiz, Category, SubCategory, Progress, Answer, MCQuestion, TF_Question
 
@@ -17,11 +15,19 @@ class QuizAdminForm(forms.ModelForm):
     django-admin-interface-using-horizontal-filter-with-
     inline-manytomany-field
     """
-
     class Meta:
         model = Quiz
         exclude = []
 
+    def __init__(self, *args, **kwargs):
+        super(QuizAdminForm, self).__init__(*args, **kwargs)
+        if self.instance.pk:
+            print("this", self.instance.pk, Quiz.objects.get(pk=self.instance.pk))
+            self.fields['mcquestion'] = forms.ModelMultipleChoiceField(
+                queryset=Quiz.objects.get(pk=self.instance.pk).mcquestion,
+                required=False,
+
+            )
         # mcquestion = forms.ModelMultipleChoiceField(
         # queryset=MCQuestion.objects.all().select_subclasses(),
         # required=False,
@@ -52,30 +58,45 @@ class QuizAdminForm(forms.ModelForm):
 class QuizAdmin(admin.ModelAdmin):
     form = QuizAdminForm
 
-    #list_display = ('title', 'category', )
-    #list_filter = ('category',)
-    search_fields = ('description', 'category', )
+    add_form_template = 'quizadminformsaloni.html'
+
+    # list_display = ('title', 'category', )
+    # list_filter = ('category',)
+    search_fields = ('description', 'category',)
+
+    # def get_osm_info(self):
+    #     # ...
+    #     pass
+    #
+    # def change_view(self, request, object_id, form_url='', extra_context=None):
+    #     extra_context = extra_context or {}
+    #     extra_context['osm_data'] = self.get_osm_info()
+    #     return super(QuizAdmin, self).change_view(
+    #         request, object_id, form_url, extra_context=extra_context,
+    #     )
+
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    search_fields = ('category', )
+    search_fields = ('category',)
 
 
 class SubCategoryAdmin(admin.ModelAdmin):
-    search_fields = ('sub_category', )
-    #list_display = ('sub_category', 'category',)
-    #list_filter = ('category',)
+    search_fields = ('sub_category',)
+    # list_display = ('sub_category', 'category',)
+    # list_filter = ('category',)
 
 
 class MCQuestionAdmin(admin.ModelAdmin):
-    #list_display = ('content', 'category', )
-    #list_filter = ('category',)
+    # list_display = ('content', 'category', )
+    # list_filter = ('category',)
     fields = ('content', 'figure', 'explanation', 'answer_order')
 
     search_fields = ('content', 'explanation')
     # filter_horizontal = ('quiz',)
 
     inlines = [AnswerInline]
+    add_form_template = 'quizadminformsaloni.html'
 
 
 class ProgressAdmin(admin.ModelAdmin):
@@ -83,12 +104,12 @@ class ProgressAdmin(admin.ModelAdmin):
     to do:
             create a user section
     """
-    search_fields = ('user', 'score', )
+    search_fields = ('user', 'score',)
 
 
 class TFQuestionAdmin(admin.ModelAdmin):
-    #list_display = ('content', 'category', )
-    #list_filter = ('category',)
+    # list_display = ('content', 'category', )
+    # list_filter = ('category',)
     fields = ('content', 'figure', 'explanation', 'correct',)
 
     search_fields = ('content', 'explanation')
@@ -96,11 +117,12 @@ class TFQuestionAdmin(admin.ModelAdmin):
 
 
 class EssayQuestionAdmin(admin.ModelAdmin):
-    #list_display = ('content', 'category', )
-    #list_filter = ('category',)
-    fields = ('content', 'quiz', 'explanation', )
+    # list_display = ('content', 'category', )
+    # list_filter = ('category',)
+    fields = ('content', 'quiz', 'explanation',)
     search_fields = ('content', 'explanation')
     # filter_horizontal = ('quiz',)
+
 
 admin.site.register(Quiz, QuizAdmin)
 admin.site.register(Category, CategoryAdmin)
@@ -108,4 +130,3 @@ admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(MCQuestion, MCQuestionAdmin)
 admin.site.register(Progress, ProgressAdmin)
 admin.site.register(TF_Question, TFQuestionAdmin)
-
