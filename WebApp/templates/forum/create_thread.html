@@ -19,7 +19,7 @@
         <form method="post" action="{% url 'forum:create_thread' %}">
             {% csrf_token %}
 
-            <div class="x-title">
+            <div class=" x-title">
                 <h2 align="center">Create Thread</h2>
 
             </div>
@@ -69,7 +69,7 @@
 
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Text areas
+                    <h2>Description
 
                     </h2>
 
@@ -162,14 +162,12 @@
                     </div>
 
                     <div id="editor-one" class="editor-wrapper"></div>
-                    <div id="div_id_content_raw" class="form-group">
 
-                        <textarea name="content_raw" id="id_content_raw" class="textarea form-control"
-                            style="display:none;"></textarea>
-                    </div>
-
-
+                    <textarea name="content_raw" id="id_content_raw" style="display:none;"></textarea>
                 </div>
+
+
+
             </div>
 
             <div class="form-group">
@@ -177,10 +175,18 @@
                         id="submit-id-submit"></div>
             </div>
         </form>
-
-
     </div>
 
 
+
 </div>
+<script>
+    $('#submit-id-submit').click(function () {
+        $('#id_content_raw').val($('.editor-wrapper').html());
+    });
+</script>
+
+
+
+
 {% endblock %}

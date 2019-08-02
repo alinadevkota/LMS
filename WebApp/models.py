@@ -93,7 +93,7 @@ class MemberInfo(AbstractUser):
     # Member_Name = models.CharField(max_length=500, blank=True, null=True)
     Member_Permanent_Address = models.CharField(max_length=500, blank=True, null=True)
     Member_Temporary_Address = models.CharField(max_length=500, blank=True, null=True)
-    Member_BirthDate = models.DateField(blank=True, null=True)
+    Member_BirthDate = models.DateTimeField(blank=True, null=True)
     # Member_Email = models.CharField(max_length=150, blank=True, null=True)
     Member_Phone = models.CharField(max_length=150, blank=True, null=True)
     Member_Gender = models.CharField(max_length=150, blank=True, null=True)
@@ -248,6 +248,9 @@ class ChapterInfo(models.Model):
     def get_update_url(self):
         return reverse('chapterinfo_update', args=(self.pk,))
 
+    def __str__(self):
+        return self.Chapter_Name
+
 
 class ChapterContentsInfo(models.Model):
     # Fields
@@ -357,6 +360,9 @@ class HomeworkInfo(models.Model):
         'ChapterInfo',
         related_name="homeworkinfos", on_delete=models.DO_NOTHING
     )
+
+    def __str__(self):
+        return self.Homework_Topic
 
 
 class AssignHomeworkInfo(models.Model):

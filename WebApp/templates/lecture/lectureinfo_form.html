@@ -1,6 +1,17 @@
 {% load static %}
 {% load crispy_forms_tags %}
+{#<link rel="stylesheet" href="css/jquery.transfer.css">#}
+{#<link rel="stylesheet" href="icon_font/css/icon_font.css">#}
+<style>
+    .simple-rating i {
+        color: #f5ba00;
+        display: inline-block;
+        padding: 1px 5px;
+        cursor: pointer;
+        font-size: x-large;
+    }
 
+</style>
 
 <div class="headerDiv">
     <h2 class="infoFormHeader">
@@ -13,7 +24,7 @@
     <hr class="header_hr">
 </div>
 
-<form method="POST" id="FormID">
+<form method="POST" id="FormID" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         {{ form.Lecture_Name|as_crispy_field }}
@@ -33,7 +44,10 @@
         {{ form.Lecture_Cover_File|as_crispy_field }}
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        {{ form.Lecture_Level|as_crispy_field }}
+        <label for="id_Lecture_Level" class="control-label ">
+            Lecture Level
+        </label>
+        <input class="rating" id="id_Lecture_Level" type="hidden">
     </div>
 
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -65,5 +79,7 @@
         <button class="btn btn-success" type="submit">Submit</button>
     </div>
 
-
 </form>
+
+
+

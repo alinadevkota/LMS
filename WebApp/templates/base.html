@@ -77,10 +77,10 @@
 
             <div class="right_col" role="main">
 
-                <div class="page-title">
-
-
-                </div>
+                {#                <div class="page-title">#}
+                {##}
+                {##}
+                {#                </div>#}
                 <ol aria-label="breadcrumb" class="breadcrumb navClass">
                     <li class="breadcrumb-item"><a href="{% url 'start' %}">Home</a></li>
                     {% block breadcrumb %}
@@ -91,11 +91,13 @@
                     <!-- {{ content }} -->
                 {% endblock content %}
 
-            </div>
 
-            <!-- <div class="footer">
-                {% include "WebApp/theme/footer.html" %}
-            </div> -->
+            </div>
+            {% block footer %}
+                <footer>
+                    {% include "WebApp/theme/footer.html" %}
+                </footer>
+            {% endblock footer %}
         </div>
     </div>
 
