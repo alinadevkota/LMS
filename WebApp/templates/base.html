@@ -16,6 +16,7 @@
 
         <title>LMS {% block title %}{% endblock %}</title>
 
+        <link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon"/>
 
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 
@@ -159,7 +160,7 @@
     {% block customjss %}
 
     {% endblock %}
- <script src=" {% static 'build/js/custom.js' %}"></script>
+    <script src=" {% static 'build/js/custom.js' %}"></script>
 {% endblock body %}
 
 </body>
