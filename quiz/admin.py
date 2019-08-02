@@ -58,7 +58,7 @@ class QuizAdminForm(forms.ModelForm):
 class QuizAdmin(admin.ModelAdmin):
     form = QuizAdminForm
 
-    add_form_template = 'quizadminformsaloni.html'
+    add_form_template = 'admin_add_form.html'
 
     # list_display = ('title', 'category', )
     # list_filter = ('category',)
@@ -96,7 +96,7 @@ class MCQuestionAdmin(admin.ModelAdmin):
     # filter_horizontal = ('quiz',)
 
     inlines = [AnswerInline]
-    add_form_template = 'quizadminformsaloni.html'
+    add_form_template = 'admin_add_form.html'
 
 
 class ProgressAdmin(admin.ModelAdmin):
@@ -114,6 +114,7 @@ class TFQuestionAdmin(admin.ModelAdmin):
 
     search_fields = ('content', 'explanation')
     # filter_horizontal = ('quiz',)
+    add_form_template = 'admin_add_form.html'
 
 
 class EssayQuestionAdmin(admin.ModelAdmin):
@@ -122,6 +123,7 @@ class EssayQuestionAdmin(admin.ModelAdmin):
     fields = ('content', 'quiz', 'explanation',)
     search_fields = ('content', 'explanation')
     # filter_horizontal = ('quiz',)
+    add_form_template = 'admin_add_form.html'
 
 
 admin.site.register(Quiz, QuizAdmin)

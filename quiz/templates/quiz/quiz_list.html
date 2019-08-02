@@ -3,6 +3,13 @@
 {% block title %}{% trans "All Quizzes" %}{% endblock %}
 
 {% block content %}
+
+    {% block breadcrumb %}
+    <li class="breadcrumb-item active" aria-current="page">Quizzes
+    </li>
+{% endblock %}
+
+
 <h2>{% trans "List of quizzes" %}</h2>
     {% if quiz_list %}
 		<table class="table table-bordered table-striped">
