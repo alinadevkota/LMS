@@ -1,48 +1,137 @@
-{% extends "student_module/base.html" %}
+ {% extends "student_module/base.html" %}
 
 {% block title %}
     Quiz
-{% endblock %}
+{% endblock %} 
+
 
 {% block content %}
+  <!-- <ol class="breadcrumb navClass">
+      <li class="active">Home</li>
+  </ol> -->
+<div class="page_section"><h1>Quizz</h1></div>
 
-
-    <div class="page_section"><h1>Quizz</h1></div>
-    <div class="row">
-        <div class="col-lg-4 col-sm-6 col-xs-12">
-            <div class="panel panel-default paper-shadow">
-                <div class="panel-body">
-                    <h3>Compiler Design</h3>
-                    <a class="btn btn-info media-bottom" href="{% url 'quiz_question' %}">Attempt Quiz</a>
-                </div>
-
-            </div>
+    <div class="">
+        <div class="container">
+             <div class="row">
+                 
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                   
+                        <div class="box-part text-center">
+                            
+                            <i class="fa fa-cloud fa-3x" aria-hidden="true"></i>
+                            
+                            <div class="title">
+                                <h3>CLOUD</h3>
+                            </div>
+                            
+                            <div class="text">
+                                <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+                            </div>
+                            
+                            <a href="{% url 'quiz_question' %}">Try Quiz</a>
+                            
+                         </div>
+                    </div>	 
+                    
+                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                   
+                        <div class="box-part text-center">
+                            
+                            <i class="fa fa-html5 fa-3x" aria-hidden="true"></i>
+                        
+                            <div class="title">
+                                <h3>HTML</h3>
+                            </div>
+                            
+                            <div class="text">
+                                <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+                            </div>
+                            
+                            <a href="{% url 'quiz_question' %}">Try Quiz</a>
+                            
+                         </div>
+                    </div>	 
+                    
+                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                   
+                        <div class="box-part text-center">
+                            
+                            <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
+                            
+                            <div class="title">
+                                <h3>JAVA</h3>
+                            </div>
+                            
+                            <div class="text">
+                                <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+                            </div>
+                            
+                            <a href="{% url 'quiz_question' %}">Try Quiz</a>
+                            
+                         </div>
+                    </div>	 
+                    
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                   
+                        <div class="box-part text-center">
+                            
+                            <i class="fa fa-css3 fa-3x" aria-hidden="true"></i>
+                            
+                            <div class="title">
+                                <h3>CSS</h3>
+                            </div>
+                            
+                            <div class="text">
+                                <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+                            </div>
+                            
+                            <a href="{% url 'quiz_question' %}">Try Quiz</a>
+                            
+                         </div>
+                    </div>	 
+                    
+                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                   
+                        <div class="box-part text-center">
+                            
+                            <i class="fa fa-google-plus fa-3x" aria-hidden="true"></i>
+                        
+                            <div class="title">
+                                <h3>GOOGLE</h3>
+                            </div>
+                            
+                            <div class="text">
+                                <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+                            </div>
+                            
+                            <a href="{% url 'quiz_question' %}">Try Quiz</a>
+                            
+                         </div>
+                    </div>	 
+                    
+                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                   
+                        <div class="box-part text-center">
+                            
+                            <i class="fa fa-git fa-3x" aria-hidden="true"></i>
+                            
+                            <div class="title">
+                                <h3>GITHUB</h3>
+                            </div>
+                            
+                            <div class="text">
+                                <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+                            </div>
+                            
+                            <a href="{% url 'quiz_question' %}">Try Quiz</a>
+                            
+                         </div>
+                    </div>
+            
+            </div>		
         </div>
-        <div class="col-lg-4 col-sm-6 col-xs-12">
-            <div class="panel panel-default paper-shadow">
-                <div class="panel-body">
-                    <h3>Basics of HTML</h3>
-                    <a class="btn btn-info media-bottom" href="{% url 'quiz_question' %}">Attempt Quiz</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 col-xs-12">
-            <div class="panel panel-default paper-shadow">
-                <div class="panel-body">
-                    <h3>Human Computer Interaction</h3>
-                    <a class="btn btn-info media-bottom" href="{% url 'quiz_question' %}">Attempt Quiz</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 col-xs-12">
-            <div class="panel panel-default paper-shadow">
-                <div class="panel-body">
-                    <h3>Principles of Programming</h3>
-                    <a class="btn btn-info media-bottom" href="{% url 'quiz_question' %}">Attempt Quiz</a>
-                </div>
-            </div>
-        </div>
-
     </div>
+  
 
 {% endblock %}
