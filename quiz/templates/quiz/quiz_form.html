@@ -1,7 +1,7 @@
-
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{{ form.media }}
 {% block content %}
 
 
@@ -11,77 +11,23 @@
 
     {{ form.media }}
 
+            <a class="btn btn-primary" href="/mcquestion/create/" > Add MCQ question </a>
+            <a class="btn btn-primary" href="tfquestion/create/" > Add TF question </a>
+            <a class="btn btn-primary" href="#" > Add Essay question </a>
+
+
 <p><a class="btn btn-default" href="{% url 'quiz_create' %}">Create Quiz</a></p>
 <form method="post">
 {% csrf_token %}
 
 {{form|crispy}}
 
-<button type="button" class="btn btn-primary" id="nextButton">Next</button>
+<button class="btn btn-primary" type="submit">Submit</button>
+
+<a href="/q/mcquestion/create" pk = quiz.pk>Add MCQ</a>
 
 
-{#<button class="btn btn-primary" type="submit">Submit</button>#}
 </form>
-
-
-{##--------------------------------------------------------------------------------------------------------#}
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-
-<script>
-
-
-    $("#nextButton").click(function () {
-        var title = document.getElementById("id_title").value;
-        var description = document.getElementById("id_description").value;
-        var url = document.getElementById("id_url").value;
-        var random_order = document.getElementById("id_random_order").value;
-        var max_questions = document.getElementById("id_max_questions").value;
-        var answers_at_end = document.getElementById("id_answers_at_end").value;
-        var exam_paper = document.getElementById("id_exam_paper").value;
-        var single_attempt = document.getElementById("id_single_attempt").value;
-        var pass_mark = document.getElementById("id_pass_mark").value;
-        var success_text = document.getElementById("id_success_text").value;
-        var fail_text = document.getElementById("id_fail_text").value;
-
-        var data = {
-            "title": id_title,
-            "description": id_description,
-            "url": id_url,
-            "random_order": id_random_order,
-            "max_questions": id_max_questions,
-            "answers_at_end":id_answers_at_end,
-            "exam_paper": id_exam_paper,
-            "single_attempt": id_single_attempt,
-            "pass_mark": id_pass_mark,
-            "success_text": id_success_text,
-            "fail_text": id_fail_text,
-        }
-
-        $.ajax({
-            url: '/survey/api/v1/surveyinfo/',
-            type: 'POST',
-            data: data,
-            beforeSend: function (xhr, settings) {
-                xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
-            },
-            success: function (arg) {
-                alert("success");
-                //location.reload()
-            }
-        }).done(function (server_data) {
-            console.log(server_data)
-        }).fail(function (res) {
-            console.log(res);
-            console.log("failed");
-            alert("failed data entry");
-        });
-    });
-</script>
 {% endblock %}
 
 
-</body>
-</html>

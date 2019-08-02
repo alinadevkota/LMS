@@ -1,6 +1,9 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 
 from quiz import views
+from . import api
+
 
 try:
     from django.conf.urls import url
@@ -12,7 +15,19 @@ from .views import QuizListView, QuizCreateView, CategoriesListView, \
     QuizTake, MCQuestionCreateView, TFQuestionCreateView, MCQuestionUpdateView, TFQuestionUpdateView, \
     QuizDetailView, QuizUpdateView, QuizDeleteView, QuizMarkingList
 
-urlpatterns = [
+
+
+router = routers.DefaultRouter()
+router.register(r'quiz', api.QuizViewSet)
+router.register(r'mcquestion', api.MCQuestionViewSet)
+router.register(r'tfquestion', api.TFQuestionViewSet)
+router.register(r'answer', api.AnswerViewSet)
+
+
+urlpatterns = (
+    # urls for Django Rest Framework API
+    path('api/v1/', include(router.urls)),
+
 
     url(r'^$', view=QuizListView.as_view(), name='quiz_index'),
 
@@ -31,7 +46,7 @@ urlpatterns = [
     url(r'^(?P<slug>[\w-]+)/$', view=QuizDetailView.as_view(), name='quiz_start_page'),
 
     url(r'^(?P<quiz_name>[\w-]+)/take/$', view=QuizTake.as_view(), name='quiz_question'),
-]
+)
 
 urlpatterns += (
 
