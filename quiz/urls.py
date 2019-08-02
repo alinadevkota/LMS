@@ -13,9 +13,7 @@ except ImportError:
 from .views import QuizListView, QuizCreateView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, \
     QuizTake, MCQuestionCreateView, TFQuestionCreateView, MCQuestionUpdateView, TFQuestionUpdateView, \
-    QuizDetailView, QuizUpdateView, QuizDeleteView, QuizMarkingList
-
-
+    QuizDetailView, QuizUpdateView, QuizDeleteView, QuizMarkingList, QuizMarkingDetail
 
 router = routers.DefaultRouter()
 router.register(r'quiz', api.QuizViewSet)
@@ -40,7 +38,7 @@ urlpatterns = (
 
     url(r'^marking/$', view=QuizMarkingList.as_view(), name='quiz_marking'),
 
-    # url(r'^marking/(?P<pk>[\d.]+)/$', view=QuizMarkingDetail.as_view(), name='quiz_marking_detail'),
+    url(r'^marking/(?P<pk>[\d.]+)/$', view=QuizMarkingDetail.as_view(), name='quiz_marking_detail'),
 
     # passes variable 'quiz_name' to quiz_take view
     url(r'^(?P<slug>[\w-]+)/$', view=QuizDetailView.as_view(), name='quiz_start_page'),

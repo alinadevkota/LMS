@@ -335,8 +335,8 @@ class TF_Question(Question):
 
 @python_2_unicode_compatible
 class Quiz(models.Model):
-    mcquestion = models.ManyToManyField(MCQuestion)
-    tfquestion = models.ManyToManyField(TF_Question)
+    mcquestion = models.ManyToManyField(MCQuestion,verbose_name=_("Multiple Choice Question"))
+    tfquestion = models.ManyToManyField(TF_Question, verbose_name=_("True/False Question"))
 
     # start_time=
     title = models.CharField(
@@ -436,13 +436,10 @@ class Quiz(models.Model):
     def __str__(self):
         return self.title
 
-    # def question_set(self):
-    #     return Question.objects.filter(quiz = self.pk)
-
     def get_mcquestions(self):
         return self.mcquestion_set.all().select_subclasses()
 
-    def tfget_question(self):
+    def get_tfquestions(self):
         return self.tfquestion_set.all().select_subclasses()
 
     @property
@@ -507,10 +504,12 @@ class SittingManager(models.Manager):
         mcquestions = ",".join(map(str, mcquestion_set)) + ","
         tfquestions = ",".join(map(str, tfquestion_set)) + ","
 
+        questions = mcquestions + tfquestions
+
         new_sitting = self.create(user=user,
                                   quiz=quiz,
-                                  question_order=tfquestions + mcquestions,
-                                  question_list=tfquestions + mcquestions,
+                                  question_order=questions,
+                                  question_list=questions,
                                   incorrect_questions="",
                                   current_score=0,
                                   complete=False,
@@ -585,10 +584,6 @@ class Sitting(models.Model):
 
     end = models.DateTimeField(null=True, blank=True, verbose_name=_("End"))
 
-    # duration = models.DateTimeField(verbose_name=_("Duration"))
-    #
-    # duration = end - start
-
     objects = SittingManager()
 
     class Meta:
@@ -618,6 +613,13 @@ class Sitting(models.Model):
     def add_to_score(self, points):
         self.current_score += int(points)
         self.save()
+
+    # def get_mcquestions(self):
+    #     return self.quiz.mcquestion_set.all().select_subclasses()
+    #
+    # def get_tfquestions(self):
+    #     return self.quiz.tfquestion_set.all().select_subclasses()
+
 
     @property
     def get_current_score(self):
@@ -694,10 +696,15 @@ class Sitting(models.Model):
 
     def get_questions(self, with_answers=False):
         question_ids = self._question_ids()
-        questions = sorted(
-            self.quiz.mcquestion_set.filter(id__in=question_ids)
-                .select_subclasses(),
+        mcquestions = sorted(
+            self.quiz.mcquestion.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
+        tfquestions = sorted(
+            self.quiz.tfquestion.filter(id__in=question_ids),
+            key=lambda q: question_ids.index(q.id))
+        questions = mcquestions+ tfquestions
+        # print("__________________________********************************________________")
+        # print(self.quiz.question_set)
 
         if with_answers:
             user_answers = json.loads(self.user_answers)
@@ -709,7 +716,7 @@ class Sitting(models.Model):
     @property
     def questions_with_user_answers(self):
         return {
-            q: q.user_answer for q in self.get_questions(with_answers=True)
+            q: q.user_answer for q in self.get_mcquestions(with_answers=True)
         }
 
     @property
