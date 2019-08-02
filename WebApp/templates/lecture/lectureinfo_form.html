@@ -36,7 +36,7 @@
             </label>
             <div class="controls ">
                     <textarea name="Lecture_Description" cols="40" rows="1" id="id_Lecture_Description"
-                              class="textarea form-control"></textarea>
+                              class="textarea form-control">{{ object.Lecture_Description }}</textarea>
             </div>
         </div>
     </div>
@@ -47,7 +47,8 @@
         <label for="id_Lecture_Level" class="control-label ">
             Lecture Level
         </label>
-        <input class="rating" id="id_Lecture_Level" type="hidden">
+        <input class="rating" id="id_Lecture_Level" type="hidden" name="Lecture_Level"
+               value="{{ object.Lecture_Level }}">
     </div>
 
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -80,6 +81,15 @@
     </div>
 
 </form>
+<script>
+    {% if object.Lecture_Level %}
+
+        var rating = parseInt({{ object.Lecture_Level }});
+
+
+    {% endif %}
+
+</script>
 
 
 
