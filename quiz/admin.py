@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib import admin
+from django.contrib.admin.widgets import FilteredSelectMultiple
+from django.utils.translation import gettext as _
 
-from .models import Quiz, Category, SubCategory, Progress, Answer, MCQuestion, TF_Question
+from .models import Quiz, Category, SubCategory, Progress, Answer, MCQuestion, TF_Question, Essay_Question
 
 
 class AnswerInline(admin.TabularInline):
@@ -22,12 +24,21 @@ class QuizAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(QuizAdminForm, self).__init__(*args, **kwargs)
         if self.instance.pk:
-            print("this", self.instance.pk, Quiz.objects.get(pk=self.instance.pk))
+            # print("this", self.instance.pk, Quiz.objects.get(pk=self.instance.pk))
+
             self.fields['mcquestion'] = forms.ModelMultipleChoiceField(
                 queryset=Quiz.objects.get(pk=self.instance.pk).mcquestion,
                 required=False,
-
+                widget = FilteredSelectMultiple(verbose_name=_("Mcquestion"), is_stacked=False)
             )
+
+
+            #     quiz=forms.ModelMultipleChoiceField(
+            #         queryset=Quiz.objects.all(),
+            #         required=False,
+            #         # label=_("Questions"),
+            #         widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
+            # )
         # mcquestion = forms.ModelMultipleChoiceField(
         # queryset=MCQuestion.objects.all().select_subclasses(),
         # required=False,
@@ -59,6 +70,8 @@ class QuizAdmin(admin.ModelAdmin):
     form = QuizAdminForm
 
     add_form_template = 'admin_add_form.html'
+    change_form_template = 'admin_add_form.html'
+
 
     # list_display = ('title', 'category', )
     # list_filter = ('category',)
@@ -120,7 +133,7 @@ class TFQuestionAdmin(admin.ModelAdmin):
 class EssayQuestionAdmin(admin.ModelAdmin):
     # list_display = ('content', 'category', )
     # list_filter = ('category',)
-    fields = ('content', 'quiz', 'explanation',)
+    fields = ('content', 'explanation',)
     search_fields = ('content', 'explanation')
     # filter_horizontal = ('quiz',)
     add_form_template = 'admin_add_form.html'
@@ -132,3 +145,4 @@ admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(MCQuestion, MCQuestionAdmin)
 admin.site.register(Progress, ProgressAdmin)
 admin.site.register(TF_Question, TFQuestionAdmin)
+admin.site.register(Essay_Question, EssayQuestionAdmin)
