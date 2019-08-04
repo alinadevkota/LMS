@@ -333,10 +333,41 @@ class TF_Question(Question):
         return reverse('tfquestion_update', args=(self.pk,))
 
 
+#essay modelss___________________________________________________________
+class Essay_Question(Question):
+
+    def check_if_correct(self, guess):
+        return False
+
+    def get_answers(self):
+        return False
+
+    def get_answers_list(self):
+        return False
+
+    def answer_choice_to_string(self, guess):
+        return str(guess)
+
+    def __str__(self):
+        return self.content
+
+    class Meta:
+        verbose_name = _("Essay style question")
+        verbose_name_plural = _("Essay style questions")
+
+    def get_absolute_url(self):
+        return reverse('essayquestion_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('essayquestion_update', args=(self.pk,))
+
+
+
 @python_2_unicode_compatible
 class Quiz(models.Model):
     mcquestion = models.ManyToManyField(MCQuestion,verbose_name=_("Multiple Choice Question"))
     tfquestion = models.ManyToManyField(TF_Question, verbose_name=_("True/False Question"))
+    essayquestion = models.ManyToManyField(Essay_Question, verbose_name=_("Essay Type Question"))
 
     # start_time=
     title = models.CharField(
@@ -363,9 +394,9 @@ class Quiz(models.Model):
                     "a random order or as they "
                     "are set?"))
 
-    max_questions = models.PositiveIntegerField(
-        blank=True, null=True, verbose_name=_("Max Questions"),
-        help_text=_("Number of questions to be answered on each attempt."))
+    # max_questions = models.PositiveIntegerField(
+    #     blank=True, null=True, verbose_name=_("Max Questions"),
+    #     help_text=_("Number of questions to be answered on each attempt."))
 
     answers_at_end = models.BooleanField(
         blank=False, default=False,
@@ -437,14 +468,17 @@ class Quiz(models.Model):
         return self.title
 
     def get_mcquestions(self):
-        return self.mcquestion_set.all().select_subclasses()
+        return self.mcquestion_set.all()
 
     def get_tfquestions(self):
-        return self.tfquestion_set.all().select_subclasses()
+        return self.tfquestion_set.all()
+
+    def get_essayquestions(self):
+        return self.essayquestion_set.all()
 
     @property
     def get_max_score(self):
-        return self.get_mcquestions().count()+self.get_tfquestions().count()
+        return self.get_mcquestions().count()+self.get_tfquestions().count()+self.get_essayquestions().count()
 
     def anon_score_id(self):
         return str(self.id) + "_score"
@@ -485,26 +519,32 @@ class SittingManager(models.Manager):
         if quiz.random_order is True:
             mcquestion_set = quiz.mcquestion.all().order_by('?')
             tfquestion_set = quiz.tfquestion.all().order_by('?')
+            essayquestion_set = quiz.essayquestion.all().order_by('?')
         else:
             mcquestion_set = quiz.mcquestion.all()
             tfquestion_set = quiz.tfquestion.all()
+            essayquestion_set = quiz.essayquestion.all()
 
         mcquestion_set = [item.id for item in mcquestion_set]
         tfquestion_set = [item.id for item in tfquestion_set]
+        essayquestion_set = [item.id for item in essayquestion_set]
 
         if (len(mcquestion_set) == 0 or len(tfquestion_set) == 0):
             raise ImproperlyConfigured('Question set of the quiz is empty. '
                                        'Please configure questions properly')
 
-        if quiz.max_questions and quiz.max_questions < len(mcquestion_set):
-            mcquestion_set = mcquestion_set[:quiz.max_questions]
-        if quiz.max_questions and quiz.max_questions < len(tfquestion_set):
-            tfquestion_set = tfquestion_set[:quiz.max_questions]
+        # if quiz.max_questions and quiz.max_questions < len(mcquestion_set):
+        #     mcquestion_set = mcquestion_set[:quiz.max_questions]
+        # if quiz.max_questions and quiz.max_questions < len(tfquestion_set):
+        #     tfquestion_set = tfquestion_set[:quiz.max_questions]
+        # if quiz.max_questions and quiz.max_questions < len(essayquestion_set):
+        #     essayquestion_set = essayquestion_set[:quiz.max_questions]
 
         mcquestions = ",".join(map(str, mcquestion_set)) + ","
         tfquestions = ",".join(map(str, tfquestion_set)) + ","
+        essayquestions = ",".join(map(str, essayquestion_set)) + ","
 
-        questions = mcquestions + tfquestions
+        questions = mcquestions + tfquestions + essayquestions
 
         new_sitting = self.create(user=user,
                                   quiz=quiz,
@@ -614,13 +654,6 @@ class Sitting(models.Model):
         self.current_score += int(points)
         self.save()
 
-    # def get_mcquestions(self):
-    #     return self.quiz.mcquestion_set.all().select_subclasses()
-    #
-    # def get_tfquestions(self):
-    #     return self.quiz.tfquestion_set.all().select_subclasses()
-
-
     @property
     def get_current_score(self):
         return self.current_score
@@ -702,7 +735,10 @@ class Sitting(models.Model):
         tfquestions = sorted(
             self.quiz.tfquestion.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
-        questions = mcquestions+ tfquestions
+        essayquestions = sorted(
+            self.quiz.tfquestion.filter(id__in=question_ids),
+            key=lambda q: question_ids.index(q.id))
+        questions = mcquestions+ tfquestions+ essayquestions
         # print("__________________________********************************________________")
         # print(self.quiz.question_set)
 
@@ -716,7 +752,7 @@ class Sitting(models.Model):
     @property
     def questions_with_user_answers(self):
         return {
-            q: q.user_answer for q in self.get_mcquestions(with_answers=True)
+            q: q.user_answer for q in self.get_questions(with_answers=True)
         }
 
     @property

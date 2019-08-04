@@ -13,7 +13,8 @@ except ImportError:
 from .views import QuizListView, QuizCreateView, CategoriesListView, \
     ViewQuizListByCategory, QuizUserProgressView, \
     QuizTake, MCQuestionCreateView, TFQuestionCreateView, MCQuestionUpdateView, TFQuestionUpdateView, \
-    QuizDetailView, QuizUpdateView, QuizDeleteView, QuizMarkingList, QuizMarkingDetail
+    QuizDetailView, QuizUpdateView, QuizDeleteView, QuizMarkingList, QuizMarkingDetail, EssayQuestionCreateView, \
+    EssayQuestionUpdateView
 
 router = routers.DefaultRouter()
 router.register(r'quiz', api.QuizViewSet)
@@ -65,11 +66,11 @@ urlpatterns += (
     path('tfquestion/update/<int:pk>', TFQuestionUpdateView.as_view(), name='tfquestion_update'),
     path('tfquestion/detail/<int:pk>/', views.TFQuestionDetailView.as_view(), name='tfquestion_detail'),
     path('tfquestion/delete/<int:pk>/', views.TFQuestionDeleteView, name='tfquestion_delete'),
-#
-#     path('essayquestion/', views.EssayQuestionListView.as_view(), name='essayquestion_list'),
-#     # path('essayquestion/create/', EssayQuestionCreateView.as_view(), name='essayquestion_create'),
-#     # path('essayquestion/update/<int:pk>', EssayQuestionUpdateView.as_view(), name='essayquestion_update'),
-#     path('essayquestion/detail/<int:pk>/', views.EssayQuestionDetailView.as_view(), name='essayquestion_detail'),
-#     path('essayquestion/delete/<int:pk>/', views.EssayQuestionDeleteView, name='essayquestion_delete'),
-#
+
+    path('essayquestion/', views.EssayQuestionListView.as_view(), name='essayquestion_list'),
+    path('essayquestion/create/', EssayQuestionCreateView.as_view(), name='essayquestion_create'),
+    path('essayquestion/update/<int:pk>', EssayQuestionUpdateView.as_view(), name='essayquestion_update'),
+    path('essayquestion/detail/<int:pk>/', views.EssayQuestionDetailView.as_view(), name='essayquestion_detail'),
+    path('essayquestion/delete/<int:pk>/', views.EssayQuestionDeleteView, name='essayquestion_delete'),
+
 )

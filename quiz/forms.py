@@ -6,7 +6,7 @@ from django.utils.translation import gettext as _
 # from quiz import admin
 from django_addanother.widgets import AddAnotherWidgetWrapper
 
-from quiz.models import Quiz, MCQuestion, TF_Question
+from quiz.models import Quiz, MCQuestion, TF_Question, Essay_Question
 
 
 # class AnswerInline(admin.TabularInline):
@@ -59,6 +59,17 @@ class MCQuestionForm(forms.ModelForm):
 class TFQuestionForm(forms.ModelForm):
     class Meta:
         model = TF_Question
+        fields = '__all__'
+
+    quiz = forms.ModelMultipleChoiceField(
+        queryset=Quiz.objects.all(),
+        required=False,
+        # label=_("Questions"),
+        widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
+
+class EssayQuestionForm(forms.ModelForm):
+    class Meta:
+        model = Essay_Question
         fields = '__all__'
 
     quiz = forms.ModelMultipleChoiceField(
