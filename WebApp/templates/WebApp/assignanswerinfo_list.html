@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'qanswerinfo_list' %}">QAnswerInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'assignanswerinfo_list' %}">Assign Answer Listing</a></p>
 <table class="table">
 <tr>
 <td>ID</td><td>Link</td>
@@ -38,5 +38,5 @@
     <td>{{ object.udt_agent }}</td>
 </tr>
 {% endfor %}
-</table><a class="btn btn-primary" href="{% url 'qanswerinfo_create' %}">Create new QAnswerInfo</a>
+</table><a class="btn btn-primary" href="{% url 'assignanswerinfo_create' %}">Create new QAnswerInfo</a>
 {% endblock %}

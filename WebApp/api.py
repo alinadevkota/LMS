@@ -77,12 +77,12 @@ class InningInfoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class OmrQuestionInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the OmrQuestionInfo class"""
-
-    queryset = models.OmrQuestionInfo.objects.all()
-    serializer_class = serializers.OmrQuestionInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
+# class OmrQuestionInfoViewSet(viewsets.ModelViewSet):
+#     """ViewSet for the OmrQuestionInfo class"""
+#
+#     queryset = models.OmrQuestionInfo.objects.all()
+#     serializer_class = serializers.OmrQuestionInfoSerializer
+#     permission_classes = [permissions.IsAuthenticated]
 
 
 class QuizInfoViewSet(viewsets.ModelViewSet):
@@ -93,11 +93,11 @@ class QuizInfoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class AssignHomeworkInfoViewSet(viewsets.ModelViewSet):
+class AssignAssignmentInfoViewSet(viewsets.ModelViewSet):
     """ViewSet for the AssignHomeworkInfo class"""
 
-    queryset = models.AssignHomeworkInfo.objects.all()
-    serializer_class = serializers.AssignHomeworkInfoSerializer
+    queryset = models.AssignAssignmentInfo.objects.all()
+    serializer_class = serializers.AssignAssignmentInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -173,11 +173,11 @@ class GroupMappingViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class HomeworkInfoViewSet(viewsets.ModelViewSet):
+class AssignmentInfoViewSet(viewsets.ModelViewSet):
     """ViewSet for the HomeworkInfo class"""
 
-    queryset = models.HomeworkInfo.objects.all()
-    serializer_class = serializers.HomeworkInfoSerializer
+    queryset = models.AssignmentInfo.objects.all()
+    serializer_class = serializers.AssignmentInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -229,44 +229,44 @@ class MessageInfoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class OmrAnswerInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the OmrAnswerInfo class"""
+# class OmrAnswerInfoViewSet(viewsets.ModelViewSet):
+#     """ViewSet for the OmrAnswerInfo class"""
+#
+#     queryset = models.OmrAnswerInfo.objects.all()
+#     serializer_class = serializers.OmrAnswerInfoSerializer
+#     permission_classes = [permissions.IsAuthenticated]
 
-    queryset = models.OmrAnswerInfo.objects.all()
-    serializer_class = serializers.OmrAnswerInfoSerializer
+
+# class OmrAssignInfoViewSet(viewsets.ModelViewSet):
+#     """ViewSet for the OmrAssignInfo class"""
+#
+#     queryset = models.OmrAssignInfo.objects.all()
+#     serializer_class = serializers.OmrAssignInfoSerializer
+#     permission_classes = [permissions.IsAuthenticated]
+#
+#
+# class OmrExampleInfoViewSet(viewsets.ModelViewSet):
+#     """ViewSet for the OmrExampleInfo class"""
+#
+#     queryset = models.OmrExampleInfo.objects.all()
+#     serializer_class = serializers.OmrExampleInfoSerializer
+#     permission_classes = [permissions.IsAuthenticated]
+
+
+class AssignAnswerInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the AssignAnswerInfo class"""
+
+    queryset = models.AssignAnswerInfo.objects.all()
+    serializer_class = serializers.AssignAnswerInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
-class OmrAssignInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the OmrAssignInfo class"""
-
-    queryset = models.OmrAssignInfo.objects.all()
-    serializer_class = serializers.OmrAssignInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class OmrExampleInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the OmrExampleInfo class"""
-
-    queryset = models.OmrExampleInfo.objects.all()
-    serializer_class = serializers.OmrExampleInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class QAnswerInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the QAnswerInfo class"""
-
-    queryset = models.QAnswerInfo.objects.all()
-    serializer_class = serializers.QAnswerInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class QAnswerLogViewSet(viewsets.ModelViewSet):
-    """ViewSet for the QAnswerLog class"""
-
-    queryset = models.QAnswerLog.objects.all()
-    serializer_class = serializers.QAnswerLogSerializer
-    permission_classes = [permissions.IsAuthenticated]
+# class QAnswerLogViewSet(viewsets.ModelViewSet):
+#     """ViewSet for the QAnswerLog class"""
+#
+#     queryset = models.QAnswerLog.objects.all()
+#     serializer_class = serializers.QAnswerLogSerializer
+#     permission_classes = [permissions.IsAuthenticated]
 
 
 class QExampleInfoViewSet(viewsets.ModelViewSet):
