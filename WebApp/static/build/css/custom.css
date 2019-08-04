@@ -5731,9 +5731,6 @@ article {
     font-size: 25px;
 }
 
-.errorMessage {
-    font-size: medium;
-    color: red;
 
 
 
@@ -5825,6 +5822,9 @@ article {
 .quiz-breadcrumb{
     margin-top: 70px
 }
+.quiz-questions {
+  width: 100%!important;
+}
 .topic{
     text-align: center;
 }
@@ -5914,7 +5914,7 @@ input[type=checkbox], input[type=radio] {
     text-align: center
 }
 #nextquestions :hover{
-    color: white !important'
+    color: white !important;
 }
 .button, .greyButton {
     background-color: #2a3f54;
