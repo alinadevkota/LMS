@@ -5224,6 +5224,7 @@ $(function () {
 
 function Myfunctionbtn(event, obj) {
     event.preventDefault();
+<<<<<<< HEAD
 
     console.log(`options-${obj.id}`)
     var parentLi = $(`#options-${obj.id}`);
@@ -5238,6 +5239,11 @@ function Myfunctionbtn(event, obj) {
     <div style="display:flex;"><p style="margin-top: 10px; margin-right: 10px">${lastChildId}</p> 
     <input class="form-control" type="text" name="option" placeholder="option" style="margin-left: 5px;"></div>
     </li>`)
+=======
+    console.log(obj.id)
+    $("#options-" + obj.id).append(`<li id="optionlist" style="list-style:none; margin-left: 20px;">
+        <input class="form-control" type="text" id="optionid" name="options" placeholder="option "></li><br>`)
+>>>>>>> e4ee5cb7b9f3b7de3b2381329a6fe67ad7a67372
 }
 
 $(document).ready(function () {
@@ -5248,9 +5254,14 @@ $(document).ready(function () {
         var id1 = parseInt(count++)
         $("#mySelect").append(`
             <li id="question-${id1}">
+<<<<<<< HEAD
             <div style="display:flex;"><p style="margin-top: 35px; margin-right: 20px">${id1}</p>
             <input class="form-control" placeholder="Enter Questions here..." type="text" style="list-style:none; margin-top: 30px; " name="questions"></div>
              <label for="option" style="margin-top: 10px; margin-bottom: 10px;">Option:</label><button id="${id1} " onclick="Myfunctionbtn(event,this)" class="btn btn-success" style="margin-top:5px; margin-bottom: 10px;">+</button> 
+=======
+            <p>${id1}</p><input class="form-control" placeholder="Enter Questions here..." type="text" style="list-style:none; margin-top: 10px;" name="questions" id="questionid">
+             <label for="option">Option:</label> <button id="${id1} " onclick="Myfunctionbtn(event,this)" class="btn btn-success">+</button>
+>>>>>>> e4ee5cb7b9f3b7de3b2381329a6fe67ad7a67372
              </li><li id="options-${id1}" style="list-style:none;"></li>`)
 
     });
@@ -5294,4 +5305,57 @@ $(document).ready(function () {
         $("#short_que").show(200);
         $('#mcq_que').hide();
     });
+<<<<<<< HEAD
 });
+=======
+}); 
+
+// TIMER 
+/*
+to modify total time, just input on variable totaltime
+*/
+
+$(document).ready(function(){
+    $("#time").text().innerHTML=parseInt($('#quiz-timer').attr('data-timer'));
+})
+
+
+var totaltime =parseInt($('#quiz-timer').attr('data-timer'));
+var countdown = parseInt($('#quiz-timer').attr('data-timer'));
+
+function update(percent){
+  var deg;
+  if(percent<(totaltime/2)){
+    deg = 90 + (360*percent/totaltime);
+      $('.pie').css('background-image',
+                'linear-gradient('+deg+'deg, transparent 50%, white 50%),linear-gradient(90deg, white 50%, transparent 50%)'
+               );
+  } else if(percent>=(totaltime/2)){
+          deg = -90 + (360*percent/totaltime);
+          $('.pie').css('background-image',
+                'linear-gradient('+deg+'deg, transparent 50%, #4183D7 50%),linear-gradient(90deg, white 50%, transparent 50%)'
+               );
+          }
+}
+var count =0;
+
+cuentaAtras = setInterval(function () {
+  countdown--;
+  count+=1;
+  if (countdown<10){
+    $('#time').html(" &nbsp;" + countdown);  
+   
+  }else{
+    $('#time').html(countdown);   
+  }
+  update(count);
+  
+  if(count==totaltime){
+    count=0;
+    countdown=stop();
+    totaltime=stop();
+    
+  } 
+  
+}, 1000);
+>>>>>>> e4ee5cb7b9f3b7de3b2381329a6fe67ad7a67372

@@ -67,7 +67,8 @@
                                                data-target="#moderation-modal" data-pk="{{ thread.pk }}"
                                                data-action="open-thread"
                                                data-api-url="{% url 'forum:thread-detail' thread.pk %}">
-                                                <span class="btn btn-default btn-xs"> Open </span>
+                                                <span class="btn btn-info btn-xs"><i
+                                                        class="fa fa-close"></i> Open </span>
                                             </a>
                                         {% else %}
                                             <a href="#" class="moderate-action close-thread" data-toggle="modal"
@@ -75,26 +76,24 @@
                                                data-action="close-thread"
                                                data-api-url="{% url 'forum:thread-detail' thread.pk %}">
                                     <span class="btn btn-info btn-xs">
-                                        <i class="fa fa-close"></i> Close </span>
+                                        <i class="fa fa-folder-open-o"></i> Close </span>
                                             </a>
                                         {% endif %}
                                         {% if thread.hidden %}
                                             <a href="#" class="moderate-action hide-thread" data-toggle="modal"
-                                           data-target="#moderation-modal" data-pk="{{ thread.pk }}"
-                                           data-action="unhide-thread"
-                                           data-api-url="{% url 'forum:thread-detail' thread.pk %}">
-                                            <span class="btn btn-danger btn-xs"><i
-                                                    class="fa fa-eye-slash"></i> UnHide </span>
-                                        </a>
-                                            {% else %}
+                                               data-target="#moderation-modal" data-pk="{{ thread.pk }}"
+                                               data-action="unhide-thread"
+                                               data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+                                                <span class="btn btn-danger btn-xs"><i class="fa fa-eye-slash"></i> UnHide </span>
+                                            </a>
+                                        {% else %}
                                             <a href="#" class="moderate-action hide-thread" data-toggle="modal"
-                                           data-target="#moderation-modal" data-pk="{{ thread.pk }}"
-                                           data-action="hide-thread"
-                                           data-api-url="{% url 'forum:thread-detail' thread.pk %}">
-                                            <span class="btn btn-danger btn-xs"><i
-                                                    class="fa fa-eye-slash"></i> Hide </span>
-                                        </a>
-                                            {% endif %}
+                                               data-target="#moderation-modal" data-pk="{{ thread.pk }}"
+                                               data-action="hide-thread"
+                                               data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+                                                <span class="btn btn-danger btn-xs"><i class="fa fa-eye-slash"></i> Hide </span>
+                                            </a>
+                                        {% endif %}
 
                                     {% endif %}
                                 </div>
@@ -112,7 +111,8 @@
 
                                 <div class="byline">
                                     <span>{{ thread.pub_date }}</span> by <a
-                                        href="{% url 'forum:user_info' request.user.pk %}">{{ thread.user.username }}</a>
+                                        href="{% url 'forum:user_info' request.user.pk %}"
+                                        style="color:darkblue">{{ thread.user.username }}</a>
                                     |
                                     <span>{% blocktrans with view_count=thread.view_count %} <i class="fa fa-eye"></i>
                                         viewed
@@ -126,11 +126,12 @@
                                 </span>
                                 </div>
                                 <h5>
-                                    <p class="excerpt">{{ thread.content_rendered | safe }}
+                                    <p class="excerpt">{{ thread.content_raw|safe }}
                                 </h5>
                                 <ul class="list-group reply-list">
                                     {% for post in posts %}
                                         <li class="list-group-item reply-item">
+
                                             <div class="thread-meta row">
 
                                                 <div class="col-xs-9 col-sm-10">
@@ -146,44 +147,6 @@
                                                         </div>
 
 
-                                                        {% if request.user.is_superuser %}
-                                                            {% if not post.hidden %}
-                                                                <a href="#" class="moderate-action hide-reply"
-                                                                   data-toggle="modal"
-                                                                   data-target="#moderation-modal"
-                                                                   data-pk="{{ thread.pk }}"
-                                                                   data-action="hide-reply"
-                                                                   data-api-url="{% url 'forum:post-detail' post.pk %}">
-                                                                    <div class="hide_button">
-                                                                        <p class="moderation-links">
-
-                                                                        <span class="btn btn-danger btn-xs"><i
-                                                                                class="fa fa-eye-slash"></i> Hide </span>
-
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                            {% else %}
-                                                                <a href="#" class="moderate-action hide-reply"
-                                                                   data-toggle="modal"
-                                                                   data-target="#moderation-modal"
-                                                                   data-pk="{{ thread.pk }}"
-                                                                   data-action="unhide-reply"
-                                                                   data-api-url="{% url 'forum:post-detail' post.pk %}">
-                                                                    <div class="hide_button">
-                                                                        <p class="moderation-links">
-
-                                                                        <span class="btn btn-danger btn-xs"><i
-                                                                                class="fa fa-eye-slash"></i> UnHide </span>
-
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                            {% endif %}
-
-                                                        {% endif %}
-
-
                                                     </div>
 
 
@@ -195,11 +158,54 @@
 
                                                 </div>
                                             </div>
-
+                                        <div class="left">
                                             <p class="reply-link">
                                                 <a href="#" data-username="{{ post.user.username }}"
-                                                   class="reply-to">{% trans "Reply" %}</a>
+                                                   class="reply-to"
+                                                   style="color: darkblue">{% trans "Reply" %}</a>
                                             </p>
+                                        </div>
+                                            <div class="top_button">
+
+                                                {% if request.user.is_superuser %}
+                                                    {% if not post.hidden %}
+
+                                                        <a href="#" class="moderate-action hide-reply"
+                                                           data-toggle="modal"
+                                                           data-target="#moderation-modal" data-pk="{{ thread.pk }}"
+                                                           data-action="hide-reply"
+                                                           data-api-url="{% url 'forum:post-detail' post.pk %}">
+                                                            <div class="hide_button">
+                                                                <p class="moderation-links">
+
+                                                            <span class="btn btn-danger btn-xs"><i
+                                                                    class="fa fa-eye-slash"></i> Hide </span>
+
+                                                                </p>
+                                                            </div>
+                                                        </a>
+
+                                                    {% else %}
+
+                                                        <a href="#" class="moderate-action hide-reply"
+                                                           data-toggle="modal"
+                                                           data-target="#moderation-modal" data-pk="{{ thread.pk }}"
+                                                           data-action="unhide-reply"
+                                                           data-api-url="{% url 'forum:post-detail' post.pk %}">
+                                                            <div class="hide_button">
+                                                                <p class="moderation-links">
+
+                                                            <span class="btn btn-danger btn-xs"><i
+                                                                    class="fa fa-eye-slash"></i> UnHide </span>
+
+                                                                </p>
+                                                            </div>
+                                                        </a>
+
+                                                    {% endif %}
+
+                                                {% endif %}
+                                            </div>
 
                                         </li>
                                     {% endfor %}
@@ -211,10 +217,11 @@
                                     <h2>Your Comments</h2>
                                     <div class="btn-group">
 
-                                        <div class="controls"> <textarea name="content_raw" id="id_content_raw"
-                                                                         class="textarea form-control" rows="4"
-                                                                         cols="80" required=""
-                                                                         placeholder="Write your comment here"></textarea>
+                                        <div class="form-group col-md-12"> <textarea name="content_raw"
+                                                                                     id="id_content_raw"
+                                                                                     class="textarea form-control"
+                                                                                     rows="4" cols="80" required=""
+                                                                                     placeholder="Write your comment here"></textarea>
 
                                         </div>
                                         <br>
@@ -225,6 +232,7 @@
 
 
                                         </div>
+
                                     </div>
 
                                 </form>

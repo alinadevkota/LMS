@@ -180,7 +180,7 @@
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-6">
-                                <form>
+                                <form id="outerform">
                                     {% csrf_token %}
                                     <div class="row">
                                         <div class="label_inputs">
@@ -195,17 +195,32 @@
                                                       aria-hidden="true"></span>
                                             </div>
                                             <div class="form-group " id="chooseSession" style="display: none;">
-                                                <label for="inputState">Choose Session</label>
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>Choose...</option>
-                                                    <option>...</option>
+                                                <label for="inputState">Session</label>
+                                                {#                                                <select id="inputState" class="form-control">#}
+                                                {#                                                    <option selected>Choose...</option>#}
+                                                {#                                                    <option>...</option>#}
+                                                {#                                                </select>#}
+                                                <select name="session" id="id_session" required="required"
+                                                        class="select form-control">
+                                                    <option value="" selected="">----</option>
+                                                    {% for c in sessions %}
+                                                        <option value="{{ c.id|capfirst }}">{{ c.Inning_Name|capfirst }}</option>
+                                                    {% endfor %}
+
+
                                                 </select>
+
                                             </div>
                                             <div class="form-group " id="chooseCourse" style="display: none;">
-                                                <label for="inputState">Choose Course</label>
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>Choose...</option>
-                                                    <option>...</option>
+                                                <label for="inputState">Course</label>
+                                                <select name="session" id="id_course" required="required"
+                                                        class="select form-control">
+                                                    <option value="" selected="">----</option>
+                                                    {% for l in courses %}
+                                                        <option value="{{ l.id|capfirst }}">{{ l.Lecture_Name|capfirst }}</option>
+                                                    {% endfor %}
+
+
                                                 </select>
                                             </div>
                                             <div class="form-group has-feedback">
@@ -258,7 +273,7 @@
                                             <button type="button" class="btn btn-primary" id="nextButton">Next</button>
 
 
-                                            <div class="selectQuestionType" style="display: none;">
+                                            <div class="selectQuestionType" style=" display: none;">
                                                 <div class="btn-group" id="switchButtons" data-toggle="buttons">
                                                     <label class="mcq_question btn btn-default btn-on btn-md active">
                                                         <input type="radio" value="1"
@@ -283,9 +298,9 @@
                                                             <ul id="mySelect" style="list-style: none;">
                                                             </ul>
                                                         </div>
-                                                        <a href="">
-                                                            <div class="btn btn-info">Save</div>
-                                                        </a>
+
+                                                        <div class="btn btn-info" id="save-btn">Save</div>
+
                                                         <a href="">
                                                             <div class="btn btn-primary">Save As New</div>
                                                         </a>
@@ -303,9 +318,9 @@
                                                                 <ul id="short_que_add" style="list-style: none;">
                                                                 </ul>
                                                             </div>
-                                                            <a href="">
-                                                                <div class="btn btn-info">Save</div>
-                                                            </a>
+
+                                                            <div class="btn btn-info">Save</div>
+
                                                             <a href="">
                                                                 <div class="btn btn-primary">Save As New</div>
                                                             </a>
@@ -334,50 +349,28 @@
 
         $("#nextButton").click(function () {
             var title = document.getElementById("id_title").value;
-            var name = document.getElementById("id_name").value;
             var start_date = document.getElementById("Start_date").value;
             var end_date = document.getElementById("id_End_date").value;
-            var survey_cover = document.getElementById("id_Survery_Cover").value;
-            {#var use_flag=document.getElementById("id_Use_Flag").value;#}
+            var session_index = document.getElementById("id_session");
+            var Session_Code = session_index.options[session_index.selectedIndex].value;
+            var course_index = document.getElementById("id_course");
+            var Course_Code = course_index.options[course_index.selectedIndex].value;
+            console.log(Course_Code + "subject");
+            console.log(Session_Code + "session");
 
             var data = {
                 "Survey_Title": title,
                 "Start_Date": start_date,
                 "End_Date": end_date,
-                "Survey_Cover": survey_cover,
+                "Survey_Cover": null,
                 "Use_Flag": 'True',
                 "Added_By": '{{ user.id }}',
                 "Category_Code": null,
-                "Assigned_To": null
+                "Assigned_To": Session_Code,
+                "Lecture_Code": Course_Code,
 
             }
-            {#var token_survey = document.getElementsByName("csrfmiddlewaretoken").input.value;#}
-            {#token={% csrf_token %}.value;#}
-            {#    console.log(token)#}
-            {#    console.log(token_survey);#}
-            {#var token =  $('input[name="csrfToken"]').attr('value')#}
-            {#    $.ajaxSetup({#}
-            {#        beforeSend: function(xhr) {#}
-            {#            xhr.setRequestHeader('Csrf-Token', token);#}
-            {#        }#}
-            {#    });#}
-            {#console.log(token);#}
-            {#    var token = Cookies.get('csrftoken');#}
-            {#    console.log(token)#}
-            {#    $.ajax({#}
-            {#        method: 'post',#}
-            {#        datatype: 'json',#}
-            {#        headers: {#}
-            {#            'Accept': 'application/json, text/plain, */*',#}
-            {#            'Content-Type': 'application/json',#}
-            {#            'Authorization': 'd2d4c2fb1d3a353fcd36015be792ba510e532055',#}
-            {#        },#}
-            {#        url: '/survey/api/v1/surveyinfo/',#}
-            {#        body: JSON.stringify({data: data})#}
-            {#    }).then(res => console.log(res))#}
-            {#        .then(res => console.log(res));#}
-            {##}
-            //{#});#}
+
             $.ajax({
                 url: '/survey/api/v1/surveyinfo/',
                 type: 'POST',
@@ -386,28 +379,52 @@
                     xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
                 },
                 success: function (arg) {
-                    alert("hahahah");
-                    //location.reload()
+                    // alert("data entry success" + Session_Code + " " + Course_Code);
                 }
             }).done(function (server_data) {
                 console.log(server_data)
             }).fail(function (res) {
                 console.log(res);
-                console.log("failed")
+                console.log("failed");
+                alert('data entry failed');
             });
-        });
 
-        {#        function csrfSafeMethod(method) {#}
-        {#// these HTTP methods do not require CSRF protection#}
-        {#            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));#}
-        {#        }#}
-        {##}
-        {#        $.ajaxSetup({#}
-        {#            beforeSend: function (xhr, settings) {#}
-        {#                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {#}
-        {#                    xhr.setRequestHeader("X-CSRFToken", csrftoken);#}
-        {#                }#}
-        {#            }#}
-        {#        });#}
+
+        });
+        $("#save-btn").click(function () {
+            q = document.querySelectorAll('[id^="options-"]');
+            {#var dates = document.querySelectorAll('[id^="options-"]');#}
+            q.forEach(function (e, i) {
+
+                var elm = document.getElementById(e.id).querySelectorAll('[id="optionid"]');
+                var q_id=e.id[e.id.length - 1];
+                var question_content;
+
+                var questioncontainer = document.querySelectorAll('[id="question-'+q_id+'"]');
+                //console.log(question);
+                questioncontainer.forEach(function (que,index) {
+                    var question = document.getElementById(que.id).querySelectorAll('[id="questionid"]');
+                    question.forEach(function (ques,i) {
+                        question_content=ques.value;
+                    });
+                });
+
+
+                // use ajax to post question here
+                console.log(question_content);
+
+
+
+
+                elm.forEach(function (elem, i) {
+
+                    //use ajax to post options here
+                    console.log(elem.value,question_content);
+
+                });
+            });
+
+
+        });
     </script>
 {% endblock %}

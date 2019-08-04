@@ -1,150 +1,238 @@
-{% extends "student_module/base.html" %}
+{% extends "student_module/base.html"%}
+{% load static %}
 {% block title %}
-    MyCourses
+CourseDetail
 {% endblock %}
 
 {% block content %}
-    <div class="right_col" role="main">
-        <div class="page_section"><h1>My Courses</h1></div>
-        <div class="row">
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                    <div class=" dashboard_graph boxShadow">
-                        <div>
-                            <a href="{% url 'course_detail' %}">
-                                <div class="courseimagediv">
-                                    <img src="https://picsum.photos/id/5/500/300?image=7" class="img-responsive courseimage">
-                                    <div class="middle">
-                                        <div class="coursetext">Join</div>
-                                    </div>
-                                </div>
 
-                            </a>
-                            <div class="courseextend" style="padding-left: 20px;padding-right:10px;"
-                                data-toggle="collapse" data-target="#description2">
-                                <h2>Intermediate Reactjs</h2>
-                                <div class="courseDetailStyle">
-                                    <div class="">
-                                        <p class="" style="color: #f9a825">
-                                            <span class="fa fa-fw fa-star "></span>
-                                            <span class="fa fa-fw fa-star "></span>
-                                            <span class="fa fa-fw fa-star "></span>
-                                            <span class="fa fa-fw fa-star-o "></span>
-                                            <span class="fa fa-fw fa-star-o "></span>
-                                        </p>
-                                    </div>
-                                    <div>
-                                        6 hours
-                                    </div>
-                                </div>
-                                 <div class="courseDetailStyle">
-                                    <div class="progress" style="height:6px;width: 60%;margin-top: 20px">
-                                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="70"
-                                             aria-valuemax="100" aria-valuemin="0" style="width:20%">
-                                        </div>
-                                    </div>
-                                    <div style="padding-left: 10px">14%</div>
-                                </div>
-                            </div>
-                            <div class="collapse" id="description2" style="padding-left: 20px;padding-right: 20px;
-                                    border-top: 1px solid lightgrey">
-                                <h5 class="card-text text-justify">Some quick example
-                                    text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </h5>
-                                <div>
-                                    <div style="display: flex;flex-direction: row;padding-left: 20px">
-                                        <img src="/static/images/suted.jpg" class="profile_img img-responsive"
+
+    <div class="right_col " role="main">
+        <div class="container-fluid">
+            <div style="margin-bottom: 20px">
+                <div class="row" style=" color: white;background-color:#2A3F54;margin-bottom: 30px; margin-top: 60px; padding-left: 15px">
+                    <h1 class="courseHeader">{{ Course.Lecture_Name|safe }} </h1>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                        <img class="img-responsive" src="{% static 'images/react.jpg' %}" alt="courseImage">
+                        <div class="courseDetailStyle1 row" style="margin: 20px">
+                            <div class="col-lg-4" style="border-right: 1px solid lightgrey;display: flex;flex-direction: row;">
+
+
+                                <img src="/media/{{ Course.Teacher_Code.Member_Avatar }}"
+                                     class="profile_img img-responsive"
                                              style="height: 50px;width: 50px;">
-                                        <div style="padding-left: 10px;font-size: 15px;">
-                                            <ul class="list-unstyled">
-                                                <li>
-                                                    Instructor
-                                                </li>
-                                                <li style="font-weight: bold;color: black;">
-                                                    Shyam Paudel
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                <div style="padding-left: 10px;font-size: 15px;">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            Instructor
+                                        </li>
+                                        <li style="font-weight: bold;color: black;">
+                                            {{ Course.Teacher_Code }}
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
+                            <div class="col-lg-4" style=" border-right: 1px solid lightgrey;">
+                                <div style="font-size: 15px"> Reviews: </div>
+                                <span style="color: lightskyblue;">
+	            		            <i class="fa fa-star" aria-hidden="false"></i>
+	            		            <i class="fa fa-star" aria-hidden="true"></i>
+	            		            <i class="fa fa-star" aria-hidden="true"></i>
+	            		            <i class="fa fa-star" aria-hidden="true"></i>
+	            		            <i class="fa fa-star" aria-hidden="true"></i>
+	            			    </span>
+                            </div>
+                            <div class="col-lg-4" style="font-size: 15px">
+                                <i class="fa fa-comment-o"></i>
+                                <a href="">FORUM</a>
 
+                            </div>
                         </div>
                     </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                    <div class=" dashboard_graph boxShadow">
-                        <div class="" style="">
-                            <a href="{% url 'course_detail' %}">
-                                <div class="courseimagediv">
-                                    <img src="https://picsum.photos/id/5/500/300" class=" img-responsive courseimage">
-                                    <div class="middle">
-                                        <div class="coursetext">Join</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="courseextend" style="padding-left: 20px;padding-right:10px;"
-                                data-toggle="collapse" data-target="#description3">
-                                <h2>Computer Vision</h2>
-                                <div class="courseDetailStyle">
-                                    <div class="">
-                                        <p class="" style="color: #f9a825">
-                                            <span class="fa fa-fw fa-star "></span>
-                                            <span class="fa fa-fw fa-star "></span>
-                                            <span class="fa fa-fw fa-star "></span>
-                                            <span class="fa fa-fw fa-star-o "></span>
-                                            <span class="fa fa-fw fa-star-o "></span>
-                                        </p>
-                                    </div>
-                                    <div>
-                                        6 hours
-                                    </div>
-                                </div>
-                                 <div class="courseDetailStyle">
-                                    <div class="progress" style="height:6px;width: 60%;margin-top: 20px">
-                                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="70"
-                                             aria-valuemax="100" aria-valuemin="0" style="width:20%">
-                                        </div>
-                                    </div>
-                                    <div style="padding-left: 10px">14%</div>
-                                </div>
-                            </div>
-                            <div class="collapse" id="description3" style="padding-left: 20px;padding-right: 20px;
-                                    border-top: 1px solid lightgrey">
-                                <h5 class="card-text text-justify">Some quick example
-                                    text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </h5>
-                                <div>
-                                    <div style="display: flex;flex-direction: row;padding-left: 20px">
-                                        <img src="/static/images/suted.jpg" class="profile_img img-responsive"
-                                             style="height: 50px;width: 50px;">
-                                        <div style="padding-left: 10px;font-size: 15px;">
-                                            <ul class="list-unstyled">
-                                                <li>
-                                                    Instructor
-                                                </li>
-                                                <li style="font-weight: bold;color: black;">
-                                                    Shyam Paudel
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class=" dashboard_graph col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="text-display-1" style="padding: 10px ">COURSE INFO</div>
+                            <div class="" >
+                                <ol class="list-unstyled" style="padding: 20px;">
+                                    <li>
+                                        <i class="fa fa-clock-o" style="padding-right: 10px; color: #2A3F54"></i>
+                                        Duration:
+                                    </li>
 
+                                    <hr>
+                                    <li class="">
+                                        <i class="fa fa-book" style="padding-right: 10px;color: #2A3F54"></i>
+                                        Chapters:
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <i class="fa fa-question" style="padding-right: 10px; color: #2A3F54"></i>
+                                        Quizzes:
+                                    </li>
+
+                                    <hr>
+                                    <li>
+                                        <i class="fa fa-user" style="padding-right: 10px; color: #2A3F54"></i>
+                                        Students Enrolled:
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <i class="fa fa-certificate" style="padding-right: 10px; color: #2A3F54"></i>
+                                        Certificate:
+                                    </li>
+
+                                </ol>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+
+            <div class="row" >
+                <div class="" style="padding: 10px;">
+                    <h2 class="text-display-1" style="margin-bottom: 20px">COURSE DESCRIPTION</h2>
+                    <p>{{ Course.Lecture_Description }}
+                    </p>
+                </div>
+
+
+            </div>
+            <hr>
+
+            <ol class="list-unstyled">
+                <h2 class="text-display-1" style="margin-bottom: 20px">CURRICULUM</h2>
+                <li>
+                    <div class="panel boxShadow" >
+                              <div class="panel-body" style="padding: 30px">
+                                <div class="courseDetailStyle lectureList" data-toggle="collapse"
+                                     data-display-toggle="tooltip" title="Extend" data-target="#chapteronelectures">
+                                    <h5 style="color: black">CHAPTER 1</h5>
+                                    <i class="fa fa-caret-down" style="font-size: 25px" data-toggle="collapse"
+                                       data-target="#lectures"></i>
+                                </div>
+
+                                <h2 style="color:black;font-weight: bold">The component Lifecycle</h2>
+                                <p class="courseTextColor">React has been designed from the start for gradual adoption, and you can use as
+                                little or as much React as you need. Whether you want to get a taste of React, add some interactivity
+                                to a simple HTML page, or start a complex React-powered app, the links in this section will help you
+                                get started. </p>
+                                <div class="collapse" id="chapteronelectures" >
+                                    <ol class="list-group">
+                                        <li class="list-group-item lectures">
+                                            Introduction
+                                            <a href="#"></a>
+                                        </li>
+                                        <li class="list-group-item lectures">
+                                            React JSX
+                                        </li>
+                                        <li class="list-group-item lectures">
+                                            Playing with React Component
+                                        </li>
+
+                                    </ol>
+                                </div>
+                                <button type="button" style="width:100px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
+                                margin-top: 20px;margin-bottom: 10px;">CONTINUE <i class="fa fa-arrow-right"></i></button>
+
+                                <hr>
+                                <div class="courseDetailStyle">
+                                    <div class="courseDetailStyle">
+                                         <div class="progress progress-mini width-100 margin-none">
+                                             <div class="progress-bar progress-bar-success" role="progressbar"
+                                                             aria-valuenow="13" aria-valuemin="0" aria-valuemax="100"
+                                                             style="width: 13%">
+                                             </div>
+                                        </div>
+                                        <div style="padding-left: 10px">13 %</div>
+                                    </div>
+
+                                    <div>1 hour 45 minutes</div>
+                                </div>
+                            </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="panel boxShadow" >
+                        <div class="panel-body" style="padding: 30px">
+                            <div class="courseDetailStyle lectureList" data-toggle="collapse" data-target="#lectures">
+                                <h5 style="color: black">CHAPTER 2</h5>
+                                <i class="fa fa-caret-down" style="font-size: 25px" data-toggle="collapse" data-target="#lectures"></i>
+                            </div>
+                            <h2 style="color:black;font-weight: bold">The component Lifecycle</h2>
+                            <p class="courseTextColor">React has been designed from the start for gradual adoption, and you can use as
+                            little or as much React as you need. Whether you want to get a taste of React, add some interactivity
+                            to a simple HTML page, or start a complex React-powered app, the links in this section will help you
+                            get started.</p>
+                             <button type="button" style="width:70px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
+                            margin-top: 20px;margin-bottom: 10px;">START <i class="fa fa-arrow-right"></i></button>
+                            <hr>
+                           <div class="courseDetailStyle">
+                                <div class="courseDetailStyle">
+                                     <div class="progress progress-mini width-100 margin-none">
+                                         <div class="progress-bar progress-bar-success" role="progressbar"
+                                                         aria-valuenow="13" aria-valuemin="0" aria-valuemax="100"
+                                                         style="">
+                                         </div>
+                                    </div>
+                                    <div style="padding-left: 10px">NOT STARTED</div>
+                                </div>
+
+                                <div>2 hours</div>
+                            </div>
                         </div>
                     </div>
-            </div>
+                </li>
+
+                <li>
+                    <div class="panel boxShadow" >
+                        <div class="panel-body" style="padding: 30px">
+                            <div class="courseDetailStyle lectureList" data-toggle="collapse" data-target="#lectures">
+                                <h5 style="color: black">CHAPTER 3</h5>
+                                <i class="fa fa-caret-down" style="font-size: 25px" data-toggle="collapse" data-target="#lectures"></i>
+                            </div>
+                            <h2 style="color:black;font-weight: bold">The component Lifecycle</h2>
+                            <p class="courseTextColor">React has been designed from the start for gradual adoption, and you can use as
+                            little or as much React as you need. Whether you want to get a taste of React, add some interactivity
+                            to a simple HTML page, or start a complex React-powered app, the links in this section will help you
+                            get started.</p>
+                             <button type="button" style="width:70px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
+                            margin-top: 20px;margin-bottom: 10px;">START <i class="fa fa-arrow-right"></i></button>
+                             <hr>
+                            <div class="courseDetailStyle" >
+                                <div class="courseDetailStyle">
+                                     <div class="progress progress-mini width-100 margin-none">
+                                         <div class="progress-bar progress-bar-success" role="progressbar"
+                                                         aria-valuenow="13" aria-valuemin="0" aria-valuemax="100"
+                                                         style="">
+                                         </div>
+                                    </div>
+                                    <div style="padding-left: 10px">NOT STARTED</div>
+                                </div>
+
+                                <div>1 hour 45 minutes</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ol>
 
 
         </div>
         <ul class="pagination">
-            <li class="disabled"><a href="#"><<</a></li>
+            <li class="disabled"><a href="#"></a></li>
             <li class="active"><a href="#">1</a></li>
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
             <li><a href="#">>></a></li>
         </ul>
     </div>
+
+
+
+
 {% endblock %}
