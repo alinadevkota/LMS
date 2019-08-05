@@ -48550,6 +48550,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   flex-direction:row;
   justify-content:flex-start;
   align-items:center;
+  margin-top: -14px;
   
 }
 
@@ -48568,16 +48569,25 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 }
 .reply-content-detail{
   margin-left:10px;
+  margin-top: 38px;
+  font-size: 20px;
+  font-style: bold;
+  
 }
 
-.chat-reply{
+/* .chat-reply{
     width:100%;
    display:flex;
     padding:4px;
     justify-content:flex-start;
     align-items:flex-start;
     margin-top:10px;
-    font-weight:300;
+    font-weight:300; */
+}
+
+.chat_reply{
+  margin-left:10px;
+  margin-top: 20px;
 }
 
 .top_button{
@@ -48665,4 +48675,21 @@ padding-left: 60px;
 .topic_header{
   margin-bottom: -8px;
   
+}
+
+
+.thread_answer{
+  padding-bottom: 40px;
+  font-style: italic;
+}
+
+.thread_replies{
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.8em;
+    color: #009999;
+}
+.thread_date{
+    margin-top: -35px;
+    margin-right: -90px;
 }
