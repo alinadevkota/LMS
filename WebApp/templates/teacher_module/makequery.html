@@ -34,7 +34,7 @@
             </div>
         </div>
 
-      <!--  <div class="col-sm-9" id="test">
+        <div class="col-sm-9" id="test">
             <div class="hR"></div>
             <div class="row" id="rowCards">
                 <div class="col-xs-12 col-sm-12 col-md-4">
@@ -142,7 +142,6 @@
             </div>
 
         </div>
-        -->
         <div class="col-xs-12 col-sm-12 col-md-3">
             <div class="categoryContainer">
                 <div class="card" style="width: 20rem; height: 30rem;">
@@ -185,7 +184,6 @@
                                     {% csrf_token %}
                                     <div class="row">
                                         <div class="label_inputs">
-                                            <div id="HideOnNext">
                                             <div class="form-group has-feedback">
                                                 <label for="id_Title" class="control-label ">
                                                     Title
@@ -273,9 +271,9 @@
                                                    name="Use_Flag"><br>
 
                                             <button type="button" class="btn btn-primary" id="nextButton">Next</button>
-                                            </div>
 
-                                            <div class="selectQuestionType" style="display: none;">
+
+                                            <div class="selectQuestionType" style=" display: none;">
                                                 <div class="btn-group" id="switchButtons" data-toggle="buttons">
                                                     <label class="mcq_question btn btn-default btn-on btn-md active">
                                                         <input type="radio" value="1"
@@ -381,8 +379,7 @@
                     xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
                 },
                 success: function (arg) {
-                    document.getElementById('HideOnNext').style.display ='none';
-                    alert("data entry success" + Session_Code + " " + Course_Code);
+                    // alert("data entry success" + Session_Code + " " + Course_Code);
                 }
             }).done(function (server_data) {
                 console.log(server_data)
@@ -394,16 +391,40 @@
 
 
         });
-        {#$("#save-btn").click(function () {#}
-        {#    q=document.getElementById('outerform').querySelectorAll('[id^="options-"]');#}
+        $("#save-btn").click(function () {
+            q = document.querySelectorAll('[id^="options-"]');
             {#var dates = document.querySelectorAll('[id^="options-"]');#}
-        {#    console.log(q.length);#}
-        {#    q.forEach(function (e, i) {#}
-        {#        console.log(document.querySelector("#outerform").e.questions.value);#}
-        {#    });#}
-        {##}
-        //{#});#}
+            q.forEach(function (e, i) {
+
+                var elm = document.getElementById(e.id).querySelectorAll('[id="optionid"]');
+                var q_id=e.id[e.id.length - 1];
+                var question_content;
+
+                var questioncontainer = document.querySelectorAll('[id="question-'+q_id+'"]');
+                //console.log(question);
+                questioncontainer.forEach(function (que,index) {
+                    var question = document.getElementById(que.id).querySelectorAll('[id="questionid"]');
+                    question.forEach(function (ques,i) {
+                        question_content=ques.value;
+                    });
+                });
 
 
+                // use ajax to post question here
+                console.log(question_content);
+
+
+
+
+                elm.forEach(function (elem, i) {
+
+                    //use ajax to post options here
+                    console.log(elem.value,question_content);
+
+                });
+            });
+
+
+        });
     </script>
 {% endblock %}

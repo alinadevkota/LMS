@@ -1,6 +1,9 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 
 from quiz import views
+from . import api
+
 
 try:
     from django.conf.urls import url
@@ -8,18 +11,29 @@ except ImportError:
     from django.urls import re_path as url, path
 
 from .views import QuizListView, QuizCreateView, CategoriesListView, \
-    ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList, \
-    QuizMarkingDetail, QuizTake, MCQuestionCreateView, TFQuestionCreateView, \
-    EssayQuestionCreateView, MCQuestionUpdateView, TFQuestionUpdateView, \
-    EssayQuestionUpdateView, QuizDetailView, QuizUpdateView, QuizDeleteView
+    ViewQuizListByCategory, QuizUserProgressView, \
+    QuizTake, MCQuestionCreateView, TFQuestionCreateView, MCQuestionUpdateView, TFQuestionUpdateView, \
+    QuizDetailView, QuizUpdateView, QuizDeleteView, QuizMarkingList, QuizMarkingDetail, EssayQuestionCreateView, \
+    EssayQuestionUpdateView
 
-urlpatterns = [
+router = routers.DefaultRouter()
+router.register(r'quiz', api.QuizViewSet)
+router.register(r'mcquestion', api.MCQuestionViewSet)
+router.register(r'tfquestion', api.TFQuestionViewSet)
+router.register(r'answer', api.AnswerViewSet)
+
+
+urlpatterns = (
+    # urls for Django Rest Framework API
+    path('api/v1/', include(router.urls)),
+
 
     url(r'^$', view=QuizListView.as_view(), name='quiz_index'),
 
     url(r'^category/$', view=CategoriesListView.as_view(), name='quiz_category_list_all'),
 
-    url(r'^category/(?P<category_name>[\w|\W-]+)/$', view=ViewQuizListByCategory.as_view(), name='quiz_category_list_matching'),
+    url(r'^category/(?P<category_name>[\w|\W-]+)/$', view=ViewQuizListByCategory.as_view(),
+        name='quiz_category_list_matching'),
 
     url(r'^progress/$', view=QuizUserProgressView.as_view(), name='quiz_progress'),
 
@@ -27,23 +41,19 @@ urlpatterns = [
 
     url(r'^marking/(?P<pk>[\d.]+)/$', view=QuizMarkingDetail.as_view(), name='quiz_marking_detail'),
 
-     # passes variable 'quiz_name' to quiz_take view
+    # passes variable 'quiz_name' to quiz_take view
     url(r'^(?P<slug>[\w-]+)/$', view=QuizDetailView.as_view(), name='quiz_start_page'),
 
     url(r'^(?P<quiz_name>[\w-]+)/take/$', view=QuizTake.as_view(), name='quiz_question'),
-]
-
-
-
-
+)
 
 urlpatterns += (
 
     path('quiz/', QuizListView.as_view(), name='quiz_list'),
     path('quiz/create/', QuizCreateView.as_view(), name='quiz_create'),
-    path('quiz/update/<int:pk>', QuizUpdateView.as_view(), name = 'quiz_update'),
-    path('quiz/detail/<int:pk>', QuizDetailView.as_view(), name = 'quiz_detail'),
-    path('quiz/delete/<int:pk>', QuizDeleteView, name = 'quiz_delete'),
+    path('quiz/update/<int:pk>', QuizUpdateView.as_view(), name='quiz_update'),
+    path('quiz/detail/<int:pk>', QuizDetailView.as_view(), name='quiz_detail'),
+    path('quiz/delete/<int:pk>', QuizDeleteView, name='quiz_delete'),
 
     path('mcquestion/', views.MCQuestionListView.as_view(), name='mcquestion_list'),
     path('mcquestion/create/', MCQuestionCreateView.as_view(), name='mcquestion_create'),
@@ -64,5 +74,3 @@ urlpatterns += (
     path('essayquestion/delete/<int:pk>/', views.EssayQuestionDeleteView, name='essayquestion_delete'),
 
 )
-
-

@@ -19,4 +19,21 @@
 {% block content %}
     {% include 'lecture/lectureinfo_form.html' %}
 {% endblock content %}
+{% block customjss %}
 
+    <script src="{% static 'vendorsx/jquery-star-rating/simple-rating.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.rating').rating();
+            for (var i = 0; i < 5; i++) {
+                var starObj = $('.rating').next().children()[i];
+                if (i < rating) {
+                    $(starObj).removeClass('fa-star-o');
+                    $(starObj).addClass('fa-star');
+                }
+            }
+        });
+
+    </script>
+
+{% endblock %}

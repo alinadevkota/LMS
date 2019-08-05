@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'assignmentinfo_list' %}">HomeworkInfo Listing</a></p>
+<table class="table">
+<tr><td>subject_code</td><td>{{ object.subject_code }}</td></tr>
+<tr><td>level_score</td><td>{{ object.level_score }}</td></tr>
+<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
+<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
+<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
+<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
+<tr><td>level</td><td>{{ object.level }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit HomeworkInfo</a>
+
+{% endblock %}
