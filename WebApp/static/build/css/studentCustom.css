@@ -306,7 +306,8 @@ form{
     padding: 16px;
     text-align: center;
 }
-  #rowCards {
+
+#rowCards {
     margin: 0 -5px;
     display: flex;
     flex-wrap: wrap;
@@ -325,27 +326,18 @@ form{
     padding: 1rem;
     margin-top: 20px;
 }
-
-@media (min-width: 40rem) {
-    .questionLists {
-      width: 50%;
-  }
+@media (max-width: 600px) {
+    .card-body{
+        width: 5rem;
+    }
 }
-  
-@media (min-width: 56rem) {
-    .questionLists {
-      width: 33.3333%;
-  }
-}
-
 .categoryContainer .card{
     margin-top: 30px;
     float: center;
 }
 
 .categoryContainer .card-body{
-    text-align: center;  
-    
+    text-align: center;   
 }
 .categoryContainer .card-title{
     padding-top: 25px;
@@ -354,9 +346,33 @@ form{
     padding-top: 20px; 
     display: flex;
     justify-content: space-around;
-    width: 100%;
     height: 40px;
     align-items: center;    
+}
+
+@media (max-width: 600px) {
+    .categoryContainer .card-text{
+        padding-left: 100px;
+        height: 40px;
+    }
+    .categoryContainer hr{
+        width: 170px;
+        margin-left: 15px;
+        margin-top: 10px;
+    }
+    .categoryContainer .card-text button{
+        margin-left: 30px;
+    }
+
+    .categoryContainer .card-title{
+        padding-left: 50px;
+    }
+    
+}
+@media (max-width: 1199px) {
+    .categoryContainer{
+        margin-left: 30px;
+    }
 }
 
 .btn-success{
@@ -375,9 +391,23 @@ form{
     text-align: center;
     
 }
+#surveyheader{
+    display: flex;
+    flex: inline;
+}
+
 #status{
     z-index:0;
-    margin-left: 70px;
+    margin-left: 10px;
+}
+@media (max-width: 770px) {
+    #surveyheader{
+        display: grid;
+    }   
+    #status{
+        display:flex;
+        justify-content: center;
+    }
 }
 #switchButtons .btn-default.btn-on.active{
     background-color: #5BB75B;
@@ -404,8 +434,15 @@ form{
     border: none;
     border-radius: 0.3em 0 0 0.3em;
 }
+
+@media (max-width: 600px) {
+    .searchBarSurvey input[type=search]{
+        width: 20rem;
+    }
+}
 .hR{
-    width: 100rem;
+    margin-right: 40px;
+    width: 100%;
     height: 2px;
     display: flex;
     flex-direction: auto;
@@ -418,30 +455,54 @@ form{
 
 /* ===================================SURVEY FORM================================ */
 
+#popupForm{
+    width:100%;
+    border-radius: 0.2em;
+    position: relative;
+    top: 0px;
+    left: 1%;
+}
+/* 
 .index-form{
     width: 100%;
-    margin-left: -250px;
-    margin-top: -100px;
-    padding-top: 60px;
     padding-bottom: 60px;
     opacity: 1;
-}
+} */
 
-.form-group .form-control{
+/* .form-group .form-control{
     border-radius: 5px;
     background: transparent;
-    min-width: 70rem; 
+    width: 70rem; 
 }
+
+@media (max-width: 1300px) {
+    .form-group .form-control{
+        transition: 0.5s;
+        width: 50rem;
+    }
+}
+
+@media (max-width: 950px) {
+    .form-group .form-control{
+        transition: 0.5s;
+        width: 40rem;
+    }
+}
+
+@media (min-width: 470px) and (max-width: 760px) {
+    .form-group .form-control{
+        transition: 0.5s;
+        width: 20rem;
+    }
+} */
+
 .label_inputs{    
+    width: 100%;
     padding: 20px; 
 }
 
 .questionContainer{
     padding: 10px;
-}
-.questionSection{
-    display: flex;
-    justify-items: auto;
 }
 .questionContainer .btn-success{
     width: auto;
@@ -452,6 +513,11 @@ form{
 
 #switchButtons{
     margin-bottom: -20px;
+    display: flex;
+    justify-content: center;
+}
+.questionSection{
+    padding-bottom: 10px;
 }
 #addButtons {
     color: white;    
@@ -466,14 +532,18 @@ form{
 .index-form .btn-info{
     margin-top: 20px;
     font-size: 18px;
-    width: 120px;
-    margin-bottom: 20px;   
+    margin-bottom: 5px;   
 }
 .index-form .btn-primary{
     margin-top: 20px;
     font-size: 18px;
-    width: 140px;
-    margin-bottom: 20px;   
+    margin-bottom: 5px;   
+}
+#nextButton{
+    margin-top: 20px;
+    font-size: 18px;
+    width: 10rem;
+    margin-bottom: 10px;  
 }
 .optionContainer{
     margin-top: 5px;
@@ -519,8 +589,6 @@ form{
 	width:30px;
 	height:30px;
     padding-top:4px;
-    margin-right: 20px;
-    margin-top: 20px;
 	display:inline-block;
 	position:absolute;
 	top:0px;
@@ -542,4 +610,6 @@ form{
 	transform:translate(50%, -50%) rotate(180deg);
 	background:rgba(0,0,0,1);
 	text-decoration:none;
-}
+}    
+/* QUIZ PORTION ONLY */ 
+

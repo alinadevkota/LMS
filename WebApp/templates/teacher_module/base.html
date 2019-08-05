@@ -1,18 +1,5 @@
-<!-- {% comment %} <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TeacherLMS|{% block title %}{% endblock %}</title>
-</head>
-<body>
-    Hello
-    {% block content %}
-    {% endblock %}
-</body>
-</html> {% endcomment %}
-{% load static %} -->
+
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -124,7 +111,7 @@
     <script src="{% static "vendorsx/devbridge-autocomplete/dist/jquery.autocomplete.min.js" %}"></script>
     <!-- starrr -->
     <script src="{% static "vendorsx/starrr/dist/starrr.js" %}"></script>
-    {% block javascripts %}
+    {% block customjss %}
 
     {% endblock %}
     <!-- Custom Theme Scripts -->

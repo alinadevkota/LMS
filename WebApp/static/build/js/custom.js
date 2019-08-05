@@ -5198,12 +5198,12 @@ function filterFunction() {
     }
 }
 
-$(document).ready(function () {
-    // $(".discussions").css({ 'display': 'block' })
-    $('#submitButton').on('click', function () {
-        $("#progressResult").css({ 'display': 'block' })
-    });
-});
+// $(document).ready(function () {
+//     // $(".discussions").css({ 'display': 'block' })
+//     $('#submitButton').on('click', function () {
+//         $("#progressResult").css({ 'display': 'block' })
+//     });
+// });
 
 $(function () {
     //----- OPEN
@@ -5222,12 +5222,22 @@ $(function () {
 });
 
 
-
 function Myfunctionbtn(event, obj) {
     event.preventDefault();
-    console.log(obj.id)
-    $("#options-" + obj.id).append(`<li id="optionlist" style="list-style:none; margin-left: 20px;">
-        <input class="form-control" type="text" id="optionid" name="options" placeholder="option "></li><br>`)
+
+    console.log(`options-${obj.id}`)
+    var parentLi = $(`#options-${obj.id}`);
+    if (parentLi.children().length > 0) {
+        lastChildId = parentLi.children().length + 1;
+    }
+    else {
+        lastChildId = 1;
+    }
+
+    $("#options-" + obj.id).append(`<li id="${lastChildId}" style="list-style:none; margin-left: 20px; ">
+    <div style="display:flex;"><p style="margin-top: 10px; margin-right: 10px">${lastChildId}</p> 
+    <input class="form-control" type="text" name="option" placeholder="option" style="margin-left: 5px;"></div>
+    </li>`)
 }
 
 $(document).ready(function () {
@@ -5238,16 +5248,16 @@ $(document).ready(function () {
         var id1 = parseInt(count++)
         $("#mySelect").append(`
             <li id="question-${id1}">
-            <p>${id1}</p><input class="form-control" placeholder="Enter Questions here..." type="text" style="list-style:none; margin-top: 10px;" name="questions" id="questionid">
-             <label for="option">Option:</label> <button id="${id1} " onclick="Myfunctionbtn(event,this)" class="btn btn-success">+</button>
+            <div style="display:flex;"><p style="margin-top: 35px; margin-right: 20px">${id1}</p>
+            <input class="form-control" placeholder="Enter Questions here..." type="text" style="list-style:none; margin-top: 30px; " name="questions"></div>
+             <label for="option" style="margin-top: 10px; margin-bottom: 10px;">Option:</label><button id="${id1} " onclick="Myfunctionbtn(event,this)" class="btn btn-success" style="margin-top:5px; margin-bottom: 10px;">+</button> 
              </li><li id="options-${id1}" style="list-style:none;"></li>`)
+
     });
     $("#addButtons").on("click", function (e) {
         e.preventDefault();
         var id2 = parseInt(increse++)
-        $("#short_que_add").append(`<li id="shq-${id2}"><p>${id2}</p><input class="form-control" placeholder="Enter Questions here..." type="text" name="questions"><label for="exampleFormControlTextarea1">Answer:</label>
-        <textarea class="form-control rounded-0" id="exampleFormControlTextarea1"
-            rows="4"></textarea></li>`)
+        $("#short_que_add").append(`<li id="shq-${id2}"><div style="display:flex; align-items: center;"><p style="margin-top: 10px; margin-right: 20px; margin-bottom: 20px;">${id2}</p><input class="form-control" placeholder="Enter Questions here..." type="text" name="questions"></div></li>`)
     });
 
     $('#nextButton').on("click", function () {
@@ -5285,3 +5295,52 @@ $(document).ready(function () {
         $('#mcq_que').hide();
     });
 });
+
+// TIMER 
+/*
+to modify total time, just input on variable totaltime
+*/
+
+$(document).ready(function () {
+    $("#time").text().innerHTML = parseInt($('#quiz-timer').attr('data-timer'));
+})
+
+
+var totaltime = parseInt($('#quiz-timer').attr('data-timer'));
+var countdown = parseInt($('#quiz-timer').attr('data-timer'));
+
+function update(percent) {
+    var deg;
+    if (percent < (totaltime / 2)) {
+        deg = 90 + (360 * percent / totaltime);
+        $('.pie').css('background-image',
+            'linear-gradient(' + deg + 'deg, transparent 50%, white 50%),linear-gradient(90deg, white 50%, transparent 50%)'
+        );
+    } else if (percent >= (totaltime / 2)) {
+        deg = -90 + (360 * percent / totaltime);
+        $('.pie').css('background-image',
+            'linear-gradient(' + deg + 'deg, transparent 50%, #4183D7 50%),linear-gradient(90deg, white 50%, transparent 50%)'
+        );
+    }
+}
+var count = 0;
+
+cuentaAtras = setInterval(function () {
+    countdown--;
+    count += 1;
+    if (countdown < 10) {
+        $('#time').html(" &nbsp;" + countdown);
+
+    } else {
+        $('#time').html(countdown);
+    }
+    update(count);
+
+    if (count == totaltime) {
+        count = 0;
+        countdown = stop();
+        totaltime = stop();
+
+    }
+
+}, 1000);

@@ -6,14 +6,16 @@ Polls
 {% block stylesheets %}
 <link href="{% static 'build/css/studentCustom.css' %}" rel="stylesheet">
 {% endblock stylesheets %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item" aria-current="page"><a href="{% url 'questions' %}">Survey</a></li>
+<li class="breadcrumb-item active" aria-current="page">Polls</li>
+{% endblock %}
+
 {% block content %}
 
 <div class="clearfix"></div>
-<ol aria-label="breadcrumb" class="breadcrumb navClass">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'questions' %}">Survey</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Polls</li>
-</ol>
+
 <div class="container">
     <div class="row">
 
@@ -23,16 +25,18 @@ Polls
             <h3>1. Why is JavaScript popular?</h3>
             <form>
                 <ul style="list-style: none;">
-                    <li><input type="radio" name="gender" value="Versatile"> Versatile<br></li>
-                    <li><input type="radio" name="gender" value="Available"> Available<br></li>
-                    <li><input type="radio" name="gender" value="Reusable"> Reusable<br></li>
+                    <li>A. Versatile</li>
+                    <li>B. Easy</li>
+                    <li>C. Simpler</li>
                 </ul>
             </form>
-            <div class="pollButtons">
+            <!-- <div class="pollButtons">
                 <button type="button" id="submitButton" class="btn btn-info">Vote</button>
-            </div>
+            </div> -->
 
-            <div class="bs-chart-container" id="progressResult" style="display: none; width: 80%;">
+
+            <!-- display: none;  -->
+            <div class="bs-chart-container" id="progressResult" style="width: 80%;">
                 <h4>Results:</h4>
                 <div class="surveyResults">
                     <strong>Option A</strong>

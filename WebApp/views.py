@@ -17,19 +17,22 @@ from django.views.generic.edit import FormView
 from forum.models import Thread
 
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
-    ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, OmrQuestionInfoForm, QuizInfoForm, \
-    AssignHomeworkInfoForm, AssignQuestionInfoForm, BoardInfoForm, BoardContentInfoForm, InningGroupForm, \
+    ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, QuizInfoForm, \
+    AssignmentInfoForm, QuestionInfoForm, AssignAssignmentInfoForm, \
+    AssignQuestionInfoForm, AssignAnswerInfoForm, \
+    BoardInfoForm, BoardContentInfoForm, InningGroupForm, \
     ChapterContentMediaForm, ChapterImgInfoForm, ChapterMissonCheckForm, ChapterWriteForm, GroupMappingForm, \
-    HomeworkInfoForm, LearningNoteForm, LectureUbtInfoForm, LessonInfoForm, LessonLogForm, MemberGroupForm, \
-    MessageInfoForm, OmrAnswerInfoForm, OmrAssignInfoForm, OmrExampleInfoForm, QAnswerInfoForm, QAnswerLogForm, \
-    QExampleInfoForm, QuestionInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, ScheduleInfoForm, TalkMemberForm, \
+    LearningNoteForm, LectureUbtInfoForm, LessonInfoForm, LessonLogForm, MemberGroupForm, \
+    MessageInfoForm, \
+    QExampleInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, ScheduleInfoForm, TalkMemberForm, \
     TalkRoomForm, TalkMessageForm, TalkMessageReadForm, TodoInfoForm, TodoTInfoForm, UserUpdateForm, UserRegisterForm, \
     MemberInfoForm, ChangeOthersPasswordForm
 from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
-    ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, \
+    ChapterMissonCheckItem, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
+    AssignQuestionInfo, AssignAnswerInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
-    HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, \
-    OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, \
+    LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
+     QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, Events
 from datetime import datetime
 import json
@@ -57,11 +60,11 @@ import json
 
 def ProfileView(request):
     try:
-        center = CenterInfo.objects.get( Center_Name =request.user.Center_Code)
+        center = CenterInfo.objects.get(Center_Name=request.user.Center_Code)
     except:
         center = None
         pass
-    return render(request, 'WebApp/profile.html',{"center":center})
+    return render(request, 'WebApp/profile.html', {"center": center})
 
 
 def login(request, template_name='registration/login.html',
@@ -324,8 +327,6 @@ class LectureInfoListView(ListView):
         return qs
 
 
-
-
 class LectureInfoCreateView(CreateView):
     model = LectureInfo
     form_class = LectureInfoForm
@@ -333,6 +334,11 @@ class LectureInfoCreateView(CreateView):
 
 class LectureInfoDetailView(DetailView):
     model = LectureInfo
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk'))
+        return context
 
 
 class LectureInfoUpdateView(UpdateView):
@@ -430,22 +436,22 @@ class InningInfoUpdateView(UpdateView):
     form_class = InningInfoForm
 
 
-class OmrQuestionInfoListView(ListView):
-    model = OmrQuestionInfo
-
-
-class OmrQuestionInfoCreateView(CreateView):
-    model = OmrQuestionInfo
-    form_class = OmrQuestionInfoForm
-
-
-class OmrQuestionInfoDetailView(DetailView):
-    model = OmrQuestionInfo
-
-
-class OmrQuestionInfoUpdateView(UpdateView):
-    model = OmrQuestionInfo
-    form_class = OmrQuestionInfoForm
+# class OmrQuestionInfoListView(ListView):
+#     model = OmrQuestionInfo
+#
+#
+# class OmrQuestionInfoCreateView(CreateView):
+#     model = OmrQuestionInfo
+#     form_class = OmrQuestionInfoForm
+#
+#
+# class OmrQuestionInfoDetailView(DetailView):
+#     model = OmrQuestionInfo
+#
+#
+# class OmrQuestionInfoUpdateView(UpdateView):
+#     model = OmrQuestionInfo
+#     form_class = OmrQuestionInfoForm
 
 
 class QuizInfoListView(ListView):
@@ -466,22 +472,59 @@ class QuizInfoUpdateView(UpdateView):
     form_class = QuizInfoForm
 
 
-class AssignHomeworkInfoListView(ListView):
-    model = AssignHomeworkInfo
+# AssignmentInfoViews
+class AssignmentInfoListView(ListView):
+    model = AssignmentInfo
 
 
-class AssignHomeworkInfoCreateView(CreateView):
-    model = AssignHomeworkInfo
-    form_class = AssignHomeworkInfoForm
+class AssignmentInfoCreateView(CreateView):
+    model = AssignmentInfo
+    form_class = AssignmentInfoForm
 
 
-class AssignHomeworkInfoDetailView(DetailView):
-    model = AssignHomeworkInfo
+class AssignmentInfoDetailView(DetailView):
+    model = AssignmentInfo
 
 
-class AssignHomeworkInfoUpdateView(UpdateView):
-    model = AssignHomeworkInfo
-    form_class = AssignHomeworkInfoForm
+class AssignmentInfoUpdateView(UpdateView):
+    model = AssignmentInfo
+    form_class = AssignmentInfoForm
+
+
+class QuestionInfoListView(ListView):
+    model = QuestionInfo
+
+
+class QuestionInfoCreateView(CreateView):
+    model = QuestionInfo
+    form_class = QuestionInfoForm
+
+
+class QuestionInfoDetailView(DetailView):
+    model = QuestionInfo
+
+
+class QuestionInfoUpdateView(UpdateView):
+    model = QuestionInfo
+    form_class = QuestionInfoForm
+
+
+class AssignAssignmentInfoListView(ListView):
+    model = AssignAssignmentInfo
+
+
+class AssignAssignmentInfoCreateView(CreateView):
+    model = AssignAssignmentInfo
+    form_class = AssignAssignmentInfoForm
+
+
+class AssignAssignmentInfoDetailView(DetailView):
+    model = AssignAssignmentInfo
+
+
+class AssignAssignmentInfoUpdateView(UpdateView):
+    model = AssignAssignmentInfo
+    form_class = AssignAssignmentInfoForm
 
 
 class AssignQuestionInfoListView(ListView):
@@ -500,6 +543,24 @@ class AssignQuestionInfoDetailView(DetailView):
 class AssignQuestionInfoUpdateView(UpdateView):
     model = AssignQuestionInfo
     form_class = AssignQuestionInfoForm
+
+
+class AssignAnswerInfoListView(ListView):
+    model = AssignAnswerInfo
+
+
+class AssignAnswerInfoCreateView(CreateView):
+    model = AssignAnswerInfo
+    form_class = AssignAnswerInfoForm
+
+
+class AssignAnswerInfoDetailView(DetailView):
+    model = AssignAnswerInfo
+
+
+class AssignAnswerInfoUpdateView(UpdateView):
+    model = AssignAnswerInfo
+    form_class = AssignAnswerInfoForm
 
 
 class BoardInfoListView(ListView):
@@ -646,24 +707,6 @@ class GroupMappingUpdateView(UpdateView):
     form_class = GroupMappingForm
 
 
-class HomeworkInfoListView(ListView):
-    model = HomeworkInfo
-
-
-class HomeworkInfoCreateView(CreateView):
-    model = HomeworkInfo
-    form_class = HomeworkInfoForm
-
-
-class HomeworkInfoDetailView(DetailView):
-    model = HomeworkInfo
-
-
-class HomeworkInfoUpdateView(UpdateView):
-    model = HomeworkInfo
-    form_class = HomeworkInfoForm
-
-
 class LearningNoteListView(ListView):
     model = LearningNote
 
@@ -772,94 +815,76 @@ class MessageInfoUpdateView(UpdateView):
     form_class = MessageInfoForm
 
 
-class OmrAnswerInfoListView(ListView):
-    model = OmrAnswerInfo
+# class OmrAnswerInfoListView(ListView):
+#     model = OmrAnswerInfo
+#
+#
+# class OmrAnswerInfoCreateView(CreateView):
+#     model = OmrAnswerInfo
+#     form_class = OmrAnswerInfoForm
+#
+#
+# class OmrAnswerInfoDetailView(DetailView):
+#     model = OmrAnswerInfo
+#
+#
+# class OmrAnswerInfoUpdateView(UpdateView):
+#     model = OmrAnswerInfo
+#     form_class = OmrAnswerInfoForm
+#
+#
+# class OmrAssignInfoListView(ListView):
+#     model = OmrAssignInfo
+#
+#
+# class OmrAssignInfoCreateView(CreateView):
+#     model = OmrAssignInfo
+#     form_class = OmrAssignInfoForm
+#
+#
+# class OmrAssignInfoDetailView(DetailView):
+#     model = OmrAssignInfo
+#
+#
+# class OmrAssignInfoUpdateView(UpdateView):
+#     model = OmrAssignInfo
+#     form_class = OmrAssignInfoForm
+#
+#
+# class OmrExampleInfoListView(ListView):
+#     model = OmrExampleInfo
+#
+#
+# class OmrExampleInfoCreateView(CreateView):
+#     model = OmrExampleInfo
+#     form_class = OmrExampleInfoForm
+#
+#
+# class OmrExampleInfoDetailView(DetailView):
+#     model = OmrExampleInfo
+#
+#
+# class OmrExampleInfoUpdateView(UpdateView):
+#     model = OmrExampleInfo
+#     form_class = OmrExampleInfoForm
 
 
-class OmrAnswerInfoCreateView(CreateView):
-    model = OmrAnswerInfo
-    form_class = OmrAnswerInfoForm
+# class QAnswerLogListView(ListView):
+#     model = QAnswerLog
 
+#
+# class QAnswerLogCreateView(CreateView):
+#     model = QAnswerLog
+#     form_class = QAnswerLogForm
 
-class OmrAnswerInfoDetailView(DetailView):
-    model = OmrAnswerInfo
-
-
-class OmrAnswerInfoUpdateView(UpdateView):
-    model = OmrAnswerInfo
-    form_class = OmrAnswerInfoForm
-
-
-class OmrAssignInfoListView(ListView):
-    model = OmrAssignInfo
-
-
-class OmrAssignInfoCreateView(CreateView):
-    model = OmrAssignInfo
-    form_class = OmrAssignInfoForm
-
-
-class OmrAssignInfoDetailView(DetailView):
-    model = OmrAssignInfo
-
-
-class OmrAssignInfoUpdateView(UpdateView):
-    model = OmrAssignInfo
-    form_class = OmrAssignInfoForm
-
-
-class OmrExampleInfoListView(ListView):
-    model = OmrExampleInfo
-
-
-class OmrExampleInfoCreateView(CreateView):
-    model = OmrExampleInfo
-    form_class = OmrExampleInfoForm
-
-
-class OmrExampleInfoDetailView(DetailView):
-    model = OmrExampleInfo
-
-
-class OmrExampleInfoUpdateView(UpdateView):
-    model = OmrExampleInfo
-    form_class = OmrExampleInfoForm
-
-
-class QAnswerInfoListView(ListView):
-    model = QAnswerInfo
-
-
-class QAnswerInfoCreateView(CreateView):
-    model = QAnswerInfo
-    form_class = QAnswerInfoForm
-
-
-class QAnswerInfoDetailView(DetailView):
-    model = QAnswerInfo
-
-
-class QAnswerInfoUpdateView(UpdateView):
-    model = QAnswerInfo
-    form_class = QAnswerInfoForm
-
-
-class QAnswerLogListView(ListView):
-    model = QAnswerLog
-
-
-class QAnswerLogCreateView(CreateView):
-    model = QAnswerLog
-    form_class = QAnswerLogForm
-
-
-class QAnswerLogDetailView(DetailView):
-    model = QAnswerLog
-
-
-class QAnswerLogUpdateView(UpdateView):
-    model = QAnswerLog
-    form_class = QAnswerLogForm
+#
+# class QAnswerLogDetailView(DetailView):
+#     model = QAnswerLog
+#
+# #
+# class QAnswerLogUpdateView(UpdateView):
+#     model = QAnswerLog
+#     form_class = QAnswerLogForm
 
 
 class QExampleInfoListView(ListView):
@@ -878,24 +903,6 @@ class QExampleInfoDetailView(DetailView):
 class QExampleInfoUpdateView(UpdateView):
     model = QExampleInfo
     form_class = QExampleInfoForm
-
-
-class QuestionInfoListView(ListView):
-    model = QuestionInfo
-
-
-class QuestionInfoCreateView(CreateView):
-    model = QuestionInfo
-    form_class = QuestionInfoForm
-
-
-class QuestionInfoDetailView(DetailView):
-    model = QuestionInfo
-
-
-class QuestionInfoUpdateView(UpdateView):
-    model = QuestionInfo
-    form_class = QuestionInfoForm
 
 
 class QuizAnswerInfoListView(ListView):
