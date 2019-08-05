@@ -13,6 +13,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from django.views.generic.edit import FormView
+from django.core.paginator import Paginator
 
 from forum.models import Thread
 
@@ -315,9 +316,11 @@ def MemberInfoDeleteView(request, pk):
 
 class LectureInfoListView(ListView):
     model = LectureInfo
+    paginate_by = 12
 
     def get_queryset(self):
         qs = self.model.objects.all()
+
         query = self.request.GET.get('query')
         if query:
             qs = qs.filter(Lecture_Name__contains=query)

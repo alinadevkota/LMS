@@ -26,27 +26,10 @@
             {% endif %}">Create new Lecture</a>
     </div>
     {% include 'WebApp/theme/alerts.html' %}
-    {#    {% if messages %}#}
-    {#        {% for message in messages %}#}
-    {#            <div class="text-center errorMessage">#}
-    {#                <strong>#}
-    {#                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}#}
-    {#                        ERROR!!#}
-    {#                    {% else %}#}
-    {#                        {{ message.tags|title }}#}
-    {#                    {% endif %}#}
-    {#                </strong>#}
-    {#                {{ message }}#}
-    {#                <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-    {#                    <span aria-hidden="true">&times;</span>#}
-    {#                </button>#}
-    {#            </div>#}
-    {#        {% endfor %}#}
-    {#    {% endif %}#}
 
     <br><br><br>
-    <div class="container" id="divID">
 
+    <div class="container" id="divID">
         {% for object in object_list %}
             <div class="gridContentsList col-md-3 col-sm-6 col-xs-12" id="listCard">
                 <div class="card-header">
@@ -109,4 +92,77 @@
             </div>
         {% endfor %}
     </div>
+    <div class=" text-center">
+        {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
 </div>
+{#<div class="pagination">#}
+{#    <span class="step-links">#}
+{#        {% if object.has_other_pages %}#}
+{#            <ul class="pagination pagination-primary justify-content-center">#}
+{##}
+{#                {% if object.has_previous %}#}
+{#                    <li class="page-item mx-1">#}
+{#                        <a class="page-link iconbox iconbox-sm rounded-0"#}
+{#                           href="?page={{ object.previous_page_number }}">#}
+{#                            <i class="ti-angle-left small"></i>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% else %}#}
+{#                    <li class="page-item mx-1 disabled">#}
+{#                        <a class="page-link iconbox iconbox-sm rounded-0">#}
+{#                            <i class="ti-angle-left small"></i>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{##}
+{#                {% for i in object.paginator.page_range %}#}
+{#                    {% if lectures.number == i %}#}
+{#                        <li class="page-item mx-1 active">#}
+{#                            <a class="page-link iconbox iconbox-sm rounded-0">{{ i }}</a>#}
+{#                        </li>#}
+{#                    {% else %}#}
+{#                        <li class="page-item mx-1">#}
+{#                            <a class="page-link iconbox iconbox-sm rounded-0" href="?page={{ i }}">{{ i }}</a>#}
+{#                        </li>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{##}
+{#                {% if object.has_next %}#}
+{#                    <li class="page-item mx-1">#}
+{#                        <a class="page-link iconbox iconbox-sm rounded-0" href="?page={{ lectures.next_page_number }}">#}
+{#                            <i class="ti-angle-right small"></i>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% else %}#}
+{#                    <li class="page-item mx-1 disabled">#}
+{#                        <a class="page-link iconbox iconbox-sm rounded-0">#}
+{#                            <i class="ti-angle-right small"></i>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{##}
+{#            </ul>#}
+{#        {% endif %}#}
+{#     </span>#}
+{#</div>#}
