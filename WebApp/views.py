@@ -151,14 +151,14 @@ def start(request):
             coursecount = LectureInfo.objects.count()
             studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
             teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
-            parentcount = MemberInfo.objects.filter(Is_Parent=True, Center_Code=request.user.Center_Code).count
+            threadcount = Thread.objects.count()
             totalcount = MemberInfo.objects.filter(Center_Code=request.user.Center_Code).count
 
             # return HttpResponse("default home")
             return render(request, "WebApp/homepage.html",
                           {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
                            'teachercount': teachercount,
-                           'parentcount': parentcount, 'totalcount': totalcount, 'thread': thread})
+                           'threadcount': threadcount, 'totalcount': totalcount, 'thread': thread})
         if request.user.Is_Student:
             return redirect('students_dashboard')
         if request.user.Is_Teacher:
