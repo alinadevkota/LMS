@@ -252,12 +252,6 @@ input[type=search]{
     flex-wrap: wrap;    
 }
 
-.pollsContainer{
-    border-radius: 5px;
-    background-color: #e3e3e3 ;
-    padding: 5px 50px;
-    margin-top: 100px;
-}
 .bs-chart-container strong {
     font-weight: 400;
     margin-bottom: 5px;
@@ -268,11 +262,13 @@ input[type=search]{
     border-radius: 10px;
     margin-bottom: 10px;
 }
-.pollsContainer h2 {
+.pollTitle {
     font-size: 3em;
     line-height: 1.285em;
     font-weight: 500;
     color: #1ebeb4;
+    display: flex;
+    justify-content: center;
 }
 form{
     word-spacing: 0.2em;
@@ -291,8 +287,8 @@ form{
 .pollButtons .btn-info{
     background-color:#354254;
     border: none;
-    margin-top:5px;
-    margin-bottom: 20px;
+    margin-top:20px;
+    margin-bottom: 15px;
     transition-property:  background-color;
     transition-duration: 0.5s;
 }
@@ -302,6 +298,23 @@ form{
     color: #354254;
 }
 
+#pollsQuestions{
+    margin-top: 20px;
+}
+.title{
+    font-size: 20px;
+    padding-left: 40px;
+}
+.radioInputs{
+    padding-left: 70px;  
+}
+#pollsQuestions #pollsOptions{
+    font-size: 16px;
+    padding-left: 5px;
+}
+.radioInputs .optionIndex{
+    margin-right: 5px;
+}
 .questionLists .card{
     padding: 16px;
     text-align: center;
@@ -462,39 +475,6 @@ form{
     top: 0px;
     left: 1%;
 }
-/* 
-.index-form{
-    width: 100%;
-    padding-bottom: 60px;
-    opacity: 1;
-} */
-
-/* .form-group .form-control{
-    border-radius: 5px;
-    background: transparent;
-    width: 70rem; 
-}
-
-@media (max-width: 1300px) {
-    .form-group .form-control{
-        transition: 0.5s;
-        width: 50rem;
-    }
-}
-
-@media (max-width: 950px) {
-    .form-group .form-control{
-        transition: 0.5s;
-        width: 40rem;
-    }
-}
-
-@media (min-width: 470px) and (max-width: 760px) {
-    .form-group .form-control{
-        transition: 0.5s;
-        width: 20rem;
-    }
-} */
 
 .label_inputs{    
     width: 100%;
