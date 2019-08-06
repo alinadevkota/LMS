@@ -33,7 +33,7 @@ from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterCon
     AssignQuestionInfo, AssignAnswerInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
     LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
-     QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
+    QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, Events
 from datetime import datetime
 import json
@@ -146,8 +146,8 @@ def start(request):
     if request.user.is_authenticated:
 
         if request.user.Is_CenterAdmin:
-            thread = Thread.objects.filter()
-            course = LectureInfo.objects.order_by('Register_DateTime')[:4]
+            thread = Thread.objects.order_by('-pub_date')[:7]
+            course = LectureInfo.objects.order_by('-Register_DateTime')[:4]
             coursecount = LectureInfo.objects.count()
             studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
             teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
@@ -316,7 +316,7 @@ def MemberInfoDeleteView(request, pk):
 
 class LectureInfoListView(ListView):
     model = LectureInfo
-    paginate_by = 12
+    paginate_by = 8
 
     def get_queryset(self):
         qs = self.model.objects.all()
@@ -357,6 +357,11 @@ class ChapterInfoCreateView(CreateView):
     model = ChapterInfo
     form_class = ChapterInfoForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        return context
+
 
 class ChapterInfoDetailView(DetailView):
     model = ChapterInfo
@@ -365,6 +370,11 @@ class ChapterInfoDetailView(DetailView):
 class ChapterInfoUpdateView(UpdateView):
     model = ChapterInfo
     form_class = ChapterInfoForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        return context
 
 
 class ChapterContentsInfoListView(ListView):

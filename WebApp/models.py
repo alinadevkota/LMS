@@ -242,10 +242,10 @@ class ChapterInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('chapterinfo_detail', args=(self.pk,))
+        return reverse('chapterinfo_detail', args=(self.Lecture_Code.id,self.pk,))
 
     def get_update_url(self):
-        return reverse('chapterinfo_update', args=(self.pk,))
+        return reverse('chapterinfo_update', args=(self.Lecture_Code.id,self.pk,))
 
     def __str__(self):
         return self.Chapter_Name
@@ -386,6 +386,12 @@ class AssignmentInfo(models.Model):
 
     def __str__(self):
         return self.Assignment_Topic
+
+    def get_absolute_url(self):
+        return reverse('assignmentinfo_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('assignmentinfo_update', args=(self.pk,))
 
 
 class QuestionInfo(models.Model):
