@@ -7080,8 +7080,10 @@ ul.icon-list.icon-list-block li:not(:last-of-type) {
 
 
 .link-text-color {
-  color: #212121;
+  color: rgb(8, 17, 17);
 }
+
+
 .link-white {
   color: #ffffff;
 }
@@ -15871,7 +15873,7 @@ ul.img-grid li img {
   border: none;
   line-height: 16px;
   background-color: transparent;
-  padding: 3px 0 13px;
+  padding: 3px 10px 13px;
   box-shadow: none;
   border-radius: 0;
   -webkit-appearance: none;
@@ -48558,8 +48560,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   width:50px;
   height:50px;
   border-radius:50%;
- 
-  margin-left:2px
+  margin-left:10px
 }
 
 .profile_pic_forum img{
@@ -48645,8 +48646,14 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 }
 
 a:hover{
-  color:#00719b;
+  text-decoration:underline;
 }
+
+a:active{
+  color: rgb(122, 122, 255);
+}
+
+
 
 .content_reply{
   margin-left: 0px;
@@ -48693,3 +48700,22 @@ padding-left: 60px;
     margin-top: -35px;
     margin-right: -90px;
 }
+
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.user_profile{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  margin-left: 98px;
+
+}
+
+
+
