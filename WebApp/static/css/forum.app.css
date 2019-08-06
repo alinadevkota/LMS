@@ -48560,7 +48560,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   width:50px;
   height:50px;
   border-radius:50%;
-  margin-left:10px
+  margin-left:10px;
 }
 
 .profile_pic_forum img{
@@ -48570,8 +48570,8 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 }
 .reply-content-detail{
   margin-left:10px;
-  margin-top: 38px;
-  font-size: 20px;
+  margin-top: 15px;
+  font-size: 15px;
   font-style: bold;
   
 }
