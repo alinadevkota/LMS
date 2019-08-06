@@ -92,16 +92,16 @@
 
                                 {% endif %}
                             </div>
-
-                            <h3 class="thread-title">
-                                <a>{{ thread.title }}</a>
-
-                            </h3>
-
-                                                    
+                
 
 
                             <div class="byline">
+                                
+                            <h3 class="thread-title">
+                                    <a>{{ thread.title }}</a>
+    
+                                </h3>
+                                    
                                 posted by <a href="{% url 'forum:user_info' pk=thread.user.pk %}"
                                     class="link-text-color">
                                     <img src="/media/{{ thread.user.Member_Avatar }}" class="img-circle width-20">

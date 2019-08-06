@@ -5793,15 +5793,12 @@ article {
     margin: 20px 0;
 }
   .block{
-    position:absolute;
-    background:white;
-    width:80px;
-    height:80px;
-    display:block;
-    border-radius:50%;
-    top:9px;
-    left:8px;
-  }
+    background: white;
+    display: block;
+    top: 9px;
+    left: 8px;
+}
+
 
 
 #time{

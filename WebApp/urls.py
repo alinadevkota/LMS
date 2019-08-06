@@ -460,11 +460,23 @@ urlpatterns += (
 )
 
 urlpatterns += (
-    path('question/', views.question, name="questions"),
+    path('question/', views.question, name="questions"),  
+)
 
+urlpatterns += (
+    path('question_teachers/', views.question_teachers, name="question_teachers"),   
+)
+urlpatterns += (
+    path('questions_student/', views.questions_student, name="questions_student"),   
 )
 urlpatterns += (
     path('polls/', views.polls, name="polls"),
+)
+urlpatterns += (
+    path('polls_teachers/', views.polls_teachers, name="polls_teachers"),
+)
+urlpatterns += (
+    path('polls_student/', views.polls_student, name="polls_student"),
 )
 urlpatterns += (
     path('survey/', views.survey, name="survey"),
