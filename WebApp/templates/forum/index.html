@@ -86,17 +86,18 @@
                             class="link-text-color">{{ thread.topic.node_group.title }}</a>
                         |
 
-                        Topic:
+                        Sub Category:
                         <a href="{% url 'forum:topic' pk=thread.topic.pk %}"
                             class="link-text-color">{{ thread.topic.title }}</a>
-                        | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }}
+
 
                         <br>
                         posted by
                         <a href="{% url 'forum:user_info' pk=thread.user.pk %}" class="link-text-color">
                             <img src="/media/{{ thread.user.Member_Avatar }}" class="img-circle width-20">
                             {{ thread.user.username }}</a>
-                        |<span>{% blocktrans with view_count=thread.view_count %}
+                        | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }} |
+                        <span>{% blocktrans with view_count=thread.view_count %}
                             <i class="fa fa-eye"></i>
                             viewed
                             {{ view_count }}

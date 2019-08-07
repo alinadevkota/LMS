@@ -92,16 +92,16 @@
 
                                 {% endif %}
                             </div>
-                
+
 
 
                             <div class="byline">
-                                
-                            <h3 class="thread-title">
+
+                                <h3 class="thread-title">
                                     <a>{{ thread.title }}</a>
-    
+
                                 </h3>
-                                    
+
                                 posted by <a href="{% url 'forum:user_info' pk=thread.user.pk %}"
                                     class="link-text-color">
                                     <img src="/media/{{ thread.user.Member_Avatar }}" class="img-circle width-20">
@@ -125,10 +125,11 @@
                             <hr>
                             <ul class="list-group reply-list">
                                 <h2 class="thread_replies">
-                                    <i class="fa fa-comments"></i>
+                                    <i class="fa fa-comments-o"></i>
                                     Comments </h2>
+                                <hr>
                                 {% for post in posts %}
-                                <li class="list-group-item reply-item">
+                                <li class="list-group-reply reply-item">
 
 
                                     <div class="thread-meta row">
@@ -141,17 +142,14 @@
                                                 <div class="reply-content-detail">
                                                     <a
                                                         href="{% url 'forum:user_info' post.user_id %}">{{ post.user }}</a>
-                                                    <br>
-
-                                                    <div class="chat_reply">
-                                                        {{ post.content_rendered | safe }} </div>
+                                                    <span> {{ post.content_rendered | safe }} </span>
 
                                                 </div>
 
                                             </div>
                                             <span
                                                 class="pull-right thread_date">{{ post.pub_date | naturaltime }}</span>
-                                            <br>
+
                                         </div>
                                     </div>
                                     <div class="left">
@@ -204,7 +202,7 @@
                                 {% endfor %}
                             </ul>
 
-
+                            <br>
                             <form method="POST">
                                 {% csrf_token %}
                                 <h2>Your Comments</h2>
@@ -227,7 +225,7 @@
                                 </div>
 
                             </form>
-                            </p>
+
 
 
                         </div>

@@ -248,7 +248,8 @@ def search_redirect(request):
 
 
 @login_required
-def create_thread(request, topic_pk=None):
+def create_thread(request, topic_pk=None ):
+    node_group = NodeGroup.objects.all()
     topic = Topic.objects.filter(pk=topic_pk)
     if request.method == 'POST':
         form = ThreadForm(request.POST, user=request.user)
@@ -258,7 +259,7 @@ def create_thread(request, topic_pk=None):
     else:
         form = ThreadForm()
 
-    return render(request, 'forum/create_thread.html', {'form': form, 'title': _('Create Thread'),'topic':topic})
+    return render(request, 'forum/create_thread.html', {'form': form, 'node_group':node_group, 'title': _('Create Thread'),'topic':topic})
 
 @login_required
 def create_topic(request,nodegroup_pk=None ):

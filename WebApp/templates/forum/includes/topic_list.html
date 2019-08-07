@@ -34,7 +34,7 @@
 
     <div class="table-responsive">
 
-        <table class="table table-striped table-bordered bg-white nowrap">
+        <table class="table table-striped table-bordered  nowrap">
             <thead class="thead-light bg-primary">
                 <tr class="tableTitleRow">
                     <td>Topic icon</td>
@@ -69,7 +69,7 @@
                     {% if list.1 %}
                     <td> <a href="{% url 'forum:thread' pk=list.1.pk %}"> {{ list.1.title }} </a></td>
                     {% else %}
-                    <td> no threads yet</td>
+                    <td> No threads yet</td>
                     {% endif %}
                 </tr>
                 {% endfor %}

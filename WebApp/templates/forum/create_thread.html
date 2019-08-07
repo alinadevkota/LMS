@@ -22,8 +22,24 @@
             <div class=" x-title">
                 <h2 align="center">Create Thread</h2>
 
+
             </div>
             <div class="ln_solid"></div>
+
+
+            <div id="div_id_node_group" class="form-group"><label for="id_node_group"
+                    class="control-label  requiredField">
+                    NodeGroup<span class="asteriskField">*</span> </label>
+                <div class="controls"><select name="node_group" id="id_node_group" required=""
+                        class="select form-control">
+                        <option value="" selected="">---------</option>
+                        {% for c in node_group %}
+                        <option id="{{ c.id }}" value="{{ c.id|capfirst }}">{{ c }}</option>
+                        {% endfor %}
+
+                    </select></div>
+            </div>
+
 
             {% if not topic %}
 
@@ -32,7 +48,9 @@
                 <div class="controls"><select name="topic" id="id_topic" required="" class="select form-control">
                         <option value="" selected="">---------</option>
                         {% for c in form.fields.topic.queryset %}
-                        <option value="{{ c.id|capfirst }}">{{ c }}</option>
+                        <option class="{{ c.node_group.id }}" value="{{ c.id|capfirst }}" style="display: none;">{{ c }}
+                        </option>
+
                         {% endfor %}
 
                     </select></div>
@@ -184,6 +202,28 @@
     $('#submit-id-submit').click(function () {
         $('#id_content_raw').val($('.editor-wrapper').html());
     });
+
+    $(function () {
+        $("#id_node_group").on("change", function () {
+            var levelClass = $("#id_node_group").find('option:selected').attr('id');
+            $('#id_topic option').each(function () {
+                var self = $(this);
+                if (self.hasClass(levelClass) || typeof (levelClass) == "undefined") {
+                    self.show();
+                } else {
+                    self.hide();
+                }
+            });
+        });
+    });
+    // function populate() {
+    //     var selectBox = document.getElementById('id_node_group');
+    //     var userInput = selectBox.options[selectBox.selectedIndex].value;
+    //     if (userInput == 'id_node_group') {
+    //         document.getElementById('id_topic');
+    //     }
+    //     return false;
+    // }
 </script>
 
 
