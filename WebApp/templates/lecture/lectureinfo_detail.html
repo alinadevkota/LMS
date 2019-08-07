@@ -114,7 +114,7 @@
                 <a class="btn-sm btn-success" href="{% if '/teachers' in request.path %}
                         {% url 'teacher_chapterinfo_create' %}
                     {% else %}
-                        {% url 'chapterinfo_create' %}
+                        {% url 'chapterinfo_create' course=object.pk %}
                     {% endif %}">Create new Chapter</a>
             </div>
 

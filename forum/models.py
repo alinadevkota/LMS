@@ -115,6 +115,9 @@ class Thread(models.Model):
         t.thread_count = t.get_thread_count()
         t.save(update_fields=[ 'thread_count'])
 
+    def get_absolute_url(self):
+        return reverse('forum:thread', kwargs={'pk': self.pk})
+
     class Meta:
         ordering = ['order', '-pub_date']
 

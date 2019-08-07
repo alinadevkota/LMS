@@ -111,8 +111,8 @@ class AssignmentInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.AssignmentInfo
         fields = (
-            'pk', 'Lecture_Code', 'Chapter_Code', ' Assignment_Topic', 'Use_Flag', 'Register_DateTime',
-            'Updated_DateTime', 'Register_Agent','Assignment_Deadline'
+            'pk', 'Assignment_Topic','Assignment_Deadline', 'Use_Flag', 'Register_DateTime',
+            'Updated_DateTime', 'Register_Agent', 'Lecture_Code', 'Chapter_Code'
         )
 
 
@@ -148,7 +148,7 @@ class AssignAnswerInfoSerializer(serializers.ModelSerializer):
         model = models.AssignAnswerInfo
         fields = (
             'pk', 'Assignment_Score', 'Assignment_Code', 'Question_Code',
-            'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'Student_Code'
+            'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Student_Code'
         )
 
 

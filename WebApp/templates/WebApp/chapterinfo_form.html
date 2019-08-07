@@ -2,12 +2,14 @@
 {% load static %}
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{% url 'lectureinfo_list' %}">Lecture</a></li>
-    <li class="breadcrumb-item"><a href="{{ object.Lecture_Code.get_absolute_url }}">{{ object.Lecture_Code }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ Lecture_Code.get_absolute_url }}">{{ Lecture_Code }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ object.get_absolute_url }}">{{ object.Chapter_Name }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">
-        {% if '/chapterinfo/create/' == request.path %}
+        {% if '/create/' in request.path %}
             Create New Chapter
         {% else %}
-            Edit Chapter Info
+            Edit Chapter
         {% endif %}
     </li>
 {% endblock %}

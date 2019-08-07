@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "student_module/base.html"%}
 {% load static %}
 {% block title %}
 Polls
@@ -46,7 +46,7 @@ Polls
                             <h2 class="card-title "><strong>1. What is hadoop?</strong></h2>
                             <hr>
                             <h5 class="card-text text-justify">
-                                <a href=" {% url 'polls' %}">
+                                <a href=" {% url 'polls_student' %}">
                                     <div class="pollButtons">
                                         <button type="button" class="btn btn-info">Text survey</button>
                                     </div>
@@ -63,7 +63,7 @@ Polls
                             <h2 class="card-title "><strong>2. What is hadoop?</strong></h2>
                             <hr>
                             <h5 class="card-text text-justify">
-                                <a href=" {% url 'polls' %}">
+                                <a href=" {% url 'polls_student' %}">
                                     <div class="pollButtons">
                                         <button type="button" class="btn btn-info">Text survey</button>
                                     </div>
@@ -80,7 +80,7 @@ Polls
                             <h2 class="card-title "><strong>3. What is hadoop?</strong></h2>
                             <hr>
                             <h5 class="card-text text-justify">
-                                <a href=" {% url 'polls' %}">
+                                <a href=" {% url 'polls_student' %}">
                                     <div class="pollButtons">
                                         <button type="button" class="btn btn-info">Text survey</button>
                                     </div>
@@ -98,7 +98,7 @@ Polls
                             <h2 class="card-title "><strong>4. What is hadoop?</strong></h2>
                             <hr>
                             <h5 class="card-text text-justify">
-                                <a href=" {% url 'polls' %}">
+                                <a href=" {% url 'polls_student' %}">
                                     <div class="pollButtons">
                                         <button type="button" class="btn btn-info">Text survey</button>
                                     </div>
@@ -115,7 +115,7 @@ Polls
                             <h2 class="card-title "><strong>2. What is hadoop?</strong></h2>
                             <hr>
                             <h5 class="card-text text-justify">
-                                <a href=" {% url 'polls' %}">
+                                <a href=" {% url 'polls_student' %}">
                                     <div class="pollButtons">
                                         <button type="button" class="btn btn-info">Text survey</button>
                                     </div>
@@ -132,7 +132,7 @@ Polls
                             <h2 class="card-title "><strong>3. What is hadoop?</strong></h2>
                             <hr>
                             <h5 class="card-text text-justify">
-                                <a href=" {% url 'polls' %}">
+                                <a href=" {% url 'polls_student' %}">
                                     <div class="pollButtons">
                                         <button type="button" class="btn btn-info">Text survey</button>
                                     </div>
@@ -152,17 +152,16 @@ Polls
                     <h2 class="card-title "><strong>Category</strong></h2>
                     <hr>
                     <h5 class="card-text">
-                        <a href="">General</a><button class="general btn btn-success" data-popup-open="popup-1"><a href="#">Add</a></button>
+                        <a href="">General</a>
                     </h5>
                     <h5 class="card-text">
-                        <a href="">Session</a><button class="session btn btn-success" data-popup-open="popup-1"><a href="#">Add</a></button>
+                        <a href="">Session</a>
                     </h5>
                     <h5 class="card-text">
-                        <a href="">Course</a><button class="courseAdd btn btn-success" data-popup-open="popup-1"><a
-                                href="#">Add</a></button>
+                        <a href="">Course</a>
                     </h5>
                     <h5 class="card-text">
-                        <a href="">System</a><button class="system btn btn-success" data-popup-open="popup-1"><a href="#">Add</a></button>
+                        <a href="">System</a>
                     </h5>
                 </div>
             </div>
@@ -303,67 +302,6 @@ Polls
                                 </div>
                             </div>
                         </div>
-
-                        <!-- <div class="form-group has-feedback">
-                            <label for="id_Title" class="control-label col-md-3 col-sm-3 col-xs-12">
-                                Title
-                            </label>
-                            <input type="text" value="" name="title" id="id_title" required="required" class="form-control has-feedback-left"
-                                placeholder="Title">
-                            <span class="fa fa-paragraph form-control-feedback left" aria-hidden="true"></span>
-                        </div>
-                        <div class="form-group " id="chooseSession" style="display: none;">
-                            <label for="inputState">Choose Session</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
-                        </div>
-                        <div class="form-group " id="chooseCourse" style="display: none;">
-                            <label for="inputState">Choose Course</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
-                        </div> -->
-                        <!-- <div class="form-group has-feedback">
-                                            <label for="id_name" class="control-label ">
-                                                Name
-                                            </label>
-                                            <input type="text" value="" name="name" id="id_name" required="required"
-                                                class="form-control has-feedback-left" placeholder="Name">
-                                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                        </div> -->
-
-                        <!-- <div class="form-group has-feedback">
-                            <label for="id_Start_date" class="control-label col-md-3 col-sm-3 col-xs-12">
-                                Start date
-                            </label>
-                            <input type="date" name="Start_date" value="" id="Start_date" required="required" class="form-control has-feedback-left">
-                            <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
-                        </div>
-
-                        <div class="form-group has-feedback">
-                            <label for="id_End_date" class="control-label col-md-3 col-sm-3 col-xs-12">
-                                End date
-                            </label>
-                            <input type="date" name="End_date" value="" id="id_End_date" required="required" class="form-control has-feedback-left">
-                            <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
-                        </div> -->
-
-                        <!-- <div class="form-group has-feedback">
-                                            <label for="id_Survery_Cover" class="control-label ">
-                                                Survey cover
-                                            </label>
-                                            <input type="file" name="Survery_Cover" value="" id="id_Survery_Cover"
-                                                class="form-control has-feedback-left" placeholder="Survery Cover">
-                                            <span class="fa fa-image form-control-feedback left" aria-hidden="true"></span>
-                                        </div>
-
-                                        <label> Status</label><br>
-                                        <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"><br> -->
-
-
                     </div>
                 </form>
             </article>

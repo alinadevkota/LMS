@@ -30,6 +30,7 @@ def Dashboard(request):
 class LectureInfoListView(ListView):
     model = LectureInfo
     template_name = 'teacher_module/lectureinfo_list.html'
+    paginate_by = 2
 
     def get_queryset(self):
         lectures = LectureInfo.objects.filter(Teacher_Code=self.request.user.id)

@@ -31,61 +31,63 @@
 
     <div class="container" id="divID">
         {% for object in object_list %}
-            <div class="gridContentsList col-md-3 col-sm-6 col-xs-12" id="listCard">
-                <div class="card-header">
-                    <a href="{% if '/teachers' in request.path %}
+            <div class="col-md-3 col-sm-6 col-xs-12" id="listCard">
+                <div class="gridContentsList">
+                    <div class="card-header">
+                        <a href="{% if '/teachers' in request.path %}
                                 /teachers{{ object.get_absolute_url }}
                             {% else %}
                                {{ object.get_absolute_url }}
                             {% endif %}">
-                        <img id="lectureListImage" class="card-img-top" src="
+                            <img id="lectureListImage" class="card-img-top" src="
                             {% if object.Lecture_Cover_File %}
                                 /media/{{ object.Lecture_Cover_File }}
                             {% else %}
                                 {% static 'images/course.jpg' %}
                             {% endif %}"
-                             alt="Card image cap" width="100%" height="180px" style="object-fit: cover">
-                    </a>
-                </div>
-                <div class="card-body" id="cardInfo">
-                    <h2 class="card-title"><strong><a
-                            href="{% if '/teachers' in request.path %}
+                                 alt="Card image cap" width="100%" height="180px" style="object-fit: cover">
+                        </a>
+                    </div>
+                    <div class="card-body" id="cardInfo">
+                        <h2 class="card-title"><strong><a
+                                href="{% if '/teachers' in request.path %}
                                         /teachers{{ object.get_absolute_url }}
                                       {% else %}
                                         {{ object.get_absolute_url }}
                                       {% endif %}">{{ object.Lecture_Name }}</a></strong></h2>
 
-                    {#                        <p class="ratingIcons">#}
-                    {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
-                    {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
-                    {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
-                    {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
-                    {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
-                    {#                        </p>#}
+                        {#                        <p class="ratingIcons">#}
+                        {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
+                        {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
+                        {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
+                        {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
+                        {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
+                        {#                        </p>#}
 
-                    <hr>
+                        <hr>
 
-                    <h5 class="lectureDescription">
-                        {% if object.Lecture_Description %}
-                            {{ object.Lecture_Description }}
-                        {% else %}
-                            No Description
-                        {% endif %}
-                    </h5>
+                        <h5 class="lectureDescription">
+                            {% if object.Lecture_Description %}
+                                {{ object.Lecture_Description }}
+                            {% else %}
+                                No Description
+                            {% endif %}
+                        </h5>
 
 
-                    <div class="row d-flex flex-row">
-                        <div class="col-md-3">
+                        <div class="row d-flex flex-row">
+                            <div class="col-md-3">
                                             <span class="">
                                                 <img width="60px" id="avatar"
                                                      src="{{ object.Teacher_Code.Member_Avatar.url }}">
                                             </span>
-                        </div>
+                            </div>
 
-                        <div class="col-md-9 ">
+                            <div class="col-md-9 text-center">
 
-                            <p>Instructor</p>
-                            <h4>{{ object.Teacher_Code }}</h4>
+                                <p>Instructor</p>
+                                <h5>{{ object.Teacher_Code }}</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
