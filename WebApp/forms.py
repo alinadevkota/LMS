@@ -18,11 +18,11 @@ from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterCon
 
 
 class UserRegisterForm(UserCreationForm):
-    Member_Role = forms.MultipleChoiceField(choices=USER_ROLES, widget=forms.CheckboxSelectMultiple())
+    # Member_Role = forms.MultipleChoiceField(choices=USER_ROLES, widget=forms.CheckboxSelectMultiple())
 
     class Meta(UserCreationForm.Meta):
         model = MemberInfo
-        fields = ('username', 'email', 'Member_Role')
+        fields = ('username', 'email', 'Member_Gender','Center_Code', 'Is_Student', 'Is_Teacher')
 
 
 class UserUpdateForm(forms.ModelForm):
