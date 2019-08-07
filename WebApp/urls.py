@@ -102,7 +102,7 @@ urlpatterns += (
     path('memberinfo/create/', views.MemberInfoCreateView.as_view(), name='memberinfo_create'),
     path('memberinfo/detail/<int:pk>/', views.MemberInfoDetailView.as_view(), name='memberinfo_detail'),
     path('memberinfo/update/<int:pk>/', views.MemberInfoUpdateView.as_view(), name='memberinfo_update'),
-    path('memberinfo/delete/<int:pk>/', views.MemberInfoDeleteView, name='memberinfo_delete'),
+    path('memberinfo/delete/<int:pk>/', views.MemberInfoDeleteView.as_view(), name='memberinfo_delete'),
 )
 
 urlpatterns += (

@@ -11,7 +11,7 @@ from django.utils.translation import gettext as _
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import DetailView, ListView, UpdateView, CreateView
+from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView
 from django.views.generic.edit import FormView
 from django.core.paginator import Paginator
 
@@ -309,9 +309,21 @@ class MemberInfoUpdateView(UpdateView):
     model = MemberInfo
     form_class = MemberInfoForm
 
+class MemberInfoDeleteView(DeleteView):
+    model = MemberInfo
+    success_url = reverse_lazy('memberinfo_list')
+    def post(self, request, *args, **kwargs):
+        try:
+            return self.delete(request, *args, **kwargs)
+        except:
+            messages.error(request,"You can't delete this user instead you can turn off the status value which will disable the user.")
+            return redirect('memberinfo_list')
+    
 
-def MemberInfoDeleteView(request, pk):
-    MemberInfo.objects.filter(pk=pk).delete()
+
+
+# def MemberInfoDeleteView(request, pk):
+#     MemberInfo.objects.filter(pk=pk).delete()
 
 
 class LectureInfoListView(ListView):
