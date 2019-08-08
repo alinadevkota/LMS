@@ -1,21 +1,35 @@
 {% extends "base.html" %}
 {% load static %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'assignassignmentinfo_list' %}">Assign Assignment</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ object.Assignment_Code }}</li>
+{% endblock %}
 {% block content %}
-
-
-
-
-<p><a class="btn btn-default" href="{% url 'assignassignmentinfo_list' %}">Assign Assignment Listing</a></p>
-<table class="table">
-<tr><td>subject_code</td><td>{{ object.subject_code }}</td></tr>
-<tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
-<tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
-<tr><td>reg_time</td><td>{{ object.reg_time }}</td></tr>
-<tr><td>reg_agent</td><td>{{ object.reg_agent }}</td></tr>
-<tr><td>udt_date</td><td>{{ object.udt_date }}</td></tr>
-<tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
-<tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
-</table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Assign Assignment</a>
-
+    <div class="outerdiv">
+        <h2 class="detailListHeader">Assiged Assignment</h2>
+        <hr class="header_hr">
+        <br>
+        <table class="table">
+            <tr>
+                <td>Use Flag</td>
+                <td>{{ object.Use_Flag }}</td>
+            </tr>
+            <tr>
+                <td>Inning Code</td>
+                <td>{{ object.Inning_Code }}</td>
+            </tr>
+            <tr>
+                <td>Assignment Code</td>
+                <td>{{ object.Assignment_Code }}</td>
+            </tr>
+            <tr>
+                <td>Assigned By</td>
+                <td>{{ object.Assigned_By }}</td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Assignment</a>
+            <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Assignment</a>
+        </div>
+    </div>
 {% endblock %}

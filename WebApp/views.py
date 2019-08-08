@@ -206,6 +206,7 @@ class register(CreateView):
     form_class = UserRegisterForm
     success_url = reverse_lazy('loginsuccess')
     template_name = 'registration/register.html'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['centers'] = CenterInfo.objects.all()
@@ -314,17 +315,18 @@ class MemberInfoUpdateView(UpdateView):
     model = MemberInfo
     form_class = MemberInfoForm
 
+
 class MemberInfoDeleteView(DeleteView):
     model = MemberInfo
     success_url = reverse_lazy('memberinfo_list')
+
     def post(self, request, *args, **kwargs):
         try:
             return self.delete(request, *args, **kwargs)
         except:
-            messages.error(request,"You can't delete this user instead you can turn off the status value which will disable the user.")
+            messages.error(request,
+                           "You can't delete this user instead you can turn off the status value which will disable the user.")
             return redirect('memberinfo_list')
-    
-
 
 
 # def MemberInfoDeleteView(request, pk):
@@ -382,6 +384,11 @@ class ChapterInfoCreateView(CreateView):
 
 class ChapterInfoDetailView(DetailView):
     model = ChapterInfo
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['assignments'] = AssignmentInfo.objects.filter(Chapter_Code=self.kwargs.get('pk'))
+        return context
 
 
 class ChapterInfoUpdateView(UpdateView):
@@ -511,6 +518,12 @@ class AssignmentInfoCreateView(CreateView):
     model = AssignmentInfo
     form_class = AssignmentInfoForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
+        return context
+
 
 class AssignmentInfoDetailView(DetailView):
     model = AssignmentInfo
@@ -519,6 +532,12 @@ class AssignmentInfoDetailView(DetailView):
 class AssignmentInfoUpdateView(UpdateView):
     model = AssignmentInfo
     form_class = AssignmentInfoForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
+        return context
 
 
 class QuestionInfoListView(ListView):
@@ -1100,21 +1119,26 @@ class TodoTInfoUpdateView(UpdateView):
 def question(request):
     return render(request, 'WebApp/question.html')
 
+
 def question_teachers(request):
     return render(request, 'teacher_module/question_teachers.html')
+
 
 def questions_student(request):
     return render(request, 'student_module/questions_student.html')
 
+
 def polls(request):
     return render(request, 'WebApp/polls.html')
+
 
 def polls_teachers(request):
     return render(request, 'teacher_module/polls_teachers.html')
 
+
 def polls_student(request):
     return render(request, 'student_module/polls_student.html')
 
+
 def survey(request):
     return render(request, 'WebApp/survey.html')
-

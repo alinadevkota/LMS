@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.files.storage import FileSystemStorage
 from django.db import models as models
 from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, BooleanField, \
-    ImageField
+    ImageField,FileField
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
@@ -388,11 +388,16 @@ class AssignmentInfo(models.Model):
         return self.Assignment_Topic
 
     def get_absolute_url(self):
-        return reverse('assignmentinfo_detail', args=(self.pk,))
+        return reverse('assignmentinfo_detail', args=(self.Lecture_Code.id,self.Chapter_Code.id,self.pk,))
 
     def get_update_url(self):
-        return reverse('assignmentinfo_update', args=(self.pk,))
+        return reverse('assignmentinfo_update', args=(self.Lecture_Code.id,self.Chapter_Code.id,self.pk,))
 
+
+
+
+def upload_to(instance,filename):
+    return 'questions/{0}/{1}'.format(instance.id,filename)
 
 class QuestionInfo(models.Model):
     # Fields
@@ -408,7 +413,7 @@ class QuestionInfo(models.Model):
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
 
-    Question_Media_File = CharField(max_length=250, blank=True, null=True)
+    Question_Media_File = FileField(upload_to=upload_to, blank=True, null=True)
     Question_Description = TextField(blank=True, null=True)
     # question_level = IntegerField(blank=True, null=True)
     # teacher_contents = CharField(max_length=500, blank=True, null=True)
@@ -439,6 +444,8 @@ class QuestionInfo(models.Model):
 
     def get_update_url(self):
         return reverse('questioninfo_update', args=(self.pk,))
+
+
 
 
 class AssignAssignmentInfo(models.Model):
@@ -511,6 +518,8 @@ class AssignQuestionInfo(models.Model):
     def get_update_url(self):
         return reverse('assignquestioninfo_update', args=(self.pk,))
 
+def assignment_upload(instance, filename):
+        return 'assignments/{0}/{1}'.format(instance.Assignment_Code.id, filename)
 
 class AssignAnswerInfo(models.Model):
     # Fields
@@ -521,7 +530,7 @@ class AssignAnswerInfo(models.Model):
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
     Assignment_Answer = TextField(null=True, blank=True)
-    # Assignment_File = FileField(upload_to=)
+    Assignment_File = FileField(upload_to=assignment_upload, null=True, blank=True)
 
     # Relationship Fields
     Assignment_Code = ForeignKey(
