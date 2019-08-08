@@ -160,7 +160,7 @@ def start(request):
                            'teachercount': teachercount,
                            'threadcount': threadcount, 'totalcount': totalcount, 'thread': thread})
         if request.user.Is_Student:
-            return redirect('students_dashboard')
+            return redirect('student_home')
         if request.user.Is_Teacher:
             return redirect('teacher_home')
         if request.user.Is_Parent:
@@ -201,10 +201,15 @@ def editprofile(request):
     return render(request, 'registration/editprofile.html', {'form': form})
 
 
-class register(generic.CreateView):
+class register(CreateView):
+    model = MemberInfo
     form_class = UserRegisterForm
     success_url = reverse_lazy('loginsuccess')
     template_name = 'registration/register.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['centers'] = CenterInfo.objects.all()
+        return context
 
 
 def change_password_others(request, pk):
