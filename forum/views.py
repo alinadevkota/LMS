@@ -94,7 +94,7 @@ class NodeGroupView(ListView):
 
 class TopicView(ListView):
     model = Thread
-    paginate_by = 30
+    paginate_by = 3
     template_name = 'forum/topic.html'
     context_object_name = 'threads'
 
