@@ -29,7 +29,7 @@
 
             <div id="div_id_node_group" class="form-group"><label for="id_node_group"
                     class="control-label  requiredField">
-                    NodeGroup<span class="asteriskField">*</span> </label>
+                    Category<span class="asteriskField">*</span> </label>
                 <div class="controls"><select name="node_group" id="id_node_group" required=""
                         class="select form-control">
                         <option value="" selected="">---------</option>
@@ -44,7 +44,7 @@
             {% if not topic %}
 
             <div id="div_id_topic" class="form-group"><label for="id_topic" class="control-label  requiredField">
-                    Topic<span class="asteriskField">*</span> </label>
+                    SubCategory<span class="asteriskField">*</span> </label>
                 <div class="controls"><select name="topic" id="id_topic" required="" class="select form-control">
                         <option value="" selected="">---------</option>
                         {% for c in form.fields.topic.queryset %}
@@ -216,14 +216,7 @@
             });
         });
     });
-    // function populate() {
-    //     var selectBox = document.getElementById('id_node_group');
-    //     var userInput = selectBox.options[selectBox.selectedIndex].value;
-    //     if (userInput == 'id_node_group') {
-    //         document.getElementById('id_topic');
-    //     }
-    //     return false;
-    // }
+
 </script>
 
 

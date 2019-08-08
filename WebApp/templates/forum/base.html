@@ -100,7 +100,8 @@
                     </div>
                     {% for nodegroup in node_groups %}
                     <li class="list-group-item">
-                        <a href="{% url 'forum:nodegroup' nodegroup.pk %}"> {{ nodegroup.title }}</a>
+                        <a href="{% url 'forum:nodegroup' nodegroup.pk %}" id="link-lists" class="node_group_list">
+                            {{ nodegroup.title }}</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -114,5 +115,8 @@
 
 
 
-{% block footer_ext %}{% endblock %}
+{% block footer_ext %}
+
+
+{% endblock %}
 {% endblock %}

@@ -10708,17 +10708,6 @@ div.list-group > .list-group-item {
   font-size: 15px;
   color:#368BC1;
 }
-.list-group-menu > .list-group-item > a:hover {
-  text-decoration: none;
-  color:black;
-}
-
-.list-group-menu > .list-group-item > a:visited{
-  color:black;
-}
-
-
-
 .list-group-fit,
 .sidebar .sidebar-block.list-group-fit,
 .sidebar .sidebar-block.list-group-menu,
@@ -48607,6 +48596,15 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 
 
 
+.topic_list{
+ 
+  margin-bottom: -13px;
+}
+
+.right_content{
+  margin-top: -50px;
+  float: right;
+}
 .topic_meta{
   margin-left: 5px;
 }
@@ -48733,4 +48731,16 @@ padding-left: 60px;
     margin-bottom: -18px;
     background-color: #fff;
     border: 1px solid #ddd;
+}
+
+.text-wrapper{
+  background-color: #f1f1f1;
+    border-radius: 2px;
+    padding: 15px;
+}
+
+.post-reply{
+  font-size: 12px;
+    color: #bdc3c7;
+    display: block;
 }

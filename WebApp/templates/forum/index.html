@@ -46,6 +46,7 @@
 
 
         {% for nodegroup in node_groups %}
+        {% if nodegroup.topic_count > 0 %}
 
         <li class="list-group-item">
             <div class="media v-middle">
@@ -97,11 +98,7 @@
                             <img src="/media/{{ thread.user.Member_Avatar }}" class="img-circle width-20">
                             {{ thread.user.username }}</a>
                         | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }} |
-                        <span>{% blocktrans with view_count=thread.view_count %}
-                            <i class="fa fa-eye"></i>
-                            viewed
-                            {{ view_count }}
-                            times{% endblocktrans %}</span>&nbsp;
+                        &nbsp;
                         |<i class="fa fa-clock-o fa-fw"></i> Last Replied: {{ thread.last_replied }}
 
 
@@ -114,6 +111,12 @@
                     <a href="{% url 'forum:thread' pk=thread.pk %}" class="btn btn-white text-light"><i
                             class="fa fa-comments fa-fw"></i>
                         {{ thread.reply_count }}</a>
+
+                    <span class="btn btn-white text-light">{% blocktrans with view_count=thread.view_count %}
+                        <i class="fa fa-eye"></i>
+                        {{ view_count }}
+                        {% endblocktrans %}</span>
+
                 </div>
 
 
@@ -127,11 +130,14 @@
         </div>
 
 
-
+        {% else %}
+        {% endif %}
         {% endfor %}
 
     </ul>
     <div class="clearfix"></div>
 </div>
+
+
 
 {% endblock %}
