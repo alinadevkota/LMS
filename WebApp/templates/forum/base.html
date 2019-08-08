@@ -95,12 +95,18 @@
             <div class="card">
 
                 <ul class="list-group list-group-menu">
-                    <div class="panel-heading" style="background-color: steelblue">
+                    <div class="panel-heading" style="background-color:#F5F5F5">
                         <h4 class="panel-title">Categories</h4>
                     </div>
                     {% for nodegroup in node_groups %}
-                    <li class="list-group-item">
-                        <a href="{% url 'forum:nodegroup' nodegroup.pk %}" id="link-lists" class="node_group_list">
+                    <li class="list-group-item
+                    {% if '/nodegroup/' in request.path %}
+                        {% if nodegroup.pk|stringformat:"i" in request.path %}
+                            active
+                        {% endif %}
+                    {% endif %}">
+                        <a href="{% url 'forum:nodegroup' nodegroup.pk %}" id="{{ nodegroup.pk }}"
+                            class="node_group_list">
                             {{ nodegroup.title }}</a>
                     </li>
                     {% endfor %}
@@ -111,10 +117,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 {% block footer_ext %}
 
 
