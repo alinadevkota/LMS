@@ -43,6 +43,8 @@ class PostSerializer(serializers.ModelSerializer):
             'content_rendered',
             'pub_date',
             'hidden',
+            'thread',
+            'user',
         )
 
 
