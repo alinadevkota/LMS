@@ -22,6 +22,8 @@ class ThreadSerializer(serializers.ModelSerializer):
             'title',
             'content_raw',
             'content_rendered',
+            'user',
+            'topic',
             'view_count',
             'reply_count',
             'pub_date',
@@ -39,6 +41,8 @@ class PostSerializer(serializers.ModelSerializer):
         model = models.Post
         fields = (
             'pk',
+            'thread',
+            'user',
             'content_raw',
             'content_rendered',
             'pub_date',
@@ -52,6 +56,9 @@ class NotificationSerializer(serializers.ModelSerializer):
         model = models.Notification
         fields = (
             'pk',
+            'sender',
+            'to',
+            'post',
             'read',
             'pub_date',
         )
@@ -90,6 +97,7 @@ class TopicSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'thread_count',
+            'node_group',
             'topic_icon',
         )
 
