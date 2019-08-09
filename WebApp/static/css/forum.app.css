@@ -48628,6 +48628,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 }
 
 .form-control{
+  margin-bottom: 8px;
   background-color: #F3F2EE;
   width: 100%; 
 }
@@ -48740,7 +48741,30 @@ padding-left: 60px;
 }
 
 .post-reply{
-  font-size: 12px;
+    font-size: 12px;
     color: #bdc3c7;
     display: block;
+}
+.searchButton{
+  display: flex;
+  
+  margin-top: -44px;
+    margin-right: -5px;
+}
+
+
+.form-control-search .form-control{
+  font-size: 1.23rem;
+    border: none;
+    line-height: 16px;
+    background-color: transparent;
+    padding: 3px 10px 13px;
+    box-shadow: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: auto;
+    padding-top: -46px;
+    margin-top: -7px;
 }
