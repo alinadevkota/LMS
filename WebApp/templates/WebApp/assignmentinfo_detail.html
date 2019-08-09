@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{% url 'questioninfo_list' %}">Question</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ object.Question_Title }}</li>
+    {#    <li class="breadcrumb-item"><a href="{% url 'assignmentinfo_list'  %}">Assignment</a></li>#}
+    <li class="breadcrumb-item"><a href="{% url 'lectureinfo_list' %}">Lecture</a></li>
+    <li class="breadcrumb-item"><a href="{{ object.Lecture_Code.get_absolute_url }}">{{ object.Lecture_Code }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ object.Chapter_Code.get_absolute_url }}">{{ object.Chapter_Code }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ object.Assignment_Topic }}</li>
 {% endblock %}
 {% block content %}
     <div class="outerdiv">
@@ -12,20 +15,12 @@
         <br>
         <table class="table">
             <tr>
-                <td>Question Title</td>
-                <td>{{ object.Question_Title }}</td>
+                <td>Assignment Topic</td>
+                <td>{{ object.Assignment_Topic }}</td>
             </tr>
             <tr>
-                <td>Question Score</td>
-                <td>{{ object.Question_Score }}</td>
-            </tr>
-            <tr>
-                <td>Question Description</td>
-                <td>{{ object.Question_Description }}</td>
-            </tr>
-            <tr>
-                <td>Question Media File</td>
-                <td>{{ object.Question_Media_File }}</td>
+                <td>Assignment Deadline</td>
+                <td>{{ object.Assignment_Deadline }}</td>
             </tr>
             <tr>
                 <td>Lecture Code</td>

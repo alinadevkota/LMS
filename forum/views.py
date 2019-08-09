@@ -38,18 +38,19 @@ def get_thread_ordering(request):
 # Create your views here.
 class Index(ListView):
     model = Thread
-    paginate_by = 30
     template_name = 'forum/index.html'
     context_object_name = 'threads'
 
     def get_queryset(self):
-        return Thread.objects.visible().select_related(
-            'user', 'topic'
-        ).prefetch_related(
-            'user__forum_avatar'
-        ).order_by(
-            *['order', get_thread_ordering(self.request)]
-        )
+        nodegroups= NodeGroup.objects.all()
+        threadqueryset = Thread.objects.none()
+        for ng in nodegroups:
+            topics=Topic.objects.filter(node_group=ng.pk)
+            for topic in topics:
+                threads = Thread.objects.visible().filter(topic=topic.pk).order_by('pub_date')[:4]
+                threadqueryset |= threads
+
+        return threadqueryset
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
@@ -61,7 +62,6 @@ class Index(ListView):
 
 class NodeGroupView(ListView):
     model = Topic
-    paginate_by = 30
     template_name = 'forum/nodegroup.html'
     context_object_name = 'topics'
 
@@ -94,7 +94,7 @@ class NodeGroupView(ListView):
 
 class TopicView(ListView):
     model = Thread
-    paginate_by = 30
+    paginate_by = 20
     template_name = 'forum/topic.html'
     context_object_name = 'threads'
 
@@ -120,7 +120,7 @@ class TopicView(ListView):
 
 class ThreadView(ListView):
     model = Post
-    paginate_by = 30
+    paginate_by = 15
     template_name = 'forum/thread.html'
     context_object_name = 'posts'
 
@@ -173,7 +173,7 @@ def user_info(request, pk):
 
 class UserThreads(ListView):
     model = Post
-    paginate_by = 30
+    paginate_by = 15
     template_name = 'forum/user_threads.html'
     context_object_name = 'threads'
 
@@ -194,7 +194,7 @@ class UserThreads(ListView):
 
 class UserPosts(ListView):
     model = Post
-    paginate_by = 30
+    paginate_by = 15
     template_name = 'forum/user_replies.html'
     context_object_name = 'replies'
 
@@ -215,7 +215,7 @@ class UserPosts(ListView):
 
 class SearchView(ListView):
     model = Thread
-    paginate_by = 30
+    paginate_by = 20
     template_name = 'forum/search.html'
     context_object_name = 'threads'
 
@@ -248,8 +248,11 @@ def search_redirect(request):
 
 
 @login_required
-def create_thread(request, topic_pk=None):
+def create_thread(request, topic_pk=None, nodegroup_pk=None ):
+    node_group = NodeGroup.objects.all()
+    fixed_nodegroup=NodeGroup.objects.filter(pk=nodegroup_pk)
     topic = Topic.objects.filter(pk=topic_pk)
+    topics=Topic.objects.filter(node_group=nodegroup_pk)
     if request.method == 'POST':
         form = ThreadForm(request.POST, user=request.user)
         if form.is_valid():
@@ -258,7 +261,7 @@ def create_thread(request, topic_pk=None):
     else:
         form = ThreadForm()
 
-    return render(request, 'forum/create_thread.html', {'form': form, 'title': _('Create Thread'),'topic':topic})
+    return render(request, 'forum/create_thread.html', {'form': form, 'node_group':node_group, 'title': _('Create Thread'),'topic':topic,'fixed_nodegroup':fixed_nodegroup,'topics':topics})
 
 @login_required
 def create_topic(request,nodegroup_pk=None ):
@@ -374,7 +377,7 @@ def notification_view(request):
 class NotificationView(ListView):
 
     model = Notification
-    paginate_by = 30
+    paginate_by = 20
     template_name = 'forum/notifications.html'
     context_object_name = 'notifications'
 

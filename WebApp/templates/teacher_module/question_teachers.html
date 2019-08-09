@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "teacher_module/base.html" %}
 {% load static %}
 {% block title %}
 Polls
@@ -53,7 +53,7 @@ Polls
                                     <li><label>End date:</label></li>
                                 </ul>
                                 <h5 class="card-text text-justify">
-                                    <a href=" {% url 'polls' %}">
+                                    <a href=" {% url 'polls_teachers' %}">
                                         <div class="pollButtons">
                                             <button type="button" class="btn btn-info">View</button>
                                         </div>
@@ -75,7 +75,7 @@ Polls
                                     <li><label>End date:</label></li>
                                 </ul>
                                 <h5 class="card-text text-justify">
-                                    <a href=" {% url 'polls' %}">
+                                    <a href=" {% url 'polls_teachers' %}">
                                         <div class="pollButtons">
                                             <button type="button" class="btn btn-info">View</button>
                                         </div>
@@ -97,7 +97,7 @@ Polls
                                     <li><label>End date:</label></li>
                                 </ul>
                                 <h5 class="card-text text-justify">
-                                    <a href=" {% url 'polls' %}">
+                                    <a href=" {% url 'polls_teachers' %}">
                                         <div class="pollButtons">
                                             <button type="button" class="btn btn-info">View</button>
                                         </div>
@@ -120,7 +120,7 @@ Polls
                                     <li><label>End date:</label></li>
                                 </ul>
                                 <h5 class="card-text text-justify">
-                                    <a href=" {% url 'polls' %}">
+                                    <a href=" {% url 'polls_teachers' %}">
                                         <div class="pollButtons">
                                             <button type="button" class="btn btn-info">View</button>
                                         </div>
@@ -142,7 +142,7 @@ Polls
                                     <li><label>End date:</label></li>
                                 </ul>
                                 <h5 class="card-text text-justify">
-                                    <a href=" {% url 'polls' %}">
+                                    <a href=" {% url 'polls_teachers' %}">
                                         <div class="pollButtons">
                                             <button type="button" class="btn btn-info">View</button>
                                         </div>
@@ -164,7 +164,7 @@ Polls
                                     <li><label>End date:</label></li>
                                 </ul>
                                 <h5 class="card-text text-justify">
-                                    <a href=" {% url 'polls' %}">
+                                    <a href=" {% url 'polls_teachers' %}">
                                         <div class="pollButtons">
                                             <button type="button" class="btn btn-info">View</button>
                                         </div>
@@ -189,7 +189,7 @@ Polls
                                     <li><label>End date:</label></li>
                                 </ul>
                                 <h5 class="card-text text-justify">
-                                    <a href=" {% url 'polls' %}">
+                                    <a href=" {% url 'polls_teachers' %}">
                                         <div class="pollButtons">
                                             <button type="button" class="btn btn-info">View</button>
                                         </div>
@@ -211,7 +211,7 @@ Polls
                                     <li><label>End date:</label></li>
                                 </ul>
                                 <h5 class="card-text text-justify">
-                                    <a href=" {% url 'polls' %}">
+                                    <a href=" {% url 'polls_teachers' %}">
                                         <div class="pollButtons">
                                             <button type="button" class="btn btn-info">View</button>
                                         </div>
@@ -233,7 +233,7 @@ Polls
                                     <li><label>End date:</label></li>
                                 </ul>
                                 <h5 class="card-text text-justify">
-                                    <a href=" {% url 'polls' %}">
+                                    <a href=" {% url 'polls_teachers' %}">
                                         <div class="pollButtons">
                                             <button type="button" class="btn btn-info">View</button>
                                         </div>
@@ -256,7 +256,7 @@ Polls
                                     <li><label>End date:</label></li>
                                 </ul>
                                 <h5 class="card-text text-justify">
-                                    <a href=" {% url 'polls' %}">
+                                    <a href=" {% url 'polls_teachers' %}">
                                         <div class="pollButtons">
                                             <button type="button" class="btn btn-info">View</button>
                                         </div>
@@ -278,7 +278,7 @@ Polls
                                     <li><label>End date:</label></li>
                                 </ul>
                                 <h5 class="card-text text-justify">
-                                    <a href=" {% url 'polls' %}">
+                                    <a href=" {% url 'polls_teachers' %}">
                                         <div class="pollButtons">
                                             <button type="button" class="btn btn-info">View</button>
                                         </div>
@@ -300,7 +300,7 @@ Polls
                                     <li><label>End date:</label></li>
                                 </ul>
                                 <h5 class="card-text text-justify">
-                                    <a href=" {% url 'polls' %}">
+                                    <a href=" {% url 'polls_teachers' %}">
                                         <div class="pollButtons">
                                             <button type="button" class="btn btn-info">View</button>
                                         </div>
@@ -315,6 +315,7 @@ Polls
         </div>
 
     </div>
+    <!-- polls_teachers -->
     <div class="col-md-12 col-lg-3">
         <div class="categoryContainer">
             <div class="card" style="width: 22rem; height: 35rem;">
@@ -536,73 +537,7 @@ Polls
                                             </div>
                                         </form>
 
-                                        <!-- ................................. -->
-                                        <!-- <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left"
-                                                novalidate="">
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-12 col-sm-12 col-xs-12" id="categoryTitle"
-                                                        for="first-name">Category :
-                                                        <span class="generalLabel">General</span>
-                                                        <span class="sessionLabel" style="display:none;">Session</span>
-                                                        <span class="courseLabel" style="display:none;">Course</span>
-                                                        <span class="systemLabel" style="display:none;">System</span>
-                                                    </label>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-12 col-sm-12 col-xs-12" for="first-name">Title
-                                                        <span class="required">*</span>
-                                                    </label>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        <input type="text" id="title" required="required" class="form-control col-md-7 col-xs-12"
-                                                            placeholder="Create new survey">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-12 col-sm-12 col-xs-12">Start date<span
-                                                            class="required">*</span>
-                                                    </label>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        <input id="start-date" class="date-picker form-control col-md-7 col-xs-12"
-                                                            required="required" type="date">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-12 col-sm-12 col-xs-12">End date<span
-                                                            class="required">*</span>
-                                                    </label>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        <input id="end-date" class="date-picker form-control col-md-7 col-xs-12"
-                                                            required="required" type="date">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group" id="chooseSession" style="display: none;">
-                                                    <label class="control-label col-md-12 col-sm-12 col-xs-12" for="first-name">Choose
-                                                        Session
-                                                        <span class="required">*</span>
-                                                    </label>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        <select id="inputState" class="form-control col-md-7 col-xs-12">
-                                                            <option selected>Choose...</option>
-                                                            <option>...</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group" id="chooseCourse" style="display: none;">
-                                                    <label class="control-label col-md-12 col-sm-12 col-xs-12" for="first-name">Choose
-                                                        Course
-                                                        <span class="required">*</span>
-                                                    </label>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        <select id="inputState" class="form-control col-md-7 col-xs-12">
-                                                            <option selected>Choose...</option>
-                                                            <option>...</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <button type="button" class="btn btn-primary control-label col-md-12 col-sm-12 col-xs-12"
-                                                    id="nextButton">Next</button>
-    
-                                            </form> -->
+
                                     </div>
                                 </div>
                             </div>
@@ -612,94 +547,7 @@ Polls
             </article>
         </div>
 
-        <!-- ......................................................... -->
-        <!-- 
-            <div class="popup-inner " id="questionPopup" style="display:none;">
-                <article class="index-form">
-                    <form id="popupForm">
-                        <div class="label_inputs">
-    
-                            <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <div class="x_panel">
-                                        <div class="x_content">
-                                            <br>
-                                            <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left"
-                                                novalidate="">
-    
-                                                <div class="ln_solid"></div>
-                                                <div class="form-group">
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 ">
-                                                        <div class="selectQuestionType">
-                                                            <div class="btn-group" id="switchButtons" data-toggle="buttons">
-                                                                <label class="mcq_question btn btn-default btn-on btn-md active">
-                                                                    <input type="radio" value="1" name="multifeatured_module[module_id][switchButtons]"
-                                                                        checked="checked">MCQ</label>
-                                                                <label class="short_question btn btn-default btn-off btn-md ">
-                                                                    <input type="radio" value="0" name="multifeatured_module[module_id][switchButtons]">SAQ</label>
-                                                            </div>
-    
-                                                            <div class="questionContainer">
-                                                                <div id="mcq_que">
-                                                                    <div class="questionSection ">
-                                                                        <label for="questions">Questions:</label>
-                                                                        <button class="btn btn-success" id="newQuestion">+
-                                                                            Questions</button>
-                                                                    </div>
-    
-                                                                    <div class="optionContainer">
-                                                                        <ul id="mySelect" style="list-style: none;">
-                                                                        </ul>
-                                                                    </div>
-    
-                                                                    <div class="row">
-                                                                        <a href="">
-                                                                            <div class="btn btn-info col-md-12 col-sm-12 ">Save</div>
-                                                                        </a>
-                                                                        <a href="">
-                                                                            <div class="btn btn-primary col-md-12 col-sm-12 ">Save
-                                                                                As New</div>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-    
-                                                                <div id="short_que" style="display: none;">
-                                                                    <div class="queContainer">
-                                                                        <div class="form-group ">
-                                                                            <label for="questions">Questions:</label>
-                                                                            <button class="btn btn-success"><a href="" id="addButtons">+
-                                                                                    Questions</a></button>
-                                                                        </div>
-                                                                        <div class="short_que_Container">
-                                                                            <ul id="short_que_add" style="list-style: none;">
-                                                                            </ul>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <a href="">
-                                                                                <div class="btn btn-info col-md-12 col-sm-12 ">Save</div>
-                                                                            </a>
-                                                                            <a href="">
-                                                                                <div class="btn btn-primary col-md-12 col-sm-12 ">Save
-                                                                                    As New</div>
-                                                                            </a>
-                                                                        </div>
-    
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </article>
-            </div> -->
+
 
 
     </div>

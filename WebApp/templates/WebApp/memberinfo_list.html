@@ -17,6 +17,7 @@
             </ul>
         </nav>
         <hr class="header_hr">
+        <div class="col-md-6 text-danger">{% include 'WebApp/theme/alerts.html'  %}</div> 
         <div class="btn-createnew">
             <a class="btn btn-success" href="{% url 'memberinfo_create' %}">Create new Member</a>
         </div>
@@ -69,6 +70,10 @@
 {% endblock %}
 {% block customjss %}
     <script type="text/javascript">
+            setTimeout( function(){
+                $('#message').fadeOut('slow');
+            }, 3000);
+        
         $(document).ready(function () {
 
             var table_main = $('.table').DataTable({

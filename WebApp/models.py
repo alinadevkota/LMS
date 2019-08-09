@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.files.storage import FileSystemStorage
 from django.db import models as models
 from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, BooleanField, \
-    ImageField
+    ImageField,FileField
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
@@ -180,7 +180,6 @@ class LectureInfo(models.Model):
         return self.Lecture_Name
 
 
-
 class ChapterInfo(models.Model):
     # Fields
     Chapter_No = IntegerField(blank=True, null=True)
@@ -243,10 +242,10 @@ class ChapterInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('chapterinfo_detail', args=(self.pk,))
+        return reverse('chapterinfo_detail', args=(self.Lecture_Code.id,self.pk,))
 
     def get_update_url(self):
-        return reverse('chapterinfo_update', args=(self.pk,))
+        return reverse('chapterinfo_update', args=(self.Lecture_Code.id,self.pk,))
 
     def __str__(self):
         return self.Chapter_Name
@@ -349,118 +348,204 @@ class InningInfo(models.Model):
         return self.Inning_Name
 
 
-class HomeworkInfo(models.Model):
-    Homework_Topic = CharField(max_length=500, blank=True, null=True)
+# class HomeworkInfo(models.Model):
+#     Homework_Topic = CharField(max_length=500, blank=True, null=True)
+#     Use_Flag = BooleanField(default=True)
+#     Register_DateTime = DateTimeField(auto_now_add=True)
+#     Updated_DateTime = DateTimeField(auto_now=True)
+#     Register_Agent = CharField(max_length=500, blank=True, null=True)
+#
+#     Chapter_Code = ForeignKey(
+#         'ChapterInfo',
+#         related_name="homeworkinfos", on_delete=models.DO_NOTHING
+#     )
+#
+#     def __str__(self):
+#         return self.Homework_Topic
+
+
+# AssignmentModels
+class AssignmentInfo(models.Model):
+    Assignment_Topic = CharField(max_length=500, blank=True, null=True)
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
-
+    Assignment_Deadline = DateTimeField(null=True, blank=True)
+    Lecture_Code = ForeignKey(
+        'LectureInfo',
+        related_name="assignmentinfos", on_delete=models.DO_NOTHING
+    )
     Chapter_Code = ForeignKey(
         'ChapterInfo',
-        related_name="homeworkinfos", on_delete=models.DO_NOTHING
+        related_name="assignmentinfos", on_delete=models.DO_NOTHING
+    )
+    Register_Agent = ForeignKey(
+        'MemberInfo',
+        related_name="assignmentinfos", on_delete=models.DO_NOTHING
     )
 
     def __str__(self):
-        return self.Homework_Topic
+        return self.Assignment_Topic
+
+    def get_absolute_url(self):
+        return reverse('assignmentinfo_detail', args=(self.Lecture_Code.id,self.Chapter_Code.id,self.pk,))
+
+    def get_update_url(self):
+        return reverse('assignmentinfo_update', args=(self.Lecture_Code.id,self.Chapter_Code.id,self.pk,))
 
 
-class AssignHomeworkInfo(models.Model):
+
+
+def upload_to(instance,filename):
+    return 'questions/{0}/{1}'.format(instance.id,filename)
+
+class QuestionInfo(models.Model):
+    # Fields
+    # subject_code = IntegerField(blank=True, null=True)
+    # question_type = CharField(max_length=10, blank=True, null=True)
+    Question_Title = CharField(max_length=4000, blank=True, null=True)
+    # question_media_type = CharField(max_length=10, blank=True, null=True)
+    # question_media_file = CharField(max_length=200, blank=True, null=True)
+    Question_Score = IntegerField(blank=True, null=True)
+    # question_head = CharField(max_length=2000, blank=True, null=True)
+    # question_essay = CharField(max_length=500, blank=True, null=True)
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+
+    Question_Media_File = FileField(upload_to=upload_to, blank=True, null=True)
+    Question_Description = TextField(blank=True, null=True)
+    # question_level = IntegerField(blank=True, null=True)
+    # teacher_contents = CharField(max_length=500, blank=True, null=True)
+    # student_contents = CharField(max_length=500, blank=True, null=True)
+
+    # Relationship Fields
+    Lecture_Code = ForeignKey(
+        'LectureInfo',
+        related_name="questioninfos", on_delete=models.DO_NOTHING
+    )
+    Chapter_Code = ForeignKey(
+        'ChapterInfo',
+        related_name="questioninfos", on_delete=models.DO_NOTHING
+    )
+    Register_Agent = ForeignKey(
+        'MemberInfo',
+        related_name="questioninfos", on_delete=models.DO_NOTHING
+    )
+
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('questioninfo_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('questioninfo_update', args=(self.pk,))
+
+
+
+
+class AssignAssignmentInfo(models.Model):
     # Fields
     # Subject_code = IntegerField(blank=True, null=True)
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
+
     # Relationship Fields
     Inning_Code = ForeignKey(
         'InningInfo',
-        related_name="assignhomeworkinfos", on_delete=models.DO_NOTHING
+        related_name="assignassignmentinfos", on_delete=models.DO_NOTHING
     )
-    Homework_Code = ForeignKey(
-        'HomeworkInfo',
-        related_name="assignhomeworkinfos", on_delete=models.DO_NOTHING
+    Assignment_Code = ForeignKey(
+        'AssignmentInfo',
+        related_name="assignassignmentinfos", on_delete=models.DO_NOTHING
     )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('assignhomeworkinfo_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('assignhomeworkinfo_update', args=(self.pk,))
-
-
-class OmrQuestionInfo(models.Model):
-    # Fields
-    # subject_code = IntegerField(blank=True, null=True)
-
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
-
-    Question_Level = IntegerField(blank=True, null=True)
-    Question_Score = IntegerField(blank=True, null=True)
-    Question_Description = TextField(blank=True, null=True)
-    # Relationship Fields
-    Homework_Code = ForeignKey(
-        'HomeworkInfo',
-        related_name="omrquestioninfos", on_delete=models.DO_NOTHING
-    )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('omrquestioninfo_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('omrquestioninfo_update', args=(self.pk,))
-
-
-class OmrAnswerInfo(models.Model):
-    # Fields
-    # subject_code = IntegerField(blank=True, null=True)
-    # omr_answer = IntegerField(blank=True, null=True)
-    # omr_answer_idx = IntegerField(blank=True, null=True)
-    # omr_answer_correct = CharField(max_length=200, blank=True, null=True)
-    # question_score = IntegerField(blank=True, null=True)
-
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    Answer_Description = models.TextField(blank=True, null=True)
-    Answer_Score = IntegerField(blank=True, null=True)
-    # Relationship Fields
-    # lecture_code = ForeignKey(
-    #     'LectureInfo',
-    #      related_name="omranswerinfos", on_delete=models.DO_NOTHING
-    # )
-    # chapter_code = ForeignKey(
-    #     'ChapterInfo',
-    #      related_name="omranswerinfos", on_delete=models.DO_NOTHING
-    # )
-    Student_Code = ForeignKey(
+    Assigned_By = ForeignKey(
         'MemberInfo',
-        related_name="omranswerinfos", on_delete=models.DO_NOTHING
+        related_name="assignassignmentinfos", on_delete=models.DO_NOTHING
+    )
+
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('assignassignmentinfo_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('assignassignmentinfo_update', args=(self.pk,))
+
+
+class AssignQuestionInfo(models.Model):
+    # Fields
+    # subject_code = IntegerField(blank=True, null=True)
+    # question_type = CharField(max_length=20, blank=True, null=True)
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    # Register_Agent = CharField(max_length=500, blank=True, null=True)
+
+    # Relationship Fields
+    Question_Code = ForeignKey(
+        'QuestionInfo',
+        related_name="assignquestioninfos", on_delete=models.DO_NOTHING
+    )
+    Assignment_Code = ForeignKey(
+        'AssignmentInfo',
+        related_name="assignquestioninfos", on_delete=models.DO_NOTHING
+    )
+
+    Register_Agent = ForeignKey(
+        'MemberInfo',
+        related_name="assignquestioninfos", on_delete=models.DO_NOTHING
+    )
+
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('assignquestioninfo_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('assignquestioninfo_update', args=(self.pk,))
+
+def assignment_upload(instance, filename):
+        return 'assignments/{0}/{1}'.format(instance.Assignment_Code.id, filename)
+
+class AssignAnswerInfo(models.Model):
+    # Fields
+    # subject_code = IntegerField(blank=True, null=True)
+
+    Assignment_Score = IntegerField(blank=True, null=True)
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Assignment_Answer = TextField(null=True, blank=True)
+    Assignment_File = FileField(upload_to=assignment_upload, null=True, blank=True)
+
+    # Relationship Fields
+    Assignment_Code = ForeignKey(
+        'AssignmentInfo',
+        related_name="assignanswerinfos", on_delete=models.DO_NOTHING
     )
     Question_Code = ForeignKey(
-        'OmrQuestionInfo',
-        related_name="omranswerinfos", on_delete=models.DO_NOTHING
+        'QuestionInfo',
+        related_name="assignanswerinfos", on_delete=models.DO_NOTHING
+    )
+    Student_Code = ForeignKey(
+        'MemberInfo',
+        related_name="assignanswerinfos", on_delete=models.DO_NOTHING
     )
 
-    # lesson_code = ForeignKey(
-    #     'LessonInfo',
-    #      related_name="omranswerinfos", on_delete=models.DO_NOTHING
-    # )
 
     class Meta:
         ordering = ('-pk',)
@@ -469,10 +554,90 @@ class OmrAnswerInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('omranswerinfo_detail', args=(self.pk,))
+        return reverse('assignanswerinfo_detail', args=(self.pk,))
 
     def get_update_url(self):
-        return reverse('omranswerinfo_update', args=(self.pk,))
+        return reverse('assignanswerinfo_update', args=(self.pk,))
+
+
+# class OmrQuestionInfo(models.Model):
+#     # Fields
+#     # subject_code = IntegerField(blank=True, null=True)
+#
+#     Use_Flag = BooleanField(default=True)
+#     Register_DateTime = DateTimeField(auto_now_add=True)
+#     Updated_DateTime = DateTimeField(auto_now=True)
+#     Register_Agent = CharField(max_length=500, blank=True, null=True)
+#
+#     Question_Level = IntegerField(blank=True, null=True)
+#     Question_Score = IntegerField(blank=True, null=True)
+#     Question_Description = TextField(blank=True, null=True)
+#     # Relationship Fields
+#     Homework_Code = ForeignKey(
+#         'HomeworkInfo',
+#         related_name="omrquestioninfos", on_delete=models.DO_NOTHING
+#     )
+#
+#     class Meta:
+#         ordering = ('-pk',)
+#
+#     def __unicode__(self):
+#         return u'%s' % self.pk
+#
+#     def get_absolute_url(self):
+#         return reverse('omrquestioninfo_detail', args=(self.pk,))
+#
+#     def get_update_url(self):
+#         return reverse('omrquestioninfo_update', args=(self.pk,))
+
+
+# class OmrAnswerInfo(models.Model):
+#     # Fields
+#     # subject_code = IntegerField(blank=True, null=True)
+#     # omr_answer = IntegerField(blank=True, null=True)
+#     # omr_answer_idx = IntegerField(blank=True, null=True)
+#     # omr_answer_correct = CharField(max_length=200, blank=True, null=True)
+#     # question_score = IntegerField(blank=True, null=True)
+#
+#     Use_Flag = BooleanField(default=True)
+#     Register_DateTime = DateTimeField(auto_now_add=True)
+#     Updated_DateTime = DateTimeField(auto_now=True)
+#     Answer_Description = models.TextField(blank=True, null=True)
+#     Answer_Score = IntegerField(blank=True, null=True)
+#     # Relationship Fields
+#     # lecture_code = ForeignKey(
+#     #     'LectureInfo',
+#     #      related_name="omranswerinfos", on_delete=models.DO_NOTHING
+#     # )
+#     # chapter_code = ForeignKey(
+#     #     'ChapterInfo',
+#     #      related_name="omranswerinfos", on_delete=models.DO_NOTHING
+#     # )
+#     Student_Code = ForeignKey(
+#         'MemberInfo',
+#         related_name="omranswerinfos", on_delete=models.DO_NOTHING
+#     )
+#     Question_Code = ForeignKey(
+#         'OmrQuestionInfo',
+#         related_name="omranswerinfos", on_delete=models.DO_NOTHING
+#     )
+#
+#     # lesson_code = ForeignKey(
+#     #     'LessonInfo',
+#     #      related_name="omranswerinfos", on_delete=models.DO_NOTHING
+#     # )
+#
+#     class Meta:
+#         ordering = ('-pk',)
+#
+#     def __unicode__(self):
+#         return u'%s' % self.pk
+#
+#     def get_absolute_url(self):
+#         return reverse('omranswerinfo_detail', args=(self.pk,))
+#
+#     def get_update_url(self):
+#         return reverse('omranswerinfo_update', args=(self.pk,))
 
 
 class InningGroup(models.Model):
@@ -508,7 +673,6 @@ class InningGroup(models.Model):
 
     def get_update_url(self):
         return reverse('inninggroup_update', args=(self.pk,))
-
 
 
 class GroupMapping(models.Model):
@@ -641,43 +805,6 @@ class QuizInfo(models.Model):
 
     def get_update_url(self):
         return reverse('quizinfo_update', args=(self.pk,))
-
-
-class AssignQuestionInfo(models.Model):
-    # Fields
-    subject_code = IntegerField(blank=True, null=True)
-    question_type = CharField(max_length=20, blank=True, null=True)
-
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
-
-    # Relationship Fields
-    question_code = ForeignKey(
-        'OmrQuestionInfo',
-        related_name="assignquestioninfos", on_delete=models.DO_NOTHING
-    )
-    lecture_code = ForeignKey(
-        'LectureInfo',
-        related_name="assignquestioninfos", on_delete=models.DO_NOTHING
-    )
-    chapter_code = ForeignKey(
-        'ChapterInfo',
-        related_name="assignquestioninfos", on_delete=models.DO_NOTHING
-    )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('assignquestioninfo_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('assignquestioninfo_update', args=(self.pk,))
 
 
 class BoardInfo(models.Model):
@@ -870,45 +997,6 @@ class ChapterWrite(models.Model):
         return reverse('chapterwrite_update', args=(self.pk,))
 
 
-#
-# class HomeworkInfo(models.Model):
-#
-#     # Fields
-#     subject_code = IntegerField(blank=True, null=True)
-#     level_score = IntegerField(blank=True, null=True)
-#
-#     Use_Flag = BooleanField(default=True)
-#     Register_DateTime = DateTimeField(auto_now_add=True)
-#     Updated_DateTime = DateTimeField(auto_now=True)
-#     Register_Agent = CharField(max_length=500, blank=True, null=True)
-#
-#     level = IntegerField(blank=True, null=True)
-#
-#     # Relationship Fields
-#     question_code = ForeignKey(
-#         'OmrQuestionInfo', on_delete=models.DO_NOTHING
-#     )
-#     lecture_code = ForeignKey(
-#         'LectureInfo',
-#          related_name="homeworkinfos", on_delete=models.DO_NOTHING
-#     )
-#     chapter_code = ForeignKey(
-#         'ChapterInfo',
-#          related_name="homeworkinfos", on_delete=models.DO_NOTHING
-#     )
-#
-#     class Meta:
-#         ordering = ('-pk',)
-#
-#     def __unicode__(self):
-#         return u'%s' % self.pk
-#
-#     def get_absolute_url(self):
-#         return reverse('homeworkinfo_detail', args=(self.pk,))
-#
-#
-#     def get_update_url(self):
-#         return reverse('homeworkinfo_update', args=(self.pk,))
 
 
 class LearningNote(models.Model):
@@ -1131,158 +1219,109 @@ class MessageInfo(models.Model):
         return reverse('messageinfo_update', args=(self.pk,))
 
 
-class OmrAssignInfo(models.Model):
-    # Fields
-    subject_code = IntegerField(blank=True, null=True)
-
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
-
-    # Relationship Fields
-    question_code = ForeignKey(
-        'OmrQuestionInfo',
-        related_name="omrassigninfos", on_delete=models.DO_NOTHING
-    )
-    lecture_code = ForeignKey(
-        'LectureInfo',
-        related_name="omrassigninfos", on_delete=models.DO_NOTHING
-    )
-    chapter_code = ForeignKey(
-        'ChapterInfo',
-        related_name="omrassigninfos", on_delete=models.DO_NOTHING
-    )
-    member_code = ForeignKey(
-        'MemberInfo',
-        related_name="omrassigninfos", on_delete=models.DO_NOTHING
-    )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('omrassigninfo_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('omrassigninfo_update', args=(self.pk,))
-
-
-class OmrExampleInfo(models.Model):
-    # Fields
-    omr_example_correct = CharField(max_length=1, blank=True, null=True)
-    omr_example_idx = IntegerField(blank=True, null=True)
-
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
-
-    # Relationship Fields
-    question_code = ForeignKey(
-        'OmrQuestionInfo',
-        related_name="omrexampleinfos", on_delete=models.DO_NOTHING
-    )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('omrexampleinfo_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('omrexampleinfo_update', args=(self.pk,))
-
-
-class QAnswerInfo(models.Model):
-    # Fields
-    subject_code = IntegerField(blank=True, null=True)
-    question_type = CharField(max_length=10, blank=True, null=True)
-    question_answer = CharField(max_length=200, blank=True, null=True)
-    question_idx = IntegerField(blank=True, null=True)
-    question_correct = CharField(max_length=200, blank=True, null=True)
-    question_score = IntegerField(blank=True, null=True)
-
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
-
-    # Relationship Fields
-    lecture_code = ForeignKey(
-        'LectureInfo',
-        related_name="qanswerinfos", on_delete=models.DO_NOTHING
-    )
-    chapter_code = ForeignKey(
-        'ChapterInfo',
-        related_name="qanswerinfos", on_delete=models.DO_NOTHING
-    )
-    member_code = ForeignKey(
-        'MemberInfo',
-        related_name="qanswerinfos", on_delete=models.DO_NOTHING
-    )
-    question_code = ForeignKey(
-        'OmrQuestionInfo',
-        related_name="qanswerinfos", on_delete=models.DO_NOTHING
-    )
-    lesson_code = ForeignKey(
-        'LessonInfo',
-        related_name="qanswerinfos", on_delete=models.DO_NOTHING
-    )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('qanswerinfo_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('qanswerinfo_update', args=(self.pk,))
+# class OmrAssignInfo(models.Model):
+#     # Fields
+#     subject_code = IntegerField(blank=True, null=True)
+#
+#     Use_Flag = BooleanField(default=True)
+#     Register_DateTime = DateTimeField(auto_now_add=True)
+#     Updated_DateTime = DateTimeField(auto_now=True)
+#     Register_Agent = CharField(max_length=500, blank=True, null=True)
+#
+#     # Relationship Fields
+#     question_code = ForeignKey(
+#         'OmrQuestionInfo',
+#         related_name="omrassigninfos", on_delete=models.DO_NOTHING
+#     )
+#     lecture_code = ForeignKey(
+#         'LectureInfo',
+#         related_name="omrassigninfos", on_delete=models.DO_NOTHING
+#     )
+#     chapter_code = ForeignKey(
+#         'ChapterInfo',
+#         related_name="omrassigninfos", on_delete=models.DO_NOTHING
+#     )
+#     member_code = ForeignKey(
+#         'MemberInfo',
+#         related_name="omrassigninfos", on_delete=models.DO_NOTHING
+#     )
+#
+#     class Meta:
+#         ordering = ('-pk',)
+#
+#     def __unicode__(self):
+#         return u'%s' % self.pk
+#
+#     def get_absolute_url(self):
+#         return reverse('omrassigninfo_detail', args=(self.pk,))
+#
+#     def get_update_url(self):
+#         return reverse('omrassigninfo_update', args=(self.pk,))
+#
+#
+# class OmrExampleInfo(models.Model):
+#     # Fields
+#     omr_example_correct = CharField(max_length=1, blank=True, null=True)
+#     omr_example_idx = IntegerField(blank=True, null=True)
+#
+#     Use_Flag = BooleanField(default=True)
+#     Register_DateTime = DateTimeField(auto_now_add=True)
+#     Updated_DateTime = DateTimeField(auto_now=True)
+#     Register_Agent = CharField(max_length=500, blank=True, null=True)
+#
+#     # Relationship Fields
+#     question_code = ForeignKey(
+#         'OmrQuestionInfo',
+#         related_name="omrexampleinfos", on_delete=models.DO_NOTHING
+#     )
+#
+#     class Meta:
+#         ordering = ('-pk',)
+#
+#     def __unicode__(self):
+#         return u'%s' % self.pk
+#
+#     def get_absolute_url(self):
+#         return reverse('omrexampleinfo_detail', args=(self.pk,))
+#
+#     def get_update_url(self):
+#         return reverse('omrexampleinfo_update', args=(self.pk,))
 
 
-class QAnswerLog(models.Model):
-    # Fields
-    question_answer = CharField(max_length=250, blank=True, null=True)
-    question_idx = CharField(max_length=250, blank=True, null=True)
-    question_score = IntegerField(blank=True, null=True)
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
-    # Relationship Fields
-    lecture_code = ForeignKey(
-        'LectureInfo',
-        related_name="qanswerlogs", on_delete=models.DO_NOTHING
-    )
-    member_code = ForeignKey(
-        'MemberInfo',
-        related_name="qanswerlogs", on_delete=models.DO_NOTHING
-    )
-    question_code = ForeignKey(
-        'OmrQuestionInfo',
-        related_name="qanswerlogs", on_delete=models.DO_NOTHING
-    )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('qanswerlog_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('qanswerlog_update', args=(self.pk,))
+# class QAnswerLog(models.Model):
+#     # Fields
+#     question_answer = CharField(max_length=250, blank=True, null=True)
+#     question_idx = CharField(max_length=250, blank=True, null=True)
+#     question_score = IntegerField(blank=True, null=True)
+#     Use_Flag = BooleanField(default=True)
+#     Register_DateTime = DateTimeField(auto_now_add=True)
+#     Updated_DateTime = DateTimeField(auto_now=True)
+#     Register_Agent = CharField(max_length=500, blank=True, null=True)
+#     # Relationship Fields
+#     lecture_code = ForeignKey(
+#         'LectureInfo',
+#         related_name="qanswerlogs", on_delete=models.DO_NOTHING
+#     )
+#     member_code = ForeignKey(
+#         'MemberInfo',
+#         related_name="qanswerlogs", on_delete=models.DO_NOTHING
+#     )
+#     # question_code = ForeignKey(
+#     #     'OmrQuestionInfo',
+#     #     related_name="qanswerlogs", on_delete=models.DO_NOTHING
+#     # )
+#
+#     class Meta:
+#         ordering = ('-pk',)
+#
+#     def __unicode__(self):
+#         return u'%s' % self.pk
+#
+#     def get_absolute_url(self):
+#         return reverse('qanswerlog_detail', args=(self.pk,))
+#
+#     def get_update_url(self):
+#         return reverse('qanswerlog_update', args=(self.pk,))
 
 
 class QExampleInfo(models.Model):
@@ -1297,10 +1336,10 @@ class QExampleInfo(models.Model):
     q_example_type = CharField(max_length=50, blank=True, null=True)
 
     # Relationship Fields
-    question_code = ForeignKey(
-        'OmrQuestionInfo',
-        related_name="qexampleinfos", on_delete=models.DO_NOTHING
-    )
+    # question_code = ForeignKey(
+    #     'OmrQuestionInfo',
+    #     related_name="qexampleinfos", on_delete=models.DO_NOTHING
+    # )
 
     class Meta:
         ordering = ('-pk',)
@@ -1313,51 +1352,6 @@ class QExampleInfo(models.Model):
 
     def get_update_url(self):
         return reverse('qexampleinfo_update', args=(self.pk,))
-
-
-class QuestionInfo(models.Model):
-    # Fields
-    subject_code = IntegerField(blank=True, null=True)
-    question_type = CharField(max_length=10, blank=True, null=True)
-    question = CharField(max_length=4000, blank=True, null=True)
-    question_media_type = CharField(max_length=10, blank=True, null=True)
-    question_media_file = CharField(max_length=200, blank=True, null=True)
-    question_score = IntegerField(blank=True, null=True)
-    question_head = CharField(max_length=2000, blank=True, null=True)
-    question_essay = CharField(max_length=500, blank=True, null=True)
-
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
-
-    question_media_file2 = CharField(max_length=250, blank=True, null=True)
-    question_comment = TextField(blank=True, null=True)
-    question_level = IntegerField(blank=True, null=True)
-    teacher_contents = CharField(max_length=500, blank=True, null=True)
-    student_contents = CharField(max_length=500, blank=True, null=True)
-
-    # Relationship Fields
-    lecture_code = ForeignKey(
-        'LectureInfo',
-        related_name="questioninfos", on_delete=models.DO_NOTHING
-    )
-    chapter_code = ForeignKey(
-        'ChapterInfo',
-        related_name="questioninfos", on_delete=models.DO_NOTHING
-    )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('questioninfo_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('questioninfo_update', args=(self.pk,))
 
 
 class QuizAnswerInfo(models.Model):
@@ -1643,12 +1637,13 @@ class TodoTInfo(models.Model):
     def get_update_url(self):
         return reverse('todotinfo_update', args=(self.pk,))
 
+
 class Events(models.Model):
     even_id = models.AutoField(primary_key=True)
-    event_name = models.CharField(max_length=255,null=True,blank=True)
-    start_date = models.DateTimeField(null=True,blank=True)
-    end_date = models.DateTimeField(null=True,blank=True)
-    event_type = models.CharField(max_length=10,null=True,blank=True)
+    event_name = models.CharField(max_length=255, null=True, blank=True)
+    start_date = models.DateTimeField(null=True, blank=True)
+    end_date = models.DateTimeField(null=True, blank=True)
+    event_type = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
         return self.event_name

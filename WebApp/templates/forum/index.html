@@ -46,6 +46,7 @@
 
 
         {% for nodegroup in node_groups %}
+        {% if nodegroup.topic_count > 0 %}
 
         <li class="list-group-item">
             <div class="media v-middle">
@@ -86,21 +87,18 @@
                             class="link-text-color">{{ thread.topic.node_group.title }}</a>
                         |
 
-                        Topic:
+                        Sub Category:
                         <a href="{% url 'forum:topic' pk=thread.topic.pk %}"
                             class="link-text-color">{{ thread.topic.title }}</a>
-                        | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }}
+
 
                         <br>
                         posted by
                         <a href="{% url 'forum:user_info' pk=thread.user.pk %}" class="link-text-color">
                             <img src="/media/{{ thread.user.Member_Avatar }}" class="img-circle width-20">
                             {{ thread.user.username }}</a>
-                        |<span>{% blocktrans with view_count=thread.view_count %}
-                            <i class="fa fa-eye"></i>
-                            viewed
-                            {{ view_count }}
-                            times{% endblocktrans %}</span>&nbsp;
+                        | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }} |
+                        &nbsp;
                         |<i class="fa fa-clock-o fa-fw"></i> Last Replied: {{ thread.last_replied }}
 
 
@@ -113,6 +111,12 @@
                     <a href="{% url 'forum:thread' pk=thread.pk %}" class="btn btn-white text-light"><i
                             class="fa fa-comments fa-fw"></i>
                         {{ thread.reply_count }}</a>
+
+                    <span class="btn btn-white text-light">{% blocktrans with view_count=thread.view_count %}
+                        <i class="fa fa-eye"></i>
+                        {{ view_count }}
+                        {% endblocktrans %}</span>
+
                 </div>
 
 
@@ -126,11 +130,14 @@
         </div>
 
 
-
+        {% else %}
+        {% endif %}
         {% endfor %}
 
     </ul>
     <div class="clearfix"></div>
 </div>
+
+
 
 {% endblock %}
