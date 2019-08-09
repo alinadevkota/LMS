@@ -29,15 +29,15 @@ class EssayForm(forms.Form):
 
 class QuizForm(forms.ModelForm):
 
-    mcquestion = forms.ModelMultipleChoiceField(
-        queryset=MCQuestion.objects.all(),
-        initial=[],
-        required=False,
-        # label=_("Questions"),
-        widget= AddAnotherWidgetWrapper(
-                forms.SelectMultiple,
-                reverse_lazy('mcquestion_create'),
-            ))
+    # mcquestion = forms.ModelMultipleChoiceField(
+    #     queryset=MCQuestion.objects.all(),
+    #     initial=[],
+    #     required=False,
+    #     # label=_("Questions"),
+    #     widget= AddAnotherWidgetWrapper(
+    #             forms.SelectMultiple,
+    #             reverse_lazy('mcquestion_create'),
+    #         ))
 
     class Meta:
         model = Quiz
