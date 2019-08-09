@@ -26,9 +26,9 @@
                     {% if notification.thread %}
                     {% url 'forum:thread' notification.thread_id as thread_url %}
                     <a href="{{ thread_url }}">
-                        <span class="image"><img src="/media/{{ notification.sender.Member_Avatar }}" alt="" /></span>
+                        <span class=""><img src="/media/{{ notification.sender.Member_Avatar }}" alt="" /></span>
                         <span>
-                            <span>{{ notification.sender }} </span>
+                            <span class="title">{{ notification.sender }} </span>
                             <span class="time">{{ notification.pub_date }}</span>
                         </span>
                         <span class="message">

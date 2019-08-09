@@ -11,7 +11,7 @@ from django.utils.translation import gettext as _
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import DetailView, ListView, UpdateView, CreateView
+from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView
 from django.views.generic.edit import FormView
 from django.core.paginator import Paginator
 
@@ -33,7 +33,7 @@ from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterCon
     AssignQuestionInfo, AssignAnswerInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
     LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
-     QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
+    QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, Events
 from datetime import datetime
 import json
@@ -146,21 +146,21 @@ def start(request):
     if request.user.is_authenticated:
 
         if request.user.Is_CenterAdmin:
-            thread = Thread.objects.filter()
-            course = LectureInfo.objects.order_by('Register_DateTime')[:4]
+            thread = Thread.objects.order_by('-pub_date')[:7]
+            course = LectureInfo.objects.order_by('-Register_DateTime')[:4]
             coursecount = LectureInfo.objects.count()
             studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
             teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
-            parentcount = MemberInfo.objects.filter(Is_Parent=True, Center_Code=request.user.Center_Code).count
+            threadcount = Thread.objects.count()
             totalcount = MemberInfo.objects.filter(Center_Code=request.user.Center_Code).count
 
             # return HttpResponse("default home")
             return render(request, "WebApp/homepage.html",
                           {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
                            'teachercount': teachercount,
-                           'parentcount': parentcount, 'totalcount': totalcount, 'thread': thread})
+                           'threadcount': threadcount, 'totalcount': totalcount, 'thread': thread})
         if request.user.Is_Student:
-            return redirect('students_dashboard')
+            return redirect('student_home')
         if request.user.Is_Teacher:
             return redirect('teacher_home')
         if request.user.Is_Parent:
@@ -201,10 +201,16 @@ def editprofile(request):
     return render(request, 'registration/editprofile.html', {'form': form})
 
 
-class register(generic.CreateView):
+class register(CreateView):
+    model = MemberInfo
     form_class = UserRegisterForm
     success_url = reverse_lazy('loginsuccess')
     template_name = 'registration/register.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['centers'] = CenterInfo.objects.all()
+        return context
 
 
 def change_password_others(request, pk):
@@ -310,13 +316,26 @@ class MemberInfoUpdateView(UpdateView):
     form_class = MemberInfoForm
 
 
-def MemberInfoDeleteView(request, pk):
-    MemberInfo.objects.filter(pk=pk).delete()
+class MemberInfoDeleteView(DeleteView):
+    model = MemberInfo
+    success_url = reverse_lazy('memberinfo_list')
+
+    def post(self, request, *args, **kwargs):
+        try:
+            return self.delete(request, *args, **kwargs)
+        except:
+            messages.error(request,
+                           "You can't delete this user instead you can turn off the status value which will disable the user.")
+            return redirect('memberinfo_list')
+
+
+# def MemberInfoDeleteView(request, pk):
+#     MemberInfo.objects.filter(pk=pk).delete()
 
 
 class LectureInfoListView(ListView):
     model = LectureInfo
-    paginate_by = 12
+    paginate_by = 8
 
     def get_queryset(self):
         qs = self.model.objects.all()
@@ -357,14 +376,29 @@ class ChapterInfoCreateView(CreateView):
     model = ChapterInfo
     form_class = ChapterInfoForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        return context
+
 
 class ChapterInfoDetailView(DetailView):
     model = ChapterInfo
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['assignments'] = AssignmentInfo.objects.filter(Chapter_Code=self.kwargs.get('pk'))
+        return context
 
 
 class ChapterInfoUpdateView(UpdateView):
     model = ChapterInfo
     form_class = ChapterInfoForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        return context
 
 
 class ChapterContentsInfoListView(ListView):
@@ -484,6 +518,12 @@ class AssignmentInfoCreateView(CreateView):
     model = AssignmentInfo
     form_class = AssignmentInfoForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
+        return context
+
 
 class AssignmentInfoDetailView(DetailView):
     model = AssignmentInfo
@@ -492,6 +532,12 @@ class AssignmentInfoDetailView(DetailView):
 class AssignmentInfoUpdateView(UpdateView):
     model = AssignmentInfo
     form_class = AssignmentInfoForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
+        return context
 
 
 class QuestionInfoListView(ListView):

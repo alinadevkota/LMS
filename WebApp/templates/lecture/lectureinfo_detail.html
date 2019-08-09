@@ -81,19 +81,10 @@
                     <td>{{ object.Register_Agent }}</td>
                 </tr>
 
-                {#            <tr>#}
-                {#                <td>Center Code</td>#}
-                {#                <td>{{ object.Center_Code }}</td>#}
-                {#            </tr>#}
                 <tr>
                     <td>Teacher Code</td>
                     <td>{{ object.Teacher_Code }}</td>
                 </tr>
-                {#            <tr>#}
-                {#                <td>Use Flag</td>#}
-                {#                <td>{{ object.Use_Flag }}</td>#}
-                {#            </tr>#}
-
             </table>
 
             <h4 align="center"><b>Lecture Description</b></h4>
@@ -114,7 +105,7 @@
                 <a class="btn-sm btn-success" href="{% if '/teachers' in request.path %}
                         {% url 'teacher_chapterinfo_create' %}
                     {% else %}
-                        {% url 'chapterinfo_create' %}
+                        {% url 'chapterinfo_create' course=object.pk %}
                     {% endif %}">Create new Chapter</a>
             </div>
 
