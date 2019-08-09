@@ -42,18 +42,19 @@ class LectureInfoListView(ListView):
     model = LectureInfo
     template_name = 'student_module/lectureinfo_list.html'
 
+
 class LectureInfoDetailView(DetailView):
     model = LectureInfo
     template_name = 'student_module/lectureinfo_detail.html'
 
 
-def question(request):
-    return render(request, 'student_module/question.html')
-
-
-def polls(request):
-    return render(request, 'student_module/polls.html')
-
 def ProfileView(request):
     return render(request, 'student_module/profile.html')
 
+
+def questions_student(request):
+    return render(request, 'student_module/questions_student.html')
+
+
+def polls_student(request):
+    return render(request, 'student_module/polls_student.html')
