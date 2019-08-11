@@ -35,10 +35,10 @@ urlpatterns += (
 
 urlpatterns += (
     # urls for QuestionInfo
-    path('questioninfo/', views.QuestionInfoListView.as_view(), name='questioninfo_list'),
-    path('questioninfo/create/', views.QuestionInfoCreateView.as_view(), name='questioninfo_create'),
-    path('questioninfo/detail/<int:pk>/', views.QuestionInfoDetailView.as_view(), name='questioninfo_detail'),
-    path('questioninfo/update/<int:pk>/', views.QuestionInfoUpdateView.as_view(), name='questioninfo_update'),
+    path('survey/questioninfo/', views.QuestionInfoListView.as_view(), name='questioninfo_list'),
+    path('survey/questioninfo/create/', views.QuestionInfoCreateView.as_view(), name='questioninfo_create'),
+    path('survey/questioninfo/detail/<int:pk>/', views.QuestionInfoDetailView.as_view(), name='questioninfo_detail'),
+    path('survey/questioninfo/update/<int:pk>/', views.QuestionInfoUpdateView.as_view(), name='questioninfo_update'),
 )
 
 urlpatterns += (
