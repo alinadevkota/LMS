@@ -48768,3 +48768,25 @@ padding-left: 60px;
     padding-top: -46px;
     margin-top: -7px;
 }
+
+/* .nodeGroup_topic{
+  margin-left: 41%;
+    margin-bottom: -3%;
+} */
+
+.media-body h4{
+font-size: 17px;
+}
+
+.link-text{
+  color: #42a5f5;
+}
+.link-color{
+  color: black;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.reply_thread{
+  margin-left: 58px;
+}

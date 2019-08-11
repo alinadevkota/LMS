@@ -73,14 +73,13 @@
                                     <span class="meta">
                                         SubCategory:
                                         <a href="{% url 'forum:topic' thread.topic.pk %}">
-                                            <span class="topic-meta" style="color: darkblue">
+                                            <span class="topic-meta link-text">
                                                 {{ thread.topic.title }}
                                             </span> |
                                         </a>
                                     </span>
                                     <span class="meta meta-username">
-                                        posted by<a href="{% url 'forum:user_info' thread.user.pk %}"
-                                            style="color: darkblue">
+                                        posted by<a href="{% url 'forum:user_info' thread.user.pk %}" class="link-text">
                                             {{ thread.user.username }}
                                         </a>
                                     </span>

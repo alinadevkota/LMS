@@ -17,7 +17,7 @@
 {% block main_contain %}
 <div class="panel panel-default paper-shadow">
     <div class="panel panel-heading">
-        <h2> {{ panel_title }} </h2>
+        <h2> Threads Created by {{ panel_title }} </h2>
     </div>
 
     {% if show_order %}
@@ -62,14 +62,14 @@
                                     <span class="meta">
                                         Topic:
                                         <a href="{% url 'forum:topic' thread.topic.pk %}">
-                                            <span class="link-text-color">
+                                            <span class="link-color">
                                                 {{ thread.topic.title }}
                                             </span>
                                         </a>
                                     </span>
                                     <span class="meta meta-username ">
                                         posted by
-                                        <a href="{% url 'forum:user_info' thread.user.pk %}" class="link-text-color">
+                                        <a href="{% url 'forum:user_info' thread.user.pk %}" class="link-color">
                                             {{ thread.user.username }}
                                         </a>
                                     </span>
