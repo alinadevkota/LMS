@@ -5263,7 +5263,7 @@ $(document).ready(function () {
             <li id="question-${id1}">
             <div style="display:flex;"><p style="margin-top: 35px; margin-right: 20px">${id1}</p>
             <input class="form-control" placeholder="Enter Questions here..." type="text" style="list-style:none; margin-top: 30px; " name="questions"></div>
-             <label for="option" style="margin-top: 10px; margin-bottom: 10px;">Option:</label><button id="${id1} " onclick="Myfunctionbtn(event,this)" class="btn btn-success" style="margin-top:5px; margin-bottom: 10px;">+</button> 
+             <label for="option" style="margin-top: 10px; margin-bottom: 10px;">Option:</label><button id="${id1} " onclick="Myfunctionbtn(event,this)" class="btn btn-success" style="margin-top:5px; margin-bottom: 10px;">Add option</button> 
              </li><li id="options-${id1}" style="list-style:none;"></li>`)
 
     });
@@ -5320,6 +5320,14 @@ $(document).ready(function () {
         $('#mcq_que').hide();
     });
 });
+
+// CATEGORY ACTIVE
+
+$(document).on('click', '.categoryContainer .card-text', function () {
+    $(this).addClass('active').siblings().removeClass('active')
+})
+
+
 
 /* FORM WIZARD SURVEY */
 

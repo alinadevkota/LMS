@@ -56,7 +56,6 @@
                     </a>
 
 
-<<<<<<< HEAD
                 </li>
                 <li>
                     <a href="{% url 'admin_calendar' %}"><i class="fa fa-calendar"></i> Calendar
@@ -76,9 +75,9 @@
                         <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="{% url 'lectureinfo_list' %}">Course List</a></li>
-                        <li>
-                            <a href="{% url 'lectureinfo_create' %}">Create New Course</a>
-                        </li>
+                        {# <li>#}
+                            {# <a href="{% url 'assignmentinfo_list'  %}">Assignments</a>#}
+                            {# </li>#}
                     </ul>
                 </li>
                 <li>
@@ -98,49 +97,6 @@
                     <a href="{% url 'user_profile' %}"><i class="fa fa-cogs"></i> Profile
                     </a>
                 </li>
-=======
-                    </li>
-                    <li>
-                        <a href="{% url 'admin_calendar' %}"><i class="fa fa-calendar"></i> Calendar
-                        </a>
-                    </li>
-                    <li>
-                        <a><i class="fa fa-user"></i>Members<span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{% url 'memberinfo_list' %}">Members List</a></li>
-                            <li>
-                                <a href="{% url 'memberinfo_create' %}">Create New Member</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a><i class="fa fa-book"></i> Courses
-                            <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{% url 'lectureinfo_list' %}">Course List</a></li>
-{#                            <li>#}
-{#                                <a href="{% url 'assignmentinfo_list'  %}">Assignments</a>#}
-{#                            </li>#}
-                        </ul>
-                    </li>
-                    <li>
-                        <a><i class="fa fa-list"></i> Session
-                            <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{% url 'inninginfo_list' %}">List of Sessions</a></li>
-                            <li>
-                                <a href="{% url 'inninggroup_list' %}">Session Mapping</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'groupmapping_list' %}">Group Mapping</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{% url 'user_profile' %}"><i class="fa fa-cogs"></i> Profile
-                        </a>
-                    </li>
->>>>>>> 6f0115218942fb56c92e5125859b14e9929f438c
 
 
             </ul>
@@ -198,11 +154,11 @@
             <li><a>Level One<span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li class="sub_menu"><a href="level2.html">Level Two</a>
-=======
+x
                 <li>
                     <a href="{% url 'messageinfo_list' %}">
                         <i class="fa fa-envelope" id="messageSidebar"></i>Message</a>
->>>>>>> a2df03cb792cc32990b7a788b44047c9899753dc
+
                 </li>
             </ul>
         </div>

@@ -106,59 +106,26 @@ urlpatterns += (
 urlpatterns += (
     # urls for MemberInfo
     path('memberinfo/', views.MemberInfoListView.as_view(), name='memberinfo_list'),
-<<<<<<< HEAD
-    path('memberinfo/create/', views.MemberInfoCreateView.as_view(),
-         name='memberinfo_create'),
-    path('memberinfo/detail/<int:pk>/',
-         views.MemberInfoDetailView.as_view(), name='memberinfo_detail'),
-    path('memberinfo/update/<int:pk>/',
-         views.MemberInfoUpdateView.as_view(), name='memberinfo_update'),
-    path('memberinfo/delete/<int:pk>/',
-         views.MemberInfoDeleteView, name='memberinfo_delete'),
-=======
     path('memberinfo/create/', views.MemberInfoCreateView.as_view(), name='memberinfo_create'),
     path('memberinfo/detail/<int:pk>/', views.MemberInfoDetailView.as_view(), name='memberinfo_detail'),
     path('memberinfo/update/<int:pk>/', views.MemberInfoUpdateView.as_view(), name='memberinfo_update'),
     path('memberinfo/delete/<int:pk>/', views.MemberInfoDeleteView.as_view(), name='memberinfo_delete'),
->>>>>>> 6f0115218942fb56c92e5125859b14e9929f438c
 )
 
 urlpatterns += (
     # urls for LectureInfo
-<<<<<<< HEAD
-    path('lectureinfo/', views.LectureInfoListView.as_view(),
-         name='lectureinfo_list'),
-    path('lectureinfo/create/', views.LectureInfoCreateView.as_view(),
-         name='lectureinfo_create'),
-    path('lectureinfo/detail/<int:pk>/',
-         views.LectureInfoDetailView.as_view(), name='lectureinfo_detail'),
-    path('lectureinfo/update/<int:pk>/',
-         views.LectureInfoUpdateView.as_view(), name='lectureinfo_update'),
-=======
     path('courseinfo/', views.LectureInfoListView.as_view(), name='lectureinfo_list'),
     path('courseinfo/create /', views.LectureInfoCreateView.as_view(), name='lectureinfo_create'),
     path('courseinfo/<int:pk>/', views.LectureInfoDetailView.as_view(), name='lectureinfo_detail'),
     path('courseinfo/edit/<int:pk>/', views.LectureInfoUpdateView.as_view(), name='lectureinfo_update'),
->>>>>>> 6f0115218942fb56c92e5125859b14e9929f438c
 )
 
 urlpatterns += (
     # urls for ChapterInfo
-<<<<<<< HEAD
-    path('chapterinfo/', views.ChapterInfoListView.as_view(),
-         name='chapterinfo_list'),
-    path('chapterinfo/create/', views.ChapterInfoCreateView.as_view(),
-         name='chapterinfo_create'),
-    path('chapterinfo/detail/<int:pk>/',
-         views.ChapterInfoDetailView.as_view(), name='chapterinfo_detail'),
-    path('chapterinfo/update/<int:pk>/',
-         views.ChapterInfoUpdateView.as_view(), name='chapterinfo_update'),
-=======
     path('courseinfo/<int:course>/chapterinfo/', views.ChapterInfoListView.as_view(), name='chapterinfo_list'),
     path('courseinfo/<int:course>/create/', views.ChapterInfoCreateView.as_view(), name='chapterinfo_create'),
     path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(), name='chapterinfo_detail'),
     path('courseinfo/<int:course>/chapterinfo/<int:pk>/edit/', views.ChapterInfoUpdateView.as_view(), name='chapterinfo_update'),
->>>>>>> 6f0115218942fb56c92e5125859b14e9929f438c
 )
 
 urlpatterns += (
@@ -229,21 +196,10 @@ urlpatterns += (
 
 urlpatterns += (
     # urls for HomeworkInfo
-<<<<<<< HEAD
-    path('assignmentinfo/', views.AssignmentInfoListView.as_view(),
-         name='assignmentinfo_list'),
-    path('assignmentinfo/create/', views.AssignmentInfoCreateView.as_view(),
-         name='assignmentinfo_create'),
-    path('assignmentinfo/detail/<int:pk>/',
-         views.AssignmentInfoDetailView.as_view(), name='assignmentinfo_detail'),
-    path('assignmentinfo/update/<int:pk>/',
-         views.AssignmentInfoUpdateView.as_view(), name='assignmentinfo_update'),
-=======
     path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/', views.AssignmentInfoListView.as_view(), name='assignmentinfo_list'),
     path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/create/', views.AssignmentInfoCreateView.as_view(), name='assignmentinfo_create'),
     path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/detail/<int:pk>/', views.AssignmentInfoDetailView.as_view(), name='assignmentinfo_detail'),
     path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/update/<int:pk>/', views.AssignmentInfoUpdateView.as_view(), name='assignmentinfo_update'),
->>>>>>> 6f0115218942fb56c92e5125859b14e9929f438c
 )
 
 urlpatterns += (

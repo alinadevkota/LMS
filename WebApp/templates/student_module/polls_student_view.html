@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "student_module/base.html"%}
 {% load static %}
 {% block title %}
 Polls
@@ -8,7 +8,7 @@ Polls
 {% endblock stylesheets %}
 
 {% block breadcrumb %}
-<li class="breadcrumb-item" aria-current="page"><a href="{% url 'question' %}">Survey</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="{% url 'questions_student' %}">Survey</a></li>
 <li class="breadcrumb-item active" aria-current="page">Polls</li>
 {% endblock %}
 
@@ -32,20 +32,19 @@ Polls
                                 :
                                 <span class="generalLabel">General</span>
                                 <!-- <span class="sessionLabel" style="display:none;">Session</span>
-                                        <span class="courseLabel" style="display:none;">Course</span>
-                                        <span class="systemLabel" style="display:none;">System</span> -->
+                                <span class="courseLabel" style="display:none;">Course</span>
+                                <span class="systemLabel" style="display:none;">System</span> -->
                             </label>
                         </div>
                     </li>
                     <li class="surveyViewDates">
-                        <i class="fa fa-calendar"></i><label>Start date: Jul 11, 2019</label>
+                        <i class="fa fa-calendar"></i><label>Start date:</label>
                     </li>
                     <li class="surveyViewDates">
-                        <i class="fa fa-calendar"></i><label>End date: Jul 15, 2019</label>
+                        <i class="fa fa-calendar"></i><label>End date:</label>
                     </li>
                 </ul>
 
-                <button type="button" class="btn btn-info btn-lg" id="retakeSurveyBtn">Retake survey</button>
             </div>
 
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -113,13 +112,12 @@ Polls
                         <h5> Rojan Bade on August 8 at 12:30 PM</h5>
                     </div>
                     <div style="
-                        width: 100%;
-                        height: 2px;
-                        display: flex;
-                        flex-direction: auto;
-                        background-color: #f1f1f1; ">
+                                width: 100%;
+                                height: 2px;
+                                display: flex;
+                                flex-direction: auto;
+                                background-color: #f1f1f1; ">
                     </div>
-
                     <div class="x_content" style="margin-left: 40px;">
                         <label>Answer:</label>
                         <p>
@@ -130,6 +128,7 @@ Polls
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
