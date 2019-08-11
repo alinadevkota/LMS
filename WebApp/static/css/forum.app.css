@@ -48652,10 +48652,6 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
   padding-top: 0px;
 }
 
-a:hover{
-  text-decoration:underline;
-}
-
 a:active{
   color: rgb(122, 122, 255);
 }
@@ -48769,11 +48765,6 @@ padding-left: 60px;
     margin-top: -7px;
 }
 
-/* .nodeGroup_topic{
-  margin-left: 41%;
-    margin-bottom: -3%;
-} */
-
 .media-body h4{
 font-size: 17px;
 }
@@ -48789,4 +48780,23 @@ font-size: 17px;
 
 .reply_thread{
   margin-left: 58px;
+}
+
+.media-body h6{
+font-weight: bold;
+font-size: 19px;
+}
+
+.x-title h2{
+  text-align: center;
+  
+}
+
+a:hover{
+
+font-weight: bold;
+}
+
+.list-group-item a:hover{
+ font-weight: bold;
 }

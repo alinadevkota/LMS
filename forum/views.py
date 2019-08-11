@@ -249,9 +249,11 @@ def search_redirect(request):
 
 @login_required
 def create_thread(request, topic_pk=None, nodegroup_pk=None ):
+    topic = None
     node_group = NodeGroup.objects.all()
     fixed_nodegroup=NodeGroup.objects.filter(pk=nodegroup_pk)
-    topic = Topic.objects.filter(pk=topic_pk)
+    if topic_pk:
+        topic = Topic.objects.get(pk=topic_pk)
     topics=Topic.objects.filter(node_group=nodegroup_pk)
     if request.method == 'POST':
         form = ThreadForm(request.POST, user=request.user)

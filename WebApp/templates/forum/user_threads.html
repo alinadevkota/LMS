@@ -59,14 +59,14 @@
                             {% endif %}
                             <div class="topic_meta text-light text-caption">
                                 <h5>
-                                    <span class="meta">
+                                    <span class="meta meta-username">
                                         Topic:
-                                        <a href="{% url 'forum:topic' thread.topic.pk %}">
-                                            <span class="link-color">
+                                        <a href="{% url 'forum:topic' thread.topic.pk %}" class="link-color">
+                                            <span>
                                                 {{ thread.topic.title }}
                                             </span>
                                         </a>
-                                    </span>
+                                    </span> |
                                     <span class="meta meta-username ">
                                         posted by
                                         <a href="{% url 'forum:user_info' thread.user.pk %}" class="link-color">

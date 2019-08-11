@@ -20,7 +20,7 @@
             {% csrf_token %}
 
             <div class=" x-title">
-                <h2 align="center">Create Thread</h2>
+                <h2>Create Thread</h2>
 
 
             </div>
@@ -42,7 +42,7 @@
             {% else %}
             <div id="div_id_node_group" class="form-group">
                 <label for="id_node_group" class="control-label  requiredField">
-                    NodeGroup<span class="asteriskField">*</span> </label>
+                    Category<span class="asteriskField">*</span> </label>
                 <input type="text" value="{{ fixed_nodegroup.0.title }}" required=""
                     class="textinput textInput form-control" maxlength="30" readonly>
                 <input name="node_group" id="id_node_group" required="" value="{{ fixed_nodegroup.0.pk }}" hidden></div>
@@ -77,9 +77,9 @@
             <div id="div_id_node_group" class="form-group">
                 <label for="id_node_group" class="control-label  requiredField">
                     Topic<span class="asteriskField">*</span> </label>
-                <input type="text" value="{{ topics.0.title }}" required="" class="textinput textInput form-control"
+                <input type="text" value="{{ topic.title }}" required="" class="textinput textInput form-control"
                     maxlength="30" readonly>
-                <input name="topics" id="id_topics" required="" value="{{ topics.0.pk }}" hidden></div>
+                <input name="topic" id="id_topics" required="" value="{{ topic.pk }}" hidden></div>
             {% endif %}
 
 
