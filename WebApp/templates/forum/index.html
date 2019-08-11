@@ -51,13 +51,9 @@
         <li class="list-group-item">
             <div class="media v-middle">
                 <div class="media-body">
-                    <a href="{% url 'forum:nodegroup' nodegroup.pk %}"></a>
                     <h6 class="text-headline margin-none">
-                        <a href="{% url 'forum:nodegroup' nodegroup.pk %}"
-                            class="link-text-color">{{ nodegroup.title }}</a>
+                        <a href="{% url 'forum:nodegroup' nodegroup.pk %}" class="">{{ nodegroup.title }}</a>
                     </h6>
-
-
                 </div>
 
 
@@ -84,17 +80,17 @@
                     <div class="text-light text-caption">
                         Category:
                         <a href="{% url 'forum:nodegroup' thread.topic.node_group.pk %}"
-                            class="link-text-color">{{ thread.topic.node_group.title }}</a>
+                            class="link-text">{{ thread.topic.node_group.title }}</a>
                         |
 
                         Sub Category:
                         <a href="{% url 'forum:topic' pk=thread.topic.pk %}"
-                            class="link-text-color">{{ thread.topic.title }}</a>
+                            class="link-text">{{ thread.topic.title }}</a>
 
 
                         <br>
                         posted by
-                        <a href="{% url 'forum:user_info' pk=thread.user.pk %}" class="link-text-color">
+                        <a href="{% url 'forum:user_info' pk=thread.user.pk %}" class="link-text">
                             <img src="/media/{{ thread.user.Member_Avatar }}" class="img-circle width-20">
                             {{ thread.user.username }}</a>
                         | <i class="fa fa-clock-o fa-fw"></i> {{ thread.pub_date }} |

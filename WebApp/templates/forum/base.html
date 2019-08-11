@@ -56,43 +56,48 @@
                 {% block widget_after %}{% endblock %}
             </div>
 
-            <div class="panel panel-default">
-
-                <div class="card">
-
-                    <div class="form-group form-control-material">
-
-                        <form role="search" action="{% url 'forum:search_redirect' %}">
-
-
-                            <input type="text" id="keywordInput" name="keyword" class="form-control"
-                                placeholder="Type to search">
-                            <label for="keyword"> Search. . </label>
-                    </div>
-                    <button type="submit" id="navSearchBtn" class="btn btn-inverse paper-shadow relative" data-z="0.5"
-                        data-hover-z="1"> {% trans 'Search' %} </button>
-                    </form>
-
-
-                </div>
-
-
-            </div>
-
-
-            <div class="panel panel-default">
-                <div class="card">
-                    <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread' %}"><i
-                            class="fa fa-fw fa-plus"></i>
-                        Ask New
-                        Question</a>
-                </div>
-
-            </div>
-
 
 
             <div class="card">
+
+                <div class="form-group form-control-search searchField">
+
+                    <form role="search" action="{% url 'forum:search_redirect' %}" class="form">
+
+
+                        <input type="text" id="keywordInput" name="keyword" class="form-control"
+                            placeholder="Type to search">
+                        <!-- <label for="keyword"> Search. . </label> -->
+
+                        <div class=" pull-right searchButton">
+                            <button type="submit" id="navSearchBtn" class="btn btn-inverse" data-hover-z="1"><i
+                                    class="fa fa-search"></i> </button>
+
+                        </div>
+
+                    </form>
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+            <!-- <div class="card">
+                <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread' %}"><i
+                        class="fa fa-fw fa-plus"></i>
+                    Ask New
+                    Question</a>
+            </div> -->
+
+
+
+
+
+            <div class="card panel panel-default">
 
                 <ul class="list-group list-group-menu">
                     <div class="panel-heading" style="background-color:#F5F5F5">

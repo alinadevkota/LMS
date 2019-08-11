@@ -11,8 +11,8 @@
                     style="width: 100%" />
             </a>
         </div>
-        <a class="btn-white btn-flat" href="{% url 'forum:user_info' request.user.pk %}">
-            <h3>{{ request.user.username }}</h3>
+        <a href="{% url 'forum:user_info' request.user.pk %}">
+            <h3 class="btn-white btn-flat">{{ request.user.username }}</h3>
         </a>
         <ul class="list-unstyled user_data">
             <li><a class="btn-white btn-flat" href="{% url 'forum:user_threads' request.user.pk %}"><i
