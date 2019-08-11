@@ -383,9 +383,22 @@ class Quiz(models.Model):
         help_text=_("a user friendly url"),
         verbose_name=_("user friendly url"))
 
-    # category = models.ForeignKey(
-    #     Category, null=True, blank=True,
-    #     verbose_name=_("Category"), on_delete=models.CASCADE)
+    duration = models.DurationField(
+        help_text=_("Time limit for quiz"),
+        verbose_name=_("Time limit for quiz"))
+
+    duration = models.DurationField(null=False,
+                                             blank=False,
+                                             default='00:05:00',
+                                             verbose_name=_('Time limit for quiz'),
+                                             help_text=_('[DD] [HH:[MM:]]ss[.uuuuuu] format')
+                                             )
+
+    def duration_HHmm(self):
+        sec = self.duration.total_seconds()
+        return '%02d:%02d' % (int((sec / 3600) % 3600), int((sec / 60) % 60))
+
+    # in template just use {{ < model >.duration_HHmm}} instead of {{ < model >.duration}}.
 
     random_order = models.BooleanField(
         blank=False, default=False,
@@ -476,6 +489,22 @@ class Quiz(models.Model):
     def get_essayquestions(self):
         return self.essayquestion_set.all()
 
+
+    def get_questions(self):
+        question_ids = self._question_ids()
+        mcquestions = sorted(
+            self.mcquestion.filter(id__in=question_ids),
+            key=lambda q: question_ids.index(q.id))
+        tfquestions = sorted(
+            self.tfquestion.filter(id__in=question_ids),
+            key=lambda q: question_ids.index(q.id))
+        essayquestions = sorted(
+            self.tfquestion.filter(id__in=question_ids),
+            key=lambda q: question_ids.index(q.id))
+        questions = mcquestions+ tfquestions+ essayquestions
+
+        return questions
+
     @property
     def get_max_score(self):
         return self.get_mcquestions().count()+self.get_tfquestions().count()+self.get_essayquestions().count()
@@ -530,8 +559,7 @@ class SittingManager(models.Manager):
         essayquestion_set = [item.id for item in essayquestion_set]
 
         if (len(mcquestion_set) == 0 or len(tfquestion_set) == 0):
-            raise ImproperlyConfigured('Question set of the quiz is empty. '
-                                       'Please configure questions properly')
+            raise ImproperlyConfigured('Question set of the quiz is empty. Please configure questions properly')
 
         # if quiz.max_questions and quiz.max_questions < len(mcquestion_set):
         #     mcquestion_set = mcquestion_set[:quiz.max_questions]
@@ -739,8 +767,6 @@ class Sitting(models.Model):
             self.quiz.tfquestion.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
         questions = mcquestions+ tfquestions+ essayquestions
-        # print("__________________________********************************________________")
-        # print(self.quiz.question_set)
 
         if with_answers:
             user_answers = json.loads(self.user_answers)

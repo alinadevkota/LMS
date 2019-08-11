@@ -5154,6 +5154,19 @@ $(document).ready(function () {
         // $(this).css('color', 'white');
         $('.listView').hide();
     });
+
+    // -----------------------------ACTIVE AND EPIRE -------------------------------------
+    $('#ActiveButton').on('click', function () {
+        $('.active_survey').show(300);
+        //$(this).css('color', 'white');
+        $('.expire_survey').hide();
+    });
+    $('#ExpireButton').on('click', function () {
+        $('.expire_survey').show(300);
+        // $(this).css('color', 'white');
+        $('.active_survey').hide();
+    });
+
 });
 
 /* When the user clicks on the button,
@@ -5260,29 +5273,41 @@ $(document).ready(function () {
         $("#short_que_add").append(`<li id="shq-${id2}"><div style="display:flex; align-items: center;"><p style="margin-top: 10px; margin-right: 20px; margin-bottom: 20px;">${id2}</p><input class="form-control" placeholder="Enter Questions here..." type="text" name="questions"></div></li>`)
     });
 
-    $('#nextButton').on("click", function () {
-        $(".selectQuestionType").show();
-    })
 
     // .................................................................................
 
     $('.general').on('click', function () {
         $("#chooseSession").hide();
         $('#chooseCourse').hide();
+        $('.sessionLabel').hide();
+        $('.courseLabel').hide();
+        $('.systemLabel').hide();
     });
 
     $('.system').on('click', function () {
         $("#chooseSession").hide();
         $('#chooseCourse').hide();
+        $('.generalLabel').hide();
+        $('.sessionLabel').hide();
+        $('.courseLabel').hide();
+        $('.systemLabel').show();
     });
 
     $('.session').on('click', function () {
         $("#chooseSession").show();
         $('#chooseCourse').hide();
+        $('.generalLabel').hide();
+        $('.sessionLabel').show();
+        $('.courseLabel').hide();
+        $('.systemLabel').hide();
     });
     $('.courseAdd').on('click', function () {
         $("#chooseSession").show();
         $('#chooseCourse').show();
+        $('.generalLabel').hide();
+        $('.sessionLabel').hide();
+        $('.courseLabel').show();
+        $('.systemLabel').hide();
     });
     // .................................................................................
     $('.mcq_question').on('click', function () {
@@ -5295,6 +5320,54 @@ $(document).ready(function () {
         $('#mcq_que').hide();
     });
 });
+
+/* FORM WIZARD SURVEY */
+
+$(document).ready(function () {
+
+    var navListItems = $('div.setup-panel div a'),
+        allWells = $('.setup-content'),
+        allNextBtn = $('.nextBtn');
+
+    allWells.hide();
+
+    navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+            $item = $(this);
+
+        if (!$item.hasClass('disabled')) {
+            navListItems.removeClass('btn-primary').addClass('btn-default');
+            $item.addClass('btn-primary');
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+    });
+
+    allNextBtn.click(function () {
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+
+        $(".form-group").removeClass("has-error");
+        for (var i = 0; i < curInputs.length; i++) {
+            if (!curInputs[i].validity.valid) {
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }
+
+        if (isValid)
+            nextStepWizard.removeAttr('disabled').trigger('click');
+    });
+
+    $('div.setup-panel div a.btn-primary').trigger('click');
+});
+
+
 
 // TIMER 
 /*

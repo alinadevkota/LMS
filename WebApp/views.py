@@ -1119,26 +1119,6 @@ class TodoTInfoUpdateView(UpdateView):
 def question(request):
     return render(request, 'WebApp/question.html')
 
-
-def question_teachers(request):
-    return render(request, 'teacher_module/question_teachers.html')
-
-
-def questions_student(request):
-    return render(request, 'student_module/questions_student.html')
-
-
 def polls(request):
     return render(request, 'WebApp/polls.html')
 
-
-def polls_teachers(request):
-    return render(request, 'teacher_module/polls_teachers.html')
-
-
-def polls_student(request):
-    return render(request, 'student_module/polls_student.html')
-
-
-def survey(request):
-    return render(request, 'WebApp/survey.html')

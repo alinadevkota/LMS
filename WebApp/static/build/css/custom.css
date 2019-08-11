@@ -2624,14 +2624,6 @@ button, .buttons, .btn, .modal-footer .btn + .btn {
     margin-bottom: 10px
 }
 
-.ln_solid {
-    border-top: 1px solid #e5e5e5;
-    color: #ffffff;
-    background-color: #ffffff;
-    height: 1px;
-    margin: 20px 0
-}
-
 span.section {
     display: block;
     width: 100%;

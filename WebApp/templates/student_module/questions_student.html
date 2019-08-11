@@ -18,151 +18,327 @@ Polls
 <div class="container" id="mainSurveyPage">
 
     <div class="row" id="surveyheader">
-        <form>
-            <div class="searchBarSurvey col-sm-5">
-                <input type="search" placeholder="Survey...">
-                <div class="pollButtons">
-                    <button type="button" class="btn btn-info">Search</button>
-                </div>
+        <div class="searchBarSurvey col-sm-5">
+            <input type="search" placeholder="Survey...">
+            <div class="pollButtons">
+                <button type="button" class="btn btn-info">Search</button>
             </div>
-        </form>
-
+        </div>
         <div class="col-sm-7">
             <div class="btn-group" id="status" data-toggle="buttons">
-                <label class="btn btn-default btn-on-3 btn-sm active">
+                <label class="btn btn-default btn-on-3 btn-sm active" id="ActiveButton">
                     <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">Active</label>
-                <label class="btn btn-default btn-off-3 btn-sm ">
-                    <input type="radio" value="0" name="multifeatured_module[module_id][status]">Expire</label>
+                <label class="btn btn-default btn-off-3 btn-sm " id="ExpireButton">
+                    <input type="radio" value="0" name="multifeatured_module[module_id][status]">History</label>
             </div>
         </div>
     </div>
+    <!-- polls_student -->
     <div class="hR"></div>
     <div class="col-md-12 col-lg-9">
         <div class="row" id="rowCards">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                <div class="questionLists ">
-                    <div class="card">
-                        <div class="card-body" style="width: 25rem;">
-                            <h2 class="card-title "><strong>1. What is hadoop?</strong></h2>
-                            <hr>
-                            <h5 class="card-text text-justify">
-                                <a href=" {% url 'polls_student' %}">
-                                    <div class="pollButtons">
-                                        <button type="button" class="btn btn-info">Text survey</button>
-                                    </div>
-                                </a>
-                            </h5>
+            <!-- ......................................Active section.................................................... -->
+            <div class="active_survey">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="questionLists ">
+                        <div class="card">
+                            <div class="card-body" style="width: 25rem;">
+                                <h2 class="card-title "><strong>1. What is hadoop?</strong></h2>
+                                <hr>
+                                <ul class="card_labels">
+                                    <li><label>Questions:</label></li>
+                                    <li><label>Start date:</label></li>
+                                    <li><label>End date:</label></li>
+                                </ul>
+
+                                <h5 class="card-text text-justify">
+                                    <a href=" {% url 'polls_student' %}">
+                                        <div class="pollButtons">
+                                            <button type="button" class="btn btn-info">Participate</button>
+                                        </div>
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="questionLists ">
+                        <div class="card">
+                            <div class="card-body" style="width: 25rem;">
+                                <h2 class="card-title "><strong>2. What is hadoop?</strong></h2>
+                                <hr>
+                                <ul class="card_labels">
+                                    <li><label>Questions:</label></li>
+                                    <li><label>Start date:</label></li>
+                                    <li><label>End date:</label></li>
+                                </ul>
+                                <h5 class="card-text text-justify">
+                                    <a href=" {% url 'polls_student' %}">
+                                        <div class="pollButtons">
+                                            <button type="button" class="btn btn-info">Participate</button>
+                                        </div>
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="questionLists ">
+                        <div class="card">
+                            <div class="card-body" style="width: 25rem;">
+                                <h2 class="card-title "><strong>3. What is hadoop?</strong></h2>
+                                <hr>
+                                <ul class="card_labels">
+                                    <li><label>Questions:</label></li>
+                                    <li><label>Start date:</label></li>
+                                    <li><label>End date:</label></li>
+                                </ul>
+                                <h5 class="card-text text-justify">
+                                    <a href=" {% url 'polls_student' %}">
+                                        <div class="pollButtons">
+                                            <button type="button" class="btn btn-info">Participate</button>
+                                        </div>
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="questionLists ">
+                        <div class="card">
+                            <div class="card-body" style="width: 25rem;">
+                                <h2 class="card-title "><strong>4. What is hadoop?</strong></h2>
+                                <hr>
+                                <ul class="card_labels">
+                                    <li><label>Questions:</label></li>
+                                    <li><label>Start date:</label></li>
+                                    <li><label>End date:</label></li>
+                                </ul>
+                                <h5 class="card-text text-justify">
+                                    <a href=" {% url 'polls_student' %}">
+                                        <div class="pollButtons">
+                                            <button type="button" class="btn btn-info">Participate</button>
+                                        </div>
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="questionLists ">
+                        <div class="card">
+                            <div class="card-body" style="width: 25rem;">
+                                <h2 class="card-title "><strong>2. What is hadoop?</strong></h2>
+                                <hr>
+                                <ul class="card_labels">
+                                    <li><label>Questions:</label></li>
+                                    <li><label>Start date:</label></li>
+                                    <li><label>End date:</label></li>
+                                </ul>
+                                <h5 class="card-text text-justify">
+                                    <a href=" {% url 'polls_student' %}">
+                                        <div class="pollButtons">
+                                            <button type="button" class="btn btn-info">Participate</button>
+                                        </div>
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="questionLists ">
+                        <div class="card">
+                            <div class="card-body" style="width: 25rem;">
+                                <h2 class="card-title "><strong>3. What is hadoop?</strong></h2>
+                                <hr>
+                                <ul class="card_labels">
+                                    <li><label>Questions:</label></li>
+                                    <li><label>Start date:</label></li>
+                                    <li><label>End date:</label></li>
+                                </ul>
+                                <h5 class="card-text text-justify">
+                                    <a href=" {% url 'polls_student' %}">
+                                        <div class="pollButtons">
+                                            <button type="button" class="btn btn-info">Participate</button>
+                                        </div>
+                                    </a>
+                                </h5>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                <div class="questionLists ">
-                    <div class="card">
-                        <div class="card-body" style="width: 25rem;">
-                            <h2 class="card-title "><strong>2. What is hadoop?</strong></h2>
-                            <hr>
-                            <h5 class="card-text text-justify">
-                                <a href=" {% url 'polls_student' %}">
-                                    <div class="pollButtons">
-                                        <button type="button" class="btn btn-info">Text survey</button>
-                                    </div>
-                                </a>
-                            </h5>
+            <!-- ......................................Expire section.................................................... -->
+            <div class="expire_survey" style="display: none;">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="questionLists ">
+                        <div class="card">
+                            <div class="card-body" style="width: 25rem;">
+                                <h2 class="card-title "><strong>1. What is hadoop?</strong></h2>
+                                <hr>
+                                <ul class="card_labels">
+                                    <li><label>Questions:</label></li>
+                                    <li><label>Start date:</label></li>
+                                    <li><label>End date:</label></li>
+                                </ul>
+                                <h5 class="card-text text-justify">
+                                    <a href=" {% url 'polls_student' %}">
+                                        <div class="pollButtons">
+                                            <button type="button" class="btn btn-info">View</button>
+                                        </div>
+                                    </a>
+                                </h5>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                <div class="questionLists ">
-                    <div class="card">
-                        <div class="card-body" style="width: 25rem;">
-                            <h2 class="card-title "><strong>3. What is hadoop?</strong></h2>
-                            <hr>
-                            <h5 class="card-text text-justify">
-                                <a href=" {% url 'polls_student' %}">
-                                    <div class="pollButtons">
-                                        <button type="button" class="btn btn-info">Text survey</button>
-                                    </div>
-                                </a>
-                            </h5>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="questionLists ">
+                        <div class="card">
+                            <div class="card-body" style="width: 25rem;">
+                                <h2 class="card-title "><strong>2. What is hadoop?</strong></h2>
+                                <hr>
+                                <ul class="card_labels">
+                                    <li><label>Questions:</label></li>
+                                    <li><label>Start date:</label></li>
+                                    <li><label>End date:</label></li>
+                                </ul>
+                                <h5 class="card-text text-justify">
+                                    <a href=" {% url 'polls_student' %}">
+                                        <div class="pollButtons">
+                                            <button type="button" class="btn btn-info">View</button>
+                                        </div>
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="questionLists ">
+                        <div class="card">
+                            <div class="card-body" style="width: 25rem;">
+                                <h2 class="card-title "><strong>3. What is hadoop?</strong></h2>
+                                <hr>
+                                <ul class="card_labels">
+                                    <li><label>Questions:</label></li>
+                                    <li><label>Start date:</label></li>
+                                    <li><label>End date:</label></li>
+                                </ul>
+                                <h5 class="card-text text-justify">
+                                    <a href=" {% url 'polls_student' %}">
+                                        <div class="pollButtons">
+                                            <button type="button" class="btn btn-info">View</button>
+                                        </div>
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="questionLists ">
+                        <div class="card">
+                            <div class="card-body" style="width: 25rem;">
+                                <h2 class="card-title "><strong>4. What is hadoop?</strong></h2>
+                                <hr>
+                                <ul class="card_labels">
+                                    <li><label>Questions:</label></li>
+                                    <li><label>Start date:</label></li>
+                                    <li><label>End date:</label></li>
+                                </ul>
+                                <h5 class="card-text text-justify">
+                                    <a href=" {% url 'polls_student' %}">
+                                        <div class="pollButtons">
+                                            <button type="button" class="btn btn-info">View</button>
+                                        </div>
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="questionLists ">
+                        <div class="card">
+                            <div class="card-body" style="width: 25rem;">
+                                <h2 class="card-title "><strong>2. What is hadoop?</strong></h2>
+                                <hr>
+                                <ul class="card_labels">
+                                    <li><label>Questions:</label></li>
+                                    <li><label>Start date:</label></li>
+                                    <li><label>End date:</label></li>
+                                </ul>
+                                <h5 class="card-text text-justify">
+                                    <a href=" {% url 'polls_student' %}">
+                                        <div class="pollButtons">
+                                            <button type="button" class="btn btn-info">View</button>
+                                        </div>
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="questionLists ">
+                        <div class="card">
+                            <div class="card-body" style="width: 25rem;">
+                                <h2 class="card-title "><strong>3. What is hadoop?</strong></h2>
+                                <hr>
+                                <ul class="card_labels">
+                                    <li><label>Questions:</label></li>
+                                    <li><label>Start date:</label></li>
+                                    <li><label>End date:</label></li>
+                                </ul>
+                                <h5 class="card-text text-justify">
+                                    <a href=" {% url 'polls_student' %}">
+                                        <div class="pollButtons">
+                                            <button type="button" class="btn btn-info">View</button>
+                                        </div>
+                                    </a>
+                                </h5>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                <div class="questionLists ">
-                    <div class="card">
-                        <div class="card-body" style="width: 25rem;">
-                            <h2 class="card-title "><strong>4. What is hadoop?</strong></h2>
-                            <hr>
-                            <h5 class="card-text text-justify">
-                                <a href=" {% url 'polls_student' %}">
-                                    <div class="pollButtons">
-                                        <button type="button" class="btn btn-info">Text survey</button>
-                                    </div>
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                <div class="questionLists ">
-                    <div class="card">
-                        <div class="card-body" style="width: 25rem;">
-                            <h2 class="card-title "><strong>2. What is hadoop?</strong></h2>
-                            <hr>
-                            <h5 class="card-text text-justify">
-                                <a href=" {% url 'polls_student' %}">
-                                    <div class="pollButtons">
-                                        <button type="button" class="btn btn-info">Text survey</button>
-                                    </div>
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                <div class="questionLists ">
-                    <div class="card">
-                        <div class="card-body" style="width: 25rem;">
-                            <h2 class="card-title "><strong>3. What is hadoop?</strong></h2>
-                            <hr>
-                            <h5 class="card-text text-justify">
-                                <a href=" {% url 'polls_student' %}">
-                                    <div class="pollButtons">
-                                        <button type="button" class="btn btn-info">Text survey</button>
-                                    </div>
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
+
     <div class="col-md-12 col-lg-3">
         <div class="categoryContainer">
-            <div class="card" style="width: 22rem; height: 30rem;">
+            <div class="card" style="width: 22rem; height: 35rem;">
                 <div class="card-body">
                     <h2 class="card-title "><strong>Category</strong></h2>
                     <hr>
-                    <h5 class="card-text">
-                        <a href="">General</a>
-                    </h5>
-                    <h5 class="card-text">
-                        <a href="">Session</a>
-                    </h5>
-                    <h5 class="card-text">
-                        <a href="">Course</a>
-                    </h5>
-                    <h5 class="card-text">
-                        <a href="">System</a>
-                    </h5>
+                    <div id="card_category">
+                        <h5 class="card-text active">
+                            <a href="#"><i class="fa fa-bar-chart" id="categoryIcons"></i>All survey</a>
+                        </h5>
+                        <h5 class="card-text">
+                            <a href="#"><i class="fa fa-home" id="categoryIcons"></i>General</a>
+                        </h5>
+                        <h5 class="card-text ">
+                            <a href="#"><i class="fa fa-group" id="categoryIcons"></i>Session</a>
+                        </h5>
+                        <h5 class="card-text">
+                            <a href="#"><i class="fa fa-book" id="categoryIcons"></i>Course</a>
+                        </h5>
+                        <h5 class="card-text">
+                            <a href="#"><i class="fa fa-laptop" id="categoryIcons"></i>System</a>
+                        </h5>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -191,8 +367,8 @@ Polls
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-12 col-sm-3 col-xs-12">Start date<span
-                                                        class="required">*</span>
+                                                <label class="control-label col-md-12 col-sm-3 col-xs-12">Start
+                                                    date<span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                                     <input id="start-date" class="date-picker form-control col-md-7 col-xs-12"
@@ -311,4 +487,19 @@ Polls
     </div>
 </div>
 
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    var header = document.getElementById("card_category");
+    var btns = header.getElementsByClassName("card-text");
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function () {
+            var current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+        });
+    }
+
+</script>
 {% endblock %}

@@ -31,7 +31,7 @@
                     Session Name
                 </label>
                 <div class="controls ">
-                    <input type="text" name="Inning_Name" id="id_Inning_Name" maxlength="500"
+                    <input value="{{ object.Inning_Name }}" type="text" name="Inning_Name" id="id_Inning_Name" maxlength="500"
                            class="textinput textInput form-control">
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     Start Date</span>
                 </label>
                 <div class="controls ">
-                    <input type="date" name="Start_Date" required="" id="id_Start_Date"
+                    <input value="{{ object.Start_Date|date:"Y-m-d" }}" type="date" name="Start_Date" required="" id="id_Start_Date"
                            class="datetimeinput form-control">
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     End Date</span>
                 </label>
                 <div class="controls ">
-                    <input type="date" name="End_Date" required="" id="id_End_Date" class="datetimeinput form-control">
+                    <input value="{{ object.End_Date|date:"Y-m-d" }}" type="date" name="End_Date" required="" id="id_End_Date" class="datetimeinput form-control">
                 </div>
             </div>
         </div>
