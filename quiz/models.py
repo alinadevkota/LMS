@@ -558,7 +558,7 @@ class SittingManager(models.Manager):
         tfquestion_set = [item.id for item in tfquestion_set]
         essayquestion_set = [item.id for item in essayquestion_set]
 
-        if (len(mcquestion_set) == 0 or len(tfquestion_set) == 0):
+        if (len(mcquestion_set) == 0 and len(tfquestion_set) == 0 and len(essayquestion_set) == 0):
             raise ImproperlyConfigured('Question set of the quiz is empty. Please configure questions properly')
 
         # if quiz.max_questions and quiz.max_questions < len(mcquestion_set):
@@ -764,7 +764,7 @@ class Sitting(models.Model):
             self.quiz.tfquestion.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
         essayquestions = sorted(
-            self.quiz.tfquestion.filter(id__in=question_ids),
+            self.quiz.essayquestion.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
         questions = mcquestions+ tfquestions+ essayquestions
 

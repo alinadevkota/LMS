@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib import admin
 from django.contrib.admin.widgets import FilteredSelectMultiple
+from django.utils.html import format_html
 from django.utils.translation import gettext as _
 
 from .models import Quiz, Category, SubCategory, Progress, Answer, MCQuestion, TF_Question, Essay_Question
@@ -23,14 +24,14 @@ class QuizAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(QuizAdminForm, self).__init__(*args, **kwargs)
-        if self.instance.pk:
-            # print("this", self.instance.pk, Quiz.objects.get(pk=self.instance.pk))
-
-            self.fields['mcquestion'] = forms.ModelMultipleChoiceField(
-                queryset=Quiz.objects.get(pk=self.instance.pk).mcquestion,
-                required=False,
-                widget = FilteredSelectMultiple(verbose_name=_("Mcquestion"), is_stacked=False)
-            )
+        # if self.instance.pk:
+        #     # print("this", self.instance.pk, Quiz.objects.get(pk=self.instance.pk))
+        #
+        #     self.fields['mcquestion'] = forms.ModelMultipleChoiceField(
+        #         queryset=Quiz.objects.get(pk=self.instance.pk).mcquestion,
+        #         required=False,
+        #         widget = FilteredSelectMultiple(verbose_name=_("Mcquestion"), is_stacked=False)
+        #     )
 
 
             #     quiz=forms.ModelMultipleChoiceField(
@@ -87,7 +88,13 @@ class QuizAdmin(admin.ModelAdmin):
     #     return super(QuizAdmin, self).change_view(
     #         request, object_id, form_url, extra_context=extra_context,
     #     )
+    # def change_button(self, obj):
+    #     return format_html('<a class="btn" href="/admin/quiz/mcquestion/{}/change/">Change</a>', obj.id)
+    #
+    # def delete_button(self, obj):
+    #     return format_html('<a class="btn" href="/admin/quiz/mcquestion/{}/delete/">Delete</a>', obj.id)
 
+    # list_display = ('__str__', 'change_button', 'delete_button')
 
 
 class CategoryAdmin(admin.ModelAdmin):
