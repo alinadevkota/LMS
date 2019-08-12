@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.files.storage import FileSystemStorage
 from django.db import models as models
 from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, BooleanField, \
-    ImageField,FileField
+    ImageField, FileField
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
@@ -242,10 +242,10 @@ class ChapterInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('chapterinfo_detail', args=(self.Lecture_Code.id,self.pk,))
+        return reverse('chapterinfo_detail', args=(self.Lecture_Code.id, self.pk,))
 
     def get_update_url(self):
-        return reverse('chapterinfo_update', args=(self.Lecture_Code.id,self.pk,))
+        return reverse('chapterinfo_update', args=(self.Lecture_Code.id, self.pk,))
 
     def __str__(self):
         return self.Chapter_Name
@@ -314,40 +314,6 @@ class ChapterContentsInfo(models.Model):
         return reverse('chaptercontentsinfo_update', args=(self.pk,))
 
 
-class InningInfo(models.Model):
-    # Fields
-    Inning_Name = CharField(max_length=500, blank=True, null=True)
-    Start_Date = DateTimeField(auto_now=False, auto_now_add=False)
-    End_Date = DateTimeField(auto_now=False, auto_now_add=False)
-
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
-
-    # Relationship Fields
-
-    Center_Code = ForeignKey(
-        'CenterInfo',
-        related_name="inninginfos", on_delete=models.DO_NOTHING
-    )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('inninginfo_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('inninginfo_update', args=(self.pk,))
-
-    def __str__(self):
-        return self.Inning_Name
-
-
 # class HomeworkInfo(models.Model):
 #     Homework_Topic = CharField(max_length=500, blank=True, null=True)
 #     Use_Flag = BooleanField(default=True)
@@ -388,16 +354,15 @@ class AssignmentInfo(models.Model):
         return self.Assignment_Topic
 
     def get_absolute_url(self):
-        return reverse('assignmentinfo_detail', args=(self.Lecture_Code.id,self.Chapter_Code.id,self.pk,))
+        return reverse('assignmentinfo_detail', args=(self.Lecture_Code.id, self.Chapter_Code.id, self.pk,))
 
     def get_update_url(self):
-        return reverse('assignmentinfo_update', args=(self.Lecture_Code.id,self.Chapter_Code.id,self.pk,))
+        return reverse('assignmentinfo_update', args=(self.Lecture_Code.id, self.Chapter_Code.id, self.pk,))
 
 
+def upload_to(instance, filename):
+    return 'questions/{0}/{1}'.format(instance.id, filename)
 
-
-def upload_to(instance,filename):
-    return 'questions/{0}/{1}'.format(instance.id,filename)
 
 class QuestionInfo(models.Model):
     # Fields
@@ -444,8 +409,6 @@ class QuestionInfo(models.Model):
 
     def get_update_url(self):
         return reverse('questioninfo_update', args=(self.pk,))
-
-
 
 
 class AssignAssignmentInfo(models.Model):
@@ -518,8 +481,10 @@ class AssignQuestionInfo(models.Model):
     def get_update_url(self):
         return reverse('assignquestioninfo_update', args=(self.pk,))
 
+
 def assignment_upload(instance, filename):
-        return 'assignments/{0}/{1}'.format(instance.Assignment_Code.id, filename)
+    return 'assignments/{0}/{1}'.format(instance.Assignment_Code.id, filename)
+
 
 class AssignAnswerInfo(models.Model):
     # Fields
@@ -545,7 +510,6 @@ class AssignAnswerInfo(models.Model):
         'MemberInfo',
         related_name="assignanswerinfos", on_delete=models.DO_NOTHING
     )
-
 
     class Meta:
         ordering = ('-pk',)
@@ -639,6 +603,47 @@ class AssignAnswerInfo(models.Model):
 #     def get_update_url(self):
 #         return reverse('omranswerinfo_update', args=(self.pk,))
 
+class InningInfo(models.Model):
+    # Fields
+    Inning_Name = CharField(max_length=500, blank=True, null=True)
+    Start_Date = DateTimeField(auto_now=False, auto_now_add=False)
+    End_Date = DateTimeField(auto_now=False, auto_now_add=False)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
+
+    # Relationship Fields
+
+    Center_Code = ForeignKey(
+        'CenterInfo',
+        related_name="inninginfos", on_delete=models.DO_NOTHING
+    )
+    # GroupMapping = ForeignKey(
+    #     'GroupMapping',
+    #     related_name="inninginfos", on_delete=models.DO_NOTHING
+    #
+    # )
+    Groups = models.ManyToManyField(
+        'GroupMapping'
+    )
+
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('inninginfo_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('inninginfo_update', args=(self.pk,))
+
+    def __str__(self):
+        return self.Inning_Name
+
 
 class InningGroup(models.Model):
     # Fields
@@ -681,22 +686,25 @@ class GroupMapping(models.Model):
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
     Register_Agent = CharField(max_length=500, blank=True, null=True)
+    GroupMapping_Name = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
-    Inning_Code = ForeignKey(
-        'InningInfo',
-        on_delete=models.DO_NOTHING
-    )
-    Student_Code = ForeignKey(
-        'MemberInfo',
-        on_delete=models.DO_NOTHING
+    # Inning_Code = ForeignKey(
+    #     'InningInfo',
+    #     on_delete=models.DO_NOTHING
+    # )
+    memberinfo_id = models.ManyToManyField(
+        'MemberInfo'
     )
 
     class Meta:
         ordering = ('-pk',)
 
     def __unicode__(self):
-        return u'%s' % self.pk
+        return u'%s' % self.GroupMapping_Name
+
+    def __str__(self):
+        return u'%s' % self.GroupMapping_Name
 
     def get_absolute_url(self):
         return reverse('groupmapping_detail', args=(self.pk,))
@@ -995,8 +1003,6 @@ class ChapterWrite(models.Model):
 
     def get_update_url(self):
         return reverse('chapterwrite_update', args=(self.pk,))
-
-
 
 
 class LearningNote(models.Model):

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block breadcrumb %}
-    <li class="breadcrumb-item active" aria-current="page">Group Mapping</li>
+    <li class="breadcrumb-item active" aria-current="page">Groups</li>
 {% endblock %}
 {% block content %}
     <div class="groupmappingListClass">
@@ -10,7 +10,7 @@
         <h2 class="tableHeader">List of Group Mappings</h2>
         <hr class="header_hr">
         <div class="btn-createnew">
-            <a class="btn btn-success" href="{% url 'groupmapping_create' %}">Create New GroupMapping</a>
+            <a class="btn btn-success" href="{% url 'groupmapping_create' %}">Create New Group</a>
         </div>
         <br><br><br>
         <div class="table-responsive">
@@ -18,19 +18,19 @@
                 <thead class="thead-light bg-primary">
                 <tr>
                     <td>ID</td>
-                    <td>Session</td>
+                    <td>Group Name</td>
                     <td>Register Agent</td>
                     <td>Use Flag</td>
-                    <td>Student Code</td>
+{#                    <td>Students</td>#}
                 </tr>
                 </thead>
                 {% for object in object_list %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td><b><a href="{{ object.get_absolute_url }}">{{ object.Inning_Code }}</a></b></td>
+                        <td><b><a href="{{ object.get_absolute_url }}">{{ object.GroupMapping_Name }}</a></b></td>
                         <td>{{ object.Register_Agent }}</td>
                         <td>{{ object.Use_Flag }}</td>
-                        <td>{{ object.Student_Code }}</td>
+{#                        <td>{{ object.memberinfo_id }}</td>#}
 
                     </tr>
                 {% endfor %}

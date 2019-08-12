@@ -392,7 +392,7 @@ class GroupMappingAdminForm(forms.ModelForm):
 
 class GroupMappingAdmin(admin.ModelAdmin):
     form = GroupMappingAdminForm
-    list_display = ['Inning_Code', 'Student_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
+    list_display = [ 'GroupMapping_Name','Use_Flag', 'Register_DateTime', 'Updated_DateTime',
                     'Register_Agent']
     # readonly_fields = ['use_flag', 'reg_date', 'reg_time', 'reg_agent', 'udt_date', 'udt_time', 'udt_agent']
 

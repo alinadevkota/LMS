@@ -745,6 +745,11 @@ class GroupMappingListView(ListView):
 class GroupMappingCreateView(CreateView):
     model = GroupMapping
     form_class = GroupMappingForm
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['Inning_Name'] = get_object_or_404(InningInfo, pk=self.kwargs.get('inning_name'))
+    #     return context
 
 
 class GroupMappingDetailView(DetailView):
@@ -754,6 +759,11 @@ class GroupMappingDetailView(DetailView):
 class GroupMappingUpdateView(UpdateView):
     model = GroupMapping
     form_class = GroupMappingForm
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['Inning_Name'] = get_object_or_404(InningInfo, pk=self.kwargs.get('inning_name'))
+    #     return context
 
 
 class LearningNoteListView(ListView):

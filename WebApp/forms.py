@@ -1,13 +1,14 @@
 from django import forms
+from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm, TextInput
 
 from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
-    ChapterMissonCheckItem, InningInfo,  QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
+    ChapterMissonCheckItem, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
     AssignQuestionInfo, AssignAnswerInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
-    LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo,  \
-    QExampleInfo,  QuizAnswerInfo, QuizExampleInfo, \
+    LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
+    QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, USER_ROLES
 
 
@@ -22,7 +23,7 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = MemberInfo
-        fields = ('username', 'email', 'Member_Gender','Center_Code', 'Is_Student', 'Is_Teacher')
+        fields = ('username', 'email', 'Member_Gender', 'Center_Code', 'Is_Student', 'Is_Teacher')
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -87,6 +88,13 @@ class ChapterMissonCheckItemForm(forms.ModelForm):
 
 
 class InningInfoForm(forms.ModelForm):
+    Groups = forms.ModelMultipleChoiceField(queryset=GroupMapping.objects.all(),
+                                            widget=FilteredSelectMultiple("Groups", is_stacked=False))
+
+    class Media:
+        css = {'all': ('/static/admin/css/widgets.css',), }
+        js = ('/admin/jsi18n/',)
+
     class Meta:
         model = InningInfo
         fields = '__all__'
@@ -102,6 +110,7 @@ class QuizInfoForm(forms.ModelForm):
     class Meta:
         model = QuizInfo
         fields = '__all__'
+
 
 # AssignmentInfoForms
 class AssignmentInfoForm(forms.ModelForm):
@@ -127,6 +136,7 @@ class AssignQuestionInfoForm(forms.ModelForm):
         model = AssignQuestionInfo
         fields = '__all__'
 
+
 class AssignAnswerInfoForm(forms.ModelForm):
     class Meta:
         model = AssignAnswerInfo
@@ -146,6 +156,7 @@ class BoardContentInfoForm(forms.ModelForm):
 
 
 class InningGroupForm(forms.ModelForm):
+
     class Meta:
         model = InningGroup
         fields = '__all__'
@@ -175,7 +186,18 @@ class ChapterWriteForm(forms.ModelForm):
         fields = '__all__'
 
 
+def is_stacked(args):
+    pass
+
+
 class GroupMappingForm(forms.ModelForm):
+    memberinfo_id = forms.ModelMultipleChoiceField(queryset=MemberInfo.objects.filter(Is_Student=True),
+                                                   widget=FilteredSelectMultiple("Students", is_stacked=False))
+
+    class Media:
+        css = {'all': ('/static/admin/css/widgets.css',), }
+        js = ('/admin/jsi18n/',)
+
     class Meta:
         model = GroupMapping
         fields = '__all__'
@@ -233,7 +255,6 @@ class MessageInfoForm(forms.ModelForm):
 #     class Meta:
 #         model = OmrExampleInfo
 #         fields = '__all__'
-
 
 
 class QExampleInfoForm(forms.ModelForm):

@@ -2,11 +2,11 @@
 
 
 <div class="outerdiv">
-    <div class="col-md-12">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="col-md-9 col-sm-12 col-xs-12 text-center">
             <h2 class="detailListHeader">Lecture Information</h2>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12 text-right" id="button">
+        <div class="col-md-3 col-sm-12 col-xs-12 text-center" id="button">
             <a class="btn-sm btn-primary" href="{% if '/teachers' in request.path %}
                 /teachers{{ object.get_update_url }}
             {% else %}
@@ -15,7 +15,7 @@
             <a class="btn-sm btn-danger" href="{{ object.get_delete_url }}">Delete Lecture</a>
         </div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <hr class="header_hr">
         <div class="col-md-6 col-xs-12">
             <img class="card-img-top" src="
@@ -97,11 +97,11 @@
     <div class="col-md-12 col-sm-12 xol-xs-12">
         <hr class="header_hr">
 
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 xol-xs-12">
             <div class="col-md-9 col-sm-12 col-xs-12 text-center">
                 <h2 class="detailListHeader">Chapters</h2>
             </div>
-            <div class="col-md-3 col-sm-12 col-xs-12 text-right" id="button">
+            <div class="col-md-3 col-sm-12 col-xs-12 text-center" id="button">
                 <a class="btn-sm btn-success" href="{% if '/teachers' in request.path %}
                         {% url 'teacher_chapterinfo_create' %}
                     {% else %}
@@ -110,7 +110,7 @@
             </div>
 
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 xol-xs-12">
             <hr class="header_hr">
             {% for o in chapters %}
                 <div class="col-md-12 col-sm-12 col-xs-12 boxShadow" style="box-shadow: gainsboro; margin: 10px;">
