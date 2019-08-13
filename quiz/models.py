@@ -15,6 +15,8 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from model_utils.managers import InheritanceManager
 
+from WebApp.models import LectureInfo, ChapterInfo
+
 # multichoice modelss___________________________________________________________
 
 ANSWER_ORDER_OPTIONS = (
@@ -24,51 +26,53 @@ ANSWER_ORDER_OPTIONS = (
 )
 
 
-class CategoryManager(models.Manager):
+# class CategoryManager(models.Manager):
+#
+#     def new_category(self, category):
+#         new_category = self.create(category=re.sub('\s+', '-', category)
+#                                    .lower())
+#
+#         new_category.save()
+#         return new_category
 
-    def new_category(self, category):
-        new_category = self.create(category=re.sub('\s+', '-', category)
-                                   .lower())
 
-        new_category.save()
-        return new_category
+# @python_2_unicode_compatible
+# class Category(models.Model):
+#     category = models.CharField(
+#         verbose_name=_("Category"),
+#         max_length=250, blank=True,
+#         unique=True, null=True)
+#
+#     objects = CategoryManager()
+#
+#     class Meta:
+#         verbose_name = _("Category")
+#         verbose_name_plural = _("Categories")
+#
+#     def __str__(self):
+#         return self.category
 
 
 @python_2_unicode_compatible
-class Category(models.Model):
-    category = models.CharField(
-        verbose_name=_("Category"),
-        max_length=250, blank=True,
-        unique=True, null=True)
+# class SubCategory(models.Model):
+#     sub_category = models.CharField(
+#         verbose_name=_("Sub-Category"),
+#         max_length=250, blank=True, null=True)
+#
+#     category = models.ForeignKey(
+#         Category, null=True, blank=True,
+#         verbose_name=_("Category"), on_delete=models.CASCADE)
+#
+#     objects = CategoryManager()
+#
+#     class Meta:
+#         verbose_name = _("Sub-Category")
+#         verbose_name_plural = _("Sub-Categories")
+#
+#     def __str__(self):
+#         return self.sub_category + " (" + self.category.category + ")"
 
-    objects = CategoryManager()
 
-    class Meta:
-        verbose_name = _("Category")
-        verbose_name_plural = _("Categories")
-
-    def __str__(self):
-        return self.category
-
-
-@python_2_unicode_compatible
-class SubCategory(models.Model):
-    sub_category = models.CharField(
-        verbose_name=_("Sub-Category"),
-        max_length=250, blank=True, null=True)
-
-    category = models.ForeignKey(
-        Category, null=True, blank=True,
-        verbose_name=_("Category"), on_delete=models.CASCADE)
-
-    objects = CategoryManager()
-
-    class Meta:
-        verbose_name = _("Sub-Category")
-        verbose_name_plural = _("Sub-Categories")
-
-    def __str__(self):
-        return self.sub_category + " (" + self.category.category + ")"
 
 
 class ProgressManager(models.Manager):
@@ -115,8 +119,8 @@ class Progress(models.Model):
         score_before = self.score
         output = {}
 
-        for cat in Category.objects.all():
-            to_find = re.escape(cat.category) + r",(\d+),(\d+),"
+        for cat in LectureInfo.objects.all():
+            to_find = re.escape(cat.Lecture_Name) + r",(\d+),(\d+),"
             #  group 1 is score, group 2 is highest possible
 
             match = re.search(to_find, self.score, re.IGNORECASE)
@@ -131,11 +135,11 @@ class Progress(models.Model):
                 except:
                     percent = 0
 
-                output[cat.category] = [score, possible, percent]
+                output[cat.Lecture_Name] = [score, possible, percent]
 
             else:  # if category has not been added yet, add it.
-                self.score += cat.category + ",0,0,"
-                output[cat.category] = [0, 0]
+                self.score += cat.Lecture_Name + ",0,0,"
+                output[cat.Lecture_Name] = [0, 0]
 
         if len(self.score) > len(score_before):
             # If a new category has been added, save changes.
@@ -222,6 +226,12 @@ class Question(models.Model):
                                help_text=_("Enter the question text that "
                                            "you want displayed"),
                                verbose_name=_('Question'))
+
+    category = models.ForeignKey(LectureInfo,
+                                 verbose_name=_("LectureInfo"),
+                                 blank=True,
+                                 null=True,
+                                 on_delete=models.CASCADE)
 
     explanation = models.TextField(max_length=2000,
                                    blank=True,
@@ -337,7 +347,7 @@ class TF_Question(Question):
 class Essay_Question(Question):
 
     def check_if_correct(self, guess):
-        return False
+        return True
 
     def get_answers(self):
         return False
@@ -381,11 +391,16 @@ class Quiz(models.Model):
     url = models.SlugField(
         max_length=60, blank=False,
         help_text=_("a user friendly url"),
-        verbose_name=_("user friendly url"))
+        verbose_name=_("user friendly url"), unique=True)
+
+    category = models.ForeignKey(
+        LectureInfo, null=True, blank=True,
+        verbose_name=_("Lecture"), on_delete=models.CASCADE)
 
     duration = models.DurationField(
         help_text=_("Time limit for quiz"),
         verbose_name=_("Time limit for quiz"))
+
 
     duration = models.DurationField(null=False,
                                              blank=False,

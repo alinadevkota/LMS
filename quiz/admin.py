@@ -1,10 +1,11 @@
+import django
 from django import forms
 from django.contrib import admin
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
 
-from .models import Quiz, Category, SubCategory, Progress, Answer, MCQuestion, TF_Question, Essay_Question
+from .models import Quiz, Progress, Answer, MCQuestion, TF_Question, Essay_Question
 
 
 class AnswerInline(admin.TabularInline):
@@ -24,59 +25,37 @@ class QuizAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(QuizAdminForm, self).__init__(*args, **kwargs)
-        # if self.instance.pk:
-        #     # print("this", self.instance.pk, Quiz.objects.get(pk=self.instance.pk))
-        #
-        #     self.fields['mcquestion'] = forms.ModelMultipleChoiceField(
-        #         queryset=Quiz.objects.get(pk=self.instance.pk).mcquestion,
-        #         required=False,
-        #         widget = FilteredSelectMultiple(verbose_name=_("Mcquestion"), is_stacked=False)
-        #     )
 
 
-            #     quiz=forms.ModelMultipleChoiceField(
-            #         queryset=Quiz.objects.all(),
-            #         required=False,
-            #         # label=_("Questions"),
-            #         widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
-            # )
-        # mcquestion = forms.ModelMultipleChoiceField(
-        # queryset=MCQuestion.objects.all().select_subclasses(),
-        # required=False,
-        # # label=_("Questions"),
-        # widget=FilteredSelectMultiple(
-        #     verbose_name=_("mcquestion"),
-        #     is_stacked=False))
-    #
-    # def __init__(self, *args, **kwargs):
-    #     super(QuizAdminForm, self).__init__(*args, **kwargs)
-    #     if self.instance.pk:
-    #         self.fields['mcquestion'].initial =\
-    #             self.instance.mcquestion_set.all().select_subclasses()
-    #         self.fields['tfquestion'].initial = \
-    #             self.instance.tfquestion_set.all().select_subclasses()
-    #
-    # def save(self, commit=True):
-    #     quiz = super(QuizAdminForm, self).save(commit=False)
-    #     quiz.save()
-    #     print(self.cleaned_data['mcquestion'])
-    #     quiz.mcquestion_set.set(self.cleaned_data['mcquestion'])
-    #     quiz.tfquestion_set.set(self.cleaned_data['tfquestion'])
-    #     # quiz.question_set.set(self.cleaned_data['mcquestion'])
-    #     self.save_m2m()
-    #     return quiz
+# for adding widget to the quiz fields
+    # mcquestion = forms.ModelMultipleChoiceField(
+    #     queryset=MCQuestion.objects.all(),
+    #     required=False,
+    #     # label=_("Questions"),
+    #     # widget= AddAnotherWidgetWrapper(
+    #     #         forms.SelectMultiple,
+    #     #         reverse_lazy('mcquestion_create'),
+    #     widget=FilteredSelectMultiple(verbose_name=_("MCQ"), is_stacked=False))
 
 
 class QuizAdmin(admin.ModelAdmin):
     form = QuizAdminForm
 
-    add_form_template = 'admin_add_form.html'
+    add_form_template = 'admin_add_form_with_buttons.html'
     change_form_template = 'admin_add_form.html'
-
 
     # list_display = ('title', 'category', )
     # list_filter = ('category',)
     search_fields = ('description', 'category',)
+
+
+    # def changelist_view(self, request, extra_context=None):
+    #     # Execute default logic from parent class changelist_view()
+    #
+    #
+    #     return super(QuizAdmin, self).changelist_view(
+    #         request, extra_context=extra_context
+    #     )
 
     # def get_osm_info(self):
     #     # ...
@@ -97,27 +76,14 @@ class QuizAdmin(admin.ModelAdmin):
     # list_display = ('__str__', 'change_button', 'delete_button')
 
 
-class CategoryAdmin(admin.ModelAdmin):
-    search_fields = ('category',)
-
-
-class SubCategoryAdmin(admin.ModelAdmin):
-    search_fields = ('sub_category',)
-    # list_display = ('sub_category', 'category',)
-    # list_filter = ('category',)
-
-
-class MCQuestionAdmin(admin.ModelAdmin):
-    # list_display = ('content', 'category', )
-    # list_filter = ('category',)
-    fields = ('content', 'figure', 'explanation', 'answer_order')
-
-    search_fields = ('content', 'explanation')
-    # filter_horizontal = ('quiz',)
-
-    inlines = [AnswerInline]
-    add_form_template = 'admin_add_form.html'
-
+# class CategoryAdmin(admin.ModelAdmin):
+#     search_fields = ('category',)
+#
+#
+# class SubCategoryAdmin(admin.ModelAdmin):
+#     search_fields = ('sub_category',)
+#     # list_display = ('sub_category', 'category',)
+#     # list_filter = ('category',)
 
 class ProgressAdmin(admin.ModelAdmin):
     """
@@ -127,9 +93,27 @@ class ProgressAdmin(admin.ModelAdmin):
     search_fields = ('user', 'score',)
 
 
+class MCQuestionAdmin(admin.ModelAdmin):
+
+    change_form_template = 'admin_add_form.html'
+    change_list_template = 'custom_list.html'
+    list_display = ('content', 'category', )
+    list_filter = ('category',)
+    fields = ('content', 'figure', 'explanation', 'answer_order')
+
+    search_fields = ('content', 'explanation')
+    # filter_horizontal = ('quiz',)
+
+    inlines = [AnswerInline]
+    add_form_template = 'admin_add_form.html'
+
+
 class TFQuestionAdmin(admin.ModelAdmin):
-    # list_display = ('content', 'category', )
-    # list_filter = ('category',)
+    change_form_template = 'admin_add_form.html'
+    change_list_template = 'custom_list.html'
+
+    list_display = ('content', 'category', )
+    list_filter = ('category',)
     fields = ('content', 'figure', 'explanation', 'correct',)
 
     search_fields = ('content', 'explanation')
@@ -138,17 +122,20 @@ class TFQuestionAdmin(admin.ModelAdmin):
 
 
 class EssayQuestionAdmin(admin.ModelAdmin):
+    change_form_template = 'admin_add_form.html'
+    change_list_template = 'custom_list.html'
+
     # list_display = ('content', 'category', )
     # list_filter = ('category',)
-    fields = ('content', 'explanation',)
+    fields = ('content', 'explanation')
     search_fields = ('content', 'explanation')
     # filter_horizontal = ('quiz',)
     add_form_template = 'admin_add_form.html'
 
 
 admin.site.register(Quiz, QuizAdmin)
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(SubCategory, SubCategoryAdmin)
+# admin.site.register(Category, CategoryAdmin)
+# admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(MCQuestion, MCQuestionAdmin)
 admin.site.register(Progress, ProgressAdmin)
 admin.site.register(TF_Question, TFQuestionAdmin)
