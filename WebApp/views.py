@@ -16,6 +16,7 @@ from django.views.generic.edit import FormView
 from django.core.paginator import Paginator
 
 from forum.models import Thread
+from forum.views import get_top_thread_keywords
 
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
     ChapterMissonCheckCardForm, ChapterMissonCheckItemForm,SessionInfoForm, InningInfoForm, QuizInfoForm, \
@@ -146,7 +147,9 @@ def start(request):
     if request.user.is_authenticated:
 
         if request.user.Is_CenterAdmin:
-            thread = Thread.objects.order_by('-pub_date')[:7]
+            thread = Thread.objects.order_by('-pub_date')[:5]
+            wordCloud = Thread.objects.all()
+            thread_keywords = get_top_thread_keywords(request, 10)
             course = LectureInfo.objects.order_by('-Register_DateTime')[:4]
             coursecount = LectureInfo.objects.count()
             studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
@@ -158,7 +161,7 @@ def start(request):
             return render(request, "WebApp/homepage.html",
                           {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
                            'teachercount': teachercount,
-                           'threadcount': threadcount, 'totalcount': totalcount, 'thread': thread})
+                           'threadcount': threadcount, 'totalcount': totalcount, 'thread': thread, 'wordCloud':wordCloud, 'get_top_thread_keywords':thread_keywords })
         if request.user.Is_Student:
             return redirect('student_home')
         if request.user.Is_Teacher:

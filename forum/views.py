@@ -487,11 +487,13 @@ def get_top_thread_keywords(request, number_of_keyword):
     word_counter = {}
     for eachx in obj:
         words =  TextBlob(eachx.title).noun_phrases
-        print(words)
         for eachword in words:
-            if eachword in word_counter:
-                word_counter[eachword] += 1
-            else:
-                word_counter[eachword] = 1
+            for singleword in eachword.split(" "):
+                if singleword in word_counter:
+                    print(singleword)
+                    word_counter[singleword] += 1
+                else:
+                    word_counter[singleword] = 1
+
     popular_words = sorted(word_counter, key=word_counter.get, reverse=True)
     return popular_words[:number_of_keyword]
