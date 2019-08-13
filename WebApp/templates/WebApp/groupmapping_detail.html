@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{% url 'groupmapping_list' %}">Group Mapping</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'groupmapping_list' %}">Groups</a></li>
+    {#    <li class="breadcrumb-item"><a href="{% url 'inninginfo_detail' object.Inning_Code.id %}">{{ object.Inning_Code }}</a></li>#}
     <li class="breadcrumb-item active" aria-current="page">Group Mapping Information</li>
 {% endblock %}
 {% block content %}
@@ -13,25 +14,32 @@
         <br>
         <table class="table">
             <tr>
-                <td>Session</td>
-                <td>{{ object.Inning_Code }}</td>
+                <td>GroupName</td>
+                <td>{{ object.GroupMapping_Name }}</td>
             </tr>
             <tr>
                 <td>Register Agent</td>
                 <td>{{ object.Register_Agent }}</td>
             </tr>
+            <tr>
+                <td>Members</td>
+                <td> {% for students in object.memberinfo_id.all %}{{ students }}<br>{% endfor %}</td>
+            </tr>
 
-            <tr>
-                <td>Use Flag</td>
-                <td>{{ object.Use_Flag }}</td>
-            </tr>
-            <tr>
-                <td>Student Code</td>
-                <td>{{ object.Student_Code }}</td>
-            </tr>
+
+            {#            <tr>#}
+            {#                <td>Use Flag</td>#}
+            {#                <td>{{ object.Use_Flag }}</td>#}
+            {#            </tr>#}
+            {#            <tr>#}
+            {#                <td>Student Code</td>#}
+            {#                <td>{{ object.Student_Code }}</td>#}
+            {#            </tr>#}
 
         </table>
-        <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Group Mapping</a>
-        <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Group Mapping</a>
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Group Mapping</a>
+            <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Group Mapping</a>
+        </div>
     </div>
 {% endblock %}

@@ -85,17 +85,14 @@
                             <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{% url 'inninginfo_list' %}">List of Sessions</a></li>
-                            <li>
-                                <a href="{% url 'inninggroup_list' %}">Session Mapping</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'groupmapping_list' %}">Group Mapping</a>
-                            </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="{% url 'user_profile' %}"><i class="fa fa-cogs"></i> Profile
-                        </a>
+                  <li>
+                        <a><i class="fa fa-list"></i> Group
+                            <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{% url 'groupmapping_list' %}">List of Groups</a></li>
+                        </ul>
                     </li>
 
 

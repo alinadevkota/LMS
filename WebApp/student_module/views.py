@@ -58,3 +58,7 @@ def questions_student(request):
 
 def polls_student(request):
     return render(request, 'student_module/polls_student.html')
+
+
+def polls_student_view(request):
+    return render(request, 'student_module/polls_student_view.html')

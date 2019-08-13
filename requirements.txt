@@ -19,3 +19,4 @@ django-model-utils==3.2.0
 django-createsuperuserwithpassword
 django-filter==2.2.0
 django-addanother==2.0.0
+textblob
