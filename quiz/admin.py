@@ -99,7 +99,7 @@ class MCQuestionAdmin(admin.ModelAdmin):
     change_list_template = 'custom_list.html'
     list_display = ('content', 'category', )
     list_filter = ('category',)
-    fields = ('content', 'figure', 'explanation', 'answer_order')
+    fields = ('content', 'figure', 'explanation', 'answer_order', 'cent_code')
 
     search_fields = ('content', 'explanation')
     # filter_horizontal = ('quiz',)
@@ -114,7 +114,7 @@ class TFQuestionAdmin(admin.ModelAdmin):
 
     list_display = ('content', 'category', )
     list_filter = ('category',)
-    fields = ('content', 'figure', 'explanation', 'correct',)
+    fields = ('content', 'figure', 'explanation', 'correct', 'cent_code')
 
     search_fields = ('content', 'explanation')
     # filter_horizontal = ('quiz',)
@@ -127,7 +127,7 @@ class EssayQuestionAdmin(admin.ModelAdmin):
 
     # list_display = ('content', 'category', )
     # list_filter = ('category',)
-    fields = ('content', 'explanation')
+    fields = ('content', 'explanation', 'cent_code')
     search_fields = ('content', 'explanation')
     # filter_horizontal = ('quiz',)
     add_form_template = 'admin_add_form.html'
