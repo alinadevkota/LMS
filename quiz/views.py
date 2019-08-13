@@ -185,12 +185,10 @@ class QuizTake(FormView):
             self.question = self.anon_next_question()
             self.progress = self.anon_sitting_progress()
 
-        # if self.question.__class__ is Essay_Question:
-        #     form_class = EssayForm
-        # else:
-        #     form_class = self.form_class
-        form_class = self.form_class
-
+        if self.question.__class__ is Essay_Question:
+            form_class = EssayForm
+        else:
+            form_class = self.form_class
         return form_class(**self.get_form_kwargs())
 
     def get_form_kwargs(self):

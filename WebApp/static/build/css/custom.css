@@ -5708,7 +5708,7 @@ article {
 
 #button.col-md-3.text-right {
     margin-top: 15px;
-!important;
+
 }
 
 #tabs {
@@ -5729,6 +5729,17 @@ article {
     line-height: 60px;
     margin-left: 200;
     font-size: 25px;
+}
+/* changes to quiz delete */
+
+.submit-row a.deletelink {
+    display: block;
+    background: #ba2121;
+    border-radius: 4px;
+    padding: 18px 15px !important;
+    height: 15px;
+    line-height: 6px !important;
+    color: #fff;
 }
 
 
@@ -5792,7 +5803,7 @@ article {
     float: right;
     margin: 20px 0;
 }
-  .block{
+  .block-timer{
     position:absolute;
     background:white;
     width:80px;
@@ -5830,7 +5841,8 @@ article {
 }
 .privew {
     margin-bottom: 20px;
-}
+} 
+
 .questionsBox {
     display: block;
     border: solid 1px #e3e3e3;
@@ -5943,6 +5955,24 @@ input[type=checkbox], input[type=radio] {
 .preview1 , .preview2 , .preview3 , .preview4 {
     display: none
 }
-
-
+/* FORM QUIZ */
+.related-widget-wrapper{
+    width: 100%;
+}
+ .related-widget-wrapper select{
+    width: 100%
+}
+.aligned  label{
+    width: 175px;
+}
+/* .block {
+    position: absolute;
+    background: white;
+    width: 80px;
+    height: 80px;
+    display: block;
+    border-radius: 50%;
+    top: 9px;
+    left: 8px;
+} */
 /* STOP */
