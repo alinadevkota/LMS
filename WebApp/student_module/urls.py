@@ -50,3 +50,8 @@ urlpatterns += (
 urlpatterns += (
     path('polls_student/', views.polls_student, name="polls_student"),
 )
+
+urlpatterns += (
+    path('polls_student_view/', views.polls_student_view,
+         name="polls_student_view"),
+)

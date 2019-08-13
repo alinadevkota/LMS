@@ -48628,6 +48628,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 }
 
 .form-control{
+  margin-bottom: 8px;
   background-color: #F3F2EE;
   width: 100%; 
 }
@@ -48649,10 +48650,6 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 
 .reply-entry-title{
   padding-top: 0px;
-}
-
-a:hover{
-  text-decoration:underline;
 }
 
 a:active{
@@ -48740,7 +48737,65 @@ padding-left: 60px;
 }
 
 .post-reply{
-  font-size: 12px;
+    font-size: 12px;
     color: #bdc3c7;
     display: block;
+}
+.searchButton{
+  display: flex;
+  
+  margin-top: -44px;
+    margin-right: -5px;
+}
+
+
+.form-control-search .form-control{
+  font-size: 1.23rem;
+    border: none;
+    line-height: 16px;
+    background-color: transparent;
+    padding: 3px 10px 13px;
+    box-shadow: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: auto;
+    padding-top: -46px;
+    margin-top: -7px;
+}
+
+.media-body h4{
+font-size: 17px;
+}
+
+.link-text{
+  color: #42a5f5;
+}
+.link-color{
+  color: #42a5f5;
+  font-size: 13px;
+}
+
+.reply_thread{
+  margin-left: 58px;
+}
+
+.media-body h6{
+font-weight: bold;
+font-size: 19px;
+}
+
+.x-title h2{
+  text-align: center;
+  
+}
+
+a:hover{
+
+font-weight: bold;
+}
+
+.list-group-item a:hover{
+ font-weight: bold;
 }

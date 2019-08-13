@@ -74,17 +74,21 @@ class TopicAdmin(admin.ModelAdmin):
     number_of_threads.short_description = "Number of Threads [total(visible)]"
 
     list_display = (
+        'id',
         'title',
-        'number_of_threads'
+        'number_of_threads',
+
     )
     search_fields = (
         'title',
     )
+
+
 class NodeGroupAdmin(admin.ModelAdmin):
 
     def number_of_topics(self, obj):
         topics = Topic.objects.filter(node_group=obj)
-        return "{}({})".format(topics.count(),topics.count())
+        return "{}({})".format(topics.count(), topics.count())
 
     number_of_topics.short_description = "Number of topics [total(visible)]"
 
@@ -95,6 +99,7 @@ class NodeGroupAdmin(admin.ModelAdmin):
     search_fields = (
         'title',
     )
+
 
 admin.site.register(Thread, ThreadAdmin)
 admin.site.register(NodeGroup, NodeGroupAdmin)

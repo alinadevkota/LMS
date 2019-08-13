@@ -1,20 +1,25 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponseForbidden
-from django.urls import reverse
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
-from django.contrib.auth import get_user_model
-from django.conf import settings
-from django.views.generic import ListView
-from django.utils.translation import ugettext as _
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
-from .models import Thread, Topic, Post, Notification, ForumAvatar, NodeGroup
-from .forms import ThreadForm, ThreadEditForm, AppendixForm, ForumAvatarForm, ReplyForm, TopicForm, TopicEditForm, PostEditForm
-from .misc import get_query
-from django.db.models import Sum
 import re
+
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
+from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.shortcuts import render
+from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext as _
+from django.views.generic import ListView
+from textblob import TextBlob
+
+
+from .forms import ThreadForm, ThreadEditForm, AppendixForm, ForumAvatarForm, ReplyForm, TopicForm, TopicEditForm, \
+    PostEditForm
+from .misc import get_query
+from .models import Thread, Topic, Post, Notification, ForumAvatar, NodeGroup
 
 EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
 User = get_user_model()
@@ -42,10 +47,10 @@ class Index(ListView):
     context_object_name = 'threads'
 
     def get_queryset(self):
-        nodegroups= NodeGroup.objects.all()
+        nodegroups = NodeGroup.objects.all()
         threadqueryset = Thread.objects.none()
         for ng in nodegroups:
-            topics=Topic.objects.filter(node_group=ng.pk)
+            topics = Topic.objects.filter(node_group=ng.pk)
             for topic in topics:
                 threads = Thread.objects.visible().filter(topic=topic.pk).order_by('pub_date')[:4]
                 threadqueryset |= threads
@@ -56,9 +61,11 @@ class Index(ListView):
         context = super(ListView, self).get_context_data(**kwargs)
         context['panel_title'] = _('New Threads')
         context['title'] = _('Index')
-        context['topics']= Topic.objects.all()
+        context['topics'] = Topic.objects.all()
         context['show_order'] = True
+        context['get_top_thread_keywords'] = get_top_thread_keywords(self.request, 10)
         return context
+
 
 class NodeGroupView(ListView):
     model = Topic
@@ -89,8 +96,9 @@ class NodeGroupView(ListView):
         context['node_group'] = nodegroup = NodeGroup.objects.get(pk=self.kwargs.get('pk'))
         context['title'] = context['panel_title'] = nodegroup.title
         context['show_order'] = True
-        context['latest_thread_for_topics']=latest_threads
+        context['latest_thread_for_topics'] = latest_threads
         return context
+
 
 class TopicView(ListView):
     model = Thread
@@ -192,6 +200,7 @@ class UserThreads(ListView):
         context['panel_title'] = context['title'] = context['user'].username
         return context
 
+
 class UserPosts(ListView):
     model = Post
     paginate_by = 15
@@ -212,6 +221,7 @@ class UserPosts(ListView):
         context['user'] = User.objects.get(pk=self.kwargs.get('pk'))
         context['panel_title'] = context['title'] = context['user'].username
         return context
+
 
 class SearchView(ListView):
     model = Thread
@@ -248,11 +258,13 @@ def search_redirect(request):
 
 
 @login_required
-def create_thread(request, topic_pk=None, nodegroup_pk=None ):
+def create_thread(request, topic_pk=None, nodegroup_pk=None):
+    topic = None
     node_group = NodeGroup.objects.all()
-    fixed_nodegroup=NodeGroup.objects.filter(pk=nodegroup_pk)
-    topic = Topic.objects.filter(pk=topic_pk)
-    topics=Topic.objects.filter(node_group=nodegroup_pk)
+    fixed_nodegroup = NodeGroup.objects.filter(pk=nodegroup_pk)
+    if topic_pk:
+        topic = Topic.objects.get(pk=topic_pk)
+    topics = Topic.objects.filter(node_group=nodegroup_pk)
     if request.method == 'POST':
         form = ThreadForm(request.POST, user=request.user)
         if form.is_valid():
@@ -261,10 +273,13 @@ def create_thread(request, topic_pk=None, nodegroup_pk=None ):
     else:
         form = ThreadForm()
 
-    return render(request, 'forum/create_thread.html', {'form': form, 'node_group':node_group, 'title': _('Create Thread'),'topic':topic,'fixed_nodegroup':fixed_nodegroup,'topics':topics})
+    return render(request, 'forum/create_thread.html',
+                  {'form': form, 'node_group': node_group, 'title': _('Create Thread'), 'topic': topic,
+                   'fixed_nodegroup': fixed_nodegroup, 'topics': topics})
+
 
 @login_required
-def create_topic(request,nodegroup_pk=None ):
+def create_topic(request, nodegroup_pk=None):
     node_group = NodeGroup.objects.filter(pk=nodegroup_pk)
     if request.method == 'POST':
         form = TopicForm(request.POST, user=request.user)
@@ -274,7 +289,8 @@ def create_topic(request,nodegroup_pk=None ):
     else:
         form = TopicForm()
 
-    return render(request, 'forum/create_topic.html', {'form': form, 'title': _('Create Topic'),'node_group':node_group})
+    return render(request, 'forum/create_topic.html',
+                  {'form': form, 'title': _('Create Topic'), 'node_group': node_group})
 
 
 @login_required
@@ -293,6 +309,7 @@ def edit_thread(request, pk):
         form = ThreadEditForm(instance=thread)
 
     return render(request, 'forum/edit_thread.html', {'form': form, 'title': _('Edit thread')})
+
 
 @login_required
 def edit_post(request, pk):
@@ -375,7 +392,6 @@ def notification_view(request):
 
 
 class NotificationView(ListView):
-
     model = Notification
     paginate_by = 20
     template_name = 'forum/notifications.html'
@@ -464,3 +480,18 @@ def reg_view(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("forum:index"))
+
+
+def get_top_thread_keywords(request, number_of_keyword):
+    obj = Thread.objects.all()
+    word_counter = {}
+    for eachx in obj:
+        words =  TextBlob(eachx.title).noun_phrases
+        print(words)
+        for eachword in words:
+            if eachword in word_counter:
+                word_counter[eachword] += 1
+            else:
+                word_counter[eachword] = 1
+    popular_words = sorted(word_counter, key=word_counter.get, reverse=True)
+    return popular_words[:number_of_keyword]

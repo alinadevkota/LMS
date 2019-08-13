@@ -28,10 +28,9 @@
         </div>
 
         <span class="pull-right new_thread">
-            <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread' topic_pk=topic.pk %}"><i
+            <a class="btn btn-white btn-flat" href="{% url 'forum:create_thread' topic.node_group.pk topic.pk %}"><i
                     class="fa fa-fw fa-plus"></i>
-                New
-                Thread</a>
+                Ask New Question</a>
 
         </span>
 
@@ -73,15 +72,14 @@
                                     <span class="meta">
                                         SubCategory:
                                         <a href="{% url 'forum:topic' thread.topic.pk %}">
-                                            <span class="topic-meta" style="color: darkblue">
+                                            <span class="topic-meta link-text">
                                                 {{ thread.topic.title }}
                                             </span> |
                                         </a>
                                     </span>
                                     <span class="meta meta-username">
-                                        posted by<a href="{% url 'forum:user_info' thread.user.pk %}"
-                                            style="color: darkblue">
-                                            {{ thread.user.username }}
+                                        posted by<a href="{% url 'forum:user_info' thread.user.pk %}">
+                                            <span class="topic-meta link-text"> {{ thread.user.username }} </span>
                                         </a>
                                     </span>
 

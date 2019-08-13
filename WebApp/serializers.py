@@ -219,7 +219,7 @@ class GroupMappingSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.GroupMapping
         fields = (
-            'pk', 'Inning_Code', 'Student_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
+            'pk', 'Inning_Code', 'memberinfo_id', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
             'Register_Agent'
         )
 

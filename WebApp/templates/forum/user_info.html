@@ -45,10 +45,10 @@
                                 <p class="topic-meta">
                                     &nbsp; Topic:
                                     <a href="{% url 'forum:topic' thread.topic.pk %}">
-                                        <span class="link-text-color">
+                                        <span class="link-color">
                                             {{ thread.topic.title }}
                                         </span>
-                                    </a>
+                                    </a> |
                                     <span class="meta meta-pub_date"> posted
                                         {{ thread.pub_date | naturaltime }}
                                     </span> |
@@ -99,7 +99,7 @@
                                                 </p>
                                             </div>
                                             <div class="reply_thread">
-                                                <p>{{ reply.content_rendered | safe }}</p>
+                                                <p> {{ reply.content_rendered | safe }} </p>
                                             </div>
                                         </h5>
 
@@ -163,8 +163,9 @@
                     </p>
 
                     <div class="message_date">
-                        <h3 class="date text-info">{{ reply.pub_date|date:"d" }}</h3>
-                        <p class="month">{{ reply.pub_date|date:"M" }}</p>
+                        <h3 class="date text-info">{{ reply.pub_date|date:"d, M" }}</h3>
+
+                        <p class="month">{{ reply.pub_date|date:"Y" }}</p>
                     </div>
 
 
@@ -172,9 +173,8 @@
                         <h4 class="heading"> {{ reply.user.username }} </h4>
 
                         <blockquote class="message"> {{ reply.content_rendered | safe }} </blockquote>
-                        <p>{{ reply.pub_date | naturaltime }}</p>
+                        <p>{{ reply.pub_date |date:"H:i A" }}</p>
                     </div>
-
                     {% endfor %}
                 </li>
             </ul>
