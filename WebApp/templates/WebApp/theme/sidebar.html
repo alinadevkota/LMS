@@ -27,19 +27,19 @@
                         {% else %}
                             {% static 'images/profile/profile.png' %}
                         {% endif %}"
-                     alt="..." class="img-circle profile_img"/>
-            </div>
+                alt="..." class="img-circle profile_img" />
+        </div>
 
-            <div class="profile_info">
+        <div class="profile_info">
 
-                <span>Welcome,</span>
-                <h2>{{ request.user.username }}</h2>
-            </div>
+            <span>Welcome,</span>
+            <h2>{{ request.user.username }}</h2>
+        </div>
         {% endif %}
     </div>
     <!-- /menu profile quick info -->
 
-    <br/>
+    <br />
 
     <!-- sidebar menu -->
     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
@@ -103,10 +103,10 @@
                     <ul class="nav child_menu">
                         <li><a href="{% url 'forum:index' %}">Home</a></li>
                         {% if request.user.is_authenticated %}
-                            <li><a href="{% url 'forum:user_info' request.user.pk %}">Profile</a></li>
+                        <li><a href="{% url 'forum:user_info' request.user.pk %}">profile</a></li>
                         {% endif %} {% for nodegroup in node_groups %}
                         <li><a href="{% url 'forum:nodegroup' nodegroup.pk %}">{{ nodegroup.title }}</a></li>
-                    {% endfor %}
+                        {% endfor %}
 
                     </ul>
                 </li>

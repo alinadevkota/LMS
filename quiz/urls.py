@@ -11,7 +11,7 @@ except ImportError:
     from django.urls import re_path as url, path
 
 from .views import QuizListView, QuizCreateView, CategoriesListView, \
-    ViewQuizListByCategory, QuizUserProgressView, \
+    QuizUserProgressView, \
     QuizTake, MCQuestionCreateView, TFQuestionCreateView, MCQuestionUpdateView, TFQuestionUpdateView, \
     QuizDetailView, QuizUpdateView, QuizDeleteView, QuizMarkingList, QuizMarkingDetail, EssayQuestionCreateView, \
     EssayQuestionUpdateView
@@ -32,8 +32,8 @@ urlpatterns = (
 
     url(r'^category/$', view=CategoriesListView.as_view(), name='quiz_category_list_all'),
 
-    url(r'^category/(?P<category_name>[\w|\W-]+)/$', view=ViewQuizListByCategory.as_view(),
-        name='quiz_category_list_matching'),
+    # url(r'^category/(?P<category_name>[\w|\W-]+)/$', view=ViewQuizListByCategory.as_view(),
+    #     name='quiz_category_list_matching'),
 
     url(r'^progress/$', view=QuizUserProgressView.as_view(), name='quiz_progress'),
 
