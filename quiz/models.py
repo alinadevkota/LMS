@@ -15,7 +15,7 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from model_utils.managers import InheritanceManager
 
-from WebApp.models import LectureInfo, ChapterInfo
+from WebApp.models import LectureInfo, ChapterInfo, CenterInfo
 
 # multichoice modelss___________________________________________________________
 
@@ -240,6 +240,10 @@ class Question(models.Model):
                                                "been answered."),
                                    verbose_name=_('Explanation'))
 
+    cent_code = models.ForeignKey(
+        CenterInfo, null=True, blank=True,
+        verbose_name=_("Center Code"), on_delete=models.CASCADE)
+
     objects = InheritanceManager()
 
     class Meta:
@@ -396,6 +400,10 @@ class Quiz(models.Model):
     category = models.ForeignKey(
         LectureInfo, null=True, blank=True,
         verbose_name=_("Lecture"), on_delete=models.CASCADE)
+
+    cent_code = models.ForeignKey(
+        CenterInfo, null=True, blank=True,
+        verbose_name=_("Center Code"), on_delete=models.CASCADE)
 
     duration = models.DurationField(
         help_text=_("Time limit for quiz"),
