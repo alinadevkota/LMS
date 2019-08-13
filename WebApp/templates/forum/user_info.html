@@ -163,8 +163,9 @@
                     </p>
 
                     <div class="message_date">
-                        <h3 class="date text-info">{{ reply.pub_date|date:"d" }}</h3>
-                        <p class="month">{{ reply.pub_date|date:"M" }}</p>
+                        <h3 class="date text-info">{{ reply.pub_date|date:"d, M" }}</h3>
+
+                        <p class="month">{{ reply.pub_date|date:"Y" }}</p>
                     </div>
 
 
@@ -172,9 +173,8 @@
                         <h4 class="heading"> {{ reply.user.username }} </h4>
 
                         <blockquote class="message"> {{ reply.content_rendered | safe }} </blockquote>
-                        <p>{{ reply.pub_date | naturaltime }}</p>
+                        <p>{{ reply.pub_date |date:"H:i A" }}</p>
                     </div>
-
                     {% endfor %}
                 </li>
             </ul>
