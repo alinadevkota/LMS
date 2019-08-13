@@ -7,12 +7,12 @@
     {#    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>#}
 {% endblock stylesheets %}
 {% block breadcrumb %}
-    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'inninginfo_list' %}">Session</a></li>
+    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'inninginfo_list' %}">Session Mapping</a></li>
     <li class="breadcrumb-item active" aria-current="page">
         {% if '/inninginfo/create/' == request.path %}
-            Create New Session
+            Create New Session Mapping
         {% else %}
-            Edit Session Info
+            Edit Session Mapping
         {% endif %}
     </li>
 {% endblock %}
@@ -20,9 +20,9 @@
     <div class="headerDiv">
         <h2 class="infoFormHeader">
             {% if '/inninginfo/create/' == request.path %}
-                Create New Session
+                Create New Session Mapping
             {% else %}
-                Edit Session Info
+                Edit Session Mapping
             {% endif %}
         </h2>
         <hr class="header_hr">
@@ -30,18 +30,24 @@
 
     <form method="post" id="FormID">
         {% csrf_token %}
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <div id="div_id_Inning_Name" class="form-group">
-                <label for="id_Inning_Name" class="control-label ">
-                    Session Name
-                </label>
-                <div class="controls ">
-                    <input value="{{ object.Inning_Name }}" type="text" name="Inning_Name" id="id_Inning_Name"
-                           maxlength="500"
-                           class="textinput textInput form-control">
-                </div>
-            </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            {{ form.Inning_Name|as_crispy_field }}
         </div>
+        <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+            {{ form.Groups|as_crispy_field }}
+        </div>
+        {#        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
+        {#            <div id="div_id_Inning_Name" class="form-group">#}
+        {#                <label for="id_Inning_Name" class="control-label ">#}
+        {#                    Session Name#}
+        {#                </label>#}
+        {#                <div class="controls ">#}
+        {#                    <input value="{{ object.Inning_Name }}" type="text" name="Inning_Name" id="id_Inning_Name"#}
+        {#                           maxlength="500"#}
+        {#                           class="textinput textInput form-control">#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </div>#}
         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
             <div id="div_id_Start_Date" class="form-group">
                 <label for="id_Start_Date" class="control-label requiredField">
@@ -70,7 +76,7 @@
         {#            {{ form.Register_Agent|as_crispy_field }}#}
         {#        </div>#}
 
-        <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback text-center">
             <label>
                 Status
             </label><br>
@@ -82,8 +88,9 @@
                     {% endif %}
             ><br> <br>
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-            {{ form.Groups }}
+
+        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            {{ form.Course_Group }}
         </div>
 
 

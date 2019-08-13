@@ -1,29 +1,33 @@
 {% extends "base.html" %}
 {% load static %}
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{% url 'groupmapping_list' %}">Batch Registration</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'sessioninfo_list' %}">Sessions</a></li>
     {#    <li class="breadcrumb-item"><a href="{% url 'inninginfo_detail' object.Inning_Code.id %}">{{ object.Inning_Code }}</a></li>#}
-    <li class="breadcrumb-item active" aria-current="page">{{ object.GroupMapping_Name }}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ object.Session_Name }}</li>
 {% endblock %}
 {% block content %}
 
     <div class="outerdiv">
 
-        <h2 class="detailListHeader">Group Mapping Information</h2>
+        <h2 class="detailListHeader">Session Information</h2>
         <hr class="header_hr">
         <br>
         <table class="table">
             <tr>
-                <td>GroupName</td>
-                <td>{{ object.GroupMapping_Name }}</td>
+                <td>Session Name</td>
+                <td>{{ object.Session_Name }}</td>
             </tr>
             <tr>
-                <td>Register Agent</td>
-                <td>{{ object.Register_Agent }}</td>
+                <td>Description</td>
+                <td>{{ object.Description }}</td>
             </tr>
             <tr>
-                <td>Members</td>
-                <td> {% for students in object.Students.all %}{{ students }}<br>{% endfor %}</td>
+                <td>Use Flag</td>
+                <td>{{ object.Use_Flag }}</td>
+            </tr>
+            <tr>
+                <td>Center Code</td>
+                <td>{{ object.Center_Code }}</td>
             </tr>
 
 
@@ -38,8 +42,8 @@
 
         </table>
         <div class="text-center">
-            <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Group Mapping</a>
-            <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Group Mapping</a>
+            <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Session</a>
+            <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Session</a>
         </div>
     </div>
 {% endblock %}

@@ -1,25 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{% url 'inninggroup_list' %}">Session Mapping</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Session Mapping Information</li>
+    <li class="breadcrumb-item"><a href="{% url 'inninggroup_list' %}">Teacher Allocation</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ object.InningGroup_Name }}</li>
 {% endblock %}
 {% block content %}
 
     <div class="outerdiv">
 
-        <h2 class="detailListHeader">Session Mapping Information</h2>
+        <h2 class="detailListHeader">Teacher Allocation Information</h2>
         <hr class="header_hr">
         <br>
         <table class="table">
             <tr>
                 <td>Session</td>
-                <td>{{ object.Inning_Code }}</td>
+                <td>{{ object.InningGroup_Name }}</td>
             </tr>
-            <tr>
-                <td>Teacher Code</td>
-                <td>{{ object.Teacher_Code }}</td>
-            </tr>
+
             <tr>
                 <td>Use Flag</td>
                 <td>{{ object.Use_Flag }}</td>
@@ -33,9 +30,15 @@
                 <td>Lecture Code</td>
                 <td>{{ object.Lecture_Code }}</td>
             </tr>
+            <tr>
+                <td>Teacher Code</td>
+                <td> {% for teachers in object.Teacher_Code.all %}{{ teachers }}<br>{% endfor %}</td>
+            </tr>
         </table>
-        <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Session Group</a>
-        <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Session Group</a>
+        <div class="text-center">
 
+            <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Teacher Allocation</a>
+            <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Teacher Allocation</a>
+        </div>
     </div>
 {% endblock %}

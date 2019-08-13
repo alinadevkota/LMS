@@ -25,44 +25,44 @@
                                 {% static 'images/course.jpg' %}
                             {% endif %}"
                  alt="Card image cap" width="100%">
-            <div class="courseDetailStyle1 row" style="margin-top: 10px">
-                <div class="col-lg-3" style="border-right: 1px solid lightgrey;display: flex;flex-direction: row;">
-
-
-                    <img src="{{ object.Teacher_Code.Member_Avatar.url }}"
-                         class="profile_img img-responsive"
-                         style="height: 50px;width: 50px;">
-                    <div style="padding-left: 10px;font-size: 15px;">
-                        <h5 align="center">
-                            <ul class="list-unstyled">
-                                <li>
-                                    Instructor
-                                </li>
-                                <li style="font-weight: bold;color: black;">
-                                    {{ object.Teacher_Code }}
-                                </li>
-                            </ul>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <h5 align="center">Reviews:
-                        <span style="color: lightskyblue;">
-	            		            <i class="fa fa-star" aria-hidden="false"></i>
-	            		            <i class="fa fa-star" aria-hidden="true"></i>
-	            		            <i class="fa fa-star" aria-hidden="true"></i>
-	            		            <i class="fa fa-star" aria-hidden="true"></i>
-	            		            <i class="fa fa-star" aria-hidden="true"></i>
-                    </span>
-                    </h5>
-                </div>
-                <div class="col-lg-3" style="font-size: 15px;border-left: 1px solid lightgrey;">
-                    <h5 align="center"><i class="fa fa-comment-o"></i>
-                        <a href="">FORUM</a>
-                    </h5>
-                </div>
-
-            </div>
+{#            <div class="courseDetailStyle1 row" style="margin-top: 10px">#}
+{#                <div class="col-lg-3" style="border-right: 1px solid lightgrey;display: flex;flex-direction: row;">#}
+{##}
+{##}
+{#                    <img src="{{ object.Teacher_Code.Member_Avatar.url }}"#}
+{#                         class="profile_img img-responsive"#}
+{#                         style="height: 50px;width: 50px;">#}
+{#                    <div style="padding-left: 10px;font-size: 15px;">#}
+{#                        <h5 align="center">#}
+{#                            <ul class="list-unstyled">#}
+{#                                <li>#}
+{#                                    Instructor#}
+{#                                </li>#}
+{#                                <li style="font-weight: bold;color: black;">#}
+{#                                    {{ object.Teacher_Code }}#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </h5>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-lg-3">#}
+{#                    <h5 align="center">Reviews:#}
+{#                        <span style="color: lightskyblue;">#}
+{#	            		            <i class="fa fa-star" aria-hidden="false"></i>#}
+{#	            		            <i class="fa fa-star" aria-hidden="true"></i>#}
+{#	            		            <i class="fa fa-star" aria-hidden="true"></i>#}
+{#	            		            <i class="fa fa-star" aria-hidden="true"></i>#}
+{#	            		            <i class="fa fa-star" aria-hidden="true"></i>#}
+{#                    </span>#}
+{#                    </h5>#}
+{#                </div>#}
+{#                <div class="col-lg-3" style="font-size: 15px;border-left: 1px solid lightgrey;">#}
+{#                    <h5 align="center"><i class="fa fa-comment-o"></i>#}
+{#                        <a href="">FORUM</a>#}
+{#                    </h5>#}
+{#                </div>#}
+{##}
+{#            </div>#}
         </div>
         <div class="col-md-6 col-sm-12 col-xs-12">
             <h3 align="center"><b>{{ object.Lecture_Name }}</b></h3>
@@ -81,10 +81,10 @@
                     <td>{{ object.Register_Agent }}</td>
                 </tr>
 
-                <tr>
-                    <td>Teacher Code</td>
-                    <td>{{ object.Teacher_Code }}</td>
-                </tr>
+{#                <tr>#}
+{#                    <td>Teacher Code</td>#}
+{#                    <td>{{ object.Teacher_Code }}</td>#}
+{#                </tr>#}
             </table>
 
             <h4 align="center"><b>Lecture Description</b></h4>

@@ -66,7 +66,7 @@
 
                         <hr>
 
-                        <h5 class="lectureDescription">
+                        <h5 class="lectureDescription" style="padding-bottom: 10px;">
                             {% if object.Lecture_Description %}
                                 {{ object.Lecture_Description }}
                             {% else %}
@@ -75,20 +75,20 @@
                         </h5>
 
 
-                        <div class="row d-flex flex-row">
-                            <div class="col-md-3">
-                                            <span class="">
-                                                <img width="60px" id="avatar"
-                                                     src="{{ object.Teacher_Code.Member_Avatar.url }}">
-                                            </span>
-                            </div>
-
-                            <div class="col-md-9 text-center">
-
-                                <p>Instructor</p>
-                                <h5>{{ object.Teacher_Code }}</h5>
-                            </div>
-                        </div>
+{#                        <div class="row d-flex flex-row">#}
+{#                            <div class="col-md-3">#}
+{#                                            <span class="">#}
+{#                                                <img width="60px" id="avatar"#}
+{#                                                     src="{{ object.Teacher_Code.Member_Avatar.url }}">#}
+{#                                            </span>#}
+{#                            </div>#}
+{##}
+{#                            <div class="col-md-9 text-center">#}
+{##}
+{#                                <p>Instructor</p>#}
+{#                                <h5>{{ object.Teacher_Code }}</h5>#}
+{#                            </div>#}
+{#                        </div>#}
                     </div>
                 </div>
             </div>

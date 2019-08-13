@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
 {% block breadcrumb %}
-    <li class="breadcrumb-item active" aria-current="page">Groups</li>
+    <li class="breadcrumb-item active" aria-current="page">Batch Registration</li>
 {% endblock %}
 {% block content %}
     <div class="groupmappingListClass">
 
         <hr class="header_hr">
-        <h2 class="tableHeader">List of Group Mappings</h2>
+        <h2 class="tableHeader">List of Batch</h2>
         <hr class="header_hr">
         <div class="btn-createnew">
-            <a class="btn btn-success" href="{% url 'groupmapping_create' %}">Create New Group</a>
+            <a class="btn btn-success" href="{% url 'groupmapping_create' %}">Create New Batch</a>
         </div>
         <br><br><br>
         <div class="table-responsive">
