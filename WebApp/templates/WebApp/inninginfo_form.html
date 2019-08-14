@@ -3,6 +3,9 @@
 {% load crispy_forms_tags %}
 {% block stylesheets %}
     {{ form.media }}
+    <link href="{% static 'vendorsx/nprogress/nprogress.css' %}" rel="stylesheet">
+    <link href="{% static '/build/css/custom.min.css' %}" rel="stylesheet">
+
     {#    <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>#}
     {#    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>#}
 {% endblock stylesheets %}
@@ -28,83 +31,256 @@
         <hr class="header_hr">
     </div>
 
-    <form method="post" id="FormID">
-        {% csrf_token %}
-        <div class="col-md-6 col-sm-6 col-xs-12">
-            {{ form.Inning_Name|as_crispy_field }}
-        </div>
-        <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
-            {{ form.Groups|as_crispy_field }}
-        </div>
-        {#        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
-        {#            <div id="div_id_Inning_Name" class="form-group">#}
-        {#                <label for="id_Inning_Name" class="control-label ">#}
-        {#                    Session Name#}
-        {#                </label>#}
-        {#                <div class="controls ">#}
-        {#                    <input value="{{ object.Inning_Name }}" type="text" name="Inning_Name" id="id_Inning_Name"#}
-        {#                           maxlength="500"#}
-        {#                           class="textinput textInput form-control">#}
-        {#                </div>#}
-        {#            </div>#}
-        {#        </div>#}
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <div id="div_id_Start_Date" class="form-group">
-                <label for="id_Start_Date" class="control-label requiredField">
-                    Start Date</span>
-                </label>
-                <div class="controls ">
-                    <input value="{{ object.Start_Date|date:"Y-m-d" }}" type="date" name="Start_Date" required=""
-                           id="id_Start_Date"
-                           class="datetimeinput form-control">
+    <div id="wizard" class="form_wizard wizard_horizontal">
+        <ul class="wizard_steps anchor">
+            <li>
+                <a href="#step-1" class="selected" isdone="1" rel="1">
+                    <span class="step_no">1</span>
+                    <span class="step_descr">  Step 1<br>  <small>Step 1 description</small>    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#step-2" class="disabled" isdone="0" rel="2">
+                    <span class="step_no">2</span>
+                    <span class="step_descr">    Step 2<br>    <small>Step 2 description</small>    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#step-3" class="disabled" isdone="0" rel="3">
+                    <span class="step_no">3</span> <span class="step_descr">  Step 3<br> <small>Step 3 description</small>    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#step-4" class="disabled" isdone="0" rel="4">
+                    <span class="step_no">4</span> <span class="step_descr">  Step 4<br> <small>Step 4 description</small> </span>
+                </a>
+            </li>
+        </ul>
+        <div class="form-wrapper" style="width: 100%!important;">
+
+            <div class="stepContainer" style="height: 277px;">
+                <div id="step-1" style="display: block;">
+                    <form class="form-horizontal form-label-left">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span
+                                    class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="first-name" required="required"
+                                       class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span
+                                    class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="last-name" name="last-name" required="required"
+                                       class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name /
+                                Initial</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text"
+                                       name="middle-name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div id="gender" class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-default" data-toggle-class="btn-primary"
+                                           data-toggle-passive-class="btn-default">
+                                        <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
+                                    </label>
+                                    <label class="btn btn-primary" data-toggle-class="btn-primary"
+                                           data-toggle-passive-class="btn-default">
+                                        <input type="radio" name="gender" value="female"> Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span
+                                    class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="birthday" class="date-picker form-control col-md-7 col-xs-12"
+                                       required="required"
+                                       type="text">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="step-2" style="display: none;">
+                    <h2 class="StepTitle">Step 2 Content</h2>
+                    <p>
+                        do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+                <div id="step-3" style="display: none;">
+                    <h2 class="StepTitle">Step 3 Content</h2>
+                    <p>
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                        dolor
+                        in reprehenderit in voluptate velit esse cillum dolore
+                        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                        officia
+                        deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+                <div id="step-4" style="display: none;">
+                    <h2 class="StepTitle">Step 4 Content</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut
+                        aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit
+                        anim id est laborum.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <div id="div_id_End_Date" class="form-group">
-                <label for="id_End_Date" class="control-label  requiredField">
-                    End Date</span>
-                </label>
-                <div class="controls ">
-                    <input value="{{ object.End_Date|date:"Y-m-d" }}" type="date" name="End_Date" required=""
-                           id="id_End_Date" class="datetimeinput form-control">
-                </div>
+            <div class="actionBar">
+                <div class="msgBox">
+                    <div class="content"></div>
+                    <a href="#" class="close">X</a></div>
+                <div class="loader">Loading</div>
+                <a href="#" class="buttonFinish buttonDisabled btn btn-default">Finish</a>
+                <a href="#" class="buttonNext btn btn-success">Next</a>
+                <a href="#" class="buttonPrevious buttonDisabled btn btn-primary">Previous</a>
             </div>
         </div>
-        {#        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
-        {#            {{ form.Register_Agent|as_crispy_field }}#}
-        {#        </div>#}
+    </div>
 
-        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback text-center">
-            <label>
-                Status
-            </label><br>
-            <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
-                    {% if object.Use_Flag == False %}
-                   &nbsp;
-                    {% else %}
-                   checked
-                    {% endif %}
-            ><br> <br>
-        </div>
+    {#        <form method="post" id="FormID">#}
+    {#            {% csrf_token %}#}
+    {#            <div class="col-md-6 col-sm-6 col-xs-12">#}
+    {#                {{ form.Inning_Name|as_crispy_field }}#}
+    {#            </div>#}
+    {#            <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">#}
+    {#                {{ form.Groups|as_crispy_field }}#}
+    {#            </div>#}
+    {#            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
+    {#                <div id="div_id_Inning_Name" class="form-group">#}
+    {#                    <label for="id_Inning_Name" class="control-label ">#}
+    {#                        Session Name#}
+    {#                    </label>#}
+    {#                    <div class="controls ">#}
+    {#                        <input value="{{ object.Inning_Name }}" type="text" name="Inning_Name" id="id_Inning_Name"#}
+    {#                               maxlength="500"#}
+    {#                               class="textinput textInput form-control">#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
+    {#                <div id="div_id_Start_Date" class="form-group">#}
+    {#                    <label for="id_Start_Date" class="control-label requiredField">#}
+    {#                        Start Date</span>#}
+    {#                    </label>#}
+    {#                    <div class="controls ">#}
+    {#                        <input value="{{ object.Start_Date|date:"Y-m-d" }}" type="date" name="Start_Date" required=""#}
+    {#                               id="id_Start_Date"#}
+    {#                               class="datetimeinput form-control">#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {##}
+    {#            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
+    {#                <div id="div_id_End_Date" class="form-group">#}
+    {#                    <label for="id_End_Date" class="control-label  requiredField">#}
+    {#                        End Date</span>#}
+    {#                    </label>#}
+    {#                    <div class="controls ">#}
+    {#                        <input value="{{ object.End_Date|date:"Y-m-d" }}" type="date" name="End_Date" required=""#}
+    {#                               id="id_End_Date" class="datetimeinput form-control">#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
+    {#                {{ form.Register_Agent|as_crispy_field }}#}
+    {#            </div>#}
+    {##}
+    {#            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback text-center">#}
+    {#                <label>#}
+    {#                    Status#}
+    {#                </label><br>#}
+    {#                <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"#}
+    {#                        {% if object.Use_Flag == False %}#}
+    {#                       &nbsp;#}
+    {#                        {% else %}#}
+    {#                       checked#}
+    {#                        {% endif %}#}
+    {#                ><br> <br>#}
+    {#            </div>#}
+    {##}
+    {#            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">#}
+    {#                {{ form.Course_Group }}#}
+    {#            </div>#}
+    {##}
+    {##}
+    {#            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
+    {#                <input type="hidden" name="Center_Code" id="id_Center_Code" value="{{ request.user.Center_Code.id }}"#}
+    {#                       class="select form-control">#}
+    {#            </div>#}
+    {#            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
+    {#                <input type="hidden" name="Register_Agent" id="id_Register_Agent" value="{{ request.user.username }}"#}
+    {#                       class="select form-control">#}
+    {#            </div>#}
+    {##}
+    {#            <div class="submitButton  col-md-12">#}
+    {#                <button class="btn btn-success" type="submit">Submit</button>#}
+    {#            </div>#}
+    {#        </form>#}
+{% endblock %}
+{% block customjss %}
+    <script src=" {% static 'vendorsx/jQuery-Smart-Wizard/js/jquery.smartWizard.js' %}"></script>
 
-        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-            {{ form.Course_Group }}
-        </div>
 
-
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <input type="hidden" name="Center_Code" id="id_Center_Code" value="{{ request.user.Center_Code.id }}"
-                   class="select form-control">
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-            <input type="hidden" name="Register_Agent" id="id_Register_Agent" value="{{ request.user.username }}"
-                   class="select form-control">
-        </div>
-
-        <div class="submitButton  col-md-12">
-            <button class="btn btn-success" type="submit">Submit</button>
-        </div>
-    </form>
 {% endblock %}
