@@ -36,6 +36,46 @@
                 {% endif %}
 
 
+                {% if request.user.is_superuser %}
+                {#                                <a href="#" class="moderate-action move-thread-up" data-toggle="modal"#}
+                {#                                    data-target="#moderation-modal" data-pk="{{ thread.pk }}"#}
+                {#                                    data-action="move-thread-up"#}
+                {#                                    data-api-url="{% url 'forum:thread-detail' thread.pk %}">#}
+                {#                                    <span class="btn btn-primary btn-xs"><i class="fa fa-chevron-up"></i> Up </span>#}
+                {#                                </a>#}
+                {% if thread.closed %}
+                <a href="#" class="moderate-action open-thread" data-toggle="modal" data-target="#moderation-modal"
+                    data-pk="{{ thread.pk }}" data-action="open-thread"
+                    data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+                    <span class="btn btn-info btn-xs"><i class="fa fa-close"></i> Open </span>
+                </a>
+                {% else %}
+                <a href="#" class="moderate-action close-thread" data-toggle="modal" data-target="#moderation-modal"
+                    data-pk="{{ thread.pk }}" data-action="close-thread"
+                    data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+                    <span class="btn btn-info btn-xs">
+                        <i class="fa fa-folder-open-o"></i> Close </span>
+                </a>
+                {% endif %}
+                {% if thread.hidden %}
+                <a href="#" class="moderate-action hide-thread" data-toggle="modal" data-target="#moderation-modal"
+                    data-pk="{{ thread.pk }}" data-action="unhide-thread"
+                    data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+                    <span class="btn btn-danger btn-xs"><i class="fa fa-eye-slash"></i> UnHide </span>
+                </a>
+                {% else %}
+                <a href="#" class="moderate-action hide-thread" data-toggle="modal" data-target="#moderation-modal"
+                    data-pk="{{ thread.pk }}" data-action="hide-thread"
+                    data-api-url="{% url 'forum:thread-detail' thread.pk %}">
+                    <span class="btn btn-danger btn-xs"><i class="fa fa-eye-slash"></i> Hide </span>
+                </a>
+                {% endif %}
+
+                {% endif %}
+
+
+
+
             </div>
 
             <div class="clearfix"></div>
@@ -51,55 +91,16 @@
 
                         </div>
                         <div class="block_content">
+                            <h3 class="title">
+                                {{ thread.title }}
 
+                            </h3>
 
-                            <div class="top_button">
-                                {% if request.user.is_superuser %}
-                                {#                                <a href="#" class="moderate-action move-thread-up" data-toggle="modal"#}
-                                {#                                    data-target="#moderation-modal" data-pk="{{ thread.pk }}"#}
-                                {#                                    data-action="move-thread-up"#}
-                                {#                                    data-api-url="{% url 'forum:thread-detail' thread.pk %}">#}
-                                {#                                    <span class="btn btn-primary btn-xs"><i class="fa fa-chevron-up"></i> Up </span>#}
-                                {#                                </a>#}
-                                {% if thread.closed %}
-                                <a href="#" class="moderate-action open-thread" data-toggle="modal"
-                                    data-target="#moderation-modal" data-pk="{{ thread.pk }}" data-action="open-thread"
-                                    data-api-url="{% url 'forum:thread-detail' thread.pk %}">
-                                    <span class="btn btn-info btn-xs"><i class="fa fa-close"></i> Open </span>
-                                </a>
-                                {% else %}
-                                <a href="#" class="moderate-action close-thread" data-toggle="modal"
-                                    data-target="#moderation-modal" data-pk="{{ thread.pk }}" data-action="close-thread"
-                                    data-api-url="{% url 'forum:thread-detail' thread.pk %}">
-                                    <span class="btn btn-info btn-xs">
-                                        <i class="fa fa-folder-open-o"></i> Close </span>
-                                </a>
-                                {% endif %}
-                                {% if thread.hidden %}
-                                <a href="#" class="moderate-action hide-thread" data-toggle="modal"
-                                    data-target="#moderation-modal" data-pk="{{ thread.pk }}"
-                                    data-action="unhide-thread"
-                                    data-api-url="{% url 'forum:thread-detail' thread.pk %}">
-                                    <span class="btn btn-danger btn-xs"><i class="fa fa-eye-slash"></i> UnHide </span>
-                                </a>
-                                {% else %}
-                                <a href="#" class="moderate-action hide-thread" data-toggle="modal"
-                                    data-target="#moderation-modal" data-pk="{{ thread.pk }}" data-action="hide-thread"
-                                    data-api-url="{% url 'forum:thread-detail' thread.pk %}">
-                                    <span class="btn btn-danger btn-xs"><i class="fa fa-eye-slash"></i> Hide </span>
-                                </a>
-                                {% endif %}
-
-                                {% endif %}
-                            </div>
 
 
                             <div class="byline">
 
-                                <h3 class="thread-title">
-                                    <a>{{ thread.title }}</a>
 
-                                </h3>
 
                                 posted by <a href="{% url 'forum:user_info' pk=thread.user.pk %}"
                                     class="link-text-color">
@@ -119,39 +120,47 @@
                                 </span>
                             </div>
                             <h3 class="thread_answer">
-                                <p> Answer: <br> {{ thread.content_raw | safe }}</p>
+                                <p>{{ thread.content_raw | safe }}</p>
                             </h3>
-                            <hr>
-                            <ul class="list-group reply-list">
+
+                            <ul class="list-comment reply-lists">
+
                                 <h2 class="thread_replies">
                                     <i class="fa fa-comments-o"></i>
                                     Comments </h2>
                                 <hr>
+
                                 {% for post in posts %}
+
                                 <li class="list-group-reply reply-item">
 
 
                                     <div class="thread-meta row">
 
-                                        <div class="col-xs-9 col-sm-10">
+                                        <div class="">
                                             <div class="reply-content">
-                                                <div class="profile_pic_forum">
-                                                    <img src="/media/{{ post.user.Member_Avatar }}" alt="..." />
-                                                </div>
-                                                <div class="reply-content-detail">
-                                                    <a
-                                                        href="{% url 'forum:user_info' post.user_id %}">{{ post.user }}</a>
-                                                    <span> {{ post.content_rendered | safe }} </span>
-
-                                                </div>
+                                                <!-- <div class="profile_pic_forum"> -->
+                                                <img src="/media/{{ post.user.Member_Avatar }}" alt="..." />
+                                                <!-- </div> -->
+                                                <a href="{% url 'forum:user_info' post.user_id %}">{{ post.user }}</a>
 
                                             </div>
-                                            <span
-                                                class="pull-right thread_date">{{ post.pub_date | naturaltime }}</span>
+                                            <div class="reply-content-detail">
+
+
+                                                <span> {{ post.content_raw | safe }} </span>
+                                            </div>
+
+
+
+
+
 
                                         </div>
                                     </div>
+                                    <br>
                                     <div class="left">
+                                        <span>{{ post.pub_date | naturaltime }}</span> <br>
                                         <p class="reply-link">
                                             <a href="#" data-username="{{ post.user.username }}" class="reply-to"
                                                 style="color: darkblue">{% trans "Reply" %}</a>
@@ -195,6 +204,8 @@
                                         {% endif %}
 
                                         {% endif %}
+
+
                                     </div>
 
                                 </li>
@@ -203,23 +214,120 @@
 
                             <br>
                             {% if request.user.is_authenticated %}
-                            <div class="text-wrapper">
-                                <div class="post-reply"> Post a Reply</div>
-                                <div class="col-md-12"> <textarea name="content_raw" id="id_content_raw"
-                                        class="textarea form-control" rows="4" cols="80" required=""
-                                        placeholder="Type your message here"></textarea>
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2 style="font-weight: bold">Post Reply
 
+                                    </h2>
+
+                                    <div class="clearfix"></div>
                                 </div>
-                                <br>
+                                <div class="x_content">
+                                    <div id="alerts"></div>
+                                    <div class="btn-toolbar editor" data-role="editor-toolbar"
+                                        data-target="#editor-one">
+                                        <div class="btn-group">
+                                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i
+                                                    class="fa fa-font"></i><b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                            </ul>
+                                        </div>
 
-                                <button class="btn btn-sm btn-primary" id="submitButton"><i class="fa fa-reply"></i>
-                                    Post Reply
-                                </button>
+                                        <div class="btn-group">
+                                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i
+                                                    class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a data-edit="fontSize 5">
+                                                        <p style="font-size:17px">Huge</p>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-edit="fontSize 3">
+                                                        <p style="font-size:14px">Normal</p>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-edit="fontSize 1">
+                                                        <p style="font-size:11px">Small</p>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
 
+                                        <div class="btn-group">
+                                            <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i
+                                                    class="fa fa-bold"></i></a>
+                                            <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i
+                                                    class="fa fa-italic"></i></a>
+                                            <a class="btn" data-edit="strikethrough" title="Strikethrough"><i
+                                                    class="fa fa-strikethrough"></i></a>
+                                            <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i
+                                                    class="fa fa-underline"></i></a>
+                                        </div>
 
+                                        <div class="btn-group">
+                                            <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i
+                                                    class="fa fa-list-ul"></i></a>
+                                            <a class="btn" data-edit="insertorderedlist" title="Number list"><i
+                                                    class="fa fa-list-ol"></i></a>
+                                            <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i
+                                                    class="fa fa-dedent"></i></a>
+                                            <a class="btn" data-edit="indent" title="Indent (Tab)"><i
+                                                    class="fa fa-indent"></i></a>
+                                        </div>
+
+                                        <div class="btn-group">
+                                            <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i
+                                                    class="fa fa-align-left"></i></a>
+                                            <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i
+                                                    class="fa fa-align-center"></i></a>
+                                            <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i
+                                                    class="fa fa-align-right"></i></a>
+                                            <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i
+                                                    class="fa fa-align-justify"></i></a>
+                                        </div>
+
+                                        <div class="btn-group">
+                                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i
+                                                    class="fa fa-link"></i></a>
+                                            <div class="dropdown-menu input-append">
+                                                <input class="span2" placeholder="URL" type="text"
+                                                    data-edit="createLink" />
+                                                <button class="btn" type="button">Add</button>
+                                            </div>
+                                            <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i
+                                                    class="fa fa-cut"></i></a>
+                                        </div>
+
+                                        <div class="btn-group">
+                                            <a class="btn" title="Insert picture (or just drag & drop)"
+                                                id="pictureBtn"><i class="fa fa-picture-o"></i></a>
+                                            <input type="file" data-role="magic-overlay" data-target="#pictureBtn"
+                                                data-edit="insertImage" />
+                                        </div>
+
+                                        <div class="btn-group">
+                                            <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i
+                                                    class="fa fa-undo"></i></a>
+                                            <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i
+                                                    class="fa fa-repeat"></i></a>
+                                        </div>
+                                    </div>
+
+                                    <div id="editor-one" class="editor-wrapper"></div>
+
+                                    <textarea name="content_raw" id="id_content_raw" style="display:none;"></textarea>
+                                </div>
 
 
                             </div>
+
+                            <div class="form-group">
+                                <div class="controls "><input type="submit" name="submit" value="Submit"
+                                        class="btn btn-sm btn-primary" id="submitButton"></div>
+                            </div>
+                            </form>
                             {% endif %}
 
                         </div>
@@ -233,6 +341,8 @@
         </div>
     </div>
 </div>
+
+
 {% endblock %}
 
 {#{% block widget_after %}#}
@@ -380,9 +490,10 @@
                 modal.find('.modal-title').text(modalTitle);
                 modal.find('.modal-body').html(modalBody);
             })
-        </script>
-<script>
+
+
     $("#submitButton").click(function () {
+        $('#id_content_raw').val($('.editor-wrapper').html());
         var content_raw = document.getElementById("id_content_raw").value
         var data = { "content_raw": content_raw, "user": {{ request.user.pk }}, "thread": {{ thread.pk }} };
 
