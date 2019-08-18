@@ -1,49 +1,54 @@
 {% load static %}
 
 <div class="outerDiv">
-    <div class="col-md-8 col-sm-12 col xs-12"><h1 align="center"><b>Chapter {{ object.Chapter_No }}
-        : {{ object.Chapter_Name }} </b></h1></div>
-    <div class="col-md-4 col-sm-12 col xs-12" id="buttons">
-        <a class="btn btn-primary" href="{% if '/teachers' in request.path %}
+    <div class="col-md-6 col-sm-12 col xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                <h1><b>Chapter {{ object.Chapter_No }}
+                    : {{ object.Chapter_Name }} </b></h1></div>
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center" id="buttons">
+                <a class="btn-sm btn-primary"
+                   href="{% if '/teachers' in request.path %}
                 /teachers{{ object.get_update_url }}
             {% else %}
                 {{ object.get_update_url }}
-            {% endif %}">Edit Chapter</a>
-        <a class="btn btn-success" href="{% url 'teacher_chapterinfo_build' %}">Lecture Builder</a>
-        <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Chapter</a>
+            {% endif %}">Edit Chapter &nbsp;</a>
+                <a class="btn-sm btn-success" href="{% url 'teacher_chapterinfo_build' %}">Lecture Builder &nbsp;</a>
+                <a class="btn-sm btn-danger" href="{{ object.get_delete_url }}">Delete Chapter</a>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12" id="tabs">
+                <table class="table">
+                    <tr>
+                        <td>Summary</td>
+                        <td>{{ object.Summary }}</td>
+                    </tr>
+                    <tr>
+                        <td>Page Number</td>
+                        <td>{{ object.Page_Num }}</td>
+                    </tr>
+                    <tr>
+                        <td>Use Flag</td>
+                        <td>{{ object.Use_Flag }}</td>
+                    </tr>
+                    <tr>
+                        <td>Register Agent</td>
+                        <td>{{ object.Register_Agent }}</td>
+                    </tr>
+                    <tr>
+                        <td>Lecture Code</td>
+                        <td>{{ object.Lecture_Code }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="col-md-12 col-sm-12 col-xs-12" id="tabs">
-        <table class="table">
-            <tr>
-                <td>Summary</td>
-                <td>{{ object.Summary }}</td>
-            </tr>
-            <tr>
-                <td>Page Number</td>
-                <td>{{ object.Page_Num }}</td>
-            </tr>
-            <tr>
-                <td>Use Flag</td>
-                <td>{{ object.Use_Flag }}</td>
-            </tr>
-            <tr>
-                <td>Register Agent</td>
-                <td>{{ object.Register_Agent }}</td>
-            </tr>
-            <tr>
-                <td>Lecture Code</td>
-                <td>{{ object.Lecture_Code }}</td>
-            </tr>
-        </table>
-    </div>
-    <div class="col-md-12 col-sm-12 xol-xs-12">
-        <hr class="header_hr">
+    <div class="col-md-6 col-sm-12 xol-xs-12">
 
-        <div class="col-md-12">
-            <div class="col-md-9 col-sm-12 col-xs-12 text-center">
+        <div class="col-md-12 col-sm-12 col-xs-12 ">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2 class="detailListHeader">Assignments</h2>
             </div>
-            <div class="col-md-3 col-sm-12 col-xs-12 text-right" id="button">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center" id="buttons">
                 <a class="btn-sm btn-success" href="{% if '/teachers' in request.path %}
                         {% url 'teacher_assignmentinfo_create' %}
                     {% else %}
@@ -55,7 +60,7 @@
         <div class="col-md-12">
             <hr class="header_hr">
             {% for o in assignments %}
-                <div class="col-md-12 col-sm-12 col-xs-12 boxShadow" style="box-shadow: gainsboro; margin: 10px;">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         <h5 style="padding-top: 3px; color: #000000"> Assignment No: {{ forloop.counter }}</h5>
                         <h4>
@@ -75,7 +80,7 @@
                     </div>
 
                     <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px; ">
-                        <hr style="margin-top: 5px; margin-bottom: 10px;">
+                        <hr style="margin-top: 1px; margin-bottom: 10px;">
                         <p>Submission Deadline - {{ o.Assignment_Deadline }}</p>
                     </div>
                 </div>
