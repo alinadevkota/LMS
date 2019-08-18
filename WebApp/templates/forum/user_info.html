@@ -45,10 +45,10 @@
                                 <p class="topic-meta">
                                     &nbsp; Topic:
                                     <a href="{% url 'forum:topic' thread.topic.pk %}">
-                                        <span class="label label-success meta-topic">
+                                        <span class="link-color">
                                             {{ thread.topic.title }}
                                         </span>
-                                    </a>
+                                    </a> |
                                     <span class="meta meta-pub_date"> posted
                                         {{ thread.pub_date | naturaltime }}
                                     </span> |
@@ -99,7 +99,7 @@
                                                 </p>
                                             </div>
                                             <div class="reply_thread">
-                                                <p>{{ reply.content_rendered | safe }}</p>
+                                                <p> {{ reply.content_rendered | safe }} </p>
                                             </div>
                                         </h5>
 

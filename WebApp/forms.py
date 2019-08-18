@@ -1,12 +1,14 @@
 from django import forms
+from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm, TextInput
 
 from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
-    ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, \
+    ChapterMissonCheckItem, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
+    AssignQuestionInfo, AssignAnswerInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
-    HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, \
-    OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, \
+    LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
+    QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, USER_ROLES
 
 
@@ -17,11 +19,11 @@ from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterCon
 
 
 class UserRegisterForm(UserCreationForm):
-    Member_Role = forms.MultipleChoiceField(choices=USER_ROLES, widget=forms.CheckboxSelectMultiple())
+    # Member_Role = forms.MultipleChoiceField(choices=USER_ROLES, widget=forms.CheckboxSelectMultiple())
 
     class Meta(UserCreationForm.Meta):
         model = MemberInfo
-        fields = ('username', 'email', 'Member_Role')
+        fields = ('username', 'email', 'Member_Gender', 'Center_Code', 'Is_Student', 'Is_Teacher')
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -52,8 +54,7 @@ class MemberInfoForm(forms.ModelForm):
         model = MemberInfo
         # fields = 'username', 'first_name', 'last_name', 'email', 'date_joined', 'Member_Permanent_Address', 'Member_Temporary_Address', 'Member_BirthDate', 'Member_Phone', 'Member_Avatar', 'Member_Gender', 'Member_Memo','Center_Code'
         fields = '__all__'
-        exclude = ('last_login','date_joined','password','is_staff','is_active','is_superuser')
-
+        exclude = ('last_login', 'date_joined', 'password', 'is_staff', 'is_active', 'is_superuser')
 
 
 class LectureInfoForm(forms.ModelForm):
@@ -87,15 +88,22 @@ class ChapterMissonCheckItemForm(forms.ModelForm):
 
 
 class InningInfoForm(forms.ModelForm):
+    Groups = forms.ModelMultipleChoiceField(queryset=GroupMapping.objects.all(),
+                                            widget=FilteredSelectMultiple("Groups", is_stacked=False))
+
+    class Media:
+        css = {'all': ('/static/admin/css/widgets.css',), }
+        js = ('/admin/jsi18n/',)
+
     class Meta:
         model = InningInfo
         fields = '__all__'
 
 
-class OmrQuestionInfoForm(forms.ModelForm):
-    class Meta:
-        model = OmrQuestionInfo
-        fields = '__all__'
+# class OmrQuestionInfoForm(forms.ModelForm):
+#     class Meta:
+#         model = OmrQuestionInfo
+#         fields = '__all__'
 
 
 class QuizInfoForm(forms.ModelForm):
@@ -104,15 +112,34 @@ class QuizInfoForm(forms.ModelForm):
         fields = '__all__'
 
 
-class AssignHomeworkInfoForm(forms.ModelForm):
+# AssignmentInfoForms
+class AssignmentInfoForm(forms.ModelForm):
     class Meta:
-        model = AssignHomeworkInfo
+        model = AssignmentInfo
+        fields = '__all__'
+
+
+class QuestionInfoForm(forms.ModelForm):
+    class Meta:
+        model = QuestionInfo
+        fields = '__all__'
+
+
+class AssignAssignmentInfoForm(forms.ModelForm):
+    class Meta:
+        model = AssignAssignmentInfo
         fields = '__all__'
 
 
 class AssignQuestionInfoForm(forms.ModelForm):
     class Meta:
         model = AssignQuestionInfo
+        fields = '__all__'
+
+
+class AssignAnswerInfoForm(forms.ModelForm):
+    class Meta:
+        model = AssignAnswerInfo
         fields = '__all__'
 
 
@@ -129,6 +156,7 @@ class BoardContentInfoForm(forms.ModelForm):
 
 
 class InningGroupForm(forms.ModelForm):
+
     class Meta:
         model = InningGroup
         fields = '__all__'
@@ -158,15 +186,20 @@ class ChapterWriteForm(forms.ModelForm):
         fields = '__all__'
 
 
+def is_stacked(args):
+    pass
+
+
 class GroupMappingForm(forms.ModelForm):
+    memberinfo_id = forms.ModelMultipleChoiceField(queryset=MemberInfo.objects.filter(Is_Student=True),
+                                                   widget=FilteredSelectMultiple("Students", is_stacked=False))
+
+    class Media:
+        css = {'all': ('/static/admin/css/widgets.css',), }
+        js = ('/admin/jsi18n/',)
+
     class Meta:
         model = GroupMapping
-        fields = '__all__'
-
-
-class HomeworkInfoForm(forms.ModelForm):
-    class Meta:
-        model = HomeworkInfo
         fields = '__all__'
 
 
@@ -206,45 +239,27 @@ class MessageInfoForm(forms.ModelForm):
         fields = '__all__'
 
 
-class OmrAnswerInfoForm(forms.ModelForm):
-    class Meta:
-        model = OmrAnswerInfo
-        fields = '__all__'
-
-
-class OmrAssignInfoForm(forms.ModelForm):
-    class Meta:
-        model = OmrAssignInfo
-        fields = '__all__'
-
-
-class OmrExampleInfoForm(forms.ModelForm):
-    class Meta:
-        model = OmrExampleInfo
-        fields = '__all__'
-
-
-class QAnswerInfoForm(forms.ModelForm):
-    class Meta:
-        model = QAnswerInfo
-        fields = '__all__'
-
-
-class QAnswerLogForm(forms.ModelForm):
-    class Meta:
-        model = QAnswerLog
-        fields = '__all__'
+# class OmrAnswerInfoForm(forms.ModelForm):
+#     class Meta:
+#         model = OmrAnswerInfo
+#         fields = '__all__'
+#
+#
+# class OmrAssignInfoForm(forms.ModelForm):
+#     class Meta:
+#         model = OmrAssignInfo
+#         fields = '__all__'
+#
+#
+# class OmrExampleInfoForm(forms.ModelForm):
+#     class Meta:
+#         model = OmrExampleInfo
+#         fields = '__all__'
 
 
 class QExampleInfoForm(forms.ModelForm):
     class Meta:
         model = QExampleInfo
-        fields = '__all__'
-
-
-class QuestionInfoForm(forms.ModelForm):
-    class Meta:
-        model = QuestionInfo
         fields = '__all__'
 
 
@@ -307,4 +322,3 @@ class ChangeOthersPasswordForm(forms.Form):
         "type": "password"
     }
     password = forms.CharField(widget=forms.TextInput(attrs=attrs))
-

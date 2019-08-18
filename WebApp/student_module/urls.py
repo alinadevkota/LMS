@@ -31,12 +31,27 @@ urlpatterns += (
 
 urlpatterns += (
     # urls for LectureInfo
-    path('lectureinfo/', views.LectureInfoListView.as_view(), name='student_lectureinfo_list'),
-    path('lectureinfo/detail/<int:pk>/', views.LectureInfoDetailView.as_view(), name='student_lectureinfo_detail'),
+    path('lectureinfo/', views.LectureInfoListView.as_view(),
+         name='student_lectureinfo_list'),
+    path('lectureinfo/detail/<int:pk>/', views.LectureInfoDetailView.as_view(),
+         name='student_lectureinfo_detail'),
 )
 
 urlpatterns += (
     # urls for Profile
-    path('profile/', login_required(views.ProfileView), name='student_user_profile'),
+    path('profile/', login_required(views.ProfileView),
+         name='student_user_profile'),
 )
 
+urlpatterns += (
+    path('questions_student/', views.questions_student, name="questions_student"),
+)
+
+urlpatterns += (
+    path('polls_student/', views.polls_student, name="polls_student"),
+)
+
+urlpatterns += (
+    path('polls_student_view/', views.polls_student_view,
+         name="polls_student_view"),
+)

@@ -20,19 +20,21 @@
             {% csrf_token %}
 
             <div class=" x-title">
-                <h2 align="center">Create Thread</h2>
+                <h2>Create Thread</h2>
+
 
             </div>
             <div class="ln_solid"></div>
 
-            {% if not topic %}
-
-            <div id="div_id_topic" class="form-group"><label for="id_topic" class="control-label  requiredField">
-                    Topic<span class="asteriskField">*</span> </label>
-                <div class="controls"><select name="topic" id="id_topic" required="" class="select form-control">
+            {% if not fixed_nodegroup %}
+            <div id="div_id_node_group" class="form-group"><label for="id_node_group"
+                    class="control-label  requiredField">
+                    Category<span class="asteriskField">*</span> </label>
+                <div class="controls"><select name="node_group" id="id_node_group" required=""
+                        class="select form-control">
                         <option value="" selected="">---------</option>
-                        {% for c in form.fields.topic.queryset %}
-                        <option value="{{ c.id|capfirst }}">{{ c }}</option>
+                        {% for c in node_group %}
+                        <option id="{{ c.id }}" value="{{ c.id|capfirst }}">{{ c }}</option>
                         {% endfor %}
 
                     </select></div>
@@ -40,10 +42,44 @@
             {% else %}
             <div id="div_id_node_group" class="form-group">
                 <label for="id_node_group" class="control-label  requiredField">
+                    Category<span class="asteriskField">*</span> </label>
+                <input type="text" value="{{ fixed_nodegroup.0.title }}" required=""
+                    class="textinput textInput form-control" maxlength="30" readonly>
+                <input name="node_group" id="id_node_group" required="" value="{{ fixed_nodegroup.0.pk }}" hidden></div>
+            {% endif %}
+
+            {% if not topic %}
+
+            <div id="div_id_topic" class="form-group"><label for="id_topic" class="control-label  requiredField">
+                    SubCategory<span class="asteriskField">*</span> </label>
+                <div class="controls"><select name="topic" id="id_topic" required="" class="select form-control">
+                        {% if not fixed_nodegroup %}
+                        <option value="" selected="">---------</option>
+                        {% for c in form.fields.topic.queryset %}
+                        <option class="{{ c.node_group.id }}" value="{{ c.id|capfirst }}" style="display: none;">{{ c }}
+                        </option>
+                        {% endfor %}
+                        {% else %}
+                        <option value="" selected="">---------</option>
+                        {% for c in topics %}
+
+                        <option class="{{ c.node_group.id }}" value="{{ c.id|capfirst }}">{{ c }}
+                        </option>
+
+
+                        {% endfor %}
+                        {% endif %}
+
+
+                    </select></div>
+            </div>
+            {% else %}
+            <div id="div_id_node_group" class="form-group">
+                <label for="id_node_group" class="control-label  requiredField">
                     Topic<span class="asteriskField">*</span> </label>
-                <input type="text" value="{{ topic.0.title }}" required="" class="textinput textInput form-control"
+                <input type="text" value="{{ topic.title }}" required="" class="textinput textInput form-control"
                     maxlength="30" readonly>
-                <input name="topic" id="id_topic" required="" value="{{ topic.0.pk }}" hidden></div>
+                <input name="topic" id="id_topics" required="" value="{{ topic.pk }}" hidden></div>
             {% endif %}
 
 
@@ -56,15 +92,11 @@
 
 
             <!-- <div id="div_id_content_raw" class="form-group"><label for="id_content_raw"
-                    class="control-label  requiredField">
-                    Content<span class="asteriskField">*</span> </label>
-                <div class="controls "> <textarea name="content_raw" cols="40" id="id_content_raw" rows="10"
-                        class="textarea form-control" required=""></textarea></div>
-            </div> -->
-
-
-
-
+                        class="control-label  requiredField">
+                        Content<span class="asteriskField">*</span> </label>
+                    <div class="controls "> <textarea name="content_raw" cols="40" id="id_content_raw" rows="10"
+                            class="textarea form-control" required=""></textarea></div>
+                </div> -->
 
 
             <div class="x_panel">
@@ -167,7 +199,6 @@
                 </div>
 
 
-
             </div>
 
             <div class="form-group">
@@ -178,12 +209,38 @@
     </div>
 
 
-
 </div>
 <script>
     $('#submit-id-submit').click(function () {
         $('#id_content_raw').val($('.editor-wrapper').html());
     });
+    $(document).ready(function () {
+        $("#id_node_group").on("change", function () {
+            var levelClass = $("#id_node_group").find('option:selected').attr('id');
+            $('#id_topic option').each(function () {
+                var self = $(this);
+                if (self.hasClass(levelClass) || typeof (levelClass) == "undefined") {
+                    self.show();
+                } else {
+                    self.hide();
+                }
+            });
+        });
+    });
+    $(function () {
+        $("#id_node_group").on("change", function () {
+            var levelClass = $("#id_node_group").find('option:selected').attr('id');
+            $('#id_topic option').each(function () {
+                var self = $(this);
+                if (self.hasClass(levelClass) || typeof (levelClass) == "undefined") {
+                    self.show();
+                } else {
+                    self.hide();
+                }
+            });
+        });
+    });
+
 </script>
 
 

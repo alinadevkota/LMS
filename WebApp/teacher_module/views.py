@@ -30,16 +30,19 @@ def Dashboard(request):
 class LectureInfoListView(ListView):
     model = LectureInfo
     template_name = 'teacher_module/lectureinfo_list.html'
+    paginate_by = 2
 
     def get_queryset(self):
-        lectures = LectureInfo.objects.filter(Teacher_Code=self.request.user.id)
+        lectures = LectureInfo.objects.filter(
+            Teacher_Code=self.request.user.id)
         if self.request.GET.get('query'):
             query = self.request.GET.get('query')
             if query:
                 qs = lectures.filter(Lecture_Name__contains=query)
                 if not len(qs):
                     messages.error(self.request, 'Search not found')
-            qs = qs.order_by("-id")  # you don't need this if you set up your ordering on the model
+            # you don't need this if you set up your ordering on the model
+            qs = qs.order_by("-id")
             return qs
         else:
             return lectures
@@ -56,10 +59,13 @@ class LectureInfoCreateView(CreateView):
 class LectureInfoDetailView(DetailView):
     model = LectureInfo
     template_name = 'teacher_module/lectureinfo_detail.html'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk'))
+        context['chapters'] = ChapterInfo.objects.filter(
+            Lecture_Code=self.kwargs.get('pk'))
         return context
+
 
 class LectureInfoUpdateView(UpdateView):
     model = LectureInfo
@@ -78,13 +84,14 @@ class ChapterInfoCreateView(CreateView):
     template_name = 'teacher_module/chapterinfo_form.html'
 
 
-
 class ChapterInfoDetailView(DetailView):
     model = ChapterInfo
     template_name = 'teacher_module/chapterinfo_detail.html'
 
+
 def ChapterInfoBuildView(request):
     return render(request, 'teacher_module/lecturebuilder.html')
+
 
 class ChapterInfoUpdateView(UpdateView):
     model = ChapterInfo
@@ -98,9 +105,17 @@ def ProfileView(request):
 
 def makequery(request):
     # model=SurveyInfo
-    Course=LectureInfo.objects.all()
-    Session=InningInfo.objects.all()
-    return render(request, 'teacher_module/makequery.html',{
-    'courses': Course,
-    'sessions': Session
-})
+    Course = LectureInfo.objects.all()
+    Session = InningInfo.objects.all()
+    return render(request, 'teacher_module/makequery.html', {
+        'courses': Course,
+        'sessions': Session
+    })
+
+
+def question_teachers(request):
+    return render(request, 'teacher_module/question_teachers.html')
+
+
+def polls_teachers(request):
+    return render(request, 'teacher_module/polls_teachers.html')

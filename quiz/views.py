@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView, FormView, CreateView, UpdateView
 
-from .forms import QuestionForm, QuizForm, MCQuestionForm, TFQuestionForm, EssayQuestionForm
+from .forms import QuestionForm, EssayForm, QuizForm, TFQuestionForm, EssayQuestionForm, MCQuestionForm
 from .models import Quiz, Category, Progress, Sitting, MCQuestion, TF_Question, Question, Essay_Question
 
 
@@ -32,8 +32,6 @@ class SittingFilterTitleMixin(object):
 class QuizCreateView(CreatePopupMixin, CreateView):
     model = Quiz
     form_class = QuizForm
-
-
 
 
 
