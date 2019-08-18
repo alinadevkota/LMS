@@ -1,6 +1,7 @@
 from django import forms
 from .models import CategoryInfo, SurveyInfo, QuestionInfo, OptionInfo, SubmitSurvey, AnswerInfo
-from WebApp.models import MemberInfo
+from WebApp.models import MemberInfo, CenterInfo
+
 
 class CategoryInfoForm(forms.ModelForm):
     class Meta:
@@ -25,6 +26,7 @@ class OptionInfoForm(forms.ModelForm):
         model = OptionInfo
         fields = '__all__'
 
+
 class SubmitSurveyForm(forms.ModelForm):
     class Meta:
         model = SubmitSurvey
@@ -35,6 +37,3 @@ class AnswerInfoForm(forms.ModelForm):
     class Meta:
         model = AnswerInfo
         fields = '__all__'
-
-
-

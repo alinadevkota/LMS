@@ -7,13 +7,14 @@ from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField,
     ImageField, DateField
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from WebApp.models import MemberInfo,InningInfo,LectureInfo
+from WebApp.models import MemberInfo, InningInfo, LectureInfo, CenterInfo
+
 
 class CategoryInfo(models.Model):
 
     # Fields
-    Category_Name = CharField(max_length=500, blank=True, null=True)
-
+    Category_Name = CharField(max_length=100, blank=True, null=True)
+    Category_Icon = CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         ordering = ('-pk',)
@@ -27,7 +28,6 @@ class CategoryInfo(models.Model):
     def get_absolute_url(self):
         return reverse('categoryinfo_detail', args=(self.pk,))
 
-
     def get_update_url(self):
         return reverse('categoryinfo_update', args=(self.pk,))
 
@@ -36,10 +36,17 @@ class SurveyInfo(models.Model):
 
     # Fields
     Survey_Title = CharField(max_length=500, blank=True, null=True)
-    Start_Date = DateField(auto_now=False, auto_now_add=False,null=True)
-    End_Date = DateField(auto_now=False, auto_now_add=False,null=True)
-    Survey_Cover = ImageField(upload_to="Survey_Covers/", blank=True, null=True)
+    Start_Date = DateField(auto_now=False, auto_now_add=False, null=True)
+    End_Date = DateField(auto_now=False, auto_now_add=False, null=True)
+    Survey_Cover = ImageField(
+        upload_to="Survey_Covers/", blank=True, null=True)
     Use_Flag = BooleanField(default=True)
+
+    Center_Code = ForeignKey(
+        'WebApp.CenterInfo',
+        related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
+    )
+
     Assigned_To = ForeignKey(
         'WebApp.InningInfo',
         related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
@@ -50,12 +57,12 @@ class SurveyInfo(models.Model):
     )
     Category_Code = ForeignKey(
         'CategoryInfo',
-        related_name="surveyinfo", on_delete=models.DO_NOTHING,null=True
+        related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
 
-    Lecture_Code=ForeignKey(
+    Lecture_Code = ForeignKey(
         'WebApp.LectureInfo',
-        related_name="surveyinfo", on_delete=models.DO_NOTHING,null=True
+        related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
 
     class Meta:
@@ -67,22 +74,22 @@ class SurveyInfo(models.Model):
     def __str__(self):
         return self.Survey_Title
 
+    def questions_count(self):
+        return QuestionInfo.objects.filter(Survey_Code=self.pk).count()
 
     def get_absolute_url(self):
         return reverse('surveyinfo_detail', args=(self.pk,))
 
-
     def get_update_url(self):
         return reverse('surveyinfo_update', args=(self.pk,))
-    
-    
+
 
 class QuestionInfo(models.Model):
 
     # Fields
     Question_Name = CharField(max_length=500, blank=True, null=True)
     # Question_Answer = CharField(max_length=500, blank=True, null=True)
-    Question_Type=CharField(max_length=500, blank=True, null=True)
+    Question_Type = CharField(max_length=500, blank=True, null=True)
     Survey_Code = ForeignKey(
         'SurveyInfo',
         related_name="questioninfo", on_delete=models.CASCADE
@@ -97,9 +104,15 @@ class QuestionInfo(models.Model):
     def __str__(self):
         return self.Question_Name
 
+    @property
+    def get_answers(self):
+        answers = AnswerInfo.objects.all().filter(Question_Code=self.pk).exclude(
+            Answer_Value__isnull=True)[:4]
+
+        return answers
+
     def get_absolute_url(self):
         return reverse('questioninfo_detail', args=(self.pk,))
-
 
     def get_update_url(self):
         return reverse('questioninfo_update', args=(self.pk,))
@@ -126,9 +139,9 @@ class OptionInfo(models.Model):
     def get_absolute_url(self):
         return reverse('optioninfo_detail', args=(self.pk,))
 
-
     def get_update_url(self):
         return reverse('optioninfo_update', args=(self.pk,))
+
 
 class SubmitSurvey(models.Model):
 
@@ -141,6 +154,7 @@ class SubmitSurvey(models.Model):
         'WebApp.MemberInfo',
         related_name="submitsurvey", on_delete=models.DO_NOTHING
     )
+
     class Meta:
         ordering = ('-pk',)
 
@@ -150,15 +164,15 @@ class SubmitSurvey(models.Model):
     def get_absolute_url(self):
         return reverse('submitsurvey_detail', args=(self.pk,))
 
-
     def get_update_url(self):
         return reverse('submitsurvey_update', args=(self.pk,))
 
-class AnswerInfo(models.Model):
 
+class AnswerInfo(models.Model):
 
     # Fields
     Answer_Value = CharField(max_length=500, blank=True, null=True)
+    # Created_Date = DateTimeField(auto_now_add=True)
     Question_Code = ForeignKey(
         'QuestionInfo',
         related_name="answerinfo", on_delete=models.CASCADE
@@ -176,7 +190,6 @@ class AnswerInfo(models.Model):
 
     def get_absolute_url(self):
         return reverse('answerinfo_detail', args=(self.pk,))
-
 
     def get_update_url(self):
         return reverse('answerinfo_update', args=(self.pk,))

@@ -5276,7 +5276,7 @@ $(document).ready(function () {
 
     // .................................................................................
 
-    $('.general').on('click', function () {
+    $('.General').on('click', function () {
         $("#chooseSession").hide();
         $('#chooseCourse').hide();
         $('.sessionLabel').hide();
@@ -5284,7 +5284,7 @@ $(document).ready(function () {
         $('.systemLabel').hide();
     });
 
-    $('.system').on('click', function () {
+    $('.System').on('click', function () {
         $("#chooseSession").hide();
         $('#chooseCourse').hide();
         $('.generalLabel').hide();
@@ -5293,7 +5293,7 @@ $(document).ready(function () {
         $('.systemLabel').show();
     });
 
-    $('.session').on('click', function () {
+    $('.Session').on('click', function () {
         $("#chooseSession").show();
         $('#chooseCourse').hide();
         $('.generalLabel').hide();
@@ -5301,7 +5301,7 @@ $(document).ready(function () {
         $('.courseLabel').hide();
         $('.systemLabel').hide();
     });
-    $('.courseAdd').on('click', function () {
+    $('.Course').on('click', function () {
         $("#chooseSession").show();
         $('#chooseCourse').show();
         $('.generalLabel').hide();
@@ -5327,7 +5327,19 @@ $(document).on('click', '.categoryContainer .card-text', function () {
     $(this).addClass('active').siblings().removeClass('active')
 })
 
+// ACTIVE COURSES WITH RESPECT TO CURRENT CATEGORY
 
+$(".category-name ").click(function () {
+
+    category_name = this.id;
+
+    $.get("{% url 'surveyinfo_category' category = category_name %}", function (data) {
+        console.log(category);
+    });
+    // category_active = categories
+
+
+});
 
 /* FORM WIZARD SURVEY */
 
@@ -5374,6 +5386,19 @@ $(document).ready(function () {
 
     $('div.setup-panel div a.btn-primary').trigger('click');
 });
+
+//  EXPIRE SURVEY
+
+// var today = new Date();
+// var dd = String(today.getDate()).padStart(2, '0');
+// var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+// var yyyy = today.getFullYear();
+
+
+// today = mm + '/' + dd + '/' + yyyy;
+
+// document.write(today);
+// console.log(today);
 
 
 

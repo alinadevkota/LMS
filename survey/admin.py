@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django import forms
 from .models import CategoryInfo, SurveyInfo, QuestionInfo, OptionInfo, SubmitSurvey, AnswerInfo
-from WebApp.models import MemberInfo
+from WebApp.models import MemberInfo, CenterInfo
+
+
 class CategoryInfoAdminForm(forms.ModelForm):
 
     class Meta:
@@ -11,8 +13,9 @@ class CategoryInfoAdminForm(forms.ModelForm):
 
 class CategoryInfoAdmin(admin.ModelAdmin):
     form = CategoryInfoAdminForm
-    list_display = ['Category_Name']
+    list_display = ['Category_Name', 'Category_Icon']
     # readonly_fields = ['Category_Name']
+
 
 admin.site.register(CategoryInfo, CategoryInfoAdmin)
 
@@ -26,8 +29,10 @@ class SurveyInfoAdminForm(forms.ModelForm):
 
 class SurveyInfoAdmin(admin.ModelAdmin):
     form = SurveyInfoAdminForm
-    list_display = ['Survey_Title', 'Start_Date', 'End_Date', 'Survey_Cover', 'Use_Flag','Added_By','Category_Code','Assigned_To','Lecture_Code']
+    list_display = ['Survey_Title', 'Start_Date', 'End_Date', 'Survey_Cover',
+                    'Use_Flag', 'Added_By', 'Category_Code', 'Assigned_To', 'Lecture_Code', 'Center_Code']
     # readonly_fields = ['Survey_Title', 'Start_Date', 'End_Date', 'Survey_Cover', 'Use_Flag']
+
 
 admin.site.register(SurveyInfo, SurveyInfoAdmin)
 
@@ -41,8 +46,9 @@ class QuestionInfoAdminForm(forms.ModelForm):
 
 class QuestionInfoAdmin(admin.ModelAdmin):
     form = QuestionInfoAdminForm
-    list_display = ['Question_Name','Survey_Code','Question_Type']
+    list_display = ['Question_Name', 'Survey_Code', 'Question_Type']
     # readonly_fields = ['Question_Name']
+
 
 admin.site.register(QuestionInfo, QuestionInfoAdmin)
 
@@ -56,8 +62,9 @@ class OptionInfoAdminForm(forms.ModelForm):
 
 class OptionInfoAdmin(admin.ModelAdmin):
     form = OptionInfoAdminForm
-    list_display = ['Option_Name','Question_Code']
+    list_display = ['Option_Name', 'Question_Code']
     # readonly_fields = ['Option_Name']
+
 
 admin.site.register(OptionInfo, OptionInfoAdmin)
 
@@ -86,9 +93,8 @@ class AnswerInfoAdminForm(forms.ModelForm):
 
 class AnswerInfoAdmin(admin.ModelAdmin):
     form = AnswerInfoAdminForm
-    list_display = ['Answer_Value','Question_Code','Submit_Code']
+    list_display = ['Answer_Value', 'Question_Code', 'Submit_Code']
     # readonly_fields = ['Answer_Value']
 
+
 admin.site.register(AnswerInfo, AnswerInfoAdmin)
-
-
