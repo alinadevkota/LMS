@@ -48542,7 +48542,6 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 /* ===============for reply content============ */
 .reply-content{
   widows: 100px;
-  height:70px;
   /* border:1px solid #eee; */
   padding:5px;
   display:flex;
@@ -48556,22 +48555,46 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 .profile_pic_forum{
   width:50px;
   height:50px;
-  border-radius:50%;
+  border-radius:90%;
   margin-left:-10px;
 }
 
 .profile_pic_forum img{
   width:50px;
   height:50px;
-  border-radius:50%;
+  border-radius:60px;
+  animation-name: none !important;
+  padding: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(189, 184, 184);
+    border-image: initial;
+  
+    margin: 2px 14px 0px 0px !important;
+
 }
 .reply-content-detail{
-  margin-left:10px;
-  margin-top: 15px;
+  margin-left: 70px;
+  margin-top: -20px;
   font-size: 15px;
-  font-style: bold;
+  
   
 }
+
+.reply-content img{
+width:50px;
+height:50px;
+border-radius:60px;
+animation-name: none !important;
+padding: 2px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(189, 184, 184);
+  border-image: initial;
+
+  margin: 2px 14px 0px 0px !important;
+}
+
 
 /* .chat-reply{
     width:100%;
@@ -48697,12 +48720,12 @@ padding-left: 60px;
 .thread_replies{
     font-weight: bold;
     text-align: center;
-    font-size: 1.8em;
+    font-size: 1.3em;
     color: #009999;
 }
 .thread_date{
     margin-top: -35px;
-    margin-right: -90px;
+    margin-right: -10px;
 }
 
 
@@ -48725,9 +48748,8 @@ padding-left: 60px;
   position: relative;
     display: block;
     padding: 9px 17px;
-    margin-bottom: -18px;
     background-color: #fff;
-    border: 1px solid #ddd;
+ 
 }
 
 .text-wrapper{
@@ -48773,8 +48795,7 @@ font-size: 17px;
   color: #42a5f5;
 }
 .link-color{
-  color: black;
-  font-weight: bold;
+  color: #42a5f5;
   font-size: 13px;
 }
 
@@ -48799,4 +48820,43 @@ font-weight: bold;
 
 .list-group-item a:hover{
  font-weight: bold;
+}
+
+.thread_answer img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.list-comment{
+  padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 0;
+    background-color: #FFF;
+}
+
+.reply-lists{
+  box-shadow: none;
+    margin-top: 25px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(214, 214, 214);
+    border-image: initial;
+}
+
+.reply-content-detail img{
+   max-width:100%;
+  }
+  
+  
+ 
+
+  
+}
+
+.reply-content-raw{
+  margin-left:5px;
+  margin-top: 15px;
+  font-size: 15px;
+  
 }

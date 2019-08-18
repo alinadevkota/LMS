@@ -5,19 +5,21 @@
 {% block content %}
 
     {% block breadcrumb %}
-    <li class="breadcrumb-item active" aria-current="page">Quizzes
-    </li>
+    <!-- <li class="breadcrumb-item active" aria-current="page">Quizzes
+    </li> -->
 {% endblock %}
 
-
-<h2>{% trans "List of quizzes" %}</h2>
+<div class="exam-results text-center">
+	<h2>{% trans "List of quizzes"  %}</h2>
+</div>
+<!-- <h2>{% trans "List of quizzes" %}</h2> -->
     {% if quiz_list %}
 		<table class="table table-bordered table-striped">
 
 		  <thead>
-			<tr>
+			<tr class="quiz-capital">
 			  <th>{% trans "Title" %}</th>
-			  <th>{% trans "Category" %}</th>
+			  <th>{% trans "Lecture" %}</th>
 			  <th>{% trans "Exam" %}</th>
 			  <th>{% trans "Single attempt" %}</th>
 			  <th>{% trans "Details" %}</th>
@@ -27,7 +29,7 @@
 		  <tbody>
 
         {% for quiz in quiz_list %}
-
+         
   			<tr>
 			  <td>{{ quiz.title }}</td>
 			  <td>{{ quiz.category }}</td>

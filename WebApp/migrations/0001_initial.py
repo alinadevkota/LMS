@@ -121,6 +121,20 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='GroupMapping',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('Use_Flag', models.BooleanField(default=True)),
+                ('Register_DateTime', models.DateTimeField(auto_now_add=True)),
+                ('Updated_DateTime', models.DateTimeField(auto_now=True)),
+                ('Register_Agent', models.CharField(blank=True, max_length=500, null=True)),
+                ('GroupMapping_Name', models.CharField(blank=True, max_length=500, null=True)),
+            ],
+            options={
+                'ordering': ('-pk',),
+            },
+        ),
+        migrations.CreateModel(
             name='InningInfo',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -132,6 +146,7 @@ class Migration(migrations.Migration):
                 ('Updated_DateTime', models.DateTimeField(auto_now=True)),
                 ('Register_Agent', models.CharField(blank=True, max_length=500, null=True)),
                 ('Center_Code', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='inninginfos', to='WebApp.CenterInfo')),
+                ('Groups', models.ManyToManyField(to='WebApp.GroupMapping')),
             ],
             options={
                 'ordering': ('-pk',),
@@ -550,20 +565,10 @@ class Migration(migrations.Migration):
                 'ordering': ('-pk',),
             },
         ),
-        migrations.CreateModel(
-            name='GroupMapping',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('Use_Flag', models.BooleanField(default=True)),
-                ('Register_DateTime', models.DateTimeField(auto_now_add=True)),
-                ('Updated_DateTime', models.DateTimeField(auto_now=True)),
-                ('Register_Agent', models.CharField(blank=True, max_length=500, null=True)),
-                ('Inning_Code', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='WebApp.InningInfo')),
-                ('Student_Code', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL)),
-            ],
-            options={
-                'ordering': ('-pk',),
-            },
+        migrations.AddField(
+            model_name='groupmapping',
+            name='memberinfo_id',
+            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL),
         ),
         migrations.CreateModel(
             name='ChapterWrite',

@@ -13,7 +13,7 @@
 
 <div class="headerDiv">
     <h2 class="infoFormHeader">
-        {% if '/create/' in request.path %}
+        {% if 'create' in request.path %}
             Create New Lecture
         {% else %}
             Edit Lecture Info
@@ -38,8 +38,20 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         {{ form.Lecture_Cover_File|as_crispy_field }}
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+        <label>
+            Status
+        </label><br>
+        <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
+                {% if object.Use_Flag == False %}
+               &nbsp;
+                {% else %}
+               checked
+                {% endif %}
+        ><br> <br>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         <label for="id_Lecture_Level" class="control-label ">
@@ -52,17 +64,15 @@
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         {{ form.Lecture_Provider|as_crispy_field }}
     </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        {% if '/teachers' in request.path %}
-            <input type="hidden" name="Teacher_Code" id="id_Center_Code" value="{{ request.user.id }}"
-                   class="select form-control">
-        {% else %}
-            {{ form.Teacher_Code|as_crispy_field }}
-        {% endif %}
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        {{ form.Use_Flag|as_crispy_field }}
-    </div>
+    {#    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
+    {#        {% if '/teachers' in request.path %}#}
+    {#            <input type="hidden" name="Teacher_Code" id="id_Center_Code" value="{{ request.user.id }}"#}
+    {#                   class="select form-control">#}
+    {#        {% else %}#}
+    {#            {{ form.Teacher_Code|as_crispy_field }}#}
+    {#        {% endif %}#}
+    {#    </div>#}
+
 
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         <input type="hidden" name="Center_Code" id="id_Center_Code" value="{{ request.user.Center_Code.id }}"

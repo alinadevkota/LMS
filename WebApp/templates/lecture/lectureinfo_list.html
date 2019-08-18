@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 <div class="lectureInfoListClass">
-    <h2 class="tableHeader">List of Lectures</h2>
+    <h2 class="tableHeader">List of Courses</h2>
 
 
     <hr class="header_hr">
@@ -23,7 +23,7 @@
                 {% url 'teacher_lectureinfo_create' %}
             {% else %}
                 {% url 'lectureinfo_create' %}
-            {% endif %}">Create new Lecture</a>
+            {% endif %}">Create new Course</a>
     </div>
     {% include 'WebApp/theme/alerts.html' %}
 
@@ -66,7 +66,7 @@
 
                         <hr>
 
-                        <h5 class="lectureDescription">
+                        <h5 class="lectureDescription" style="padding-bottom: 10px;">
                             {% if object.Lecture_Description %}
                                 {{ object.Lecture_Description }}
                             {% else %}
@@ -75,20 +75,20 @@
                         </h5>
 
 
-                        <div class="row d-flex flex-row">
-                            <div class="col-md-3">
-                                            <span class="">
-                                                <img width="60px" id="avatar"
-                                                     src="{{ object.Teacher_Code.Member_Avatar.url }}">
-                                            </span>
-                            </div>
-
-                            <div class="col-md-9 text-center">
-
-                                <p>Instructor</p>
-                                <h5>{{ object.Teacher_Code }}</h5>
-                            </div>
-                        </div>
+{#                        <div class="row d-flex flex-row">#}
+{#                            <div class="col-md-3">#}
+{#                                            <span class="">#}
+{#                                                <img width="60px" id="avatar"#}
+{#                                                     src="{{ object.Teacher_Code.Member_Avatar.url }}">#}
+{#                                            </span>#}
+{#                            </div>#}
+{##}
+{#                            <div class="col-md-9 text-center">#}
+{##}
+{#                                <p>Instructor</p>#}
+{#                                <h5>{{ object.Teacher_Code }}</h5>#}
+{#                            </div>#}
+{#                        </div>#}
                     </div>
                 </div>
             </div>
@@ -118,53 +118,3 @@
         {% endif %}
     </div>
 </div>
-{#<div class="pagination">#}
-{#    <span class="step-links">#}
-{#        {% if object.has_other_pages %}#}
-{#            <ul class="pagination pagination-primary justify-content-center">#}
-{##}
-{#                {% if object.has_previous %}#}
-{#                    <li class="page-item mx-1">#}
-{#                        <a class="page-link iconbox iconbox-sm rounded-0"#}
-{#                           href="?page={{ object.previous_page_number }}">#}
-{#                            <i class="ti-angle-left small"></i>#}
-{#                        </a>#}
-{#                    </li>#}
-{#                {% else %}#}
-{#                    <li class="page-item mx-1 disabled">#}
-{#                        <a class="page-link iconbox iconbox-sm rounded-0">#}
-{#                            <i class="ti-angle-left small"></i>#}
-{#                        </a>#}
-{#                    </li>#}
-{#                {% endif %}#}
-{##}
-{#                {% for i in object.paginator.page_range %}#}
-{#                    {% if lectures.number == i %}#}
-{#                        <li class="page-item mx-1 active">#}
-{#                            <a class="page-link iconbox iconbox-sm rounded-0">{{ i }}</a>#}
-{#                        </li>#}
-{#                    {% else %}#}
-{#                        <li class="page-item mx-1">#}
-{#                            <a class="page-link iconbox iconbox-sm rounded-0" href="?page={{ i }}">{{ i }}</a>#}
-{#                        </li>#}
-{#                    {% endif %}#}
-{#                {% endfor %}#}
-{##}
-{#                {% if object.has_next %}#}
-{#                    <li class="page-item mx-1">#}
-{#                        <a class="page-link iconbox iconbox-sm rounded-0" href="?page={{ lectures.next_page_number }}">#}
-{#                            <i class="ti-angle-right small"></i>#}
-{#                        </a>#}
-{#                    </li>#}
-{#                {% else %}#}
-{#                    <li class="page-item mx-1 disabled">#}
-{#                        <a class="page-link iconbox iconbox-sm rounded-0">#}
-{#                            <i class="ti-angle-right small"></i>#}
-{#                        </a>#}
-{#                    </li>#}
-{#                {% endif %}#}
-{##}
-{#            </ul>#}
-{#        {% endif %}#}
-{#     </span>#}
-{#</div>#}

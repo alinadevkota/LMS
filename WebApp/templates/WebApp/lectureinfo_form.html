@@ -6,12 +6,12 @@
 {% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'lectureinfo_list' %}">Lecture</a></li>
+    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'lectureinfo_list' %}">Course</a></li>
     <li class="breadcrumb-item active" aria-current="page">
-        {% if '/create/' in request.path %}
-            Create New Lecture
+        {% if 'create' in request.path %}
+            Create New Course
         {% else %}
-            Edit Lecture Info
+            Edit Course Info
         {% endif %}
     </li>
 

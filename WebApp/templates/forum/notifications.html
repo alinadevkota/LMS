@@ -49,7 +49,9 @@
                             <span class="time">{{ notification.pub_date }}</span>
                         </span>
                         <span class="message">
-                            {% blocktrans with username=notification.sender.username thread_title=notification.post.thread.title %}
+                            <strong>
+                                {% blocktrans with username=notification.sender.username thread_title=notification.post.thread.title %}
+                            </strong>
                             mentioned you when replying to
 
                             <strong> {{ thread_title }}</strong>
