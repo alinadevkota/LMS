@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "teacher_module/base.html" %}
 
 
 
@@ -39,6 +39,7 @@
 
 
 {% block content %}
+
     <div id="content-main">
         {% block object-tools %}
             {% if change %}{% if not is_popup %}
@@ -99,16 +100,3 @@
 
 {% endblock %}
 
-{% block customjss %}
-
-    <script type="text/javascript" src="{% static "admin/js/jquery.init.js" %}"></script>
-    {{ block.super }}
-
-    <script type="text/javascript"
-            id="django-admin-form-add-constants"
-            src="{% static 'admin/js/change_form.js' %}"
-            {% if adminform and add %}
-            data-model-name="{{ opts.model_name }}"
-            {% endif %}>
-    </script>
-{% endblock %}

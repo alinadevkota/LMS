@@ -8,8 +8,9 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView, FormView, CreateView, UpdateView
 
+from WebApp.models import LectureInfo
 from .forms import QuestionForm, EssayForm, QuizForm, TFQuestionForm, EssayQuestionForm, MCQuestionForm
-from .models import Quiz, Category, Progress, Sitting, MCQuestion, TF_Question, Question, Essay_Question
+from .models import Quiz, Progress, Sitting, MCQuestion, TF_Question, Question, Essay_Question
 
 
 class QuizMarkerMixin(object):
@@ -52,14 +53,14 @@ class QuizDetailView(DetailView):
     model = Quiz
     slug_field = 'url'
 
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-
-        if self.object.draft and not request.user.has_perm('quiz.change_quiz'):
-            raise PermissionDenied
-
-        context = self.get_context_data(object=self.object)
-        return self.render_to_response(context)
+    # def get(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+    #
+    #     if self.object.draft and not request.user.has_perm('quiz.change_quiz'):
+    #         raise PermissionDenied
+    #
+    #     context = self.get_context_data(object=self.object)
+    #     return self.render_to_response(context)
 
 
 def QuizDeleteView(request, pk):
@@ -68,31 +69,31 @@ def QuizDeleteView(request, pk):
 
 
 class CategoriesListView(ListView):
-    model = Category
+    model = LectureInfo
 
 
-class ViewQuizListByCategory(ListView):
+class ViewQuizListByLecture(ListView):
     model = Quiz
     template_name = 'view_quiz_category.html'
 
     def dispatch(self, request, *args, **kwargs):
         self.category = get_object_or_404(
-            Category,
+            LectureInfo,
             category=self.kwargs['category_name']
         )
 
-        return super(ViewQuizListByCategory, self). \
+        return super(ViewQuizListByLecture, self). \
             dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(ViewQuizListByCategory, self) \
+        context = super(ViewQuizListByLecture, self) \
             .get_context_data(**kwargs)
 
         context['category'] = self.category
         return context
 
     def get_queryset(self):
-        queryset = super(ViewQuizListByCategory, self).get_queryset()
+        queryset = super(ViewQuizListByLecture, self).get_queryset()
         return queryset.filter(category=self.category, draft=False)
 
 
@@ -413,6 +414,7 @@ class MCQuestionListView(ListView):
 
 
 
+
 class MCQuestionCreateView(CreateView):
     model = MCQuestion
     form_class = MCQuestionForm
@@ -433,7 +435,7 @@ def MCQuestionDeleteView(request, pk):
     return redirect("mcquestion_list")
 
 
-# -------------------------TF_Question Views------------------
+# -------------------------_Question Views------------------
 
 class TFQuestionListView(ListView):
     model = TF_Question

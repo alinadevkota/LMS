@@ -124,10 +124,8 @@ urlpatterns += (
     # urls for ChapterInfo
     path('courseinfo/<int:course>/chapterinfo/', views.ChapterInfoListView.as_view(), name='chapterinfo_list'),
     path('courseinfo/<int:course>/create/', views.ChapterInfoCreateView.as_view(), name='chapterinfo_create'),
-    path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(),
-         name='chapterinfo_detail'),
-    path('courseinfo/<int:course>/chapterinfo/<int:pk>/edit/', views.ChapterInfoUpdateView.as_view(),
-         name='chapterinfo_update'),
+    path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(), name='chapterinfo_detail'),
+    path('courseinfo/<int:course>/chapterinfo/<int:pk>/edit/', views.ChapterInfoUpdateView.as_view(), name='chapterinfo_update'),
 )
 
 urlpatterns += (
@@ -166,16 +164,7 @@ urlpatterns += (
          name='chaptermissoncheckitem_update'),
 )
 
-urlpatterns += (
-    # urls for InningInfo
-    path('inninginfo/', views.InningInfoListView.as_view(), name='inninginfo_list'),
-    path('inninginfo/create/', views.InningInfoCreateView.as_view(),
-         name='inninginfo_create'),
-    path('inninginfo/<int:pk>/',
-         views.InningInfoDetailView.as_view(), name='inninginfo_detail'),
-    path('inninginfo/update/<int:pk>/',
-         views.InningInfoUpdateView.as_view(), name='inninginfo_update'),
-)
+
 
 # urlpatterns += (
 #     # urls for OmrQuestionInfo
@@ -279,6 +268,31 @@ urlpatterns += (
          name='boardcontentinfo_update'),
 )
 
+
+urlpatterns += (
+    # urls for InningInfo
+    path('sessioninfo/', views.SessionInfoListView.as_view(), name='sessioninfo_list'),
+    path('sessioninfo/create/', views.SessionInfoCreateView.as_view(),
+         name='sessioninfo_create'),
+    path('sessioninfo/<int:pk>/',
+         views.SessionInfoDetailView.as_view(), name='sessioninfo_detail'),
+    path('sessioninfo/update/<int:pk>/',
+         views.SessionInfoUpdateView.as_view(), name='sessioninfo_update'),
+)
+
+
+urlpatterns += (
+    # urls for InningInfo
+    path('inninginfo/', views.InningInfoListView.as_view(), name='inninginfo_list'),
+    path('inninginfo/create/', views.InningInfoCreateView.as_view(),
+         name='inninginfo_create'),
+    path('inninginfo/<int:pk>/',
+         views.InningInfoDetailView.as_view(), name='inninginfo_detail'),
+    path('inninginfo/update/<int:pk>/',
+         views.InningInfoUpdateView.as_view(), name='inninginfo_update'),
+)
+
+
 urlpatterns += (
     # urls for InningGroup
     path('inninggroup/', views.InningGroupListView.as_view(),
@@ -289,6 +303,20 @@ urlpatterns += (
          views.InningGroupDetailView.as_view(), name='inninggroup_detail'),
     path('inninggroup/update/<int:pk>/',
          views.InningGroupUpdateView.as_view(), name='inninggroup_update'),
+)
+
+
+urlpatterns += (
+    # urls for GroupMapping
+    path('groupmapping/', views.GroupMappingListView.as_view(),
+         name='groupmapping_list'),
+    path('groupmapping/create/', views.GroupMappingCreateView.as_view(),
+         name='groupmapping_create'),
+    path('groupmapping/<int:pk>/',
+         views.GroupMappingDetailView.as_view(), name='groupmapping_detail'),
+    path('groupmapping/update/<int:pk>/',
+         views.GroupMappingUpdateView.as_view(), name='groupmapping_update'),
+    # path('admin/jsi18n', i18n.javascript_catalog),
 )
 
 urlpatterns += (
@@ -339,18 +367,7 @@ urlpatterns += (
          views.ChapterWriteUpdateView.as_view(), name='chapterwrite_update'),
 )
 
-urlpatterns += (
-    # urls for GroupMapping
-    path('groupmapping/', views.GroupMappingListView.as_view(),
-         name='groupmapping_list'),
-    path('groupmapping/create/', views.GroupMappingCreateView.as_view(),
-         name='groupmapping_create'),
-    path('groupmapping/<int:pk>/',
-         views.GroupMappingDetailView.as_view(), name='groupmapping_detail'),
-    path('groupmapping/update/<int:pk>/',
-         views.GroupMappingUpdateView.as_view(), name='groupmapping_update'),
-    # path('admin/jsi18n', i18n.javascript_catalog),
-)
+
 
 urlpatterns += (
     # urls for LearningNote

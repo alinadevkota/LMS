@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm, TextInput
 
 from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
-    ChapterMissonCheckItem, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
+    ChapterMissonCheckItem,SessionInfo, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
     AssignQuestionInfo, AssignAnswerInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
     LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
@@ -86,9 +86,40 @@ class ChapterMissonCheckItemForm(forms.ModelForm):
         model = ChapterMissonCheckItem
         fields = '__all__'
 
+class SessionInfoForm(forms.ModelForm):
+    class Meta:
+        model = SessionInfo
+        fields = '__all__'
+
+
+class GroupMappingForm(forms.ModelForm):
+    Students = forms.ModelMultipleChoiceField(queryset=MemberInfo.objects.filter(Is_Student=True),
+                                              widget=FilteredSelectMultiple("Students", is_stacked=False))
+
+    class Media:
+        css = {'all': ('/static/admin/css/widgets.css',), }
+        js = ('/admin/jsi18n/',)
+
+    class Meta:
+        model = GroupMapping
+        fields = '__all__'
+
+
+class InningGroupForm(forms.ModelForm):
+    Teacher_Code = forms.ModelMultipleChoiceField(queryset=MemberInfo.objects.filter(Is_Teacher=True),
+                                                  widget=FilteredSelectMultiple("Students", is_stacked=False))
+
+    class Media:
+        css = {'all': ('/static/admin/css/widgets.css',), }
+        js = ('/admin/jsi18n/',)
+
+    class Meta:
+        model = InningGroup
+        fields = '__all__'
+
 
 class InningInfoForm(forms.ModelForm):
-    Groups = forms.ModelMultipleChoiceField(queryset=GroupMapping.objects.all(),
+    Course_Group = forms.ModelMultipleChoiceField(queryset=InningGroup.objects.all(),
                                             widget=FilteredSelectMultiple("Groups", is_stacked=False))
 
     class Media:
@@ -98,6 +129,10 @@ class InningInfoForm(forms.ModelForm):
     class Meta:
         model = InningInfo
         fields = '__all__'
+
+
+
+
 
 
 # class OmrQuestionInfoForm(forms.ModelForm):
@@ -155,12 +190,6 @@ class BoardContentInfoForm(forms.ModelForm):
         fields = '__all__'
 
 
-class InningGroupForm(forms.ModelForm):
-
-    class Meta:
-        model = InningGroup
-        fields = '__all__'
-
 
 class ChapterContentMediaForm(forms.ModelForm):
     class Meta:
@@ -188,19 +217,6 @@ class ChapterWriteForm(forms.ModelForm):
 
 def is_stacked(args):
     pass
-
-
-class GroupMappingForm(forms.ModelForm):
-    memberinfo_id = forms.ModelMultipleChoiceField(queryset=MemberInfo.objects.filter(Is_Student=True),
-                                                   widget=FilteredSelectMultiple("Students", is_stacked=False))
-
-    class Media:
-        css = {'all': ('/static/admin/css/widgets.css',), }
-        js = ('/admin/jsi18n/',)
-
-    class Meta:
-        model = GroupMapping
-        fields = '__all__'
 
 
 class LearningNoteForm(forms.ModelForm):

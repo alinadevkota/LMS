@@ -384,34 +384,36 @@
 <script>
     $("#submitButton").click(function () {
         var content_raw = document.getElementById("id_content_raw").value
-        var data = {
-            "content_raw": content_raw,
-            "user": {{ request.user.pk }
-    },
-        "thread": {{ thread.pk }}
-
-                }
-                $.ajax({
-                    url: '/forum/api/v1/post/',
-                    type: 'POST',
-                    data: data,
-                    beforeSend: function (xhr, settings) {
-                        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
-                    },
-                    success: function (arg) {
-                        // alert("data entry success" + Session_Code + " " + Course_Code);
-                    }
-                }).done(function (server_data) {
-                    console.log(server_data)
-                    location.reload();
-                }).fail(function (res) {
-                    console.log(res);
-                    console.log("failed");
-                    alert('data entry failed');
-                });
+        var data = { "content_raw": content_raw, "user": {{ request.user.pk }}, "thread": {{ thread.pk }} };
 
 
-            });
+
+    console.log(data);
+
+    $.ajax({
+        url: '/forum/api/v1/post/',
+        type: 'POST',
+        data: data,
+        beforeSend: function (xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+        },
+        success: function (arg) {
+            // alert("data entry success" + Session_Code + " " + Course_Code);
+        }
+    }).done(function (server_data) {
+        console.log(server_data)
+        location.reload();
+    }).fail(function (res) {
+        console.log(res);
+        console.log("failed");
+        alert('data entry failed');
+    });
+
+
+    });
+
+
+
 </script>
 {% endif %}
 

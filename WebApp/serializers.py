@@ -81,10 +81,25 @@ class InningInfoSerializer(serializers.ModelSerializer):
         model = models.InningInfo
         fields = (
             'pk', 'Inning_Name', 'Start_Date', 'End_Date', 'Use_Flag', 'Register_DateTime',
-            'Updated_DateTime',
+            'Updated_DateTime','Groups','Course_Group',
             'Register_Agent', 'Center_Code'
         )
 
+class InningGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.InningGroup
+        fields = (
+            'pk', 'Teacher_Code', 'Lecture_Code', 'Use_Flag', 'Register_DateTime',
+            'Updated_DateTime', 'Register_Agent','InningGroup_Name','Center_Code'
+        )
+
+class GroupMappingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.GroupMapping
+        fields = (
+            'pk', 'Center_Code', 'Students', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
+            'Register_Agent','GroupMapping_Name'
+        )
 #
 # class OmrQuestionInfoSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -171,13 +186,6 @@ class BoardContentInfoSerializer(serializers.ModelSerializer):
         )
 
 
-class InningGroupSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.InningGroup
-        fields = (
-            'pk', 'Teacher_Code', 'Inning_Code', 'Lecture_Code', 'Use_Flag', 'Register_DateTime',
-            'Updated_DateTime', 'Register_Agent'
-        )
 
 
 class ChapterContentMediaSerializer(serializers.ModelSerializer):
@@ -215,13 +223,7 @@ class ChapterWriteSerializer(serializers.ModelSerializer):
         )
 
 
-class GroupMappingSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.GroupMapping
-        fields = (
-            'pk', 'Inning_Code', 'memberinfo_id', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
-            'Register_Agent'
-        )
+
 
 
 class LearningNoteSerializer(serializers.ModelSerializer):
