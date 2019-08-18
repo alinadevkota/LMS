@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 <div class="lectureInfoListClass">
-    <h2 class="tableHeader">List of Lectures</h2>
+    <h2 class="tableHeader">List of Courses</h2>
 
 
     <hr class="header_hr">
@@ -23,7 +23,7 @@
                 {% url 'teacher_lectureinfo_create' %}
             {% else %}
                 {% url 'lectureinfo_create' %}
-            {% endif %}">Create new Lecture</a>
+            {% endif %}">Create new Course</a>
     </div>
     {% include 'WebApp/theme/alerts.html' %}
 

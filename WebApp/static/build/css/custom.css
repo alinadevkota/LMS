@@ -4586,7 +4586,7 @@ fieldset {
     margin: 0;
     padding: 0;
     border: 0 solid #CCC;
-    overflow-x: hidden
+    overflow: hidden
 }
 
 .wizard_horizontal ul.wizard_steps {
@@ -5227,9 +5227,9 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 
 .content {
     width: 170px;
-    margin-top: 55px;
+    /*margin-top: 55px;*/
     margin-left: 15px;
-    padding-top: 10px;
+    /*padding-top: 10px;*/
 }
 
 .status .content1 {
@@ -5696,7 +5696,7 @@ article {
 /*coursedetailpage made by rajav*/
 #buttons {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 #button.col-md-3.text-right {
