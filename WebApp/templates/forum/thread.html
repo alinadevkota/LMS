@@ -123,11 +123,12 @@
                                 <p>{{ thread.content_raw | safe }}</p>
                             </h3>
 
-                            <ul class="list-group reply-list">
-                                <hr>
+                            <ul class="list-comment reply-lists">
+
                                 <h2 class="thread_replies">
                                     <i class="fa fa-comments-o"></i>
                                     Comments </h2>
+                                <hr>
 
                                 {% for post in posts %}
 
@@ -136,25 +137,30 @@
 
                                     <div class="thread-meta row">
 
-                                        <div class="col-xs-9 col-sm-10">
+                                        <div class="">
                                             <div class="reply-content">
-                                                <div class="profile_pic_forum">
-                                                    <img src="/media/{{ post.user.Member_Avatar }}" alt="..." />
-                                                </div>
-                                                <div class="reply-content-detail">
-                                                    <a
-                                                        href="{% url 'forum:user_info' post.user_id %}">{{ post.user }}</a>
-                                                    <span> {{ post.content_rendered | safe }} </span>
-
-                                                </div>
+                                                <!-- <div class="profile_pic_forum"> -->
+                                                <img src="/media/{{ post.user.Member_Avatar }}" alt="..." />
+                                                <!-- </div> -->
+                                                <a href="{% url 'forum:user_info' post.user_id %}">{{ post.user }}</a>
 
                                             </div>
-                                            <span
-                                                class="pull-right thread_date">{{ post.pub_date | naturaltime }}</span>
+                                            <div class="reply-content-detail">
+
+
+                                                <span> {{ post.content_raw | safe }} </span>
+                                            </div>
+
+
+
+
+
 
                                         </div>
                                     </div>
+                                    <br>
                                     <div class="left">
+                                        <span>{{ post.pub_date | naturaltime }}</span> <br>
                                         <p class="reply-link">
                                             <a href="#" data-username="{{ post.user.username }}" class="reply-to"
                                                 style="color: darkblue">{% trans "Reply" %}</a>
@@ -198,6 +204,8 @@
                                         {% endif %}
 
                                         {% endif %}
+
+
                                     </div>
 
                                 </li>
