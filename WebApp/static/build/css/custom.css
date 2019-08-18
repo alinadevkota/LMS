@@ -5964,16 +5964,42 @@ input[type=checkbox], input[type=radio] {
 
 .preview1, .preview2, .preview3, .preview4 {
     display: none
+} 
+/* quiz list */ 
+.icon-quiz-list{
+    text-decoration: none;
+    padding-top: 10px;
+    color: white
+} 
+.icon-quiz-list:hover{
+    color: white
+} 
+.icon-for-quiz{
+    padding-top: 5px
 }
+
+/* ends */
 /* FORM QUIZ */
 .related-widget-wrapper{
     width: 100%;
 }
  .related-widget-wrapper select{
     width: 100%
+} 
+#content-main .aligned label{
+    color: black !important; 
+    font-weight: bold !important;
 }
-.aligned  label{
-    width: 175px;
+.aligned .field-mcquestion label{
+    width: 175px!important;
+} 
+.field-description label{
+ font-weight:bold!important; 
+ color: black;
+} 
+.field-category label{
+    font-weight:bold!important; 
+ color: black;
 }
 /* quiz results css */ 
  .exam-results{
@@ -5982,7 +6008,14 @@ input[type=checkbox], input[type=radio] {
       background-color: #007fbe;
       padding: 5px 10px; 
       margin-bottom: 20px
- }
+ } 
+ .exam-results1{
+    text-transform: uppercase; 
+    color: white; 
+    background-color: #007fbe;
+    padding: 5px 10px; 
+    margin-bottom: 20px
+}
  .quiz-card-result{
     box-shadow: 0 0 10px rgba(0,0,0,0.6);
     padding: 20px; 

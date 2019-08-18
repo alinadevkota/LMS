@@ -2,16 +2,17 @@
 {% load static%}
 {% block title %}
     Quiz
-{% endblock %}
+{% endblock %} 
+{% block breadcrumb %} 
+<li class="breadcrumb-item"><a href="/">COURSE</a></li>
+                
+<li class="breadcrumb-item " > QUIZ</li> 
+<li class="breadcrumb-item active" aria-current="page">HTML</li> 
+
+{% endblock %} 
 
 {% block content %} 
-<section class="quiz-breadcrumb">
-        <ol aria-label="breadcrumb" class="breadcrumb navClass">
-                <li class="breadcrumb-item"><a href="/">COURSE</a></li>
-                <li class="breadcrumb-item"><a href="/">QUIZ</a></li>
-                <li class="breadcrumb-item active" aria-current="page">HTML</li>
-            </ol>
-</section>
+
 
   <section class="timer ">
       <div class="container">
