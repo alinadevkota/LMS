@@ -1,6 +1,7 @@
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from .models import CategoryInfo, SurveyInfo, QuestionInfo, OptionInfo, SubmitSurvey, AnswerInfo
 from .forms import CategoryInfoForm, SurveyInfoForm, QuestionInfoForm, OptionInfoForm, SubmitSurveyForm, AnswerInfoForm
+from datetime import datetime
 
 
 class CategoryInfoListView(ListView):
@@ -24,6 +25,13 @@ class CategoryInfoUpdateView(UpdateView):
 class SurveyInfoListView(ListView):
     model = SurveyInfo
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['currentDate'] = datetime.now().date()
+        context['categories'] = CategoryInfo.objects.all()
+
+        return context
+
 
 class SurveyInfoCreateView(CreateView):
     model = SurveyInfo
@@ -33,10 +41,25 @@ class SurveyInfoCreateView(CreateView):
 class SurveyInfoDetailView(DetailView):
     model = SurveyInfo
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['questions'] = QuestionInfo.objects.filter(
+            Survey_Code=self.kwargs.get('pk')).order_by('pk')
+
+        context['options'] = OptionInfo.objects.all()
+        context['submit'] = SubmitSurvey.objects.all()
+
+        return context
+
 
 class SurveyInfoUpdateView(UpdateView):
     model = SurveyInfo
     form_class = SurveyInfoForm
+
+
+def surveyinfo_category(request, id):
+    category = SurveyInfo.objects.filter(Category_Name)
+    return JsonResponse({'category': 'category'})
 
 
 class QuestionInfoListView(ListView):
@@ -74,6 +97,7 @@ class OptionInfoUpdateView(UpdateView):
     model = OptionInfo
     form_class = OptionInfoForm
 
+
 class SubmitSurveyListView(ListView):
     model = SubmitSurvey
 
@@ -108,4 +132,3 @@ class AnswerInfoDetailView(DetailView):
 class AnswerInfoUpdateView(UpdateView):
     model = AnswerInfo
     form_class = AnswerInfoForm
-
