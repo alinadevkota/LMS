@@ -45,21 +45,25 @@
 
   {% if exams %}
 
-  <hr>
+	<hr> 
+	<div class="exam-results text-center">
+			<h2>{% trans "Previous exam papers" %}</h2>
+	 </div>
 
-  <h1>{% trans "Previous exam papers" %}</h1>
+
   <p class="lead">
-	{% trans "Below are the results of exams that you have sat." %}
+			<i class="fa fa-angle-right "></i>
+	{% trans " Below are the results of exams that you have sat." %}
   </p>
 
   <table class="table table-bordered table-striped">
 
 	<thead>
 	  <tr>
-		<th>{% trans "Quiz Title" %}</th>
-		<th>{% trans "Score" %}</th>
-		<th>{% trans "Possible Score" %}</th>
-		<th>%</th>
+		<th class="quiz-capital">{% trans "Quiz Title" %}</th>
+		<th class="quiz-capital">{% trans "Score" %}</th>
+		<th class="quiz-capital">{% trans "Possible Score" %}</th>
+		<th class="quiz-capital">%</th>
 	  </tr>
 	</thead>
 

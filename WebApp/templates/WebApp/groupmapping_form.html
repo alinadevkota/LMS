@@ -10,7 +10,7 @@
     {#    <li class="breadcrumb-item"><a href="{% url 'inninginfo_list' %}">Session</a></li>#}
     {#    <li class="breadcrumb-item"><a href="{% url 'inninginfo_detail' Inning_Name.id %}">{{ Inning_Name }}</a></li>#}
 
-    <li class="breadcrumb-item"><a href="{% url 'groupmapping_list' %}">Student Mapping</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'groupmapping_list' %}">Batch Registration</a></li>
     <li class="breadcrumb-item active" aria-current="page">
         Assign Student
     </li>
@@ -20,18 +20,18 @@
 
     <div class="headerDiv">
         <h2 class="infoFormHeader">
-           Create New Group
+            Assign Student to Batch
         </h2>
         <hr class="header_hr">
     </div>
-    <div class="text-center">
+    <div class="col-md-6 col-md-offset-3 text-center" style="margin-top: 3%">
         <form method="post">
             {% csrf_token %}
 
-            <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 {{ form.GroupMapping_Name|as_crispy_field }}
             </div>
-            <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                 <label>
                     Status
                 </label><br>
@@ -43,14 +43,17 @@
                         {% endif %}
                 ><br> <br>
             </div>
-            <div class="col-md-12 col-sm-12 col-xs-12 text-center" >
-                {{ form.memberinfo_id }}
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                {{ form.Students }}
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                 <input type="hidden" name="Register_Agent" id="id_Register_Agent" value="{{ request.user.username }}"
                        class="select form-control">
             </div>
-
+            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                <input type="hidden" name="Center_Code" id="id_Center_Code" value="{{ request.user.Center_Code.id }}"
+                       class="select form-control">
+            </div>
             <div class="submitButton col-md-12">
                 <button class="btn btn-success" type="submit">Submit</button>
             </div>

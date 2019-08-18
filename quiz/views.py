@@ -188,7 +188,6 @@ class QuizTake(FormView):
             form_class = EssayForm
         else:
             form_class = self.form_class
-
         return form_class(**self.get_form_kwargs())
 
     def get_form_kwargs(self):

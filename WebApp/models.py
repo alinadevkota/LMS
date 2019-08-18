@@ -160,9 +160,9 @@ class LectureInfo(models.Model):
     Center_Code = ForeignKey(
         'CenterInfo',
         related_name="lectureinfos", on_delete=models.DO_NOTHING)
-    Teacher_Code = ForeignKey(
-        'MemberInfo',
-        related_name="lectureinfos", on_delete=models.DO_NOTHING)
+    # Teacher_Code = ForeignKey(
+    #     'MemberInfo',
+    #     related_name="lectureinfos", on_delete=models.DO_NOTHING)
 
     class Meta:
         ordering = ('-pk',)
@@ -603,9 +603,116 @@ class AssignAnswerInfo(models.Model):
 #     def get_update_url(self):
 #         return reverse('omranswerinfo_update', args=(self.pk,))
 
+class SessionInfo(models.Model):
+    Session_Name = CharField(max_length=500, blank=True, null=True)
+    Description = TextField(blank=True, null=True)
+    Use_Flag = BooleanField(default=True)
+
+    Center_Code = ForeignKey(
+        'CenterInfo',
+        related_name="sessioninfos", on_delete=models.DO_NOTHING
+    )
+
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('sessioninfo_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('sessioninfo_update', args=(self.pk,))
+
+    def __str__(self):
+        return self.Session_Name
+
+class GroupMapping(models.Model):
+    # Fields
+    GroupMapping_Name = CharField(max_length=500, blank=True, null=True)
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
+
+    # Relationship Fields
+    # Inning_Code = ForeignKey(
+    #     'InningInfo',
+    #     on_delete=models.DO_NOTHING
+    # )
+    Students = models.ManyToManyField(
+        'MemberInfo'
+    )
+
+    Center_Code = ForeignKey(
+        'CenterInfo',
+        related_name="groupmappings", on_delete=models.DO_NOTHING
+    )
+
+    class Meta:
+        ordering = ('-pk',)
+
+    def __unicode__(self):
+        return u'%s' % self.GroupMapping_Name
+
+    def __str__(self):
+        return u'%s' % self.GroupMapping_Name
+
+    def get_absolute_url(self):
+        return reverse('groupmapping_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('groupmapping_update', args=(self.pk,))
+
+
+class InningGroup(models.Model):
+    # Fields
+
+    InningGroup_Name = CharField(max_length=500, blank=True, null=True)
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
+
+    # Relationship Fields
+    # Inning_Code = ForeignKey(
+    #     'InningInfo',
+    #     related_name="inninggroups", on_delete=models.DO_NOTHING
+    # )
+    Lecture_Code = ForeignKey(
+        'LectureInfo',
+        related_name="inninggroups", on_delete=models.DO_NOTHING
+    )
+
+    Teacher_Code = models.ManyToManyField(
+        'MemberInfo'
+    )
+
+    Center_Code = ForeignKey(
+        'CenterInfo',
+        related_name="inninggroups", on_delete=models.DO_NOTHING
+    )
+
+    class Meta:
+        ordering = ('-pk',)
+
+    def __str__(self):
+        return self.InningGroup_Name
+
+    def __unicode__(self):
+        return u'%s' % self.pk
+
+    def get_absolute_url(self):
+        return reverse('inninggroup_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('inninggroup_update', args=(self.pk,))
+
+
 class InningInfo(models.Model):
     # Fields
-    Inning_Name = CharField(max_length=500, blank=True, null=True)
+
     Start_Date = DateTimeField(auto_now=False, auto_now_add=False)
     End_Date = DateTimeField(auto_now=False, auto_now_add=False)
 
@@ -615,18 +722,23 @@ class InningInfo(models.Model):
     Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
+    Inning_Name = ForeignKey(
+        'SessionInfo',
+        related_name="inninginfos", on_delete=models.DO_NOTHING
+    )
 
     Center_Code = ForeignKey(
         'CenterInfo',
         related_name="inninginfos", on_delete=models.DO_NOTHING
     )
-    # GroupMapping = ForeignKey(
-    #     'GroupMapping',
-    #     related_name="inninginfos", on_delete=models.DO_NOTHING
-    #
-    # )
-    Groups = models.ManyToManyField(
-        'GroupMapping'
+
+    Groups =ForeignKey(
+        'GroupMapping',
+        related_name="inninginfos", on_delete=models.DO_NOTHING
+    )
+
+    Course_Group =  models.ManyToManyField(
+        'InningGroup'
     )
 
     class Meta:
@@ -645,72 +757,6 @@ class InningInfo(models.Model):
         return self.Inning_Name
 
 
-class InningGroup(models.Model):
-    # Fields
-    Teacher_Code = ForeignKey(
-        'MemberInfo',
-        on_delete=models.DO_NOTHING
-    )
-
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
-
-    # Relationship Fields
-    Inning_Code = ForeignKey(
-        'InningInfo',
-        related_name="inninggroups", on_delete=models.DO_NOTHING
-    )
-    Lecture_Code = ForeignKey(
-        'LectureInfo',
-        related_name="inninggroups", on_delete=models.DO_NOTHING
-    )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('inninggroup_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('inninggroup_update', args=(self.pk,))
-
-
-class GroupMapping(models.Model):
-    # Fields
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
-    GroupMapping_Name = CharField(max_length=500, blank=True, null=True)
-
-    # Relationship Fields
-    # Inning_Code = ForeignKey(
-    #     'InningInfo',
-    #     on_delete=models.DO_NOTHING
-    # )
-    memberinfo_id = models.ManyToManyField(
-        'MemberInfo'
-    )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.GroupMapping_Name
-
-    def __str__(self):
-        return u'%s' % self.GroupMapping_Name
-
-    def get_absolute_url(self):
-        return reverse('groupmapping_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('groupmapping_update', args=(self.pk,))
 
 
 class ChapterMissonCheckCard(models.Model):

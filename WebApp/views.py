@@ -19,7 +19,7 @@ from forum.models import Thread
 from forum.views import get_top_thread_keywords
 
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
-    ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, InningInfoForm, QuizInfoForm, \
+    ChapterMissonCheckCardForm, ChapterMissonCheckItemForm,SessionInfoForm, InningInfoForm, QuizInfoForm, \
     AssignmentInfoForm, QuestionInfoForm, AssignAssignmentInfoForm, \
     AssignQuestionInfoForm, AssignAnswerInfoForm, \
     BoardInfoForm, BoardContentInfoForm, InningGroupForm, \
@@ -32,7 +32,7 @@ from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterCont
 from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
     ChapterMissonCheckItem, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
     AssignQuestionInfo, AssignAnswerInfo, BoardInfo, \
-    BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
+    BoardContentInfo,SessionInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
     LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
     QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, Events
@@ -457,6 +457,22 @@ class ChapterMissonCheckItemUpdateView(UpdateView):
     model = ChapterMissonCheckItem
     form_class = ChapterMissonCheckItemForm
 
+class SessionInfoListView(ListView):
+    model = SessionInfo
+
+
+class SessionInfoCreateView(CreateView):
+    model = SessionInfo
+    form_class = SessionInfoForm
+
+
+class SessionInfoDetailView(DetailView):
+    model = SessionInfo
+
+
+class SessionInfoUpdateView(UpdateView):
+    model = SessionInfo
+    form_class = SessionInfoForm
 
 class InningInfoListView(ListView):
     model = InningInfo
@@ -474,6 +490,47 @@ class InningInfoDetailView(DetailView):
 class InningInfoUpdateView(UpdateView):
     model = InningInfo
     form_class = InningInfoForm
+
+class InningGroupListView(ListView):
+    model = InningGroup
+
+
+class InningGroupCreateView(CreateView):
+    model = InningGroup
+    form_class = InningGroupForm
+
+
+class InningGroupDetailView(DetailView):
+    model = InningGroup
+
+class InningGroupUpdateView(UpdateView):
+    model = InningGroup
+    form_class = InningGroupForm
+
+class GroupMappingListView(ListView):
+    model = GroupMapping
+
+
+class GroupMappingCreateView(CreateView):
+    model = GroupMapping
+    form_class = GroupMappingForm
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['Inning_Name'] = get_object_or_404(InningInfo, pk=self.kwargs.get('inning_name'))
+    #     return context
+
+class GroupMappingDetailView(DetailView):
+    model = GroupMapping
+
+class GroupMappingUpdateView(UpdateView):
+    model = GroupMapping
+    form_class = GroupMappingForm
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['Inning_Name'] = get_object_or_404(InningInfo, pk=self.kwargs.get('inning_name'))
+    #     return context
 
 
 # class OmrQuestionInfoListView(ListView):
@@ -651,23 +708,6 @@ class BoardContentInfoUpdateView(UpdateView):
     form_class = BoardContentInfoForm
 
 
-class InningGroupListView(ListView):
-    model = InningGroup
-
-
-class InningGroupCreateView(CreateView):
-    model = InningGroup
-    form_class = InningGroupForm
-
-
-class InningGroupDetailView(DetailView):
-    model = InningGroup
-
-
-class InningGroupUpdateView(UpdateView):
-    model = InningGroup
-    form_class = InningGroupForm
-
 
 class ChapterContentMediaListView(ListView):
     model = ChapterContentMedia
@@ -741,32 +781,7 @@ class ChapterWriteUpdateView(UpdateView):
     form_class = ChapterWriteForm
 
 
-class GroupMappingListView(ListView):
-    model = GroupMapping
 
-
-class GroupMappingCreateView(CreateView):
-    model = GroupMapping
-    form_class = GroupMappingForm
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['Inning_Name'] = get_object_or_404(InningInfo, pk=self.kwargs.get('inning_name'))
-    #     return context
-
-
-class GroupMappingDetailView(DetailView):
-    model = GroupMapping
-
-
-class GroupMappingUpdateView(UpdateView):
-    model = GroupMapping
-    form_class = GroupMappingForm
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['Inning_Name'] = get_object_or_404(InningInfo, pk=self.kwargs.get('inning_name'))
-    #     return context
 
 
 class LearningNoteListView(ListView):

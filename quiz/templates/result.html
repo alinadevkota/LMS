@@ -29,14 +29,23 @@
   {% if max_score %}
 
   <div>
-	<h2>{% trans "Exam results" %}</h2>
+	<h2 >
+     <div class="exam-results text-center">
+        {% trans "Exam results" %}
+     </div>
+  </h2>
 	<p>
 	  <small class="muted">{% trans "Exam title" %}: </small>
-	  <strong>{{ quiz.title }}</strong></p>
+    <strong class="quiz-capital">{{ quiz.title }}</strong></p>    
+    
+    <div class="quiz-card-result">
+        <p class="lead">
+            <i class="fa fa-angle-right "></i>
+          {% trans "You answered" %} <strong> {{ score }}</strong> {% trans "questions correctly out of" %} <strong>{{ max_score }}</strong>, {% trans "giving you" %} &nbsp;<strong>{{ percent }}</strong> {% trans "percent correct" %}
+        </p>
+    </div>
 
-	<p class="lead">
-	  {% trans "You answered" %} {{ score }} {% trans "questions correctly out of" %} {{ max_score }}, {% trans "giving you" %} {{ percent }} {% trans "percent correct" %}
-	</p>
+	
 
 	{% if quiz.pass_mark %}
 	<hr>
@@ -45,9 +54,11 @@
 
 	{% endif %}
 
+	<!-- <p class="quiz-review">{% trans "- Review the questions below and try the exam again in the future"%}.</p> -->
+
 	{% if user.is_authenticated %}
 
-	  <p>{% trans "The result of this exam will be stored in your progress section so you can review and monitor your progression" %}.</p>
+	  <p class="quiz-review">{% trans "- The result of this exam will be stored in your  progress  section so you can review and monitor your progression" %}.</p>
 
 	{% endif %}
   </div>
@@ -79,12 +90,12 @@
 	  {% correct_answer_for_all question %}
 
       {% if question.user_answer %}
-      <p>{% trans "Your answer" %}: {{ question|answer_choice_to_string:question.user_answer }}</p>
+      <p>{% trans "-Your answer" %}: {{ question|answer_choice_to_string:question.user_answer }}</p>
       {% endif %}
 
-	  <p><strong>{% trans "Explanation" %}:</strong></p>
+	  <p class="quiz-review"><strong>{% trans "Explanation" %}:</strong></p>
 	  <div class="well " style="background-color: #fcf8e3;">
-		<p>{{ question.explanation|safe }}</p>
+		<p class="quiz-review">{{ question.explanation|safe }}</p>
 	  </div>
 
 	  <hr>

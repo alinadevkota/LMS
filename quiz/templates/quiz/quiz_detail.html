@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block content %}
-<h2>{{ quiz.title }}</h2>
-<h3>{% trans "Lecture" %}: {{ quiz.category }}</h3>
+
+<!-- <h2>{{ quiz.title }}</h2>
+<h3>"Category": {{ quiz.category }}</h3>
 {% if quiz.single_attempt %}
   <h4>{% trans "You will only get one attempt at this quiz" %}.</h4>
 {% endif %}
@@ -15,5 +16,43 @@
   <a href="{% url 'quiz_question' quiz_name=quiz.url %}">
 	{% trans "Start quiz" %}
   </a>
-</p>
+</p> -->
+
+
+
+<div class="">
+  <div class="container">
+       <div class="row text-center">
+           
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+             
+                  <div class="box-part text-center">
+                      
+                      <i class="fa fa-cloud fa-3x" aria-hidden="true"></i>
+                      
+                      <div class="title">
+                          <h3>{{ quiz.title }}</h3>
+                      </div>
+                      
+                      <div class="text">
+                          <span><h3>"Category": {{ quiz.category }}</h3>
+                          {% if quiz.single_attempt %}
+                            <h4>{% trans "You will only get one attempt at this quiz" %}.</h4>
+                          {% endif %}
+                          <p>{{ quiz.description }}</p>
+                          </span>
+                      </div>
+                      
+                      <a href="{% url 'quiz_question' quiz_name=quiz.url %}">
+                        {% trans "Start quiz" %}
+                        </a>
+                      
+                   </div>
+              </div>	 
+             
+              
+      
+      </div>		
+  </div>
+</div>
 {% endblock %}
