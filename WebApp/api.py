@@ -77,6 +77,15 @@ class InningInfoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
+class SessionInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the InningInfo class"""
+
+    queryset = models.SessionInfo.objects.all()
+    serializer_class = serializers.SessionInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+
 # class OmrQuestionInfoViewSet(viewsets.ModelViewSet):
 #     """ViewSet for the OmrQuestionInfo class"""
 #
