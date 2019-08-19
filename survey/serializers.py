@@ -19,7 +19,7 @@ class SurveyInfoSerializer(serializers.ModelSerializer):
         model = models.SurveyInfo
         fields = (
             'pk', 
-            'Survey_Title', 'Start_Date', 'End_Date', 'Survey_Cover', 'Use_Flag','Added_By','Category_Code','Assigned_To','Lecture_Code'
+            'Survey_Title', 'Start_Date', 'End_Date', 'Survey_Cover', 'Use_Flag','Added_By','Category_Code','Assigned_To','Lecture_Code', 'Center_Code'
         )
 
 

@@ -3,20 +3,14 @@
 {% block title %}
     Quiz
 {% endblock %} 
-
-
-{% block content %}
-  <!-- <ol class="breadcrumb navClass">
-      <li class="active">Home</li>
-  </ol> --> 
-  <section class="quiz-breadcrumb">
-        <ol aria-label="breadcrumb" class="breadcrumb navClass">
-                <li class="breadcrumb-item"><a href="/">COURSE</a></li>
+{% block breadcrumb %} 
+<li class="breadcrumb-item"><a href="/">COURSE</a></li>
                 
-                <li class="breadcrumb-item active" aria-current="page"> QUIZ</li>
-            </ol>
-</section>
-<!-- <div class="page_section"><h1>Quizz</h1></div> -->
+<li class="breadcrumb-item active" aria-current="page"> QUIZ</li>
+{% endblock %} 
+{% block content %}
+
+
 
     <div class="">
         <div class="container">

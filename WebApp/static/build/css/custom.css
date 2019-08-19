@@ -5172,7 +5172,6 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 .containerMessage2 {
     margin-top: 10px;
     margin-left: 10px;
-    height: 560px;
     background-color: #fafafa;
     border-radius: 5px 5px 5px 5px;
     box-shadow: 0 0 5px #adadad;
@@ -5226,6 +5225,8 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 
 
 .content {
+    width: 100%;
+    margin-top: 55px;
     width: 170px;
     /*margin-top: 55px;*/
     margin-left: 15px;
@@ -5413,7 +5414,6 @@ article {
 }
 
 .discussions .status {
-    background-color: #f0f0f0;
     border-radius: 5px;
     width: auto;
     height: auto;
@@ -5424,7 +5424,7 @@ article {
 
 .discussions .onlineUser {
     margin-top: 10px;
-    width: 20%;
+    width: 15%;
     background: #fff;
     padding: 7px;
     border-radius: 50%;
@@ -5677,9 +5677,9 @@ article {
 }
 
 .card-body hr {
-    margin-top: 5px;
+    margin-top: 5px
 !important;
-    margin-bottom: 5px;
+    margin-bottom: 5px
 !important;
 
 }
@@ -5964,16 +5964,42 @@ input[type=checkbox], input[type=radio] {
 
 .preview1, .preview2, .preview3, .preview4 {
     display: none
+} 
+/* quiz list */ 
+.icon-quiz-list{
+    text-decoration: none;
+    padding-top: 10px;
+    color: white
+} 
+.icon-quiz-list:hover{
+    color: white
+} 
+.icon-for-quiz{
+    padding-top: 5px
 }
+
+/* ends */
 /* FORM QUIZ */
 .related-widget-wrapper{
     width: 100%;
 }
  .related-widget-wrapper select{
     width: 100%
+} 
+#content-main .aligned label{
+    color: black !important; 
+    font-weight: bold !important;
 }
-.aligned  label{
-    width: 175px;
+.aligned .field-mcquestion label{
+    width: 175px!important;
+} 
+.field-description label{
+ font-weight:bold!important; 
+ color: black;
+} 
+.field-category label{
+    font-weight:bold!important; 
+ color: black;
 }
 /* quiz results css */ 
  .exam-results{
@@ -5982,7 +6008,14 @@ input[type=checkbox], input[type=radio] {
       background-color: #007fbe;
       padding: 5px 10px; 
       margin-bottom: 20px
- }
+ } 
+ .exam-results1{
+    text-transform: uppercase; 
+    color: white; 
+    background-color: #007fbe;
+    padding: 5px 10px; 
+    margin-bottom: 20px
+}
  .quiz-card-result{
     box-shadow: 0 0 10px rgba(0,0,0,0.6);
     padding: 20px; 
