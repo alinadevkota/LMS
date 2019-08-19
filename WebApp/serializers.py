@@ -85,6 +85,13 @@ class InningInfoSerializer(serializers.ModelSerializer):
             'Register_Agent', 'Center_Code'
         )
 
+class SessionInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.SessionInfo
+        fields = (
+            'Session_Name','Description','Use_Flag','Center_Code'
+        )
+
 class InningGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.InningGroup
