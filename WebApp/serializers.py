@@ -89,7 +89,7 @@ class SessionInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SessionInfo
         fields = (
-            'Session_Name','Description','Use_Flag','Center_Code'
+            'pk', 'Session_Name', 'Description', 'Use_Flag', 'Center_Code'
         )
 
 class InningGroupSerializer(serializers.ModelSerializer):
