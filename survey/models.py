@@ -86,10 +86,15 @@ class SurveyInfo(models.Model):
 
 class QuestionInfo(models.Model):
 
+    QUESTION_TYPE_CHOICES = [
+    ('SAQ', 'Short Answer'),
+    ('MCQ', 'Multiple Choice'),
+    ]
+
     # Fields
     Question_Name = CharField(max_length=500, blank=True, null=True)
     # Question_Answer = CharField(max_length=500, blank=True, null=True)
-    Question_Type = CharField(max_length=500, blank=True, null=True)
+    Question_Type = CharField(max_length=3, choices=QUESTION_TYPE_CHOICES, default='SAQ')
     Survey_Code = ForeignKey(
         'SurveyInfo',
         related_name="questioninfo", on_delete=models.CASCADE
