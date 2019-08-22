@@ -1,3 +1,4 @@
+from django.contrib.messages import constants as messages
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -9,12 +10,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'x-v$qxhbfy+jse*f)mx7(r_@_h#3rwo-o36t5j#pnhh25%8h*2')
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY', 'x-v$qxhbfy+jse*f)mx7(r_@_h#3rwo-o36t5j#pnhh25%8h*2')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['lms-nsd.sushant.info.np', 'localhost', '127.0.0.1', 'lsm-nsdev.herokuapp.com']
+ALLOWED_HOSTS = ['lms-nsd.sushant.info.np',
+                 'localhost', '127.0.0.1', 'lsm-nsdev.herokuapp.com']
 
 # Application definition
 
@@ -94,6 +97,17 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'lms',
+#         'USER': 'postgres',
+#         'PASSWORD': 'admin',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -149,7 +163,7 @@ STATICFILES_DIRS = (
 
     os.path.join(BASE_DIR, 'WebApp/static'),
 
-) #/opt/soundshelter/soundshelter/soundshelter/static
+)  # /opt/soundshelter/soundshelter/soundshelter/static
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -162,16 +176,15 @@ LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'WebApp.MemberInfo'
 
 # Django Messages
-from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
-REST_FRAMEWORK = {   
+REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        ],
+    ],
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
     ],
@@ -179,7 +192,7 @@ REST_FRAMEWORK = {
 
 
 DATE_INPUT_FORMATS = [
-    '%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', # '2006-10-25', '10/25/2006', '10/25/06'
+    '%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y',  # '2006-10-25', '10/25/2006', '10/25/06'
     '%b %d %Y', '%b %d, %Y',            # 'Oct 25 2006', 'Oct 25, 2006'
     '%d %b %Y', '%d %b, %Y',            # '25 Oct 2006', '25 Oct, 2006'
     '%B %d %Y', '%B %d, %Y',            # 'October 25 2006', 'October 25, 2006'

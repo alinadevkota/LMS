@@ -26,17 +26,8 @@
 
     <div class="container" id="mainSurveyPage">
 
-        <div class="row" id="surveyheader">
-            <form class="col-md-6">
-                <div class="searchBarSurvey ">
-                    <input type="search" placeholder="Survey...">
-                    <div class="pollButtons">
-                        <button type="button" class="btn btn-info">Search</button>
-                    </div>
-                </div>
-            </form>
-
-            <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-8 col-xs-12">
                 <div class="btn-group" id="status" data-toggle="buttons">
                     <label class="btn btn-default btn-on-3 btn-sm active" id="ActiveButton">
                         <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">Active</label>
@@ -44,308 +35,483 @@
                         <input type="radio" value="0" name="multifeatured_module[module_id][status]">Expire</label>
                 </div>
             </div>
+            <form class="col-md-4 col-xs-12" id="searchBarSurvey">
+
+                <div role="search" action="/forum/search/" id="surveySearch">
+                    <input type="text" id="keywordInput" name="keyword" placeholder="Type to search">
+                    <div class=" pull-right searchButton">
+                        <button type="submit" id="navSearchBtn" class="btn btn-inverse" data-hover-z="1"><i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </form>
         </div>
         <div class="hR"></div>
 
-        <div class="container" style="margin-left: 20px;">
-            <div class="row" id="rowCards">
-                <div class="col-md-12 col-lg-9">
-                    <!-- ......................................Active section........................................ -->
-                    <div class="active_survey ">
-                        {% for object in object_list %}
+        <div class="container">
+            <div class="row">
+                <div  id="surveyContainer">
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="categoryContainer">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title "><strong>Category</strong></h2>
+                                <hr>
+                                <div id="card_category">
 
-                        {% if object.End_Date > currentDate %}
+                                    <h5 class="card-text active" style="justify-content: flex-start;">
+                                        <a href="#" style=" padding-left: 15px;"><i class="fa fa-bar-chart" id="categoryIcons"></i>All
+                                            survey</a>
+                                    </h5>
+                                    {% for category in categories %}
+                                    <h5 class="card-text">
+                                        <a href="#" class=" category-name " id=" {{ category.id }}"><i class="fa fa-{{ category.Category_Icon}}"
+                                                id="categoryIcons"></i>
+                                            {{ category.Category_Name }}
+                                        </a><button class=" {{ category.Category_Name }} btn btn-success"
+                                            data-popup-open="popup-1">Add</button>
+                                    </h5>
 
-                        <div class="questionLists col-xs-12 col-sm-6 col-md-6 col-lg-3 ">
-                            <div class="card">
-                                <a href=" {% url 'surveyinfo_detail' object.pk %}">
-                                    <div class="card-body   ">
-                                        <h2 class="card-title "><strong>{{ object.Survey_Title }}</strong></h2>
-                                        <hr>
-                                        <ul class="card_labels">
-                                            <li><label>Questions: {{ object.questions_count }}</label></li>
-                                            <li><label>Start date: {{ object.Start_Date }}</label></li>
-                                            <li><label>End date: {{ object.End_Date }}</label></li>
-                                        </ul>
-                                        <!-- <h5 class="card-text text-justify">
-                                        
-                                            <div class="pollButtons">
-                                                <button type="button" class="btn btn-info">View</button>
-                                            </div>
-                                        
-                                    </h5> -->
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                    <!-- ......................................Expire section.................................... -->
-                    <div class="expire_survey " style="display: none;">
-                        {% for object in object_list %}
-                        {% if object.End_Date < currentDate %} <div class="  ">
-                            <div class="questionLists col-xs-12 col-sm-6 col-md-6 col-lg-3 ">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h2 class="card-title "><strong>{{ object.Survey_Title }}</strong></h2>
-                                        <hr>
-                                        <ul class="card_labels">
-                                            <li><label>Questions: {{ object.questions_count }} </label></li>
-                                            <li><label>Start date: {{ object.Start_Date }}</label></li>
-                                            <li><label>End date: {{ object.End_Date }}</label></li>
-                                        </ul>
-                                        <h5 class="card-text text-justify">
-                                            <a href=" {% url 'surveyinfo_detail' object.pk %}">
-                                                <div class="pollButtons">
-                                                    <button type="button" class="btn btn-info">View</button>
-                                                </div>
-                                            </a>
-                                        </h5>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-
-                </div>
-            </div>
-
-            <div class="col-md-12 col-lg-2 " style="margin-left:20px;">
-                <div class="categoryContainer">
-                    <div class="card" style="width: 22rem; height: 35rem;">
-                        <div class="card-body">
-                            <h2 class="card-title "><strong>Category</strong></h2>
-                            <hr>
-                            <div id="card_category">
-
-                                <h5 class="card-text active" style="justify-content: flex-start;">
-                                    <a href="#" style=" padding-left: 15px;"><i class="fa fa-bar-chart" id="categoryIcons"></i>All
-                                        survey</a>
-                                </h5>
-                                {% for category in categories %}
-                                <h5 class="card-text">
-                                    <a href="#" class=" category-name " id=" {{ category.id }}"><i class="fa fa-{{ category.Category_Icon}}"
-                                            id="categoryIcons"></i>
-                                        {{ category.Category_Name }}
-                                    </a><button class=" {{ category.Category_Name }} btn btn-success" data-popup-open="popup-1">Add</button>
-                                </h5>
-                                <!-- <h5 class="card-text">
-                                    <a href="#"><i class="fa fa-group" id="categoryIcons"></i></a><button class="session btn btn-success"
-                                        data-popup-open="popup-1">Add</button>
-                                </h5>
-                                <h5 class="card-text">
-                                    <a href="#"><i class="fa fa-book" id="categoryIcons"></i></a><button class="courseAdd btn btn-success"
-                                        data-popup-open="popup-1">Add</button>
-                                </h5>
-                                <h5 class="card-text">
-                                    <a href="#  "><i class="fa fa-laptop" id="categoryIcons" style="margin-right: -5px;"></i>
-                                        System</a><button class="system btn btn-success" data-popup-open="popup-1">Add</button>
-                                </h5> -->
-                                {% endfor %}
-                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="popup" data-popup="popup-1">
+                        <div class="popup-inner ">
+                            <article class="index-form">
+                                <form id="popupForm">
+                                    <div class="label_inputs">
 
-                <div class="popup" data-popup="popup-1">
-                    <div class="popup-inner ">
-                        <article class="index-form">
-                            <form id="popupForm">
-                                <div class="label_inputs">
-
-                                    <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <div class="x_panel">
-                                                <div class="x_content">
-                                                    <br>
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-12 col-sm-12 col-xs-12" id="categoryTitle"
-                                                            for="first-name">Category :
-                                                            <span class="generalLabel">General</span>
-                                                            <span class="sessionLabel" style="display:none;">Session</span>
-                                                            <span class="courseLabel" style="display:none;">Course</span>
-                                                            <span class="systemLabel" style="display:none;">System</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="stepwizard">
-                                                        <div class="stepwizard-row setup-panel">
-                                                            <div class="stepwizard-step">
-                                                                <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
-                                                                <p>Survey Information</p>
-                                                            </div>
-                                                            <div class="stepwizard-step">
-                                                                <a href="#step-2" type="button" class="btn btn-default btn-circle"
-                                                                    disabled="disabled">2</a>
-                                                                <p>Add Question</p>
-                                                            </div>
-                                                            <div class="stepwizard-step">
-                                                                <a href="#step-3" type="button" class="btn btn-default btn-circle"
-                                                                    disabled="disabled">3</a>
-                                                                <p>Finish</p>
-                                                            </div>
+                                        <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="x_panel">
+                                                    <div class="x_content">
+                                                        <br>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-12 col-sm-12 col-xs-12"
+                                                                id="categoryTitle" for="first-name">Category :
+                                                                <span class="generalLabel">General</span>
+                                                                <span class="sessionLabel" style="display:none;">Session</span>
+                                                                <span class="courseLabel" style="display:none;">Course</span>
+                                                                <span class="systemLabel" style="display:none;">System</span>
+                                                            </label>
                                                         </div>
-                                                    </div>
-                                                    <form role="form">
-                                                        <div class="row setup-content" id="step-1">
-                                                            <div class="col-xs-12">
-                                                                <div class="col-md-12">
-                                                                    <form id="demo-form2" data-parsley-validate=""
-                                                                        class="form-horizontal form-label-left"
-                                                                        novalidate="">
-
-                                                                        <div class="form-group">
-                                                                            <label class="control-label col-md-12 col-sm-12 col-xs-12"
-                                                                                for="first-name">Title
-                                                                                <span class="required">*</span>
-                                                                            </label>
-                                                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                                <input type="text" id="title" required="required"
-                                                                                    class="form-control col-md-7 col-xs-12"
-                                                                                    placeholder="Create new survey">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label class="control-label col-md-12 col-sm-12 col-xs-12">Start
-                                                                                date<span class="required">*</span>
-                                                                            </label>
-                                                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                                <input id="start-date" class="date-picker form-control col-md-7 col-xs-12"
-                                                                                    required="required" type="date">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label class="control-label col-md-12 col-sm-12 col-xs-12">End
-                                                                                date<span class="required">*</span>
-                                                                            </label>
-                                                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                                <input id="end-date" class="date-picker form-control col-md-7 col-xs-12"
-                                                                                    required="required" type="date">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group" id="chooseSession"
-                                                                            style="display: none;">
-                                                                            <label class="control-label col-md-12 col-sm-12 col-xs-12"
-                                                                                for="first-name">Choose
-                                                                                Session
-                                                                                <span class="required">*</span>
-                                                                            </label>
-                                                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                                <select id="inputState" class="form-control col-md-7 col-xs-12">
-                                                                                    <option selected>Choose...</option>
-                                                                                    <option>...</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group" id="chooseCourse" style="display: none;">
-                                                                            <label class="control-label col-md-12 col-sm-12 col-xs-12"
-                                                                                for="first-name">Choose
-                                                                                Course
-                                                                                <span class="required">*</span>
-                                                                            </label>
-                                                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                                <select id="inputState" class="form-control col-md-7 col-xs-12">
-                                                                                    <option selected>Choose...</option>
-                                                                                    <option>...</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </form>
-                                                                    <button class="btn btn-primary nextBtn btn-lg pull-right"
-                                                                        id="nextButton" type="button">Next</button>
+                                                        <div class="stepwizard">
+                                                            <div class="stepwizard-row setup-panel">
+                                                                <div class="stepwizard-step">
+                                                                    <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                                                                    <p>Survey Information</p>
+                                                                </div>
+                                                                <div class="stepwizard-step">
+                                                                    <a href="#step-2" type="button" class="btn btn-default btn-circle"
+                                                                        disabled="disabled">2</a>
+                                                                    <p>Add Question</p>
+                                                                </div>
+                                                                <div class="stepwizard-step">
+                                                                    <a href="#step-3" type="button" class="btn btn-default btn-circle"
+                                                                        disabled="disabled">3</a>
+                                                                    <p>Finish</p>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row setup-content" id="step-2">
-                                                            <div class="col-xs-12">
-                                                                <div class="col-md-12">
-                                                                    <div class="selectQuestionType">
-                                                                        <div class="btn-group" id="switchButtons"
-                                                                            data-toggle="buttons">
-                                                                            <label class="mcq_question btn btn-default btn-on btn-md active">
-                                                                                <input type="radio" value="1" name="multifeatured_module[module_id][switchButtons]"
-                                                                                    checked="checked">MCQ</label>
-                                                                            <label class="short_question btn btn-default btn-off btn-md ">
-                                                                                <input type="radio" value="0" name="multifeatured_module[module_id][switchButtons]">SAQ</label>
-                                                                        </div>
+                                                        <form role="form">
+                                                            <div class="row setup-content" id="step-1">
+                                                                <div class="col-xs-12">
+                                                                    <div class="col-md-12">
+                                                                        <form id="demo-form2" data-parsley-validate=""
+                                                                            class="form-horizontal form-label-left"
+                                                                            novalidate="">
 
-                                                                        <div class="questionContainer">
-                                                                            <div id="mcq_que">
-                                                                                <div class="questionSection ">
-                                                                                    <label for="questions">Questions:</label>
-                                                                                    <button class="btn btn-success" id="newQuestion">Add
-                                                                                        Questions</button>
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-md-12 col-sm-12 col-xs-12"
+                                                                                    for="first-name">Title
+                                                                                    <span class="required">*</span>
+                                                                                </label>
+                                                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                                    <input type="text" id="title"
+                                                                                        required="required" class="form-control col-md-7 col-xs-12"
+                                                                                        placeholder="Create new survey">
                                                                                 </div>
-
-                                                                                <div class="optionContainer">
-                                                                                    <ul id="mySelect" style="list-style: none;">
-                                                                                    </ul>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-md-12 col-sm-12 col-xs-12">Start
+                                                                                    date<span class="required">*</span>
+                                                                                </label>
+                                                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                                    <input id="start-date" class="date-picker form-control col-md-7 col-xs-12"
+                                                                                        required="required" type="date">
                                                                                 </div>
-
-                                                                                <!-- <div class="row">
-                                                                                    <a href="">
-                                                                                        <div class="btn btn-info col-md-12 col-sm-12 "
-                                                                                            id="saveButton">Save</div>
-                                                                                    </a>
-                                                                                    <a href="">
-                                                                                        <div class="btn btn-primary col-md-12 col-sm-12 "
-                                                                                            id="saveButton">Save
-                                                                                            As New</div>
-                                                                                    </a>
-                                                                                </div> -->
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-md-12 col-sm-12 col-xs-12">End
+                                                                                    date<span class="required">*</span>
+                                                                                </label>
+                                                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                                    <input id="end-date" class="date-picker form-control col-md-7 col-xs-12"
+                                                                                        required="required" type="date">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group" id="chooseSession"
+                                                                                style="display: none;">
+                                                                                <label class="control-label col-md-12 col-sm-12 col-xs-12"
+                                                                                    for="first-name">Choose
+                                                                                    Session
+                                                                                    <span class="required">*</span>
+                                                                                </label>
+                                                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                                    <select id="inputState" class="form-control col-md-7 col-xs-12">
+                                                                                        <option selected>Choose...</option>
+                                                                                        <option>...</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group" id="chooseCourse"
+                                                                                style="display: none;">
+                                                                                <label class="control-label col-md-12 col-sm-12 col-xs-12"
+                                                                                    for="first-name">Choose
+                                                                                    Course
+                                                                                    <span class="required">*</span>
+                                                                                </label>
+                                                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                                    <select id="inputState" class="form-control col-md-7 col-xs-12">
+                                                                                        <option selected>Choose...</option>
+                                                                                        <option>...</option>
+                                                                                    </select>
+                                                                                </div>
                                                                             </div>
 
-                                                                            <div id="short_que" style="display: none;">
-                                                                                <div class="queContainer">
-                                                                                    <div class="form-group ">
+                                                                        </form>
+                                                                        <button class="btn btn-primary nextBtn btn-lg pull-right"
+                                                                            id="nextButton" type="button">Next</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row setup-content" id="step-2">
+                                                                <div class="col-xs-12">
+                                                                    <div class="col-md-12">
+                                                                        <div class="selectQuestionType">
+                                                                            <div class="btn-group" id="switchButtons"
+                                                                                data-toggle="buttons">
+                                                                                <label class="mcq_question btn btn-default btn-on btn-md active">
+                                                                                    <input type="radio" value="1" name="multifeatured_module[module_id][switchButtons]"
+                                                                                        checked="checked">MCQ</label>
+                                                                                <label class="short_question btn btn-default btn-off btn-md ">
+                                                                                    <input type="radio" value="0" name="multifeatured_module[module_id][switchButtons]">SAQ</label>
+                                                                            </div>
+
+                                                                            <div class="questionContainer">
+                                                                                <div id="mcq_que">
+                                                                                    <div class="questionSection ">
                                                                                         <label for="questions">Questions:</label>
-                                                                                        <button class="btn btn-success"><a
-                                                                                                href="" id="addButtons">Add
-                                                                                                Questions</a></button>
+                                                                                        <button class="btn btn-success"
+                                                                                            id="newQuestion">Add
+                                                                                            Questions</button>
                                                                                     </div>
-                                                                                    <div class="short_que_Container">
-                                                                                        <ul id="short_que_add" style="list-style: none;">
+
+                                                                                    <div class="optionContainer">
+                                                                                        <ul id="mySelect" style="list-style: none;">
                                                                                         </ul>
                                                                                     </div>
 
+                                                                                    <!-- <div class="row">
+                                                                                                    <a href="">
+                                                                                                        <div class="btn btn-info col-md-12 col-sm-12 "
+                                                                                                            id="saveButton">Save</div>
+                                                                                                    </a>
+                                                                                                    <a href="">
+                                                                                                        <div class="btn btn-primary col-md-12 col-sm-12 "
+                                                                                                            id="saveButton">Save
+                                                                                                            As New</div>
+                                                                                                    </a>
+                                                                                                </div> -->
+                                                                                </div>
+
+                                                                                <div id="short_que" style="display: none;">
+                                                                                    <div class="queContainer">
+                                                                                        <div class="form-group ">
+                                                                                            <label for="questions">Questions:</label>
+                                                                                            <button class="btn btn-success"><a
+                                                                                                    href="" id="addButtons">Add
+                                                                                                    Questions</a></button>
+                                                                                        </div>
+                                                                                        <div class="short_que_Container">
+                                                                                            <ul id="short_que_add"
+                                                                                                style="list-style: none;">
+                                                                                            </ul>
+                                                                                        </div>
+
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                        <button class="btn btn-primary nextBtn btn-lg pull-right"
+                                                                            id="nextButton" type="button">Next</button>
                                                                     </div>
-                                                                    <button class="btn btn-primary nextBtn btn-lg pull-right"
-                                                                        id="nextButton" type="button">Next</button>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row setup-content" id="step-3">
-                                                            <div class="col-xs-12">
-                                                                <div class="col-md-12">
-                                                                    <h3> Successfully completed form fill in. Click on
-                                                                        submit
-                                                                        button to finish.</h3>
-                                                                    <button class="btn btn-success btn-lg pull-right"
-                                                                        type="submit">Finish!</button>
+                                                            <div class="row setup-content" id="step-3">
+                                                                <div class="col-xs-12">
+                                                                    <div class="col-md-12">
+                                                                        <h3> Successfully completed form fill in. Click
+                                                                            on
+                                                                            submit
+                                                                            button to finish.</h3>
+                                                                        <button class="btn btn-success btn-lg pull-right"
+                                                                            type="submit">Finish!</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </form>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                        </article>
-                    </div>
+                                </form>
+                            </article>
+                        </div>
 
+                    </div>
+                </div>
+
+
+                <div class="col-md-10 col-sm-10 col-xs-12">
+                    <div id="rowCards">
+                        <!-- ......................................Active section........................................ -->
+                        <div class="active_survey " data-popup-open="popup-2">
+                            {% for object in object_list %}
+
+                            {% if object.End_Date > currentDate %}
+
+                            <div class="questionLists col-xs-12 col-sm-6 col-md-3 " id=" {{ object.id }}">
+                                <div class="card">
+                                    <a href=" {% url 'surveyinfo_detail' object.pk %}">
+                                        <div class="card-body   ">
+                                            <h2 class="card-title "><strong>{{ object.Survey_Title }}</strong></h2>
+                                            <hr>
+                                            <ul class="card_labels">
+                                                <li><label>Questions: {{ object.questions_count }}</label></li>
+                                                <li><label>Start date: {{ object.Start_Date }}</label></li>
+                                                <li><label>End date: {{ object.End_Date }}</label></li>
+                                            </ul>
+                                            <!-- <h5 class="card-text text-justify">
+                                                    
+                                                        <div class="pollButtons">
+                                                            <button type="button" class="btn btn-info">View</button>
+                                                        </div>
+                                                    
+                                                </h5> -->
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <!-- ......................................Expire section.................................... -->
+                        <div class="expire_survey " style="display: none;">
+                            {% for object in object_list %}
+                            {% if object.End_Date < currentDate %} <div class="  ">
+                                <div class="questionLists col-xs-12 col-sm-6 col-md-3 ">
+                                    <div class="card">
+                                        <a href=" {% url 'surveyinfo_detail' object.pk %}">
+                                            <div class="card-body">
+                                                <h2 class="card-title "><strong>{{ object.Survey_Title }}</strong></h2>
+                                                <hr>
+                                                <ul class="card_labels">
+                                                    <li><label>Questions: {{ object.questions_count }} </label></li>
+                                                    <li><label>Start date: {{ object.Start_Date }}</label></li>
+                                                    <li><label>End date: {{ object.End_Date }}</label></li>
+                                                </ul>>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+
+                    </div>
+                </div>
                 </div>
             </div>
+
         </div>
 
+        <div class="popup" data-popup="popup-2">
+            <div class="popup-inner ">
+                <article class="index-form">
+                    <form id="popupForm">
+                        <div class="label_inputs">
+
+                            <a class="popup-close" data-popup-close="popup-2" href="#">x</a>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="x_panel">
+                                        <div class="x_content">
+
+                                            <div class="container">
+                                                <div class="row" id="surveyView">
+
+                                                    <div class="container">
+
+                                                        <h2 class="pollTitle">{{ object.Survey_Title }}</h2>
+                                                        <div class="horizontalBar"></div>
+
+                                                        <div class="viewSurveyTitle">
+                                                            <ul class="card_labels">
+                                                                <li>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label col-md-12 col-sm-12 col-xs-12"
+                                                                            id="categoryTitle1" for="first-name">Category
+                                                                            :
+                                                                        </label>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="surveyViewDates">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    <label id="start_date">
+                                                                        Start date: 
+                                                                    </label>
+                                                                </li>
+                                                                <li class="surveyViewDates">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    <label id="end_date">
+                                                                        End date: 
+                                                                    </label>
+                                                                </li>
+                                                            </ul>
+
+                                                            <button type="button" class="btn btn-info btn-lg" id="retakeSurveyBtn">Retake
+                                                                survey</button>
+                                                        </div>
+                                                        {% for question in questions %}
+
+                                                        {% if question.Question_Type == "MCQ" %}
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="x_panel" id="pollsQuestions">
+                                                                <div class="x_title">
+                                                                    <h2 class="title "><strong>{{ forloop.counter }} .
+                                                                            &nbsp; {{ question.Question_Name }}</strong></h2>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                                <div class="x_content">
+                                                                    <label>
+                                                                        <ul class="radioInputs">
+                                                                            {% for option in options %}
+                                                                            {# {% if option.Question_Code.pk ==
+                                                                            question.pk %} #}
+                                                                            <li>
+                                                                                <label class="optionIndex">A.</label>
+                                                                                <label id="pollsOptions">
+                                                                                    {{ option.Option_Name }}
+                                                                                </label>
+                                                                            </li>
+                                                                            {# {% endif %} #}
+                                                                            {% endfor %}
+                                                                        </ul>
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="bs-chart-container" id="progressResult"
+                                                                    style="width: 80%;">
+                                                                    <h4>Results:</h4>
+                                                                    <div class="surveyResults">
+                                                                        <strong>Option A</strong>
+                                                                        <div class="progress">
+                                                                            <div class="progress-bar progress-bar-success"
+                                                                                role="progressbar" aria-valuenow="40"
+                                                                                aria-valuemin="0" aria-valuemax="100"
+                                                                                style="width: 50%">
+                                                                                <span class>50% </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <strong>Option B</strong>
+                                                                        <div class="progress">
+                                                                            <div class="progress-bar progress-bar-success"
+                                                                                role="progressbar" aria-valuenow="20"
+                                                                                aria-valuemin="0" aria-valuemax="100"
+                                                                                style="width: 5%">
+                                                                                <span class>5%</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <strong>Option C</strong>
+                                                                        <div class="progress">
+                                                                            <div class="progress-bar progress-bar-success"
+                                                                                role="progressbar" aria-valuenow="60"
+                                                                                aria-valuemin="0" aria-valuemax="100"
+                                                                                style="width: 20%">
+                                                                                <span class>20% </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <strong>Option D</strong>
+                                                                        <div class="progress">
+                                                                            <div class="progress-bar progress-bar-success"
+                                                                                role="progressbar" aria-valuenow="60"
+                                                                                aria-valuemin="0" aria-valuemax="100"
+                                                                                style="width: 25%">
+                                                                                <span class>25% </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {% else %}
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="x_panel" id="pollsQuestions" style="box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);">
+                                                                <div>
+                                                                    <h2 class="title "><strong>{{
+                                                                            question.Question_Name }}</strong></h2>
+                                                                    <h5> {% if object.pk == submit.Survey_Code %}{{
+                                                                        submit. }} {% endif %} </h5>
+                                                                </div>
+                                                                <div style="
+                                                                    width: 100%;
+                                                                    height: 2px;
+                                                                    display: flex;
+                                                                    flex-direction: auto;
+                                                                    background-color: #f1f1f1; ">
+                                                                </div>
+
+                                                                <div class="x_content" style="margin-left: 40px;">
+                                                                    <label class="SAQ_answer_label">Answers:</label>
+                                                                    <p class="SAQ_answer">
+                                                                        {% for answer in question.get_answers %}
+                                                                        {{ answer.Answer_Value }}<br>
+                                                                        {{ answer.Submit_Code.Student_Code }}on August
+                                                                        8 at 12:30 PM<br><br>
+                                                                        {% endfor %}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {% endif %}
+
+                                                        {% endfor %}
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </article>
+            </div>
+
+        </div>
 
     </div>
 
