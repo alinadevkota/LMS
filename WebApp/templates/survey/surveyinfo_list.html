@@ -281,7 +281,7 @@
                 <div class="col-md-10 col-sm-10 col-xs-12">
                     <div id="rowCards">
                         <!-- ......................................Active section........................................ -->
-                        <div class="active_survey " data-popup-open="popup-2">
+                        <div class="active_survey " >
                             {% for object in object_list %}
 
                             {% if object.End_Date > currentDate %}
@@ -326,7 +326,7 @@
                                                     <li><label>Questions: {{ object.questions_count }} </label></li>
                                                     <li><label>Start date: {{ object.Start_Date }}</label></li>
                                                     <li><label>End date: {{ object.End_Date }}</label></li>
-                                                </ul>>
+                                                </ul>
                                             </div>
                                         </a>
                                     </div>
@@ -342,7 +342,7 @@
 
         </div>
 
-        <div class="popup" data-popup="popup-2">
+        <!-- <div class="popup" data-popup="popup-2">
             <div class="popup-inner ">
                 <article class="index-form">
                     <form id="popupForm">
@@ -359,7 +359,7 @@
 
                                                     <div class="container">
 
-                                                        <h2 class="pollTitle">{{ object.Survey_Title }}</h2>
+                                                        <h2 class="pollTitle" id="pollTitle"></h2>
                                                         <div class="horizontalBar"></div>
 
                                                         <div class="viewSurveyTitle">
@@ -367,21 +367,21 @@
                                                                 <li>
                                                                     <div class="form-group">
                                                                         <label class="control-label col-md-12 col-sm-12 col-xs-12"
-                                                                            id="categoryTitle1" for="first-name">Category
-                                                                            :
+                                                                             for="first-name">Category :
+                                                                            <span id="categoryTitle1"></span>
                                                                         </label>
                                                                     </div>
                                                                 </li>
                                                                 <li class="surveyViewDates">
                                                                     <i class="fa fa-calendar"></i>
-                                                                    <label id="start_date">
-                                                                        Start date: 
+                                                                    <label>
+                                                                        Start date: <span  id="start_date"></span>
                                                                     </label>
                                                                 </li>
                                                                 <li class="surveyViewDates">
                                                                     <i class="fa fa-calendar"></i>
-                                                                    <label id="end_date">
-                                                                        End date: 
+                                                                    <label>
+                                                                        End date: <span  id="end_date"></span>
                                                                     </label>
                                                                 </li>
                                                             </ul>
@@ -389,30 +389,27 @@
                                                             <button type="button" class="btn btn-info btn-lg" id="retakeSurveyBtn">Retake
                                                                 survey</button>
                                                         </div>
-                                                        {% for question in questions %}
+                                                       
 
-                                                        {% if question.Question_Type == "MCQ" %}
+                                                       
                                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                                             <div class="x_panel" id="pollsQuestions">
                                                                 <div class="x_title">
-                                                                    <h2 class="title "><strong>{{ forloop.counter }} .
-                                                                            &nbsp; {{ question.Question_Name }}</strong></h2>
+                                                                    <h2 class="title " id="questionNameTitle"><strong>
+                                                                            &nbsp; </strong></h2>
                                                                     <div class="clearfix"></div>
                                                                 </div>
                                                                 <div class="x_content">
                                                                     <label>
                                                                         <ul class="radioInputs">
-                                                                            {% for option in options %}
-                                                                            {# {% if option.Question_Code.pk ==
-                                                                            question.pk %} #}
+                                                                          
                                                                             <li>
                                                                                 <label class="optionIndex">A.</label>
                                                                                 <label id="pollsOptions">
-                                                                                    {{ option.Option_Name }}
+                                                                                   
                                                                                 </label>
                                                                             </li>
-                                                                            {# {% endif %} #}
-                                                                            {% endfor %}
+                                                                         
                                                                         </ul>
                                                                     </label>
                                                                 </div>
@@ -462,14 +459,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {% else %}
+                                                       
                                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                                             <div class="x_panel" id="pollsQuestions" style="box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);">
                                                                 <div>
-                                                                    <h2 class="title "><strong>{{
-                                                                            question.Question_Name }}</strong></h2>
-                                                                    <h5> {% if object.pk == submit.Survey_Code %}{{
-                                                                        submit. }} {% endif %} </h5>
+                                                                    <h2 class="title " id="SAQ_questionNameTitle"><strong>
+                                                                           </strong></h2>
+                                                                    <h5> </h5>
                                                                 </div>
                                                                 <div style="
                                                                     width: 100%;
@@ -482,22 +478,11 @@
                                                                 <div class="x_content" style="margin-left: 40px;">
                                                                     <label class="SAQ_answer_label">Answers:</label>
                                                                     <p class="SAQ_answer">
-                                                                        {% for answer in question.get_answers %}
-                                                                        {{ answer.Answer_Value }}<br>
-                                                                        {{ answer.Submit_Code.Student_Code }}on August
-                                                                        8 at 12:30 PM<br><br>
-                                                                        {% endfor %}
+                                                                        
                                                                     </p>
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        {% endif %}
-
-                                                        {% endfor %}
-
-
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -511,7 +496,7 @@
                 </article>
             </div>
 
-        </div>
+        </div> -->
 
     </div>
 

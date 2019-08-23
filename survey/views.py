@@ -32,6 +32,12 @@ class SurveyInfoListView(ListView):
         context['currentDate'] = datetime.now().date()
         context['categories'] = CategoryInfo.objects.all()
 
+        context['questions'] = QuestionInfo.objects.filter(
+            Survey_Code=self.kwargs.get('pk')).order_by('pk')
+
+        context['options'] = OptionInfo.objects.all()
+        context['submit'] = SubmitSurvey.objects.all()
+
         return context
 
 

@@ -6252,25 +6252,53 @@ $(document).on("click", ".categoryContainer .card-text", function() {
 
 // TO GET THE DATA ON CARD CLICK
 
-$(".questionLists ").click(function() {
-  var id = parseInt(this.id);
-  console.log(id);
-  $.ajax({
-    dataType: "json",
-    type: "GET",
-    data: {
-        'id': id
-    },
-    url: `/survey/api/v1/surveyinfo/${id}/?format=json`,
-    success: function(data) {
-      console.log(data);
-        $('#categoryTitle1').append(data.Survey_Title);
-        $('#start_date').append(data.Start_Date);
-        $('#end_date').append(data.End_Date);
-    }
-    
-  });
-});
+// $(".questionLists ").click(function() {
+//   var id = parseInt(this.id);
+//   var urls = [
+//     `/survey/api/v1/surveyinfo/${id}/?format=json`,
+//     "/survey/api/v1/questioninfo/?format=json"
+//   ];
+//   console.log(id);
+//   $.each(urls, function(i, u) {
+//     $.ajax(u, {
+//       dataType: "json",
+//       type: "GET",
+//       data: {
+//         id: id
+//       },
+//       success: function(data) {
+//         console.log(data);
+//         if (i == 0) {
+//           $("#pollTitle").html(data.Survey_Title);
+//           $("#categoryTitle1").html(data.Category_Name);
+//           $("#start_date").html(data.Start_Date);
+//           $("#end_date").html(data.End_Date);
+//         }
+
+//         console.log(i);
+//         if (i == 1) {
+//           if (data.length == 0) {
+//             $("#pollsQuestions").html("");
+//           }
+//           $("#questionNameTitle").html("");
+//           for (j = 0; j < data.length; j++) {
+//             console.log(data[j].Question_Name);
+//             if (data.Question_Type == "MCQ") {
+//               if (data[j].Survey_Code == id) {
+//                 $("#questionNameTitle").append(data[j].Question_Name + "<br>");
+//               }
+//             else {
+//               if (data[j].Survey_Code == id) {
+//                 $("#SAQ_questionNameTitle").append(data[j].Question_Name + "<br>");
+//               }
+              
+//             }
+//           }
+//         }
+//       }
+//     });
+//   });
+// });
 
 /* FORM WIZARD SURVEY */
 
