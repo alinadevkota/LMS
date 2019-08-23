@@ -5603,8 +5603,8 @@ article {
 #FormID {
     border-radius: 10px;
     padding-top: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-bottom: 5px;
     background: #f5f5f5;
     margin-bottom: 10px;
@@ -5696,7 +5696,7 @@ article {
 /*coursedetailpage made by rajav*/
 #buttons {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 #button.col-md-3.text-right {
@@ -6041,3 +6041,16 @@ input[type=checkbox], input[type=radio] {
 
  }
 /* end */
+/*inninginfoform popup*/
+
+/*bootstrap modalcss*/
+.modal-body{
+        height:650px;
+        overflow-y: auto;
+}
+.box2{
+    width: 950px;
+}
+.box3{
+    width: 1050px;
+}

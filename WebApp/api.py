@@ -110,12 +110,12 @@ class AssignAssignmentInfoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class AssignQuestionInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the AssignQuestionInfo class"""
-
-    queryset = models.AssignQuestionInfo.objects.all()
-    serializer_class = serializers.AssignQuestionInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
+# class AssignQuestionInfoViewSet(viewsets.ModelViewSet):
+#     """ViewSet for the AssignQuestionInfo class"""
+#
+#     queryset = models.AssignQuestionInfo.objects.all()
+#     serializer_class = serializers.AssignQuestionInfoSerializer
+#     permission_classes = [permissions.IsAuthenticated]
 
 
 class BoardInfoViewSet(viewsets.ModelViewSet):

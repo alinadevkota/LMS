@@ -30,38 +30,108 @@
         </h2>
         <hr class="header_hr">
     </div>
+
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Create Session
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h4>
+
+                </div>
+                <div class="modal-body">
+                    <iframe src="{% url 'sessioninfo_create' %}" style="height: 600px; width: 530px;" ></iframe>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content box2">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Create Group
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h4>
+
+                </div>
+                <div class="modal-body">
+                    <iframe src="{% url 'groupmapping_create' %}" style="height: 600px; width: 900px;"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content box3">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Create Teacher Allocation
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h4>
+
+                </div>
+                <div class="modal-body">
+                    <iframe src="{% url 'inninggroup_create' %}" style="height: 600px; width: 990px; "></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    {{ form }}#}
     <form class="form-horizontal form-label-left" method="post" id="FormID">
         {% csrf_token %}
-        <div id="wizard" class="form_wizard wizard_horizontal">
+        <div id="wizard" class="wizard_horizontal">
             <ul class="wizard_steps anchor">
                 <li>
                     <a href="#step-1" class="selected" isdone="1" rel="1">
                         <span class="step_no">1</span>
                         <span class="step_descr">Choose  Session
-{#                            <br><small>Session Name<br>and Group</small>#}
-                        </span>
+                                <br><small>Session Name<br>and Group</small>
+                            </span>
                     </a>
                 </li>
                 <li>
                     <a href="#step-2" class="disabled" isdone="0" rel="2">
                         <span class="step_no">2</span>
                         <span class="step_descr">Choose  Interval
-{#                            <br><small>Session Name<br>and Group</small>#}
-                        </span> </a>
+                                <br><small>Session Name<br>and Group</small>
+                            </span> </a>
                 </li>
                 <li>
                     <a href="#step-3" class="disabled" isdone="0" rel="3">
                         <span class="step_no">3</span>
                         <span class="step_descr">Choose  Student
-{#                            <br><small>Session Name<br>and Group</small>#}
-                        </span> </a>
+                                <br><small>Session Name<br>and Group</small>
+                            </span> </a>
                 </li>
                 <li>
                     <a href="#step-4" class="disabled" isdone="0" rel="4">
                         <span class="step_no">4</span>
                         <span class="step_descr">Choose  Courses
-{#                            <br><small>Session Name<br>and Group</small>#}
-                        </span> </a>
+                                <br><small>Session Name<br>and Group</small>
+                            </span> </a>
                 </li>
 
             </ul>
@@ -69,20 +139,28 @@
 
                 <div class="stepContainer">
                     <div id="step-1" style="display: block;">
-                        <div class="col-md-6 col-md-offset-3 text-center">
-                            <h2 class="StepTitle">Select Session Name and Group</h2>
-                            <div class="col-md-12 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-9 col-xs-7 col-md-offset-3 text-center">
+                            <h2 class="StepTitle">Select Session Name</h2>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
                                 {{ form.Inning_Name|as_crispy_field }}
                             </div>
 
                         </div>
+                        <div class="col-md-2 col-sm-3 col-xs-5" style="margin-top: 53px">
+                            <h1>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal1">
+                                    + Create New Session
+                                </button>
+                            </h1>
+                        </div>
                     </div>
                     <div id="step-2" style="display: none; ">
-                        <div class="col-md-6 col-md-offset-3 text-center">
+                        <div class="col-md-6 col-sm-12 col-md-offset-3 text-center">
                             <h2 class="StepTitle">Start and End Dates for Session</h2>
                             <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                                 <div id="div_id_Start_Date" class="form-group">
-                                    <label for="id_Start_Date" class="control-label requiredField">
+                                    <label for="id_Start_Date" class="control-label">
                                         Start Date</span>
                                     </label>
                                     <div class="controls ">
@@ -101,7 +179,8 @@
                                         End Date</span>
                                     </label>
                                     <div class="controls ">
-                                        <input value="{{ object.End_Date|date:"Y-m-d" }}" type="date" name="End_Date"
+                                        <input value="{{ object.End_Date|date:"Y-m-d" }}" type="date"
+                                               name="End_Date"
                                                required=""
                                                id="id_End_Date" class="datetimeinput form-control">
                                     </div>
@@ -110,18 +189,35 @@
                         </div>
                     </div>
                     <div id="step-3" style="display: none; ">
-                        <div class="col-md-6 col-md-offset-3 text-center">
+                        <div class="col-md-6 col-sm-9 col-xs-7 col-md-offset-3 text-center">
                             <h2 class="StepTitle">Choose Student Group for this Session</h2>
 
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 {{ form.Groups|as_crispy_field }}
                             </div>
                         </div>
+                        <div class="col-md-2 col-sm-3 col-xs-5" style="margin-top: 53px">
+                            <h1>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal2">
+                                    + Create New Group
+                                </button>
+                            </h1>
+                        </div>
                     </div>
                     <div id="step-4" style="display: none;">
-                        <div class="col-md-6 col-md-offset-3 text-center">
+                        <div class="col-md-6 col-sm-9 col-xs-7 col-md-offset-3 text-center">
 
-                            <h2 class="StepTitle">Select Group for Session</h2>
+                            <h2 class="StepTitle">
+
+                                Select Group for Session<br><br>
+                                or<br>
+                                <button type="button" class="btn" data-toggle="modal"
+                                        data-target="#exampleModal3" style="background-color: transparent">
+                                    <h4><u>Create New Teacher Allocation</u></h4>
+                                </button>
+                            </h2>
+
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 {{ form.Course_Group }}
                             </div>
@@ -150,8 +246,9 @@
                                        class="select form-control">
                             </div>
                         </div>
+
                         <div class="submitButton  col-md-12">
-                            <button class="btn btn-success" type="submit"> Submit </button>
+                            <button class="btn btn-success" type="submit"> Submit</button>
                         </div>
                     </div>
                 </div>
@@ -240,6 +337,9 @@
 {% endblock %}
 {% block customjss %}
     <script src=" {% static 'vendorsx/jQuery-Smart-Wizard/js/jquery.smartWizard.js' %}"></script>
-
-
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+    </script>
 {% endblock %}

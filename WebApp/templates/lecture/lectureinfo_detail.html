@@ -6,7 +6,7 @@
         <div class="col-md-9 col-sm-12 col-xs-12 text-center">
             <h2 class="detailListHeader">Course Information</h2>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12 text-center" id="button">
+        <div class="col-md-3 col-sm-12 col-xs-12 text-center" id="buttons">
             <a class="btn-sm btn-primary" href="{% if '/teachers' in request.path %}
                 /teachers{{ object.get_update_url }}
             {% else %}
@@ -100,7 +100,7 @@
             <div class="col-md-9 col-sm-12 col-xs-12 text-center">
                 <h2 class="detailListHeader">Chapters</h2>
             </div>
-            <div class="col-md-3 col-sm-12 col-xs-12 text-center" id="button">
+            <div class="col-md-3 col-sm-12 col-xs-12 text-center" id="buttons">
                 <a class="btn-sm btn-success" href="{% if '/teachers' in request.path %}
                         {% url 'teacher_chapterinfo_create' %}
                     {% else %}

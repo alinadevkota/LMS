@@ -22,7 +22,7 @@ router.register(r'sessioninfo', api.SessionInfoViewSet)
 # router.register(r'omrquestioninfo', api.OmrQuestionInfoViewSet)
 router.register(r'quizinfo', api.QuizInfoViewSet)
 router.register(r'assignassignmentinfo', api.AssignAssignmentInfoViewSet)
-router.register(r'assignquestioninfo', api.AssignQuestionInfoViewSet)
+# router.register(r'assignquestioninfo', api.AssignQuestionInfoViewSet)
 router.register(r'boardinfo', api.BoardInfoViewSet)
 router.register(r'boardcontentinfo', api.BoardContentInfoViewSet)
 router.register(r'inninggroup', api.InningGroupViewSet)
@@ -200,49 +200,49 @@ urlpatterns += (
 
 urlpatterns += (
     # urls for QuestionInfo
-    path('questioninfo/', views.QuestionInfoListView.as_view(),
+    path('assignmentinfo/<int:assignment>/questioninfo/', views.QuestionInfoListView.as_view(),
          name='questioninfo_list'),
-    path('questioninfo/create/', views.QuestionInfoCreateView.as_view(),
+    path('assignmentinfo/<int:assignment>/questioninfo/create/', views.QuestionInfoCreateView.as_view(),
          name='questioninfo_create'),
-    path('questioninfo/detail/<int:pk>/',
+    path('assignmentinfo/<int:assignment>/questioninfo/detail/<int:pk>/',
          views.QuestionInfoDetailView.as_view(), name='questioninfo_detail'),
-    path('questioninfo/update/<int:pk>/',
+    path('assignmentinfo/<int:assignment>/questioninfo/update/<int:pk>/',
          views.QuestionInfoUpdateView.as_view(), name='questioninfo_update'),
 )
 
 urlpatterns += (
     # urls for AssignHomeworkInfo
-    path('assignassignmentinfo/', views.AssignAssignmentInfoListView.as_view(),
+    path('inninginfo/<int:session>/assignmentinfo/<int:assignment>/assignassignmentinfo/', views.AssignAssignmentInfoListView.as_view(),
          name='assignassignmentinfo_list'),
-    path('assignassignmentinfo/create/', views.AssignAssignmentInfoCreateView.as_view(),
+    path('inninginfo/<int:session>/assignmentinfo/<int:assignment>/assignassignmentinfo/create/', views.AssignAssignmentInfoCreateView.as_view(),
          name='assignassignmentinfo_create'),
-    path('assignassignmentinfo/detail/<int:pk>/', views.AssignAssignmentInfoDetailView.as_view(),
+    path('inninginfo/<int:session>/assignmentinfo/<int:assignment>/assignassignmentinfo/detail/<int:pk>/', views.AssignAssignmentInfoDetailView.as_view(),
          name='assignassignmentinfo_detail'),
-    path('assignassignmentinfo/update/<int:pk>/', views.AssignAssignmentInfoUpdateView.as_view(),
+    path('inninginfo/<int:session>/assignmentinfo/<int:assignment>/assignassignmentinfo/update/<int:pk>/', views.AssignAssignmentInfoUpdateView.as_view(),
          name='assignassignmentinfo_update'),
 )
 
-urlpatterns += (
-    # urls for AssignQuestionInfo
-    path('assignquestioninfo/', views.AssignQuestionInfoListView.as_view(),
-         name='assignquestioninfo_list'),
-    path('assignquestioninfo/create/', views.AssignQuestionInfoCreateView.as_view(),
-         name='assignquestioninfo_create'),
-    path('assignquestioninfo/detail/<int:pk>/', views.AssignQuestionInfoDetailView.as_view(),
-         name='assignquestioninfo_detail'),
-    path('assignquestioninfo/update/<int:pk>/', views.AssignQuestionInfoUpdateView.as_view(),
-         name='assignquestioninfo_update'),
-)
+# urlpatterns += (
+#     # urls for AssignQuestionInfo
+#     path('assignquestioninfo/', views.AssignQuestionInfoListView.as_view(),
+#          name='assignquestioninfo_list'),
+#     path('assignquestioninfo/create/', views.AssignQuestionInfoCreateView.as_view(),
+#          name='assignquestioninfo_create'),
+#     path('assignquestioninfo/detail/<int:pk>/', views.AssignQuestionInfoDetailView.as_view(),
+#          name='assignquestioninfo_detail'),
+#     path('assignquestioninfo/update/<int:pk>/', views.AssignQuestionInfoUpdateView.as_view(),
+#          name='assignquestioninfo_update'),
+# )
 
 urlpatterns += (
     # urls for AssignAnswerInfo
-    path('assignanswerinfo/', views.AssignAnswerInfoListView.as_view(),
+    path('questioninfo/<int:questioncode>/assignanswerinfo/', views.AssignAnswerInfoListView.as_view(),
          name='assignanswerinfo_list'),
-    path('assignanswerinfo/create/', views.AssignAnswerInfoCreateView.as_view(),
+    path('questioninfo/<int:questioncode>/assignanswerinfo/create/', views.AssignAnswerInfoCreateView.as_view(),
          name='assignanswerinfo_create'),
-    path('assignanswerinfo/detail/<int:pk>/',
+    path('questioninfo/<int:questioncode>/assignanswerinfo/detail/<int:pk>/',
          views.AssignAnswerInfoDetailView.as_view(), name='assignanswerinfo_detail'),
-    path('assignanswerinfo/update/<int:pk>/',
+    path('questioninfo/<int:questioncode>/assignanswerinfo/update/<int:pk>/',
          views.AssignAnswerInfoUpdateView.as_view(), name='assignanswerinfo_update'),
 )
 

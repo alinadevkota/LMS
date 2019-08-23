@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm, TextInput
 
 from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
-    ChapterMissonCheckItem,SessionInfo, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
-    AssignQuestionInfo, AssignAnswerInfo, BoardInfo, \
+    ChapterMissonCheckItem, SessionInfo, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
+    AssignAnswerInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
     LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
     QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
@@ -86,6 +86,7 @@ class ChapterMissonCheckItemForm(forms.ModelForm):
         model = ChapterMissonCheckItem
         fields = '__all__'
 
+
 class SessionInfoForm(forms.ModelForm):
     class Meta:
         model = SessionInfo
@@ -120,7 +121,7 @@ class InningGroupForm(forms.ModelForm):
 
 class InningInfoForm(forms.ModelForm):
     Course_Group = forms.ModelMultipleChoiceField(queryset=InningGroup.objects.all(),
-                                            widget=FilteredSelectMultiple("Groups", is_stacked=False))
+                                                  widget=FilteredSelectMultiple("Groups", is_stacked=False))
 
     class Media:
         css = {'all': ('/static/admin/css/widgets.css',), }
@@ -129,10 +130,6 @@ class InningInfoForm(forms.ModelForm):
     class Meta:
         model = InningInfo
         fields = '__all__'
-
-
-
-
 
 
 # class OmrQuestionInfoForm(forms.ModelForm):
@@ -166,10 +163,10 @@ class AssignAssignmentInfoForm(forms.ModelForm):
         fields = '__all__'
 
 
-class AssignQuestionInfoForm(forms.ModelForm):
-    class Meta:
-        model = AssignQuestionInfo
-        fields = '__all__'
+# class AssignQuestionInfoForm(forms.ModelForm):
+#     class Meta:
+#         model = AssignQuestionInfo
+#         fields = '__all__'
 
 
 class AssignAnswerInfoForm(forms.ModelForm):
@@ -188,7 +185,6 @@ class BoardContentInfoForm(forms.ModelForm):
     class Meta:
         model = BoardContentInfo
         fields = '__all__'
-
 
 
 class ChapterContentMediaForm(forms.ModelForm):
