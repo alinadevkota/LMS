@@ -48560,8 +48560,8 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 }
 
 .profile_pic_forum img{
-  width:50px;
-  height:50px;
+  width:35px;
+  height:35px;
   border-radius:60px;
   animation-name: none !important;
   padding: 2px;
@@ -48574,16 +48574,17 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 
 }
 .reply-content-detail{
-  margin-left: 70px;
-  margin-top: -20px;
+  color: #616770;;
   font-size: 15px;
-  
+  margin-left: 46px;
+  margin-top: 28px;
+ 
   
 }
 
 .reply-content img{
-width:50px;
-height:50px;
+width:35px;
+height:35px;
 border-radius:60px;
 animation-name: none !important;
 padding: 2px;
@@ -48592,7 +48593,7 @@ padding: 2px;
   border-color: rgb(189, 184, 184);
   border-image: initial;
 
-  margin: 2px 14px 0px 0px !important;
+  margin: 0px 5px 0px 0px !important;
 }
 
 
@@ -48747,7 +48748,7 @@ padding-left: 60px;
 .list-group-reply{
   position: relative;
     display: block;
-    padding: 9px 17px;
+    padding: 12px 5px;
     background-color: #fff;
  
 }
@@ -48829,7 +48830,7 @@ font-weight: bold;
 }
 
 .list-comment{
-  padding: 15px;
+  padding: 0px;
     margin-bottom: 20px;
     border-radius: 0;
     background-color: #FFF;
@@ -48838,9 +48839,9 @@ font-weight: bold;
 .reply-lists{
   box-shadow: none;
     margin-top: 25px;
-    border-width: 1px;
+    /* border-width: 1px;
     border-style: solid;
-    border-color: rgb(214, 214, 214);
+    border-color: rgb(214, 214, 214); */
     border-image: initial;
 }
 
@@ -48859,4 +48860,9 @@ font-weight: bold;
   margin-top: 15px;
   font-size: 15px;
   
+}
+
+.username-link{
+  color: black;
+  font-weight: bold;
 }
