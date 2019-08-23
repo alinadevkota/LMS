@@ -3,6 +3,8 @@ from .models import CategoryInfo, SurveyInfo, QuestionInfo, OptionInfo, SubmitSu
 from .forms import CategoryInfoForm, SurveyInfoForm, QuestionInfoForm, OptionInfoForm, SubmitSurveyForm, AnswerInfoForm
 from datetime import datetime
 
+from django.http import JsonResponse
+
 
 class CategoryInfoListView(ListView):
     model = CategoryInfo
@@ -31,6 +33,18 @@ class SurveyInfoListView(ListView):
         context['categories'] = CategoryInfo.objects.all()
 
         return context
+
+
+# def get_survey_info(request):
+#     id = request.GET.get('id', None)
+#     # questions = QuestionInfo.objects.filter(
+#     #     Survey_Code=id).order_by('pk')
+#     options = OptionInfo.objects.all()
+#     data = {'options':options}
+#     print(data)
+#     #submit = SubmitSurvey.objects.all()
+#     # context = 'asdasdasdasd'
+#     return JsonResponse(data)
 
 
 class SurveyInfoCreateView(CreateView):

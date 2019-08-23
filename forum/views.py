@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views.generic import ListView
-from textblob import TextBlob
+# from textblob import TextBlob
 
 
 from .forms import ThreadForm, ThreadEditForm, AppendixForm, ForumAvatarForm, ReplyForm, TopicForm, TopicEditForm, \
@@ -52,7 +52,8 @@ class Index(ListView):
         for ng in nodegroups:
             topics = Topic.objects.filter(node_group=ng.pk)
             for topic in topics:
-                threads = Thread.objects.visible().filter(topic=topic.pk).order_by('pub_date')[:4]
+                threads = Thread.objects.visible().filter(
+                    topic=topic.pk).order_by('pub_date')[:4]
                 threadqueryset |= threads
 
         return threadqueryset
@@ -63,7 +64,8 @@ class Index(ListView):
         context['title'] = _('Index')
         context['topics'] = Topic.objects.all()
         context['show_order'] = True
-        context['get_top_thread_keywords'] = get_top_thread_keywords(self.request, 10)
+        context['get_top_thread_keywords'] = get_top_thread_keywords(
+            self.request, 10)
         return context
 
 
@@ -87,13 +89,16 @@ class NodeGroupView(ListView):
         for topic in topics:
             reply_count = 0
             try:
-                thread = Thread.objects.filter(topic=topic.pk).order_by('pub_date')[0]
-                reply_count = Thread.objects.filter(topic=topic.pk).aggregate(Sum('reply_count'))['reply_count__sum']
+                thread = Thread.objects.filter(
+                    topic=topic.pk).order_by('pub_date')[0]
+                reply_count = Thread.objects.filter(topic=topic.pk).aggregate(
+                    Sum('reply_count'))['reply_count__sum']
             except:
                 thread = None
             latest_threads.append([topic, thread, reply_count])
         context = super(ListView, self).get_context_data(**kwargs)
-        context['node_group'] = nodegroup = NodeGroup.objects.get(pk=self.kwargs.get('pk'))
+        context['node_group'] = nodegroup = NodeGroup.objects.get(
+            pk=self.kwargs.get('pk'))
         context['title'] = context['panel_title'] = nodegroup.title
         context['show_order'] = True
         context['latest_thread_for_topics'] = latest_threads
@@ -244,7 +249,8 @@ class SearchView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        context['title'] = context['panel_title'] = _('Search: ') + self.kwargs.get('keyword')
+        context['title'] = context['panel_title'] = _(
+            'Search: ') + self.kwargs.get('keyword')
         context['show_order'] = True
         return context
 
@@ -366,9 +372,11 @@ def upload_avatar(request):
     avatar = ForumAvatar.objects.filter(user_id=request.user.id).first()
     if request.method == 'POST':
         if avatar:
-            form = ForumAvatarForm(request.POST, request.FILES, instance=avatar, user=request.user)
+            form = ForumAvatarForm(
+                request.POST, request.FILES, instance=avatar, user=request.user)
         else:
-            form = ForumAvatarForm(request.POST, request.FILES, user=request.user)
+            form = ForumAvatarForm(
+                request.POST, request.FILES, user=request.user)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('forum:index'))
@@ -422,11 +430,13 @@ def login_view(request):
         valid = True
         if not username or not password:
             valid = False
-            messages.add_message(request, messages.INFO, _("Username and password cannot be empty"))
+            messages.add_message(request, messages.INFO, _(
+                "Username and password cannot be empty"))
         user = User.objects.filter(username=username).first()
         if not user:
             valid = False
-            messages.add_message(request, messages.INFO, _("User does not exist"))
+            messages.add_message(request, messages.INFO,
+                                 _("User does not exist"))
         user = authenticate(username=username, password=password)
         if (user is not None) and valid:
             if user.is_active:
@@ -434,10 +444,12 @@ def login_view(request):
                 return HttpResponseRedirect(reverse('forum:index'))
             else:
                 valid = False
-                messages.add_message(request, messages.INFO, _("User deactivated"))
+                messages.add_message(
+                    request, messages.INFO, _("User deactivated"))
         else:
             valid = False
-            messages.add_message(request, messages.INFO, _("Incorrect password"))
+            messages.add_message(request, messages.INFO,
+                                 _("Incorrect password"))
         if not valid:
             return HttpResponseRedirect(reverse("forum:login"))
 
@@ -453,10 +465,12 @@ def reg_view(request):
         valid = True
         if User.objects.filter(username=username).exists():
             valid = False
-            messages.add_message(request, messages.INFO, _("User already exists"))
+            messages.add_message(request, messages.INFO,
+                                 _("User already exists"))
         if password != password2:
             valid = False
-            messages.add_message(request, messages.INFO, _("Password does not match"))
+            messages.add_message(request, messages.INFO,
+                                 _("Password does not match"))
         if not EMAIL_REGEX.match(email):
             valid = False
             messages.add_message(request, messages.INFO, _("Invalid Email"))
@@ -486,7 +500,7 @@ def get_top_thread_keywords(request, number_of_keyword):
     obj = Thread.objects.all()
     word_counter = {}
     for eachx in obj:
-        words =  TextBlob(eachx.title).noun_phrases
+        words = TextBlob(eachx.title).noun_phrases
         for eachword in words:
             for singleword in eachword.split(" "):
                 if singleword in word_counter:

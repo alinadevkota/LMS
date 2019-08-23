@@ -753,8 +753,8 @@ class InningInfo(models.Model):
     def get_update_url(self):
         return reverse('inninginfo_update', args=(self.pk,))
 
-    def __str__(self):
-        return self.Inning_Name
+    # def __str__(self):
+    #     return self.Inning_Name
 
 
 

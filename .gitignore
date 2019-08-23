@@ -141,4 +141,11 @@ dmypy.json
 .vscode
 .idea
 
+# Server files
+.requirements.txt.swp
+.deploy.sh.swp
+venv2
+.settings.py.swp
+
+
 # End of https://www.gitignore.io/api/django
