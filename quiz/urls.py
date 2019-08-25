@@ -42,26 +42,18 @@ urlpatterns = (
     url(r'^marking/(?P<pk>[\d.]+)/$', view=QuizMarkingDetail.as_view(), name='quiz_marking_detail'),
 
     # passes variable 'quiz_name' to quiz_take view
-    url(r'^(?P<slug>[\w-]+)/$', view=QuizDetailView.as_view(), name='quiz_start_page'),
+    #url(r'^(?P<slug>[\w-]+)/$', view=QuizDetailView.as_view(), name='quiz_start_page'),
 
     url(r'^(?P<quiz_name>[\w-]+)/take/$', view=QuizTake.as_view(), name='quiz_question'),
 )
 
 urlpatterns += (
 
-<<<<<<< HEAD
     path('', QuizListView.as_view(), name='quiz_index'),
-    path('quiz/create/', QuizCreateView.as_view(), name='quiz_create'),
-    path('quiz/update/<int:pk>', QuizUpdateView.as_view(), name='quiz_update'),
-    path('quiz/detail/<int:pk>', QuizDetailView.as_view(), name='quiz_detail'),
-    path('quiz/delete/<int:pk>', QuizDeleteView, name='quiz_delete'),
-=======
-    path('quiz/', QuizListView.as_view(), name='quiz_list'),
     path('create/', QuizCreateView.as_view(), name='quiz_create'),
     path('update/<int:pk>', QuizUpdateView.as_view(), name='quiz_update'),
     path('detail/<int:pk>', QuizDetailView.as_view(), name='quiz_detail'),
     path('delete/<int:pk>', QuizDeleteView, name='quiz_delete'),
->>>>>>> 980eefc32f06c10ad924269a1b97efba31b3f10b
 
     path('mcquestion/', views.MCQuestionListView.as_view(), name='mcquestion_list'),
     path('mcquestion/create/', MCQuestionCreateView.as_view(), name='mcquestion_create'),

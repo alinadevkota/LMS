@@ -11,8 +11,8 @@
 
     {{ form.media }}
 
-            <a class="btn btn-primary" href="/mcquestion/create/" > Add MCQ question </a>
-            <a class="btn btn-primary" href="tfquestion/create/" > Add TF question </a>
+            <a class="btn btn-primary" href="{% url 'mcquestion_create' %}" > Add MCQ question </a>
+            <a class="btn btn-primary" href="{% url 'tfquestion_create' %}" > Add TF question </a>
             <a class="btn btn-primary" href="#" > Add Essay question </a>
 
 

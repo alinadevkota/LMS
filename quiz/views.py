@@ -31,7 +31,9 @@ class SittingFilterTitleMixin(object):
 
 
 class QuizCreateView(CreatePopupMixin, CreateView):
+    #template_name = 'quiz/test_temp.html'
     model = Quiz
+    #fields = ['title']
     form_class = QuizForm
 
 
