@@ -116,7 +116,7 @@ urlpatterns += (
 urlpatterns += (
     # urls for LectureInfo
     path('courseinfo/', views.LectureInfoListView.as_view(), name='lectureinfo_list'),
-    path('courseinfo/create /', views.LectureInfoCreateView.as_view(), name='lectureinfo_create'),
+    path('courseinfo/create /', views.LectureInfoCreateView.as_view(), name='lectureinfo_create'), 
     path('courseinfo/<int:pk>/', views.LectureInfoDetailView.as_view(), name='lectureinfo_detail'),
     path('courseinfo/edit/<int:pk>/', views.LectureInfoUpdateView.as_view(), name='lectureinfo_update'),
 )

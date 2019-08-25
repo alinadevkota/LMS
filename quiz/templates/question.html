@@ -49,7 +49,11 @@
 {% endif %}
 
 <p>
-  <small class="muted">{% trans "Question category" %}:</small>
+  <small class="muted"><strong> 
+			{% trans "Question category" %}:
+
+	</strong> 
+		</small>
   <strong>{{ question.category }}</strong>
 </p>
 
@@ -61,7 +65,7 @@
 			<div id="step-1"> 
 				   <div class="privew1">
 						    <div class="questionsBox">
-										<div class="questions">1.&nbsp; {{ question.content }}</div>  
+										<div class="questions">{{ progress.0|add:1 }})&nbsp; {{ question.content }}</div>  
 
 											 
 										{% if question.figure %} 
@@ -85,7 +89,7 @@
 													{% endfor %}
 											
 												</ul> 
-										<input type="submit" value={% trans "Check" %} class="btn btn-large btn-block btn-warning" >			
+										<input type="submit" value={% trans "Submit" %} class="btn btn-large btn-block btn-warning" >			
 									</form>	
 										
 								</div>
