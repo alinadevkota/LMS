@@ -28,7 +28,7 @@ urlpatterns = (
     path('api/v1/', include(router.urls)),
 
 
-    url(r'^$', view=QuizListView.as_view(), name='quiz_index'),
+    #url(r'^$', view=QuizListView.as_view(), name='quiz_index'),
 
     url(r'^category/$', view=CategoriesListView.as_view(), name='quiz_category_list_all'),
 
@@ -49,7 +49,7 @@ urlpatterns = (
 
 urlpatterns += (
 
-    path('quiz/', QuizListView.as_view(), name='quiz_list'),
+    path('', QuizListView.as_view(), name='quiz_index'),
     path('quiz/create/', QuizCreateView.as_view(), name='quiz_create'),
     path('quiz/update/<int:pk>', QuizUpdateView.as_view(), name='quiz_update'),
     path('quiz/detail/<int:pk>', QuizDetailView.as_view(), name='quiz_detail'),
