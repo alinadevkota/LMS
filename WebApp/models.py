@@ -385,14 +385,20 @@ class QuestionInfo(models.Model):
     # student_contents = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
-    Lecture_Code = ForeignKey(
-        'LectureInfo',
+    # Lecture_Code = ForeignKey(
+    #     'LectureInfo',
+    #     related_name="questioninfos", on_delete=models.DO_NOTHING
+    # )
+    # Chapter_Code = ForeignKey(
+    #     'ChapterInfo',
+    #     related_name="questioninfos", on_delete=models.DO_NOTHING
+    # )
+    #
+    Assignment_Code = ForeignKey(
+        'AssignmentInfo',
         related_name="questioninfos", on_delete=models.DO_NOTHING
     )
-    Chapter_Code = ForeignKey(
-        'ChapterInfo',
-        related_name="questioninfos", on_delete=models.DO_NOTHING
-    )
+
     Register_Agent = ForeignKey(
         'MemberInfo',
         related_name="questioninfos", on_delete=models.DO_NOTHING
@@ -445,43 +451,43 @@ class AssignAssignmentInfo(models.Model):
         return reverse('assignassignmentinfo_update', args=(self.pk,))
 
 
-class AssignQuestionInfo(models.Model):
-    # Fields
-    # subject_code = IntegerField(blank=True, null=True)
-    # question_type = CharField(max_length=20, blank=True, null=True)
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    # Register_Agent = CharField(max_length=500, blank=True, null=True)
-
-    # Relationship Fields
-    Question_Code = ForeignKey(
-        'QuestionInfo',
-        related_name="assignquestioninfos", on_delete=models.DO_NOTHING
-    )
-    Assignment_Code = ForeignKey(
-        'AssignmentInfo',
-        related_name="assignquestioninfos", on_delete=models.DO_NOTHING
-    )
-
-    Register_Agent = ForeignKey(
-        'MemberInfo',
-        related_name="assignquestioninfos", on_delete=models.DO_NOTHING
-    )
-
-    class Meta:
-        ordering = ('-pk',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('assignquestioninfo_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('assignquestioninfo_update', args=(self.pk,))
-
-
+# class AssignQuestionInfo(models.Model):
+#     # Fields
+#     # subject_code = IntegerField(blank=True, null=True)
+#     # question_type = CharField(max_length=20, blank=True, null=True)
+#     Use_Flag = BooleanField(default=True)
+#     Register_DateTime = DateTimeField(auto_now_add=True)
+#     Updated_DateTime = DateTimeField(auto_now=True)
+#     # Register_Agent = CharField(max_length=500, blank=True, null=True)
+#
+#     # Relationship Fields
+#     Question_Code = ForeignKey(
+#         'QuestionInfo',
+#         related_name="assignquestioninfos", on_delete=models.DO_NOTHING
+#     )
+#     Assignment_Code = ForeignKey(
+#         'AssignmentInfo',
+#         related_name="assignquestioninfos", on_delete=models.DO_NOTHING
+#     )
+#
+#     Register_Agent = ForeignKey(
+#         'MemberInfo',
+#         related_name="assignquestioninfos", on_delete=models.DO_NOTHING
+#     )
+#
+#     class Meta:
+#         ordering = ('-pk',)
+#
+#     def __unicode__(self):
+#         return u'%s' % self.pk
+#
+#     def get_absolute_url(self):
+#         return reverse('assignquestioninfo_detail', args=(self.pk,))
+#
+#     def get_update_url(self):
+#         return reverse('assignquestioninfo_update', args=(self.pk,))
+#
+#
 def assignment_upload(instance, filename):
     return 'assignments/{0}/{1}'.format(instance.Assignment_Code.id, filename)
 
@@ -498,10 +504,10 @@ class AssignAnswerInfo(models.Model):
     Assignment_File = FileField(upload_to=assignment_upload, null=True, blank=True)
 
     # Relationship Fields
-    Assignment_Code = ForeignKey(
-        'AssignmentInfo',
-        related_name="assignanswerinfos", on_delete=models.DO_NOTHING
-    )
+    # Assignment_Code = ForeignKey(
+    #     'AssignmentInfo',
+    #     related_name="assignanswerinfos", on_delete=models.DO_NOTHING
+    # )
     Question_Code = ForeignKey(
         'QuestionInfo',
         related_name="assignanswerinfos", on_delete=models.DO_NOTHING
@@ -753,8 +759,8 @@ class InningInfo(models.Model):
     def get_update_url(self):
         return reverse('inninginfo_update', args=(self.pk,))
 
-    def __str__(self):
-        return self.Inning_Name
+    # def __str__(self):
+    #     return self.Inning_Name
 
 
 

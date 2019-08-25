@@ -39,6 +39,9 @@ urlpatterns += (
     path('surveyinfo/update/<int:pk>/',
          views.SurveyInfoUpdateView.as_view(), name='surveyinfo_update'),
 
+     # path('surveyinfo/detail', views.get_survey_info,
+     #     name='get_survey_info'),
+
     path('surveyinfo/<int:category>/', views.surveyinfo_category,
          name='surveyinfo_category'),
 

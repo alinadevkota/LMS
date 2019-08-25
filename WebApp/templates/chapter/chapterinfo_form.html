@@ -12,42 +12,55 @@
     </h2>
     <hr class="header_hr">
 </div>
-<form method="post">
-    {% csrf_token %}
-    <div class="col-md-6 col-sm-6 col-xs-12">
-        {{ form.Chapter_No|as_crispy_field }}
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-        {{ form.Chapter_Name|as_crispy_field }}
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-        <div id="div_id_Summary" class="form-group">
-            <label for="id_Summary" class="control-label ">
-                Summary
-            </label>
-            <div class="controls ">
-                <textarea name="Summary" rows="3" class="textarea form-control" id="id_Summary" cols="40">{{ object.Summary }}</textarea>
-            </div>
+<div class="col-md-6 col-sm-12 col-xs-12 col-md-offset-3">
+
+    <form method="post" id="FormID">
+        {% csrf_token %}
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            {{ form.Chapter_No|as_crispy_field }}<br>
         </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-        {{ form.Page_Num|as_crispy_field }}
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-        {{ form.Use_Flag|as_crispy_field }}
-    </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            {{ form.Chapter_Name|as_crispy_field }}<br>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div id="div_id_Summary" class="form-group">
+                <label for="id_Summary" class="control-label ">
+                    Summary
+                </label>
+                <div class="controls ">
+                <textarea name="Summary" rows="3" class="textarea form-control" id="id_Summary"
+                          cols="40">{{ object.Summary }}</textarea>
+                </div>
+            </div><br>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            {{ form.Page_Num|as_crispy_field }}<br>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <label>
+                Status
+            </label><br>
+            <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
+                    {% if object.Use_Flag == False %}
+                   &nbsp;
+                    {% else %}
+                   checked
+                    {% endif %}
+            ><br> <br>
+        </div>
 
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <input type="hidden" name="Register_Agent" id="id_Register_Agent" value="{{ request.user.username }}"
-               class="select form-control">
-    </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <input type="hidden" name="Register_Agent" id="id_Register_Agent" value="{{ request.user.username }}"
+                   class="select form-control">
+        </div>
 
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <input type="hidden" name="Lecture_Code" id="id_Lecture_Code" value="{{ Lecture_Code.id }}"
-               class="select form-control">
-    </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <input type="hidden" name="Lecture_Code" id="id_Lecture_Code" value="{{ Lecture_Code.id }}"
+                   class="select form-control">
+        </div>
 
-    <div class="col-md-12" align="center">
-        <button class="btn btn-success" type="submit">Submit</button>
-    </div>
-</form>
+        <div class="col-md-12" align="center">
+            <button class="btn btn-success" type="submit">Submit</button>
+        </div>
+    </form>
+</div>

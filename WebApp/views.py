@@ -19,9 +19,9 @@ from forum.models import Thread
 from forum.views import get_top_thread_keywords
 
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
-    ChapterMissonCheckCardForm, ChapterMissonCheckItemForm,SessionInfoForm, InningInfoForm, QuizInfoForm, \
+    ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, SessionInfoForm, InningInfoForm, QuizInfoForm, \
     AssignmentInfoForm, QuestionInfoForm, AssignAssignmentInfoForm, \
-    AssignQuestionInfoForm, AssignAnswerInfoForm, \
+    AssignAnswerInfoForm, \
     BoardInfoForm, BoardContentInfoForm, InningGroupForm, \
     ChapterContentMediaForm, ChapterImgInfoForm, ChapterMissonCheckForm, ChapterWriteForm, GroupMappingForm, \
     LearningNoteForm, LectureUbtInfoForm, LessonInfoForm, LessonLogForm, MemberGroupForm, \
@@ -31,8 +31,9 @@ from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterCont
     MemberInfoForm, ChangeOthersPasswordForm
 from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
     ChapterMissonCheckItem, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
-    AssignQuestionInfo, AssignAnswerInfo, BoardInfo, \
-    BoardContentInfo,SessionInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
+    AssignAnswerInfo, BoardInfo, \
+    BoardContentInfo, SessionInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, \
+    GroupMapping, \
     LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
     QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, Events
@@ -162,7 +163,8 @@ def start(request):
             return render(request, "WebApp/homepage.html",
                           {'course': course, 'coursecount': coursecount, 'studentcount': studentcount,
                            'teachercount': teachercount,
-                           'threadcount': threadcount, 'totalcount': totalcount, 'thread': thread, 'wordCloud':wordCloud, 'get_top_thread_keywords':thread_keywords })
+                           'threadcount': threadcount, 'totalcount': totalcount, 'thread': thread,
+                           'wordCloud': wordCloud, 'get_top_thread_keywords': thread_keywords})
         if request.user.Is_Student:
             return redirect('student_home')
         if request.user.Is_Teacher:
@@ -460,6 +462,7 @@ class ChapterMissonCheckItemUpdateView(UpdateView):
     model = ChapterMissonCheckItem
     form_class = ChapterMissonCheckItemForm
 
+
 class SessionInfoListView(ListView):
     model = SessionInfo
 
@@ -477,6 +480,7 @@ class SessionInfoUpdateView(UpdateView):
     model = SessionInfo
     form_class = SessionInfoForm
 
+
 class InningInfoListView(ListView):
     model = InningInfo
 
@@ -484,6 +488,12 @@ class InningInfoListView(ListView):
 class InningInfoCreateView(CreateView):
     model = InningInfo
     form_class = InningInfoForm
+    # form_classes = {
+    #                 # 'sessioninfoform': SessionInfoForm,
+    #                 # 'groupmappingform': GroupMappingForm,
+    #                 # 'inninggroupform': InningGroupForm,
+    #                 'inninginfoform':InningInfoForm
+    #                 }
 
 
 class InningInfoDetailView(DetailView):
@@ -493,6 +503,7 @@ class InningInfoDetailView(DetailView):
 class InningInfoUpdateView(UpdateView):
     model = InningInfo
     form_class = InningInfoForm
+
 
 class InningGroupListView(ListView):
     model = InningGroup
@@ -506,9 +517,11 @@ class InningGroupCreateView(CreateView):
 class InningGroupDetailView(DetailView):
     model = InningGroup
 
+
 class InningGroupUpdateView(UpdateView):
     model = InningGroup
     form_class = InningGroupForm
+
 
 class GroupMappingListView(ListView):
     model = GroupMapping
@@ -523,8 +536,10 @@ class GroupMappingCreateView(CreateView):
     #     context['Inning_Name'] = get_object_or_404(InningInfo, pk=self.kwargs.get('inning_name'))
     #     return context
 
+
 class GroupMappingDetailView(DetailView):
     model = GroupMapping
+
 
 class GroupMappingUpdateView(UpdateView):
     model = GroupMapping
@@ -611,6 +626,11 @@ class QuestionInfoCreateView(CreateView):
     model = QuestionInfo
     form_class = QuestionInfoForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
+        return context
+
 
 class QuestionInfoDetailView(DetailView):
     model = QuestionInfo
@@ -619,6 +639,11 @@ class QuestionInfoDetailView(DetailView):
 class QuestionInfoUpdateView(UpdateView):
     model = QuestionInfo
     form_class = QuestionInfoForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
+        return context
 
 
 class AssignAssignmentInfoListView(ListView):
@@ -629,6 +654,12 @@ class AssignAssignmentInfoCreateView(CreateView):
     model = AssignAssignmentInfo
     form_class = AssignAssignmentInfoForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Inning_Code'] = get_object_or_404(InningInfo, pk=self.kwargs.get('session'))
+        context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
+        return context
+
 
 class AssignAssignmentInfoDetailView(DetailView):
     model = AssignAssignmentInfo
@@ -638,23 +669,29 @@ class AssignAssignmentInfoUpdateView(UpdateView):
     model = AssignAssignmentInfo
     form_class = AssignAssignmentInfoForm
 
-
-class AssignQuestionInfoListView(ListView):
-    model = AssignQuestionInfo
-
-
-class AssignQuestionInfoCreateView(CreateView):
-    model = AssignQuestionInfo
-    form_class = AssignQuestionInfoForm
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Inning_Code'] = get_object_or_404(InningInfo, pk=self.kwargs.get('session'))
+        context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
+        return context
 
 
-class AssignQuestionInfoDetailView(DetailView):
-    model = AssignQuestionInfo
-
-
-class AssignQuestionInfoUpdateView(UpdateView):
-    model = AssignQuestionInfo
-    form_class = AssignQuestionInfoForm
+# class AssignQuestionInfoListView(ListView):
+#     model = AssignQuestionInfo
+#
+#
+# class AssignQuestionInfoCreateView(CreateView):
+#     model = AssignQuestionInfo
+#     form_class = AssignQuestionInfoForm
+#
+#
+# class AssignQuestionInfoDetailView(DetailView):
+#     model = AssignQuestionInfo
+#
+#
+# class AssignQuestionInfoUpdateView(UpdateView):
+#     model = AssignQuestionInfo
+#     form_class = AssignQuestionInfoForm
 
 
 class AssignAnswerInfoListView(ListView):
@@ -665,6 +702,11 @@ class AssignAnswerInfoCreateView(CreateView):
     model = AssignAnswerInfo
     form_class = AssignAnswerInfoForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Question_Code'] = get_object_or_404(QuestionInfo, pk=self.kwargs.get('questioncode'))
+        return context
+
 
 class AssignAnswerInfoDetailView(DetailView):
     model = AssignAnswerInfo
@@ -673,6 +715,12 @@ class AssignAnswerInfoDetailView(DetailView):
 class AssignAnswerInfoUpdateView(UpdateView):
     model = AssignAnswerInfo
     form_class = AssignAnswerInfoForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Question_Code'] = get_object_or_404(QuestionInfo, pk=self.kwargs.get('questioncode'))
+        return context
+
 
 
 class BoardInfoListView(ListView):
@@ -709,7 +757,6 @@ class BoardContentInfoDetailView(DetailView):
 class BoardContentInfoUpdateView(UpdateView):
     model = BoardContentInfo
     form_class = BoardContentInfoForm
-
 
 
 class ChapterContentMediaListView(ListView):
@@ -782,9 +829,6 @@ class ChapterWriteDetailView(DetailView):
 class ChapterWriteUpdateView(UpdateView):
     model = ChapterWrite
     form_class = ChapterWriteForm
-
-
-
 
 
 class LearningNoteListView(ListView):
@@ -1150,6 +1194,6 @@ class TodoTInfoUpdateView(UpdateView):
 def question(request):
     return render(request, 'WebApp/question.html')
 
+
 def polls(request):
     return render(request, 'WebApp/polls.html')
-

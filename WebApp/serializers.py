@@ -85,6 +85,13 @@ class InningInfoSerializer(serializers.ModelSerializer):
             'Register_Agent', 'Center_Code'
         )
 
+class SessionInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.SessionInfo
+        fields = (
+            'pk', 'Session_Name', 'Description', 'Use_Flag', 'Center_Code'
+        )
+
 class InningGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.InningGroup
@@ -149,13 +156,13 @@ class AssignAssignmentInfoSerializer(serializers.ModelSerializer):
         )
 
 
-class AssignQuestionInfoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.AssignQuestionInfo
-        fields = (
-            'pk', 'Question_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
-            'Register_Agent', 'Assignment_Code'
-        )
+# class AssignQuestionInfoSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = models.AssignQuestionInfo
+#         fields = (
+#             'pk', 'Question_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
+#             'Register_Agent', 'Assignment_Code'
+#         )
 
 
 class AssignAnswerInfoSerializer(serializers.ModelSerializer):
@@ -163,7 +170,7 @@ class AssignAnswerInfoSerializer(serializers.ModelSerializer):
         model = models.AssignAnswerInfo
         fields = (
             'pk', 'Assignment_Score', 'Assignment_Code', 'Question_Code',
-            'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Student_Code'
+            'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Assignment_Answer', 'Student_Code'
         )
 
 

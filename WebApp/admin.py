@@ -2,7 +2,7 @@ from django.contrib import admin
 from django import forms
 from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
     ChapterMissonCheckItem,SessionInfo, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
-    AssignQuestionInfo, AssignAnswerInfo, BoardInfo, \
+     AssignAnswerInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
     LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
     QExampleInfo, QuizAnswerInfo, \
@@ -201,7 +201,7 @@ class QuestionInfoAdminForm(forms.ModelForm):
 class QuestionInfoAdmin(admin.ModelAdmin):
     form = QuestionInfoAdminForm
     list_display = ['Question_Title', 'Question_Score', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
-                    'Register_Agent', 'Question_Media_File', 'Question_Description', 'Lecture_Code', 'Chapter_Code']
+                    'Register_Agent', 'Question_Media_File', 'Question_Description', 'Assignment_Code']
     # readonly_fields = ['subject_code', 'question_type', 'use_flag', 'reg_date', 'reg_time', 'udt_date', 'udt_time', 'udt_agent']
 
 
@@ -223,21 +223,21 @@ class AssignAssignmentInfoAdmin(admin.ModelAdmin):
 
 admin.site.register(AssignAssignmentInfo, AssignAssignmentInfoAdmin)
 
-
-class AssignQuestionInfoAdminForm(forms.ModelForm):
-    class Meta:
-        model = AssignQuestionInfo
-        fields = '__all__'
-
-
-class AssignQuestionInfoAdmin(admin.ModelAdmin):
-    form = AssignQuestionInfoAdminForm
-    list_display = ['Question_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
-                    'Register_Agent', 'Assignment_Code']
-    # readonly_fields = ['subject_code', 'question_type', 'use_flag', 'reg_date', 'reg_time', 'udt_date', 'udt_time', 'udt_agent']
-
-
-admin.site.register(AssignQuestionInfo, AssignQuestionInfoAdmin)
+#
+# class AssignQuestionInfoAdminForm(forms.ModelForm):
+#     class Meta:
+#         model = AssignQuestionInfo
+#         fields = '__all__'
+#
+#
+# class AssignQuestionInfoAdmin(admin.ModelAdmin):
+#     form = AssignQuestionInfoAdminForm
+#     list_display = ['Question_Code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
+#                     'Register_Agent', 'Assignment_Code']
+#     # readonly_fields = ['subject_code', 'question_type', 'use_flag', 'reg_date', 'reg_time', 'udt_date', 'udt_time', 'udt_agent']
+#
+#
+# admin.site.register(AssignQuestionInfo, AssignQuestionInfoAdmin)
 
 
 class AssignAnswerInfoAdminForm(forms.ModelForm):
@@ -248,7 +248,7 @@ class AssignAnswerInfoAdminForm(forms.ModelForm):
 
 class AssignAnswerInfoAdmin(admin.ModelAdmin):
     form = AssignAnswerInfoAdminForm
-    list_display = ['Assignment_Score', 'Assignment_Code', 'Question_Code',
+    list_display = ['Assignment_Score', 'Question_Code',
                     'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Assignment_Answer', 'Student_Code']
     # readonly_fields = ['subject_code', 'question_type', 'question_answer', 'question_idx', 'question_correct', 'question_score', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
 
