@@ -5735,7 +5735,9 @@ article {
     line-height: 6px !important;
     color: #fff;
 }
-
+.sitting-message{
+    color: #007fbe;
+}
 
 /* quiz ui */
 .quiz-part {
@@ -5965,7 +5967,16 @@ input[type=checkbox], input[type=radio] {
 .preview1, .preview2, .preview3, .preview4 {
     display: none
 } 
+
 /* quiz list */ 
+.quiz-counter{
+    font-size:15px; 
+
+    font-weight: 600;  
+
+     color: black;
+
+} 
 .icon-quiz-list{
     text-decoration: none;
     padding-top: 10px;
@@ -5977,7 +5988,18 @@ input[type=checkbox], input[type=radio] {
 .icon-for-quiz{
     padding-top: 5px
 }
-
+.quiz-ans-explain{
+    font-size: 14px;
+    font-weight: 600
+}
+.quiz-play{
+    background-color: #007fbe;
+    padding: 6px ;
+    color: white;
+} 
+.quiz-play:hover{
+    color: white
+}
 /* ends */
 /* FORM QUIZ */
 .related-widget-wrapper{

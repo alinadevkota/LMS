@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'^q/', include('quiz.urls')),
+    url(r'^quiz/', include('quiz.urls')),
     path('', include('WebApp.urls')),
     path('forum/',include('forum.urls')),
     path('students/',include('WebApp.student_module.urls')),

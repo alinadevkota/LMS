@@ -409,7 +409,21 @@ class Quiz(models.Model):
         help_text=_("Time limit for quiz"),
         verbose_name=_("Time limit for quiz"))
 
-
+    pre_test = models.BooleanField(
+        default = False
+    ) 
+    post_test = models.BooleanField(
+        default = False
+    ) 
+    created_date =  models.DateTimeField(
+        auto_now_add=True
+    ) 
+    updated_date =  models.DateTimeField(
+        auto_now = True
+    )
+    chapter_code = models.ForeignKey(
+        ChapterInfo, null=True, blank=True,
+        verbose_name=_("Chapter"), on_delete=models.CASCADE)
     duration = models.DurationField(null=False,
                                              blank=False,
                                              default='00:05:00',

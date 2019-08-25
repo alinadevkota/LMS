@@ -36,6 +36,7 @@ from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterCon
     LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
     QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, Events
+from quiz.models import Quiz
 from datetime import datetime
 import json
 
@@ -363,6 +364,7 @@ class LectureInfoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk'))
+        context['quiz'] = Quiz.objects.filter(category=self.kwargs.get('pk')).count()
         return context
 
 
@@ -400,7 +402,8 @@ class ChapterInfoUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course')) 
+     
         return context
 
 

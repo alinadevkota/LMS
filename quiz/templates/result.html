@@ -49,7 +49,7 @@
 
 	{% if quiz.pass_mark %}
 	<hr>
-        <p class="lead">{{ sitting.result_message }}</p>
+        <p class=" sitting-message lead">{{ sitting.result_message }}</p>
 	<hr>
 
 	{% endif %}
@@ -84,13 +84,13 @@
     {% for question in questions %}
 
       <p class="lead">
-		{{ question.content }}
+		{{ question.content }} 
 	  </p>
 
 	  {% correct_answer_for_all question %}
 
       {% if question.user_answer %}
-      <p>{% trans "-Your answer" %}: {{ question|answer_choice_to_string:question.user_answer }}</p>
+      <p class="quiz-ans-explain">{% trans "-Your answer" %}: {{ question|answer_choice_to_string:question.user_answer }}</p>
       {% endif %}
 
 	  <p class="quiz-review"><strong>{% trans "Explanation" %}:</strong></p>
