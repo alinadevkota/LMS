@@ -3,7 +3,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.views import LogoutView, LoginView, PasswordContextMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -11,7 +11,7 @@ from django.utils.translation import gettext as _
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView
+from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView, TemplateView
 from django.views.generic.edit import FormView
 from django.core.paginator import Paginator
 
@@ -37,7 +37,6 @@ from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterCon
     LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
     QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, Events
-from quiz.models import Quiz
 from datetime import datetime
 import json
 
@@ -61,6 +60,31 @@ import json
 #     model = Profile
 #     form_class = ProfileForm
 #
+
+class AjaxableResponseMixin:
+    """
+    Mixin to add AJAX support to a form.
+    Must be used with an object-based FormView (e.g. CreateView)
+    """
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
+
+    def form_valid(self, form):
+        # We make sure to call the parent's form_valid() method because
+        # it might do some processing (in the case of CreateView, it will
+        # call form.save() for example).
+        response = super().form_valid(form)
+        if self.request.is_ajax():
+            data = {
+                'pk': self.object.pk,
+            }
+            return JsonResponse(data)
+        else:
+            return response
 
 def ProfileView(request):
     try:
@@ -366,7 +390,6 @@ class LectureInfoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk'))
-        context['quiz'] = Quiz.objects.filter(category=self.kwargs.get('pk')).count()
         return context
 
 
@@ -404,8 +427,7 @@ class ChapterInfoUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course')) 
-     
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
         return context
 
 
@@ -513,6 +535,11 @@ class InningGroupCreateView(CreateView):
     model = InningGroup
     form_class = InningGroupForm
 
+class InningInfoCreateSessionAjax(AjaxableResponseMixin, CreateView):
+    model = SessionInfo
+    form_class = SessionInfoForm
+    template_name = 'ajax/sessioncreate_form_ajax.html'
+    
 
 class InningGroupDetailView(DetailView):
     model = InningGroup
@@ -522,6 +549,10 @@ class InningGroupUpdateView(UpdateView):
     model = InningGroup
     form_class = InningGroupForm
 
+class GroupCreateSessionAjax(AjaxableResponseMixin, CreateView):
+    model = GroupMapping
+    form_class = GroupMappingForm
+    template_name = 'ajax/groupcreate_form_ajax.html'
 
 class GroupMappingListView(ListView):
     model = GroupMapping

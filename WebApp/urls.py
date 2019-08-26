@@ -116,7 +116,7 @@ urlpatterns += (
 urlpatterns += (
     # urls for LectureInfo
     path('courseinfo/', views.LectureInfoListView.as_view(), name='lectureinfo_list'),
-    path('courseinfo/create /', views.LectureInfoCreateView.as_view(), name='lectureinfo_create'), 
+    path('courseinfo/create /', views.LectureInfoCreateView.as_view(), name='lectureinfo_create'),
     path('courseinfo/<int:pk>/', views.LectureInfoDetailView.as_view(), name='lectureinfo_detail'),
     path('courseinfo/edit/<int:pk>/', views.LectureInfoUpdateView.as_view(), name='lectureinfo_update'),
 )
@@ -291,6 +291,8 @@ urlpatterns += (
          views.InningInfoDetailView.as_view(), name='inninginfo_detail'),
     path('inninginfo/update/<int:pk>/',
          views.InningInfoUpdateView.as_view(), name='inninginfo_update'),
+     path('inninginfo/create/ajax', 
+          views.InningInfoCreateSessionAjax.as_view(), name = 'sessioninfo_create_ajax'),
 )
 
 
@@ -318,6 +320,8 @@ urlpatterns += (
     path('groupmapping/update/<int:pk>/',
          views.GroupMappingUpdateView.as_view(), name='groupmapping_update'),
     # path('admin/jsi18n', i18n.javascript_catalog),
+    path('groupmapping/create/ajax', 
+          views.GroupCreateSessionAjax.as_view(), name = 'group_create_ajax'),
 )
 
 urlpatterns += (
