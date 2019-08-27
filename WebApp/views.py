@@ -535,6 +535,11 @@ class InningGroupCreateView(CreateView):
     model = InningGroup
     form_class = InningGroupForm
 
+class InningGroupCreateAjax(AjaxableResponseMixin, CreateView):
+    model = InningGroup
+    form_class = InningGroupForm
+    template_name = 'ajax/inninggroup_form_ajax.html'
+
 class InningInfoCreateSessionAjax(AjaxableResponseMixin, CreateView):
     model = SessionInfo
     form_class = SessionInfoForm

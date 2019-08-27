@@ -291,8 +291,6 @@ urlpatterns += (
          views.InningInfoDetailView.as_view(), name='inninginfo_detail'),
     path('inninginfo/update/<int:pk>/',
          views.InningInfoUpdateView.as_view(), name='inninginfo_update'),
-     path('inninginfo/create/ajax', 
-          views.InningInfoCreateSessionAjax.as_view(), name = 'sessioninfo_create_ajax'),
 )
 
 
@@ -320,8 +318,6 @@ urlpatterns += (
     path('groupmapping/update/<int:pk>/',
          views.GroupMappingUpdateView.as_view(), name='groupmapping_update'),
     # path('admin/jsi18n', i18n.javascript_catalog),
-    path('groupmapping/create/ajax', 
-          views.GroupCreateSessionAjax.as_view(), name = 'group_create_ajax'),
 )
 
 urlpatterns += (
@@ -602,4 +598,19 @@ urlpatterns += (
 
 urlpatterns += (
     path('polls/', views.polls, name="polls"),
+)
+
+urlpatterns += (
+    # urls for Ajax
+     path('inninginfo/create/ajax', 
+          views.InningInfoCreateSessionAjax.as_view(), name = 'sessioninfo_create_ajax'),
+     path('groupmapping/create/ajax', 
+          views.GroupCreateSessionAjax.as_view(), name = 'group_create_ajax'),
+     path('inninggroup/create/ajax', 
+          views.InningGroupCreateAjax.as_view(), name = 'inninggroup_create_ajax'),
+)
+
+urlpatterns += (
+     #urls for chapterpagebuilder
+     
 )

@@ -49,7 +49,7 @@ urlpatterns = (
 
 urlpatterns += (
 
-    path('', QuizListView.as_view(), name='quiz_index'),
+    path('', QuizListView.as_view(), name='quiz_list'),
     path('create/', QuizCreateView.as_view(), name='quiz_create'),
     path('update/<int:pk>', QuizUpdateView.as_view(), name='quiz_update'),
     path('detail/<int:pk>', QuizDetailView.as_view(), name='quiz_detail'),
