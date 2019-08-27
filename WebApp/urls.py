@@ -332,11 +332,8 @@ urlpatterns += (
     path('groupmapping/update/<int:pk>/',
          views.GroupMappingUpdateView.as_view(), name='groupmapping_update'),
     # path('admin/jsi18n', i18n.javascript_catalog),
-<<<<<<< HEAD
-=======
     path('groupmapping/create/ajax',
          views.GroupCreateSessionAjax.as_view(), name='group_create_ajax'),
->>>>>>> 74128349c22605f709efc3136a01ef3d00fa842d
 )
 
 urlpatterns += (
