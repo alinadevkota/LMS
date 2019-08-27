@@ -60,12 +60,17 @@
 								exam <br>
 								{% endif %}
 				 </td>
-				 <td>{{ quiz.url }}</td>
+				 <td>
+				 	<a href="{% url 'quiz_detail_s' quiz.url %}">
+				 		{{ quiz.url }}
+					</a>
+				 </td>
 				<td></td>
 			  <td>
 				<a href="{% url 'quiz_detail' pk=quiz.id %}">
 				  {% trans "View details" %}
 				</a>
+			  </td>
 			</tr>
 
         {% endfor %}

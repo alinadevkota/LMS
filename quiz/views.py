@@ -7,6 +7,7 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView, FormView, CreateView, UpdateView
+from django.urls import reverse, reverse_lazy
 
 from WebApp.models import LectureInfo
 from .forms import QuestionForm, EssayForm, QuizForm, TFQuestionForm, EssayQuestionForm, MCQuestionForm
@@ -35,6 +36,7 @@ class QuizCreateView(CreatePopupMixin, CreateView):
     model = Quiz
     #fields = ['title']
     form_class = QuizForm
+    success_url = reverse_lazy('quiz_list')
 
 
 
