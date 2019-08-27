@@ -66,6 +66,7 @@ class AjaxableResponseMixin:
     Mixin to add AJAX support to a form.
     Must be used with an object-based FormView (e.g. CreateView)
     """
+
     def form_invalid(self, form):
         response = super().form_invalid(form)
         if self.request.is_ajax():
@@ -85,6 +86,7 @@ class AjaxableResponseMixin:
             return JsonResponse(data)
         else:
             return response
+
 
 def ProfileView(request):
     try:
@@ -485,6 +487,24 @@ class ChapterMissonCheckItemUpdateView(UpdateView):
     form_class = ChapterMissonCheckItemForm
 
 
+class SessionInfoCreateViewPopup(CreateView):
+    model = SessionInfo
+    form_class = SessionInfoForm
+    template_name = 'popup/sessioninfoformpopup.html'
+
+
+class InningGroupCreateViewPopup(CreateView):
+    model = SessionInfo
+    form_class = SessionInfoForm
+    template_name = 'popup/inninggroupformpopup.html'
+
+
+class GroupMappingCreateViewPopup(CreateView):
+    model = SessionInfo
+    form_class = SessionInfoForm
+    template_name = 'popup/groupmappingformpopup.html'
+
+
 class SessionInfoListView(ListView):
     model = SessionInfo
 
@@ -508,6 +528,13 @@ class InningInfoListView(ListView):
 
 
 class InningInfoCreateView(CreateView):
+    # template_name = "WebApp/inninginfo_form.html"
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     form = InningInfoForm()
+    #     context['form'] = form
+    #     return context
     model = InningInfo
     form_class = InningInfoForm
     # form_classes = {
@@ -535,11 +562,12 @@ class InningGroupCreateView(CreateView):
     model = InningGroup
     form_class = InningGroupForm
 
+
 class InningInfoCreateSessionAjax(AjaxableResponseMixin, CreateView):
     model = SessionInfo
     form_class = SessionInfoForm
     template_name = 'ajax/sessioncreate_form_ajax.html'
-    
+
 
 class InningGroupDetailView(DetailView):
     model = InningGroup
@@ -549,10 +577,12 @@ class InningGroupUpdateView(UpdateView):
     model = InningGroup
     form_class = InningGroupForm
 
+
 class GroupCreateSessionAjax(AjaxableResponseMixin, CreateView):
     model = GroupMapping
     form_class = GroupMappingForm
     template_name = 'ajax/groupcreate_form_ajax.html'
+
 
 class GroupMappingListView(ListView):
     model = GroupMapping
@@ -637,6 +667,14 @@ class AssignmentInfoCreateView(CreateView):
 class AssignmentInfoDetailView(DetailView):
     model = AssignmentInfo
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Questions'] = QuestionInfo.objects.filter(Assignment_Code=self.kwargs.get('pk'))
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
+        # context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
+        return context
+
 
 class AssignmentInfoUpdateView(UpdateView):
     model = AssignmentInfo
@@ -656,11 +694,27 @@ class QuestionInfoListView(ListView):
 class QuestionInfoCreateView(CreateView):
     model = QuestionInfo
     form_class = QuestionInfoForm
+    # success_url = 'questioninfo_detail'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
         context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
         return context
+
+
+class QuestionInfoCreateAjax(AjaxableResponseMixin, CreateView):
+    model = QuestionInfo
+    form_class = QuestionInfoForm
+    template_name = 'ajax/questioninfo_form_ajax.html'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+    #     context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
+    #     # context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
+    #     return context
 
 
 class QuestionInfoDetailView(DetailView):
@@ -673,6 +727,8 @@ class QuestionInfoUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
         context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
         return context
 
@@ -751,7 +807,6 @@ class AssignAnswerInfoUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['Question_Code'] = get_object_or_404(QuestionInfo, pk=self.kwargs.get('questioncode'))
         return context
-
 
 
 class BoardInfoListView(ListView):

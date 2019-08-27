@@ -4,6 +4,7 @@ from rest_framework import routers
 from . import api
 from . import views
 
+# app_name = "survey"
 router = routers.DefaultRouter()
 router.register(r'categoryinfo', api.CategoryInfoViewSet)
 router.register(r'surveyinfo', api.SurveyInfoViewSet)

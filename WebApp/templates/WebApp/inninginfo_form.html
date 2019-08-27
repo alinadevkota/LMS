@@ -6,8 +6,6 @@
     <link href="{% static 'vendorsx/nprogress/nprogress.css' %}" rel="stylesheet">
     <link href="{% static '/build/css/custom.min.css' %}" rel="stylesheet">
 
-    {#    <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>#}
-    {#    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>#}
 {% endblock stylesheets %}
 {% block breadcrumb %}
     <li class="breadcrumb-item" aria-current="page"><a href="{% url 'inninginfo_list' %}">Session Mapping</a></li>
@@ -42,16 +40,9 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </h4>
-
                 </div>
                 <div class="modal-body" id="create_session_modal_body">
-                    {# <iframe src="{% url 'sessioninfo_create' %}" style="height: 600px; width: 530px;" ></iframe>#}
-
                 </div>
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div> -->
             </div>
         </div>
     </div>
@@ -342,29 +333,29 @@
             $('#myInput').trigger('focus')
         });
 
-        $('#add-newsession-btn').on('click', function(){
+        $('#add-newsession-btn').on('click', function () {
             $('#create_session_modal_body').empty();
             $.ajax({
                 type: "GET",
                 url: "{% url 'sessioninfo_create_ajax' %}",  // URL to your view that serves new info
-                success: function(response) {
+                success: function (response) {
                     $('#create_session_modal_body').append(response);
                 },
-                error: function(){
+                error: function () {
                     console.log('Error in generating session create form')
                 }
             });
         });
 
-        $('#add-newgroup-btn').on('click', function(){
+        $('#add-newgroup-btn').on('click', function () {
             $('#create_groupmapping_modal_body').empty();
             $.ajax({
                 type: "GET",
                 url: "{% url 'group_create_ajax' %}",  // URL to your view that serves new info
-                success: function(response) {
+                success: function (response) {
                     $('#create_groupmapping_modal_body').append(response);
                 },
-                error: function(){
+                error: function () {
                     console.log('Error in generating group create form')
                 }
             });

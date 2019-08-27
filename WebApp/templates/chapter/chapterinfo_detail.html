@@ -1,69 +1,6 @@
 {% load static %}
 
 <div class="outerDiv">
-    <div class="col-md-6 col-sm-12 col xs-12">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                <h1><b>Chapter {{ object.Chapter_No }}
-                    : {{ object.Chapter_Name }} </b></h1></div>
-            <div class="col-md-12 col-sm-12 col-xs-12 text-center" id="buttons">
-                <a class="btn-sm btn-primary"
-                   href="{% if '/teachers' in request.path %}
-                /teachers{{ object.get_update_url }}
-            {% else %}
-                {{ object.get_update_url }}
-            {% endif %}">Edit Chapter &nbsp;</a>
-                <a class="btn-sm btn-success" href="{% url 'teacher_chapterinfo_build' %}">Lecture Builder &nbsp;</a>
-                <a class="btn-sm btn-danger" href="{{ object.get_delete_url }}">Delete Chapter</a>
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12" id="tabs">
-                <table class="table">
-                    <tr>
-                        <td>Summary</td>
-                        <td>{{ object.Summary }}</td>
-                    </tr>
-                    <tr>
-                        <td>Page Number</td>
-                        <td>{{ object.Page_Num }}</td>
-                    </tr>
-                    <tr>
-                        <td>Use Flag</td>
-                        <td>{{ object.Use_Flag }}</td>
-                    </tr>
-                    <tr>
-                        <td>Register Agent</td>
-                        <td>{{ object.Register_Agent }}</td>
-                    </tr>
-                    <tr>
-                        <td>Lecture Code</td>
-                        <td>{{ object.Lecture_Code }}</td>
-                    </tr>
-                    <tr>
-                         <td>Pre Test Quiz</td>
-                         <td>
-                                <div class="btn-group" id="status" data-toggle="buttons">
-                                        <label class="btn btn-default btn-on-3 btn-sm active" id="ActiveButton">
-                                            <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
-                                        <label class="btn btn-default btn-off-3 btn-sm" id="ExpireButton">
-                                            <input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>
-                                    </div>
-                         </td>
-                    </tr>
-                    <tr>
-                         <td>Post Test Quiz</td>
-                         <td>
-                                <div class="btn-group" id="status" data-toggle="buttons">
-                                        <label class="btn btn-default btn-on-3 btn-sm active" id="ActiveButton">
-                                            <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
-                                        <label class="btn btn-default btn-off-3 btn-sm" id="ExpireButton">
-                                            <input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>
-                                    </div>
-                         </td>
-                       </tr>
-                </table>
-            </div>
-        </div>
-    </div>
     <div class="col-md-6 col-sm-12 xol-xs-12">
 
         <div class="col-md-12 col-sm-12 col-xs-12 ">
@@ -109,6 +46,73 @@
             {% endfor %}
         </div>
     </div>
-  
+
+    <div class="col-md-6 col-sm-12 col xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                <h1><b>Chapter {{ object.Chapter_No }}
+                    : {{ object.Chapter_Name }} </b></h1></div>
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center" id="buttons">
+                <a class="btn-sm btn-primary"
+                   href="{% if '/teachers' in request.path %}
+                /teachers{{ object.get_update_url }}
+            {% else %}
+                {{ object.get_update_url }}
+            {% endif %}">Edit Chapter &nbsp;</a>
+                <a class="btn-sm btn-success" href="{% url 'teacher_chapterinfo_build' %}">Lecture Builder &nbsp;</a>
+                <a class="btn-sm btn-danger" href="{{ object.get_delete_url }}">Delete Chapter</a>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12" id="tabs">
+                <table class="table">
+                    <tr>
+                        <td>Summary</td>
+                        <td>{{ object.Summary }}</td>
+                    </tr>
+                    <tr>
+                        <td>Page Number</td>
+                        <td>{{ object.Page_Num }}</td>
+                    </tr>
+                    <tr>
+                        <td>Use Flag</td>
+                        <td>{{ object.Use_Flag }}</td>
+                    </tr>
+                    <tr>
+                        <td>Register Agent</td>
+                        <td>{{ object.Register_Agent }}</td>
+                    </tr>
+                    <tr>
+                        <td>Lecture Code</td>
+                        <td>{{ object.Lecture_Code }}</td>
+                    </tr>
+                    <tr>
+                        <td>Pre Test Quiz</td>
+                        <td>
+                            <div class="btn-group" id="status" data-toggle="buttons">
+                                <label class="btn btn-default btn-on-3 btn-sm active" id="ActiveButton">
+                                    <input type="radio" value="1" name="multifeatured_module[module_id][status]"
+                                           checked="checked">ON</label>
+                                <label class="btn btn-default btn-off-3 btn-sm" id="ExpireButton">
+                                    <input type="radio" value="0"
+                                           name="multifeatured_module[module_id][status]">OFF</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Post Test Quiz</td>
+                        <td>
+                            <div class="btn-group" id="status" data-toggle="buttons">
+                                <label class="btn btn-default btn-on-3 btn-sm active" id="ActiveButton">
+                                    <input type="radio" value="1" name="multifeatured_module[module_id][status]"
+                                           checked="checked">ON</label>
+                                <label class="btn btn-default btn-off-3 btn-sm" id="ExpireButton">
+                                    <input type="radio" value="0"
+                                           name="multifeatured_module[module_id][status]">OFF</label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
