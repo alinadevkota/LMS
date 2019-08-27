@@ -59,7 +59,7 @@
             {% else %}
                 {{ object.get_update_url }}
             {% endif %}">Edit Chapter &nbsp;</a>
-                <a class="btn-sm btn-success" href="{% url 'teacher_chapterinfo_build' %}">Lecture Builder &nbsp;</a>
+                <a class="btn-sm btn-success" href="{% url 'chapterpagebuilder' object.Lecture_Code.id object.id %}">Lecture Builder &nbsp;</a>
                 <a class="btn-sm btn-danger" href="{{ object.get_delete_url }}">Delete Chapter</a>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12" id="tabs">

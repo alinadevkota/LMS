@@ -1287,3 +1287,6 @@ def question(request):
 
 def polls(request):
     return render(request, 'WebApp/polls.html')
+
+def chapterpagebuilder(request, course, chapter):
+    return render(request, 'WebApp/chapterbuilder.html')
