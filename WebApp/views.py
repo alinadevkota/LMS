@@ -420,6 +420,34 @@ class ChapterInfoDetailView(DetailView):
         context['assignments'] = AssignmentInfo.objects.filter(Chapter_Code=self.kwargs.get('pk'))
         return context
 
+class CourseForum(ListView):
+    model = Thread
+    paginate_by = 20
+    template_name = 'forum/topic.html'
+    context_object_name = 'threads'
+
+    def get_queryset(self):
+        return Thread.objects.visible().filter(
+            topic__id=self.kwargs.get('pk')
+        ).select_related(
+            'user', 'topic'
+        ).prefetch_related(
+            'user__forum_avatar'
+        ).order_by(
+            *['order', get_thread_ordering(self.request)]
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        print(self.kwargs.get('pk'))
+        context['topic'] = topic = Topic.objects.get(pk=self.kwargs.get('pk'))
+        context['title'] = context['panel_title'] = topic.title
+        context['show_order'] = True
+        return context
+
+
+
+
 
 class ChapterInfoUpdateView(UpdateView):
     model = ChapterInfo
