@@ -125,8 +125,10 @@ urlpatterns += (
     # urls for ChapterInfo
     path('courseinfo/<int:course>/chapterinfo/', views.ChapterInfoListView.as_view(), name='chapterinfo_list'),
     path('courseinfo/<int:course>/create/', views.ChapterInfoCreateView.as_view(), name='chapterinfo_create'),
-    path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(), name='chapterinfo_detail'),
-    path('courseinfo/<int:course>/chapterinfo/<int:pk>/edit/', views.ChapterInfoUpdateView.as_view(), name='chapterinfo_update'),
+    path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(),
+         name='chapterinfo_detail'),
+    path('courseinfo/<int:course>/chapterinfo/<int:pk>/edit/', views.ChapterInfoUpdateView.as_view(),
+         name='chapterinfo_update'),
 )
 
 urlpatterns += (
@@ -165,8 +167,6 @@ urlpatterns += (
          name='chaptermissoncheckitem_update'),
 )
 
-
-
 # urlpatterns += (
 #     # urls for OmrQuestionInfo
 #     path('omrquestioninfo/', views.OmrQuestionInfoListView.as_view(), name='omrquestioninfo_list'),
@@ -196,29 +196,36 @@ urlpatterns += (
          views.AssignmentInfoDetailView.as_view(), name='assignmentinfo_detail'),
     path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/update/<int:pk>/',
          views.AssignmentInfoUpdateView.as_view(), name='assignmentinfo_update'),
+    path('assignmentinfo/create/ajax',
+         views.QuestionInfoCreateAjax.as_view(), name='questioninfo_create_ajax'),
 )
 
 urlpatterns += (
     # urls for QuestionInfo
-    path('assignmentinfo/<int:assignment>/questioninfo/', views.QuestionInfoListView.as_view(),
+    path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/', views.QuestionInfoListView.as_view(),
          name='questioninfo_list'),
-    path('assignmentinfo/<int:assignment>/questioninfo/create/', views.QuestionInfoCreateView.as_view(),
+    path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/create/', views.QuestionInfoCreateView.as_view(),
          name='questioninfo_create'),
-    path('assignmentinfo/<int:assignment>/questioninfo/detail/<int:pk>/',
+    path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/detail/<int:pk>/',
          views.QuestionInfoDetailView.as_view(), name='questioninfo_detail'),
-    path('assignmentinfo/<int:assignment>/questioninfo/update/<int:pk>/',
+    path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/update/<int:pk>/',
          views.QuestionInfoUpdateView.as_view(), name='questioninfo_update'),
+
 )
 
 urlpatterns += (
     # urls for AssignHomeworkInfo
-    path('inninginfo/<int:session>/assignmentinfo/<int:assignment>/assignassignmentinfo/', views.AssignAssignmentInfoListView.as_view(),
+    path('inninginfo/<int:session>/assignmentinfo/<int:assignment>/assignassignmentinfo/',
+         views.AssignAssignmentInfoListView.as_view(),
          name='assignassignmentinfo_list'),
-    path('inninginfo/<int:session>/assignmentinfo/<int:assignment>/assignassignmentinfo/create/', views.AssignAssignmentInfoCreateView.as_view(),
+    path('inninginfo/<int:session>/assignmentinfo/<int:assignment>/assignassignmentinfo/create/',
+         views.AssignAssignmentInfoCreateView.as_view(),
          name='assignassignmentinfo_create'),
-    path('inninginfo/<int:session>/assignmentinfo/<int:assignment>/assignassignmentinfo/detail/<int:pk>/', views.AssignAssignmentInfoDetailView.as_view(),
+    path('inninginfo/<int:session>/assignmentinfo/<int:assignment>/assignassignmentinfo/detail/<int:pk>/',
+         views.AssignAssignmentInfoDetailView.as_view(),
          name='assignassignmentinfo_detail'),
-    path('inninginfo/<int:session>/assignmentinfo/<int:assignment>/assignassignmentinfo/update/<int:pk>/', views.AssignAssignmentInfoUpdateView.as_view(),
+    path('inninginfo/<int:session>/assignmentinfo/<int:assignment>/assignassignmentinfo/update/<int:pk>/',
+         views.AssignAssignmentInfoUpdateView.as_view(),
          name='assignassignmentinfo_update'),
 )
 
@@ -269,6 +276,16 @@ urlpatterns += (
          name='boardcontentinfo_update'),
 )
 
+urlpatterns += (
+    # urls for InningInfo
+    path('sessioninfopopup/create/', views.SessionInfoCreateViewPopup.as_view(),
+         name='sessioninfoformpopup'),
+    path('groupmappinginfopopup/create/', views.GroupMappingCreateViewPopup.as_view(),
+         name='groupmappinginfoformpopup'),
+    path('inninggrouppopup/create/', views.InningGroupCreateViewPopup.as_view(),
+         name='inninggroupformpopup')
+
+)
 
 urlpatterns += (
     # urls for InningInfo
@@ -281,7 +298,6 @@ urlpatterns += (
          views.SessionInfoUpdateView.as_view(), name='sessioninfo_update'),
 )
 
-
 urlpatterns += (
     # urls for InningInfo
     path('inninginfo/', views.InningInfoListView.as_view(), name='inninginfo_list'),
@@ -292,7 +308,6 @@ urlpatterns += (
     path('inninginfo/update/<int:pk>/',
          views.InningInfoUpdateView.as_view(), name='inninginfo_update'),
 )
-
 
 urlpatterns += (
     # urls for InningGroup
@@ -306,7 +321,6 @@ urlpatterns += (
          views.InningGroupUpdateView.as_view(), name='inninggroup_update'),
 )
 
-
 urlpatterns += (
     # urls for GroupMapping
     path('groupmapping/', views.GroupMappingListView.as_view(),
@@ -318,6 +332,11 @@ urlpatterns += (
     path('groupmapping/update/<int:pk>/',
          views.GroupMappingUpdateView.as_view(), name='groupmapping_update'),
     # path('admin/jsi18n', i18n.javascript_catalog),
+<<<<<<< HEAD
+=======
+    path('groupmapping/create/ajax',
+         views.GroupCreateSessionAjax.as_view(), name='group_create_ajax'),
+>>>>>>> 74128349c22605f709efc3136a01ef3d00fa842d
 )
 
 urlpatterns += (
@@ -367,8 +386,6 @@ urlpatterns += (
     path('chapterwrite/update/<int:pk>/',
          views.ChapterWriteUpdateView.as_view(), name='chapterwrite_update'),
 )
-
-
 
 urlpatterns += (
     # urls for LearningNote

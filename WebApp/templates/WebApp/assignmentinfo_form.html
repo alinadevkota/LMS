@@ -37,50 +37,107 @@
         </h2>
         <hr class="header_hr">
     </div>
-    <div class="col-md-6 col-sm-12 col-xs-12 col-md-offset-3">
-        <form method="post" id="FormID">
-            {% csrf_token %}
-            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                {{ form.Assignment_Topic|as_crispy_field }}
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                <div id="div_id_Assignment_Deadline" class="form-group">
-                    <label for="id_Assignment_Deadline" class="control-label ">
-                        Assignment Deadline
-                    </label>
-                    <div class="controls ">
-                        <input type="date" name="Assignment_Deadline" class="datetimeinput form-control"
-                               id="id_Assignment_Deadline">
+    <div class="col-md-12">
+        <div class="col-md-6 col-sm-12 col-xs-12 col-md-offset-3">
+            <form method="post" id="FormID">
+                {% csrf_token %}
+                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                    <div id="div_id_Assignment_Topic" class="form-group">
+                        <label for="id_Assignment_Topic" class="control-label ">
+                            Assignment Topic
+                        </label>
+                        <div class="controls ">
+                            <input type="text" name="Assignment_Topic" maxlength="500" id="id_Assignment_Topic"
+                                   class="textinput textInput form-control" required="required">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                <label>
-                    Status
-                </label><br>
-                <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
-                        {% if object.Use_Flag == False %}
-                       &nbsp;
-                        {% else %}
-                       checked
-                        {% endif %}
-                ><br> <br>
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                <input type="hidden" name="Lecture_Code" id="id_Lecture_Code" value="{{ Lecture_Code.id }}"
-                       class="select form-control">
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                <input type="hidden" name="Chapter_Code" id="id_Chapter_Code" value="{{ Chapter_No.id }}"
-                       class="select form-control">
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                <input type="hidden" name="Register_Agent" id="id_Register_Agent" value="{{ request.user.id }}"
-                       class="select form-control">
-            </div>
-            <div class="submitButton  col-md-12">
-                <button class="btn btn-success" type="submit">Submit</button>
-            </div>
-        </form>
+                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                    <div id="div_id_Assignment_Deadline" class="form-group">
+                        <label for="id_Assignment_Deadline" class="control-label ">
+                            Assignment Deadline
+                        </label>
+                        <div class="controls ">
+                            <input type="date" name="Assignment_Deadline" class="datetimeinput form-control"
+                                   id="id_Assignment_Deadline">
+                        </div>
+                    </div>
+                </div>
+                {#                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">#}
+                {#                    <label>#}
+                {#                        Status#}
+                {#                    </label><br>#}
+                {#                    <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"#}
+                {#                            {% if object.Use_Flag == False %}#}
+                {#                           &nbsp;#}
+                {#                            {% else %}#}
+                {#                           checked#}
+                {#                            {% endif %}#}
+                {#                    ><br> <br>#}
+                {#                </div>#}
+                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                    <input type="hidden" name="Lecture_Code" id="id_Lecture_Code" value="{{ Lecture_Code.id }}"
+                           class="select form-control">
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                    <input type="hidden" name="Chapter_Code" id="id_Chapter_Code" value="{{ Chapter_No.id }}"
+                           class="select form-control">
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                    <input type="hidden" name="Register_Agent" id="id_Register_Agent" value="{{ request.user.id }}"
+                           class="select form-control">
+                </div>
+                <div class="submitButton  col-md-12">
+                    <button class="btn btn-success" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
+    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px;text-align: center">
+        <h1>
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#exampleModal1" id="add-question-btn">
+                Add Question
+            </button>
+        </h1>
+    </div>
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true" id="add_question_modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Add Question
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h4>
+                </div>
+                <div class="modal-body" id="add_question_btn_body">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block customjss %}
+    <script src=" {% static 'vendorsx/jQuery-Smart-Wizard/js/jquery.smartWizard.js' %}"></script>
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        });
+
+        $('#add-question-btn').on('click', function () {
+            $('#add_question_btn_body').empty();
+            $.ajax({
+                type: "GET",
+                url: "{% url 'questioninfo_create_ajax' %}",  // URL to your view that serves new info
+                success: function (response) {
+                    $('#add_question_btn_body').append(response);
+                },
+                error: function () {
+                    console.log('Error in generating add question form')
+                }
+            });
+        });
+
+    </script>
 {% endblock %}

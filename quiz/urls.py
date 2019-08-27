@@ -53,7 +53,8 @@ urlpatterns += (
     path('create/', QuizCreateView.as_view(), name='quiz_create'),
     path('update/<int:pk>', QuizUpdateView.as_view(), name='quiz_update'),
     path('detail/<int:pk>', QuizDetailView.as_view(), name='quiz_detail'),
-    path('delete/<int:pk>', QuizDeleteView, name='quiz_delete'),
+    path('detail/<slug>', QuizDetailView.as_view(), name='quiz_detail_s'),
+    path('delete/<int:pk>', QuizDeleteView, name='quiz_delete'),   
 
     path('mcquestion/', views.MCQuestionListView.as_view(), name='mcquestion_list'),
     path('mcquestion/create/', MCQuestionCreateView.as_view(), name='mcquestion_create'),

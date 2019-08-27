@@ -54,5 +54,56 @@
       
       </div>		
   </div>
-</div>
+</div>  
+
+ <table class="table table-bordered table-striped">
+  <thead>
+    <tr class="quiz-capital">
+      <th>{% trans "Title" %}</th>
+      <th>{% trans "Course -> Chapter" %}</th>
+      <th>{% trans "No. of Questions" %}</th>
+      <th>{% trans "Type" %}</th>
+      <th>{% trans "Url" %}</th>
+      <th>{% trans "Status" %}</th> 
+      <th>{% trans "Action" %}</th>
+    </tr>
+    </thead> 
+
+    <tbody>
+       <tr>
+          <td>Quiz Name</td>
+          <td>{{ quiz.title }} </td>
+         
+       </tr>
+    </tbody>
+ </table>
+              <div class="quiz-question-list">
+                    <p class="exam-results text-center">MCQUESTIONS</p>
+                    <ul> 
+                        {% for quest in quiz.mcquestion.all %}
+                           <li class="quiz-listing">  {{quest.content}}</li> 
+                        {% endfor %}
+                    </ul>
+              </div>
+              <div class="quiz-question-list">
+                  <p class="exam-results text-center">TFQUESTIONS</p>
+                  <ul>
+                      {% for quest in quiz.tfquestion.all %}
+                      <li>{{quest.content}}</li> 
+                   {% endfor %}
+                  </ul>
+            </div>
+            <div class="quiz-question-list">
+                <p class="exam-results text-center">SHORTQUESTIONS</p>
+                <ul>
+                    {% for quest in quiz.essayquestion.all %}
+                    <li>{{quest.content}}</li> 
+                 {% endfor %}
+                </ul>
+          </div>
+  
+ 
+
+
+
 {% endblock %}
