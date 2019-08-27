@@ -38,10 +38,43 @@ class QuizForm(forms.ModelForm):
     #             forms.SelectMultiple,
     #             reverse_lazy('mcquestion_create'),
     #         ))
+    
+
+    # override __init__() to
+    # remove "required" from question field
+    # and hide friendly url for now????
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['mcquestion'].required = False
+        self.fields['tfquestion'].required = False
+        self.fields['essayquestion'].required = False
+        #self.fields['url'].required = False
+        #self.fields['url'].widget = forms.HiddenInput()
+        last_quiz = Quiz.objects.last()
+        if(last_quiz):
+            self.fields['url'].initial = "quiz" + str(last_quiz.id)
+            self.fields['title'].initial = "quiz" + str(last_quiz.id)
+        else:
+            self.fields['url'].initial = "quiz0"
+            self.fields['title'].initial = "quiz0"
 
     class Meta:
         model = Quiz
         fields = '__all__'
+    
+    # override clean() to
+    # add custom validation such that atleast
+    # one of the question must be present
+    def clean(self):
+        cleaned_data = super().clean()
+        mq = cleaned_data.get("mcquestion")
+        tq = cleaned_data.get("tfquestion")
+        eq = cleaned_data.get("essayquestion")
+        if not (mq or tq or eq):
+            raise forms.ValidationError(
+                "Please Select Atleast One Question"
+            )
+        return cleaned_data
 
 
 class MCQuestionForm(forms.ModelForm):
