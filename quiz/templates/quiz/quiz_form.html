@@ -48,5 +48,128 @@
 <a href="{%url 'mcquestion_create'%}" pk = quiz.pk>Add MCQ</a>
 
 
-</form>
+</form> 
+<hr>
+<form>
+    <div class="form-group"> 
+        <div class="col-md-12 questions-wrapper">
+                <div class="col-md-6">
+                        <label class="quiz-add-label"  for="">Multiple Choice Question</label>
+                        
+                </div>
+                <div class="col-md-6 questions-only">
+                        <a class="btn qts-button" href="{% url 'mcquestion_create' %}" > Add MCQ question </a>   
+                </div> 
+                <div class="col-md-12">
+                        {{form.mcquestion}}
+                </div>
+                
+        </div>
+    
+      
+  
+    </div>
+    <div class="form-group"> 
+            <div class="col-md-12 questions-wrapper">
+                    <div class="col-md-6">
+                            <label class="quiz-add-label"  for="">True False Question</label>
+                            
+                    </div>
+                    <div class="col-md-6 questions-only">
+                            <a class="btn qts-button" href="{% url 'tfquestion_create' %}" > Add T/F question </a>   
+                    </div>
+                    <div class="col-md-12">
+                            {{form.tfquestion}}  
+                    </div>
+                    
+            </div>
+            
+              
+              
+            </div>
+            <div class="form-group"> 
+                    <div class="col-md-12 questions-wrapper">
+                            <div class="col-md-6">
+                                    <label class="quiz-add-label"  for="">Short Type Question</label>
+                                    
+                            </div>
+                            <div class="col-md-6 questions-only">
+                                    <a class="btn qts-button" href="{% url 'essayquestion_create' %}" > Add Short question </a>   
+                            </div>
+                            <div class="col-md-12">
+                                    {{form.essayquestion}} 
+                            </div>
+                               
+                    </div>
+                   
+                      
+                      
+                    </div> 
+                    
+    <div class="form-group"> 
+        <div class="col-md-12"> 
+            <div class="col-md-6">
+                    <label class="quiz-add-label"  for="">Title</label>
+                    {{form.title}}
+
+            </div>
+            <div class="col-md-6">
+                    <label class="quiz-add-label"  for="">User Friendly Url</label>
+                    {{form.url}} 
+            </div>
+                
+                
+        </div>
+
+         
+      
+    </div>
+    <div class="form-group"> 
+            <div class="col-md-12"> 
+                <div class="col-md-6">
+                        <label class="quiz-add-label"  for="">Lecture Code</label>
+                        {{form.chapter_code}}
+    
+                </div>
+                <div class="col-md-6">
+                        <label class="quiz-add-label"  for="">Center Code</label>
+                        {{form.cent_code}} 
+                </div>
+                    
+                    
+            </div>
+    
+             
+          
+        </div>
+        <div class="form-group"> 
+                <div class="col-md-12"> 
+                    <div class="col-md-6">
+                            <label class="quiz-add-label"  for="">Chapter</label>
+                            {{form.chapter_code}}
+        
+                    </div>
+                    <div class="col-md-6">
+                            <label class="quiz-add-label"  for="">Timer</label>
+                            {{form.duration}} 
+                    </div>
+                        
+                        
+                </div>
+        
+                 
+              
+            </div>
+    <div class="form-group">
+      <label for="exampleInputFile">File input</label>
+      <input type="file" id="exampleInputFile">
+      <p class="help-block">Example block-level help text here.</p>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Check me out
+      </label>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
 {% endblock %}

@@ -3874,7 +3874,7 @@ ul.project_files li a i {
 }
 
 .form-group .btn {
-    margin-bottom: -6px;
+    margin-bottom: 0px;
 }
 
 .input-group-btn .btn {
@@ -6078,4 +6078,24 @@ input[type=checkbox], input[type=radio] {
 }
 .box3{
     width: 1050px;
+} 
+/* quiz create page */ 
+.qts-button{
+    padding: 4px 6px; 
+    color: white; 
+    background-color: #007fbe; 
+    text-align: center
+} 
+.questions-only{
+    text-align:right ;
+    padding: 0 0 10px 0;
+    margin-top: 10px
+
+}
+.quiz-add-label{
+    padding-top: 13px;
+    text-transform: uppercase;
+}
+.questions-wrapper{
+  
 }

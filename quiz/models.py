@@ -352,7 +352,7 @@ class Essay_Question(Question):
 
     def check_if_correct(self, guess):
         return True
-
+ 
     def get_answers(self):
         return False
 
@@ -397,7 +397,7 @@ class Quiz(models.Model):
         help_text=_("a user friendly url"),
         verbose_name=_("user friendly url"), unique=True)
 
-    course_code = models.ForeignKey(
+    category = models.ForeignKey(
         LectureInfo, null=True, blank=True,
         verbose_name=_("Lecture"), on_delete=models.CASCADE)
 
@@ -410,12 +410,10 @@ class Quiz(models.Model):
         verbose_name=_("Time limit for quiz"))
 
     pre_test = models.BooleanField(
-        default = False,
-        help_text=_("Pre test quiz are taken at the beggining of the chapter")
+        default = False
     ) 
     post_test = models.BooleanField(
-        default = False,
-        help_text=_("Post test quiz are taken at the end of the chapter")
+        default = False
     ) 
     created_date =  models.DateTimeField(
         auto_now_add=True
