@@ -93,12 +93,12 @@
 <div class="quiz-question-list">
     <a href="#esqn_list" data-toggle="collapse">
       <p class="exam-results text-center">
-        ESSAYQUESTIONS 
+        SHORT ANSWER QUESTIONS 
       </p>
     </a>
     <div id="esqn_list" class="collapse">
       <ul>
-          {% for quest in quiz.essayquestion.all %}
+          {% for quest in quiz.saquestion.all %}
           <li>{{quest.content}}</li> 
         {% endfor %}
       </ul>

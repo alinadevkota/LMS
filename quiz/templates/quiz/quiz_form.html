@@ -11,7 +11,7 @@
     function validateForm() {
     var mq = document.forms["quiz_create_form"]["mcquestion"].value;
     var tq = document.forms["quiz_create_form"]["tfquestion"].value;
-    var eq = document.forms["quiz_create_form"]["essayquestion"].value;
+    var eq = document.forms["quiz_create_form"]["saquestion"].value;
         if (!(mq || tq || eq)) {
             document.getElementById('qn_err_box').style.display = "block";
             $('html,body').animate({
@@ -30,7 +30,7 @@
 
             <a class="btn btn-primary" href="{% url 'mcquestion_create' %}" > Add MCQ question </a>
             <a class="btn btn-primary" href="{% url 'tfquestion_create' %}" > Add TF question </a>
-            <a class="btn btn-primary" href="{% url 'essayquestion_create' %}" > Add Essay question </a>
+            <a class="btn btn-primary" href="{% url 'saquestion_create' %}" > Add Short Answer question </a>
 
 
 <p><a class="btn btn-default" href="{% url 'quiz_create' %}">Create Quiz</a></p>
