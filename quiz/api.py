@@ -26,10 +26,14 @@ class TFQuestionViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.TF_QuestionSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+class SAQuestionViewSet(viewsets.ModelViewSet):
+    queryset = models.SA_Question.objects.all()
+    serializer_class = serializers.SA_QuestionSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
 
 class AnswerViewSet(viewsets.ModelViewSet):
     """ViewSet for the OptionInfo class"""
-
     queryset = models.Answer.objects.all()
     serializer_class = serializers.AnswerSerializer
     permission_classes = [permissions.IsAuthenticated]
