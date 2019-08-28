@@ -8,10 +8,11 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView, FormView, CreateView, UpdateView
 from django.urls import reverse, reverse_lazy
+from django.db import transaction
 
 from WebApp.models import LectureInfo
-from .forms import QuestionForm, SAForm, QuizForm, TFQuestionForm, SAQuestionForm, MCQuestionForm
-from .models import Quiz, Progress, Sitting, MCQuestion, TF_Question, Question, SA_Question
+from .forms import QuestionForm, SAForm, QuizForm, TFQuestionForm, SAQuestionForm, MCQuestionForm, AnsFormset
+from .models import Quiz, Progress, Sitting, MCQuestion, TF_Question, Question, SA_Question, Answer
 
 
 class QuizMarkerMixin(object):
@@ -417,18 +418,50 @@ class MCQuestionListView(ListView):
     model = MCQuestion
 
 
-
-
 class MCQuestionCreateView(CreateView):
-    model = MCQuestion
+    model =MCQuestion
     form_class = MCQuestionForm
 
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        if self.request.POST:
+            context['answers_formset'] = AnsFormset(self.request.POST)
+        else:
+            context['answers_formset'] = AnsFormset()
+        return context
+    
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        context = self.get_context_data()
+        ans = context['answers_formset']
+        with transaction.atomic():
+            if ans.is_valid():
+                ans.instance = self.object
+                ans.save()
+        return vform
 
 class MCQuestionUpdateView(UpdateView):
-    model = MCQuestion
+    model =MCQuestion
     form_class = MCQuestionForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)        
+        if self.request.POST:
+            context['answers_formset'] = AnsFormset(self.request.POST, instance = self.object)
+        else:
+            context['answers_formset'] = AnsFormset(instance = self.object)
+        return context
+    
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        context = self.get_context_data()
+        ans = context['answers_formset']
+        with transaction.atomic():
+            if ans.is_valid():
+                ans.instance = self.object
+                ans.save()
+        return vform
+    
 
 class MCQuestionDetailView(DetailView):
     model = MCQuestion
