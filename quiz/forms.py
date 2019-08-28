@@ -6,8 +6,8 @@ from django.utils.translation import gettext as _
 # from quiz import admin
 from django_addanother.widgets import AddAnotherWidgetWrapper
 
-from quiz.models import Quiz, MCQuestion, TF_Question, Essay_Question
-
+from quiz.models import Quiz, MCQuestion, TF_Question, SA_Question, Answer
+from django.forms import inlineformset_factory
 
 # class AnswerInline(admin.TabularInline):
 #     model = Answer
@@ -20,9 +20,9 @@ class QuestionForm(forms.Form):
                                                    widget=RadioSelect)
 
 
-class EssayForm(forms.Form):
+class SAForm(forms.Form):
     def __init__(self, question, *args, **kwargs):
-        super(EssayForm, self).__init__(*args, **kwargs)
+        super(SAForm, self).__init__(*args, **kwargs)
         self.fields["answers"] = forms.CharField(
             widget=Textarea(attrs={'style': 'width:100%'}))
 
@@ -47,7 +47,7 @@ class QuizForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['mcquestion'].required = False
         self.fields['tfquestion'].required = False
-        self.fields['essayquestion'].required = False
+        self.fields['saquestion'].required = False
         #self.fields['url'].required = False
         #self.fields['url'].widget = forms.HiddenInput()
         last_quiz = Quiz.objects.last()
@@ -69,7 +69,7 @@ class QuizForm(forms.ModelForm):
         cleaned_data = super().clean()
         mq = cleaned_data.get("mcquestion")
         tq = cleaned_data.get("tfquestion")
-        eq = cleaned_data.get("essayquestion")
+        eq = cleaned_data.get("saquestion")
         if not (mq or tq or eq):
             raise forms.ValidationError(
                 "Please Select Atleast One Question"
@@ -100,9 +100,9 @@ class TFQuestionForm(forms.ModelForm):
         # label=_("Questions"),
         widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
 
-class EssayQuestionForm(forms.ModelForm):
+class SAQuestionForm(forms.ModelForm):
     class Meta:
-        model = Essay_Question
+        model = SA_Question
         fields = '__all__'
 
     quiz = forms.ModelMultipleChoiceField(
@@ -111,3 +111,9 @@ class EssayQuestionForm(forms.ModelForm):
         # label=_("Questions"),
         widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
 
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = '__all__'
+    
+AnsFormset = inlineformset_factory(MCQuestion, Answer, form=AnswerForm, fields=['content', 'correct'], extra=1,)
