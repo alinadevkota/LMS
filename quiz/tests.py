@@ -22,7 +22,7 @@ from .views import (anon_session_score, QuizListView, CategoriesListView,
 
 from multichoice.models import MCQuestion, Answer
 from true_false.models import TF_Question
-from essay.models import Essay_Question
+from sa.models import SA_Question
 
 
 class TestCategory(TestCase):
@@ -58,7 +58,7 @@ class TestQuiz(TestCase):
         self.quiz4 = Quiz.objects.create(id=4,
                                          title='test quiz 4',
                                          description='d4',
-                                         url='T-!£$%^&*Q4')
+                                         url='T-!ï¿½$%^&*Q4')
 
         self.question1 = MCQuestion.objects.create(id=1,
                                                    content='squawk')
@@ -537,7 +537,7 @@ class TestQuestionMarking(TestCase):
         self.assertContains(response, 'incorrect')
 
     def test_paper_marking_detail_toggle_correct(self):
-        question2 = Essay_Question.objects.create(id=3, content='scribble')
+        question2 = SA_Question.objects.create(id=3, content='scribble')
         question2.quiz.add(self.quiz1)
 
         sitting3 = Sitting.objects.new_sitting(self.student, self.quiz1)
@@ -898,7 +898,7 @@ class TestQuestionViewsUser(TestCase):
         response_with_perm = self.client.get('/draft/')
         self.assertEqual(response_with_perm.status_code, 200)
 
-    def test_essay_question(self):
+    def test_sa_question(self):
         quiz3 = Quiz.objects.create(id=3,
                                     title='test quiz 3',
                                     description='d3',
@@ -906,8 +906,8 @@ class TestQuestionViewsUser(TestCase):
                                     category=self.c1,
                                     answers_at_end=True,
                                     exam_paper=True)
-        essay = Essay_Question.objects.create(id=4, content='tell all')
-        essay.quiz.add(quiz3)
+        sa = SA_Question.objects.create(id=4, content='tell all')
+        sa.quiz.add(quiz3)
         self.client.login(username='jacob', password='top_secret')
 
         response = self.client.post('/tq3/take/')
