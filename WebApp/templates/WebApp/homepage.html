@@ -396,11 +396,16 @@
     /* =======================  PLACEMENT FUNCTIONS =======================  */
     function createWordObject(word, freq) {
         var wordContainer = document.createElement("div");
+        var wordLink = document.createElement("a");
         wordContainer.style.position = "absolute";
         wordContainer.style.fontSize = freq + "px";
         wordContainer.style.lineHeight = config.lineHeight;
-        /*    wordContainer.style.transform = "translateX(-50%) translateY(-50%)";*/
-        wordContainer.appendChild(document.createTextNode(word));
+        /*    wordContainer.style.transform = "translateX(-50%) translateY(-50%)";
+        wordContainer.appendChild(document.createTextNode(word));*/
+       
+        wordLink.setAttribute(`href`, `/forum/search/(%3FP${word}.*)/`);
+        wordLink.appendChild(document.createTextNode(word));
+        wordContainer.appendChild(wordLink);
 
         return wordContainer;
     }

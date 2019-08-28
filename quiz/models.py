@@ -397,7 +397,7 @@ class Quiz(models.Model):
         help_text=_("a user friendly url"),
         verbose_name=_("user friendly url"), unique=True)
 
-    category = models.ForeignKey(
+    course_code = models.ForeignKey(
         LectureInfo, null=True, blank=True,
         verbose_name=_("Lecture"), on_delete=models.CASCADE)
 
@@ -410,10 +410,12 @@ class Quiz(models.Model):
         verbose_name=_("Time limit for quiz"))
 
     pre_test = models.BooleanField(
-        default = False
+        default = False,
+        help_text=_("Pre test quiz are taken at the beggining of the chapter")
     ) 
     post_test = models.BooleanField(
-        default = False
+        default = False,
+        help_text=_("Post test quiz are taken at the end of the chapter")
     ) 
     created_date =  models.DateTimeField(
         auto_now_add=True

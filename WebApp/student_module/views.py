@@ -12,15 +12,15 @@ from django.shortcuts import render
 # Create your views here.
 from django.views.generic import DetailView, ListView
 
-from WebApp.models import LectureInfo, GroupMapping
+from WebApp.models import LectureInfo, GroupMapping, InningInfo, InningGroup
 
 
 def start(request):
     return render(request, 'student_module/dashboard.html')
 
 
-def mycourse(request):
-    return render(request, 'student_module/myCourse.html')
+# def mycourse(request):
+#     return render(request, 'student_module/myCourse.html')
 
 
 def quiz(request):
@@ -38,6 +38,23 @@ def calendar(request):
 # def coursedetail(request):
 #     return render(request, 'student_module/course_detail.html')
 # #
+class MyCoursesListView(ListView):
+    model = LectureInfo
+    template_name = 'student_module/myCourse.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['GroupName'] = GroupMapping.objects.get(Students__id=self.request.user.id)
+        context['Group'] = InningInfo.objects.get(Groups__id=context['GroupName'].id)
+        # for course in context['Group']():
+        #     context['Course'] = InningGroup.objects.filter(id=context['Group'].id)
+        # context['Course'] = InningGroup.objects.filter(id=context['Group'].id)
+        context['Course'] = context['Group'].Course_Group.all()
+        # context['Course_Group'] = InningInfo.objects.get(Course_Group__id=context['Group'].Course_Group)
+        # print(context['Group'].Course_Group)
+        return context
+
+
 class LectureInfoListView(ListView):
     model = LectureInfo
     template_name = 'student_module/lectureinfo_list.html'
