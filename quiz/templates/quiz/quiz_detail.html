@@ -72,6 +72,10 @@
                   {% csrf_token %}
                   <input type="submit" value="Edit">
                 </form>
+                <form action="{% url 'mcquestion_create'%}" method="get">
+                  {% csrf_token %}
+                  <input type="submit" value="Add">
+                </form>
               {% endfor %}
           </ul>
         </div>

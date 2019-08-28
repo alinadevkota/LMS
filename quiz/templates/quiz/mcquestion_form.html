@@ -8,11 +8,58 @@
 
     {{ form.media }}
 
+<!--
+<form method="post">
+    {#{% csrf_token %}#}
+    {#{{ form|crispy }}#}
+    {#{{ answers_formset|crispy }}#}
+<button class="btn btn-primary" type="submit">Submit</button>
+</form>
+-->
 
 <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
-    {{ answers_formset|crispy }}
+    <br><br>
+    <p></p>
+    
+    {{ answers_formset.management_form }}
+    {% for form in answers_formset.forms %}
+        <div class='table'>
+        <table class='no_error'>
+            {{ form|crispy }}
+        </table>
+        </div>
+    {% endfor %}
+    <input type="button" value="Add More" id="add_more">
+    
+
 <button class="btn btn-primary" type="submit">Submit</button>
 </form>
+
 {% endblock %}
+{% block customjss %}
+    <script>
+        function cloneMore(selector, type) {
+            var newElement = $(selector).clone(true);
+            var total = $('#id_' + type + '-TOTAL_FORMS').val();
+            newElement.find(':input').each(function() {
+                var name = $(this).attr('name').replace('-' + (total-1) + '-','-' + total + '-');
+                var id = 'id_' + name;
+                $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+            });
+            newElement.find('label').each(function() {
+                var newFor = $(this).attr('for').replace('-' + (total-1) + '-','-' + total + '-');
+                $(this).attr('for', newFor);
+            });
+            total++;
+            $('#id_' + type + '-TOTAL_FORMS').val(total);
+            $(selector).after(newElement);
+        }
+
+        $('#add_more').click(function() {
+            cloneMore('div.table:last', 'answer_set');
+        });
+
+    </script>
+{% endblock customjss %}
