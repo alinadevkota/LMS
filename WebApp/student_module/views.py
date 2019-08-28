@@ -46,7 +46,10 @@ class MyCoursesListView(ListView):
         context = super().get_context_data(**kwargs)
         context['GroupName'] = GroupMapping.objects.get(Students__id=self.request.user.id)
         context['Group'] = InningInfo.objects.get(Groups__id=context['GroupName'].id)
-        context['Course'] = InningGroup.objects.filter(id=context['Group'].id)
+        # for course in context['Group']():
+        #     context['Course'] = InningGroup.objects.filter(id=context['Group'].id)
+        # context['Course'] = InningGroup.objects.filter(id=context['Group'].id)
+        context['Course'] = context['Group'].Course_Group.all()
         # context['Course_Group'] = InningInfo.objects.get(Course_Group__id=context['Group'].Course_Group)
         # print(context['Group'].Course_Group)
         return context
