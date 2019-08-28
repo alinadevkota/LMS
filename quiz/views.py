@@ -441,7 +441,7 @@ class MCQuestionCreateView(CreateView):
         return vform
 
 class MCQuestionUpdateView(UpdateView):
-    model =MCQuestion
+    model = MCQuestion
     form_class = MCQuestionForm
 
     def get_context_data(self, **kwargs):
@@ -471,6 +471,30 @@ def MCQuestionDeleteView(request, pk):
     MCQuestion.objects.filter(pk=pk).delete()
     return redirect("mcquestion_list")
 
+#class MCQuestionCreateFromQuiz(CreateView):
+#    model = MCQuestion
+#    form_class = MCQuestionForm
+#    fields = ['figure', 'question', 'explanation', 'answer_order']
+
+#    def get_context_data(self, **kwargs):
+#        context = super().get_context_data(**kwargs) 
+#        if self.request.POST:
+#            context['answers_formset'] = AnsFormset(self.request.POST)
+#        else:
+#            context['answers_formset'] = AnsFormset()
+#        return context
+    
+#    def form_valid(self, form):
+#        quiz_id = self.kwargs['quiz_id']
+#        self.object
+#        vform = super().form_valid(form)
+#        context = self.get_context_data()
+#        ans = context['answers_formset']
+#        with transaction.atomic():
+#            if ans.is_valid():
+#                ans.instance = self.object
+#                ans.save()
+#        return vform
 
 # -------------------------_Question Views------------------
 
