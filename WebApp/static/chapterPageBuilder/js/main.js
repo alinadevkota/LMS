@@ -124,7 +124,7 @@ $(document).ready(function() {
                       'display': 'none'
                   })
                   div.css({
-                      'background-image': 'url("../uploads/' + file.name + '")',
+                      'background-image': 'url('+load_file_url+'/' + file.name + '")',
                       'background-repeat': 'no-repeat',
                       'background-size': 'contain',
                       'background-position': 'center',
@@ -173,21 +173,20 @@ $(document).ready(function() {
                               type: 'POST',
                               success: function(data) {
                                   console.log(data);
+                                  div.css({
+                                    'background-image': 'url('+load_file_url+'/'+input.files[0].name+')',
+                                    'background-repeat': 'no-repeat',
+                                    'background-size': 'contain',
+                                    'background-position': 'center',
+                                    'border': '0'
+                                });
                               }
-
                           });
 
                           $('#picture-drag').css({
                               'display': 'none'
                           })
-
-                          div.css({
-                              'background-image': 'url("../uploads/' + input.files[0].name + '")',
-                              'background-repeat': 'no-repeat',
-                              'background-size': 'contain',
-                              'background-position': 'center',
-                              'border': '0'
-                          });
+                          
                           $(div).hover(function() {
                               $(this).css("border", "1px solid red");
                           }, function() {
@@ -276,7 +275,7 @@ $(document).ready(function() {
 
                                       div.append(`
                       <video width="400" height="200" controls>
-                      <source src="../uploads/${file.name}" type="video/mp4">
+                      <source src="`+load_file_url+`/${file.name}" type="video/mp4">
                        Your browser does not support the video tag.
                     </video>
                 `);
@@ -360,7 +359,7 @@ $(document).ready(function() {
 
                                               div.append(`
                                   <video width="400" height="200" controls>
-                                  <source src="../uploads/${input.files[0].name}" type="video/mp4">
+                                  <source src="`+load_file_url+`/${input.files[0].name}" type="video/mp4">
                                    Your browser does not support the video tag.
                                 </video>
                             `);
@@ -526,7 +525,7 @@ $(document).ready(function() {
                       'display': 'none'
                   })
                   div.css({
-                      'background-image': 'url("../uploads/' + file.name + '")',
+                      'background-image': 'url('+load_file_url+'/' + file.name + '")',
                       'background-repeat': 'no-repeat',
                       'background-size': 'contain',
                       'background-position': 'center',
@@ -579,7 +578,7 @@ $(document).ready(function() {
                           })
 
                           div.css({
-                              'background-image': 'url("../uploads/' + input.files[0].name + '")',
+                              'background-image': 'url('+load_file_url+'/' + input.files[0].name + '")',
                               'background-repeat': 'no-repeat',
                               'background-size': 'contain',
                               'background-position': 'center',
@@ -690,7 +689,7 @@ $(document).ready(function() {
                       'display': 'none'
                   })
                   div.css({
-                      'background-image': 'url("../uploads/' + file.name + '")',
+                      'background-image': 'url('+load_file_url+'/' + file.name + '")',
                       'background-repeat': 'no-repeat',
                       'background-size': 'contain',
                       'background-position': 'center',
@@ -742,7 +741,7 @@ $(document).ready(function() {
                           })
 
                           div.css({
-                              'background-image': 'url("../uploads/' + input.files[0].name + '")',
+                              'background-image': 'url('+load_file_url+'/' + input.files[0].name + '")',
                               'background-repeat': 'no-repeat',
                               'background-size': 'contain',
                               'background-position': 'center',
@@ -1420,7 +1419,7 @@ $(document).ready(function() {
                           'display': 'none'
                       })
                       div.css({
-                          'background-image': 'url("../uploads/' + file.name + '")',
+                          'background-image': 'url('+load_file_url+'/' + file.name + '")',
                           'background-repeat': 'no-repeat',
                           'background-size': 'contain',
                           'background-position': 'center',
@@ -1472,7 +1471,7 @@ $(document).ready(function() {
                               })
 
                               div.css({
-                                  'background-image': 'url("../uploads/' + input.files[0].name + '")',
+                                  'background-image': 'url('+load_file_url+'/' + input.files[0].name + '")',
                                   'background-repeat': 'no-repeat',
                                   'background-size': 'contain',
                                   'background-position': 'center',
@@ -1573,7 +1572,7 @@ $(document).ready(function() {
 
                                           div.style.html(`
                      <video width="300" height="200" controls>
-                     <source src="../uploads/${file.name}" type="video/mp4">
+                     <source src="`+load_file_url+`/${file.name}" type="video/mp4">
                       Your browser does not support the video tag.
                    </video>
                `);
@@ -1599,7 +1598,7 @@ $(document).ready(function() {
 
                               return xhr;
                           },
-                          url: save_file_url,
+                          url: image_url,
                           data: data,
                           contentType: false,
                           processData: false,
@@ -1657,7 +1656,7 @@ $(document).ready(function() {
 
                                                   div.append(`
                                 <video width="400" height="200" controls>
-                                <source src="../uploads/${input.files[0].name}" type="video/mp4">
+                                <source src="`+load_file_url+`/${input.files[0].name}" type="video/mp4">
                                  Your browser does not support the video tag.
                               </video>
                           `);

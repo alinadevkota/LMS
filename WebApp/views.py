@@ -1288,13 +1288,19 @@ def question(request):
 def polls(request):
     return render(request, 'WebApp/polls.html')
 
-def chapterpagebuilder(request, course, chapter):
-    return render(request, 'WebApp/chapterbuilder.html', {'course':course, 'chapter':chapter})
-
+#chapter builder code starts from here
 
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings 
 import os
+
+def chapterpagebuilder(request, course, chapter):
+    context = {
+        'course':course, 
+        'chapter':chapter, 
+        'file_path': settings.MEDIA_ROOT
+    }
+    return render(request, 'WebApp/chapterbuilder.html', context)
 
 @csrf_exempt
 def save_file(request):
@@ -1317,3 +1323,5 @@ def save_file(request):
                 fs = FileSystemStorage(location = path+'/chapterBuilder/'+courseID+'/'+chapterID)
                 filename = fs.save(image.name, image)
         return JsonResponse(data = {"message":"success"})
+
+#-------------------------------------------------------------------------------------------------------
