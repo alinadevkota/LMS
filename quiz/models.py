@@ -397,7 +397,7 @@ class Quiz(models.Model):
         help_text=_("a user friendly url"),
         verbose_name=_("user friendly url"), unique=True)
 
-    category = models.ForeignKey(
+    course_code = models.ForeignKey(
         LectureInfo, null=True, blank=True,
         verbose_name=_("Lecture"), on_delete=models.CASCADE)
 
