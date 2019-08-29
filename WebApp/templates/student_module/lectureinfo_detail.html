@@ -1,5 +1,9 @@
 {% extends "student_module/base.html" %}
 {% load static %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'student_mycourses_list' %}">My Courses</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ object.Lecture_Name }}</li>
+{% endblock %}
 
 {% block content %}
 

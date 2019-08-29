@@ -28,53 +28,52 @@
                             {% else %}
                                 {% static 'images/course.jpg' %}
                             {% endif %}" alt="Card image cap" width="100%">
-            <div class="courseDetailStyle1 row" style="margin-top: 10px">
+                <div class="courseDetailStyle1 row" style="margin-top: 10px">
 
 
-                <div class="col-lg-3" style="font-size: 15px;">
-                    <h5 align="center"><i class="fa fa-comment-o"></i>
-                        <a href="">FORUM</a>
-                    </h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-7 col-sm-12 col-xs-12">
-            <h3 align="center"><b>{{ object.Lecture_Name }}</b></h3>
-            <table class="table">
-
-                <tr>
-                    <td>Lecture Level</td>
-                    <td>{{ object.Lecture_Level }}</td>
-                </tr>
-                <tr>
-                    <td>Lecture Provider</td>
-                    <td>{{ object.Lecture_Provider }}</td>
-                </tr>
-                <tr>
-                    <td>Register Agent</td>
-                    <td>{{ object.Register_Agent }}</td>
-                </tr>
-
-                {#                <tr>#}
-                {#                    <td>Teacher Code</td>#}
-                {#                    <td>{{ object.Teacher_Code }}</td>#}
-                {#                </tr>#}
-            </table>
-
-            <h4 align="center"><b>Lecture Description</b></h4>
-            <span style="margin-left: 10px"> {{ object.Lecture_Description }} </span>
-            <hr>
-            <h4></h4>
-            <div class="quiz-counter">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p class="quiz-counter">Number of Quizes</p>
-                    </div>
-                    <div class=" counter col-md-6 text-center">
-                        <h4>{{ quiz }}</h4>
+                    <div class="col-lg-3" style="font-size: 15px;">
+                        <h5 align="center"><i class="fa fa-comment-o"></i>
+                            <a href="">FORUM</a>
+                        </h5>
                     </div>
                 </div>
-            </div>
+
+{#                <h3 align="center"><b>{{ object.Lecture_Name }}</b></h3>#}
+                <table class="table">
+
+                    <tr>
+                        <td>Lecture Level</td>
+                        <td>{{ object.Lecture_Level }}</td>
+                    </tr>
+                    <tr>
+                        <td>Lecture Provider</td>
+                        <td>{{ object.Lecture_Provider }}</td>
+                    </tr>
+                    <tr>
+                        <td>Register Agent</td>
+                        <td>{{ object.Register_Agent }}</td>
+                    </tr>
+
+                    {#                <tr>#}
+                    {#                    <td>Teacher Code</td>#}
+                    {#                    <td>{{ object.Teacher_Code }}</td>#}
+                    {#                </tr>#}
+                </table>
+
+                <h4 align="center"><b>Lecture Description</b></h4>
+                <span style="margin-left: 10px"> {{ object.Lecture_Description }} </span>
+                <hr>
+                <h4></h4>
+                <div class="quiz-counter">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="quiz-counter">Number of Quizes</p>
+                        </div>
+                        <div class=" counter col-md-6 text-center">
+                            <h4>{{ quiz }}</h4>
+                        </div>
+                    </div>
+                </div>
 
 
         </div>
@@ -94,7 +93,7 @@
                 {% endif %}
             </div>
             <div class="col-md-12 col-sm-12 xol-xs-12">
-                <hr class="header_hr" style="margin-bottom: 5px;margin-top: 5px;">
+                {#                <hr class="header_hr" style="margin-bottom: 5px;margin-top: 5px;">#}
                 {% for o in chapters %}
                     <div class="col-md-12 col-sm-12 col-xs-12 leftborder" style=" margin: 10px;">
                         <div class="col-md-8 col-sm-8 col-xs-12">
@@ -109,8 +108,9 @@
                             {% else %}
                                {{ o.get_absolute_url }}
                             {% endif %}">
-                                <button type="button" style="float: right;width:100px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
-                                margin-top: 20px;margin-bottom: 10px;">CONTINUE <i class="fa fa-arrow-right"></i>
+                                <button type="button" style="float: right;width:150px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
+                                margin-top: 20px;margin-bottom: 10px;">View Chapter &nbsp;<i
+                                        class="fa fa-arrow-right"></i>
                                 </button>
                             </a>
                         </div>
