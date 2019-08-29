@@ -510,7 +510,7 @@ class Quiz(models.Model):
         super(Quiz, self).save(force_insert, force_update, *args, **kwargs)
 
     def question_count(self):
-        return len(self.mcquestion.all()) + len(self.tfquestion.all()) + len(self.essayquestion.all())
+        return len(self.mcquestion.all()) + len(self.tfquestion.all()) + len(self.saquestion.all())
 
     class Meta:
         verbose_name = _("Quiz")
