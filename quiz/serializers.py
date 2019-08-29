@@ -17,29 +17,37 @@ class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Quiz
         fields = (
-            'title', 'description', 'mcquestion', 'url', 'random_order', 'max_questions', 'answers_at_end', 'exam_paper', 'single_attempt', 'pass_mark', 'success_text', 'fail_text'
+            'title', 'description', 'mcquestion', 'tfquestion', 'saquestion', 'url', 'cent_code', 'course_code', 'chapter_code', 'duration', 'random_order', 'answers_at_end', 'exam_paper', 'single_attempt', 'pre_test', 'post_test', 'pass_mark', 'success_text', 'fail_text'
         )
 
 class MCQuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Quiz
+        model = models.MCQuestion
         fields = (
-            'figure', 'content', 'explanation', 'answer_order'
+            'figure', 'content', 'course_code', 'explanation', 'cent_code', 'answer_order'
         )
 
 class TF_QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Quiz
+        model = models.TF_Question
         fields = (
-            'figure', 'content', 'explanation', 'correct'
+            'figure', 'content', 'course_code', 'explanation', 'cent_code', 'correct'
+        )
+
+class SA_QuestionSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = models.SA_Question
+        fields = (
+            'figure', 'content', 'course_code', 'explanation', 'cent_code'
         )
 
 class AnswerSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Quiz
+        model = models.Answer
         fields = (
-            'content', 'correct'
+            'question', 'content', 'correct'
         )

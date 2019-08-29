@@ -5,7 +5,7 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
 
-from .models import Quiz, Progress, Answer, MCQuestion, TF_Question, Essay_Question
+from .models import Quiz, Progress, Answer, MCQuestion, TF_Question, SA_Question
 
 
 class AnswerInline(admin.TabularInline):
@@ -46,7 +46,7 @@ class QuizAdmin(admin.ModelAdmin):
 
     # list_display = ('title', 'category', )
     # list_filter = ('category',)
-    search_fields = ('description', 'category',)
+    search_fields = ('description', 'course_code',)
 
 
     # def changelist_view(self, request, extra_context=None):
@@ -97,8 +97,8 @@ class MCQuestionAdmin(admin.ModelAdmin):
 
     change_form_template = 'admin_add_form.html'
     change_list_template = 'custom_list.html'
-    list_display = ('content', 'category', )
-    list_filter = ('category',)
+    list_display = ('content', 'course_code', )
+    list_filter = ('course_code',)
     fields = ('content', 'figure', 'explanation', 'answer_order', 'cent_code')
 
     search_fields = ('content', 'explanation')
@@ -112,8 +112,8 @@ class TFQuestionAdmin(admin.ModelAdmin):
     change_form_template = 'admin_add_form.html'
     change_list_template = 'custom_list.html'
 
-    list_display = ('content', 'category', )
-    list_filter = ('category',)
+    list_display = ('content', 'course_code', )
+    list_filter = ('course_code',)
     fields = ('content', 'figure', 'explanation', 'correct', 'cent_code')
 
     search_fields = ('content', 'explanation')
@@ -121,7 +121,7 @@ class TFQuestionAdmin(admin.ModelAdmin):
     add_form_template = 'admin_add_form.html'
 
 
-class EssayQuestionAdmin(admin.ModelAdmin):
+class SAQuestionAdmin(admin.ModelAdmin):
     change_form_template = 'admin_add_form.html'
     change_list_template = 'custom_list.html'
 
@@ -139,4 +139,4 @@ admin.site.register(Quiz, QuizAdmin)
 admin.site.register(MCQuestion, MCQuestionAdmin)
 admin.site.register(Progress, ProgressAdmin)
 admin.site.register(TF_Question, TFQuestionAdmin)
-admin.site.register(Essay_Question, EssayQuestionAdmin)
+admin.site.register(SA_Question, SAQuestionAdmin)

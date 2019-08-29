@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views import generic
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView, TemplateView
 from django.views.generic.edit import FormView
@@ -66,6 +66,7 @@ class AjaxableResponseMixin:
     Mixin to add AJAX support to a form.
     Must be used with an object-based FormView (e.g. CreateView)
     """
+
     def form_invalid(self, form):
         response = super().form_invalid(form)
         if self.request.is_ajax():
@@ -85,6 +86,7 @@ class AjaxableResponseMixin:
             return JsonResponse(data)
         else:
             return response
+
 
 def ProfileView(request):
     try:
@@ -513,6 +515,24 @@ class ChapterMissonCheckItemUpdateView(UpdateView):
     form_class = ChapterMissonCheckItemForm
 
 
+class SessionInfoCreateViewPopup(CreateView):
+    model = SessionInfo
+    form_class = SessionInfoForm
+    template_name = 'popup/sessioninfoformpopup.html'
+
+
+class InningGroupCreateViewPopup(CreateView):
+    model = SessionInfo
+    form_class = SessionInfoForm
+    template_name = 'popup/inninggroupformpopup.html'
+
+
+class GroupMappingCreateViewPopup(CreateView):
+    model = SessionInfo
+    form_class = SessionInfoForm
+    template_name = 'popup/groupmappingformpopup.html'
+
+
 class SessionInfoListView(ListView):
     model = SessionInfo
 
@@ -536,6 +556,13 @@ class InningInfoListView(ListView):
 
 
 class InningInfoCreateView(CreateView):
+    # template_name = "WebApp/inninginfo_form.html"
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     form = InningInfoForm()
+    #     context['form'] = form
+    #     return context
     model = InningInfo
     form_class = InningInfoForm
     # form_classes = {
@@ -563,11 +590,16 @@ class InningGroupCreateView(CreateView):
     model = InningGroup
     form_class = InningGroupForm
 
+class InningGroupCreateAjax(AjaxableResponseMixin, CreateView):
+    model = InningGroup
+    form_class = InningGroupForm
+    template_name = 'ajax/inninggroup_form_ajax.html'
+
 class InningInfoCreateSessionAjax(AjaxableResponseMixin, CreateView):
     model = SessionInfo
     form_class = SessionInfoForm
     template_name = 'ajax/sessioncreate_form_ajax.html'
-    
+
 
 class InningGroupDetailView(DetailView):
     model = InningGroup
@@ -577,10 +609,12 @@ class InningGroupUpdateView(UpdateView):
     model = InningGroup
     form_class = InningGroupForm
 
+
 class GroupCreateSessionAjax(AjaxableResponseMixin, CreateView):
     model = GroupMapping
     form_class = GroupMappingForm
     template_name = 'ajax/groupcreate_form_ajax.html'
+
 
 class GroupMappingListView(ListView):
     model = GroupMapping
@@ -665,6 +699,14 @@ class AssignmentInfoCreateView(CreateView):
 class AssignmentInfoDetailView(DetailView):
     model = AssignmentInfo
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Questions'] = QuestionInfo.objects.filter(Assignment_Code=self.kwargs.get('pk'))
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
+        # context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
+        return context
+
 
 class AssignmentInfoUpdateView(UpdateView):
     model = AssignmentInfo
@@ -684,11 +726,27 @@ class QuestionInfoListView(ListView):
 class QuestionInfoCreateView(CreateView):
     model = QuestionInfo
     form_class = QuestionInfoForm
+    # success_url = 'questioninfo_detail'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
         context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
         return context
+
+
+class QuestionInfoCreateAjax(AjaxableResponseMixin, CreateView):
+    model = QuestionInfo
+    form_class = QuestionInfoForm
+    template_name = 'ajax/questioninfo_form_ajax.html'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+    #     context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
+    #     # context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
+    #     return context
 
 
 class QuestionInfoDetailView(DetailView):
@@ -701,6 +759,8 @@ class QuestionInfoUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
         context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
         return context
 
@@ -779,7 +839,6 @@ class AssignAnswerInfoUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['Question_Code'] = get_object_or_404(QuestionInfo, pk=self.kwargs.get('questioncode'))
         return context
-
 
 
 class BoardInfoListView(ListView):
@@ -1256,3 +1315,33 @@ def question(request):
 
 def polls(request):
     return render(request, 'WebApp/polls.html')
+
+def chapterpagebuilder(request, course, chapter):
+    return render(request, 'WebApp/chapterbuilder.html', {'course':course, 'chapter':chapter})
+
+
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings 
+import os
+
+@csrf_exempt
+def save_file(request):
+    if request.method == "POST":
+        count = request.POST['count']
+        chapterID = request.POST['chapterID']
+        courseID = request.POST['courseID']
+        path = ''
+        for x in range(int(count)):
+            if request.FILES['file-'+str(x)]:
+                image = request.FILES['file-'+str(x)]
+                path = settings.MEDIA_ROOT
+                # following is commented because filesystemstorage auto create directories if not exist
+                # if not os.path.exists(os.path.join(path, 'chapterBuilder')):
+                #     os.makedirs(os.path.join(path, 'chapterBuilder'))
+                # if not os.path.exists(path+'chapterBuilder/'+courseID):
+                #     os.makedirs(os.path.join(path, 'chapterBuilder/'+courseID))
+                # if not os.path.exists(path+'chapterBuilder/'+courseID+'/'+chapterID):
+                #     os.makedirs(os.path.join(path, 'chapterBuilder/'+courseID+'/'+chapterID))    
+                fs = FileSystemStorage(location = path+'/chapterBuilder/'+courseID+'/'+chapterID)
+                filename = fs.save(image.name, image)
+        return JsonResponse(data = {"message":"success"})

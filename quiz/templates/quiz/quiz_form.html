@@ -6,6 +6,23 @@
 
 
 <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+
+<script>
+    function validateForm() {
+    var mq = document.forms["quiz_create_form"]["mcquestion"].value;
+    var tq = document.forms["quiz_create_form"]["tfquestion"].value;
+    var eq = document.forms["quiz_create_form"]["saquestion"].value;
+        if (!(mq || tq || eq)) {
+            document.getElementById('qn_err_box').style.display = "block";
+            $('html,body').animate({
+                scrollTop: $("#qn_err_box").offset().top},
+                'slow');
+            return false;
+        }
+    }
+</script>
+
+
 <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
 
 
@@ -13,18 +30,22 @@
 
             <a class="btn btn-primary" href="{% url 'mcquestion_create' %}" > Add MCQ question </a>
             <a class="btn btn-primary" href="{% url 'tfquestion_create' %}" > Add TF question </a>
-            <a class="btn btn-primary" href="#" > Add Essay question </a>
+            <a class="btn btn-primary" href="{% url 'saquestion_create' %}" > Add Short Answer question </a>
 
 
 <p><a class="btn btn-default" href="{% url 'quiz_create' %}">Create Quiz</a></p>
-<form method="post">
+<form name="quiz_create_form" class="needs-validation" onsubmit="return validateForm()" method="post">
 {% csrf_token %}
-
+<div id="qn_err_box" class="alert alert-block alert-danger" style="display:none;">
+    <ul>
+        <li>Please Select Atleast One Question</li>
+    </ul>
+</div>
 {{form|crispy}}
 
-<button class="btn btn-primary" type="submit">Submit</button>
+<button id="" class="btn btn-primary" type="submit">Submit</button>
 
-<a href="/q/mcquestion/create" pk = quiz.pk>Add MCQ</a>
+<a href="{%url 'mcquestion_create'%}" pk = quiz.pk>Add MCQ</a>
 
 
 </form>

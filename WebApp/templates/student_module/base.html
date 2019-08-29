@@ -62,6 +62,7 @@
 
 <body class="{% block body_class %}nav-md {% endblock body_class %}">
 {% block body %}
+    <div class="se-pre-con"></div>
 
     <div class="container body">
         <div class="main_container">
@@ -130,14 +131,21 @@
     <script src="{% static 'vendorsx/devbridge-autocomplete/dist/jquery.autocomplete.min.js' %}"></script>
     <!-- starrr -->
     <script src="{% static 'vendorsx/starrr/dist/starrr.js' %}"></script>
+    <script>
+        $(window).load(function () {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("fast");
+
+        });
+    </script>
 
     {% block javascripts %}
 
     {% endblock %}
     <!-- Custom Theme Scripts -->
-    <script src=" {% static '/build/js/custom.js' %}"></script> 
-    
-    {% endblock body %}
+    <script src=" {% static '/build/js/custom.js' %}"></script>
+
+{% endblock body %}
 </body>
 
 </html>
