@@ -160,6 +160,7 @@ class LectureInfo(models.Model):
     Center_Code = ForeignKey(
         'CenterInfo',
         related_name="lectureinfos", on_delete=models.DO_NOTHING)
+
     # Teacher_Code = ForeignKey(
     #     'MemberInfo',
     #     related_name="lectureinfos", on_delete=models.DO_NOTHING)
@@ -169,6 +170,9 @@ class LectureInfo(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.pk
+
+    def student_get_absolute_url(self):
+        return reverse('student_lectureinfo_detail', args=(self.pk,))
 
     def get_absolute_url(self):
         return reverse('lectureinfo_detail', args=(self.pk,))
@@ -240,6 +244,9 @@ class ChapterInfo(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.pk
+
+    def student_get_absolute_url(self):
+        return reverse('student_chapterinfo_detail', args=(self.Lecture_Code.id, self.pk,))
 
     def get_absolute_url(self):
         return reverse('chapterinfo_detail', args=(self.Lecture_Code.id, self.pk,))
@@ -634,6 +641,7 @@ class SessionInfo(models.Model):
     def __str__(self):
         return self.Session_Name
 
+
 class GroupMapping(models.Model):
     # Fields
     GroupMapping_Name = CharField(max_length=500, blank=True, null=True)
@@ -738,12 +746,12 @@ class InningInfo(models.Model):
         related_name="inninginfos", on_delete=models.DO_NOTHING
     )
 
-    Groups =ForeignKey(
+    Groups = ForeignKey(
         'GroupMapping',
         related_name="inninginfos", on_delete=models.DO_NOTHING
     )
 
-    Course_Group =  models.ManyToManyField(
+    Course_Group = models.ManyToManyField(
         'InningGroup'
     )
 
@@ -761,8 +769,6 @@ class InningInfo(models.Model):
 
     # def __str__(self):
     #     return self.Inning_Name
-
-
 
 
 class ChapterMissonCheckCard(models.Model):

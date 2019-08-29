@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views import generic
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView, TemplateView
 from django.views.generic.edit import FormView
@@ -421,6 +421,34 @@ class ChapterInfoDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['assignments'] = AssignmentInfo.objects.filter(Chapter_Code=self.kwargs.get('pk'))
         return context
+
+class CourseForum(ListView):
+    model = Thread
+    paginate_by = 20
+    template_name = 'courseinfo/Course_Forum.html'
+    context_object_name = 'threads'
+
+    def get_queryset(self):
+        return Thread.objects.visible().filter(
+            topic__id=self.kwargs.get('course.pk')
+        ).select_related(
+            'user', 'topic'
+        ).prefetch_related(
+            'user__forum_avatar'
+        ).order_by(
+            *['order', get_thread_ordering(self.request)]
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        print(self.kwargs.get('pk'))
+        context['topic'] = topic = Topic.objects.get(pk=self.kwargs.get('pk'))
+        context['title'] = context['panel_title'] = topic.title
+        context['show_order'] = True
+        return context
+
+
+
 
 
 class ChapterInfoUpdateView(UpdateView):
@@ -1289,4 +1317,31 @@ def polls(request):
     return render(request, 'WebApp/polls.html')
 
 def chapterpagebuilder(request, course, chapter):
-    return render(request, 'WebApp/chapterbuilder.html')
+    return render(request, 'WebApp/chapterbuilder.html', {'course':course, 'chapter':chapter})
+
+
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings 
+import os
+
+@csrf_exempt
+def save_file(request):
+    if request.method == "POST":
+        count = request.POST['count']
+        chapterID = request.POST['chapterID']
+        courseID = request.POST['courseID']
+        path = ''
+        for x in range(int(count)):
+            if request.FILES['file-'+str(x)]:
+                image = request.FILES['file-'+str(x)]
+                path = settings.MEDIA_ROOT
+                # following is commented because filesystemstorage auto create directories if not exist
+                # if not os.path.exists(os.path.join(path, 'chapterBuilder')):
+                #     os.makedirs(os.path.join(path, 'chapterBuilder'))
+                # if not os.path.exists(path+'chapterBuilder/'+courseID):
+                #     os.makedirs(os.path.join(path, 'chapterBuilder/'+courseID))
+                # if not os.path.exists(path+'chapterBuilder/'+courseID+'/'+chapterID):
+                #     os.makedirs(os.path.join(path, 'chapterBuilder/'+courseID+'/'+chapterID))    
+                fs = FileSystemStorage(location = path+'/chapterBuilder/'+courseID+'/'+chapterID)
+                filename = fs.save(image.name, image)
+        return JsonResponse(data = {"message":"success"})

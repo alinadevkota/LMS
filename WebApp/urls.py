@@ -125,10 +125,9 @@ urlpatterns += (
     # urls for ChapterInfo
     path('courseinfo/<int:course>/chapterinfo/', views.ChapterInfoListView.as_view(), name='chapterinfo_list'),
     path('courseinfo/<int:course>/create/', views.ChapterInfoCreateView.as_view(), name='chapterinfo_create'),
-    path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(),
-         name='chapterinfo_detail'),
-    path('courseinfo/<int:course>/chapterinfo/<int:pk>/edit/', views.ChapterInfoUpdateView.as_view(),
-         name='chapterinfo_update'),
+    path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(), name='chapterinfo_detail'),
+    path('courseinfo/<int:course>/chapterinfo/<int:pk>/edit/', views.ChapterInfoUpdateView.as_view(), name='chapterinfo_update'),
+    path('courseinfo/<int:course>/forum/' , views.CourseForum.as_view, name='Course_Forum'),
 )
 
 urlpatterns += (
@@ -332,9 +331,6 @@ urlpatterns += (
     path('groupmapping/update/<int:pk>/',
          views.GroupMappingUpdateView.as_view(), name='groupmapping_update'),
     # path('admin/jsi18n', i18n.javascript_catalog),
-
-    path('groupmapping/create/ajax',
-         views.GroupCreateSessionAjax.as_view(), name='group_create_ajax'),
 )
 
 urlpatterns += (
@@ -629,4 +625,5 @@ urlpatterns += (
      #urls for chapterpagebuilder
      path('courseinfo/<int:course>/chapterinfo/<int:chapter>/chapterpagebuilder',
           views.chapterpagebuilder, name = 'chapterpagebuilder'),
+     path('saveFile', views.save_file, name ='saveFile'),
 )

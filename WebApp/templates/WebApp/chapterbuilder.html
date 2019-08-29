@@ -28,12 +28,9 @@
     min-width: 130px;
     color: rgba(0, 0, 0, 0.6);
     font-size: 25px;
- 
-
   }
 
   .preview-bar {
-
     zoom: 75%;
     width: 20%;
     display: flex;
@@ -69,11 +66,6 @@
     top: 0;
     left: 0;
     bottom: 0;
-
-
-
-
-
   }
 
   .right-sidebar-content {
@@ -458,14 +450,9 @@
                     <li class="tabs-link current " onclick="openTab(event,'tab1')">
                       <i id="add-page-btn" class="fas fa-plus-square fas-5x"></i>
                     </li>
-
-
                   </ul>
                 </div>
               </div>
-
-
-
             </div>
           </div>
         </div>
@@ -487,7 +474,13 @@
 </div> -->
 
 
-
+  <script>
+    var courseID = '{{course}}';
+    var chapterID = '{{chapter}}';
+    var save_file_url = "{% url 'saveFile' %}";
+    {# var load_image_url = "{% url 'loadFile' %}"; #}
+    
+  </script>
   <script src="{% static 'chapterPageBuilder/js/jquery.min.js' %}"></script>
   <script src="{% static 'chapterPageBuilder/js/jquery-ui.min.js' %}"></script>
   <script src="{% static 'chapterPageBuilder/js/main.js' %}"></script>
@@ -495,7 +488,5 @@
   <script src="{% static 'chapterPageBuilder/js/offline.min.js' %}"></script>
   <script src="{% static 'chapterPageBuilder/js/offline.js' %}"></script>
   <script src="{% static 'chapterPageBuilder/js/accordin.js' %}"></script>
-
-
 </body>
   
