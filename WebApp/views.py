@@ -423,12 +423,12 @@ class ChapterInfoDetailView(DetailView):
 class CourseForum(ListView):
     model = Thread
     paginate_by = 20
-    template_name = 'forum/topic.html'
+    template_name = 'courseinfo/Course_Forum.html'
     context_object_name = 'threads'
 
     def get_queryset(self):
         return Thread.objects.visible().filter(
-            topic__id=self.kwargs.get('pk')
+            topic__id=self.kwargs.get('course.pk')
         ).select_related(
             'user', 'topic'
         ).prefetch_related(
