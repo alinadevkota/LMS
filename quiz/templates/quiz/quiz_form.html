@@ -26,7 +26,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
 
 
-    <!-- {{ form.media }}
+    {{ form.media }}
 
             <a class="btn btn-primary" href="{% url 'mcquestion_create' %}" > Add MCQ question </a>
             <a class="btn btn-primary" href="{% url 'tfquestion_create' %}" > Add TF question </a>
@@ -48,7 +48,7 @@
 <a href="{%url 'mcquestion_create'%}" pk = quiz.pk>Add MCQ</a>
 
 
-</form>  -->
+</form> 
 <hr>
 <form action="{% url 'quiz_create' %}" method="post">
                 {% csrf_token %}
@@ -259,7 +259,11 @@
                                 
                                             </div>
                                             <div class="col-md-6">
-                                                        <button id="" class="btn btn-primary" type="submit">Submit</button> 
+                                                    <div class="quiz-admin-btn">
+                                                                <button id="" class="btn btn-primary " type="submit">Submit</button>
+
+                                                    </div>
+                                                         
                                             </div>
                                                 
                                                 
@@ -270,4 +274,9 @@
                                     </div>
    
   </form>
+  <div id="qn_err_box" class="alert alert-block alert-danger" style="display:none;">
+    <ul>
+        <li>Please Select Atleast One Question</li>
+    </ul>
+</div>
 {% endblock %}

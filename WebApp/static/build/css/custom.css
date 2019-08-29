@@ -6026,6 +6026,9 @@ input[type=checkbox], input[type=radio] {
 
 /* ends */
 /* FORM QUIZ */
+.quiz-admin-btn{
+    margin-top: 10px
+ } 
 .related-widget-wrapper {
     width: 100%;
 }
@@ -6115,7 +6118,6 @@ input[type=checkbox], input[type=radio] {
 
 .box3 {
     width: 1050px;
-<<<<<<< HEAD
 } 
 /* quiz create page */ 
 .qts-button{
@@ -6133,20 +6135,4 @@ input[type=checkbox], input[type=radio] {
 .quiz-add-label{
     padding-top: 13px;
     text-transform: uppercase;
-}
-.questions-wrapper{
-  
-=======
-}
-
-/*screen loading*/
-.se-pre-con {
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    background: url(http://smallenvelop.com/wp-content/uploads/2014/08/Preloader_11.gif) center no-repeat #fff;
->>>>>>> dec43d05c9d5828ba79c435bcd4dea6aa3208527
 }
