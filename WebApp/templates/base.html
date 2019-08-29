@@ -60,6 +60,7 @@
 <body class="{% block body_class %}nav-md {% endblock body_class %}">
 
 {% block body %}
+    <div class="se-pre-con"></div>
     <div class="container body">
         <div class="main_container">
 
@@ -89,7 +90,7 @@
                     {% endblock %}
                 </ol>
                 {% block content %}
-{#                     {{ content }} #}
+                    {#                     {{ content }} #}
                 {% endblock content %}
 
 
@@ -155,6 +156,13 @@
     <!-- Custom Theme Scripts -->
 
     <script src="{% static 'vendorsx/fullcalendar/dist/fullcalendar.min.js' %}"></script>
+    <script>
+        $(window).load(function () {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("fast");
+
+        });
+    </script>
 
     {% block customjss %}
 
