@@ -22,7 +22,7 @@ urlpatterns = (
 )
 
 urlpatterns += (
-    path('mycourse/', views.mycourse, name="students_mycourse"),
+    # path('mycourse/', views.mycourse, name="students_mycourse"),
     path('quiz/', views.quiz, name="students_quiz"),
     path('quizzes/', views.quizzes, name="quiz_question"),
     path('calendar/', views.calendar, name="students_calendar"),
@@ -31,10 +31,19 @@ urlpatterns += (
 
 urlpatterns += (
     # urls for LectureInfo
-    path('lectureinfo/', views.LectureInfoListView.as_view(),
+    path('courseinfo/', views.LectureInfoListView.as_view(),
          name='student_lectureinfo_list'),
-    path('lectureinfo/detail/<int:pk>/', views.LectureInfoDetailView.as_view(),
+    path('courseinfo/mycourses', views.MyCoursesListView.as_view(),
+         name='student_mycourses_list'),
+    path('courseinfo/detail/<int:pk>/', views.LectureInfoDetailView.as_view(),
          name='student_lectureinfo_detail'),
+)
+
+urlpatterns += (
+    # urls for ChapterInfo
+    path('courseinfo/<int:course>/chapterinfo/', views.ChapterInfoListView.as_view(), name='student_chapterinfo_list'),
+    path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(),
+         name='student_chapterinfo_detail'),
 )
 
 urlpatterns += (

@@ -8,10 +8,11 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView, FormView, CreateView, UpdateView
 from django.urls import reverse, reverse_lazy
+from django.db import transaction
 
 from WebApp.models import LectureInfo
-from .forms import QuestionForm, EssayForm, QuizForm, TFQuestionForm, EssayQuestionForm, MCQuestionForm
-from .models import Quiz, Progress, Sitting, MCQuestion, TF_Question, Question, Essay_Question
+from .forms import QuestionForm, SAForm, QuizForm, TFQuestionForm, SAQuestionForm, MCQuestionForm, AnsFormset
+from .models import Quiz, Progress, Sitting, MCQuestion, TF_Question, Question, SA_Question, Answer
 
 
 class QuizMarkerMixin(object):
@@ -188,8 +189,8 @@ class QuizTake(FormView):
             self.question = self.anon_next_question()
             self.progress = self.anon_sitting_progress()
 
-        if self.question.__class__ is Essay_Question:
-            form_class = EssayForm
+        if self.question.__class__ is SA_Question:
+            form_class = SAForm
         else:
             form_class = self.form_class
         return form_class(**self.get_form_kwargs())
@@ -417,18 +418,50 @@ class MCQuestionListView(ListView):
     model = MCQuestion
 
 
-
-
 class MCQuestionCreateView(CreateView):
-    model = MCQuestion
+    model =MCQuestion
     form_class = MCQuestionForm
 
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        if self.request.POST:
+            context['answers_formset'] = AnsFormset(self.request.POST)
+        else:
+            context['answers_formset'] = AnsFormset()
+        return context
+    
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        context = self.get_context_data()
+        ans = context['answers_formset']
+        with transaction.atomic():
+            if ans.is_valid():
+                ans.instance = self.object
+                ans.save()
+        return vform
 
 class MCQuestionUpdateView(UpdateView):
     model = MCQuestion
     form_class = MCQuestionForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)        
+        if self.request.POST:
+            context['answers_formset'] = AnsFormset(self.request.POST, instance = self.object)
+        else:
+            context['answers_formset'] = AnsFormset(instance = self.object)
+        return context
+    
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        context = self.get_context_data()
+        ans = context['answers_formset']
+        with transaction.atomic():
+            if ans.is_valid():
+                ans.instance = self.object
+                ans.save()
+        return vform
+    
 
 class MCQuestionDetailView(DetailView):
     model = MCQuestion
@@ -438,6 +471,30 @@ def MCQuestionDeleteView(request, pk):
     MCQuestion.objects.filter(pk=pk).delete()
     return redirect("mcquestion_list")
 
+#class MCQuestionCreateFromQuiz(CreateView):
+#    model = MCQuestion
+#    form_class = MCQuestionForm
+#    fields = ['figure', 'question', 'explanation', 'answer_order']
+
+#    def get_context_data(self, **kwargs):
+#        context = super().get_context_data(**kwargs) 
+#        if self.request.POST:
+#            context['answers_formset'] = AnsFormset(self.request.POST)
+#        else:
+#            context['answers_formset'] = AnsFormset()
+#        return context
+    
+#    def form_valid(self, form):
+#        quiz_id = self.kwargs['quiz_id']
+#        self.object
+#        vform = super().form_valid(form)
+#        context = self.get_context_data()
+#        ans = context['answers_formset']
+#        with transaction.atomic():
+#            if ans.is_valid():
+#                ans.instance = self.object
+#                ans.save()
+#        return vform
 
 # -------------------------_Question Views------------------
 
@@ -463,22 +520,22 @@ def TFQuestionDeleteView(request, pk):
     TF_Question.objects.filter(pk=pk).delete()
     return redirect("tfquestion_list")
 
-# ------------------------- Essay_Question Views------------------
+# ------------------------- SA_Question Views------------------
 
-class EssayQuestionListView(ListView):
-    model = Essay_Question
+class SAQuestionListView(ListView):
+    model = SA_Question
 
-class EssayQuestionCreateView(CreateView):
-    model = Essay_Question
-    form_class = EssayQuestionForm
+class SAQuestionCreateView(CreateView):
+    model = SA_Question
+    form_class = SAQuestionForm
 
-class EssayQuestionUpdateView(UpdateView):
-    model = Essay_Question
-    form_class = EssayQuestionForm
+class SAQuestionUpdateView(UpdateView):
+    model = SA_Question
+    form_class = SAQuestionForm
 
-class EssayQuestionDetailView(DetailView):
-    model = Essay_Question
+class SAQuestionDetailView(DetailView):
+    model = SA_Question
 
-def EssayQuestionDeleteView(request, pk):
-    Essay_Question.objects.filter(pk=pk).delete()
+def SAQuestionDeleteView(request, pk):
+    SA_Question.objects.filter(pk=pk).delete()
     return redirect("essayquestion_list")
