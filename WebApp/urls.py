@@ -332,9 +332,6 @@ urlpatterns += (
     path('groupmapping/update/<int:pk>/',
          views.GroupMappingUpdateView.as_view(), name='groupmapping_update'),
     # path('admin/jsi18n', i18n.javascript_catalog),
-
-    path('groupmapping/create/ajax',
-         views.GroupCreateSessionAjax.as_view(), name='group_create_ajax'),
 )
 
 urlpatterns += (
@@ -629,4 +626,5 @@ urlpatterns += (
      #urls for chapterpagebuilder
      path('courseinfo/<int:course>/chapterinfo/<int:chapter>/chapterpagebuilder',
           views.chapterpagebuilder, name = 'chapterpagebuilder'),
+     path('saveFile', views.save_file, name ='saveFile'),
 )

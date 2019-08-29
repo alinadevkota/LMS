@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views import generic
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView, TemplateView
 from django.views.generic.edit import FormView
@@ -1289,4 +1289,31 @@ def polls(request):
     return render(request, 'WebApp/polls.html')
 
 def chapterpagebuilder(request, course, chapter):
-    return render(request, 'WebApp/chapterbuilder.html')
+    return render(request, 'WebApp/chapterbuilder.html', {'course':course, 'chapter':chapter})
+
+
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings 
+import os
+
+@csrf_exempt
+def save_file(request):
+    if request.method == "POST":
+        count = request.POST['count']
+        chapterID = request.POST['chapterID']
+        courseID = request.POST['courseID']
+        path = ''
+        for x in range(int(count)):
+            if request.FILES['file-'+str(x)]:
+                image = request.FILES['file-'+str(x)]
+                path = settings.MEDIA_ROOT
+                # following is commented because filesystemstorage auto create directories if not exist
+                # if not os.path.exists(os.path.join(path, 'chapterBuilder')):
+                #     os.makedirs(os.path.join(path, 'chapterBuilder'))
+                # if not os.path.exists(path+'chapterBuilder/'+courseID):
+                #     os.makedirs(os.path.join(path, 'chapterBuilder/'+courseID))
+                # if not os.path.exists(path+'chapterBuilder/'+courseID+'/'+chapterID):
+                #     os.makedirs(os.path.join(path, 'chapterBuilder/'+courseID+'/'+chapterID))    
+                fs = FileSystemStorage(location = path+'/chapterBuilder/'+courseID+'/'+chapterID)
+                filename = fs.save(image.name, image)
+        return JsonResponse(data = {"message":"success"})
