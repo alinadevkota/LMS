@@ -28,7 +28,7 @@
 
     {{ form.media }}
 
-            <a class="btn btn-primary" href="{% url 'mcquestion_create' %}" > Add MCQ question </a>
+            <!-- <a class="btn btn-primary" href="{% url 'mcquestion_create' %}" > Add MCQ question </a>
             <a class="btn btn-primary" href="{% url 'tfquestion_create' %}" > Add TF question </a>
             <a class="btn btn-primary" href="{% url 'saquestion_create' %}" > Add Short Answer question </a>
 
@@ -41,14 +41,14 @@
         <li>Please Select Atleast One Question</li>
     </ul>
 </div>
-{{form|crispy}}
+<-- {{form|crispy}} -->
 
-<button id="" class="btn btn-primary" type="submit">Submit</button>
+<!-- <button id="" class="btn btn-primary" type="submit">Submit</button>
 
-<a href="{%url 'mcquestion_create'%}" pk = quiz.pk>Add MCQ</a>
+<a href="{%url 'mcquestion_create'%}" pk = quiz.pk>Add MCQ</a> -->
 
 
-</form> 
+</form>  
 <hr>
 <form action="{% url 'quiz_create' %}" method="post">
                 {% csrf_token %}
