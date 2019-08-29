@@ -14,7 +14,7 @@ from .views import QuizListView, QuizCreateView, CategoriesListView, \
     QuizUserProgressView, \
     QuizTake, MCQuestionCreateView, TFQuestionCreateView, MCQuestionUpdateView, TFQuestionUpdateView, \
     QuizDetailView, QuizUpdateView, QuizDeleteView, QuizMarkingList, QuizMarkingDetail, SAQuestionCreateView, \
-    SAQuestionUpdateView
+    SAQuestionUpdateView, MCQuestionCreateFromQuiz
 
 router = routers.DefaultRouter()
 router.register(r'quiz', api.QuizViewSet)
@@ -59,6 +59,7 @@ urlpatterns += (
 
     path('mcquestion/', views.MCQuestionListView.as_view(), name='mcquestion_list'),
     path('mcquestion/create/', MCQuestionCreateView.as_view(), name='mcquestion_create'),
+    path('mcquestion/create/<int:quiz_id>/', MCQuestionCreateFromQuiz.as_view(), name='mcquestion_create_from_quiz'),
     path('mcquestion/update/<int:pk>', MCQuestionUpdateView.as_view(), name='mcquestion_update'),
     path('mcquestion/detail/<int:pk>/', views.MCQuestionDetailView.as_view(), name='mcquestion_detail'),
     path('mcquestion/delete/<int:pk>/', views.MCQuestionDeleteView, name='mcquestion_delete'),

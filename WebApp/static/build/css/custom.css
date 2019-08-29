@@ -3881,7 +3881,7 @@ ul.project_files li a i {
 }
 
 .form-group .btn {
-    margin-bottom: -6px;
+    margin-bottom: 0px;
 }
 
 .input-group-btn .btn {
@@ -5096,7 +5096,7 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 
 .page_section {
     color: black;
-    padding-top: 70px;
+    /*padding-top: 70px;*/
     padding-bottom: 20px;
 }
 
@@ -5112,7 +5112,7 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 
 .title {
     padding: 5px;
-    
+
 
 }
 
@@ -5576,6 +5576,11 @@ article {
     box-shadow: 0 0 5px rgba(143, 204, 234, 1);
 }
 
+.leftborder {
+    border-left-style: solid;
+    border-color: #009999;
+}
+
 
 /* Course_detail end*/
 #ubl_logo {
@@ -5684,10 +5689,8 @@ article {
 }
 
 .card-body hr {
-    margin-top: 5px
-!important;
-    margin-bottom: 5px
-!important;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
 
 }
 
@@ -5731,6 +5734,7 @@ article {
     margin-left: 200;
     font-size: 25px;
 }
+
 /* changes to quiz delete */
 
 .submit-row a.deletelink {
@@ -5742,7 +5746,8 @@ article {
     line-height: 6px !important;
     color: #fff;
 }
-.sitting-message{
+
+.sitting-message {
     color: #007fbe;
 }
 
@@ -5750,9 +5755,10 @@ article {
 .quiz-part {
     background-color: white;
 
-} 
-.quiz-listing{
-    
+}
+
+.quiz-listing {
+
 }
 
 .box-part {
@@ -5806,16 +5812,17 @@ article {
     float: right;
     margin: 20px 0;
 }
-  .block-timer{
-    position:absolute;
-    background:white;
-    width:80px;
-    height:80px;
-    display:block;
-    border-radius:50%;
-    top:9px;
-    left:8px;
-  }
+
+.block-timer {
+    position: absolute;
+    background: white;
+    width: 80px;
+    height: 80px;
+    display: block;
+    border-radius: 50%;
+    top: 9px;
+    left: 8px;
+}
 
 
 #time {
@@ -5848,7 +5855,7 @@ article {
 
 .privew {
     margin-bottom: 20px;
-} 
+}
 
 .questionsBox {
     display: block;
@@ -5971,118 +5978,161 @@ input[type=checkbox], input[type=radio] {
     padding: 0 10px;
     background: #FFF;
     color: #007fbe;
-} 
- 
+}
+
 
 .preview1, .preview2, .preview3, .preview4 {
     display: none
-} 
+}
 
-/* quiz list */ 
-.quiz-counter{
-    font-size:15px; 
+/* quiz list */
+.quiz-counter {
+    font-size: 15px;
 
-    font-weight: 600;  
+    font-weight: 600;
 
-     color: black;
+    color: black;
 
-} 
-.icon-quiz-list{
+}
+
+.icon-quiz-list {
     text-decoration: none;
     padding-top: 10px;
     color: white
-} 
-.icon-quiz-list:hover{
+}
+
+.icon-quiz-list:hover {
     color: white
-} 
-.icon-for-quiz{
+}
+
+.icon-for-quiz {
     padding-top: 5px
 }
-.quiz-ans-explain{
+
+.quiz-ans-explain {
     font-size: 14px;
     font-weight: 600
 }
-.quiz-play{
+
+.quiz-play {
     background-color: #007fbe;
-    padding: 6px ;
+    padding: 6px;
     color: white;
-} 
-.quiz-play:hover{
+}
+
+.quiz-play:hover {
     color: white
 }
+
 /* ends */
 /* FORM QUIZ */
-.related-widget-wrapper{
+.quiz-admin-btn{
+    margin-top: 10px
+ } 
+.related-widget-wrapper {
     width: 100%;
 }
- .related-widget-wrapper select{
+
+.related-widget-wrapper select {
     width: 100%
-} 
-#content-main .aligned label{
-    color: black !important; 
+}
+
+#content-main .aligned label {
+    color: black !important;
     font-weight: bold !important;
 }
-.aligned .field-mcquestion label{
-    width: 175px!important;
-} 
-.field-description label{
- font-weight:bold!important; 
- color: black;
-} 
-.field-category label{
-    font-weight:bold!important; 
- color: black;
+
+.aligned .field-mcquestion label {
+    width: 175px !important;
 }
-/* quiz results css */ 
- .exam-results{
-      text-transform: uppercase; 
-      color: white; 
-      background-color: #007fbe;
-      padding: 5px 10px; 
-      margin-bottom: 20px
- } 
- .exam-results1{
-    text-transform: uppercase; 
-    color: white; 
+
+.field-description label {
+    font-weight: bold !important;
+    color: black;
+}
+
+.field-category label {
+    font-weight: bold !important;
+    color: black;
+}
+
+/* quiz results css */
+.exam-results {
+    text-transform: uppercase;
+    color: white;
     background-color: #007fbe;
-    padding: 5px 10px; 
+    padding: 5px 10px;
     margin-bottom: 20px
 }
- .quiz-card-result{
-    box-shadow: 0 0 10px rgba(0,0,0,0.6);
-    padding: 20px; 
+
+.exam-results1 {
+    text-transform: uppercase;
+    color: white;
+    background-color: #007fbe;
+    padding: 5px 10px;
+    margin-bottom: 20px
+}
+
+.quiz-card-result {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    padding: 20px;
     margin: 25px 0;
 
- } 
- .quiz-review{
-     font-size: 15px
- } 
- .quiz-capital{
-     text-transform: uppercase
- }
- .muted{
-     font-size: 14px
- } 
- .quiz-ques-image{
-     height: 250px; 
-     width: 350px;
- } 
- .quiz-ques-image img {
-     height: 100%;
-     width: 100%
+}
 
- }
+.quiz-review {
+    font-size: 15px
+}
+
+.quiz-capital {
+    text-transform: uppercase
+}
+
+.muted {
+    font-size: 14px
+}
+
+.quiz-ques-image {
+    height: 250px;
+    width: 350px;
+}
+
+.quiz-ques-image img {
+    height: 100%;
+    width: 100%
+
+}
+
 /* end */
 /*inninginfoform popup*/
 
 /*bootstrap modalcss*/
-.modal-body{
-        height:650px;
-        overflow-y: auto;
+.modal-body {
+    height: 650px;
+    overflow-y: auto;
 }
-.box2{
+
+.box2 {
     width: 950px;
 }
-.box3{
+
+.box3 {
     width: 1050px;
+} 
+/* quiz create page */ 
+.qts-button{
+    padding: 4px 6px; 
+    color: white; 
+    background-color: #007fbe; 
+    text-align: center
+} 
+.questions-only{
+    text-align:right ;
+    padding: 0 0 10px 0;
+    margin-top: 10px
+
+}
+.quiz-add-label{
+    padding-top: 13px;
+    text-transform: uppercase;
 }

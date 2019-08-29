@@ -58,10 +58,10 @@
         <div id="mcqn_list" class="collapse">
           <ul> 
               {% for quest in quiz.mcquestion.all %}
-                  <a href="#mcans_list" data-toggle="collapse">
+                  <a href="#mcans_list_{{quest.id}}" data-toggle="collapse">
                     <li class="quiz-listing">  {{quest.content}}</li>
                   </a>
-                  <div id="mcans_list" class="collapse">
+                  <div id="mcans_list_{{quest.id}}" class="collapse">
                     <ul>
                       {% for ans in quest.get_answers %}
                         <li class="quiz-answer-listing"> {{ans.content}} {%if ans.correct%} -> Correct {%endif%}</li>
@@ -69,14 +69,12 @@
                     </ul>
                   </div> 
                 <form action="{% url 'mcquestion_update' pk=quest.id%}" method="get">
-                  {% csrf_token %}
                   <input type="submit" value="Edit">
                 </form>
-                <form action="{% url 'mcquestion_create'%}" method="get">
-                  {% csrf_token %}
-                  <input type="submit" value="Add">
-                </form>
               {% endfor %}
+              <form action="{% url 'mcquestion_create_from_quiz' quiz_id=quiz.id %}" method="get">
+                <input type="submit" value="Add">
+              </form>
           </ul>
         </div>
   </div>

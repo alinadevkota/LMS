@@ -17,7 +17,7 @@ class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Quiz
         fields = (
-            'title', 'description', 'mcquestion', 'tfquestion', 'saquestion', 'url', 'cent_code', 'course_code', 'chapter_code', 'duration', 'random_order', 'answers_at_end', 'exam_paper', 'single_attempt', 'pre_test', 'post_test', 'pass_mark', 'success_text', 'fail_text'
+            'pk', 'title', 'description', 'mcquestion', 'tfquestion', 'saquestion', 'url', 'cent_code', 'course_code', 'chapter_code', 'duration', 'random_order', 'answers_at_end', 'exam_paper', 'single_attempt', 'pre_test', 'post_test', 'pass_mark', 'success_text', 'fail_text'
         )
 
 class MCQuestionSerializer(serializers.ModelSerializer):
