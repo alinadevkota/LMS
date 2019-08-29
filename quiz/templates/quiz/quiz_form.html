@@ -11,7 +11,7 @@
     function validateForm() {
     var mq = document.forms["quiz_create_form"]["mcquestion"].value;
     var tq = document.forms["quiz_create_form"]["tfquestion"].value;
-    var eq = document.forms["quiz_create_form"]["essayquestion"].value;
+    var eq = document.forms["quiz_create_form"]["saquestion"].value;
         if (!(mq || tq || eq)) {
             document.getElementById('qn_err_box').style.display = "block";
             $('html,body').animate({
@@ -26,11 +26,11 @@
 <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
 
 
-    {{ form.media }}
+    <!-- {{ form.media }}
 
             <a class="btn btn-primary" href="{% url 'mcquestion_create' %}" > Add MCQ question </a>
             <a class="btn btn-primary" href="{% url 'tfquestion_create' %}" > Add TF question </a>
-            <a class="btn btn-primary" href="{% url 'essayquestion_create' %}" > Add Essay question </a>
+            <a class="btn btn-primary" href="{% url 'saquestion_create' %}" > Add Short Answer question </a>
 
 
 <p><a class="btn btn-default" href="{% url 'quiz_create' %}">Create Quiz</a></p>
@@ -48,9 +48,10 @@
 <a href="{%url 'mcquestion_create'%}" pk = quiz.pk>Add MCQ</a>
 
 
-</form> 
+</form>  -->
 <hr>
-<form>
+<form action="{% url 'quiz_create' %}" method="post">
+                {% csrf_token %}
     <div class="form-group"> 
         <div class="col-md-12 questions-wrapper">
                 <div class="col-md-6">
@@ -119,7 +120,25 @@
             </div>
                 
                 
-        </div>
+        </div> 
+        <div class="form-group"> 
+                        <div class="col-md-12 questions-wrapper">
+                                <div class="col-md-6">
+                                        <label class="quiz-add-label"  for="">Description</label>
+                                        
+                                </div>
+                                <div class="col-md-6 questions-only">
+                                        <!-- <a class="btn qts-button" href="{% url 'mcquestion_create' %}" > Add MCQ question </a>    -->
+                                </div> 
+                                <div class="col-md-12">
+                                        {{form.description}}
+                                </div>
+                                
+                        </div>
+                    
+                      
+                  
+                    </div>
 
          
       
@@ -160,16 +179,95 @@
                  
               
             </div>
-    <div class="form-group">
-      <label for="exampleInputFile">File input</label>
-      <input type="file" id="exampleInputFile">
-      <p class="help-block">Example block-level help text here.</p>
-    </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox"> Check me out
-      </label>
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+
+           <div class="form-group"> 
+                    
+                   <div class="col-md-12">
+                                
+                           <div class="col-md-4">
+                               
+                                {{form.pre_test}}
+                                <label class="quiz-add-label"  for="">Pre Test</label>
+                                <p>{{form.pre_test.help_text}}</p>
+                           </div>
+                           <div class="col-md-4">
+                                
+                                {{form.post_test}}
+                                <label class="quiz-add-label"  for="">Post Test</label>
+                                <p>{{form.post_test.help_text}}</p>
+                           </div>
+                           <div class="col-md-4"> 
+                                 {{form.random_order}}  
+                                 <label class="quiz-add-label"  for="">Random Order</label>
+                                 <p> {{form.random_order.help_text}} </p>
+
+                           </div>
+                           
+                   </div>
+           </div> 
+           
+           <div class="form-group"> 
+                    
+                        <div class="col-md-12">
+                                     
+                                <div class="col-md-4">
+                                    
+                                 {{form.answers_at_end}}  
+                                <label class="quiz-add-label"  for="">Answer at the end</label>
+                                <p> {{form.answers_at_end.help_text}}</p>
+                                </div>
+                                <div class="col-md-4">
+                                     
+                                     {{form.exam_paper}}
+                                     <label class="quiz-add-label"  for="">Exam Paper</label>
+                                     <p>{{form.exam_paper.help_text}}</p>
+                                </div>
+                                <div class="col-md-4"> 
+                                      {{form.single_attempt}}  
+                                      <label class="quiz-add-label"  for="">Single Attempt</label>
+                                      <p>{{form.single_attempt.help_text}}</p>
+     
+                                </div>
+                             
+                        </div>
+                </div> 
+                
+                <div class="form-group"> 
+                                <div class="col-md-12"> 
+                                    <div class="col-md-6">
+                                            <label class="quiz-add-label"  for="">Success Text</label>
+                                            {{form.success_text}}
+                        
+                                    </div>
+                                    <div class="col-md-6">
+                                            <label class="quiz-add-label"  for="">Fail Text</label>
+                                            {{form.fail_text}} 
+                                    </div>
+                                        
+                                        
+                                </div>
+                        
+                                 
+                              
+                            </div> 
+                            <div class="form-group"> 
+                                        <div class="col-md-12"> 
+                                            <div class="col-md-6"> 
+                                                        {{form.draft}}
+                                                    <label class="quiz-add-label"  for=""> Draft</label>
+                                                    
+                                
+                                            </div>
+                                            <div class="col-md-6">
+                                                        <button id="" class="btn btn-primary" type="submit">Submit</button> 
+                                            </div>
+                                                
+                                                
+                                        </div>
+                                
+                                         
+                                      
+                                    </div>
+   
   </form>
 {% endblock %}
