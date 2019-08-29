@@ -45,9 +45,11 @@ class QuizForm(forms.ModelForm):
     # and hide friendly url for now????
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['mcquestion'].required = False
+        self.fields['mcquestion'].required = True
         self.fields['tfquestion'].required = False
-        self.fields['saquestion'].required = False
+        self.fields['saquestion'].required = False 
+        self.fields['cent_code'].required = True
+
         #self.fields['url'].required = False
         #self.fields['url'].widget = forms.HiddenInput()
         last_quiz = Quiz.objects.last()

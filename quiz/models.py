@@ -352,7 +352,7 @@ class SA_Question(Question):
 
     def check_if_correct(self, guess):
         return True
-
+ 
     def get_answers(self):
         return False
 
@@ -397,7 +397,7 @@ class Quiz(models.Model):
         help_text=_("a user friendly url"),
         verbose_name=_("user friendly url"), unique=True)
 
-    course_code = models.ForeignKey(
+    category = models.ForeignKey(
         LectureInfo, null=True, blank=True,
         verbose_name=_("Lecture"), on_delete=models.CASCADE)
 
@@ -409,13 +409,13 @@ class Quiz(models.Model):
         help_text=_("Time limit for quiz"),
         verbose_name=_("Time limit for quiz"))
 
-    pre_test = models.BooleanField(
-        default = False,
-        help_text=_("Pre test quiz are taken at the beggining of the chapter")
+    pre_test = models.BooleanField( 
+        help_text=_("Before the course"),
+        default = False
     ) 
-    post_test = models.BooleanField(
-        default = False,
-        help_text=_("Post test quiz are taken at the end of the chapter")
+    post_test = models.BooleanField( 
+         help_text=_("After the course"),
+        default = False
     ) 
     created_date =  models.DateTimeField(
         auto_now_add=True
@@ -443,8 +443,7 @@ class Quiz(models.Model):
         blank=False, default=False,
         verbose_name=_("Random Order"),
         help_text=_("Display the questions in "
-                    "a random order or as they "
-                    "are set?"))
+                    "a random "))
 
     # max_questions = models.PositiveIntegerField(
     #     blank=True, null=True, verbose_name=_("Max Questions"),
@@ -452,22 +451,20 @@ class Quiz(models.Model):
 
     answers_at_end = models.BooleanField(
         blank=False, default=False,
-        help_text=_("Correct answer is NOT shown after question."
-                    " Answers displayed at the end."),
+        help_text=_("Correct answer is displayed at the end."),
         verbose_name=_("Answers at end"))
 
     exam_paper = models.BooleanField(
         blank=False, default=True,
-        help_text=_("If yes, the result of each"
-                    " attempt by a user will be"
-                    " stored. Necessary for marking."),
+        help_text=_("If yes, the result of attempts by user will be"
+                    " stored "),
         verbose_name=_("Exam Paper"))
 
     single_attempt = models.BooleanField(
         blank=False, default=False,
         help_text=_("If yes, only one attempt by"
                     " a user will be permitted."
-                    " Non users cannot sit this exam."),
+                   ),
         verbose_name=_("Single Attempt"))
 
     pass_mark = models.SmallIntegerField(
