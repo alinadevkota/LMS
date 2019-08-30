@@ -51,6 +51,7 @@ urlpatterns += (
     path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:pk>/',
     views.AssignmentInfoDetailView.as_view(),
         name='student_assignmentinfo_detail'),
+    path('myassignments/',views.MyAssignmentsListView.as_view(), name='student_myassignmentinfo_list')
 )
 
 urlpatterns += (

@@ -60,12 +60,21 @@ class MyCoursesListView(ListView):
         context = super().get_context_data(**kwargs)
         context['GroupName'] = GroupMapping.objects.get(Students__id=self.request.user.id)
         context['Group'] = InningInfo.objects.get(Groups__id=context['GroupName'].id)
-        # for course in context['Group']():
-        #     context['Course'] = InningGroup.objects.filter(id=context['Group'].id)
-        # context['Course'] = InningGroup.objects.filter(id=context['Group'].id)
         context['Course'] = context['Group'].Course_Group.all()
-        # context['Course_Group'] = InningInfo.objects.get(Course_Group__id=context['Group'].Course_Group)
-        # print(context['Group'].Course_Group)
+
+        return context
+
+
+class MyAssignmentsListView(ListView):
+    model = AssignmentInfo
+    template_name = 'student_module/myassignments_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['GroupName'] = GroupMapping.objects.get(Students__id=self.request.user.id)
+        context['Group'] = InningInfo.objects.get(Groups__id=context['GroupName'].id)
+        context['Course'] = context['Group'].Course_Group.all()
+
         return context
 
 
@@ -80,16 +89,17 @@ class LectureInfoDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk'))
+        context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).order_by('Chapter_No')
         return context
+
 
 class ChapterInfoListView(ListView):
     model = ChapterInfo
 
+
 class ChapterInfoDetailView(DetailView):
     model = ChapterInfo
     template_name = 'student_module/chapterinfo_detail.html'
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -101,7 +111,6 @@ class AssignmentInfoDetailView(DetailView):
     model = AssignmentInfo
     template_name = 'student_module/assignmentinfo_detail.html'
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['Questions'] = QuestionInfo.objects.filter(Assignment_Code=self.kwargs.get('pk'))
@@ -109,6 +118,7 @@ class AssignmentInfoDetailView(DetailView):
         context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
         # context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
         return context
+
 
 def ProfileView(request):
     return render(request, 'student_module/profile.html')

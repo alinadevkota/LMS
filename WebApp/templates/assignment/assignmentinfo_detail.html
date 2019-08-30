@@ -60,10 +60,10 @@
         {% endif %}
         {#            <hr class="header_hr">#}
         <div class="col-md-12">
-{#            <hr class="header_hr" style="margin-top: 5px;margin-bottom: 10px;">#}
+            {#            <hr class="header_hr" style="margin-top: 5px;margin-bottom: 10px;">#}
             {% for questions in Questions %}
 
-                <div class="col-md-12 col-sm-12 col-xs-12 leftborder">
+                <div class="col-md-12 col-sm-12 col-xs-12 leftborder" style="margin-bottom: 5px;">
 
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         <h5 style="padding-top: 3px; color: #000000"> Q: {{ forloop.counter }}</h5>
@@ -72,18 +72,49 @@
                         </h5>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <a href="{{ questions.get_absolute_url }}">
-                            <button type="button" style="float: right;width:100px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
-                                margin-top: 25px;margin-bottom: 10px;">CONTINUE <i class="fa fa-arrow-right"></i>
+                        {% if '/students' not in request.path %}
+                            <a href="{{ questions.get_absolute_url }}">
+                                <button type="button" style="float: right;width:100px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
+                                    margin-top: 25px;margin-bottom: 10px;">CONTINUE <i class="fa fa-arrow-right"></i>
+                                </button>
+                            </a>
+                        {% else %}
+                            <button type="button" id="answerQuestion{{ questions.pk }}" style="float: right;width:100px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
+                                    margin-top: 25px;margin-bottom: 10px;">ANSWER <i class="fa fa-arrow-right"></i>
                             </button>
-                        </a>
+                        {% endif %}
                     </div>
-                    {##}
-                    {#                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px; ">#}
-                    {#                        <hr style="margin-top: 1px; margin-bottom: 10px;">#}
-                    {#                        <p>Submission Deadline - {{ o.Assignment_Deadline }}</p>#}
-                    {#                    </div>#}
-                    <hr class="header_hr">
+                    <div class="x_panel" id="answerContent{{ questions.pk }}" style="display: none">
+                        <div class="x_content">
+                            <form method="post" id="answerForm" data-parsley-validate=""
+                                  class="form-horizontal form-label-left" novalidate="">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <textarea rows="5" cols="100" name="description" placeholder="Enter your Answer" style="width: 600px;!important;"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="button" id="cancelButton{{ questions.pk }}">
+                                        Cancel
+                                    </button>
+                                    <button class="btn btn-primary" type="reset">Reset</button>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <script>
+                        document.querySelector("#cancelButton{{ questions.pk }}").addEventListener('click', cancelEdit);
+                        document.querySelector("#answerQuestion{{ questions.pk }}").addEventListener('click', editProfile);
+
+
+                        function editProfile() {
+                            document.querySelector('#answerContent{{ questions.pk }}').style.display = "inline-block";
+                        }
+
+                        function cancelEdit() {
+                            document.querySelector('#answerContent{{ questions.pk }}').style.display = "none";
+                        }
+                    </script>
                 </div>
             {% endfor %}
         </div>

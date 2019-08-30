@@ -1,0 +1,66 @@
+{% extends "student_module/base.html" %}
+{% load static %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item active" aria-current="page">My Assignments</li>
+{% endblock %}
+
+{% block content %}
+
+    <h2 class="tableHeader">List of My Assignments</h2>
+
+
+    <hr class="header_hr">
+    {% for courses in Course %}
+
+        <h3 align="center">Course -
+            <a href="{% if '/students' in request.path %}
+                                {{ courses.Lecture_Code.student_get_absolute_url }}
+                            {% else %}
+                               {{ courses.Lecture_Code.get_absolute_url }}
+                            {% endif %}"><b>{{ courses.Lecture_Code.Lecture_Name }}</b> </a>
+        </h3>
+
+        {% for chapter in courses.Lecture_Code.chapterinfos.all %}
+            <div class="col-md-12 col-sm-12 col-xs-12 " style="margin-bottom: 5px;">
+
+                <a href="{% if '/students' in request.path %}
+                                {{ chapter.student_get_absolute_url }}
+                            {% else %}
+                               {{ chapter.get_absolute_url }}
+                            {% endif %}">
+                    <h4>&nbsp; Chapter {{ chapter.Chapter_No }} - <b>{{ chapter.Chapter_Name }}</b></h4>
+                </a>
+                {% for assignments in chapter.assignmentinfos.all %}
+
+
+                    <div class="col-md-12 col-sm-12 col-xs-12 " style="margin-bottom: 5px;">
+
+                        <div class="col-md-8 col-sm-8 col-xs-12 leftborder">
+                            <h5 style="padding-top: 3px; color: #000000"> Assignment No: {{ forloop.counter }}</h5>
+                            <h5>
+                                <b style="color: #000000">{{ assignments.Assignment_Topic }}</b>
+                            </h5>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <a href="{% if '/students' in request.path %}
+                                {{ assignments.student_get_absolute_url }}
+                            {% else %}
+                               {{ assignments.get_absolute_url }}
+                            {% endif %}">
+                                <button type="button" style="float: right;width:100px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
+                                margin-top: 20px;margin-bottom: 10px;">CONTINUE <i class="fa fa-arrow-right"></i>
+                                </button>
+                            </a>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 leftborder">
+                            <hr style="margin-top: 1px; margin-bottom: 10px;">
+                            <p>Submission Deadline - {{ assignments.Assignment_Deadline }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+    {% endfor %}
+{% endblock content %}
