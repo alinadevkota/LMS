@@ -478,7 +478,8 @@
     var courseID = '{{course}}';
     var chapterID = '{{chapter}}';
     var save_file_url = "{% url 'saveFile' %}";
-    {# var load_image_url = "{% url 'loadFile' %}"; #}
+    var load_file_url = "/media/chapterBuilder/"+courseID+"/"+chapterID;
+    console.log(load_file_url)
     
   </script>
   <script src="{% static 'chapterPageBuilder/js/jquery.min.js' %}"></script>

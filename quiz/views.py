@@ -463,7 +463,30 @@ class MCQuestionUpdateView(UpdateView):
                 ans.instance = self.object
                 ans.save()
         return vform
+
+class MCQuestionUpdateFromQuiz(UpdateView):
+    model = MCQuestion
+    form_class = MCQuestionForm
+    success_url = reverse_lazy('quiz_create')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)        
+        if self.request.POST:
+            context['answers_formset'] = AnsFormset(self.request.POST, instance = self.object)
+        else:
+            context['answers_formset'] = AnsFormset(instance = self.object)
+        return context
     
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        context = self.get_context_data()
+        ans = context['answers_formset']
+        with transaction.atomic():
+            if ans.is_valid():
+                ans.instance = self.object
+                ans.save()
+        return vform
+
 
 class MCQuestionDetailView(DetailView):
     model = MCQuestion
@@ -490,7 +513,7 @@ class MCQuestionCreateFromQuiz(CreateView):
         if form.is_valid():
             self.object = form.save()
         self.object.cent_code = related_quiz.cent_code
-        self.object.course_code = related_quiz.course_code
+        self.object.course_code = related_quiz.category
         vform = super().form_valid(form)
         related_quiz.mcquestion.add(self.object)
         context = self.get_context_data()
@@ -507,6 +530,39 @@ class MCQuestionCreateFromQuiz(CreateView):
             kwargs = {'pk' : self.kwargs['quiz_id']},
         )
 
+class MCQuestionUpdateFromQuiz(UpdateView):
+    model = MCQuestion
+    fields = ['figure', 'content', 'explanation', 'answer_order']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)        
+        if self.request.POST:
+            context['answers_formset'] = AnsFormset(self.request.POST, instance = self.object)
+        else:
+            context['answers_formset'] = AnsFormset(instance = self.object)
+        return context
+    
+    def form_valid(self, form):
+        related_quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
+        if form.is_valid():
+            self.object = form.save()
+        self.object.cent_code = related_quiz.cent_code
+        self.object.course_code = related_quiz.category
+        vform = super().form_valid(form)
+        related_quiz.mcquestion.add(self.object)
+        context = self.get_context_data()
+        ans = context['answers_formset']
+        with transaction.atomic():
+            if ans.is_valid():
+                ans.instance = self.object
+                ans.save()
+        return vform
+    
+    def get_success_url(self, **kwargs):
+        return reverse(
+            'quiz_detail',
+            kwargs = {'pk' : self.kwargs['quiz_id']},
+        )
 
 # -------------------------_Question Views------------------
 
@@ -518,6 +574,46 @@ class TFQuestionCreateView(CreateView):
     model = TF_Question
     form_class = TFQuestionForm
     success_url = reverse_lazy('quiz_create')
+
+class TFQuestionCreateFromQuiz(CreateView):
+    model = TF_Question
+    fields = ['figure', 'content', 'explanation', 'correct']
+    
+    def form_valid(self, form):
+        related_quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
+        if form.is_valid():
+            self.object = form.save()
+        self.object.cent_code = related_quiz.cent_code
+        self.object.course_code = related_quiz.category
+        vform = super().form_valid(form)
+        related_quiz.tfquestion.add(self.object)
+        return vform
+    
+    def get_success_url(self, **kwargs):
+        return reverse(
+            'quiz_detail',
+            kwargs = {'pk' : self.kwargs['quiz_id']},
+        )
+
+class TFQuestionUpdateFromQuiz(UpdateView):
+    model = TF_Question
+    fields = ['figure', 'content', 'explanation', 'correct']
+    
+    def form_valid(self, form):
+        related_quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
+        if form.is_valid():
+            self.object = form.save()
+        self.object.cent_code = related_quiz.cent_code
+        self.object.course_code = related_quiz.category
+        vform = super().form_valid(form)
+        related_quiz.tfquestion.add(self.object)
+        return vform
+    
+    def get_success_url(self, **kwargs):
+        return reverse(
+            'quiz_detail',
+            kwargs = {'pk' : self.kwargs['quiz_id']},
+        )
 
 
 class TFQuestionUpdateView(UpdateView):
@@ -543,6 +639,46 @@ class SAQuestionCreateView(CreateView):
     model = SA_Question
     form_class = SAQuestionForm
     success_url = reverse_lazy('quiz_create')
+
+class SAQuestionCreateFromQuiz(CreateView):
+    model = SA_Question
+    fields = ['figure', 'content', 'explanation']
+    
+    def form_valid(self, form):
+        related_quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
+        if form.is_valid():
+            self.object = form.save()
+        self.object.cent_code = related_quiz.cent_code
+        self.object.course_code = related_quiz.category
+        vform = super().form_valid(form)
+        related_quiz.saquestion.add(self.object)
+        return vform
+    
+    def get_success_url(self, **kwargs):
+        return reverse(
+            'quiz_detail',
+            kwargs = {'pk' : self.kwargs['quiz_id']},
+        )
+
+class SAQuestionUpdateFromQuiz(UpdateView):
+    model = SA_Question
+    fields = ['figure', 'content', 'explanation']
+    
+    def form_valid(self, form):
+        related_quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
+        if form.is_valid():
+            self.object = form.save()
+        self.object.cent_code = related_quiz.cent_code
+        self.object.course_code = related_quiz.category
+        vform = super().form_valid(form)
+        related_quiz.saquestion.add(self.object)
+        return vform
+    
+    def get_success_url(self, **kwargs):
+        return reverse(
+            'quiz_detail',
+            kwargs = {'pk' : self.kwargs['quiz_id']},
+        )
 
 class SAQuestionUpdateView(UpdateView):
     model = SA_Question

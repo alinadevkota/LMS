@@ -1,58 +1,12 @@
 {% load static %}
 
 <div class="outerDiv">
-    <div class="col-md-6 col-sm-12 xol-xs-12">
-
-        <div class="col-md-12 col-sm-12 col-xs-12 ">
-            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                <h2 class="detailListHeader">Assignments</h2>
-            </div>
-            {% if '/students' not in request.path %}
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center" id="buttons">
-                    <a class="btn-sm btn-success" href="{% if '/teachers' in request.path %}
-                        {% url 'teacher_assignmentinfo_create' %}
-                    {% else %}
-                        {% url 'assignmentinfo_create' course=object.Lecture_Code.id chapter=object.pk %}
-                    {% endif %}">Create new Assignment</a>
-                </div>
-            {% endif %}
-        </div>
-        <div class="col-md-12">
-            <hr class="header_hr">
-            {% for o in assignments %}
-                <div class="col-md-12 col-sm-12 col-xs-12 leftborder">
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                        <h5 style="padding-top: 3px; color: #000000"> Assignment No: {{ forloop.counter }}</h5>
-                        <h4>
-                            <b style="color: #000000">{{ o.Assignment_Topic }}</b>
-                        </h4>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <a href="{% if '/teachers' in request.path %}
-                                /teachers{{ o.get_absolute_url }}
-                            {% else %}
-                               {{ o.get_absolute_url }}
-                            {% endif %}">
-                            <button type="button" style="float: right;width:100px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
-                                margin-top: 20px;margin-bottom: 10px;">CONTINUE <i class="fa fa-arrow-right"></i>
-                            </button>
-                        </a>
-                    </div>
-
-                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px; ">
-                        <hr style="margin-top: 1px; margin-bottom: 10px;">
-                        <p>Submission Deadline - {{ o.Assignment_Deadline }}</p>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
 
     <div class="col-md-6 col-sm-12 col xs-12">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                <h1><b>Chapter {{ object.Chapter_No }}
-                    : {{ object.Chapter_Name }} </b></h1></div>
+                <h2 class="detailListHeader">Chapter {{ object.Chapter_No }}
+                    : {{ object.Chapter_Name }} </h2></div>
             {% if '/students' not in request.path %}
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center" id="buttons">
                     <a class="btn-sm btn-primary"
@@ -117,6 +71,52 @@
                     </tr>
                 </table>
             </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 xol-xs-12">
+
+        <div class="col-md-12 col-sm-12 col-xs-12 ">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                <h2 class="detailListHeader">Assignments</h2>
+            </div>
+            {% if '/students' not in request.path %}
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center" id="buttons">
+                    <a class="btn-sm btn-success" href="{% if '/teachers' in request.path %}
+                        {% url 'teacher_assignmentinfo_create' %}
+                    {% else %}
+                        {% url 'assignmentinfo_create' course=object.Lecture_Code.id chapter=object.pk %}
+                    {% endif %}">Create new Assignment</a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-12">
+            <hr class="header_hr">
+            {% for o in assignments %}
+                <div class="col-md-12 col-sm-12 col-xs-12 leftborder">
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <h5 style="padding-top: 3px; color: #000000"> Assignment No: {{ forloop.counter }}</h5>
+                        <h5>
+                            <b style="color: #000000">{{ o.Assignment_Topic }}</b>
+                        </h5>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <a href="{% if '/students' in request.path %}
+                                {{ o.student_get_absolute_url }}
+                            {% else %}
+                               {{ o.get_absolute_url }}
+                            {% endif %}">
+                            <button type="button" style="float: right;width:100px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
+                                margin-top: 20px;margin-bottom: 10px;">CONTINUE <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </a>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px; ">
+                        <hr style="margin-top: 1px; margin-bottom: 10px;">
+                        <p>Submission Deadline - {{ o.Assignment_Deadline }}</p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>

@@ -47,6 +47,13 @@ urlpatterns += (
 )
 
 urlpatterns += (
+    # urls for AssignmentInfo
+    path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:pk>/',
+    views.AssignmentInfoDetailView.as_view(),
+        name='student_assignmentinfo_detail'),
+)
+
+urlpatterns += (
     # urls for Profile
     path('profile/', login_required(views.ProfileView),
          name='student_user_profile'),

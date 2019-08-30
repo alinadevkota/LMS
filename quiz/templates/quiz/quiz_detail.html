@@ -68,7 +68,7 @@
                       {% endfor %}
                     </ul>
                   </div> 
-                <form action="{% url 'mcquestion_update' pk=quest.id%}" method="get">
+                <form action="{% url 'mcquestion_update_from_quiz' pk=quest.id quiz_id=quiz.id %}" method="get">
                   <input type="submit" value="Edit">
                 </form>
               {% endfor %}
@@ -87,8 +87,14 @@
       <div id="tfqn_list" class="collapse">
         <ul>
             {% for quest in quiz.tfquestion.all %}
-            <li>{{quest.content}}</li> 
-          {% endfor %}
+              <li>{{quest.content}}</li>
+              <form action="{% url 'tfquestion_update_from_quiz' pk=quest.id quiz_id=quiz.id %}" method="get">
+                <input type="submit" value="Edit">
+              </form> 
+            {% endfor %}
+            <form action="{% url 'tfquestion_create_from_quiz' quiz_id=quiz.id %}" method="get">
+              <input type="submit" value="Add">
+            </form>
         </ul>
       </div>
   </div>
@@ -102,7 +108,13 @@
       <ul>
           {% for quest in quiz.saquestion.all %}
           <li>{{quest.content}}</li> 
+          <form action="{% url 'saquestion_update_from_quiz' pk=quest.id quiz_id=quiz.id %}" method="get">
+            <input type="submit" value="Edit">
+          </form>
         {% endfor %}
+        <form action="{% url 'saquestion_create_from_quiz' quiz_id=quiz.id %}" method="get">
+          <input type="submit" value="Add">
+        </form>
       </ul>
     </div>  
 </div>
