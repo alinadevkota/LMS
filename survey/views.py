@@ -1,10 +1,36 @@
+from django.shortcuts import redirect
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from .models import CategoryInfo, SurveyInfo, QuestionInfo, OptionInfo, SubmitSurvey, AnswerInfo
 from .forms import CategoryInfoForm, SurveyInfoForm, QuestionInfoForm, OptionInfoForm, SubmitSurveyForm, AnswerInfoForm
 from datetime import datetime
 
+from WebApp.models import InningInfo, LectureInfo
 from django.http import JsonResponse
 
+class AjaxableResponseMixin:
+    """
+    Mixin to add AJAX support to a form.
+    Must be used with an object-based FormView (e.g. CreateView)
+    """
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
+
+    def form_valid(self, form):
+        # We make sure to call the parent's form_valid() method because
+        # it might do some processing (in the case of CreateView, it will
+        # call form.save() for example).
+        response = super().form_valid(form)
+        if self.request.is_ajax():
+            data = {
+                'pk': self.object.pk,
+            }
+            return JsonResponse(data)
+        else:
+            return response
 
 class CategoryInfoListView(ListView):
     model = CategoryInfo
@@ -38,8 +64,31 @@ class SurveyInfoListView(ListView):
         context['options'] = OptionInfo.objects.all()
         context['submit'] = SubmitSurvey.objects.all()
 
+        
+        # context['categoryName'] = CategoryInfo.objects.values_list('Category_Name')
+
+        # context['surveyForm'] = {'categoryName': list(categoryName)}
+        # context['categoryName'] = CategoryInfo.objects.values_list('Category_Name')
+        # context['surveyForm'] = serializers.serialize('json', list(categoryName), fields=('Category_Name'))
+        
+
         return context
 
+    def post(self, request):
+        obj = SurveyInfo()
+        if request.method == "POST":
+            obj.Survey_Title = request.POST['Survey_Title']
+            obj.Start_Date = request.POST['Start_Date']
+            obj.End_Date = request.POST['End_Date']
+            obj.Assigned_To = InningInfo.objects.get(pk = request.POST['Assigned_To'])
+            obj.Lecture_Code = LectureInfo.objects.get(pk = request.POST['Lecture_Code'])
+            obj.save()
+            print(obj.id)
+        return redirect('surveyinfo_detail', obj.id)
+
+# def get_context_data(self, **kwargs):
+#     categoryName = CategoryInfo.objects.filter(code__startswith='a').values_list('Category_Name')
+#     return JsonResponse({'categoryName': list(categoryName)})
 
 # def get_survey_info(request):
 #     id = request.GET.get('id', None)
@@ -57,6 +106,10 @@ class SurveyInfoCreateView(CreateView):
     model = SurveyInfo
     form_class = SurveyInfoForm
 
+class SurveyInfo_ajax(AjaxableResponseMixin, CreateView):
+    model = SurveyInfo
+    form_class = SurveyInfoForm
+    template_name = 'ajax/surveyInfoAddSurvey_ajax.html'
 
 class SurveyInfoDetailView(DetailView):
     model = SurveyInfo

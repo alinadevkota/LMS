@@ -240,7 +240,7 @@ class ChapterInfo(models.Model):
     )
 
     class Meta:
-        ordering = ('-pk',)
+        ordering = ('pk',)
 
     def __unicode__(self):
         return u'%s' % self.pk
@@ -415,7 +415,7 @@ class QuestionInfo(models.Model):
     )
 
     class Meta:
-        ordering = ('-pk',)
+        ordering = ('pk',)
 
     def __unicode__(self):
         return u'%s' % self.pk
