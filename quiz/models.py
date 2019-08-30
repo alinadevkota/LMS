@@ -227,7 +227,7 @@ class Question(models.Model):
                                            "you want displayed"),
                                verbose_name=_('Question'))
 
-    category = models.ForeignKey(LectureInfo,
+    course_code = models.ForeignKey(LectureInfo,
                                  verbose_name=_("LectureInfo"),
                                  blank=True,
                                  null=True,
@@ -347,12 +347,12 @@ class TF_Question(Question):
         return reverse('tfquestion_update', args=(self.pk,))
 
 
-#essay modelss___________________________________________________________
-class Essay_Question(Question):
+# modelss___________________________________________________________
+class SA_Question(Question):
 
     def check_if_correct(self, guess):
         return True
-
+ 
     def get_answers(self):
         return False
 
@@ -366,14 +366,14 @@ class Essay_Question(Question):
         return self.content
 
     class Meta:
-        verbose_name = _("Essay style question")
-        verbose_name_plural = _("Essay style questions")
+        verbose_name = _("Short Answer style question")
+        verbose_name_plural = _("Short Answer style questions")
 
     def get_absolute_url(self):
-        return reverse('essayquestion_detail', args=(self.pk,))
+        return reverse('question_detail', args=(self.pk,))
 
     def get_update_url(self):
-        return reverse('essayquestion_update', args=(self.pk,))
+        return reverse('question_update', args=(self.pk,))
 
 
 
@@ -381,7 +381,7 @@ class Essay_Question(Question):
 class Quiz(models.Model):
     mcquestion = models.ManyToManyField(MCQuestion,verbose_name=_("Multiple Choice Question"))
     tfquestion = models.ManyToManyField(TF_Question, verbose_name=_("True/False Question"))
-    essayquestion = models.ManyToManyField(Essay_Question, verbose_name=_("Essay Type Question"))
+    saquestion = models.ManyToManyField(SA_Question, verbose_name=_("Short Answer Type Question"))
 
     # start_time=
     title = models.CharField(
@@ -397,7 +397,7 @@ class Quiz(models.Model):
         help_text=_("a user friendly url"),
         verbose_name=_("user friendly url"), unique=True)
 
-    category = models.ForeignKey(
+    course_code = models.ForeignKey(
         LectureInfo, null=True, blank=True,
         verbose_name=_("Lecture"), on_delete=models.CASCADE)
 
@@ -409,10 +409,12 @@ class Quiz(models.Model):
         help_text=_("Time limit for quiz"),
         verbose_name=_("Time limit for quiz"))
 
-    pre_test = models.BooleanField(
+    pre_test = models.BooleanField( 
+        help_text=_("Before the course"),
         default = False
     ) 
-    post_test = models.BooleanField(
+    post_test = models.BooleanField( 
+         help_text=_("After the course"),
         default = False
     ) 
     created_date =  models.DateTimeField(
@@ -441,8 +443,7 @@ class Quiz(models.Model):
         blank=False, default=False,
         verbose_name=_("Random Order"),
         help_text=_("Display the questions in "
-                    "a random order or as they "
-                    "are set?"))
+                    "a random "))
 
     # max_questions = models.PositiveIntegerField(
     #     blank=True, null=True, verbose_name=_("Max Questions"),
@@ -450,22 +451,20 @@ class Quiz(models.Model):
 
     answers_at_end = models.BooleanField(
         blank=False, default=False,
-        help_text=_("Correct answer is NOT shown after question."
-                    " Answers displayed at the end."),
+        help_text=_("Correct answer is displayed at the end."),
         verbose_name=_("Answers at end"))
 
     exam_paper = models.BooleanField(
         blank=False, default=True,
-        help_text=_("If yes, the result of each"
-                    " attempt by a user will be"
-                    " stored. Necessary for marking."),
+        help_text=_("If yes, the result of attempts by user will be"
+                    " stored "),
         verbose_name=_("Exam Paper"))
 
     single_attempt = models.BooleanField(
         blank=False, default=False,
         help_text=_("If yes, only one attempt by"
                     " a user will be permitted."
-                    " Non users cannot sit this exam."),
+                   ),
         verbose_name=_("Single Attempt"))
 
     pass_mark = models.SmallIntegerField(
@@ -510,6 +509,9 @@ class Quiz(models.Model):
 
         super(Quiz, self).save(force_insert, force_update, *args, **kwargs)
 
+    def question_count(self):
+        return len(self.mcquestion.all()) + len(self.tfquestion.all()) + len(self.saquestion.all())
+
     class Meta:
         verbose_name = _("Quiz")
         verbose_name_plural = _("Quizzes")
@@ -523,8 +525,8 @@ class Quiz(models.Model):
     def get_tfquestions(self):
         return self.tfquestion_set.all()
 
-    def get_essayquestions(self):
-        return self.essayquestion_set.all()
+    def get_questions(self):
+        return self.question_set.all()
 
 
     def get_questions(self):
@@ -535,16 +537,16 @@ class Quiz(models.Model):
         tfquestions = sorted(
             self.tfquestion.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
-        essayquestions = sorted(
+        questions = sorted(
             self.tfquestion.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
-        questions = mcquestions+ tfquestions+ essayquestions
+        questions = mcquestions+ tfquestions+ questions
 
         return questions
 
     @property
     def get_max_score(self):
-        return self.get_mcquestions().count()+self.get_tfquestions().count()+self.get_essayquestions().count()
+        return self.get_mcquestions().count()+self.get_tfquestions().count()+self.get_questions().count()
 
     def anon_score_id(self):
         return str(self.id) + "_score"
@@ -585,31 +587,31 @@ class SittingManager(models.Manager):
         if quiz.random_order is True:
             mcquestion_set = quiz.mcquestion.all().order_by('?')
             tfquestion_set = quiz.tfquestion.all().order_by('?')
-            essayquestion_set = quiz.essayquestion.all().order_by('?')
+            question_set = quiz.question.all().order_by('?')
         else:
             mcquestion_set = quiz.mcquestion.all()
             tfquestion_set = quiz.tfquestion.all()
-            essayquestion_set = quiz.essayquestion.all()
+            question_set = quiz.question.all()
 
         mcquestion_set = [item.id for item in mcquestion_set]
         tfquestion_set = [item.id for item in tfquestion_set]
-        essayquestion_set = [item.id for item in essayquestion_set]
+        question_set = [item.id for item in question_set]
 
-        if (len(mcquestion_set) == 0 and len(tfquestion_set) == 0 and len(essayquestion_set) == 0):
+        if (len(mcquestion_set) == 0 and len(tfquestion_set) == 0 and len(question_set) == 0):
             raise ImproperlyConfigured('Question set of the quiz is empty. Please configure questions properly')
 
         # if quiz.max_questions and quiz.max_questions < len(mcquestion_set):
         #     mcquestion_set = mcquestion_set[:quiz.max_questions]
         # if quiz.max_questions and quiz.max_questions < len(tfquestion_set):
         #     tfquestion_set = tfquestion_set[:quiz.max_questions]
-        # if quiz.max_questions and quiz.max_questions < len(essayquestion_set):
-        #     essayquestion_set = essayquestion_set[:quiz.max_questions]
+        # if quiz.max_questions and quiz.max_questions < len(question_set):
+        #     question_set = question_set[:quiz.max_questions]
 
         mcquestions = ",".join(map(str, mcquestion_set)) + ","
         tfquestions = ",".join(map(str, tfquestion_set)) + ","
-        essayquestions = ",".join(map(str, essayquestion_set)) + ","
+        questions = ",".join(map(str, question_set)) + ","
 
-        questions = mcquestions + tfquestions + essayquestions
+        questions = mcquestions + tfquestions + questions
 
         new_sitting = self.create(user=user,
                                   quiz=quiz,
@@ -800,10 +802,10 @@ class Sitting(models.Model):
         tfquestions = sorted(
             self.quiz.tfquestion.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
-        essayquestions = sorted(
-            self.quiz.essayquestion.filter(id__in=question_ids),
+        questions = sorted(
+            self.quiz.question.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
-        questions = mcquestions+ tfquestions+ essayquestions
+        questions = mcquestions+ tfquestions+ questions
 
         if with_answers:
             user_answers = json.loads(self.user_answers)

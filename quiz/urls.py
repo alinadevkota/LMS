@@ -13,13 +13,15 @@ except ImportError:
 from .views import QuizListView, QuizCreateView, CategoriesListView, \
     QuizUserProgressView, \
     QuizTake, MCQuestionCreateView, TFQuestionCreateView, MCQuestionUpdateView, TFQuestionUpdateView, \
-    QuizDetailView, QuizUpdateView, QuizDeleteView, QuizMarkingList, QuizMarkingDetail, EssayQuestionCreateView, \
-    EssayQuestionUpdateView
+    QuizDetailView, QuizUpdateView, QuizDeleteView, QuizMarkingList, QuizMarkingDetail, SAQuestionCreateView, \
+    SAQuestionUpdateView, MCQuestionCreateFromQuiz, TFQuestionCreateFromQuiz, SAQuestionCreateFromQuiz, \
+    MCQuestionUpdateFromQuiz, TFQuestionUpdateFromQuiz, SAQuestionUpdateFromQuiz
 
 router = routers.DefaultRouter()
 router.register(r'quiz', api.QuizViewSet)
 router.register(r'mcquestion', api.MCQuestionViewSet)
 router.register(r'tfquestion', api.TFQuestionViewSet)
+router.register(r'saquestion', api.SAQuestionViewSet)
 router.register(r'answer', api.AnswerViewSet)
 
 
@@ -49,28 +51,35 @@ urlpatterns = (
 
 urlpatterns += (
 
-    path('', QuizListView.as_view(), name='quiz_index'),
+    path('', QuizListView.as_view(), name='quiz_list'),
     path('create/', QuizCreateView.as_view(), name='quiz_create'),
     path('update/<int:pk>', QuizUpdateView.as_view(), name='quiz_update'),
     path('detail/<int:pk>', QuizDetailView.as_view(), name='quiz_detail'),
-    path('delete/<int:pk>', QuizDeleteView, name='quiz_delete'),
+    path('detail/<slug>', QuizDetailView.as_view(), name='quiz_detail_s'),
+    path('delete/<int:pk>', QuizDeleteView, name='quiz_delete'),   
 
     path('mcquestion/', views.MCQuestionListView.as_view(), name='mcquestion_list'),
     path('mcquestion/create/', MCQuestionCreateView.as_view(), name='mcquestion_create'),
+    path('mcquestion/create/<int:quiz_id>/', MCQuestionCreateFromQuiz.as_view(), name='mcquestion_create_from_quiz'),
     path('mcquestion/update/<int:pk>', MCQuestionUpdateView.as_view(), name='mcquestion_update'),
+    path('mcquestion/update/<int:pk>/<int:quiz_id>', MCQuestionUpdateFromQuiz.as_view(), name='mcquestion_update_from_quiz'),
     path('mcquestion/detail/<int:pk>/', views.MCQuestionDetailView.as_view(), name='mcquestion_detail'),
     path('mcquestion/delete/<int:pk>/', views.MCQuestionDeleteView, name='mcquestion_delete'),
 
     path('tfquestion/', views.TFQuestionListView.as_view(), name='tfquestion_list'),
     path('tfquestion/create/', TFQuestionCreateView.as_view(), name='tfquestion_create'),
+    path('tfquestion/create/<int:quiz_id>/', TFQuestionCreateFromQuiz.as_view(), name='tfquestion_create_from_quiz'),
     path('tfquestion/update/<int:pk>', TFQuestionUpdateView.as_view(), name='tfquestion_update'),
+    path('tfquestion/update/<int:pk>/<int:quiz_id>', TFQuestionUpdateFromQuiz.as_view(), name='tfquestion_update_from_quiz'),
     path('tfquestion/detail/<int:pk>/', views.TFQuestionDetailView.as_view(), name='tfquestion_detail'),
     path('tfquestion/delete/<int:pk>/', views.TFQuestionDeleteView, name='tfquestion_delete'),
 
-    path('essayquestion/', views.EssayQuestionListView.as_view(), name='essayquestion_list'),
-    path('essayquestion/create/', EssayQuestionCreateView.as_view(), name='essayquestion_create'),
-    path('essayquestion/update/<int:pk>', EssayQuestionUpdateView.as_view(), name='essayquestion_update'),
-    path('essayquestion/detail/<int:pk>/', views.EssayQuestionDetailView.as_view(), name='essayquestion_detail'),
-    path('essayquestion/delete/<int:pk>/', views.EssayQuestionDeleteView, name='essayquestion_delete'),
+    path('saquestion/', views.SAQuestionListView.as_view(), name='saquestion_list'),
+    path('saquestion/create/', SAQuestionCreateView.as_view(), name='saquestion_create'),
+    path('saquestion/create/<int:quiz_id>/', SAQuestionCreateFromQuiz.as_view(), name='saquestion_create_from_quiz'),
+    path('saquestion/update/<int:pk>', SAQuestionUpdateView.as_view(), name='saquestion_update'),
+    path('saquestion/update/<int:pk>/<int:quiz_id>', SAQuestionUpdateFromQuiz.as_view(), name='saquestion_update_from_quiz'),
+    path('saquestion/detail/<int:pk>/', views.SAQuestionDetailView.as_view(), name='saquestion_detail'),
+    path('saquestion/delete/<int:pk>/', views.SAQuestionDeleteView, name='saquestion_delete'),
 
 )

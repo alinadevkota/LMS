@@ -1,9 +1,9 @@
 {% extends "student_module/base.html" %}
-{%load static %}
+{% load static %}
 {% block breadcrumb %}
     <li class="breadcrumb-item active" aria-current="page">Lecture</li>
 {% endblock %}
 
 {% block content %}
-dfgdg
+    {% include 'lecture/lectureinfo_list.html' %}
 {% endblock content %}
