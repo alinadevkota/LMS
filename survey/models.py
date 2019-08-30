@@ -53,13 +53,13 @@ class SurveyInfo(models.Model):
     )
     Added_By = ForeignKey(
         'WebApp.MemberInfo',
-        related_name="surveyinfo", on_delete=models.DO_NOTHING
+        related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
     Category_Code = ForeignKey(
         'CategoryInfo',
         related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
-
+    
     Lecture_Code = ForeignKey(
         'WebApp.LectureInfo',
         related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
@@ -71,7 +71,7 @@ class SurveyInfo(models.Model):
     def __unicode__(self):
         return u'%s' % self.pk
 
-    def __str__(self):
+    def __str__(self):      
         return self.Survey_Title
 
     def questions_count(self):

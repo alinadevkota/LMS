@@ -6,10 +6,10 @@
  *     // code here
  * });
  */
-(function($, sr) {
+(function ($, sr) {
   // debouncing function from John Hann
   // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
-  var debounce = function(func, threshold, execAsap) {
+  var debounce = function (func, threshold, execAsap) {
     var timeout;
 
     return function debounced() {
@@ -29,7 +29,7 @@
   };
 
   // smartresize
-  jQuery.fn[sr] = function(fn) {
+  jQuery.fn[sr] = function (fn) {
     return fn ? this.bind("resize", debounce(fn)) : this.trigger(sr);
   };
 })(jQuery, "smartresize");
@@ -53,7 +53,7 @@ var CURRENT_URL = window.location.href.split("#")[0].split("?")[0],
 // Sidebar
 function init_sidebar() {
   // TODO: This is some kind of easy fix, maybe we can improve this
-  var setContentHeight = function() {
+  var setContentHeight = function () {
     // reset height
     $RIGHT_COL.css("min-height", $(window).height());
 
@@ -68,13 +68,13 @@ function init_sidebar() {
     $RIGHT_COL.css("min-height", contentHeight);
   };
 
-  $SIDEBAR_MENU.find("a").on("click", function(ev) {
+  $SIDEBAR_MENU.find("a").on("click", function (ev) {
     console.log("clicked - sidebar_menu");
     var $li = $(this).parent();
 
     if ($li.is(".active")) {
       $li.removeClass("active active-sm");
-      $("ul:first", $li).slideUp(function() {
+      $("ul:first", $li).slideUp(function () {
         setContentHeight();
       });
     } else {
@@ -90,14 +90,14 @@ function init_sidebar() {
       }
       $li.addClass("active");
 
-      $("ul:first", $li).slideDown(function() {
+      $("ul:first", $li).slideDown(function () {
         setContentHeight();
       });
     }
   });
 
   // toggle small or large menu
-  $MENU_TOGGLE.on("click", function() {
+  $MENU_TOGGLE.on("click", function () {
     console.log("clicked - menu toggle");
 
     if ($BODY.hasClass("nav-md")) {
@@ -127,20 +127,20 @@ function init_sidebar() {
 
   $SIDEBAR_MENU
     .find("a")
-    .filter(function() {
+    .filter(function () {
       return this.href == CURRENT_URL;
     })
     .parent("li")
     .addClass("current-page")
     .parents("ul")
-    .slideDown(function() {
+    .slideDown(function () {
       setContentHeight();
     })
     .parent()
     .addClass("active");
 
   // recompute content when resizing
-  $(window).smartresize(function() {
+  $(window).smartresize(function () {
     setContentHeight();
   });
 
@@ -157,20 +157,20 @@ function init_sidebar() {
 }
 // /Sidebar
 
-var randNum = function() {
+var randNum = function () {
   return Math.floor(Math.random() * (1 + 40 - 20)) + 20;
 };
 
 // Panel toolbox
-$(document).ready(function() {
-  $(".collapse-link").on("click", function() {
+$(document).ready(function () {
+  $(".collapse-link").on("click", function () {
     var $BOX_PANEL = $(this).closest(".x_panel"),
       $ICON = $(this).find("i"),
       $BOX_CONTENT = $BOX_PANEL.find(".x_content");
 
     // fix for some div with hardcoded fix class
     if ($BOX_PANEL.attr("style")) {
-      $BOX_CONTENT.slideToggle(200, function() {
+      $BOX_CONTENT.slideToggle(200, function () {
         $BOX_PANEL.removeAttr("style");
       });
     } else {
@@ -181,7 +181,7 @@ $(document).ready(function() {
     $ICON.toggleClass("fa-chevron-up fa-chevron-down");
   });
 
-  $(".close-link").click(function() {
+  $(".close-link").click(function () {
     var $BOX_PANEL = $(this).closest(".x_panel");
 
     $BOX_PANEL.remove();
@@ -190,7 +190,7 @@ $(document).ready(function() {
 // /Panel toolbox
 
 // Tooltip
-$(document).ready(function() {
+$(document).ready(function () {
   $('[data-toggle="tooltip"]').tooltip({
     container: "body"
   });
@@ -204,12 +204,12 @@ if ($(".progress .progress-bar")[0]) {
 // /Progressbar
 
 // Switchery
-$(document).ready(function() {
+$(document).ready(function () {
   if ($(".js-switch")[0]) {
     var elems = Array.prototype.slice.call(
       document.querySelectorAll(".js-switch")
     );
-    elems.forEach(function(html) {
+    elems.forEach(function (html) {
       var switchery = new Switchery(html, {
         color: "#26B99A"
       });
@@ -219,9 +219,9 @@ $(document).ready(function() {
 // /Switchery
 
 // iCheck
-$(document).ready(function() {
+$(document).ready(function () {
   if ($("input.flat")[0]) {
-    $(document).ready(function() {
+    $(document).ready(function () {
       $("input.flat").iCheck({
         checkboxClass: "icheckbox_flat-green",
         radioClass: "iradio_flat-green"
@@ -232,7 +232,7 @@ $(document).ready(function() {
 // /iCheck
 
 // Table
-$("table input").on("ifChecked", function() {
+$("table input").on("ifChecked", function () {
   checkState = "";
   $(this)
     .parent()
@@ -241,7 +241,7 @@ $("table input").on("ifChecked", function() {
     .addClass("selected");
   countChecked();
 });
-$("table input").on("ifUnchecked", function() {
+$("table input").on("ifUnchecked", function () {
   checkState = "";
   $(this)
     .parent()
@@ -253,7 +253,7 @@ $("table input").on("ifUnchecked", function() {
 
 var checkState = "";
 
-$(".bulk_action input").on("ifChecked", function() {
+$(".bulk_action input").on("ifChecked", function () {
   checkState = "";
   $(this)
     .parent()
@@ -262,7 +262,7 @@ $(".bulk_action input").on("ifChecked", function() {
     .addClass("selected");
   countChecked();
 });
-$(".bulk_action input").on("ifUnchecked", function() {
+$(".bulk_action input").on("ifUnchecked", function () {
   checkState = "";
   $(this)
     .parent()
@@ -271,11 +271,11 @@ $(".bulk_action input").on("ifUnchecked", function() {
     .removeClass("selected");
   countChecked();
 });
-$(".bulk_action input#check-all").on("ifChecked", function() {
+$(".bulk_action input#check-all").on("ifChecked", function () {
   checkState = "all";
   countChecked();
 });
-$(".bulk_action input#check-all").on("ifUnchecked", function() {
+$(".bulk_action input#check-all").on("ifUnchecked", function () {
   checkState = "none";
   countChecked();
 });
@@ -301,8 +301,8 @@ function countChecked() {
 }
 
 // Accordion
-$(document).ready(function() {
-  $(".expand").on("click", function() {
+$(document).ready(function () {
+  $(".expand").on("click", function () {
     $(this)
       .next()
       .slideToggle(200);
@@ -318,24 +318,24 @@ $(document).ready(function() {
 
 // NProgress
 if (typeof NProgress != "undefined") {
-  $(document).ready(function() {
+  $(document).ready(function () {
     NProgress.start();
   });
 
-  $(window).load(function() {
+  $(window).load(function () {
     NProgress.done();
   });
 }
 
 // hover and retain popover when on popover content
 var originalLeave = $.fn.popover.Constructor.prototype.leave;
-$.fn.popover.Constructor.prototype.leave = function(obj) {
+$.fn.popover.Constructor.prototype.leave = function (obj) {
   var self =
     obj instanceof this.constructor
       ? obj
       : $(obj.currentTarget)
-          [this.type](this.getDelegateOptions())
-          .data("bs." + this.type);
+      [this.type](this.getDelegateOptions())
+        .data("bs." + this.type);
   var container, timeout;
 
   originalLeave.call(this, obj);
@@ -343,11 +343,11 @@ $.fn.popover.Constructor.prototype.leave = function(obj) {
   if (obj.currentTarget) {
     container = $(obj.currentTarget).siblings(".popover");
     timeout = self.timeout;
-    container.one("mouseenter", function() {
+    container.one("mouseenter", function () {
       // We entered the actual popover – call off the dogs
       clearTimeout(timeout);
       // Let's monitor popover content instead
-      container.one("mouseleave", function() {
+      container.one("mouseleave", function () {
         $.fn.popover.Constructor.prototype.leave.call(self, self);
       });
     });
@@ -526,7 +526,7 @@ function init_flot_chart() {
       margin: [0, -25],
       noColumns: 0,
       labelBoxBorderColor: null,
-      labelFormatter: function(label, series) {
+      labelFormatter: function (label, series) {
         return label + "&nbsp;&nbsp;";
       },
       width: 40,
@@ -655,11 +655,11 @@ function init_starrr() {
     rating: 4
   });
 
-  $(".stars").on("starrr:change", function(e, value) {
+  $(".stars").on("starrr:change", function (e, value) {
     $(".stars-count").html(value);
   });
 
-  $(".stars-existing").on("starrr:change", function(e, value) {
+  $(".stars-existing").on("starrr:change", function (e, value) {
     $(".stars-count-existing").html(value);
   });
 }
@@ -711,8 +711,8 @@ function init_skycons() {
   console.log("init_skycons");
 
   var icons = new Skycons({
-      color: "#73879C"
-    }),
+    color: "#73879C"
+  }),
     list = [
       "clear-day",
       "clear-night",
@@ -727,7 +727,7 @@ function init_skycons() {
     ],
     i;
 
-  for (i = list.length; i--; ) icons.set(list[i], list[i]);
+  for (i = list.length; i--;) icons.set(list[i], list[i]);
 
   icons.play();
 }
@@ -771,7 +771,7 @@ function init_chart_doughnut() {
       }
     };
 
-    $(".canvasDoughnut").each(function() {
+    $(".canvasDoughnut").each(function () {
       var chart_element = $(this);
       var chart_doughnut = new Chart(chart_element, chart_doughnut_settings);
     });
@@ -1271,7 +1271,7 @@ function init_autocomplete() {
     ZZ: "Unknown or Invalid Region"
   };
 
-  var countriesArray = $.map(countries, function(value, key) {
+  var countriesArray = $.map(countries, function (value, key) {
     return {
       value: value,
       data: key
@@ -1300,16 +1300,16 @@ function init_parsley() {
   }
   console.log("init_parsley");
 
-  $(/*.listen*/ "parsley:field:validate", function() {
+  $(/*.listen*/ "parsley:field:validate", function () {
     validateFront();
   });
-  $("#demo-form .btn").on("click", function() {
+  $("#demo-form .btn").on("click", function () {
     $("#demo-form")
       .parsley()
       .validate();
     validateFront();
   });
-  var validateFront = function() {
+  var validateFront = function () {
     if (
       true ===
       $("#demo-form")
@@ -1324,16 +1324,16 @@ function init_parsley() {
     }
   };
 
-  $(/*.listen*/ "parsley:field:validate", function() {
+  $(/*.listen*/ "parsley:field:validate", function () {
     validateFront();
   });
-  $("#demo-form2 .btn").on("click", function() {
+  $("#demo-form2 .btn").on("click", function () {
     $("#demo-form2")
       .parsley()
       .validate();
     validateFront();
   });
-  var validateFront = function() {
+  var validateFront = function () {
     // if (true === $('#demo-form2').parsley().isValid()) {
     //     $('.bs-callout-info').removeClass('hidden');
     //     $('.bs-callout-warning').addClass('hidden');
@@ -1345,7 +1345,7 @@ function init_parsley() {
 
   try {
     hljs.initHighlightingOnLoad();
-  } catch (err) {}
+  } catch (err) { }
 }
 
 /* INPUTS */
@@ -1401,33 +1401,33 @@ function init_wysiwyg() {
 
   function init_ToolbarBootstrapBindings() {
     var fonts = [
-        "Serif",
-        "Sans",
-        "Arial",
-        "Arial Black",
-        "Courier",
-        "Courier New",
-        "Comic Sans MS",
-        "Helvetica",
-        "Impact",
-        "Lucida Grande",
-        "Lucida Sans",
-        "Tahoma",
-        "Times",
-        "Times New Roman",
-        "Verdana"
-      ],
+      "Serif",
+      "Sans",
+      "Arial",
+      "Arial Black",
+      "Courier",
+      "Courier New",
+      "Comic Sans MS",
+      "Helvetica",
+      "Impact",
+      "Lucida Grande",
+      "Lucida Sans",
+      "Tahoma",
+      "Times",
+      "Times New Roman",
+      "Verdana"
+    ],
       fontTarget = $("[title=Font]").siblings(".dropdown-menu");
-    $.each(fonts, function(idx, fontName) {
+    $.each(fonts, function (idx, fontName) {
       fontTarget.append(
         $(
           '<li><a data-edit="fontName ' +
-            fontName +
-            '" style="font-family:\'' +
-            fontName +
-            "'\">" +
-            fontName +
-            "</a></li>"
+          fontName +
+          '" style="font-family:\'' +
+          fontName +
+          "'\">" +
+          fontName +
+          "</a></li>"
         )
       );
     });
@@ -1435,21 +1435,21 @@ function init_wysiwyg() {
       container: "body"
     });
     $(".dropdown-menu input")
-      .click(function() {
+      .click(function () {
         return false;
       })
-      .change(function() {
+      .change(function () {
         $(this)
           .parent(".dropdown-menu")
           .siblings(".dropdown-toggle")
           .dropdown("toggle");
       })
-      .keydown("esc", function() {
+      .keydown("esc", function () {
         this.value = "";
         $(this).change();
       });
 
-    $("[data-role=magic-overlay]").each(function() {
+    $("[data-role=magic-overlay]").each(function () {
       var overlay = $(this),
         target = $(overlay.data("target"));
       overlay
@@ -1483,13 +1483,13 @@ function init_wysiwyg() {
     }
     $(
       '<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
-        "<strong>File upload error</strong> " +
-        msg +
-        " </div>"
+      "<strong>File upload error</strong> " +
+      msg +
+      " </div>"
     ).prependTo("#alerts");
   }
 
-  $(".editor-wrapper").each(function() {
+  $(".editor-wrapper").each(function () {
     var id = $(this).attr("id"); //editor-one
 
     $(this).wysiwyg({
@@ -1522,7 +1522,7 @@ function init_cropper() {
   var options = {
     aspectRatio: 16 / 9,
     preview: ".img-preview",
-    crop: function(e) {
+    crop: function (e) {
       $dataX.val(Math.round(e.x));
       $dataY.val(Math.round(e.y));
       $dataHeight.val(Math.round(e.height));
@@ -1539,22 +1539,22 @@ function init_cropper() {
   // Cropper
   $image
     .on({
-      "build.cropper": function(e) {
+      "build.cropper": function (e) {
         console.log(e.type);
       },
-      "built.cropper": function(e) {
+      "built.cropper": function (e) {
         console.log(e.type);
       },
-      "cropstart.cropper": function(e) {
+      "cropstart.cropper": function (e) {
         console.log(e.type, e.action);
       },
-      "cropmove.cropper": function(e) {
+      "cropmove.cropper": function (e) {
         console.log(e.type, e.action);
       },
-      "cropend.cropper": function(e) {
+      "cropend.cropper": function (e) {
         console.log(e.type, e.action);
       },
-      "crop.cropper": function(e) {
+      "crop.cropper": function (e) {
         console.log(
           e.type,
           e.x,
@@ -1566,7 +1566,7 @@ function init_cropper() {
           e.scaleY
         );
       },
-      "zoom.cropper": function(e) {
+      "zoom.cropper": function (e) {
         console.log(e.type, e.ratio);
       }
     })
@@ -1590,7 +1590,7 @@ function init_cropper() {
   }
 
   // Options
-  $(".docs-toggles").on("change", "input", function() {
+  $(".docs-toggles").on("change", "input", function () {
     var $this = $(this);
     var name = $this.attr("name");
     var type = $this.prop("type");
@@ -1606,7 +1606,7 @@ function init_cropper() {
       cropBoxData = $image.cropper("getCropBoxData");
       canvasData = $image.cropper("getCanvasData");
 
-      options.built = function() {
+      options.built = function () {
         $image.cropper("setCropBoxData", cropBoxData);
         $image.cropper("setCanvasData", canvasData);
       };
@@ -1618,7 +1618,7 @@ function init_cropper() {
   });
 
   // Methods
-  $(".docs-buttons").on("click", "[data-method]", function() {
+  $(".docs-buttons").on("click", "[data-method]", function () {
     var $this = $(this);
     var data = $this.data();
     var $target;
@@ -1678,7 +1678,7 @@ function init_cropper() {
   });
 
   // Keyboard
-  $(document.body).on("keydown", function(e) {
+  $(document.body).on("keydown", function (e) {
     if (!$image.data("cropper") || this.scrollTop > 300) {
       return;
     }
@@ -1712,7 +1712,7 @@ function init_cropper() {
   var blobURL;
 
   if (URL) {
-    $inputImage.change(function() {
+    $inputImage.change(function () {
       var files = this.files;
       var file;
 
@@ -1726,7 +1726,7 @@ function init_cropper() {
         if (/^image\/\w+$/.test(file.type)) {
           blobURL = URL.createObjectURL(file);
           $image
-            .one("built.cropper", function() {
+            .one("built.cropper", function () {
               // Revoke when load complete
               URL.revokeObjectURL(blobURL);
             })
@@ -1757,20 +1757,20 @@ function init_knob() {
   console.log("init_knob");
 
   $(".knob").knob({
-    change: function(value) {
+    change: function (value) {
       //console.log("change : " + value);
     },
-    release: function(value) {
+    release: function (value) {
       //console.log(this.$.attr('value'));
       console.log("release : " + value);
     },
-    cancel: function() {
+    cancel: function () {
       console.log("cancel : ", this);
     },
     /*format : function (value) {
          return value + '%';
          },*/
-    draw: function() {
+    draw: function () {
       // "tron" case
       if (this.$.data("skin") == "tron") {
         this.cursorExt = 0.3;
@@ -1833,7 +1833,7 @@ function init_knob() {
     i = 0,
     $idir = $("div.idir"),
     $ival = $("div.ival"),
-    incr = function() {
+    incr = function () {
       i++;
       $idir
         .show()
@@ -1841,7 +1841,7 @@ function init_knob() {
         .fadeOut();
       $ival.html(i);
     },
-    decr = function() {
+    decr = function () {
       i--;
       $idir
         .show()
@@ -1853,7 +1853,7 @@ function init_knob() {
     min: 0,
     max: 20,
     stopper: false,
-    change: function() {
+    change: function () {
       if (v > this.cv) {
         if (up) {
           decr();
@@ -1979,7 +1979,7 @@ function init_IonRangeSlider() {
       .format("X"),
     grid: true,
     force_edges: true,
-    prettify: function(num) {
+    prettify: function (num) {
       var m = moment(num, "X");
       return m.format("Do MMMM, HH:mm");
     }
@@ -1994,7 +1994,7 @@ function init_daterangepicker() {
   }
   console.log("init_daterangepicker");
 
-  var cb = function(start, end, label) {
+  var cb = function (start, end, label) {
     console.log(start.toISOString(), end.toISOString(), label);
     $("#reportrange span").html(
       start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
@@ -2064,38 +2064,38 @@ function init_daterangepicker() {
     moment()
       .subtract(29, "days")
       .format("MMMM D, YYYY") +
-      " - " +
-      moment().format("MMMM D, YYYY")
+    " - " +
+    moment().format("MMMM D, YYYY")
   );
   $("#reportrange").daterangepicker(optionSet1, cb);
-  $("#reportrange").on("show.daterangepicker", function() {
+  $("#reportrange").on("show.daterangepicker", function () {
     console.log("show event fired");
   });
-  $("#reportrange").on("hide.daterangepicker", function() {
+  $("#reportrange").on("hide.daterangepicker", function () {
     console.log("hide event fired");
   });
-  $("#reportrange").on("apply.daterangepicker", function(ev, picker) {
+  $("#reportrange").on("apply.daterangepicker", function (ev, picker) {
     console.log(
       "apply event fired, start/end dates are " +
-        picker.startDate.format("MMMM D, YYYY") +
-        " to " +
-        picker.endDate.format("MMMM D, YYYY")
+      picker.startDate.format("MMMM D, YYYY") +
+      " to " +
+      picker.endDate.format("MMMM D, YYYY")
     );
   });
-  $("#reportrange").on("cancel.daterangepicker", function(ev, picker) {
+  $("#reportrange").on("cancel.daterangepicker", function (ev, picker) {
     console.log("cancel event fired");
   });
-  $("#options1").click(function() {
+  $("#options1").click(function () {
     $("#reportrange")
       .data("daterangepicker")
       .setOptions(optionSet1, cb);
   });
-  $("#options2").click(function() {
+  $("#options2").click(function () {
     $("#reportrange")
       .data("daterangepicker")
       .setOptions(optionSet2, cb);
   });
-  $("#destroy").click(function() {
+  $("#destroy").click(function () {
     $("#reportrange")
       .data("daterangepicker")
       .remove();
@@ -2108,7 +2108,7 @@ function init_daterangepicker_right() {
   }
   console.log("init_daterangepicker_right");
 
-  var cb = function(start, end, label) {
+  var cb = function (start, end, label) {
     console.log(start.toISOString(), end.toISOString(), label);
     $("#reportrange_right span").html(
       start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
@@ -2178,43 +2178,43 @@ function init_daterangepicker_right() {
     moment()
       .subtract(29, "days")
       .format("MMMM D, YYYY") +
-      " - " +
-      moment().format("MMMM D, YYYY")
+    " - " +
+    moment().format("MMMM D, YYYY")
   );
 
   $("#reportrange_right").daterangepicker(optionSet1, cb);
 
-  $("#reportrange_right").on("show.daterangepicker", function() {
+  $("#reportrange_right").on("show.daterangepicker", function () {
     console.log("show event fired");
   });
-  $("#reportrange_right").on("hide.daterangepicker", function() {
+  $("#reportrange_right").on("hide.daterangepicker", function () {
     console.log("hide event fired");
   });
-  $("#reportrange_right").on("apply.daterangepicker", function(ev, picker) {
+  $("#reportrange_right").on("apply.daterangepicker", function (ev, picker) {
     console.log(
       "apply event fired, start/end dates are " +
-        picker.startDate.format("MMMM D, YYYY") +
-        " to " +
-        picker.endDate.format("MMMM D, YYYY")
+      picker.startDate.format("MMMM D, YYYY") +
+      " to " +
+      picker.endDate.format("MMMM D, YYYY")
     );
   });
-  $("#reportrange_right").on("cancel.daterangepicker", function(ev, picker) {
+  $("#reportrange_right").on("cancel.daterangepicker", function (ev, picker) {
     console.log("cancel event fired");
   });
 
-  $("#options1").click(function() {
+  $("#options1").click(function () {
     $("#reportrange_right")
       .data("daterangepicker")
       .setOptions(optionSet1, cb);
   });
 
-  $("#options2").click(function() {
+  $("#options2").click(function () {
     $("#reportrange_right")
       .data("daterangepicker")
       .setOptions(optionSet2, cb);
   });
 
-  $("#destroy").click(function() {
+  $("#destroy").click(function () {
     $("#reportrange_right")
       .data("daterangepicker")
       .remove();
@@ -2232,7 +2232,7 @@ function init_daterangepicker_single_call() {
       singleDatePicker: true,
       singleClasses: "picker_1"
     },
-    function(start, end, label) {
+    function (start, end, label) {
       console.log(start.toISOString(), end.toISOString(), label);
     }
   );
@@ -2241,7 +2241,7 @@ function init_daterangepicker_single_call() {
       singleDatePicker: true,
       singleClasses: "picker_2"
     },
-    function(start, end, label) {
+    function (start, end, label) {
       console.log(start.toISOString(), end.toISOString(), label);
     }
   );
@@ -2250,7 +2250,7 @@ function init_daterangepicker_single_call() {
       singleDatePicker: true,
       singleClasses: "picker_3"
     },
-    function(start, end, label) {
+    function (start, end, label) {
       console.log(start.toISOString(), end.toISOString(), label);
     }
   );
@@ -2259,7 +2259,7 @@ function init_daterangepicker_single_call() {
       singleDatePicker: true,
       singleClasses: "picker_4"
     },
-    function(start, end, label) {
+    function (start, end, label) {
       console.log(start.toISOString(), end.toISOString(), label);
     }
   );
@@ -2271,7 +2271,7 @@ function init_daterangepicker_reservation() {
   }
   console.log("init_daterangepicker_reservation");
 
-  $("#reservation").daterangepicker(null, function(start, end, label) {
+  $("#reservation").daterangepicker(null, function (start, end, label) {
     console.log(start.toISOString(), end.toISOString(), label);
   });
 
@@ -2324,7 +2324,7 @@ function init_validator() {
     .on("change", "select.required", validator.checkField)
     .on("keypress", "input[required][pattern]", validator.keypress);
 
-  $(".multi.required").on("keyup blur", "input", function() {
+  $(".multi.required").on("keyup blur", "input", function () {
     validator.checkField.apply(
       $(this)
         .siblings()
@@ -2332,7 +2332,7 @@ function init_validator() {
     );
   });
 
-  $("form").submit(function(e) {
+  $("form").submit(function (e) {
     e.preventDefault();
     var submit = true;
 
@@ -2366,7 +2366,7 @@ function init_PNotify() {
     addclass: "dark",
     styling: "bootstrap3",
     hide: false,
-    before_close: function(PNotify) {
+    before_close: function (PNotify) {
       PNotify.update({
         title: PNotify.options.title + " - Enjoy your Stay",
         before_close: null
@@ -2391,7 +2391,7 @@ function init_CustomNotification() {
 
   var cnt = 10;
 
-  TabbedNotification = function(options) {
+  TabbedNotification = function (options) {
     var message =
       "<div id='ntf" +
       cnt +
@@ -2408,12 +2408,12 @@ function init_CustomNotification() {
     } else {
       $("#custom_notifications ul.notifications").append(
         "<li><a id='ntlink" +
-          cnt +
-          "' class='alert-" +
-          options.type +
-          "' href='#ntf" +
-          cnt +
-          "'><i class='fa fa-bell animated shake'></i></a></li>"
+        cnt +
+        "' class='alert-" +
+        options.type +
+        "' href='#ntf" +
+        cnt +
+        "'><i class='fa fa-bell animated shake'></i></a></li>"
       );
       $("#custom_notifications #notif-group").append(message);
       cnt++;
@@ -2421,11 +2421,11 @@ function init_CustomNotification() {
     }
   };
 
-  CustomTabs = function(options) {
+  CustomTabs = function (options) {
     $(".tabbed_notifications > div").hide();
     $(".tabbed_notifications > div:first-of-type").show();
     $("#custom_notifications").removeClass("dsp_none");
-    $(".notifications a").click(function(e) {
+    $(".notifications a").click(function (e) {
       e.preventDefault();
       var $this = $(this),
         tabbed_notifications =
@@ -2448,7 +2448,7 @@ function init_CustomNotification() {
 
   var tabid = (idname = "");
 
-  $(document).on("click", ".notification_close", function(e) {
+  $(document).on("click", ".notification_close", function (e) {
     idname = $(this)
       .parent()
       .parent()
@@ -2484,26 +2484,26 @@ function init_EasyPieChart() {
     lineWidth: 20,
     trackWidth: 16,
     lineCap: "butt",
-    onStep: function(from, to, percent) {
+    onStep: function (from, to, percent) {
       $(this.el)
         .find(".percent")
         .text(Math.round(percent));
     }
   });
   var chart = (window.chart = $(".chart").data("easyPieChart"));
-  $(".js_update").on("click", function() {
+  $(".js_update").on("click", function () {
     chart.update(Math.random() * 200 - 100);
   });
 
   //hover and retain popover when on popover content
   var originalLeave = $.fn.popover.Constructor.prototype.leave;
-  $.fn.popover.Constructor.prototype.leave = function(obj) {
+  $.fn.popover.Constructor.prototype.leave = function (obj) {
     var self =
       obj instanceof this.constructor
         ? obj
         : $(obj.currentTarget)
-            [this.type](this.getDelegateOptions())
-            .data("bs." + this.type);
+        [this.type](this.getDelegateOptions())
+          .data("bs." + this.type);
     var container, timeout;
 
     originalLeave.call(this, obj);
@@ -2511,11 +2511,11 @@ function init_EasyPieChart() {
     if (obj.currentTarget) {
       container = $(obj.currentTarget).siblings(".popover");
       timeout = self.timeout;
-      container.one("mouseenter", function() {
+      container.one("mouseenter", function () {
         //We entered the actual popover – call off the dogs
         clearTimeout(timeout);
         //Let's monitor popover content instead
-        container.one("mouseleave", function() {
+        container.one("mouseleave", function () {
           $.fn.popover.Constructor.prototype.leave.call(self, self);
         });
       });
@@ -2994,7 +2994,7 @@ function init_compose() {
   }
   console.log("init_compose");
 
-  $("#compose, .compose-close").click(function() {
+  $("#compose, .compose-close").click(function () {
     $(".compose").slideToggle();
   });
 }
@@ -3022,13 +3022,13 @@ function init_calendar() {
     },
     selectable: true,
     selectHelper: true,
-    select: function(start, end, allDay) {
+    select: function (start, end, allDay) {
       $("#fc_create").click();
 
       started = start;
       ended = end;
 
-      $(".antosubmit").on("click", function() {
+      $(".antosubmit").on("click", function () {
         var title = $("#title").val();
         if (end) {
           ended = end;
@@ -3058,13 +3058,13 @@ function init_calendar() {
         return false;
       });
     },
-    eventClick: function(calEvent, jsEvent, view) {
+    eventClick: function (calEvent, jsEvent, view) {
       $("#fc_edit").click();
       $("#title2").val(calEvent.title);
 
       categoryClass = $("#event_type").val();
 
-      $(".antosubmit2").on("click", function() {
+      $(".antosubmit2").on("click", function () {
         calEvent.title = $("#title2").val();
 
         calendar.fullCalendar("updateEvent", calEvent);
@@ -3121,7 +3121,7 @@ function init_DataTables() {
   }
   console.log("init_DataTables");
 
-  var handleDataTableButtons = function() {
+  var handleDataTableButtons = function () {
     if ($("#datatable-buttons").length) {
       $("#datatable-buttons").DataTable({
         dom: "Bfrtip",
@@ -3152,10 +3152,10 @@ function init_DataTables() {
     }
   };
 
-  TableManageButtons = (function() {
+  TableManageButtons = (function () {
     "use strict";
     return {
-      init: function() {
+      init: function () {
         handleDataTableButtons();
       }
     };
@@ -3187,7 +3187,7 @@ function init_DataTables() {
     order: [[1, "asc"]],
     columnDefs: [{ orderable: false, targets: [0] }]
   });
-  $datatable.on("draw.dt", function() {
+  $datatable.on("draw.dt", function () {
     $("checkbox input").iCheck({
       checkboxClass: "icheckbox_flat-green"
     });
@@ -3270,7 +3270,7 @@ function init_morris_charts() {
       hideHover: "auto",
       labels: ["Y", "Z", "A"],
       resize: true
-    }).on("click", function(i, row) {
+    }).on("click", function (i, row) {
       console.log(i, row);
     });
   }
@@ -3310,7 +3310,7 @@ function init_morris_charts() {
         { label: "Sugar", value: 10 }
       ],
       colors: ["#26B99A", "#34495E", "#ACADAC", "#3498DB"],
-      formatter: function(y) {
+      formatter: function (y) {
         return y + "%";
       },
       resize: true
@@ -3335,7 +3335,7 @@ function init_morris_charts() {
       resize: true
     });
 
-    $MENU_TOGGLE.on("click", function() {
+    $MENU_TOGGLE.on("click", function () {
       $(window).resize();
     });
   }
@@ -3916,7 +3916,7 @@ function init_echarts() {
           },
           axisLabel: {
             show: true,
-            formatter: function(v) {
+            formatter: function (v) {
               switch (v + "") {
                 case "10":
                   return "a";
@@ -4142,7 +4142,7 @@ function init_echarts() {
           type: "scatter",
           tooltip: {
             trigger: "item",
-            formatter: function(params) {
+            formatter: function (params) {
               if (params.value.length > 1) {
                 return (
                   params.seriesName +
@@ -4452,7 +4452,7 @@ function init_echarts() {
           type: "scatter",
           tooltip: {
             trigger: "item",
-            formatter: function(params) {
+            formatter: function (params) {
               if (params.value.length > 1) {
                 return (
                   params.seriesName +
@@ -5223,7 +5223,7 @@ function init_echarts() {
       },
       tooltip: {
         trigger: "item",
-        formatter: function(params) {
+        formatter: function (params) {
           var value = (params.value + "").split(".");
           value =
             value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, "$1,") +
@@ -5997,7 +5997,7 @@ function init_echarts() {
   }
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   init_sparklines();
   init_flot_chart();
   init_sidebar();
@@ -6034,45 +6034,91 @@ $(document).ready(function() {
   init_autocomplete();
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
   $(".discussions").css({ display: "block" });
-  $("#fa-comment").on("click", function() {
+  $("#fa-comment").on("click", function () {
     $(".discussions").show(300);
     $(".users").hide();
     $(".notification").hide();
   });
-  $("#fa-users").on("click", function() {
+  $("#fa-users").on("click", function () {
     $(".users").show(300);
     $(".discussions").hide();
     // Animation complete.
     $(".notification").hide();
   });
-  $("#fa-bell").on("click", function() {
+  $("#fa-bell").on("click", function () {
     $(".notification").show(300);
     $(".discussions").hide();
     $(".users").hide();
   });
+
+  // ..............................................................
+
+  $(".General").on("click", function () {
+    $("#chooseSession").hide();
+    $("#chooseCourse").hide();
+    $(".sessionLabel").hide();
+    $(".courseLabel").hide();
+    $(".systemLabel").hide();
+  });
+
+  $(".System").on("click", function () {
+    $("#chooseSession").hide();
+    $("#chooseCourse").hide();
+    $(".generalLabel").hide();
+    $(".sessionLabel").hide();
+    $(".courseLabel").hide();
+    $(".systemLabel").show();
+  });
+
+  $(".Session").on("click", function () {
+    $("#chooseSession").show();
+    $("#chooseCourse").hide();
+    $(".generalLabel").hide();
+    $(".sessionLabel").show();
+    $(".courseLabel").hide();
+    $(".systemLabel").hide();
+  });
+  $(".Course").on("click", function () {
+    $("#chooseSession").show();
+    $("#chooseCourse").show();
+    $(".generalLabel").hide();
+    $(".sessionLabel").hide();
+    $(".courseLabel").show();
+    $(".systemLabel").hide();
+  });
+  // .................................................................................
+  $(".mcq_question").on("click", function () {
+    $("#mcq_que").show(200);
+    $("#short_que").hide();
+  });
+
+  $(".short_question").on("click", function () {
+    $("#short_que").show(200);
+    $("#mcq_que").hide();
+  });
 });
 
-$(document).ready(function() {
-  $(".fa-list").on("click", function() {
+$(document).ready(function () {
+  $(".fa-list").on("click", function () {
     $(".listView").show(300);
     //$(this).css('color', 'white');
     $(".gridView").hide();
   });
-  $(".fa-th-large").on("click", function() {
+  $(".fa-th-large").on("click", function () {
     $(".gridView").show(300);
     // $(this).css('color', 'white');
     $(".listView").hide();
   });
 
   // -----------------------------ACTIVE AND EPIRE -------------------------------------
-  $("#ActiveButton").on("click", function() {
+  $("#ActiveButton").on("click", function () {
     $(".active_survey").show(300);
     //$(this).css('color', 'white');
     $(".expire_survey").hide();
   });
-  $("#ExpireButton").on("click", function() {
+  $("#ExpireButton").on("click", function () {
     $(".expire_survey").show(300);
     // $(this).css('color', 'white');
     $(".active_survey").hide();
@@ -6121,23 +6167,16 @@ function filterFunction() {
   }
 }
 
-// $(document).ready(function () {
-//     // $(".discussions").css({ 'display': 'block' })
-//     $('#submitButton').on('click', function () {
-//         $("#progressResult").css({ 'display': 'block' })
-//     });
-// });
-
-$(function() {
+$(function () {
   //----- OPEN
-  $("[data-popup-open]").on("click", function(e) {
+  $("[data-popup-open]").on("click", function (e) {
     var targeted_popup_class = jQuery(this).attr("data-popup-open");
     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
     e.preventDefault();
   });
 
   //----- CLOSE
-  $("[data-popup-close]").on("click", function(e) {
+  $("[data-popup-close]").on("click", function (e) {
     var targeted_popup_class = jQuery(this).attr("data-popup-close");
     $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
     e.preventDefault();
@@ -6162,10 +6201,10 @@ function Myfunctionbtn(event, obj) {
     </li>`);
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   var count = 1;
   var increse = 1;
-  $("#newQuestion").on("click", function(e) {
+  $("#newQuestion").on("click", function (e) {
     e.preventDefault();
     var id1 = parseInt(count++);
     $("#mySelect").append(`
@@ -6175,7 +6214,7 @@ $(document).ready(function() {
              <label for="option" style="margin-top: 10px; margin-bottom: 10px;">Option:</label><button id="${id1} " onclick="Myfunctionbtn(event,this)" class="btn btn-success" style="margin-top:5px; margin-bottom: 10px;">Add option</button> 
              </li><li id="options-${id1}" style="list-style:none;"></li>`);
   });
-  $("#addButtons").on("click", function(e) {
+  $("#addButtons").on("click", function (e) {
     e.preventDefault();
     var id2 = parseInt(increse++);
     $("#short_que_add").append(
@@ -6183,56 +6222,11 @@ $(document).ready(function() {
     );
   });
 
-  // .................................................................................
-
-  $(".General").on("click", function() {
-    $("#chooseSession").hide();
-    $("#chooseCourse").hide();
-    $(".sessionLabel").hide();
-    $(".courseLabel").hide();
-    $(".systemLabel").hide();
-  });
-
-  $(".System").on("click", function() {
-    $("#chooseSession").hide();
-    $("#chooseCourse").hide();
-    $(".generalLabel").hide();
-    $(".sessionLabel").hide();
-    $(".courseLabel").hide();
-    $(".systemLabel").show();
-  });
-
-  $(".Session").on("click", function() {
-    $("#chooseSession").show();
-    $("#chooseCourse").hide();
-    $(".generalLabel").hide();
-    $(".sessionLabel").show();
-    $(".courseLabel").hide();
-    $(".systemLabel").hide();
-  });
-  $(".Course").on("click", function() {
-    $("#chooseSession").show();
-    $("#chooseCourse").show();
-    $(".generalLabel").hide();
-    $(".sessionLabel").hide();
-    $(".courseLabel").show();
-    $(".systemLabel").hide();
-  });
-  // .................................................................................
-  $(".mcq_question").on("click", function() {
-    $("#mcq_que").show(200);
-    $("#short_que").hide();
-  });
-
-  $(".short_question").on("click", function() {
-    $("#short_que").show(200);
-    $("#mcq_que").hide();
-  });
 });
 
 // CATEGORY ACTIVE
 
-$(document).on("click", ".categoryContainer .card-text", function() {
+$(document).on("click", ".categoryContainer .card-text", function () {
   $(this)
     .addClass("active")
     .siblings()
@@ -6249,6 +6243,10 @@ $(document).on("click", ".categoryContainer .card-text", function() {
 //         console.log(category);
 //     });
 // });
+
+//  DYNAMIC FORM
+
+
 
 // TO GET THE DATA ON CARD CLICK
 
@@ -6291,7 +6289,7 @@ $(document).on("click", ".categoryContainer .card-text", function() {
 //               if (data[j].Survey_Code == id) {
 //                 $("#SAQ_questionNameTitle").append(data[j].Question_Name + "<br>");
 //               }
-              
+
 //             }
 //           }
 //         }
@@ -6302,14 +6300,14 @@ $(document).on("click", ".categoryContainer .card-text", function() {
 
 /* FORM WIZARD SURVEY */
 
-$(document).ready(function() {
+$(document).ready(function () {
   var navListItems = $("div.setup-panel div a"),
     allWells = $(".setup-content"),
     allNextBtn = $(".nextBtn");
 
   allWells.hide();
 
-  navListItems.click(function(e) {
+  navListItems.click(function (e) {
     e.preventDefault();
     var $target = $($(this).attr("href")),
       $item = $(this);
@@ -6323,7 +6321,7 @@ $(document).ready(function() {
     }
   });
 
-  allNextBtn.click(function() {
+  allNextBtn.click(function () {
     var curStep = $(this).closest(".setup-content"),
       curStepBtn = curStep.attr("id"),
       nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]')
@@ -6349,24 +6347,8 @@ $(document).ready(function() {
   $("div.setup-panel div a.btn-primary").trigger("click");
 });
 
-//  EXPIRE SURVEY
 
-// var today = new Date();
-// var dd = String(today.getDate()).padStart(2, '0');
-// var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-// var yyyy = today.getFullYear();
-
-// today = mm + '/' + dd + '/' + yyyy;
-
-// document.write(today);
-// console.log(today);
-
-// TIMER
-/*
-to modify total time, just input on variable totaltime
-*/
-
-$(document).ready(function() {
+$(document).ready(function () {
   $("#time").text().innerHTML = parseInt($("#quiz-timer").attr("data-timer"));
 });
 
@@ -6380,22 +6362,22 @@ function update(percent) {
     $(".pie").css(
       "background-image",
       "linear-gradient(" +
-        deg +
-        "deg, transparent 50%, white 50%),linear-gradient(90deg, white 50%, transparent 50%)"
+      deg +
+      "deg, transparent 50%, white 50%),linear-gradient(90deg, white 50%, transparent 50%)"
     );
   } else if (percent >= totaltime / 2) {
     deg = -90 + (360 * percent) / totaltime;
     $(".pie").css(
       "background-image",
       "linear-gradient(" +
-        deg +
-        "deg, transparent 50%, #4183D7 50%),linear-gradient(90deg, white 50%, transparent 50%)"
+      deg +
+      "deg, transparent 50%, #4183D7 50%),linear-gradient(90deg, white 50%, transparent 50%)"
     );
   }
 }
 var count = 0;
 
-cuentaAtras = setInterval(function() {
+cuentaAtras = setInterval(function () {
   countdown--;
   count += 1;
   if (countdown < 10) {
