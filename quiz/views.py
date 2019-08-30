@@ -513,7 +513,7 @@ class MCQuestionCreateFromQuiz(CreateView):
         if form.is_valid():
             self.object = form.save()
         self.object.cent_code = related_quiz.cent_code
-        self.object.course_code = related_quiz.category
+        self.object.course_code = related_quiz.course_code
         vform = super().form_valid(form)
         related_quiz.mcquestion.add(self.object)
         context = self.get_context_data()
@@ -547,7 +547,7 @@ class MCQuestionUpdateFromQuiz(UpdateView):
         if form.is_valid():
             self.object = form.save()
         self.object.cent_code = related_quiz.cent_code
-        self.object.course_code = related_quiz.category
+        self.object.course_code = related_quiz.course_code
         vform = super().form_valid(form)
         related_quiz.mcquestion.add(self.object)
         context = self.get_context_data()
@@ -584,7 +584,7 @@ class TFQuestionCreateFromQuiz(CreateView):
         if form.is_valid():
             self.object = form.save()
         self.object.cent_code = related_quiz.cent_code
-        self.object.course_code = related_quiz.category
+        self.object.course_code = related_quiz.course_code
         vform = super().form_valid(form)
         related_quiz.tfquestion.add(self.object)
         return vform
@@ -604,7 +604,7 @@ class TFQuestionUpdateFromQuiz(UpdateView):
         if form.is_valid():
             self.object = form.save()
         self.object.cent_code = related_quiz.cent_code
-        self.object.course_code = related_quiz.category
+        self.object.course_code = related_quiz.course_code
         vform = super().form_valid(form)
         related_quiz.tfquestion.add(self.object)
         return vform
@@ -649,7 +649,7 @@ class SAQuestionCreateFromQuiz(CreateView):
         if form.is_valid():
             self.object = form.save()
         self.object.cent_code = related_quiz.cent_code
-        self.object.course_code = related_quiz.category
+        self.object.course_code = related_quiz.course_code
         vform = super().form_valid(form)
         related_quiz.saquestion.add(self.object)
         return vform
@@ -669,7 +669,7 @@ class SAQuestionUpdateFromQuiz(UpdateView):
         if form.is_valid():
             self.object = form.save()
         self.object.cent_code = related_quiz.cent_code
-        self.object.course_code = related_quiz.category
+        self.object.course_code = related_quiz.course_code
         vform = super().form_valid(form)
         related_quiz.saquestion.add(self.object)
         return vform

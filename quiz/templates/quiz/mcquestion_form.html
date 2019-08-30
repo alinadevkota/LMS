@@ -17,7 +17,7 @@
 </form>
 -->
 
-<form method="post">
+<!-- <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
     <br><br>
@@ -27,7 +27,7 @@
     {% for form in answers_formset.forms %}
         <div class='table'>
         <table class='no_error'>
-            {{ form|crispy }}
+                {{ form|crispy }}
         </table>
         </div>
     {% endfor %}
@@ -35,6 +35,79 @@
     
 
 <button class="btn btn-primary" type="submit">Submit</button>
+</form>  -->
+<form method="post"> 
+        {% csrf_token %}
+        <div class="form-group"> 
+                <div class="col-md-12"> 
+                    <div class="col-md-6">
+                            <label class="quiz-add-label"  for="">Question</label>
+                            {{form.content}}
+        
+                    </div>
+                    <div class="col-md-6">
+                            <label class="quiz-add-label"  for="">Lecture Info</label>
+                            {{form.course_code}} 
+                    </div>
+                        
+                        
+                </div>
+        </div>  
+        <div class="form-group"> 
+                <div class="col-md-12"> 
+                    <div class="col-md-6">
+                            <label class="quiz-add-label"  for="">Center Code</label>
+                            {{form.cent_code}}
+        
+                    </div>
+                    <div class="col-md-6">
+                            <label class="quiz-add-label"  for="">Answer Order</label>
+                            {{form.answer_order}} 
+                    </div>
+                        
+                        
+                </div>
+        </div> 
+        <div class="form-group"> 
+                <div class="col-md-12"> 
+                    <div class="col-md-6">
+                            <label class="quiz-add-label"  for="">Figure</label>
+                            {{form.figure}} 
+                          
+        
+                    </div>
+                    <!-- <div class="col-md-6">
+                            <label class="quiz-add-label"  for="">Content</label>
+                            {{form.content}} 
+                            {{form.content.help_text}} 
+                    </div> -->
+                        
+                        
+                </div>
+        </div>  
+        <div class="form-group"> 
+            <div class="col-md-12">
+                    <label class="quiz-add-label"  for="">Quiz</label>
+            </div>
+                <div class="col-md-12 controls"> 
+                       
+                        {{form.quiz}}
+                </div>
+        </div> 
+        <div class="form-group">
+            <div class="col-md-12">
+                    {{ answers_formset.management_form }}
+                    {% for form in answers_formset.forms %}
+                        <div class='table'>
+                        <table class='no_error'>
+                                {{ form|crispy }}
+                        </table>
+                        </div>
+                    {% endfor %}
+                    <input class="add-mcq" type="button" value="Add More" id="add_more"> 
+                    <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </div>       
 </form>
 
 {% endblock %}
