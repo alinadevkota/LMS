@@ -1357,9 +1357,9 @@ $(document).ready(function() {
 
       $(".tabs-to-click ul").append(
 
-          `<li class="tabs-link" onclick="openTab(event,'tab${num_tabs}')" >
-    <i id="add-page-btn" class="fas fa-plus-square fas-5x"></i>
-</li>`
+          `<li class="tabs-link pagenumber" onclick="openTab(event,'tab${num_tabs}')" >
+            <i id="add-page-btn" class="fas fa-plus-square fas-5x"></i>
+        </li>`
 
       );
       $(".tabs").append(
