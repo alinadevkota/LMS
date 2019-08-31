@@ -22,7 +22,7 @@
         <div class="col-md-6 col-xs-12">
             <h3 align="center"><b>{{ object.Lecture_Name }}</b></h3>
             <br>
-            <center><img class="card-img-top" src="
+            <img class="card-img-top" src="
                             {% if object.Lecture_Cover_File %}
                                 /media/{{ object.Lecture_Cover_File }}
                             {% else %}
@@ -37,9 +37,8 @@
                     </h5>
                 </div>
             </div>
-        </div>
-        <div class="col-md-7 col-sm-12 col-xs-12">
-            <h3 align="center"><b>{{ object.Lecture_Name }}</b></h3>
+
+            {#                <h3 align="center"><b>{{ object.Lecture_Name }}</b></h3>#}
             <table class="table">
 
                 <tr>
@@ -76,7 +75,6 @@
                 </div>
             </div>
 
-
         </div>
         <div class="col-md-6 col-sm-12 xol-xs-12">
             <div class="col-md-12 col-sm-12 xol-xs-12">
@@ -94,9 +92,9 @@
                 {% endif %}
             </div>
             <div class="col-md-12 col-sm-12 xol-xs-12">
-                <hr class="header_hr" style="margin-bottom: 5px;margin-top: 5px;">
+                {#                <hr class="header_hr" style="margin-bottom: 5px;margin-top: 5px;">#}
                 {% for o in chapters %}
-                    <div class="col-md-12 col-sm-12 col-xs-12 leftborder" style=" margin: 10px;">
+                    <div class="col-md-12 col-sm-12 col-xs-12 leftborder" style=" margin: 5px;">
                         <div class="col-md-8 col-sm-8 col-xs-12">
                             <h5 style="padding-top: 3px; color: #000000"> Chapter No: {{ o.Chapter_No }}</h5>
                             <h3>
@@ -109,8 +107,9 @@
                             {% else %}
                                {{ o.get_absolute_url }}
                             {% endif %}">
-                                <button type="button" style="float: right;width:100px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
-                                margin-top: 20px;margin-bottom: 10px;">CONTINUE <i class="fa fa-arrow-right"></i>
+                                <button type="button" style="float: right;width:150px;height:25px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
+                                margin-top: 20px;margin-bottom: 10px;">View Chapter &nbsp;<i
+                                        class="fa fa-arrow-right"></i>
                                 </button>
                             </a>
                         </div>

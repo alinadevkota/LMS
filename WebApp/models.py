@@ -240,7 +240,7 @@ class ChapterInfo(models.Model):
     )
 
     class Meta:
-        ordering = ('-pk',)
+        ordering = ('pk',)
 
     def __unicode__(self):
         return u'%s' % self.pk
@@ -360,6 +360,9 @@ class AssignmentInfo(models.Model):
     def __str__(self):
         return self.Assignment_Topic
 
+    def student_get_absolute_url(self):
+        return reverse('student_assignmentinfo_detail', args=(self.Lecture_Code.id, self.Chapter_Code.id, self.pk,))
+
     def get_absolute_url(self):
         return reverse('assignmentinfo_detail', args=(self.Lecture_Code.id, self.Chapter_Code.id, self.pk,))
 
@@ -412,7 +415,7 @@ class QuestionInfo(models.Model):
     )
 
     class Meta:
-        ordering = ('-pk',)
+        ordering = ('pk',)
 
     def __unicode__(self):
         return u'%s' % self.pk

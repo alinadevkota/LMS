@@ -391,7 +391,7 @@ class LectureInfoDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk'))
+        context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).order_by('Chapter_No')
         return context
 
 

@@ -8,12 +8,12 @@
 #     return render(request, "student_module/homepage.html")
 
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.views.generic import DetailView, ListView
 
-from WebApp.models import LectureInfo, GroupMapping, InningInfo, InningGroup, ChapterInfo, AssignmentInfo
+from WebApp.models import LectureInfo, GroupMapping, InningInfo, InningGroup, ChapterInfo, AssignmentInfo, QuestionInfo
 
 
 def start(request):
@@ -60,12 +60,21 @@ class MyCoursesListView(ListView):
         context = super().get_context_data(**kwargs)
         context['GroupName'] = GroupMapping.objects.get(Students__id=self.request.user.id)
         context['Group'] = InningInfo.objects.get(Groups__id=context['GroupName'].id)
-        # for course in context['Group']():
-        #     context['Course'] = InningGroup.objects.filter(id=context['Group'].id)
-        # context['Course'] = InningGroup.objects.filter(id=context['Group'].id)
         context['Course'] = context['Group'].Course_Group.all()
-        # context['Course_Group'] = InningInfo.objects.get(Course_Group__id=context['Group'].Course_Group)
-        # print(context['Group'].Course_Group)
+
+        return context
+
+
+class MyAssignmentsListView(ListView):
+    model = AssignmentInfo
+    template_name = 'student_module/myassignments_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['GroupName'] = GroupMapping.objects.get(Students__id=self.request.user.id)
+        context['Group'] = InningInfo.objects.get(Groups__id=context['GroupName'].id)
+        context['Course'] = context['Group'].Course_Group.all()
+
         return context
 
 
@@ -80,20 +89,34 @@ class LectureInfoDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk'))
+        context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).order_by('Chapter_No')
         return context
+
 
 class ChapterInfoListView(ListView):
     model = ChapterInfo
+
 
 class ChapterInfoDetailView(DetailView):
     model = ChapterInfo
     template_name = 'student_module/chapterinfo_detail.html'
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['assignments'] = AssignmentInfo.objects.filter(Chapter_Code=self.kwargs.get('pk'))
+        return context
+
+
+class AssignmentInfoDetailView(DetailView):
+    model = AssignmentInfo
+    template_name = 'student_module/assignmentinfo_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Questions'] = QuestionInfo.objects.filter(Assignment_Code=self.kwargs.get('pk'))
+        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
+        # context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
         return context
 
 

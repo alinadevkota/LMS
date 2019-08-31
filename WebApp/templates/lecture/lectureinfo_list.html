@@ -34,8 +34,8 @@
             <div class="col-md-3 col-sm-6 col-xs-12" id="listCard">
                 <div class="gridContentsList">
                     <div class="card-header">
-                        <a href="{% if '/teachers' in request.path %}
-                                /teachers{{ object.get_absolute_url }}
+                        <a href="{% if '/students' in request.path %}
+                                {{ object.student_get_absolute_url }}
                             {% else %}
                                {{ object.get_absolute_url }}
                             {% endif %}">
