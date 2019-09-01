@@ -96,13 +96,13 @@
             <hr class="header_hr">
             {% for o in assignments %}
                 <div class="col-md-12 col-sm-12 col-xs-12 leftborder"  style="margin-bottom: 5px;">
-                    <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-md-8 col-sm-8 col-xs-8">
                         <h5 style="padding-top: 3px; color: #000000"> Assignment No: {{ forloop.counter }}</h5>
                         <h5>
                             <b style="color: #000000">{{ o.Assignment_Topic }}</b>
                         </h5>
                     </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
                         <a href="{% if '/students' in request.path %}
                                 {{ o.student_get_absolute_url }}
                             {% else %}

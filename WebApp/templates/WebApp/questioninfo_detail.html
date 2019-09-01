@@ -24,17 +24,24 @@
                 <td>{{ object.Question_Description }}</td>
             </tr>
             <tr>
+                <td>Answer Type</td>
+                <td>
+                    {% if object.Answer_Type == 'S' %}
+                        Short Answer
+                        {% elif object.Answer_Type == 'F' %}
+                        File Upload
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <td>Question Media File</td>
                 <td>{{ object.Question_Media_File }}</td>
             </tr>
             <tr>
-                <td>Lecture Code</td>
-                <td>{{ object.Lecture_Code }}</td>
+                <td>Assignment Code</td>
+                <td>{{ object.Assignment_Code }}</td>
             </tr>
-            <tr>
-                <td>Chapter Code</td>
-                <td>{{ object.Chapter_Code }}</td>
-            </tr>
+
             <tr>
                 <td>Register Agent</td>
                 <td>{{ object.Register_Agent }}</td>

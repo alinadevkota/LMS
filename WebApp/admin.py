@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django import forms
 from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
-    ChapterMissonCheckItem,SessionInfo, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
-     AssignAnswerInfo, BoardInfo, \
+    ChapterMissonCheckItem, SessionInfo, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
+    AssignAnswerInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
     LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
     QExampleInfo, QuizAnswerInfo, \
@@ -139,7 +139,6 @@ class ChapterMissonCheckItemAdmin(admin.ModelAdmin):
 admin.site.register(ChapterMissonCheckItem, ChapterMissonCheckItemAdmin)
 
 
-
 #
 # class OmrQuestionInfoAdminForm(forms.ModelForm):
 #     class Meta:
@@ -201,7 +200,8 @@ class QuestionInfoAdminForm(forms.ModelForm):
 class QuestionInfoAdmin(admin.ModelAdmin):
     form = QuestionInfoAdminForm
     list_display = ['Question_Title', 'Question_Score', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
-                    'Register_Agent', 'Question_Media_File', 'Question_Description', 'Assignment_Code']
+                    'Register_Agent', 'Question_Media_File', 'Question_Description', 'Assignment_Code',
+                    'Answer_Choices', 'Answer_Type']
     # readonly_fields = ['subject_code', 'question_type', 'use_flag', 'reg_date', 'reg_time', 'udt_date', 'udt_time', 'udt_agent']
 
 
@@ -222,6 +222,7 @@ class AssignAssignmentInfoAdmin(admin.ModelAdmin):
 
 
 admin.site.register(AssignAssignmentInfo, AssignAssignmentInfoAdmin)
+
 
 #
 # class AssignQuestionInfoAdminForm(forms.ModelForm):
@@ -288,6 +289,7 @@ class BoardContentInfoAdmin(admin.ModelAdmin):
 
 admin.site.register(BoardContentInfo, BoardContentInfoAdmin)
 
+
 class SessionInfoAdminForm(forms.ModelForm):
     class Meta:
         model = SessionInfo
@@ -296,11 +298,12 @@ class SessionInfoAdminForm(forms.ModelForm):
 
 class SessionInfoAdmin(admin.ModelAdmin):
     form = SessionInfoAdminForm
-    list_display = ['Session_Name', 'Description','Use_Flag', 'Center_Code' ]
+    list_display = ['Session_Name', 'Description', 'Use_Flag', 'Center_Code']
     # readonly_fields = ['inning_name', 'start_date', 'end_date', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
 
 
 admin.site.register(SessionInfo, SessionInfoAdmin)
+
 
 class InningGroupAdminForm(forms.ModelForm):
     class Meta:
@@ -317,6 +320,7 @@ class InningGroupAdmin(admin.ModelAdmin):
 
 admin.site.register(InningGroup, InningGroupAdmin)
 
+
 class InningInfoAdminForm(forms.ModelForm):
     class Meta:
         model = InningInfo
@@ -327,7 +331,7 @@ class InningInfoAdmin(admin.ModelAdmin):
     form = InningInfoAdminForm
     list_display = ['Inning_Name', 'Start_Date', 'End_Date', 'Use_Flag', 'Register_DateTime',
                     'Updated_DateTime',
-                    'Register_Agent', 'Center_Code','Groups']
+                    'Register_Agent', 'Center_Code', 'Groups']
     # readonly_fields = ['inning_name', 'start_date', 'end_date', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
 
 
@@ -342,8 +346,8 @@ class GroupMappingAdminForm(forms.ModelForm):
 
 class GroupMappingAdmin(admin.ModelAdmin):
     form = GroupMappingAdminForm
-    list_display = [ 'GroupMapping_Name','Use_Flag', 'Register_DateTime', 'Updated_DateTime',
-                    'Register_Agent','Center_Code']
+    list_display = ['GroupMapping_Name', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
+                    'Register_Agent', 'Center_Code']
     # readonly_fields = ['use_flag', 'reg_date', 'reg_time', 'reg_agent', 'udt_date', 'udt_time', 'udt_agent']
 
 
@@ -411,7 +415,6 @@ class ChapterWriteAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ChapterWrite, ChapterWriteAdmin)
-
 
 
 class LearningNoteAdminForm(forms.ModelForm):
