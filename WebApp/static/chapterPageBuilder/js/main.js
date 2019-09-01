@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     function display(){
-        $('#chaptertitle').text(data.chaptertitle);
+        $('#chaptertitle').text(chaptertitle);
         console.log(data.pages.length);
         $.each(data.pages, function(){
             

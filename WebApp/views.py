@@ -1323,10 +1323,23 @@ from django.conf import settings
 import os
 import json
 
-def chapterviewer(request, course, chapter):
-    pass
+def chapterviewer(request):
+    if request.method == "GET":
+        path = settings.MEDIA_ROOT
+        chapterID = request.GET['chapterID']
+        chapterobj = ChapterInfo.objects.get(id = chapterID)
+        print(chapterobj.Lecture_Code)
+        courseID = chapterobj.Lecture_Code.id
+        try:
+            with open(path+'/chapterBuilder/'+str(courseID)+'/'+str(chapterID)+'/'+str(chapterID)+'.txt') as json_file:  
+                data = json.load(json_file)
+        except Exception as e:
+            print(e)
+        return JsonResponse({'data':data})
 
 def chapterpagebuilder(request, course, chapter):
+    chaptertitle = ChapterInfo.objects.get(id = chapter).Chapter_Name
+    print(chaptertitle)
     path = settings.MEDIA_ROOT
     data = None
     try:
@@ -1336,7 +1349,8 @@ def chapterpagebuilder(request, course, chapter):
         print(e)
     context = {
         'course':course, 
-        'chapter':chapter, 
+        'chapter':chapter,
+        'chaptertitle': chaptertitle,
         'file_path': path,
         'data': data
     }
