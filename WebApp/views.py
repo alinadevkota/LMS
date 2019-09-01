@@ -1323,11 +1323,22 @@ from django.conf import settings
 import os
 import json
 
+def chapterviewer(request, course, chapter):
+    pass
+
 def chapterpagebuilder(request, course, chapter):
+    path = settings.MEDIA_ROOT
+    data = None
+    try:
+        with open(path+'/chapterBuilder/'+str(course)+'/'+str(chapter)+'/'+str(chapter)+'.txt') as json_file:  
+            data = json.load(json_file)
+    except Exception as e:
+        print(e)
     context = {
         'course':course, 
         'chapter':chapter, 
-        'file_path': settings.MEDIA_ROOT
+        'file_path': path,
+        'data': data
     }
     return render(request, 'WebApp/chapterbuilder.html', context)
 

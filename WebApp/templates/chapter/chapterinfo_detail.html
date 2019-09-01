@@ -7,6 +7,9 @@
             <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2 class="detailListHeader">Chapter {{ object.Chapter_No }}
                     : {{ object.Chapter_Name }} </h2></div>
+                     <a class="btn-sm btn-success"
+                       href="{% url 'chapterviewer' object.Lecture_Code.id object.id %}">Lecture
+                        Viewer &nbsp;</a>
             {% if '/students' not in request.path %}
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center" id="buttons">
                     <a class="btn-sm btn-primary"
