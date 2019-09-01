@@ -52,13 +52,13 @@ class QuizForm(forms.ModelForm):
 
         #self.fields['url'].required = False
         #self.fields['url'].widget = forms.HiddenInput()
-        last_quiz = Quiz.objects.last()
-        if(last_quiz):
-            self.fields['url'].initial = "quiz" + str(last_quiz.id)
-            self.fields['title'].initial = "quiz" + str(last_quiz.id)
-        else:
-            self.fields['url'].initial = "quiz0"
-            self.fields['title'].initial = "quiz0"
+        #last_quiz = Quiz.objects.last()
+        #if(last_quiz):
+        #    self.fields['url'].initial = "quiz" + str(last_quiz.id)
+        #    self.fields['title'].initial = "quiz" + str(last_quiz.id)
+        #else:
+        #    self.fields['url'].initial = "quiz0"
+        #    self.fields['title'].initial = "quiz0"
 
     class Meta:
         model = Quiz

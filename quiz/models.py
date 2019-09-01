@@ -525,8 +525,8 @@ class Quiz(models.Model):
     def get_tfquestions(self):
         return self.tfquestion_set.all()
 
-    def get_questions(self):
-        return self.question_set.all()
+    #def get_questions(self):
+    #    return self.question_set.all()
 
 
     def get_questions(self):
@@ -587,15 +587,15 @@ class SittingManager(models.Manager):
         if quiz.random_order is True:
             mcquestion_set = quiz.mcquestion.all().order_by('?')
             tfquestion_set = quiz.tfquestion.all().order_by('?')
-            question_set = quiz.question.all().order_by('?')
+            saquestion_set = quiz.saquestion.all().order_by('?')
         else:
             mcquestion_set = quiz.mcquestion.all()
             tfquestion_set = quiz.tfquestion.all()
-            question_set = quiz.question.all()
+            saquestion_set = quiz.saquestion.all()
 
         mcquestion_set = [item.id for item in mcquestion_set]
         tfquestion_set = [item.id for item in tfquestion_set]
-        question_set = [item.id for item in question_set]
+        saquestion_set = [item.id for item in saquestion_set]
 
         if (len(mcquestion_set) == 0 and len(tfquestion_set) == 0 and len(question_set) == 0):
             raise ImproperlyConfigured('Question set of the quiz is empty. Please configure questions properly')
@@ -605,13 +605,13 @@ class SittingManager(models.Manager):
         # if quiz.max_questions and quiz.max_questions < len(tfquestion_set):
         #     tfquestion_set = tfquestion_set[:quiz.max_questions]
         # if quiz.max_questions and quiz.max_questions < len(question_set):
-        #     question_set = question_set[:quiz.max_questions]
+        #     saquestion_set = saquestion_set[:quiz.max_questions]
 
         mcquestions = ",".join(map(str, mcquestion_set)) + ","
         tfquestions = ",".join(map(str, tfquestion_set)) + ","
-        questions = ",".join(map(str, question_set)) + ","
+        saquestions = ",".join(map(str, saquestion_set)) + ","
 
-        questions = mcquestions + tfquestions + questions
+        questions = mcquestions + tfquestions + saquestions
 
         new_sitting = self.create(user=user,
                                   quiz=quiz,
@@ -802,10 +802,10 @@ class Sitting(models.Model):
         tfquestions = sorted(
             self.quiz.tfquestion.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
-        questions = sorted(
-            self.quiz.question.filter(id__in=question_ids),
+        saquestions = sorted(
+            self.quiz.saquestion.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
-        questions = mcquestions+ tfquestions+ questions
+        questions = mcquestions+ tfquestions+ saquestions
 
         if with_answers:
             user_answers = json.loads(self.user_answers)
