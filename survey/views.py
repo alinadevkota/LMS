@@ -1,11 +1,14 @@
 from django.shortcuts import redirect
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from .models import CategoryInfo, SurveyInfo, QuestionInfo, OptionInfo, SubmitSurvey, AnswerInfo
-from .forms import CategoryInfoForm, SurveyInfoForm, QuestionInfoForm, OptionInfoForm, SubmitSurveyForm, AnswerInfoForm
+from .forms import CategoryInfoForm, SurveyInfoForm, QuestionInfoForm, OptionInfoForm, SubmitSurveyForm, AnswerInfoForm, \
+    QuestionInfoFormset, OptionInfoFormset, AnswerInfoFormset, QuestionAnsInfoFormset
 from datetime import datetime
 
 from WebApp.models import InningInfo, LectureInfo
 from django.http import JsonResponse
+
+from django.db import transaction
 
 class AjaxableResponseMixin:
     """
@@ -106,10 +109,44 @@ class SurveyInfoCreateView(CreateView):
     model = SurveyInfo
     form_class = SurveyInfoForm
 
+# class SurveyInfo_ajax(AjaxableResponseMixin, CreateView):
+#     model = SurveyInfo
+#     form_class = SurveyInfoForm
+#     template_name = 'ajax/surveyInfoAddSurvey_ajax2.html'
+
 class SurveyInfo_ajax(AjaxableResponseMixin, CreateView):
     model = SurveyInfo
     form_class = SurveyInfoForm
-    template_name = 'ajax/surveyInfoAddSurvey_ajax.html'
+    template_name = 'ajax/surveyInfoAddSurvey_ajax2.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        if self.request.POST:
+            context['questioninfo_formset'] = QuestionInfoFormset(self.request.POST, prefix='questioninfo')
+            context['questionansinfo_formset'] = QuestionAnsInfoFormset(self.request.POST, prefix='questionansinfo')
+        else:
+            context['questioninfo_formset'] = QuestionInfoFormset(prefix='questioninfo')
+            context['questionansinfo_formset'] = QuestionAnsInfoFormset(prefix='questionansinfo')
+        return context
+    
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        context = self.get_context_data()
+        qn = context['questioninfo_formset']
+        qna = context['questionansinfo_formset']
+        with transaction.atomic():
+            if qn.is_valid():
+                qn.instance = self.object
+                qn.save()
+            else:
+                print(qn.errors)
+                print('qn is invalid')
+            if qna.is_valid():
+                qna.instance = self.object
+                qna.save()
+            else:
+                print('qna is invalid')
+        return vform
 
 class SurveyInfoDetailView(DetailView):
     model = SurveyInfo
