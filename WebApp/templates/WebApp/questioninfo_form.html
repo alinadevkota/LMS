@@ -35,9 +35,9 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                     {{ form.Question_Score|as_crispy_field }}
                 </div>
-                {#        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
-                {#            {{ form.Question_Description|as_crispy_field }}#}
-                {#        </div>#}
+{#                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
+{#                            {{ form.Question_Description|as_crispy_field }}#}
+{#                        </div>#}
                 <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                     <div id="div_id_Question_Description" class="form-group">
                         <label for="id_Question_Description" class="control-label ">
@@ -50,8 +50,11 @@
                     </div>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                    {{ form.Question_Type }}
+                    {{ form.Answer_Type|as_crispy_field }}
                 </div>
+{#            <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">#}
+{#                    {{ form.Question_Choices }}#}
+{#                </div>#}
                 <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
                     {{ form.Question_Media_File|as_crispy_field }}
                 </div>
