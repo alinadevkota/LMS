@@ -31,59 +31,71 @@ $(document).ready(function () {
 
 
 $("#SaveBtn").on("click",function(e){
+  var data = []
+  pages = {}
+  var numberofpages = 0
+  $('.pagenumber').each(function(key,value){
+    textdiv = [];
+    picdiv = [];
+    numberofpages++;
+    const obj=$("#tab"+parseInt(key+1)).children();
+    let tops;
+    let left;
+    let width;
+    let height;
+    let content;
+    $.each( obj, function( i, value ) {
+      tops=$(this).css("top");
+      left=$(this).css("left");
+      width=$(this).css("width");
+      height=$(this).css("height");
+      content=$(this).text();
 
-  // console.log($(".textdiv")[0].outerHTML);
- 
- 
-  left=$(".textdiv").position().left;
-  tops=$(".textdiv").position().top;
-  width=$(".messageText").css('width');
-  height=$(".messageText").css('height');
- text=$('.textdiv').text();
-
- console.log(width)
- console.log(height)
-
-
-  var jsonData=
-    {
-      "html":{
-      "top":tops,
-      "left":left,
-      "width":width,
-      "height":height,
-      "content":text
-    
-    }}
-
-
-
-
-  
-var json = JSON.stringify(jsonData);
-
-$.ajax({
-  url: '/index/save',
-  type: 'post',
-  dataType: 'json',
-  contentType: 'application/json',
-  success: function (data) {
-     console.log('data send');
-  },
-  data: json
+      console.log(value.classList);
+      if(value.classList.contains('textdiv')){
+        textdiv.push(
+          {
+            'tops': $(this).css("top"),
+            'left': $(this).css("left"),
+            'width': $(this).css("width"),
+            'height': $(this).css("height"),
+            'content': $(this).text()
+          }
+        );
+      }
+      if(value.classList.contains('pic')){
+        picdiv.push(
+          {
+            'tops': $(this).css("top"),
+            'left': $(this).css("left"),
+            'width': $(this).css("width"),
+            'height': $(this).css("height"),
+            'image': value.style.backgroundImage
+          }
+        );
+      }
+    });
+    pages[numberofpages] = [textdiv,picdiv]
+  });
+  data = {
+    'numberofpages': numberofpages, 
+    'chaptertitle': $('#chaptertitle').text(),
+    'pages': pages,
+  };
+  var json=JSON.stringify(data);
+  $.ajax({
+      url: save_json_url,
+      type: 'post',
+      data: {
+        'json': json,
+        'chapterID': chapterID,
+        'courseID': courseID
+      },
+      success: function (data) {
+        console.log(data)
+      },
+    });
 });
-
-
-
-
-
-
-
-
-
-});
-
-
 
 $("#loadBtn").on("click",function(){
   $.get('/index/read', function(list) {

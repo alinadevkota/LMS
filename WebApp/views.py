@@ -1321,6 +1321,7 @@ def polls(request):
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings 
 import os
+import json
 
 def chapterpagebuilder(request, course, chapter):
     context = {
@@ -1352,4 +1353,14 @@ def save_file(request):
                 filename = fs.save(image.name, image)
         return JsonResponse(data = {"message":"success"})
 
+@csrf_exempt
+def save_json(request):
+    if request.method == "POST":
+        jsondata = json.loads(request.POST['json'])
+        chapterID = request.POST['chapterID']
+        courseID = request.POST['courseID']
+        path = settings.MEDIA_ROOT
+        with open(path+'/chapterBuilder/'+courseID+'/'+chapterID+'/'+chapterID+'.txt', 'w') as outfile:  
+            json.dump(jsondata, outfile, indent=4)
+        return JsonResponse(data = {"message":"Json Saved"})
 #-------------------------------------------------------------------------------------------------------
