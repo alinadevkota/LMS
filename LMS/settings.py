@@ -199,3 +199,5 @@ DATE_INPUT_FORMATS = [
     '%d %B %Y', '%d %B, %Y',            # '25 October 2006', '25 October, 2006'
 
 ]
+
+DATETIME_FORMAT = '%d-%m-%Y %H:%M:%S'

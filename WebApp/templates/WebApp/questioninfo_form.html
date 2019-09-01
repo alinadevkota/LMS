@@ -27,7 +27,7 @@
     </div>
     <div class="col-md-12">
         <div class="col-md-6 col-sm-12 col-xs-12 col-md-offset-3">
-            <form method="post"  id="FormID">
+            <form method="post" id="FormID">
                 {% csrf_token %}
                 <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                     {{ form.Question_Title|as_crispy_field }}
@@ -49,6 +49,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                    {{ form.Question_Type }}
+                </div>
                 <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
                     {{ form.Question_Media_File|as_crispy_field }}
                 </div>
@@ -68,10 +71,10 @@
                     <input type="hidden" name="Assignment_Code" id="id_Assignment_Code" value="{{ Assignment_Code.id }}"
                            class="select form-control">
                 </div>
-{#                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
-{#                    <input type="hidden" name="Chapter_No" id="id_Chapter_No" value="{{ Chapter_No.id }}"#}
-{#                           class="select form-control">#}
-{#                </div>#}
+                {#                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
+                {#                    <input type="hidden" name="Chapter_No" id="id_Chapter_No" value="{{ Chapter_No.id }}"#}
+                {#                           class="select form-control">#}
+                {#                </div>#}
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                     <input type="hidden" name="Register_Agent" id="id_Register_Agent" value="{{ request.user.id }}"
                            class="select form-control">
