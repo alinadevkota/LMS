@@ -1,5 +1,14 @@
 $(document).ready(function() {
 
+    function display(){
+        $('#chaptertitle').text(data.chaptertitle);
+        console.log(data.pages.length);
+        $.each(data.pages, function(){
+            
+        });
+    }
+    display();
+
   $(".tlimit").on("click", function() {
       $("#title_id").css({
           'display': 'block'

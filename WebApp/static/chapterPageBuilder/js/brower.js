@@ -75,7 +75,7 @@ $("#SaveBtn").on("click",function(e){
         );
       }
     });
-    pages[numberofpages] = [textdiv,picdiv]
+    pages[numberofpages] = [{'textdiv': textdiv,'pic':picdiv}]
   });
   data = {
     'numberofpages': numberofpages, 
