@@ -23,6 +23,8 @@ router.register(r'mcquestion', api.MCQuestionViewSet)
 router.register(r'tfquestion', api.TFQuestionViewSet)
 router.register(r'saquestion', api.SAQuestionViewSet)
 router.register(r'answer', api.AnswerViewSet)
+router.register(r'progress', api.ProgressViewSet)
+router.register(r'sitting', api.SittingViewSet)
 
 
 urlpatterns = (
