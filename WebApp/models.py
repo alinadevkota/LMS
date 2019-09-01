@@ -390,6 +390,12 @@ class QuestionInfo(models.Model):
 
     Question_Media_File = FileField(upload_to=upload_to, blank=True, null=True)
     Question_Description = TextField(blank=True, null=True)
+    Answer_Choices = (
+        ('S', 'Short Answer'),
+        ('F', 'File Upload'),
+    )
+    Answer_Type = CharField(max_length=1, choices=Answer_Choices)
+
     # question_level = IntegerField(blank=True, null=True)
     # teacher_contents = CharField(max_length=500, blank=True, null=True)
     # student_contents = CharField(max_length=500, blank=True, null=True)

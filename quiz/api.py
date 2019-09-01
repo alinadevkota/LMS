@@ -38,4 +38,15 @@ class AnswerViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.AnswerSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+class ProgressViewSet(viewsets.ModelViewSet):
+    """ViewSet for the OptionInfo class"""
+    queryset = models.Progress.objects.all()
+    serializer_class = serializers.ProgressSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class SittingViewSet(viewsets.ModelViewSet):
+    """ViewSet for the OptionInfo class"""
+    queryset = models.Sitting.objects.all()
+    serializer_class = serializers.SittingSerializer
+    permission_classes = [permissions.IsAuthenticated]
 

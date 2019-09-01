@@ -51,3 +51,19 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = (
             'pk','question', 'content', 'correct'
         )
+
+class ProgressSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Progress
+        fields = (
+            'pk','user', 'score'
+        )
+
+class SittingSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Sitting
+        fields = (
+            'pk','user', 'quiz', 'question_order', 'question_list', 'incorrect_questions', 'current_score', 'complete', 'user_answers', 'start', 'end', 'objects'
+        )        
