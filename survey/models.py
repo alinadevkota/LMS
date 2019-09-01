@@ -184,7 +184,8 @@ class AnswerInfo(models.Model):
     )
     Submit_Code = ForeignKey(
         'SubmitSurvey',
-        related_name="answerinfo", on_delete=models.CASCADE
+        related_name="answerinfo", on_delete=models.CASCADE, 
+        null=True,
     )
 
     class Meta:
