@@ -16,8 +16,15 @@ from django.views.generic import DetailView, ListView
 from WebApp.models import LectureInfo, GroupMapping, InningInfo, InningGroup, ChapterInfo, AssignmentInfo, QuestionInfo
 from datetime import datetime
 
+
 def start(request):
-    return render(request, 'student_module/dashboard.html')
+
+    if request.user.Is_Student:
+        GroupName = GroupMapping.objects.get(Students__id=request.user.id)
+        Group = InningInfo.objects.get(Groups__id=GroupName.id)
+        Course = Group.Course_Group.all()
+
+        return render(request, 'student_module/dashboard.html',{'GroupName': GroupName ,'Group': Group,'Course': Course})
 
 
 # def mycourse(request):
