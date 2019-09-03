@@ -8,7 +8,7 @@
                 <h2 class="detailListHeader">Chapter {{ object.Chapter_No }}
                     : {{ object.Chapter_Name }} </h2></div>
                      <a class="btn-sm btn-success"
-                       href="#" id="lecture-viewer" data-toggle="modal" data-target="#lecture-modal">Lecture
+                       href="#" id="lecture-viewer">Course
                         Viewer &nbsp;</a>
                     
             {% if '/students' not in request.path %}
@@ -20,7 +20,7 @@
                 {{ object.get_update_url }}
             {% endif %}">Edit Chapter &nbsp;</a>
                     <a class="btn-sm btn-success"
-                       href="{% url 'chapterpagebuilder' object.Lecture_Code.id object.id %}">Lecture
+                       href="{% url 'chapterpagebuilder' object.Lecture_Code.id object.id %}">Course
                         Builder &nbsp;</a>
                     <a class="btn-sm btn-danger" href="{{ object.get_delete_url }}">Delete Chapter</a>
                 </div>
@@ -31,20 +31,20 @@
                         <td>Summary</td>
                         <td>{{ object.Summary }}</td>
                     </tr>
-                    <tr>
-                        <td>Page Number</td>
-                        <td>{{ object.Page_Num }}</td>
-                    </tr>
-                    <tr>
-                        <td>Status</td>
-                        <td>{{ object.Use_Flag }}</td>
-                    </tr>
+{#                    <tr>#}
+{#                        <td>Page Number</td>#}
+{#                        <td>{{ object.Page_Num }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td>Status</td>#}
+{#                        <td>{{ object.Use_Flag }}</td>#}
+{#                    </tr>#}
                     <tr>
                         <td>Register Agent</td>
                         <td>{{ object.Register_Agent }}</td>
                     </tr>
                     <tr>
-                        <td>Lecture Code</td>
+                        <td>Course Code</td>
                         <td>{{ object.Lecture_Code }}</td>
                     </tr>
                     <tr>
@@ -130,7 +130,7 @@
 <!-- Modal -->
 <div id="lecture-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-  
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -143,15 +143,15 @@
             <button id="next-btn" class="btn btn-secondary">Next</button>
         </div>
         <div class="modal-body" id="modal-container" style="position: relative">
-            
+
         </div>
       </div>
-  
+
     </div>
   </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-   
+
 <script>
     $('#lecture-viewer').click(function(){
         $.ajax({
@@ -192,7 +192,7 @@
                             // css_string = JSON.stringify(css_value)
                             $('#page'+key+' > .modal-body').append(`
                                 <div style = "position: absolute; top: ${css_value.tops}; left: ${css_value.left};">
-                                    ${css_value.content} 
+                                    ${css_value.content}
                                 </div>
                             `);
                         });

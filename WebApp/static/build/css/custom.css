@@ -5711,6 +5711,8 @@ article {
     margin-top: 15px;
 }
 
+
+
 #button.col-md-3.text-right {
     margin-top: 15px;
 
@@ -6185,3 +6187,6 @@ input[type=checkbox], input[type=radio] {
     z-index: 9999;
     background: url(http://smallenvelop.com/wp-content/uploads/2014/08/Preloader_11.gif) center no-repeat #fff;
 }
+
+/*memberinfo list status buttons*/
+
