@@ -5,7 +5,7 @@
 {% block content %}
 
     <div class="page_section">
-        <h1>Overview</h1>
+        <h1><b>Overview</b></h1>
     </div>
     <div class="panel panel-default">
         <div class="media v-middle ">
@@ -37,50 +37,19 @@
                             <h5>Your recent courses</h5>
                         </div>
                         <ul class="list-group">
-                            <li class="list-group-item ">
-                                <div class="media-body">
-                                    <a href="app-take-course.html" class="text-subhead list-group-link">Basics of
-                                        HTML</a>
-                                </div>
-                                <div class="media-right">
-                                    <div class="progress progress-mini width-100 margin-none">
-                                        <div class="progress-bar progress-bar-success" role="progressbar"
-                                             aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
-                                             style="width:45%;">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item ">
-                                <div class="media-body">
-                                    <a href="app-take-course.html" class="text-subhead list-group-link">Angular in
-                                        Steps</a>
-                                </div>
-                                <div class="media-right">
-                                    <div class="progress progress-mini width-100 margin-none">
-                                        <div class="progress-bar progress-bar-success" role="progressbar"
-                                             aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-                                             style="width:75%;">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media-body">
-                                    <a href="app-take-course.html" class="text-subhead list-group-link">Bootstrap
-                                        Foundations</a>
-                                </div>
-                                <div class="media-right">
-                                    <div class="progress progress-mini width-100 margin-none">
-                                        <div class="progress-bar progress-bar-success" role="progressbar"
-                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
-                                             style="width:25%;">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            {% for object in Course %}
+                                <li class="list-group-item ">
+                                    <b>{{ object.Lecture_Code.Lecture_Name }}</b>
+                                    <a href="{{ object.Lecture_Code.student_get_absolute_url }}">
+                                        <button type="button" style="float: right;width:100px;border: 1px solid #017a9b;color:#017a9b;background-color: white;border-radius: 4px;
+                                ">CONTINUE <i class="fa fa-arrow-right"></i>
+                                        </button>
+                                    </a>
+
+                                </li>
+                            {% endfor %}
                         </ul>
-                        <div class="clearfix"></div>
+                        {#                        <div class="clearfix"></div>#}
                     </div>
                 </div>
 
