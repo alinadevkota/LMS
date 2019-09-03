@@ -79,7 +79,7 @@
                     Teacher
                 </div>
             </div>
-        <br>
+            <br>
         </div>
         <div id="div_id_password1" class="form-group"><label for="id_password1" class="control-label  requiredField">
             Password * </label>
@@ -98,6 +98,11 @@
                 <p id="hint_id_password2" class="help-block" style="font-size: small">Enter the same password as before,
                     for verification.</p>
             </div>
+        </div>
+        <div class="control-label">
+            <input type="hidden" name="Use_Flag" id="id_Use_Flag" value="False"
+                   class="select form-control">
+{#           {{ form.Use_Flag|as_crispy_field }} #}
         </div>
 
         <button class="btn btn-lg btn-success btn-block" type="submit">

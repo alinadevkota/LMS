@@ -15,6 +15,7 @@ from django.views.generic import DetailView, ListView, UpdateView, CreateView, D
 from django.views.generic.edit import FormView
 from django.core.paginator import Paginator
 
+from survey.models import SurveyInfo
 from forum.models import Thread
 from forum.views import get_top_thread_keywords
 
@@ -392,6 +393,8 @@ class LectureInfoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).order_by('Chapter_No')
+        # context ['surveycount'] = SurveyInfo.objects.filter(Lecture_Code=self.kwargs.get('pk').count)
+
         return context
 
 
@@ -1322,13 +1325,13 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings 
 import os
 import json
+from django.http import Http404, HttpResponse
 
 def chapterviewer(request):
     if request.method == "GET":
         path = settings.MEDIA_ROOT
         chapterID = request.GET['chapterID']
         chapterobj = ChapterInfo.objects.get(id = chapterID)
-        print(chapterobj.Lecture_Code)
         courseID = chapterobj.Lecture_Code.id
         try:
             with open(path+'/chapterBuilder/'+str(courseID)+'/'+str(chapterID)+'/'+str(chapterID)+'.txt') as json_file:  
@@ -1339,7 +1342,6 @@ def chapterviewer(request):
 
 def chapterpagebuilder(request, course, chapter):
     chaptertitle = ChapterInfo.objects.get(id = chapter).Chapter_Name
-    print(chaptertitle)
     path = settings.MEDIA_ROOT
     data = None
     try:
@@ -1388,4 +1390,5 @@ def save_json(request):
         with open(path+'/chapterBuilder/'+courseID+'/'+chapterID+'/'+chapterID+'.txt', 'w') as outfile:  
             json.dump(jsondata, outfile, indent=4)
         return JsonResponse(data = {"message":"Json Saved"})
+
 #-------------------------------------------------------------------------------------------------------

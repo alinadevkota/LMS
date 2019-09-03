@@ -16,8 +16,15 @@ from django.views.generic import DetailView, ListView
 from WebApp.models import LectureInfo, GroupMapping, InningInfo, InningGroup, ChapterInfo, AssignmentInfo, QuestionInfo
 from datetime import datetime
 
+
 def start(request):
-    return render(request, 'student_module/dashboard.html')
+    if request.user.Is_Student:
+        GroupName = GroupMapping.objects.get(Students__id=request.user.id)
+        Group = InningInfo.objects.get(Groups__id=GroupName.id)
+        Course = Group.Course_Group.all()
+
+        return render(request, 'student_module/dashboard.html',
+                      {'GroupName': GroupName, 'Group': Group, 'Course': Course})
 
 
 # def mycourse(request):
@@ -45,6 +52,14 @@ class MyCoursesListView(ListView):
 
     paginate_by = 8
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['GroupName'] = GroupMapping.objects.get(Students__id=self.request.user.id)
+        context['Group'] = InningInfo.objects.get(Groups__id=context['GroupName'].id)
+        context['Course'] = context['Group'].Course_Group.all()
+
+        return context
+
     def get_queryset(self):
         qs = self.model.objects.all()
 
@@ -55,14 +70,6 @@ class MyCoursesListView(ListView):
                 messages.error(self.request, 'Search not found')
         qs = qs.order_by("-id")  # you don't need this if you set up your ordering on the model
         return qs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['GroupName'] = GroupMapping.objects.get(Students__id=self.request.user.id)
-        context['Group'] = InningInfo.objects.get(Groups__id=context['GroupName'].id)
-        context['Course'] = context['Group'].Course_Group.all()
-
-        return context
 
 
 class MyAssignmentsListView(ListView):
