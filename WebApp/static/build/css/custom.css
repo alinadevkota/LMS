@@ -4594,7 +4594,8 @@ fieldset {
     margin: 0;
     padding: 0;
     border: 0 solid #CCC;
-    overflow: hidden
+    overflow: hidden;
+    height: auto!important
 }
 
 .wizard_horizontal ul.wizard_steps {
@@ -6112,6 +6113,12 @@ input[type=checkbox], input[type=radio] {
 }
 .mcq-edit{
     margin-top: 10px
+}
+.mcq-line li{
+    display: inline-block;
+}
+.add-more-text{
+    cursor: pointer;
 }
 /* end */
 /*inninginfoform popup*/
