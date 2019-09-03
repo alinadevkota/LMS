@@ -148,12 +148,12 @@
             <div class="col-md-12"> 
                 <div class="col-md-6">
                         <label class="quiz-add-label"  for="">Lecture Code</label>
-                        {{form.chapter_code}}
+                        {{form.course_code}}
     
                 </div>
                 <div class="col-md-6">
-                        <label class="quiz-add-label"  for="">Center Code</label>
-                        {{form.cent_code}} 
+                        {% comment %} <label class="quiz-add-label"  for="">Center Code</label> {% endcomment %}
+                        {{form.cent_code.as_hidden}} 
                 </div>
                     
                     
@@ -162,6 +162,7 @@
              
           
         </div>
+       
         <div class="form-group"> 
                 <div class="col-md-12"> 
                     <div class="col-md-6">
@@ -280,4 +281,13 @@
         <li>Please Select Atleast One Question</li>
     </ul>
 </div>
+{% endblock %}
+{% block customjss %}
+         <script>
+                $(document).ready(function(){
+                        $('#id_cent_code').val("{{request.user.Center_Code.id}}");
+                        //$('#id_cent_code').style.display = "none"
+                })
+                
+        </script>
 {% endblock %}
