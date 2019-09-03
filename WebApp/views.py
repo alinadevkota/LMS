@@ -1321,12 +1321,37 @@ def polls(request):
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings 
 import os
+import json
+from django.http import Http404, HttpResponse
+
+def chapterviewer(request):
+    if request.method == "GET":
+        path = settings.MEDIA_ROOT
+        chapterID = request.GET['chapterID']
+        chapterobj = ChapterInfo.objects.get(id = chapterID)
+        courseID = chapterobj.Lecture_Code.id
+        try:
+            with open(path+'/chapterBuilder/'+str(courseID)+'/'+str(chapterID)+'/'+str(chapterID)+'.txt') as json_file:  
+                data = json.load(json_file)
+        except Exception as e:
+            print(e)
+        return JsonResponse({'data':data})
 
 def chapterpagebuilder(request, course, chapter):
+    chaptertitle = ChapterInfo.objects.get(id = chapter).Chapter_Name
+    path = settings.MEDIA_ROOT
+    data = None
+    try:
+        with open(path+'/chapterBuilder/'+str(course)+'/'+str(chapter)+'/'+str(chapter)+'.txt') as json_file:  
+            data = json.load(json_file)
+    except Exception as e:
+        print(e)
     context = {
         'course':course, 
-        'chapter':chapter, 
-        'file_path': settings.MEDIA_ROOT
+        'chapter':chapter,
+        'chaptertitle': chaptertitle,
+        'file_path': path,
+        'data': data
     }
     return render(request, 'WebApp/chapterbuilder.html', context)
 
@@ -1351,5 +1376,16 @@ def save_file(request):
                 fs = FileSystemStorage(location = path+'/chapterBuilder/'+courseID+'/'+chapterID)
                 filename = fs.save(image.name, image)
         return JsonResponse(data = {"message":"success"})
+
+@csrf_exempt
+def save_json(request):
+    if request.method == "POST":
+        jsondata = json.loads(request.POST['json'])
+        chapterID = request.POST['chapterID']
+        courseID = request.POST['courseID']
+        path = settings.MEDIA_ROOT
+        with open(path+'/chapterBuilder/'+courseID+'/'+chapterID+'/'+chapterID+'.txt', 'w') as outfile:  
+            json.dump(jsondata, outfile, indent=4)
+        return JsonResponse(data = {"message":"Json Saved"})
 
 #-------------------------------------------------------------------------------------------------------

@@ -87,18 +87,37 @@
                     <div class="x_panel" id="answerContent{{ questions.pk }}" style="display: none">
                         <div class="x_content">
                             <form method="post" id="answerForm" data-parsley-validate=""
-                                  class="form-horizontal form-label-left" novalidate="">
+                                  class="form-horizontal form-label-left" novalidate=""
+                                    {#                                  action={% url 'assignanswerinfo_create'  questioncode = questions.pk  %}#}
+                            >
                                 {% csrf_token %}
-                                <div class="form-group">
-                                    <textarea rows="5" cols="100" name="description" placeholder="Enter your Answer" style="width: 600px;!important;"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn btn-primary" type="button" id="cancelButton{{ questions.pk }}">
-                                        Cancel
-                                    </button>
-                                    <button class="btn btn-primary" type="reset">Reset</button>
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                </div>
+                                {% if questions.Answer_Type == 'S' %}
+                                    <div class="form-group">
+                                        <textarea class="form-control rounded-0" rows="5" cols="100"
+                                                  name="Assignment_Answer"
+                                                  placeholder="Enter your Answer"></textarea>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button class="btn btn-primary" type="button"
+                                                id="cancelButton{{ questions.pk }}">
+                                            Cancel
+                                        </button>
+                                        <button class="btn btn-primary" type="reset">Reset</button>
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                {% elif questions.Answer_Type == 'F' %}
+
+                                    <div class="form-group">
+                                        <input type="file" name="image" required/>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button class="btn btn-primary" type="button"
+                                                id="cancelButton{{ questions.pk }}">
+                                            Cancel
+                                        </button>
+
+                                    </div>
+                                {% endif %}
                             </form>
                         </div>
                     </div>

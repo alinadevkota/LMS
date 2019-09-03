@@ -44,22 +44,7 @@
                             <label class="quiz-add-label"  for="">Question</label>
                             {{form.content}}
         
-                    </div>
-                    <div class="col-md-6">
-                            <label class="quiz-add-label"  for="">Lecture Info</label>
-                            {{form.course_code}} 
-                    </div>
-                        
-                        
-                </div>
-        </div>  
-        <div class="form-group"> 
-                <div class="col-md-12"> 
-                    <div class="col-md-6">
-                            <label class="quiz-add-label"  for="">Center Code</label>
-                            {{form.cent_code}}
-        
-                    </div>
+                    </div>                    
                     <div class="col-md-6">
                             <label class="quiz-add-label"  for="">Answer Order</label>
                             {{form.answer_order}} 
@@ -67,7 +52,25 @@
                         
                         
                 </div>
-        </div> 
+        </div>  
+        {% if form.cent_code %}
+                <div class="form-group"> 
+                    <div class="col-md-12"> 
+                        <div class="col-md-6">
+                                <label class="quiz-add-label"  for="">Center Code</label>
+                                {{form.cent_code}}
+            
+                        </div>
+                        <div class="col-md-6">
+                                <label class="quiz-add-label"  for="">Lecture Info</label>
+                                {{form.course_code}} 
+                        </div>
+                            
+                            
+                    </div>
+            </div>
+        {% endif %}
+         
         <div class="form-group"> 
                 <div class="col-md-12"> 
                     <div class="col-md-6">

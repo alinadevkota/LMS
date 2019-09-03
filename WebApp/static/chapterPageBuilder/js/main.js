@@ -1,5 +1,39 @@
 $(document).ready(function() {
 
+    function display(){
+        $('#chaptertitle').text(chaptertitle);
+        $.each(data.pages, function(key, value){
+            $.each(value, function(count){
+                
+                // -------------------------------
+                $.each(value[count], function(div,div_value){
+                    if(div == 'textdiv'){
+                        $.each(div_value, function(css, css_value){
+                            css_string = JSON.stringify(css_value)
+                            $('#tab'+key).append(`
+                                <div class="textdiv ui-draggable" style = "position: absolute; top: ${css_value.tops}; left: ${css_value.left}; border: 1px solid grey;">
+                                    ${css_value.content} 
+                                </div>
+                            `);
+                            
+                        });
+                    }
+                    if(div == 'pic'){
+                        $.each(div_value, function(css, css_value){
+                            css_string = JSON.stringify(css_value)
+                            $('#tab'+key).append(`
+                                <div style = ${css_string}>
+                                </div>
+                            `);
+                        });
+                    }
+                });
+            });
+            
+        });
+    }
+    display();
+
   $(".tlimit").on("click", function() {
       $("#title_id").css({
           'display': 'block'
@@ -1357,9 +1391,9 @@ $(document).ready(function() {
 
       $(".tabs-to-click ul").append(
 
-          `<li class="tabs-link" onclick="openTab(event,'tab${num_tabs}')" >
-    <i id="add-page-btn" class="fas fa-plus-square fas-5x"></i>
-</li>`
+          `<li class="tabs-link pagenumber" onclick="openTab(event,'tab${num_tabs}')" >
+            <i id="add-page-btn" class="fas fa-plus-square fas-5x"></i>
+        </li>`
 
       );
       $(".tabs").append(
