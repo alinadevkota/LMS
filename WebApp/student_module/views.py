@@ -15,6 +15,8 @@ from django.views.generic import DetailView, ListView
 
 from WebApp.models import LectureInfo, GroupMapping, InningInfo, InningGroup, ChapterInfo, AssignmentInfo, QuestionInfo
 from datetime import datetime
+from survey.models import SurveyInfo
+from quiz.models import Question
 
 
 def start(request):
@@ -98,6 +100,8 @@ class LectureInfoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).order_by('Chapter_No')
+        context['surveycount'] = SurveyInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).count()
+        context['quizcount'] = Question.objects.filter(course_code=self.kwargs.get('pk')).count()
         return context
 
 
