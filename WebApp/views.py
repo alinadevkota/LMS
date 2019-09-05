@@ -15,7 +15,6 @@ from django.views.generic import DetailView, ListView, UpdateView, CreateView, D
 from django.views.generic.edit import FormView
 from django.core.paginator import Paginator
 
-
 from forum.models import Thread
 from forum.views import get_top_thread_keywords
 from survey.models import SurveyInfo
@@ -395,8 +394,8 @@ class LectureInfoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).order_by('Chapter_No')
-        context ['surveycount'] = SurveyInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).count()
-        context ['quizcount'] = Question.objects.filter(course_code=self.kwargs.get('pk')).count()
+        context['surveycount'] = SurveyInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).count()
+        context['quizcount'] = Question.objects.filter(course_code=self.kwargs.get('pk')).count()
 
         return context
 
@@ -420,6 +419,30 @@ class ChapterInfoCreateView(CreateView):
         return context
 
 
+class ChapterInfoCreateViewAjax(AjaxableResponseMixin, CreateView):
+    model = ChapterInfo
+    form_class = ChapterInfoForm
+    template_name = 'ajax/chapterinfo_form_ajax.html'
+
+    def post(self, request, *args, **kwargs):
+        Obj = ChapterInfo()
+        Obj.Chapter_No = request.POST["Chapter_No"]
+        Obj.Chapter_Name = request.POST["Chapter_Name"]
+        Obj.Summary = request.POST["Summary"]
+        # print(request.POST["Use_Flag"])
+        if request.POST["Use_Flag"] == 'true':
+            Obj.Use_Flag = True
+        else:
+            Obj.Use_Flag = False
+        Obj.Lecture_Code = LectureInfo.objects.get(pk=request.POST["Lecture_Code"])
+        Obj.Register_Agent = MemberInfo.objects.get(pk=request.POST["Register_Agent"])
+        Obj.save()
+
+        return JsonResponse(
+            data={'Message': 'Success'}
+        )
+
+
 class ChapterInfoDetailView(DetailView):
     model = ChapterInfo
 
@@ -427,6 +450,7 @@ class ChapterInfoDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['assignments'] = AssignmentInfo.objects.filter(Chapter_Code=self.kwargs.get('pk'))
         return context
+
 
 class CourseForum(ListView):
     model = Thread
@@ -452,9 +476,6 @@ class CourseForum(ListView):
         context['title'] = context['panel_title'] = topic.title
         context['show_order'] = True
         return context
-
-
-
 
 
 class ChapterInfoUpdateView(UpdateView):
@@ -596,10 +617,12 @@ class InningGroupCreateView(CreateView):
     model = InningGroup
     form_class = InningGroupForm
 
+
 class InningGroupCreateAjax(AjaxableResponseMixin, CreateView):
     model = InningGroup
     form_class = InningGroupForm
     template_name = 'ajax/inninggroup_form_ajax.html'
+
 
 class InningInfoCreateSessionAjax(AjaxableResponseMixin, CreateView):
     model = SessionInfo
@@ -702,6 +725,31 @@ class AssignmentInfoCreateView(CreateView):
         return context
 
 
+class AssignmentInfoCreateViewAjax(AjaxableResponseMixin, CreateView):
+    model = AssignmentInfo
+    form_class = AssignmentInfoForm
+    template_name = 'ajax/assignmentinfo_form_ajax.html'
+
+    def post(self, request, *args, **kwargs):
+        Obj = AssignmentInfo()
+        Obj.Assignment_Topic = request.POST["Assignment_Topic"]
+        Obj.Assignment_Deadline = request.POST["Assignment_Deadline"]
+        Obj.Lecture_Code = LectureInfo.objects.get(pk=request.POST["Lecture_Code"])
+        Obj.Chapter_Code = ChapterInfo.objects.get(Chapter_No=request.POST["Chapter_Code"])
+        Obj.Register_Agent = MemberInfo.objects.get(pk=request.POST["Register_Agent"])
+        Obj.save()
+
+        return JsonResponse(
+            data={'Message': 'Success'}
+        )
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+    #     context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
+    #     return context
+
+
 class AssignmentInfoDetailView(DetailView):
     model = AssignmentInfo
 
@@ -732,6 +780,7 @@ class QuestionInfoListView(ListView):
 class QuestionInfoCreateView(CreateView):
     model = QuestionInfo
     form_class = QuestionInfoForm
+
     # success_url = 'questioninfo_detail'
 
     def get_context_data(self, **kwargs):
@@ -1322,44 +1371,50 @@ def question(request):
 def polls(request):
     return render(request, 'WebApp/polls.html')
 
-#chapter builder code starts from here
+
+# chapter builder code starts from here
 
 from django.core.files.storage import FileSystemStorage
-from django.conf import settings 
+from django.conf import settings
 import os
 import json
 from django.http import Http404, HttpResponse
+
 
 def chapterviewer(request):
     if request.method == "GET":
         path = settings.MEDIA_ROOT
         chapterID = request.GET['chapterID']
-        chapterobj = ChapterInfo.objects.get(id = chapterID)
+        chapterobj = ChapterInfo.objects.get(id=chapterID)
         courseID = chapterobj.Lecture_Code.id
         try:
-            with open(path+'/chapterBuilder/'+str(courseID)+'/'+str(chapterID)+'/'+str(chapterID)+'.txt') as json_file:  
+            with open(path + '/chapterBuilder/' + str(courseID) + '/' + str(chapterID) + '/' + str(
+                    chapterID) + '.txt') as json_file:
                 data = json.load(json_file)
         except Exception as e:
             print(e)
-        return JsonResponse({'data':data})
+        return JsonResponse({'data': data})
+
 
 def chapterpagebuilder(request, course, chapter):
-    chaptertitle = ChapterInfo.objects.get(id = chapter).Chapter_Name
+    chaptertitle = ChapterInfo.objects.get(id=chapter).Chapter_Name
     path = settings.MEDIA_ROOT
     data = None
     try:
-        with open(path+'/chapterBuilder/'+str(course)+'/'+str(chapter)+'/'+str(chapter)+'.txt') as json_file:  
+        with open(path + '/chapterBuilder/' + str(course) + '/' + str(chapter) + '/' + str(
+                chapter) + '.txt') as json_file:
             data = json.load(json_file)
     except Exception as e:
         print(e)
     context = {
-        'course':course, 
-        'chapter':chapter,
+        'course': course,
+        'chapter': chapter,
         'chaptertitle': chaptertitle,
         'file_path': path,
         'data': data
     }
     return render(request, 'WebApp/chapterbuilder.html', context)
+
 
 @csrf_exempt
 def save_file(request):
@@ -1369,8 +1424,8 @@ def save_file(request):
         courseID = request.POST['courseID']
         path = ''
         for x in range(int(count)):
-            if request.FILES['file-'+str(x)]:
-                image = request.FILES['file-'+str(x)]
+            if request.FILES['file-' + str(x)]:
+                image = request.FILES['file-' + str(x)]
                 path = settings.MEDIA_ROOT
                 # following is commented because filesystemstorage auto create directories if not exist
                 # if not os.path.exists(os.path.join(path, 'chapterBuilder')):
@@ -1379,9 +1434,10 @@ def save_file(request):
                 #     os.makedirs(os.path.join(path, 'chapterBuilder/'+courseID))
                 # if not os.path.exists(path+'chapterBuilder/'+courseID+'/'+chapterID):
                 #     os.makedirs(os.path.join(path, 'chapterBuilder/'+courseID+'/'+chapterID))    
-                fs = FileSystemStorage(location = path+'/chapterBuilder/'+courseID+'/'+chapterID)
+                fs = FileSystemStorage(location=path + '/chapterBuilder/' + courseID + '/' + chapterID)
                 filename = fs.save(image.name, image)
-        return JsonResponse(data = {"message":"success"})
+        return JsonResponse(data={"message": "success"})
+
 
 @csrf_exempt
 def save_json(request):
@@ -1390,8 +1446,8 @@ def save_json(request):
         chapterID = request.POST['chapterID']
         courseID = request.POST['courseID']
         path = settings.MEDIA_ROOT
-        with open(path+'/chapterBuilder/'+courseID+'/'+chapterID+'/'+chapterID+'.txt', 'w') as outfile:  
+        with open(path + '/chapterBuilder/' + courseID + '/' + chapterID + '/' + chapterID + '.txt', 'w') as outfile:
             json.dump(jsondata, outfile, indent=4)
-        return JsonResponse(data = {"message":"Json Saved"})
+        return JsonResponse(data={"message": "Json Saved"})
 
-#-------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------
