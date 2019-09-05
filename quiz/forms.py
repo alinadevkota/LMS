@@ -85,11 +85,11 @@ class MCQuestionForm(forms.ModelForm):
         model = MCQuestion
         fields = '__all__'
 
-    quiz = forms.ModelMultipleChoiceField(
-        queryset=Quiz.objects.all(),
-        required=False,
-        # label=_("Questions"),
-        widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
+    # quiz = forms.ModelMultipleChoiceField(
+    #     queryset=Quiz.objects.all(),
+    #     required=False,
+    #     # label=_("Questions"),
+    #     widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
 
 
 class TFQuestionForm(forms.ModelForm):
