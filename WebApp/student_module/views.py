@@ -13,8 +13,11 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.views.generic import DetailView, ListView
 
-from WebApp.models import LectureInfo, GroupMapping, InningInfo, InningGroup, ChapterInfo, AssignmentInfo, QuestionInfo
+from WebApp.models import LectureInfo, GroupMapping, InningInfo, InningGroup, ChapterInfo, AssignmentInfo
+from survey.models import SurveyInfo, CategoryInfo, QuestionInfo, OptionInfo, SubmitSurvey
 from datetime import datetime
+from survey.models import SurveyInfo
+from quiz.models import Question
 
 
 def start(request):
@@ -98,6 +101,8 @@ class LectureInfoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).order_by('Chapter_No')
+        context['surveycount'] = SurveyInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).count()
+        context['quizcount'] = Question.objects.filter(course_code=self.kwargs.get('pk')).count()
         return context
 
 
@@ -132,13 +137,43 @@ def ProfileView(request):
     return render(request, 'student_module/profile.html')
 
 
-def questions_student(request):
-    return render(request, 'student_module/questions_student.html')
+# def questions_student(request):
+#     return render(request, 'student_module/questions_student.html')
+
+class questions_student(ListView):
+    model = SurveyInfo
+    template_name = 'student_module/questions_student.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['currentDate'] = datetime.now().date()
+        context['categories'] = CategoryInfo.objects.all()
+
+        context['questions'] = QuestionInfo.objects.filter(
+            Survey_Code=self.kwargs.get('pk')).order_by('pk')
+
+        context['options'] = OptionInfo.objects.all()
+        context['submit'] = SubmitSurvey.objects.all()
+
+        
+        # context['categoryName'] = CategoryInfo.objects.values_list('Category_Name')
+
+        # context['surveyForm'] = {'categoryName': list(categoryName)}
+        # context['categoryName'] = CategoryInfo.objects.values_list('Category_Name')
+        # context['surveyForm'] = serializers.serialize('json', list(categoryName), fields=('Category_Name'))
+        
+
+        return context
+
+# def polls_student(request):
+#     return render(request, 'student_module/polls_student.html')
 
 
-def polls_student(request):
-    return render(request, 'student_module/polls_student.html')
+# def polls_student_view(request):
+#     return render(request, 'student_module/polls_student_view.html')
 
 
-def polls_student_view(request):
-    return render(request, 'student_module/polls_student_view.html')
+# class PollsCreateView(CreateView):
+#     model = Polls
+#     template_name = "TEMPLATE_NAME"
+# )

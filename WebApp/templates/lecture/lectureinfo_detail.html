@@ -56,7 +56,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Course Provider </td>
+                    <td>Course Provider</td>
                     <td>{{ object.Lecture_Provider }}</td>
                 </tr>
                 <tr>
@@ -80,15 +80,23 @@
             <span style="margin-left: 10px"> {{ object.Lecture_Description }} </span>
             <hr>
 
-            <div class="quiz-counter">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p class="quiz-counter">Number of Survey</p>
-                    </div>
-                    <div class=" counter col-md-6 text-center">
-                        <h4>{{ quiz }}{{ surveycount }}</h4>
-                    </div>
+            <div class="quiz-counter" style="margin-left: 10px">
+
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p class="quiz-counter">Number of Survey</p>
                 </div>
+                <div class=" counter col-md-6 col-sm-6 col-xs-6  text-center">
+                    <h4>{{ surveycount }}</h4>
+                </div>
+
+
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p class="quiz-counter">Number of Quiz</p>
+                </div>
+                <div class=" counter col-md-6 col-sm-6 col-xs-6 text-center">
+                    <h4>{{ quizcount }}</h4>
+                </div>
+
             </div>
         </div>
         <div class="col-md-6 col-sm-12 xol-xs-12">

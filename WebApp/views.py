@@ -15,9 +15,11 @@ from django.views.generic import DetailView, ListView, UpdateView, CreateView, D
 from django.views.generic.edit import FormView
 from django.core.paginator import Paginator
 
-from survey.models import SurveyInfo
+
 from forum.models import Thread
 from forum.views import get_top_thread_keywords
+from survey.models import SurveyInfo
+from quiz.models import Question
 
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
     ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, SessionInfoForm, InningInfoForm, QuizInfoForm, \
@@ -393,7 +395,8 @@ class LectureInfoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).order_by('Chapter_No')
-        # context ['surveycount'] = SurveyInfo.objects.filter(Lecture_Code=self.kwargs.get('pk').count)
+        context ['surveycount'] = SurveyInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).count()
+        context ['quizcount'] = Question.objects.filter(course_code=self.kwargs.get('pk')).count()
 
         return context
 
