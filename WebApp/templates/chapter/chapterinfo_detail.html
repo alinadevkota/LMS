@@ -129,7 +129,7 @@
 
 <!-- Modal -->
 <div id="lecture-modal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-lg modal-dialog">
   
       <!-- Modal content-->
       <div class="modal-content">
@@ -139,11 +139,20 @@
               <span id="chaptertitle">
                   <!-- Chapter title goes here -->
               </span></h4>
-            <button id="prev-btn" class="btn btn-secondary">Previous</button>
-            <button id="next-btn" class="btn btn-secondary">Next</button>
+            <!-- <button id="prev-btn" class="btn btn-secondary">Previous</button>
+            <button id="next-btn" class="btn btn-secondary">Next</button> -->
         </div>
-        <div class="modal-body" id="modal-container" style="position: relative">
-            
+        <div class="modal-body">
+            <div class="col-md-1">
+                <button id="prev-btn" class="btn btn-secondary"><i class="fa fa-backward"></i></button>
+            </div>
+            <div class="col-md-10" id="modal-container" style="position: relative">
+
+            </div>
+            <div class="col-md-1">
+                <button id="next-btn" class="btn btn-secondary"><i class="fa fa-forward"></i></button>
+
+            </div>
         </div>
       </div>
   
@@ -173,13 +182,13 @@
     function loaddata(data){
         $('#chaptertitle').text(data.chaptertitle);
         $.each(data.pages, function(key, value){
-            // console.log(value)
+            console.log(value)
             $.each(value, function(count){
 
                 // Create modal
                 $('#modal-container').append(`
-                <div id="page${key}" class="modal" role="dialog" style="display:none; position:absolute">
-                    <div class="modal-body" style="position:relative">
+                <div id="page${key}" style="display:none; position:absolute">
+                    <div class="divholder" style="position:relative">
                         
                     </div>
                 </div>
@@ -190,7 +199,7 @@
                     if(div == 'textdiv'){
                         $.each(div_value, function(css, css_value){
                             // css_string = JSON.stringify(css_value)
-                            $('#page'+key+' > .modal-body').append(`
+                            $('#page'+key+' > .divholder').append(`
                                 <div style = "position: absolute; top: ${css_value.tops}; left: ${css_value.left};">
                                     ${css_value.content} 
                                 </div>
@@ -199,11 +208,12 @@
                     }
                     if(div == 'pic'){
                         $.each(div_value, function(css, css_value){
+                            console.log(css_value.tops)
                             src = css_value['background-image']
                             imgsrc = src.match(/(["'])(?:(?=(\\?))\2.)*?\1/);
-                            $('#page'+key+ '> .modal-body').append(`
+                            $('#page'+key+ '> .divholder').append(`
                                 <div style = "position: absolute; top: ${css_value.tops}; left: ${css_value.left}; width = 100%">
-                                    <image src = ${imgsrc} width =100% height= 100%/>
+                                    <image src = ${imgsrc} />
                                 </div>
                             `);
                         });
