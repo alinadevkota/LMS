@@ -474,9 +474,11 @@
     var data = {{ data|safe }};
     var courseID = '{{course}}';
     var chapterID = '{{chapter}}';
+    var chaptertitle = '{{chaptertitle}}';
     var save_file_url = "{% url 'saveFile' %}";
     var load_file_url = "/media/chapterBuilder/"+courseID+"/"+chapterID;
-    var save_json_url = "{% url 'saveJson' %}";    
+    var save_json_url = "{% url 'saveJson' %}";
+        
   </script>
   <script src="{% static 'chapterPageBuilder/js/jquery.min.js' %}"></script>
   <script src="{% static 'chapterPageBuilder/js/jquery-ui.min.js' %}"></script>

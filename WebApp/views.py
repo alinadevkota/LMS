@@ -15,8 +15,11 @@ from django.views.generic import DetailView, ListView, UpdateView, CreateView, D
 from django.views.generic.edit import FormView
 from django.core.paginator import Paginator
 
+
 from forum.models import Thread
 from forum.views import get_top_thread_keywords
+from survey.models import SurveyInfo
+from quiz.models import Question
 
 from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
     ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, SessionInfoForm, InningInfoForm, QuizInfoForm, \
@@ -392,6 +395,9 @@ class LectureInfoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).order_by('Chapter_No')
+        context ['surveycount'] = SurveyInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).count()
+        context ['quizcount'] = Question.objects.filter(course_code=self.kwargs.get('pk')).count()
+
         return context
 
 
@@ -1322,11 +1328,23 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings 
 import os
 import json
+from django.http import Http404, HttpResponse
 
-def chapterviewer(request, course, chapter):
-    pass
+def chapterviewer(request):
+    if request.method == "GET":
+        path = settings.MEDIA_ROOT
+        chapterID = request.GET['chapterID']
+        chapterobj = ChapterInfo.objects.get(id = chapterID)
+        courseID = chapterobj.Lecture_Code.id
+        try:
+            with open(path+'/chapterBuilder/'+str(courseID)+'/'+str(chapterID)+'/'+str(chapterID)+'.txt') as json_file:  
+                data = json.load(json_file)
+        except Exception as e:
+            print(e)
+        return JsonResponse({'data':data})
 
 def chapterpagebuilder(request, course, chapter):
+    chaptertitle = ChapterInfo.objects.get(id = chapter).Chapter_Name
     path = settings.MEDIA_ROOT
     data = None
     try:
@@ -1336,7 +1354,8 @@ def chapterpagebuilder(request, course, chapter):
         print(e)
     context = {
         'course':course, 
-        'chapter':chapter, 
+        'chapter':chapter,
+        'chaptertitle': chaptertitle,
         'file_path': path,
         'data': data
     }
@@ -1374,4 +1393,5 @@ def save_json(request):
         with open(path+'/chapterBuilder/'+courseID+'/'+chapterID+'/'+chapterID+'.txt', 'w') as outfile:  
             json.dump(jsondata, outfile, indent=4)
         return JsonResponse(data = {"message":"Json Saved"})
+
 #-------------------------------------------------------------------------------------------------------

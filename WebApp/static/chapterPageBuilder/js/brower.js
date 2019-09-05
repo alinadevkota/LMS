@@ -70,7 +70,7 @@ $("#SaveBtn").on("click",function(e){
             'left': $(this).css("left"),
             'width': $(this).css("width"),
             'height': $(this).css("height"),
-            'image': value.style.backgroundImage
+            'background-image': value.style.backgroundImage
           }
         );
       }
@@ -93,6 +93,7 @@ $("#SaveBtn").on("click",function(e){
       },
       success: function (data) {
         console.log(data)
+        alert('saved successfully.')
       },
     });
 });
