@@ -77,17 +77,17 @@ class SurveyInfoListView(ListView):
 
         return context
 
-    def post(self, request):
-        obj = SurveyInfo()
-        if request.method == "POST":
-            obj.Survey_Title = request.POST['Survey_Title']
-            obj.Start_Date = request.POST['Start_Date']
-            obj.End_Date = request.POST['End_Date']
-            obj.Assigned_To = InningInfo.objects.get(pk = request.POST['Assigned_To'])
-            obj.Lecture_Code = LectureInfo.objects.get(pk = request.POST['Lecture_Code'])
-            obj.save()
-            print(obj.id)
-        return redirect('surveyinfo_detail', obj.id)
+    # def post(self, request):
+    #     obj = SurveyInfo()
+    #     if request.method == "POST":
+    #         obj.Survey_Title = request.POST['Survey_Title']
+    #         obj.Start_Date = request.POST['Start_Date']
+    #         obj.End_Date = request.POST['End_Date']
+    #         obj.Assigned_To = InningInfo.objects.get(pk = request.POST['Assigned_To'])
+    #         obj.Lecture_Code = LectureInfo.objects.get(pk = request.POST['Lecture_Code'])
+    #         obj.save()
+    #         print(obj.id)
+    #     return redirect('surveyinfo_detail', obj.id)
 
 # def get_context_data(self, **kwargs):
 #     categoryName = CategoryInfo.objects.filter(code__startswith='a').values_list('Category_Name')

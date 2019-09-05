@@ -205,6 +205,12 @@ class Progress(models.Model):
         return Sitting.objects.filter(user=self.user, complete=True)
 
 
+class QuestionInheritanceManager(InheritanceManager):
+    #def get_queryset(self):
+    #    return super().get_queryset().filter(cent_code=request.user.center_code)
+    pass
+
+
 @python_2_unicode_compatible
 class Question(models.Model):
     """
@@ -707,6 +713,7 @@ class Sitting(models.Model):
 
         first, _ = self.question_list.split(',', 1)
         question_id = int(first)
+        
         return Question.objects.get_subclass(id=question_id)
 
     def remove_first_question(self):

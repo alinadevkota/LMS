@@ -49,6 +49,7 @@ class QuizForm(forms.ModelForm):
         self.fields['tfquestion'].required = False
         self.fields['saquestion'].required = False 
         self.fields['cent_code'].required = True
+        #self.fields['cent_code'].widget = forms.HiddenInput()
 
         #self.fields['url'].required = False
         #self.fields['url'].widget = forms.HiddenInput()
@@ -84,11 +85,11 @@ class MCQuestionForm(forms.ModelForm):
         model = MCQuestion
         fields = '__all__'
 
-    quiz = forms.ModelMultipleChoiceField(
-        queryset=Quiz.objects.all(),
-        required=False,
-        # label=_("Questions"),
-        widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
+    # quiz = forms.ModelMultipleChoiceField(
+    #     queryset=Quiz.objects.all(),
+    #     required=False,
+    #     # label=_("Questions"),
+    #     widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
 
 
 class TFQuestionForm(forms.ModelForm):

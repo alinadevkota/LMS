@@ -14,9 +14,9 @@
 <div class="headerDiv">
     <h2 class="infoFormHeader">
         {% if 'create' in request.path %}
-            Create New Lecture
+            Create New Course
         {% else %}
-            Edit Lecture Info
+            Edit Course Info
         {% endif %}
     </h2>
     <hr class="header_hr">
@@ -25,12 +25,23 @@
 <form method="POST" id="FormID" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        {{ form.Lecture_Name|as_crispy_field }}
+        {#        {{ form.Lecture_Name|as_crispy_field }}#}
+
+        <div id="div_id_Lecture_Name" class="form-group">
+            <label for="id_Lecture_Name" class="control-label ">
+                Course Name
+            </label>
+            <div class="controls ">
+                <input type="text" name="Lecture_Name" value="{{ object.Lecture_Name }}"
+                       class="textinput textInput form-control"
+                       maxlength="500" id="id_Lecture_Name">
+            </div>
+        </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         <div id="div_id_Lecture_Description" class="form-group">
             <label for="id_Lecture_Description" class="control-label ">
-                Lecture Description
+                Course Description
             </label>
             <div class="controls ">
                     <textarea name="Lecture_Description" cols="40" rows="1" id="id_Lecture_Description"
@@ -38,8 +49,27 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+    <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
         {{ form.Lecture_Cover_File|as_crispy_field }}
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
+        <div id="div_id_Lecture_Provider" class="form-group">
+            <label for="id_Lecture_Provider" class="control-label ">
+                Course Provider
+            </label>
+            <div class="controls ">
+                <input type="text" name="Lecture_Provider"
+                       value="{{ object.Lecture_Provider }}"
+                       class="textinput textInput form-control" maxlength="250" id="id_Lecture_Provider">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+        <label for="id_Lecture_Level" class="control-label ">
+            Course Level
+        </label>
+        <input class="rating" id="id_Lecture_Level" type="hidden" name="Lecture_Level"
+               value="{{ object.Lecture_Level }}">
     </div>
     <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
         <label>
@@ -53,17 +83,8 @@
                 {% endif %}
         ><br> <br>
     </div>
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_Lecture_Level" class="control-label ">
-            Lecture Level
-        </label>
-        <input class="rating" id="id_Lecture_Level" type="hidden" name="Lecture_Level"
-               value="{{ object.Lecture_Level }}">
-    </div>
 
-    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        {{ form.Lecture_Provider|as_crispy_field }}
-    </div>
+
     {#    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">#}
     {#        {% if '/teachers' in request.path %}#}
     {#            <input type="hidden" name="Teacher_Code" id="id_Center_Code" value="{{ request.user.id }}"#}
