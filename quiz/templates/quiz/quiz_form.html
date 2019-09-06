@@ -362,44 +362,76 @@
                                     </div> 
                                 </div>
                                 <div id="step-2">
-                                    <div class="privew1">
-                                        <div class="form-group"> 
-                                            <div class="col-md-12">                    
-                                                <div class="col-md-4">                       
-                                                    {{form.pre_test}}
-                                                    <label class="quiz-add-label"  for="">Pre Test</label>
-                                                    <p>{{form.pre_test.help_text}}</p>
+                                    <div class="privew1 "> 
+                                        
+                                       
+
+                                        <div class="form-group  "> 
+                                                <div class="col-md-12"> 
+                                                        <span class="quiz-type-head">types of quiz</span>
+                                                    
                                                 </div>
-                                                <div class="col-md-4">                   
-                                                    {{form.post_test}}
-                                                    <label class="quiz-add-label"  for="">Post Test</label>
-                                                    <p>{{form.post_test.help_text}}</p>
+                                           
+                                                <div class="col-md-12 quiz-type-border ">                    
+                                                        <div class="col-md-4">                       
+                                                            {{form.pre_test}}
+                                                            <label class="quiz-add-label"  for="">Pre Test</label>
+                                                            <p>{{form.pre_test.help_text}}</p>
+                                                        </div>
+                                                        <div class="col-md-4">                   
+                                                            {{form.post_test}}
+                                                            <label class="quiz-add-label"  for="">Post Test</label>
+                                                            <p>{{form.post_test.help_text}}</p>
+                                                        </div>
+                                                       
+                                                        <div class="col-md-4">  
+                                                                {{form.answers_at_end}}  
+                                                                <label class="quiz-add-label"  for="">Answer at the end</label>
+                                                                <p> {{form.answers_at_end.help_text}}</p>
+                                                            </div>         
+                                                    </div>
+
+                                               
+                                           
+                                        </div>  
+                                           
+                                                <div class="form-group "> 
+                                                        <div class="col-md-12"> 
+                                                                <span class="quiz-type-head">quiz features</span>
+                                                            
+                                                        </div>
+                                                    <div class="col-md-12 quiz-type-border">  
+                                                            <div class="col-md-4"> 
+                                                                    {{form.random_order}}  
+                                                                    <label class="quiz-add-label"  for="">Random Order</label>
+                                                                    <p> {{form.random_order.help_text}} </p>
+                                                                </div>      
+                                                        
+                                                        <div class="col-md-4">                       
+                                                            {{form.exam_paper}}
+                                                            <label class="quiz-add-label"  for="">Exam Paper</label>
+                                                            <p>{{form.exam_paper.help_text}}</p>
+                                                        </div>
+                                                        <div class="col-md-4"> 
+                                                            {{form.single_attempt}}  
+                                                            <label class="quiz-add-label"  for="">Single Attempt</label>
+                                                            <p>{{form.single_attempt.help_text}}</p>
+                                                        </div>   
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-4"> 
-                                                    {{form.random_order}}  
-                                                    <label class="quiz-add-label"  for="">Random Order</label>
-                                                    <p> {{form.random_order.help_text}} </p>
-                                                </div>          
-                                            </div>
-                                        </div>                      
-                                        <div class="form-group"> 
-                                            <div class="col-md-12">      
-                                                <div class="col-md-4">  
-                                                    {{form.answers_at_end}}  
-                                                    <label class="quiz-add-label"  for="">Answer at the end</label>
-                                                    <p> {{form.answers_at_end.help_text}}</p>
+
+                                                            
+                                       
+                                        <div class="form-group">
+                                                <div class="col-md-12"> 
+                                                        <span class="quiz-type-head"> Save temporarily</span>
+                                                   
                                                 </div>
-                                                <div class="col-md-4">                       
-                                                    {{form.exam_paper}}
-                                                    <label class="quiz-add-label"  for="">Exam Paper</label>
-                                                    <p>{{form.exam_paper.help_text}}</p>
+                                                <div class="col-md-6">
+                                                        {{form.draft}}
+                                                        <label class="quiz-add-label"  for=""> Draft</label> <br>
+                                                        {{form.draft.help_text}}
                                                 </div>
-                                                <div class="col-md-4"> 
-                                                    {{form.single_attempt}}  
-                                                    <label class="quiz-add-label"  for="">Single Attempt</label>
-                                                    <p>{{form.single_attempt.help_text}}</p>
-                                                </div>   
-                                            </div>
                                         </div>         
                                     </div> 
                                 </div>
@@ -411,8 +443,8 @@
                                                     <label class="quiz-add-label"  for="">Multiple Choice Question</label>
                                                 </div>
                                                 <div class="col-md-6 questions-only">
-                                                        <!--<a class="btn qts-button" id="mcq_create_button"> Add MCQ question </a> -->
-                                                        <button type="button" class="btn btn-info btn-lg" id="mcq_create_button" data-toggle="modal" data-target="#mcquestion_form_popup">Add MCQ question</button>
+                                                        <!-- <a class="btn qts-button" id="mcq_create_button"> Add MCQ question </a> -->
+                                                        <button type="button" class="btn qts-button" id="mcq_create_button" data-toggle="modal" data-target="#mcquestion_form_popup">Add MCQ question</button>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div id="mcquestion_form_popup" class="modal fade">
@@ -463,8 +495,7 @@
                                         <div class="form-group"> 
                                             <div class="col-md-12"> 
                                                 <div class="col-md-6"> 
-                                                    {{form.draft}}
-                                                    <label class="quiz-add-label"  for=""> Draft</label>
+                                                  
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="quiz-admin-btn">
