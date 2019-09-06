@@ -490,10 +490,8 @@ class Quiz(models.Model):
     draft = models.BooleanField(
         blank=True, default=False,
         verbose_name=_("Draft"),
-        help_text=_("If yes, the quiz is not displayed"
-                    " in the quiz list and can only be"
-                    " taken by users who can edit"
-                    " quizzes."))
+        help_text=_("If checked, the quiz is not displayed to the student"
+                   ))
 
     def get_absolute_url(self):
         return reverse('quiz_update', args=(self.pk,))

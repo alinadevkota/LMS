@@ -83,8 +83,8 @@ class SurveyInfoListView(ListView):
     #         obj.Survey_Title = request.POST['Survey_Title']
     #         obj.Start_Date = request.POST['Start_Date']
     #         obj.End_Date = request.POST['End_Date']
-    #         obj.Assigned_To = InningInfo.objects.get(pk = request.POST['Assigned_To'])
-    #         obj.Lecture_Code = LectureInfo.objects.get(pk = request.POST['Lecture_Code'])
+    #         obj.Session_Code = InningInfo.objects.get(pk = request.POST['Session_Code'])
+    #         obj.Course_Code = LectureInfo.objects.get(pk = request.POST['Course_Code'])
     #         obj.save()
     #         print(obj.id)
     #     return redirect('surveyinfo_detail', obj.id)

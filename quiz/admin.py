@@ -5,7 +5,7 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
 
-from .models import Quiz, Progress, Answer, MCQuestion, TF_Question, SA_Question
+from .models import Quiz, Progress, Answer, MCQuestion, TF_Question, SA_Question, Sitting
 
 
 class AnswerInline(admin.TabularInline):
@@ -132,6 +132,24 @@ class SAQuestionAdmin(admin.ModelAdmin):
     # filter_horizontal = ('quiz',)
     add_form_template = 'admin_add_form.html'
 
+class SittingAdminForm(forms.ModelForm):
+    class Meta:
+        model = Sitting
+        fields = '__all__'
+
+class SittingAdmin(admin.ModelAdmin):
+    form = SittingAdminForm
+    list_display = ['user', 'quiz', 'question_order', 'question_list', 'incorrect_questions', 'current_score', 'complete', 'user_answers', 'start', 'end']
+
+class AnswerAdminForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = '__all__'
+
+class AnswerAdmin(admin.ModelAdmin):
+    form = AnswerAdminForm
+    list_display = ['question', 'content', 'correct']
+
 
 admin.site.register(Quiz, QuizAdmin)
 # admin.site.register(Category, CategoryAdmin)
@@ -140,3 +158,5 @@ admin.site.register(MCQuestion, MCQuestionAdmin)
 admin.site.register(Progress, ProgressAdmin)
 admin.site.register(TF_Question, TFQuestionAdmin)
 admin.site.register(SA_Question, SAQuestionAdmin)
+admin.site.register(Sitting, SittingAdmin)
+admin.site.register(Answer, AnswerAdmin)

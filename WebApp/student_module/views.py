@@ -21,6 +21,9 @@ from quiz.models import Question
 from django.shortcuts import redirect
 
 
+datetime_now = datetime.now()
+
+
 def start(request):
     if request.user.Is_Student:
         GroupName = GroupMapping.objects.get(Students__id=request.user.id)
@@ -58,9 +61,26 @@ class MyCoursesListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['GroupName'] = GroupMapping.objects.get(Students__id=self.request.user.id)
-        context['Group'] = InningInfo.objects.get(Groups__id=context['GroupName'].id)
-        context['Course'] = context['Group'].Course_Group.all()
+        context['batches'] = GroupMapping.objects.filter(Students__id=self.request.user.id, Center_Code=self.request.user.Center_Code)
+
+        sessions = []
+        if context['batches']:
+            for batch in context['batches']:
+                # Filtering out only active sessions
+                session = InningInfo.objects.filter(Groups__id=batch.id,End_Date__gt=datetime_now)
+                sessions += session
+        context['sessions'] = sessions
+        # print(context['sessions'])
+
+        courses = set()
+        if context['sessions']:
+            for session in context['sessions']:
+                course = session.Course_Group.all()
+                courses.update(course)
+        context['Course'] = courses
+        # print(context['courses'])
+        
+        # context['Course'] = context['Group'].Course_Group.all()
 
         return context
 

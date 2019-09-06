@@ -600,10 +600,18 @@ class TFQuestionListView(ListView):
     model = TF_Question
 
 
-class TFQuestionCreateView(CreateView):
+class TFQuestionCreateView(AjaxableResponseMixin, CreateView):
     model = TF_Question
     form_class = TFQuestionForm
-    success_url = reverse_lazy('quiz_create')
+    #success_url = reverse_lazy('quiz_create')
+    template_name = 'ajax/tfquestion_form_ajax.html'
+
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        new_tfq = {}
+        new_tfq['new_tfq_id'] = self.object.id
+        new_tfq['new_tfq_content'] = self.object.content
+        return JsonResponse(new_tfq)
 
 class TFQuestionCreateFromQuiz(CreateView):
     model = TF_Question
@@ -665,10 +673,18 @@ def TFQuestionDeleteView(request, pk):
 class SAQuestionListView(ListView):
     model = SA_Question
 
-class SAQuestionCreateView(CreateView):
+class SAQuestionCreateView(AjaxableResponseMixin, CreateView):
     model = SA_Question
     form_class = SAQuestionForm
-    success_url = reverse_lazy('quiz_create')
+    #success_url = reverse_lazy('quiz_create')
+    template_name = 'ajax/saquestion_form_ajax.html'
+
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        new_saq = {}
+        new_saq['new_saq_id'] = self.object.id
+        new_saq['new_Saq_content'] = self.object.content
+        return JsonResponse(new_saq)
 
 class SAQuestionCreateFromQuiz(CreateView):
     model = SA_Question

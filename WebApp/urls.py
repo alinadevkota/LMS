@@ -107,6 +107,7 @@ urlpatterns += (
 urlpatterns += (
     # urls for MemberInfo
     path('memberinfo/', views.MemberInfoListView.as_view(), name='memberinfo_list'),
+    path('memberinfo/inactive', views.MemberInfoListViewInactive.as_view(), name='memberinfo_list_inactive'),
     path('memberinfo/create/', views.MemberInfoCreateView.as_view(), name='memberinfo_create'),
     path('memberinfo/detail/<int:pk>/', views.MemberInfoDetailView.as_view(), name='memberinfo_detail'),
     path('memberinfo/update/<int:pk>/', views.MemberInfoUpdateView.as_view(), name='memberinfo_update'),
@@ -123,11 +124,14 @@ urlpatterns += (
 
 urlpatterns += (
     # urls for ChapterInfo
+    path('chapterinfo/create/ajax', views.ChapterInfoCreateViewAjax.as_view(), name='chapterinfo_create_ajax'),
     path('courseinfo/<int:course>/chapterinfo/', views.ChapterInfoListView.as_view(), name='chapterinfo_list'),
     path('courseinfo/<int:course>/create/', views.ChapterInfoCreateView.as_view(), name='chapterinfo_create'),
-    path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(), name='chapterinfo_detail'),
-    path('courseinfo/<int:course>/chapterinfo/<int:pk>/edit/', views.ChapterInfoUpdateView.as_view(), name='chapterinfo_update'),
-    path('courseinfo/<int:course>/forum/' , views.CourseForum.as_view, name='Course_Forum'),
+    path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(),
+         name='chapterinfo_detail'),
+    path('courseinfo/<int:course>/chapterinfo/<int:pk>/edit/', views.ChapterInfoUpdateView.as_view(),
+         name='chapterinfo_update'),
+    path('courseinfo/<int:course>/forum/', views.CourseForum.as_view, name='Course_Forum'),
 )
 
 urlpatterns += (
@@ -187,6 +191,8 @@ urlpatterns += (
 
 urlpatterns += (
     # urls for HomeworkInfo
+    path('assignmentinfo/create/ajax', views.AssignmentInfoCreateViewAjax.as_view(), name='assignmentinfo_create_ajax'),
+
     path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/', views.AssignmentInfoListView.as_view(),
          name='assignmentinfo_list'),
     path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/create/',
@@ -195,20 +201,25 @@ urlpatterns += (
          views.AssignmentInfoDetailView.as_view(), name='assignmentinfo_detail'),
     path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/update/<int:pk>/',
          views.AssignmentInfoUpdateView.as_view(), name='assignmentinfo_update'),
-    path('assignmentinfo/create/ajax',
-         views.QuestionInfoCreateAjax.as_view(), name='questioninfo_create_ajax'),
+
 )
 
 urlpatterns += (
     # urls for QuestionInfo
-    path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/', views.QuestionInfoListView.as_view(),
+    path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/',
+         views.QuestionInfoListView.as_view(),
          name='questioninfo_list'),
-    path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/create/', views.QuestionInfoCreateView.as_view(),
+    path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/create/',
+         views.QuestionInfoCreateView.as_view(),
          name='questioninfo_create'),
-    path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/detail/<int:pk>/',
-         views.QuestionInfoDetailView.as_view(), name='questioninfo_detail'),
-    path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/update/<int:pk>/',
-         views.QuestionInfoUpdateView.as_view(), name='questioninfo_update'),
+    path(
+        'courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/detail/<int:pk>/',
+        views.QuestionInfoDetailView.as_view(), name='questioninfo_detail'),
+    path(
+        'courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/update/<int:pk>/',
+        views.QuestionInfoUpdateView.as_view(), name='questioninfo_update'),
+    path('questioninfo/create/ajax',
+         views.QuestionInfoCreateViewAjax.as_view(), name='questioninfo_create_ajax'),
 
 )
 
@@ -613,20 +624,20 @@ urlpatterns += (
 
 urlpatterns += (
     # urls for Ajax
-     path('inninginfo/create/ajax', 
-          views.InningInfoCreateSessionAjax.as_view(), name = 'sessioninfo_create_ajax'),
-     path('groupmapping/create/ajax', 
-          views.GroupCreateSessionAjax.as_view(), name = 'group_create_ajax'),
-     path('inninggroup/create/ajax', 
-          views.InningGroupCreateAjax.as_view(), name = 'inninggroup_create_ajax'),
+    path('inninginfo/create/ajax',
+         views.InningInfoCreateSessionAjax.as_view(), name='sessioninfo_create_ajax'),
+    path('groupmapping/create/ajax',
+         views.GroupCreateSessionAjax.as_view(), name='group_create_ajax'),
+    path('inninggroup/create/ajax',
+         views.InningGroupCreateAjax.as_view(), name='inninggroup_create_ajax'),
 )
 
 urlpatterns += (
-     #urls for chapterpagebuilder
-     path('courseinfo/<int:course>/chapterinfo/<int:chapter>/chapterpagebuilder',
-          views.chapterpagebuilder, name = 'chapterpagebuilder'),
-     path('viewchapter',
-          views.chapterviewer, name = 'chapterviewer'),
-     path('saveFile', views.save_file, name ='saveFile'),
-     path('saveJson', views.save_json, name ='saveJson'),
+    # urls for chapterpagebuilder
+    path('courseinfo/<int:course>/chapterinfo/<int:chapter>/chapterpagebuilder',
+         views.chapterpagebuilder, name='chapterpagebuilder'),
+    path('viewchapter',
+         views.chapterviewer, name='chapterviewer'),
+    path('saveFile', views.save_file, name='saveFile'),
+    path('saveJson', views.save_json, name='saveJson'),
 )
