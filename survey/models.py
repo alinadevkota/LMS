@@ -47,7 +47,7 @@ class SurveyInfo(models.Model):
         related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
 
-    Assigned_To = ForeignKey(
+    Session_Code = ForeignKey(
         'WebApp.InningInfo',
         related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
@@ -60,7 +60,7 @@ class SurveyInfo(models.Model):
         related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
     
-    Lecture_Code = ForeignKey(
+    Course_Code = ForeignKey(
         'WebApp.LectureInfo',
         related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
