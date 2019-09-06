@@ -122,7 +122,7 @@ html, body {
     color: #73879C
 }
 
-.lecture_submit {
+.course_submit {
     text-align: center;
 }
 
@@ -5014,7 +5014,7 @@ ul.notifications {
     color: #009999;
 }
 
-.lectureInfoListingHeader {
+.courseInfoListingHeader {
     text-align: center;
 
 }
@@ -5519,11 +5519,11 @@ article {
     cursor: pointer;
 }
 
-.lectureList:hover {
+.courseList:hover {
     cursor: pointer;
 }
 
-.lectures:hover {
+.courses:hover {
     background-color: lightgray;
 }
 
@@ -5602,7 +5602,7 @@ article {
     overflow: auto;
 }
 
-/*teacher lecturelist*/
+/*teacher courselist*/
 .cardgrid {
     background-color: white;
     border-radius: 0.25rem;
@@ -5612,7 +5612,7 @@ article {
     overflow: hidden;
 }
 
-/*  teacher lecturelist end*/
+/*  teacher courselist end*/
 
 #FormID {
     border-radius: 10px;
@@ -5696,7 +5696,7 @@ article {
 
 }
 
-.lectureDescription {
+.courseDescription {
     padding-left: 10px;
 }
 

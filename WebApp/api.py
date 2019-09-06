@@ -29,11 +29,11 @@ class MemberInfoViewSet(viewsets.ModelViewSet):
     filterset_fields = ('id', 'username')
 
 
-class LectureInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the LectureInfo class"""
+class CourseInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the CourseInfo class"""
 
-    queryset = models.LectureInfo.objects.all()
-    serializer_class = serializers.LectureInfoSerializer
+    queryset = models.CourseInfo.objects.all()
+    serializer_class = serializers.CourseInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -198,11 +198,11 @@ class LearningNoteViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class LectureUbtInfoViewSet(viewsets.ModelViewSet):
-    """ViewSet for the LectureUbtInfo class"""
+class CourseUbtInfoViewSet(viewsets.ModelViewSet):
+    """ViewSet for the CourseUbtInfo class"""
 
-    queryset = models.LectureUbtInfo.objects.all()
-    serializer_class = serializers.LectureUbtInfoSerializer
+    queryset = models.CourseUbtInfo.objects.all()
+    serializer_class = serializers.CourseUbtInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 

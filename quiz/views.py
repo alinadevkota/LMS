@@ -10,7 +10,7 @@ from django.views.generic import DetailView, ListView, TemplateView, FormView, C
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
 
-from WebApp.models import LectureInfo
+from WebApp.models import CourseInfo
 from .forms import QuestionForm, SAForm, QuizForm, TFQuestionForm, SAQuestionForm, MCQuestionForm, AnsFormset
 from .models import Quiz, Progress, Sitting, MCQuestion, TF_Question, Question, SA_Question, Answer
 
@@ -99,31 +99,31 @@ def QuizDeleteView(request, pk):
 
 
 class CategoriesListView(ListView):
-    model = LectureInfo
+    model = CourseInfo
 
 
-class ViewQuizListByLecture(ListView):
+class ViewQuizListByCourse(ListView):
     model = Quiz
     template_name = 'view_quiz_category.html'
 
     def dispatch(self, request, *args, **kwargs):
         self.category = get_object_or_404(
-            LectureInfo,
+            CourseInfo,
             category=self.kwargs['category_name']
         )
 
-        return super(ViewQuizListByLecture, self). \
+        return super(ViewQuizListByCourse, self). \
             dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(ViewQuizListByLecture, self) \
+        context = super(ViewQuizListByCourse, self) \
             .get_context_data(**kwargs)
 
         context['category'] = self.category
         return context
 
     def get_queryset(self):
-        queryset = super(ViewQuizListByLecture, self).get_queryset()
+        queryset = super(ViewQuizListByCourse, self).get_queryset()
         return queryset.filter(category=self.category, draft=False)
 
 

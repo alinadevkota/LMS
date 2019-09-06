@@ -15,7 +15,7 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from model_utils.managers import InheritanceManager
 
-from WebApp.models import LectureInfo, ChapterInfo, CenterInfo
+from WebApp.models import CourseInfo, ChapterInfo, CenterInfo
 
 # multichoice modelss___________________________________________________________
 
@@ -119,8 +119,8 @@ class Progress(models.Model):
         score_before = self.score
         output = {}
 
-        for cat in LectureInfo.objects.all():
-            to_find = re.escape(cat.Lecture_Name) + r",(\d+),(\d+),"
+        for cat in CourseInfo.objects.all():
+            to_find = re.escape(cat.Course_Name) + r",(\d+),(\d+),"
             #  group 1 is score, group 2 is highest possible
 
             match = re.search(to_find, self.score, re.IGNORECASE)
@@ -135,11 +135,11 @@ class Progress(models.Model):
                 except:
                     percent = 0
 
-                output[cat.Lecture_Name] = [score, possible, percent]
+                output[cat.Course_Name] = [score, possible, percent]
 
             else:  # if category has not been added yet, add it.
-                self.score += cat.Lecture_Name + ",0,0,"
-                output[cat.Lecture_Name] = [0, 0]
+                self.score += cat.Course_Name + ",0,0,"
+                output[cat.Course_Name] = [0, 0]
 
         if len(self.score) > len(score_before):
             # If a new category has been added, save changes.
@@ -233,8 +233,8 @@ class Question(models.Model):
                                            "you want displayed"),
                                verbose_name=_('Question'))
 
-    course_code = models.ForeignKey(LectureInfo,
-                                 verbose_name=_("LectureInfo"),
+    course_code = models.ForeignKey(CourseInfo,
+                                 verbose_name=_("CourseInfo"),
                                  blank=True,
                                  null=True,
                                  on_delete=models.CASCADE)
@@ -404,8 +404,8 @@ class Quiz(models.Model):
         verbose_name=_("user friendly url"), unique=True)
 
     course_code = models.ForeignKey(
-        LectureInfo, null=True, blank=True,
-        verbose_name=_("Lecture"), on_delete=models.CASCADE)
+        CourseInfo, null=True, blank=True,
+        verbose_name=_("Course"), on_delete=models.CASCADE)
 
     cent_code = models.ForeignKey(
         CenterInfo, null=True, blank=True,

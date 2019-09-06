@@ -1,7 +1,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-<div class="lectureInfoListClass">
+<div class="courseInfoListClass">
     <h2 class="tableHeader">List of Courses</h2>
 
 
@@ -20,9 +20,9 @@
     <div class="col-md-4 col-sm-6 col-xs-12 btn-createnew">
         <a class="btn btn-success" style="float: right;" href="
             {% if '/teachers' in request.path %}
-                {% url 'teacher_lectureinfo_create' %}
+                {% url 'teacher_courseinfo_create' %}
             {% else %}
-                {% url 'lectureinfo_create' %}
+                {% url 'courseinfo_create' %}
             {% endif %}">Create new Course</a>
     </div>
     {% include 'WebApp/theme/alerts.html' %}
@@ -39,9 +39,9 @@
                             {% else %}
                                {{ object.get_absolute_url }}
                             {% endif %}">
-                            <img id="lectureListImage" class="card-img-top" src="
-                            {% if object.Lecture_Cover_File %}
-                                /media/{{ object.Lecture_Cover_File }}
+                            <img id="courseListImage" class="card-img-top" src="
+                            {% if object.Course_Cover_File %}
+                                /media/{{ object.Course_Cover_File }}
                             {% else %}
                                 {% static 'images/course.jpg' %}
                             {% endif %}"
@@ -54,7 +54,7 @@
                                         /teachers{{ object.get_absolute_url }}
                                       {% else %}
                                         {{ object.get_absolute_url }}
-                                      {% endif %}">{{ object.Lecture_Name }}</a></strong></h2>
+                                      {% endif %}">{{ object.Course_Name }}</a></strong></h2>
 
                         {#                        <p class="ratingIcons">#}
                         {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
@@ -66,9 +66,9 @@
 
                         <hr>
 
-                        <h5 class="lectureDescription" style="padding-bottom: 10px;">
-                            {% if object.Lecture_Description %}
-                                {{ object.Lecture_Description }}
+                        <h5 class="courseDescription" style="padding-bottom: 10px;">
+                            {% if object.Course_Description %}
+                                {{ object.Course_Description }}
                             {% else %}
                                 No Description
                             {% endif %}

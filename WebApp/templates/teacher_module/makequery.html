@@ -217,7 +217,7 @@
                                                         class="select form-control">
                                                     <option value="" selected="">----</option>
                                                     {% for l in courses %}
-                                                        <option value="{{ l.id|capfirst }}">{{ l.Lecture_Name|capfirst }}</option>
+                                                        <option value="{{ l.id|capfirst }}">{{ l.Course_Name|capfirst }}</option>
                                                     {% endfor %}
 
 
@@ -367,7 +367,7 @@
                 "Added_By": '{{ user.id }}',
                 "Category_Code": null,
                 "Assigned_To": Session_Code,
-                "Lecture_Code": Course_Code,
+                "Course_Code": Course_Code,
 
             }
 

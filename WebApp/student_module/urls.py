@@ -30,13 +30,13 @@ urlpatterns += (
 )
 
 urlpatterns += (
-    # urls for LectureInfo
-    path('courseinfo/', views.LectureInfoListView.as_view(),
-         name='student_lectureinfo_list'),
+    # urls for CourseInfo
+    path('courseinfo/', views.CourseInfoListView.as_view(),
+         name='student_courseinfo_list'),
     path('courseinfo/mycourses', views.MyCoursesListView.as_view(),
          name='student_mycourses_list'),
-    path('courseinfo/detail/<int:pk>/', views.LectureInfoDetailView.as_view(),
-         name='student_lectureinfo_detail'),
+    path('courseinfo/detail/<int:pk>/', views.CourseInfoDetailView.as_view(),
+         name='student_courseinfo_detail'),
 )
 
 urlpatterns += (

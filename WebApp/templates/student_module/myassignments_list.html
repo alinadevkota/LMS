@@ -20,13 +20,13 @@
 
             <h3 align="center">Course -
                 <a href="{% if '/students' in request.path %}
-                                {{ courses.Lecture_Code.student_get_absolute_url }}
+                                {{ courses.Course_Code.student_get_absolute_url }}
                             {% else %}
-                               {{ courses.Lecture_Code.get_absolute_url }}
-                            {% endif %}"><b>{{ courses.Lecture_Code.Lecture_Name }}</b> </a>
+                               {{ courses.Course_Code.get_absolute_url }}
+                            {% endif %}"><b>{{ courses.Course_Code.Course_Name }}</b> </a>
             </h3>
 
-            {% for chapter in courses.Lecture_Code.chapterinfos.all %}
+            {% for chapter in courses.Course_Code.chapterinfos.all %}
                 <div class="col-md-12 col-sm-12 col-xs-12 " style="margin-bottom: 5px;">
 
                     <a href="{% if '/students' in request.path %}
@@ -71,7 +71,7 @@
     </div>
     <div class="tabcontent" id="activeAssignments" style="display: none;">
         {% for courses in Course %}
-            {% for chapter in courses.Lecture_Code.chapterinfos.all %}
+            {% for chapter in courses.Course_Code.chapterinfos.all %}
                 {% for assignments in chapter.assignmentinfos.all %}
                     {% if assignments.Assignment_Deadline|date:'r' < currentDate|date:'r' %}
 
@@ -80,10 +80,10 @@
                             <div class="col-md-8 col-sm-8 col-xs-8 leftborder">
                                 <h5 style="color: #000000;">Course -
                                     <a href="{% if '/students' in request.path %}
-                                        {{ courses.Lecture_Code.student_get_absolute_url }}
+                                        {{ courses.Course_Code.student_get_absolute_url }}
                                     {% else %}
-                               {{ courses.Lecture_Code.get_absolute_url }}
-                                     {% endif %}"><b>{{ courses.Lecture_Code.Lecture_Name }}</b> </a>
+                               {{ courses.Course_Code.get_absolute_url }}
+                                     {% endif %}"><b>{{ courses.Course_Code.Course_Name }}</b> </a>
                                 </h5>
                                 <h5 style="color: #000000;">
                                     Chapter {{ chapter.Chapter_No }} - <a
@@ -125,7 +125,7 @@
 
     <div class="tabcontent" id="expiredAssignments" style="display: none;">
         {% for courses in Course %}
-            {% for chapter in courses.Lecture_Code.chapterinfos.all %}
+            {% for chapter in courses.Course_Code.chapterinfos.all %}
                 {% for assignments in chapter.assignmentinfos.all %}
                     {% if assignments.Assignment_Deadline|date:'r' > currentDate|date:'r' %}
 
@@ -134,10 +134,10 @@
                             <div class="col-md-8 col-sm-8 col-xs-8 leftborder">
                                 <h5 style="color: #000000;">Course - {{ currentDate }}
                                     <a href="{% if '/students' in request.path %}
-                                        {{ courses.Lecture_Code.student_get_absolute_url }}
+                                        {{ courses.Course_Code.student_get_absolute_url }}
                                     {% else %}
-                               {{ courses.Lecture_Code.get_absolute_url }}
-                                     {% endif %}"><b>{{ courses.Lecture_Code.Lecture_Name }}</b> </a>
+                               {{ courses.Course_Code.get_absolute_url }}
+                                     {% endif %}"><b>{{ courses.Course_Code.Course_Name }}</b> </a>
                                 </h5>
                                 <h5 style="color: #000000;">
                                     Chapter {{ chapter.Chapter_No }} - <a

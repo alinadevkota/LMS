@@ -12,7 +12,7 @@ router = routers.DefaultRouter()
 # router.register(r'profile', api.ProfileViewSet)
 router.register(r'centerinfo', api.CenterInfoViewSet)
 router.register(r'memberinfo', api.MemberInfoViewSet)
-router.register(r'lectureinfo', api.LectureInfoViewSet)
+router.register(r'courseinfo', api.CourseInfoViewSet)
 router.register(r'chapterinfo', api.ChapterInfoViewSet)
 router.register(r'chaptercontentsinfo', api.ChapterContentsInfoViewSet)
 router.register(r'chaptermissoncheckcard', api.ChapterMissonCheckCardViewSet)
@@ -33,7 +33,7 @@ router.register(r'chapterwrite', api.ChapterWriteViewSet)
 router.register(r'groupmapping', api.GroupMappingViewSet)
 router.register(r'assignmentinfo', api.AssignmentInfoViewSet)
 router.register(r'learningnote', api.LearningNoteViewSet)
-router.register(r'lectureubtinfo', api.LectureUbtInfoViewSet)
+router.register(r'courseubtinfo', api.CourseUbtInfoViewSet)
 router.register(r'lessoninfo', api.LessonInfoViewSet)
 router.register(r'lessonlog', api.LessonLogViewSet)
 router.register(r'membergroup', api.MemberGroupViewSet)
@@ -114,11 +114,11 @@ urlpatterns += (
 )
 
 urlpatterns += (
-    # urls for LectureInfo
-    path('courseinfo/', views.LectureInfoListView.as_view(), name='lectureinfo_list'),
-    path('courseinfo/create /', views.LectureInfoCreateView.as_view(), name='lectureinfo_create'),
-    path('courseinfo/<int:pk>/', views.LectureInfoDetailView.as_view(), name='lectureinfo_detail'),
-    path('courseinfo/edit/<int:pk>/', views.LectureInfoUpdateView.as_view(), name='lectureinfo_update'),
+    # urls for CourseInfo
+    path('courseinfo/', views.CourseInfoListView.as_view(), name='courseinfo_list'),
+    path('courseinfo/create /', views.CourseInfoCreateView.as_view(), name='courseinfo_create'),
+    path('courseinfo/<int:pk>/', views.CourseInfoDetailView.as_view(), name='courseinfo_detail'),
+    path('courseinfo/edit/<int:pk>/', views.CourseInfoUpdateView.as_view(), name='courseinfo_update'),
 )
 
 urlpatterns += (
@@ -403,15 +403,15 @@ urlpatterns += (
 )
 
 urlpatterns += (
-    # urls for LectureUbtInfo
-    path('lectureubtinfo/', views.LectureUbtInfoListView.as_view(),
-         name='lectureubtinfo_list'),
-    path('lectureubtinfo/create/', views.LectureUbtInfoCreateView.as_view(),
-         name='lectureubtinfo_create'),
-    path('lectureubtinfo/detail/<int:pk>/',
-         views.LectureUbtInfoDetailView.as_view(), name='lectureubtinfo_detail'),
-    path('lectureubtinfo/update/<int:pk>/',
-         views.LectureUbtInfoUpdateView.as_view(), name='lectureubtinfo_update'),
+    # urls for CourseUbtInfo
+    path('courseubtinfo/', views.CourseUbtInfoListView.as_view(),
+         name='courseubtinfo_list'),
+    path('courseubtinfo/create/', views.CourseUbtInfoCreateView.as_view(),
+         name='courseubtinfo_create'),
+    path('courseubtinfo/detail/<int:pk>/',
+         views.CourseUbtInfoDetailView.as_view(), name='courseubtinfo_detail'),
+    path('courseubtinfo/update/<int:pk>/',
+         views.CourseUbtInfoUpdateView.as_view(), name='courseubtinfo_update'),
 )
 
 urlpatterns += (

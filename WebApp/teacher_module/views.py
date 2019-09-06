@@ -11,8 +11,8 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, FormView
 
-from WebApp.forms import LectureInfoForm, ChapterInfoForm
-from WebApp.models import LectureInfo, ChapterInfo, InningInfo
+from WebApp.forms import CourseInfoForm, ChapterInfoForm
+from WebApp.models import CourseInfo, ChapterInfo, InningInfo
 from survey.models import SurveyInfo
 
 
@@ -28,50 +28,50 @@ def Dashboard(request):
     return render(request, 'teacher_module/homepage.html', )
 
 
-class LectureInfoListView(ListView):
-    model = LectureInfo
-    template_name = 'teacher_module/lectureinfo_list.html'
+class CourseInfoListView(ListView):
+    model = CourseInfo
+    template_name = 'teacher_module/courseinfo_list.html'
     paginate_by = 2
 
     def get_queryset(self):
-        lectures = LectureInfo.objects.filter(
+        courses = CourseInfo.objects.filter(
             Teacher_Code=self.request.user.id)
         if self.request.GET.get('query'):
             query = self.request.GET.get('query')
             if query:
-                qs = lectures.filter(Lecture_Name__contains=query)
+                qs = courses.filter(Course_Name__contains=query)
                 if not len(qs):
                     messages.error(self.request, 'Search not found')
             # you don't need this if you set up your ordering on the model
             qs = qs.order_by("-id")
             return qs
         else:
-            return lectures
+            return courses
     # def get_queryset(self):
     #     qs = self.model.objects.all()
 
 
-class LectureInfoCreateView(CreateView):
-    model = LectureInfo
-    form_class = LectureInfoForm
-    template_name = 'teacher_module/lectureinfo_form.html'
+class CourseInfoCreateView(CreateView):
+    model = CourseInfo
+    form_class = CourseInfoForm
+    template_name = 'teacher_module/courseinfo_form.html'
 
 
-class LectureInfoDetailView(DetailView):
-    model = LectureInfo
-    template_name = 'teacher_module/lectureinfo_detail.html'
+class CourseInfoDetailView(DetailView):
+    model = CourseInfo
+    template_name = 'teacher_module/courseinfo_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['chapters'] = ChapterInfo.objects.filter(
-            Lecture_Code=self.kwargs.get('pk'))
+            Course_Code=self.kwargs.get('pk'))
         return context
 
 
-class LectureInfoUpdateView(UpdateView):
-    model = LectureInfo
-    form_class = LectureInfoForm
-    template_name = 'teacher_module/lectureinfo_form.html'
+class CourseInfoUpdateView(UpdateView):
+    model = CourseInfo
+    form_class = CourseInfoForm
+    template_name = 'teacher_module/courseinfo_form.html'
 
 
 class ChapterInfoListView(ListView):
@@ -91,7 +91,7 @@ class ChapterInfoDetailView(DetailView):
 
 
 def ChapterInfoBuildView(request):
-    return render(request, 'teacher_module/lecturebuilder.html')
+    return render(request, 'teacher_module/coursebuilder.html')
 
 
 class ChapterInfoUpdateView(UpdateView):
@@ -106,7 +106,7 @@ def ProfileView(request):
 
 def makequery(request):
     # model=SurveyInfo
-    Course = LectureInfo.objects.all()
+    Course = CourseInfo.objects.all()
     Session = InningInfo.objects.all()
     return render(request, 'teacher_module/makequery.html', {
         'courses': Course,

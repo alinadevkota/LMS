@@ -5,19 +5,19 @@
     | Course Form
 {% endblock %}
 {% block breadcrumb %}
-    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'teacher_lectureinfo_list' %}">Lecture</a></li>
+    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'teacher_courseinfo_list' %}">Course</a></li>
     <li class="breadcrumb-item active" aria-current="page">
         {% if '/create/' in request.path %}
-            Create New Lecture
+            Create New Course
         {% else %}
-            Edit Lecture Info
+            Edit Course Info
         {% endif %}
     </li>
 
 {% endblock %}
 
 {% block content %}
-    {% include 'lecture/lectureinfo_form.html' %}
+    {% include 'course/courseinfo_form.html' %}
 {% endblock content %}
 
 {% block customjss %}

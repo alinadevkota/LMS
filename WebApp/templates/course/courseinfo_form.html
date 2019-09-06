@@ -25,51 +25,51 @@
 <form method="POST" id="FormID" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        {#        {{ form.Lecture_Name|as_crispy_field }}#}
+        {#        {{ form.Course_Name|as_crispy_field }}#}
 
-        <div id="div_id_Lecture_Name" class="form-group">
-            <label for="id_Lecture_Name" class="control-label ">
+        <div id="div_id_Course_Name" class="form-group">
+            <label for="id_Course_Name" class="control-label ">
                 Course Name
             </label>
             <div class="controls ">
-                <input type="text" name="Lecture_Name" value="{{ object.Lecture_Name }}"
+                <input type="text" name="Course_Name" value="{{ object.Course_Name }}"
                        class="textinput textInput form-control"
-                       maxlength="500" id="id_Lecture_Name">
+                       maxlength="500" id="id_Course_Name">
             </div>
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <div id="div_id_Lecture_Description" class="form-group">
-            <label for="id_Lecture_Description" class="control-label ">
+        <div id="div_id_Course_Description" class="form-group">
+            <label for="id_Course_Description" class="control-label ">
                 Course Description
             </label>
             <div class="controls ">
-                    <textarea name="Lecture_Description" cols="40" rows="1" id="id_Lecture_Description"
-                              class="textarea form-control">{{ object.Lecture_Description }}</textarea>
+                    <textarea name="Course_Description" cols="40" rows="1" id="id_Course_Description"
+                              class="textarea form-control">{{ object.Course_Description }}</textarea>
             </div>
         </div>
     </div>
     <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-        {{ form.Lecture_Cover_File|as_crispy_field }}
+        {{ form.Course_Cover_File|as_crispy_field }}
     </div>
     <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
-        <div id="div_id_Lecture_Provider" class="form-group">
-            <label for="id_Lecture_Provider" class="control-label ">
+        <div id="div_id_Course_Provider" class="form-group">
+            <label for="id_Course_Provider" class="control-label ">
                 Course Provider
             </label>
             <div class="controls ">
-                <input type="text" name="Lecture_Provider"
-                       value="{{ object.Lecture_Provider }}"
-                       class="textinput textInput form-control" maxlength="250" id="id_Lecture_Provider">
+                <input type="text" name="Course_Provider"
+                       value="{{ object.Course_Provider }}"
+                       class="textinput textInput form-control" maxlength="250" id="id_Course_Provider">
             </div>
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-        <label for="id_Lecture_Level" class="control-label ">
+        <label for="id_Course_Level" class="control-label ">
             Course Level
         </label>
-        <input class="rating" id="id_Lecture_Level" type="hidden" name="Lecture_Level"
-               value="{{ object.Lecture_Level }}">
+        <input class="rating" id="id_Course_Level" type="hidden" name="Course_Level"
+               value="{{ object.Course_Level }}">
     </div>
     <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
         <label>
@@ -110,8 +110,8 @@
 
 </form>
 <script>
-    {% if object.Lecture_Level %}
-        var rating = parseInt({{ object.Lecture_Level }});
+    {% if object.Course_Level %}
+        var rating = parseInt({{ object.Course_Level }});
     {% else %}
         var rating = 0;
     {% endif %}

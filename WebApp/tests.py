@@ -1,7 +1,7 @@
 import unittest
 from django.urls import reverse
 from django.test import Client
-from .models import Profile, CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, HomeworkInfo, LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
+from .models import Profile, CenterInfo, MemberInfo, CourseInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, ChapterMissonCheckItem, InningInfo, OmrQuestionInfo, QuizInfo, AssignHomeworkInfo, AssignQuestionInfo, BoardInfo, BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, HomeworkInfo, LearningNote, CourseUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, OmrAnswerInfo, OmrAssignInfo, OmrExampleInfo, QAnswerInfo, QAnswerLog, QExampleInfo, QuestionInfo, QuizAnswerInfo, QuizExampleInfo, ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from django.contrib.contenttypes.models import ContentType
@@ -68,14 +68,14 @@ def create_memberinfo(**kwargs):
     return MemberInfo.objects.create(**defaults)
 
 
-def create_lectureinfo(**kwargs):
+def create_courseinfo(**kwargs):
     defaults = {}
-    defaults["lecture_name"] = "lecture_name"
-    defaults["lecture_teacher"] = "lecture_teacher"
-    defaults["lecture_cover"] = "lecture_cover"
-    defaults["lecture_cover_file"] = "lecture_cover_file"
-    defaults["lecture_level"] = "lecture_level"
-    defaults["lecture_info"] = "lecture_info"
+    defaults["course_name"] = "course_name"
+    defaults["course_teacher"] = "course_teacher"
+    defaults["course_cover"] = "course_cover"
+    defaults["course_cover_file"] = "course_cover_file"
+    defaults["course_level"] = "course_level"
+    defaults["course_info"] = "course_info"
     defaults["teacher"] = "teacher"
     defaults["use_flag"] = "use_flag"
     defaults["reg_date"] = "reg_date"
@@ -84,8 +84,8 @@ def create_lectureinfo(**kwargs):
     defaults["udt_date"] = "udt_date"
     defaults["udt_time"] = "udt_time"
     defaults["udt_agent"] = "udt_agent"
-    defaults["lecture_certification"] = "lecture_certification"
-    defaults["lecture_provider"] = "lecture_provider"
+    defaults["course_certification"] = "course_certification"
+    defaults["course_provider"] = "course_provider"
     defaults["cert_crit_prog"] = "cert_crit_prog"
     defaults["cert_crit_post"] = "cert_crit_post"
     defaults["cert_crit_ubt"] = "cert_crit_ubt"
@@ -93,7 +93,7 @@ def create_lectureinfo(**kwargs):
     defaults.update(**kwargs)
     if "center_code" not in defaults:
         defaults["center_code"] = create_centerinfo()
-    return LectureInfo.objects.create(**defaults)
+    return CourseInfo.objects.create(**defaults)
 
 
 def create_chapterinfo(**kwargs):
@@ -146,8 +146,8 @@ def create_chapterinfo(**kwargs):
     defaults["pbl_flag"] = "pbl_flag"
     defaults["chapter_use_time"] = "chapter_use_time"
     defaults.update(**kwargs)
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     return ChapterInfo.objects.create(**defaults)
 
 
@@ -250,8 +250,8 @@ def create_inninginfo(**kwargs):
     defaults["udt_time"] = "udt_time"
     defaults["udt_agent"] = "udt_agent"
     defaults.update(**kwargs)
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "center_code" not in defaults:
         defaults["center_code"] = create_centerinfo()
     return InningInfo.objects.create(**defaults)
@@ -270,8 +270,8 @@ def create_omrquestioninfo(**kwargs):
     defaults["question_level"] = "question_level"
     defaults["question_score"] = "question_score"
     defaults.update(**kwargs)
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "chapter_code" not in defaults:
         defaults["chapter_code"] = create_chapterinfo()
     return OmrQuestionInfo.objects.create(**defaults)
@@ -296,8 +296,8 @@ def create_quizinfo(**kwargs):
     defaults["quiz_head"] = "quiz_head"
     defaults["quiz_media_file2"] = "quiz_media_file2"
     defaults.update(**kwargs)
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "chapter_code" not in defaults:
         defaults["chapter_code"] = create_chapterinfo()
     return QuizInfo.objects.create(**defaults)
@@ -316,8 +316,8 @@ def create_assignhomeworkinfo(**kwargs):
     defaults.update(**kwargs)
     if "question_code" not in defaults:
         defaults["question_code"] = create_omrquestioninfo()
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "chapter_code" not in defaults:
         defaults["chapter_code"] = create_chapterinfo()
     if "member_code" not in defaults:
@@ -338,8 +338,8 @@ def create_assignquestioninfo(**kwargs):
     defaults.update(**kwargs)
     if "question_code" not in defaults:
         defaults["question_code"] = create_omrquestioninfo()
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "chapter_code" not in defaults:
         defaults["chapter_code"] = create_chapterinfo()
     return AssignQuestionInfo.objects.create(**defaults)
@@ -405,8 +405,8 @@ def create_inninggroup(**kwargs):
         defaults["center_code"] = create_centerinfo()
     if "inning_code" not in defaults:
         defaults["inning_code"] = create_inninginfo()
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     return InningGroup.objects.create(**defaults)
 
 
@@ -515,8 +515,8 @@ def create_homeworkinfo(**kwargs):
     defaults.update(**kwargs)
     if "question_code" not in defaults:
         defaults["question_code"] = create_omrquestioninfo()
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "chapter_code" not in defaults:
         defaults["chapter_code"] = create_chapterinfo()
     return HomeworkInfo.objects.create(**defaults)
@@ -530,14 +530,14 @@ def create_learningnote(**kwargs):
     defaults.update(**kwargs)
     if "inning_code" not in defaults:
         defaults["inning_code"] = create_inninginfo()
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "chapter_code" not in defaults:
         defaults["chapter_code"] = create_chapterinfo()
     return LearningNote.objects.create(**defaults)
 
 
-def create_lectureubtinfo(**kwargs):
+def create_courseubtinfo(**kwargs):
     defaults = {}
     defaults["use_flag"] = "use_flag"
     defaults["reg_date"] = "reg_date"
@@ -549,9 +549,9 @@ def create_lectureubtinfo(**kwargs):
     defaults.update(**kwargs)
     if "quiz_code" not in defaults:
         defaults["quiz_code"] = create_quizinfo()
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
-    return LectureUbtInfo.objects.create(**defaults)
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
+    return CourseUbtInfo.objects.create(**defaults)
 
 
 def create_lessoninfo(**kwargs):
@@ -572,8 +572,8 @@ def create_lessoninfo(**kwargs):
     defaults["download_count"] = "download_count"
     defaults["download_date"] = "download_date"
     defaults.update(**kwargs)
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "member_code" not in defaults:
         defaults["member_code"] = create_memberinfo()
     if "center_code" not in defaults:
@@ -608,8 +608,8 @@ def create_lessonlog(**kwargs):
     defaults.update(**kwargs)
     if "lesson_code" not in defaults:
         defaults["lesson_code"] = create_lessoninfo()
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "chapter_code" not in defaults:
         defaults["chapter_code"] = create_chapterinfo()
     if "member_code" not in defaults:
@@ -666,8 +666,8 @@ def create_omranswerinfo(**kwargs):
     defaults["udt_time"] = "udt_time"
     defaults["udt_agent"] = "udt_agent"
     defaults.update(**kwargs)
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "chapter_code" not in defaults:
         defaults["chapter_code"] = create_chapterinfo()
     if "member_code" not in defaults:
@@ -692,8 +692,8 @@ def create_omrassigninfo(**kwargs):
     defaults.update(**kwargs)
     if "question_code" not in defaults:
         defaults["question_code"] = create_omrquestioninfo()
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "chapter_code" not in defaults:
         defaults["chapter_code"] = create_chapterinfo()
     if "member_code" not in defaults:
@@ -734,8 +734,8 @@ def create_qanswerinfo(**kwargs):
     defaults["udt_time"] = "udt_time"
     defaults["udt_agent"] = "udt_agent"
     defaults.update(**kwargs)
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "chapter_code" not in defaults:
         defaults["chapter_code"] = create_chapterinfo()
     if "member_code" not in defaults:
@@ -760,8 +760,8 @@ def create_qanswerlog(**kwargs):
     defaults["udt_time"] = "udt_time"
     defaults["udt_agent"] = "udt_agent"
     defaults.update(**kwargs)
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "member_code" not in defaults:
         defaults["member_code"] = create_memberinfo()
     if "question_code" not in defaults:
@@ -811,8 +811,8 @@ def create_questioninfo(**kwargs):
     defaults["teacher_contents"] = "teacher_contents"
     defaults["student_contents"] = "student_contents"
     defaults.update(**kwargs)
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "chapter_code" not in defaults:
         defaults["chapter_code"] = create_chapterinfo()
     return QuestionInfo.objects.create(**defaults)
@@ -835,8 +835,8 @@ def create_quizanswerinfo(**kwargs):
     defaults["udt_agent"] = "udt_agent"
     defaults["test_type"] = "test_type"
     defaults.update(**kwargs)
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "chapter_code" not in defaults:
         defaults["chapter_code"] = create_chapterinfo()
     if "member_code" not in defaults:
@@ -900,8 +900,8 @@ def create_talkroom(**kwargs):
     defaults["talk_room_cate_code"] = "talk_room_cate_code"
     defaults["use_flag"] = "use_flag"
     defaults.update(**kwargs)
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     if "inning_code" not in defaults:
         defaults["inning_code"] = create_inninginfo()
     return TalkRoom.objects.create(**defaults)
@@ -950,8 +950,8 @@ def create_todoinfo(**kwargs):
         defaults["chapter_code"] = create_chapterinfo()
     if "member_code" not in defaults:
         defaults["member_code"] = create_memberinfo()
-    if "lecture_code" not in defaults:
-        defaults["lecture_code"] = create_lectureinfo()
+    if "course_code" not in defaults:
+        defaults["course_code"] = create_courseinfo()
     return TodoInfo.objects.create(**defaults)
 
 
@@ -1116,27 +1116,27 @@ class MemberInfoViewTest(unittest.TestCase):
         self.assertEqual(response.status_code, 302)
 
 
-class LectureInfoViewTest(unittest.TestCase):
+class CourseInfoViewTest(unittest.TestCase):
     '''
-    Tests for LectureInfo
+    Tests for CourseInfo
     '''
     def setUp(self):
         self.client = Client()
 
-    def test_list_lectureinfo(self):
-        url = reverse('lectureinfo_list')
+    def test_list_courseinfo(self):
+        url = reverse('courseinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_create_lectureinfo(self):
-        url = reverse('lectureinfo_create')
+    def test_create_courseinfo(self):
+        url = reverse('courseinfo_create')
         data = {
-            "lecture_name": "lecture_name",
-            "lecture_teacher": "lecture_teacher",
-            "lecture_cover": "lecture_cover",
-            "lecture_cover_file": "lecture_cover_file",
-            "lecture_level": "lecture_level",
-            "lecture_info": "lecture_info",
+            "course_name": "course_name",
+            "course_teacher": "course_teacher",
+            "course_cover": "course_cover",
+            "course_cover_file": "course_cover_file",
+            "course_level": "course_level",
+            "course_info": "course_info",
             "teacher": "teacher",
             "use_flag": "use_flag",
             "reg_date": "reg_date",
@@ -1145,8 +1145,8 @@ class LectureInfoViewTest(unittest.TestCase):
             "udt_date": "udt_date",
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
-            "lecture_certification": "lecture_certification",
-            "lecture_provider": "lecture_provider",
+            "course_certification": "course_certification",
+            "course_provider": "course_provider",
             "cert_crit_prog": "cert_crit_prog",
             "cert_crit_post": "cert_crit_post",
             "cert_crit_ubt": "cert_crit_ubt",
@@ -1156,21 +1156,21 @@ class LectureInfoViewTest(unittest.TestCase):
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
-    def test_detail_lectureinfo(self):
-        lectureinfo = create_lectureinfo()
-        url = reverse('lectureinfo_detail', args=[lectureinfo.pk,])
+    def test_detail_courseinfo(self):
+        courseinfo = create_courseinfo()
+        url = reverse('courseinfo_detail', args=[courseinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_update_lectureinfo(self):
-        lectureinfo = create_lectureinfo()
+    def test_update_courseinfo(self):
+        courseinfo = create_courseinfo()
         data = {
-            "lecture_name": "lecture_name",
-            "lecture_teacher": "lecture_teacher",
-            "lecture_cover": "lecture_cover",
-            "lecture_cover_file": "lecture_cover_file",
-            "lecture_level": "lecture_level",
-            "lecture_info": "lecture_info",
+            "course_name": "course_name",
+            "course_teacher": "course_teacher",
+            "course_cover": "course_cover",
+            "course_cover_file": "course_cover_file",
+            "course_level": "course_level",
+            "course_info": "course_info",
             "teacher": "teacher",
             "use_flag": "use_flag",
             "reg_date": "reg_date",
@@ -1179,15 +1179,15 @@ class LectureInfoViewTest(unittest.TestCase):
             "udt_date": "udt_date",
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
-            "lecture_certification": "lecture_certification",
-            "lecture_provider": "lecture_provider",
+            "course_certification": "course_certification",
+            "course_provider": "course_provider",
             "cert_crit_prog": "cert_crit_prog",
             "cert_crit_post": "cert_crit_post",
             "cert_crit_ubt": "cert_crit_ubt",
             "cert_crit_issue": "cert_crit_issue",
             "center_code": create_centerinfo().pk,
         }
-        url = reverse('lectureinfo_update', args=[lectureinfo.pk,])
+        url = reverse('courseinfo_update', args=[courseinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -1254,7 +1254,7 @@ class ChapterInfoViewTest(unittest.TestCase):
             "epilogue_img": "epilogue_img",
             "pbl_flag": "pbl_flag",
             "chapter_use_time": "chapter_use_time",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
@@ -1315,7 +1315,7 @@ class ChapterInfoViewTest(unittest.TestCase):
             "epilogue_img": "epilogue_img",
             "pbl_flag": "pbl_flag",
             "chapter_use_time": "chapter_use_time",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
         }
         url = reverse('chapterinfo_update', args=[chapterinfo.pk,])
         response = self.client.post(url, data)
@@ -1577,7 +1577,7 @@ class InningInfoViewTest(unittest.TestCase):
             "udt_date": "udt_date",
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "center_code": create_centerinfo().pk,
         }
         response = self.client.post(url, data=data)
@@ -1602,7 +1602,7 @@ class InningInfoViewTest(unittest.TestCase):
             "udt_date": "udt_date",
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "center_code": create_centerinfo().pk,
         }
         url = reverse('inninginfo_update', args=[inninginfo.pk,])
@@ -1635,7 +1635,7 @@ class OmrQuestionInfoViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "question_level": "question_level",
             "question_score": "question_score",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
         response = self.client.post(url, data=data)
@@ -1660,7 +1660,7 @@ class OmrQuestionInfoViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "question_level": "question_level",
             "question_score": "question_score",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
         url = reverse('omrquestioninfo_update', args=[omrquestioninfo.pk,])
@@ -1699,7 +1699,7 @@ class QuizInfoViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "quiz_head": "quiz_head",
             "quiz_media_file2": "quiz_media_file2",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
         response = self.client.post(url, data=data)
@@ -1730,7 +1730,7 @@ class QuizInfoViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "quiz_head": "quiz_head",
             "quiz_media_file2": "quiz_media_file2",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
         url = reverse('quizinfo_update', args=[quizinfo.pk,])
@@ -1762,7 +1762,7 @@ class AssignHomeworkInfoViewTest(unittest.TestCase):
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
             "question_code": create_omrquestioninfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
         }
@@ -1787,7 +1787,7 @@ class AssignHomeworkInfoViewTest(unittest.TestCase):
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
             "question_code": create_omrquestioninfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
         }
@@ -1820,7 +1820,7 @@ class AssignQuestionInfoViewTest(unittest.TestCase):
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
             "question_code": create_omrquestioninfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
         response = self.client.post(url, data=data)
@@ -1844,7 +1844,7 @@ class AssignQuestionInfoViewTest(unittest.TestCase):
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
             "question_code": create_omrquestioninfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
         url = reverse('assignquestioninfo_update', args=[assignquestioninfo.pk,])
@@ -2009,7 +2009,7 @@ class InningGroupViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "center_code": create_centerinfo().pk,
             "inning_code": create_inninginfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
@@ -2033,7 +2033,7 @@ class InningGroupViewTest(unittest.TestCase):
             "udt_agent": "udt_agent",
             "center_code": create_centerinfo().pk,
             "inning_code": create_inninginfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
         }
         url = reverse('inninggroup_update', args=[inninggroup.pk,])
         response = self.client.post(url, data)
@@ -2341,7 +2341,7 @@ class HomeworkInfoViewTest(unittest.TestCase):
             "reg_agent": "reg_agent",
             "level": "level",
             "question_code": create_omrquestioninfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
         response = self.client.post(url, data=data)
@@ -2364,7 +2364,7 @@ class HomeworkInfoViewTest(unittest.TestCase):
             "reg_agent": "reg_agent",
             "level": "level",
             "question_code": create_omrquestioninfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
         url = reverse('homeworkinfo_update', args=[homeworkinfo.pk,])
@@ -2391,7 +2391,7 @@ class LearningNoteViewTest(unittest.TestCase):
             "note_contents": "note_contents",
             "note_attachment": "note_attachment",
             "inning_code": create_inninginfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
         response = self.client.post(url, data=data)
@@ -2410,7 +2410,7 @@ class LearningNoteViewTest(unittest.TestCase):
             "note_contents": "note_contents",
             "note_attachment": "note_attachment",
             "inning_code": create_inninginfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
         url = reverse('learningnote_update', args=[learningnote.pk,])
@@ -2418,20 +2418,20 @@ class LearningNoteViewTest(unittest.TestCase):
         self.assertEqual(response.status_code, 302)
 
 
-class LectureUbtInfoViewTest(unittest.TestCase):
+class CourseUbtInfoViewTest(unittest.TestCase):
     '''
-    Tests for LectureUbtInfo
+    Tests for CourseUbtInfo
     '''
     def setUp(self):
         self.client = Client()
 
-    def test_list_lectureubtinfo(self):
-        url = reverse('lectureubtinfo_list')
+    def test_list_courseubtinfo(self):
+        url = reverse('courseubtinfo_list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_create_lectureubtinfo(self):
-        url = reverse('lectureubtinfo_create')
+    def test_create_courseubtinfo(self):
+        url = reverse('courseubtinfo_create')
         data = {
             "use_flag": "use_flag",
             "reg_date": "reg_date",
@@ -2441,19 +2441,19 @@ class LectureUbtInfoViewTest(unittest.TestCase):
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
             "quiz_code": create_quizinfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
 
-    def test_detail_lectureubtinfo(self):
-        lectureubtinfo = create_lectureubtinfo()
-        url = reverse('lectureubtinfo_detail', args=[lectureubtinfo.pk,])
+    def test_detail_courseubtinfo(self):
+        courseubtinfo = create_courseubtinfo()
+        url = reverse('courseubtinfo_detail', args=[courseubtinfo.pk,])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_update_lectureubtinfo(self):
-        lectureubtinfo = create_lectureubtinfo()
+    def test_update_courseubtinfo(self):
+        courseubtinfo = create_courseubtinfo()
         data = {
             "use_flag": "use_flag",
             "reg_date": "reg_date",
@@ -2463,9 +2463,9 @@ class LectureUbtInfoViewTest(unittest.TestCase):
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
             "quiz_code": create_quizinfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
         }
-        url = reverse('lectureubtinfo_update', args=[lectureubtinfo.pk,])
+        url = reverse('courseubtinfo_update', args=[courseubtinfo.pk,])
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
@@ -2500,7 +2500,7 @@ class LessonInfoViewTest(unittest.TestCase):
             "ubt_end": "ubt_end",
             "download_count": "download_count",
             "download_date": "download_date",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "member_code": create_memberinfo().pk,
             "center_code": create_centerinfo().pk,
             "inning_code": create_inninginfo().pk,
@@ -2532,7 +2532,7 @@ class LessonInfoViewTest(unittest.TestCase):
             "ubt_end": "ubt_end",
             "download_count": "download_count",
             "download_date": "download_date",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "member_code": create_memberinfo().pk,
             "center_code": create_centerinfo().pk,
             "inning_code": create_inninginfo().pk,
@@ -2578,7 +2578,7 @@ class LessonLogViewTest(unittest.TestCase):
             "study_time": "study_time",
             "connect_page": "connect_page",
             "lesson_code": create_lessoninfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
         }
@@ -2615,7 +2615,7 @@ class LessonLogViewTest(unittest.TestCase):
             "study_time": "study_time",
             "connect_page": "connect_page",
             "lesson_code": create_lessoninfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
         }
@@ -2759,7 +2759,7 @@ class OmrAnswerInfoViewTest(unittest.TestCase):
             "udt_date": "udt_date",
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
             "question_code": create_omrquestioninfo().pk,
@@ -2789,7 +2789,7 @@ class OmrAnswerInfoViewTest(unittest.TestCase):
             "udt_date": "udt_date",
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
             "question_code": create_omrquestioninfo().pk,
@@ -2824,7 +2824,7 @@ class OmrAssignInfoViewTest(unittest.TestCase):
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
             "question_code": create_omrquestioninfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
         }
@@ -2849,7 +2849,7 @@ class OmrAssignInfoViewTest(unittest.TestCase):
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
             "question_code": create_omrquestioninfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
         }
@@ -2940,7 +2940,7 @@ class QAnswerInfoViewTest(unittest.TestCase):
             "udt_date": "udt_date",
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
             "question_code": create_omrquestioninfo().pk,
@@ -2971,7 +2971,7 @@ class QAnswerInfoViewTest(unittest.TestCase):
             "udt_date": "udt_date",
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
             "question_code": create_omrquestioninfo().pk,
@@ -3007,7 +3007,7 @@ class QAnswerLogViewTest(unittest.TestCase):
             "udt_date": "udt_date",
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "member_code": create_memberinfo().pk,
             "question_code": create_omrquestioninfo().pk,
         }
@@ -3033,7 +3033,7 @@ class QAnswerLogViewTest(unittest.TestCase):
             "udt_date": "udt_date",
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "member_code": create_memberinfo().pk,
             "question_code": create_omrquestioninfo().pk,
         }
@@ -3135,7 +3135,7 @@ class QuestionInfoViewTest(unittest.TestCase):
             "question_level": "question_level",
             "teacher_contents": "teacher_contents",
             "student_contents": "student_contents",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
         response = self.client.post(url, data=data)
@@ -3170,7 +3170,7 @@ class QuestionInfoViewTest(unittest.TestCase):
             "question_level": "question_level",
             "teacher_contents": "teacher_contents",
             "student_contents": "student_contents",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
         }
         url = reverse('questioninfo_update', args=[questioninfo.pk,])
@@ -3207,7 +3207,7 @@ class QuizAnswerInfoViewTest(unittest.TestCase):
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
             "test_type": "test_type",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
             "quiz_code": create_quizinfo().pk,
@@ -3238,7 +3238,7 @@ class QuizAnswerInfoViewTest(unittest.TestCase):
             "udt_time": "udt_time",
             "udt_agent": "udt_agent",
             "test_type": "test_type",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
             "quiz_code": create_quizinfo().pk,
@@ -3423,7 +3423,7 @@ class TalkRoomViewTest(unittest.TestCase):
         data = {
             "talk_room_cate_code": "talk_room_cate_code",
             "use_flag": "use_flag",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "inning_code": create_inninginfo().pk,
         }
         response = self.client.post(url, data=data)
@@ -3440,7 +3440,7 @@ class TalkRoomViewTest(unittest.TestCase):
         data = {
             "talk_room_cate_code": "talk_room_cate_code",
             "use_flag": "use_flag",
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
             "inning_code": create_inninginfo().pk,
         }
         url = reverse('talkroom_update', args=[talkroom.pk,])
@@ -3562,7 +3562,7 @@ class TodoInfoViewTest(unittest.TestCase):
             "end_time": "end_time",
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
         }
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 302)
@@ -3593,7 +3593,7 @@ class TodoInfoViewTest(unittest.TestCase):
             "end_time": "end_time",
             "chapter_code": create_chapterinfo().pk,
             "member_code": create_memberinfo().pk,
-            "lecture_code": create_lectureinfo().pk,
+            "course_code": create_courseinfo().pk,
         }
         url = reverse('todoinfo_update', args=[todoinfo.pk,])
         response = self.client.post(url, data)
