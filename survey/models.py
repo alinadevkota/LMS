@@ -204,23 +204,3 @@ class AnswerInfo(models.Model):
     def get_update_url(self):
         return reverse('answerinfo_update', args=(self.pk,))
 
-# class Polls(models.Model):
-#     #Fields
-#     User = models.ManyToManyField(
-#         MemberInfo
-#     )
-#     Question = models.OneToOneField(
-#         QuestionInfo,
-#         on_delete=models.CASCADE
-#     )
-#     Selected_Option = models.OneToOneField(
-#         OptionInfo,
-#         on_delete=models.CASCADE,
-#         null=True
-#     )
-
-#     def get_total_user(self):
-#         return User.objects.annotate(number_of_polls = Count('Polls') )
-
-#     def get_user_per_option(self):
-#         return

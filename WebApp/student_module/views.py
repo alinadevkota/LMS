@@ -12,12 +12,16 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.views.generic import DetailView, ListView
+from django.views import View
 
-from WebApp.models import LectureInfo, GroupMapping, InningInfo, InningGroup, ChapterInfo, AssignmentInfo
-from survey.models import SurveyInfo, CategoryInfo, QuestionInfo, OptionInfo, SubmitSurvey
+from WebApp.models import LectureInfo, GroupMapping, InningInfo, InningGroup, ChapterInfo, AssignmentInfo, MemberInfo
+from survey.models import SurveyInfo, CategoryInfo, QuestionInfo, OptionInfo, SubmitSurvey, AnswerInfo
 from datetime import datetime
-from survey.models import SurveyInfo
 from quiz.models import Question
+from django.shortcuts import redirect
+
+
+datetime_now = datetime.now()
 
 
 def start(request):
@@ -57,9 +61,26 @@ class MyCoursesListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['GroupName'] = GroupMapping.objects.get(Students__id=self.request.user.id)
-        context['Group'] = InningInfo.objects.get(Groups__id=context['GroupName'].id)
-        context['Course'] = context['Group'].Course_Group.all()
+        context['batches'] = GroupMapping.objects.filter(Students__id=self.request.user.id, Center_Code=self.request.user.Center_Code)
+
+        sessions = []
+        if context['batches']:
+            for batch in context['batches']:
+                # Filtering out only active sessions
+                session = InningInfo.objects.filter(Groups__id=batch.id,End_Date__gt=datetime_now)
+                sessions += session
+        context['sessions'] = sessions
+        # print(context['sessions'])
+
+        courses = set()
+        if context['sessions']:
+            for session in context['sessions']:
+                course = session.Course_Group.all()
+                courses.update(course)
+        context['Course'] = courses
+        # print(context['courses'])
+        
+        # context['Course'] = context['Group'].Course_Group.all()
 
         return context
 
@@ -164,6 +185,44 @@ class questions_student(ListView):
         
 
         return context
+
+class questions_student_detail(DetailView):
+    model = SurveyInfo
+    template_name = 'student_module/questions_student_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['questions'] = QuestionInfo.objects.filter(
+            Survey_Code=self.kwargs.get('pk')).order_by('pk')
+
+        context['options'] = OptionInfo.objects.all()
+        context['submit'] = SubmitSurvey.objects.all()
+
+        return context
+
+class ParticipateSurvey(View):
+
+    def post(self, request, *args, **kwargs):
+        surveyId =  request.POST["surveyInfoId"]
+        userId = self.request.user.id
+
+        print(request.POST)
+        submitSurvey = SubmitSurvey()
+        submitSurvey.Survey_Code = SurveyInfo.objects.get(id = surveyId)
+        submitSurvey.Student_Code = MemberInfo.objects.get(id = userId)
+        submitSurvey.save()
+
+        for question in QuestionInfo.objects.filter(Survey_Code = surveyId):
+
+            optionId = request.POST[str(question.id)]
+            answerObject = AnswerInfo()
+            answerObject.Answer_Value = optionId
+            answerObject.Question_Code = question
+            answerObject.Submit_Code = submitSurvey
+            answerObject.save()
+    
+        return redirect('questions_student')
+
 
 # def polls_student(request):
 #     return render(request, 'student_module/polls_student.html')
