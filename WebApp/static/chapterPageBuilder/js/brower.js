@@ -27,11 +27,8 @@ $(document).ready(function () {
 
 })
 
-
-
-
 $("#SaveBtn").on("click",function(e){
-  var data = []
+  
   pages = {}
   var numberofpages = 0
   $('.pagenumber').each(function(key,value){
@@ -81,6 +78,8 @@ $("#SaveBtn").on("click",function(e){
     'numberofpages': numberofpages, 
     'chaptertitle': $('#chaptertitle').text(),
     'pages': pages,
+    'canvasheight': $('.editor-canvas').css('height'),
+    'canvaswidth': $('.editor-canvas').css('width'),
   };
   var json=JSON.stringify(data);
   $.ajax({

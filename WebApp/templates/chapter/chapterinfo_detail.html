@@ -8,7 +8,7 @@
                 <h2 class="detailListHeader">Chapter {{ object.Chapter_No }}
                     : {{ object.Chapter_Name }} </h2></div>
                      <a class="btn-sm btn-success"
-                       href="#" id="lecture-viewer">Course
+                       href="#" id="lecture-viewer" data-toggle="modal" data-target="#lecture-modal">Course
                         Viewer &nbsp;</a>
                     
             {% if '/students' not in request.path %}
@@ -129,13 +129,8 @@
 
 <!-- Modal -->
 <div id="lecture-modal" class="modal fade" role="dialog">
-<<<<<<< HEAD
     <div class="modal-lg modal-dialog">
   
-=======
-    <div class="modal-dialog">
-
->>>>>>> f47014a767765875f05ee556fe6575b4a7c319c1
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -147,7 +142,6 @@
             <!-- <button id="prev-btn" class="btn btn-secondary">Previous</button>
             <button id="next-btn" class="btn btn-secondary">Next</button> -->
         </div>
-<<<<<<< HEAD
         <div class="modal-body">
             <div class="col-md-1">
                 <button id="prev-btn" class="btn btn-secondary"><i class="fa fa-backward"></i></button>
@@ -159,10 +153,6 @@
                 <button id="next-btn" class="btn btn-secondary"><i class="fa fa-forward"></i></button>
 
             </div>
-=======
-        <div class="modal-body" id="modal-container" style="position: relative">
-
->>>>>>> f47014a767765875f05ee556fe6575b4a7c319c1
         </div>
       </div>
 
@@ -192,7 +182,6 @@
     function loaddata(data){
         $('#chaptertitle').text(data.chaptertitle);
         $.each(data.pages, function(key, value){
-            console.log(value)
             $.each(value, function(count){
 
                 // Create modal
@@ -218,7 +207,7 @@
                     }
                     if(div == 'pic'){
                         $.each(div_value, function(css, css_value){
-                            console.log(css_value.tops)
+                            // console.log(css_value.tops)
                             src = css_value['background-image']
                             imgsrc = src.match(/(["'])(?:(?=(\\?))\2.)*?\1/);
                             $('#page'+key+ '> .divholder').append(`

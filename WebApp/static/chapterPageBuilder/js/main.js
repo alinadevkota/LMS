@@ -189,13 +189,14 @@ $(document).ready(function() {
                         var data = new FormData();
                         var count = 0
                         $.each($('.imgInp')[0].files, function(i, file) {
+                            console.log(Math.round((file.size / 1024))) // get image size
                             data.append('file-' + i, file);
                             count++;
                         });
                         data.append('count', count);
                         data.append('chapterID', chapterID);
                         data.append('courseID', courseID);
-                        console.log("imageuploadfromhere")
+                        // console.log("imageuploadfromhere")
                         $.ajax({
                             url: save_file_url,
                             data: data,
@@ -213,7 +214,10 @@ $(document).ready(function() {
                                   'background-position': 'center',
                                   'border': '0'
                               });
-                            }
+                            },
+                            error: function(data, status, errorThrown) {
+                                alert(data.responseJSON.message);
+                             }
                         });
 
                         $('#picture-drag').css({
@@ -937,7 +941,7 @@ $(document).ready(function() {
         $(".tabs-to-click ul").append(
 
             `<li class="tabs-link pagenumber" onclick="openTab(event,'tab${num_tabs}')" >
-                <i id="add-page-btn" class="fas fa-plus-square fas-5x"></i>
+               
             </li>`
 
         );

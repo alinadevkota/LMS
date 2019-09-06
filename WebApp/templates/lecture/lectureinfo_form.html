@@ -109,12 +109,26 @@
     </div>
 
 </form>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script>
     {% if object.Lecture_Level %}
         var rating = parseInt({{ object.Lecture_Level }});
     {% else %}
         var rating = 0;
     {% endif %}
+
+    $('#id_Lecture_Cover_File').change(function(){
+        if (this.files.length > 0) {
+            $.each(this.files, function (index, value) {
+                image_size = (Math.round((value.size / 1024)));
+                if(image_size > 2048) {
+                    $('#id_Lecture_Cover_File').val('');
+                    alert("File size exceeds 2MB");
+                }
+            });
+        }
+    });
 </script>
 
 
