@@ -107,6 +107,7 @@ urlpatterns += (
 urlpatterns += (
     # urls for MemberInfo
     path('memberinfo/', views.MemberInfoListView.as_view(), name='memberinfo_list'),
+    path('memberinfo/inactive', views.MemberInfoListViewInactive.as_view(), name='memberinfo_list_inactive'),
     path('memberinfo/create/', views.MemberInfoCreateView.as_view(), name='memberinfo_create'),
     path('memberinfo/detail/<int:pk>/', views.MemberInfoDetailView.as_view(), name='memberinfo_detail'),
     path('memberinfo/update/<int:pk>/', views.MemberInfoUpdateView.as_view(), name='memberinfo_update'),
@@ -200,8 +201,7 @@ urlpatterns += (
          views.AssignmentInfoDetailView.as_view(), name='assignmentinfo_detail'),
     path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/update/<int:pk>/',
          views.AssignmentInfoUpdateView.as_view(), name='assignmentinfo_update'),
-    path('assignmentinfo/create/ajax',
-         views.QuestionInfoCreateAjax.as_view(), name='questioninfo_create_ajax'),
+
 )
 
 urlpatterns += (
@@ -218,6 +218,8 @@ urlpatterns += (
     path(
         'courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/update/<int:pk>/',
         views.QuestionInfoUpdateView.as_view(), name='questioninfo_update'),
+    path('questioninfo/create/ajax',
+         views.QuestionInfoCreateViewAjax.as_view(), name='questioninfo_create_ajax'),
 
 )
 

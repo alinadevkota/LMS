@@ -16,7 +16,7 @@
                 <li><a class="navbar-brand" id="teacher_button" href="#">Teacher</a></li>
                 <li><a class="navbar-brand" id="student_button" href="#">Student</a></li>
             </ul>
-            <span style="float:right; margin:15px"><a href="{% url 'memberinfo_list_inactive' %}" style="color: white">Inactive Members</a></span>
+            <span style="float:right; margin:15px"><a href="{% url 'memberinfo_list' %}" style="color: white">Active Members</a></span>
         </nav>
         <hr class="header_hr">
         <div class="col-md-6 text-danger">{% include 'WebApp/theme/alerts.html' %}</div>
@@ -43,7 +43,7 @@
                     <td>Gender</td>
                     <td>Student</td>
                     <td>Teacher</td>
-                    {#                    <td>Status</td>#}
+{#                    <td>Status</td>#}
                 </tr>
                 </thead>
                 {% for object in object_list %}

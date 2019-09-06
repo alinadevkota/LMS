@@ -14,18 +14,7 @@
         {% endif %}
     </li>
 {% endblock %}
-{#{% block breadcrumb %}#}
-{#    <li class="breadcrumb-item" aria-current="page"><a href="#}
-{#{% url 'assignmentinfo_list' %}#}
-{#">Assignment</a></li>#}
-{#    <li class="breadcrumb-item active" aria-current="page">#}
-{#        {% if '/create/' in request.path %}#}
-{#            Create New Assignment#}
-{#        {% else %}#}
-{#            Edit Assignment#}
-{#        {% endif %}#}
-{#    </li>#}
-{#{% endblock %}#}
+
 {% block content %}
     <div class="headerDiv">
         <h2 class="infoFormHeader">
@@ -96,51 +85,13 @@
             </form>
         </div>
     </div>
-    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px;text-align: center">
-        <h1>
-            <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#exampleModal1" id="add-question-btn">
-                Add Question
-            </button>
-        </h1>
-    </div>
-    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true" id="add_question_modal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Add Question
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </h4>
-                </div>
-                <div class="modal-body" id="add_question_btn_body">
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-{% block customjss %}
-    <script src=" {% static 'vendorsx/jQuery-Smart-Wizard/js/jquery.smartWizard.js' %}"></script>
-    <script>
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-        });
+{#    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px;text-align: center">#}
+{#        <h1>#}
+{#            <button type="button" class="btn btn-primary" data-toggle="modal"#}
+{#                    data-target="#exampleModal1" id="add-question-btn">#}
+{#                Add Question#}
+{#            </button>#}
+{#        </h1>#}
+{#    </div>#}
 
-        $('#add-question-btn').on('click', function () {
-            $('#add_question_btn_body').empty();
-            $.ajax({
-                type: "GET",
-                url: "{% url 'questioninfo_create_ajax' %}",  // URL to your view that serves new info
-                success: function (response) {
-                    $('#add_question_btn_body').append(response);
-                },
-                error: function () {
-                    console.log('Error in generating add question form')
-                }
-            });
-        });
-
-    </script>
 {% endblock %}
