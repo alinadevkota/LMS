@@ -96,7 +96,6 @@ class MemberInfo(AbstractUser):
     Member_BirthDate = models.DateTimeField(blank=True, null=True)
     # Member_Email = models.CharField(max_length=150, blank=True, null=True)
     Member_Phone = models.CharField(max_length=150, blank=True, null=True)
-    Member_Gender = models.CharField(max_length=150, blank=True, null=True)
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Register_Agent = CharField(max_length=500, blank=True, null=True)
@@ -108,6 +107,12 @@ class MemberInfo(AbstractUser):
     Is_Student = models.BooleanField(default=False)
     Is_CenterAdmin = models.BooleanField(default=False)
     Is_Parent = models.BooleanField(default=False)
+    Gender_Choices = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+    Member_Gender = models.CharField(max_length=1, choices=Gender_Choices)
+
 
     # Member_Role = models.CharField(max_length=30, default="Student")
 
@@ -378,7 +383,7 @@ class QuestionInfo(models.Model):
     # Fields
     # subject_code = IntegerField(blank=True, null=True)
     # question_type = CharField(max_length=10, blank=True, null=True)
-    Question_Title = CharField(max_length=4000, blank=True, null=True)
+    Question_Title = CharField(max_length=4000)
     # question_media_type = CharField(max_length=10, blank=True, null=True)
     # question_media_file = CharField(max_length=200, blank=True, null=True)
     Question_Score = IntegerField(blank=True, null=True)
@@ -389,7 +394,7 @@ class QuestionInfo(models.Model):
     Updated_DateTime = DateTimeField(auto_now=True)
 
     Question_Media_File = FileField(upload_to=upload_to, blank=True, null=True)
-    Question_Description = TextField(blank=True, null=True)
+    Question_Description = TextField()
     Answer_Choices = (
         ('S', 'Short Answer'),
         ('F', 'File Upload'),

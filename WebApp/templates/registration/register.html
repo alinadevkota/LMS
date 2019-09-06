@@ -55,13 +55,9 @@
             <div class="controls "><input type="email" name="email" maxlength="254" id="id_email"
                                           class="emailinput form-control"></div>
         </div>
-        <div id="div_id_Member_Gender" class="form-group"><label for="id_Member_Gender" class="control-label ">
-            Member Gender
-        </label>
-            <div class="controls "><input type="text" name="Member_Gender" maxlength="150" id="id_Member_Gender"
-                                          class="textinput textInput form-control"></div>
+        <div id="div_id_Member_Gender" class="form-group">{{ form.Center_Code|as_crispy_field }}
         </div>
-        {{ form.Center_Code|as_crispy_field }}
+        {{ form.Member_Gender|as_crispy_field }}
         <div id="div_id_Member_Type" class="form-group">
             <label for="id_Member_Type" class="control-label ">
                 Member Type
@@ -79,7 +75,7 @@
                     Teacher
                 </div>
             </div>
-        <br>
+            <br>
         </div>
         <div id="div_id_password1" class="form-group"><label for="id_password1" class="control-label  requiredField">
             Password * </label>
@@ -98,6 +94,11 @@
                 <p id="hint_id_password2" class="help-block" style="font-size: small">Enter the same password as before,
                     for verification.</p>
             </div>
+        </div>
+        <div class="control-label">
+            <input type="hidden" name="Use_Flag" id="id_Use_Flag" value="False"
+                   class="select form-control">
+            {#           {{ form.Use_Flag|as_crispy_field }} #}
         </div>
 
         <button class="btn btn-lg btn-success btn-block" type="submit">

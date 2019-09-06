@@ -3,7 +3,7 @@ from django.urls import path
 from django.contrib.auth.decorators import login_required
 
 from WebApp.student_module import views
-
+from survey import views as surveyViews
 #
 # urlpatterns = (
 #     # urls for TodoTInfo
@@ -60,15 +60,31 @@ urlpatterns += (
          name='student_user_profile'),
 )
 
+# urlpatterns += (
+#     path('questions_student/', views.questions_student, name="questions_student"),
+# )
 urlpatterns += (
-    path('questions_student/', views.questions_student, name="questions_student"),
+    # urls for SurveyInfo
+    path('questions_student/', views.questions_student.as_view(), name='questions_student'),
+
+    path('questions_student_detail/detail/<int:pk>/',
+         views.questions_student_detail.as_view(), name='questions_student_detail'),
+
+     # path('surveyinfo/detail', views.get_survey_info,
+     #     name='get_survey_info'),
+
+    path('surveyinfo_ajax/', surveyViews.SurveyInfo_ajax.as_view(),
+        name='surveyinfo_ajax'),
+    
+    path('ParticipateSurvey/', views.ParticipateSurvey.as_view(),
+        name='ParticipateSurvey'),
 )
 
-urlpatterns += (
-    path('polls_student/', views.polls_student, name="polls_student"),
-)
+# urlpatterns += (
+#     path('polls_student/', views.polls_student, name="polls_student"),
+# )
 
-urlpatterns += (
-    path('polls_student_view/', views.polls_student_view,
-         name="polls_student_view"),
-)
+# urlpatterns += (
+#     path('polls_student_view/', views.polls_student_view,
+#          name="polls_student_view"),
+# )

@@ -31,6 +31,31 @@ class SittingFilterTitleMixin(object):
 
         return queryset
 
+class AjaxableResponseMixin:
+    """
+    Mixin to add AJAX support to a form.
+    Must be used with an object-based FormView (e.g. CreateView)
+    """
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
+
+    def form_valid(self, form):
+        # We make sure to call the parent's form_valid() method because
+        # it might do some processing (in the case of CreateView, it will
+        # call form.save() for example).
+        response = super().form_valid(form)
+        if self.request.is_ajax():
+            data = {
+                'pk': self.object.pk,
+            }
+            return JsonResponse(data)
+        else:
+            return response
+
 
 class QuizCreateView(CreatePopupMixin, CreateView):
     #template_name = 'quiz/test_temp.html'
@@ -417,11 +442,13 @@ class QuestionCreateView(CreateView):
 class MCQuestionListView(ListView):
     model = MCQuestion
 
+from django.http import JsonResponse
 
-class MCQuestionCreateView(CreateView):
-    model =MCQuestion
+class MCQuestionCreateView(AjaxableResponseMixin, CreateView):
+    model = MCQuestion
     form_class = MCQuestionForm
-    success_url = reverse_lazy('quiz_create')
+    #success_url = reverse_lazy('quiz_create')
+    template_name = 'ajax/mcquestion_form_ajax.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
@@ -439,7 +466,10 @@ class MCQuestionCreateView(CreateView):
             if ans.is_valid():
                 ans.instance = self.object
                 ans.save()
-        return vform
+        new_mcq = {}
+        new_mcq['new_mcq_id'] = self.object.id
+        new_mcq['new_mcq_content'] = self.object.content
+        return JsonResponse(new_mcq)
 
 class MCQuestionUpdateView(UpdateView):
     model = MCQuestion

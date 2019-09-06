@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.files.storage import FileSystemStorage
 from django.db import models as models
 from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, BooleanField, \
-    ImageField, DateField
+    ImageField, DateField, Count
 from django.urls import reverse
 from django.utils.translation import gettext as _
 from WebApp.models import MemberInfo, InningInfo, LectureInfo, CenterInfo
@@ -131,6 +131,10 @@ class OptionInfo(models.Model):
         'QuestionInfo',
         related_name="optioninfo", on_delete=models.CASCADE
     )
+    # Selected_By = models.ManyToManyField(
+    #     MemberInfo,
+    #     on_delete=models.CASCADE
+    # )
 
     class Meta:
         ordering = ('-pk',)
@@ -199,3 +203,4 @@ class AnswerInfo(models.Model):
 
     def get_update_url(self):
         return reverse('answerinfo_update', args=(self.pk,))
+
