@@ -172,47 +172,17 @@
     </div>
 </div>
 
-<<<<<<< HEAD:WebApp/templates/course/courseinfo_detail.html
-
-    {% block customjss %}
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
-                type="text/javascript"></script>
-        <script>
-            {#        {% if object.Course_Level %}#}
-            {#            var rating = parseInt({{ object.Course_Level }});#}
-            {#        {% else %}#}
-            {#            var rating = 0;#}
-            {#        {% endif %}#}
-            if (parseInt('{{object.Course_Level}}'))
-                for (j = 0; j < parseInt('{{object.Course_Level}}'); j++) {
-                    $('#rating').append("&nbsp;<i class='fa fa-star' style='color:#f5ba00'></i>");
-                }
-            else
-                $('#rating').append("Rating not defined");
-
-        </script>
-        <script src=" {% static 'vendorsx/jQuery-Smart-Wizard/js/jquery.smartWizard.js' %}"></script>
-        <script>
-            $('#myModal').on('shown.bs.modal', function () {
-                $('#myInput').trigger('focus')
-            });
-
-            $('#add-newchapter-btn').on('click', function () {
-                $('#create_chapter_modal_body').empty();
-                $('#create_chapter_modal_body').append(
-                    `<input type="hidden" name="Course_Code" id="id_Course_Code" value="{{ object.pk }}"
-=======
 {% block customjss %}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
             type="text/javascript"></script>
     <script>
-        {#        {% if object.Lecture_Level %}#}
-        {#            var rating = parseInt({{ object.Lecture_Level }});#}
+        {#        {% if object.Course_Level %}#}
+        {#            var rating = parseInt({{ object.Course_Level }});#}
         {#        {% else %}#}
         {#            var rating = 0;#}
         {#        {% endif %}#}
-        if (parseInt('{{object.Lecture_Level}}'))
-            for (j = 0; j < parseInt('{{object.Lecture_Level}}'); j++) {
+        if (parseInt('{{object.Course_Level}}'))
+            for (j = 0; j < parseInt('{{object.Course_Level}}'); j++) {
                 $('#rating').append("&nbsp;<i class='fa fa-star' style='color:#f5ba00'></i>");
             }
         else
@@ -228,8 +198,7 @@
         $('#add-newchapter-btn').on('click', function () {
             $('#create_chapter_modal_body').empty();
             $('#create_chapter_modal_body').append(
-                `<input type="hidden" name="Lecture_Code" id="id_Lecture_Code" value="{{ object.pk }}"
->>>>>>> 716ac74864e414cb8b9c15afb02a2deb3da6c43a:WebApp/templates/lecture/lectureinfo_detail.html
+                `<input type="hidden" name="Course_Code" id="id_Course_Code" value="{{ object.pk }}"
                class="select form-control">`
             )
             $.ajax({

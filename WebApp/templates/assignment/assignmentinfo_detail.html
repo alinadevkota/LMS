@@ -59,18 +59,11 @@
         {#            </div>#}
         {#        {% endif %}#}
         {% if '/students' not in request.path %}
-<<<<<<< HEAD
-            <div class="col-md-4 col-sm-12 col-xs-12 text-center" style="margin-top: 15px;">
-                <a class="btn-sm btn-success" href="
-                        {% url 'questioninfo_create' course=object.Course_Code.id chapter=Chapter_No.id assignment=object.pk %}
-                   ">Create Question</a>
-=======
             <div class="col-md-4 col-sm-4 col-xs-12 text-center" style="margin-top: 10px">
                 <button type="button" class="btn-sm btn-success" data-toggle="modal"
                         data-target="#exampleModal1" id="add-newquestion-btn">
                     Add Question
                 </button>
->>>>>>> 716ac74864e414cb8b9c15afb02a2deb3da6c43a
             </div>
         {% endif %}
         {#            <hr class="header_hr">#}

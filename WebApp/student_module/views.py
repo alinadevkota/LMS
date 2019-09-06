@@ -26,17 +26,21 @@ datetime_now = datetime.now()
 
 def start(request):
     if request.user.Is_Student:
-        GroupName = GroupMapping.objects.get(Students__id=request.user.id)
-        Group = InningInfo.objects.get(Groups__id=GroupName.id)
-        Course = Group.Course_Group.all()
+        batches = GroupMapping.objects.filter(Students__id=request.user.id, Center_Code=request.user.Center_Code)
+        sessions = []
+        if batches:
+            for batch in batches:
+                # Filtering out only active sessions
+                session = InningInfo.objects.filter(Groups__id=batch.id,End_Date__gt=datetime_now)
+                sessions += session
+        courses = set()
+        if sessions:
+            for session in sessions:
+                course = session.Course_Group.all()
+                courses.update(course)
 
         return render(request, 'student_module/dashboard.html',
-                      {'GroupName': GroupName, 'Group': Group, 'Course': Course})
-
-
-# def mycourse(request):
-#     return render(request, 'student_module/myCourse.html')
-
+                      {'GroupName': batches, 'Group': sessions, 'Course': courses})
 
 def quiz(request):
     return render(request, 'student_module/quiz.html')
@@ -49,10 +53,6 @@ def quizzes(request):
 def calendar(request):
     return render(request, 'student_module/calendar.html')
 
-
-# def coursedetail(request):
-#     return render(request, 'student_module/course_detail.html')
-# #
 class MyCoursesListView(ListView):
     model = CourseInfo
     template_name = 'student_module/myCourse.html'
@@ -70,17 +70,12 @@ class MyCoursesListView(ListView):
                 session = InningInfo.objects.filter(Groups__id=batch.id,End_Date__gt=datetime_now)
                 sessions += session
         context['sessions'] = sessions
-        # print(context['sessions'])
-
         courses = set()
         if context['sessions']:
             for session in context['sessions']:
                 course = session.Course_Group.all()
                 courses.update(course)
         context['Course'] = courses
-        # print(context['courses'])
-        
-        # context['Course'] = context['Group'].Course_Group.all()
 
         return context
 

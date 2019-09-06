@@ -805,14 +805,6 @@ class QuestionInfoCreateViewAjax(AjaxableResponseMixin, CreateView):
     form_class = QuestionInfoForm
     template_name = 'ajax/questioninfo_form_ajax.html'
 
-<<<<<<< HEAD
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['Course_Code'] = get_object_or_404(CourseInfo, pk=self.kwargs.get('course'))
-    #     context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
-    #     # context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
-    #     return context
-=======
     def post(self, request, *args, **kwargs):
         Obj = QuestionInfo()
         Obj.Question_Title = request.POST["Question_Title"]
@@ -831,7 +823,6 @@ class QuestionInfoCreateViewAjax(AjaxableResponseMixin, CreateView):
         return JsonResponse(
             data={'Message': 'Success'}
         )
->>>>>>> 716ac74864e414cb8b9c15afb02a2deb3da6c43a
 
 
 class QuestionInfoDetailView(DetailView):

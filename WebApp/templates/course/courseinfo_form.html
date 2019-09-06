@@ -39,27 +39,8 @@
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-<<<<<<< HEAD:WebApp/templates/course/courseinfo_form.html
-        <div id="div_id_Course_Description" class="form-group">
-            <label for="id_Course_Description" class="control-label ">
-                Course Description
-            </label>
-            <div class="controls ">
-                    <textarea name="Course_Description" cols="40" rows="1" id="id_Course_Description"
-                              class="textarea form-control">{{ object.Course_Description }}</textarea>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-        {{ form.Course_Cover_File|as_crispy_field }}
-    </div>
-    <div class="col-md-6 col-sm-12 col-xs-12 form-group has-feedback">
         <div id="div_id_Course_Provider" class="form-group">
             <label for="id_Course_Provider" class="control-label ">
-=======
-        <div id="div_id_Lecture_Provider" class="form-group">
-            <label for="id_Lecture_Provider" class="control-label ">
->>>>>>> 716ac74864e414cb8b9c15afb02a2deb3da6c43a:WebApp/templates/lecture/lectureinfo_form.html
                 Course Provider
             </label>
             <div class="controls ">
@@ -70,25 +51,17 @@
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-<<<<<<< HEAD:WebApp/templates/course/courseinfo_form.html
-        <label for="id_Course_Level" class="control-label ">
-            Course Level
-        </label>
-        <input class="rating" id="id_Course_Level" type="hidden" name="Course_Level"
-               value="{{ object.Course_Level }}">
-=======
 
         <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-            {{ form.Lecture_Cover_File|as_crispy_field }}
+            {{ form.Course_Cover_File|as_crispy_field }}
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-            <label for="id_Lecture_Level" class="control-label ">
+            <label for="id_Course_Level" class="control-label ">
                 Course Level
             </label>
             <input class="rating" id="id_Lecture_Level" type="hidden" name="Lecture_Level"
                    value="{{ object.Lecture_Level }}">
         </div>
->>>>>>> 716ac74864e414cb8b9c15afb02a2deb3da6c43a:WebApp/templates/lecture/lectureinfo_form.html
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
         <div id="div_id_Lecture_Description" class="form-group">
