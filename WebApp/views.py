@@ -1432,15 +1432,10 @@ def save_file(request):
         courseID = request.POST['courseID']
         path = ''
         for x in range(int(count)):
-<<<<<<< HEAD
             if request.FILES['file-'+str(x)]:
                 image = request.FILES['file-'+str(x)]
                 if (image.size/1024) > 500:
                     return JsonResponse(data = {"message":"File size exceeds 2MB"}, status=500)
-=======
-            if request.FILES['file-' + str(x)]:
-                image = request.FILES['file-' + str(x)]
->>>>>>> b0d92e7bb33fd49a5bcc86a1961189958f5e6332
                 path = settings.MEDIA_ROOT
                 image
                 # following is commented because filesystemstorage auto create directories if not exist
@@ -1464,15 +1459,11 @@ def save_json(request):
         path = settings.MEDIA_ROOT
         with open(path + '/chapterBuilder/' + courseID + '/' + chapterID + '/' + chapterID + '.txt', 'w') as outfile:
             json.dump(jsondata, outfile, indent=4)
-<<<<<<< HEAD
 
         chapterObj = ChapterInfo.objects.get(id = chapterID)
         chapterObj.Page_Num = int(jsondata['numberofpages'])
         chapterObj.save()
 
         return JsonResponse(data = {"message":"Json Saved"})
-=======
-        return JsonResponse(data={"message": "Json Saved"})
->>>>>>> b0d92e7bb33fd49a5bcc86a1961189958f5e6332
 
 # -------------------------------------------------------------------------------------------------------

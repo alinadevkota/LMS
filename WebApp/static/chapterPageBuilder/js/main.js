@@ -196,7 +196,7 @@ $(document).ready(function() {
                         data.append('count', count);
                         data.append('chapterID', chapterID);
                         data.append('courseID', courseID);
-                        // console.log("imageuploadfromhere")
+                        console.log("imageuploadfromhere")
                         $.ajax({
                             url: save_file_url,
                             data: data,
@@ -206,7 +206,7 @@ $(document).ready(function() {
                             method: 'POST',
                             type: 'POST',
                             success: function(data) {
-                                console.log(data);
+                                // console.log(data);
                                 div.css({
                                   'background-image': 'url('+load_file_url+'/'+input.files[0].name+')',
                                   'background-repeat': 'no-repeat',

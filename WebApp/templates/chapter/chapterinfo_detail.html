@@ -22,17 +22,10 @@
             <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2 class="detailListHeader">Chapter {{ object.Chapter_No }}
                     : {{ object.Chapter_Name }} </h2></div>
-<<<<<<< HEAD
                      <a class="btn-sm btn-success"
                        href="#" id="lecture-viewer" data-toggle="modal" data-target="#lecture-modal">Course
                         Viewer &nbsp;</a>
                     
-=======
-            <a class="btn-sm btn-success"
-               href="#" id="lecture-viewer">Course
-                Viewer &nbsp;</a>
-
->>>>>>> b0d92e7bb33fd49a5bcc86a1961189958f5e6332
             {% if '/students' not in request.path %}
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center" id="buttons">
                     <a class="btn-sm btn-primary"
@@ -159,7 +152,6 @@
 
 <!-- Modal -->
 <div id="lecture-modal" class="modal fade" role="dialog">
-<<<<<<< HEAD
     <div class="modal-lg modal-dialog">
   
       <!-- Modal content-->
@@ -176,20 +168,6 @@
         <div class="modal-body">
             <div class="col-md-1">
                 <button id="prev-btn" class="btn btn-secondary"><i class="fa fa-backward"></i></button>
-=======
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">
-              <span id="chaptertitle">
-                  <!-- Chapter title goes here -->
-              </span></h4>
-                <!-- <button id="prev-btn" class="btn btn-secondary">Previous</button>
-                <button id="next-btn" class="btn btn-secondary">Next</button> -->
->>>>>>> b0d92e7bb33fd49a5bcc86a1961189958f5e6332
             </div>
 
             <div class="modal-body">
@@ -208,10 +186,6 @@
 
                 </div>
             </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> b0d92e7bb33fd49a5bcc86a1961189958f5e6332
         </div>
     </div>
 
@@ -235,18 +209,10 @@
             });
         });
 
-<<<<<<< HEAD
     function loaddata(data){
         $('#chaptertitle').text(data.chaptertitle);
         $.each(data.pages, function(key, value){
             $.each(value, function(count){
-=======
-        function loaddata(data) {
-            $('#chaptertitle').text(data.chaptertitle);
-            $.each(data.pages, function (key, value) {
-                // console.log(value)
-                $.each(value, function (count) {
->>>>>>> b0d92e7bb33fd49a5bcc86a1961189958f5e6332
 
                     // Create modal
                     $('#modal-container').append(`
@@ -267,7 +233,6 @@
                                     ${css_value.content}
                                 </div>
                             `);
-<<<<<<< HEAD
                         });
                     }
                     if(div == 'pic'){
@@ -276,16 +241,6 @@
                             src = css_value['background-image']
                             imgsrc = src.match(/(["'])(?:(?=(\\?))\2.)*?\1/);
                             $('#page'+key+ '> .divholder').append(`
-=======
-                            });
-                        }
-                        if (div == 'pic') {
-                            $.each(div_value, function (css, css_value) {
-                                console.log(css_value.tops)
-                                src = css_value['background-image']
-                                imgsrc = src.match(/(["'])(?:(?=(\\?))\2.)*?\1/);
-                                $('#page' + key + '> .divholder').append(`
->>>>>>> b0d92e7bb33fd49a5bcc86a1961189958f5e6332
                                 <div style = "position: absolute; top: ${css_value.tops}; left: ${css_value.left}; width = 100%">
                                     <image src = ${imgsrc} />
                                 </div>
