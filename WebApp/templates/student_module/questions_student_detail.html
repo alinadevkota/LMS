@@ -95,7 +95,7 @@
                 </div> -->
             </div>
 
-            <form method='post' action="{% url 'ParticipateSurvey' %}" id="surveyform">
+            <form id="surveyform" method="post" action="{% url 'ParticipateSurvey' %}">
                 {% csrf_token %}
                 {% for question in questions %}
                 {% if question.Question_Type == "MCQ" %}
@@ -121,8 +121,6 @@
                                 {% endif %}
                                 {% endfor %}
                             </ul>
-
-
                         </div>
 
                         <div class="bs-chart-container" id="progressResult" style="width: 80%;">
@@ -191,10 +189,8 @@
 
                 <input type="hidden" name="surveyInfoId" value="{{ object.id }}">
                 <input type="hidden" name="userId" value="{{ request.user.id }}">
-                {{ request.user.id }}
-
-                <button type="submit">Submit</button>
-
+                <!-- {{ request.user.id }} -->
+                <button>Submit</button>
             </form>
         </div>
     </div>
@@ -202,10 +198,9 @@
 
 {% endblock %}
 
-{% block customjss %}
-
-
+{% block javascripts %}
 <script>
+    console.log('bitch');
     $('#retakeSurveyBtn').on('click', function () {
 
         $.ajax({
@@ -218,5 +213,36 @@
     });
     // categoryAddButton({{ categoryName }});
 
+    $('#surveyform').submit(function (e) {
+        // e.preventDefault();
+        var canSubmit = true;
+        console.log('bitch')
+        {% for x in object.submitsurvey.all %}
+        console.log('{{x.id}}');
+        console.log('{{ x.Student_Code.id }}');
+        console.log('{{ request.user.id }}');
+        {% if x.Student_Code.id == request.user.id %}
+        canSubmit = false;
+        {% endif %}
+        {% endfor %}
+        console.log(canSubmit)
+        if (canSubmit) {
+            $.ajax({
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                url: "{% url 'ParticipateSurvey' %}",  // URL to your view that serves new info
+                error: function () {
+                    console.log('Error Already submitted')
+                }
+            });
+        }
+        else {
+            alert('You cannot submit')
+            e.preventDefault();
+        }
+
+    });
+
 </script>
+
 {% endblock %}
