@@ -97,22 +97,22 @@ class TFQuestionForm(forms.ModelForm):
         model = TF_Question
         fields = '__all__'
 
-    quiz = forms.ModelMultipleChoiceField(
-        queryset=Quiz.objects.all(),
-        required=False,
-        # label=_("Questions"),
-        widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
+    # quiz = forms.ModelMultipleChoiceField(
+    #     queryset=Quiz.objects.all(),
+    #     required=False,
+    #     # label=_("Questions"),
+    #     widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
 
 class SAQuestionForm(forms.ModelForm):
     class Meta:
         model = SA_Question
         fields = '__all__'
 
-    quiz = forms.ModelMultipleChoiceField(
-        queryset=Quiz.objects.all(),
-        required=False,
-        # label=_("Questions"),
-        widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
+    # quiz = forms.ModelMultipleChoiceField(
+    #     queryset=Quiz.objects.all(),
+    #     required=False,
+    #     # label=_("Questions"),
+    #     widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
 
 class AnswerForm(forms.ModelForm):
     class Meta:
