@@ -7,7 +7,7 @@
 {% block content %}
     <div class="outerdiv">
 
-        <h2 class="detailListHeader">Assignment Information</h2>
+        <h2 class="detailListHeader">Question Information</h2>
         <hr class="header_hr">
         <br>
         <table class="table">
@@ -47,14 +47,14 @@
                 <td>{{ object.Register_Agent }}</td>
             </tr>
             <tr>
-                <td>Use Flag</td>
+                <td>Status</td>
                 <td>{{ object.Use_Flag }}</td>
             </tr>
 
         </table>
         <div class="text-center">
-            <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Assignment</a>
-            <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Assignment</a>
+            <a class="btn btn-primary" href="{{ object.get_update_url }}">Edit Question</a>
+            <a class="btn btn-danger" href="{{ object.get_delete_url }}">Delete Question</a>
         </div>
     </div>
 {% endblock %}
