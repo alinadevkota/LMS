@@ -443,12 +443,12 @@
           </div>
           <div class="right-sidebar">
             <div class="right-sidebar-content">
-
+              <i id="add-page-btn" class="fas fa-plus-square fas-5x"></i>
               <div class="img1 showSingle" target="1">
                 <div class="tabs-to-click">
                   <ul>
                     <li class="tabs-link current pagenumber" onclick="openTab(event,'tab1')">
-                      <i id="add-page-btn" class="fas fa-plus-square fas-5x"></i>
+                     
                     </li>
                   </ul>
                 </div>
@@ -471,7 +471,7 @@
 
 
   <script>
-    var data = {{ data|safe }};
+    var data = `{{ data|safe }}`;
     var courseID = '{{course}}';
     var chapterID = '{{chapter}}';
     var chaptertitle = '{{chaptertitle}}';

@@ -1379,6 +1379,7 @@ from django.conf import settings
 import os
 import json
 from django.http import Http404, HttpResponse
+from PIL import Image
 
 
 def chapterviewer(request):
@@ -1424,9 +1425,12 @@ def save_file(request):
         courseID = request.POST['courseID']
         path = ''
         for x in range(int(count)):
-            if request.FILES['file-' + str(x)]:
-                image = request.FILES['file-' + str(x)]
+            if request.FILES['file-'+str(x)]:
+                image = request.FILES['file-'+str(x)]
+                if (image.size/1024) > 500:
+                    return JsonResponse(data = {"message":"File size exceeds 2MB"}, status=500)
                 path = settings.MEDIA_ROOT
+                image
                 # following is commented because filesystemstorage auto create directories if not exist
                 # if not os.path.exists(os.path.join(path, 'chapterBuilder')):
                 #     os.makedirs(os.path.join(path, 'chapterBuilder'))
@@ -1448,6 +1452,11 @@ def save_json(request):
         path = settings.MEDIA_ROOT
         with open(path + '/chapterBuilder/' + courseID + '/' + chapterID + '/' + chapterID + '.txt', 'w') as outfile:
             json.dump(jsondata, outfile, indent=4)
-        return JsonResponse(data={"message": "Json Saved"})
+
+        chapterObj = ChapterInfo.objects.get(id = chapterID)
+        chapterObj.Page_Num = int(jsondata['numberofpages'])
+        chapterObj.save()
+
+        return JsonResponse(data = {"message":"Json Saved"})
 
 # -------------------------------------------------------------------------------------------------------

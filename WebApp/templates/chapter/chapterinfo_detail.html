@@ -23,7 +23,7 @@
                 <h2 class="detailListHeader">Chapter {{ object.Chapter_No }}
                     : {{ object.Chapter_Name }} </h2></div>
             <a class="btn-sm btn-success"
-               href="#" id="course-viewer">Course
+               href="#" id="course-viewer" data-toggle="modal" data-target="#course-modal">Course
                 Viewer &nbsp;</a>
 
             {% if '/students' not in request.path %}
@@ -152,7 +152,7 @@
 
 <!-- Modal -->
 <div id="course-modal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-lg modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
@@ -162,8 +162,12 @@
               <span id="chaptertitle">
                   <!-- Chapter title goes here -->
               </span></h4>
-                <!-- <button id="prev-btn" class="btn btn-secondary">Previous</button>
-                <button id="next-btn" class="btn btn-secondary">Next</button> -->
+            <!-- <button id="prev-btn" class="btn btn-secondary">Previous</button>
+            <button id="next-btn" class="btn btn-secondary">Next</button> -->
+        </div>
+        <div class="modal-body">
+            <div class="col-md-1">
+                <button id="prev-btn" class="btn btn-secondary"><i class="fa fa-backward"></i></button>
             </div>
 
             <div class="modal-body">
@@ -182,7 +186,6 @@
 
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -206,11 +209,10 @@
             });
         });
 
-        function loaddata(data) {
-            $('#chaptertitle').text(data.chaptertitle);
-            $.each(data.pages, function (key, value) {
-                // console.log(value)
-                $.each(value, function (count) {
+    function loaddata(data){
+        $('#chaptertitle').text(data.chaptertitle);
+        $.each(data.pages, function(key, value){
+            $.each(value, function(count){
 
                     // Create modal
                     $('#modal-container').append(`
@@ -231,14 +233,14 @@
                                     ${css_value.content}
                                 </div>
                             `);
-                            });
-                        }
-                        if (div == 'pic') {
-                            $.each(div_value, function (css, css_value) {
-                                console.log(css_value.tops)
-                                src = css_value['background-image']
-                                imgsrc = src.match(/(["'])(?:(?=(\\?))\2.)*?\1/);
-                                $('#page' + key + '> .divholder').append(`
+                        });
+                    }
+                    if(div == 'pic'){
+                        $.each(div_value, function(css, css_value){
+                            // console.log(css_value.tops)
+                            src = css_value['background-image']
+                            imgsrc = src.match(/(["'])(?:(?=(\\?))\2.)*?\1/);
+                            $('#page'+key+ '> .divholder').append(`
                                 <div style = "position: absolute; top: ${css_value.tops}; left: ${css_value.left}; width = 100%">
                                     <image src = ${imgsrc} />
                                 </div>
