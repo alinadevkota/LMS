@@ -18,21 +18,10 @@
 </div>
 
 <div class="outerdiv">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="col-md-9 col-sm-12 col-xs-12 text-center">
-            <h2 class="detailListHeader">Course Information</h2>
-        </div>
-        {% if '/students' not in request.path %}
-            <div class="col-md-3 col-sm-12 col-xs-12" id="buttons">
-                <a class="btn-sm btn-primary" href="{% if '/teachers' in request.path %}
-                /teachers{{ object.get_update_url }}
-            {% else %}
-                {{ object.get_update_url }}
-            {% endif %}">Edit Course</a>
-                {#                <a class="btn-sm btn-danger" href="{{ object.get_delete_url }}">Delete Course</a>#}
-            </div>
-        {% endif %}
+    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+        <h2 class="detailListHeader">Course Information</h2>
     </div>
+
     <div class="col-md-12 col-sm-12 col-xs-12">
         <hr class="header_hr" style="margin-bottom: 5px;margin-top: 5px;">
         <div class="col-md-6 col-xs-12">
@@ -59,11 +48,20 @@
                         <a href="">FORUM</a>
                     </h5>
                 </div>
+                {% if '/students' not in request.path %}
+                    <div class="col-md-3 col-sm-12 col-xs-12" style="margin-top: 10px;">
+                        <a href="{% if '/teachers' in request.path %}
+                /teachers{{ object.get_update_url }}
+                        {% else %}
+                            {{ object.get_update_url }}
+                        {% endif %}">Edit Course</a>
+                    </div>
+                {% endif %}
             </div>
             <table class="table">
 
                 <tr>
-                    <td style="vertical-align: middle;">Course Level</td>
+                    <td style="vertical-align: middle;">Difficulty</td>
                     <td>
 
                         <span id="rating"></span>
@@ -76,7 +74,7 @@
                     <td>{{ object.Course_Provider }}</td>
                 </tr>
                 <tr>
-                    <td>Register Agent</td>
+                    <td>Registered By</td>
                     <td>{{ object.Register_Agent }}</td>
                 </tr>
                 <tr>
@@ -122,17 +120,17 @@
 
 
                 </div>
-{#                {% if '/students' not in request.path %}#}
-{#                    <div class="col-md-4 col-sm-12 col-xs-12 text-center" id="buttons">#}
-{#                        <a class="btn-sm btn-success" href="{% if '/teachers' in request.path %}#}
-{#                                                            {% url 'teacher_chapterinfo_create' %}#}
-{#                                                        {% else %}#}
-{#                                                            {% url 'chapterinfo_create' course=object.pk %}#}
-{#                                                        {% endif %}">Create new Chapter</a>#}
-{#                    </div>#}
-{#                {% endif %}#}
+                {#                {% if '/students' not in request.path %}#}
+                {#                    <div class="col-md-4 col-sm-12 col-xs-12 text-center" id="buttons">#}
+                {#                        <a class="btn-sm btn-success" href="{% if '/teachers' in request.path %}#}
+                {#                                                            {% url 'teacher_chapterinfo_create' %}#}
+                {#                                                        {% else %}#}
+                {#                                                            {% url 'chapterinfo_create' course=object.pk %}#}
+                {#                                                        {% endif %}">Create new Chapter</a>#}
+                {#                    </div>#}
+                {#                {% endif %}#}
                 {% if '/students' not in request.path %}
-                    <div class="col-md-4 col-sm-4 col-xs-12 text-center" style="margin-top: 5px">
+                    <div class="col-md-4 col-sm-4 col-xs-12 text-center" style="margin-top: 10px">
                         <button type="button" class="btn-sm btn-success" data-toggle="modal"
                                 data-target="#exampleModal1" id="add-newchapter-btn">
                             Create New Chapter
@@ -172,7 +170,9 @@
             </div>
         </div>
     </div>
+</div>
 
+<<<<<<< HEAD:WebApp/templates/course/courseinfo_detail.html
 
     {% block customjss %}
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
@@ -201,19 +201,48 @@
                 $('#create_chapter_modal_body').empty();
                 $('#create_chapter_modal_body').append(
                     `<input type="hidden" name="Course_Code" id="id_Course_Code" value="{{ object.pk }}"
+=======
+{% block customjss %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+            type="text/javascript"></script>
+    <script>
+        {#        {% if object.Lecture_Level %}#}
+        {#            var rating = parseInt({{ object.Lecture_Level }});#}
+        {#        {% else %}#}
+        {#            var rating = 0;#}
+        {#        {% endif %}#}
+        if (parseInt('{{object.Lecture_Level}}'))
+            for (j = 0; j < parseInt('{{object.Lecture_Level}}'); j++) {
+                $('#rating').append("&nbsp;<i class='fa fa-star' style='color:#f5ba00'></i>");
+            }
+        else
+            $('#rating').append("Rating not defined");
+
+    </script>
+    <script src=" {% static 'vendorsx/jQuery-Smart-Wizard/js/jquery.smartWizard.js' %}"></script>
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        });
+
+        $('#add-newchapter-btn').on('click', function () {
+            $('#create_chapter_modal_body').empty();
+            $('#create_chapter_modal_body').append(
+                `<input type="hidden" name="Lecture_Code" id="id_Lecture_Code" value="{{ object.pk }}"
+>>>>>>> 716ac74864e414cb8b9c15afb02a2deb3da6c43a:WebApp/templates/lecture/lectureinfo_detail.html
                class="select form-control">`
-                )
-                $.ajax({
-                    type: "GET",
-                    url: "{% url 'chapterinfo_create_ajax' %}",  // URL to your view that serves new info
-                    success: function (response) {
-                        $('#create_chapter_modal_body').append(response);
-                    },
-                    error: function () {
-                        console.log('Error in generating chapter create form')
-                    }
-                });
+            )
+            $.ajax({
+                type: "GET",
+                url: "{% url 'chapterinfo_create_ajax' %}",  // URL to your view that serves new info
+                success: function (response) {
+                    $('#create_chapter_modal_body').append(response);
+                },
+                error: function () {
+                    console.log('Error in generating chapter create form')
+                }
             });
-        </script>
-    {% endblock %}
+        });
+    </script>
+{% endblock %}
 

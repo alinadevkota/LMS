@@ -301,7 +301,16 @@ class MemberInfoListView(ListView):
     model = MemberInfo
 
     def get_queryset(self):
-        return MemberInfo.objects.filter(Center_Code=self.request.user.Center_Code)
+        return MemberInfo.objects.filter(Center_Code=self.request.user.Center_Code,Use_Flag=True)
+
+
+class MemberInfoListViewInactive(ListView):
+    model = MemberInfo
+    template_name = 'WebApp/memberinfo_list_inactive.html'
+
+    def get_queryset(self):
+        return MemberInfo.objects.filter(Center_Code=self.request.user.Center_Code,Use_Flag=False)
+
 
 
 class MemberInfoCreateView(CreateView):
@@ -735,7 +744,7 @@ class AssignmentInfoCreateViewAjax(AjaxableResponseMixin, CreateView):
         Obj.Assignment_Topic = request.POST["Assignment_Topic"]
         Obj.Assignment_Deadline = request.POST["Assignment_Deadline"]
         Obj.Course_Code = CourseInfo.objects.get(pk=request.POST["Course_Code"])
-        Obj.Chapter_Code = ChapterInfo.objects.get(Chapter_No=request.POST["Chapter_Code"])
+        Obj.Chapter_Code = ChapterInfo.objects.get(id=request.POST["Chapter_Code"])
         Obj.Register_Agent = MemberInfo.objects.get(pk=request.POST["Register_Agent"])
         Obj.save()
 
@@ -791,17 +800,38 @@ class QuestionInfoCreateView(CreateView):
         return context
 
 
-class QuestionInfoCreateAjax(AjaxableResponseMixin, CreateView):
+class QuestionInfoCreateViewAjax(AjaxableResponseMixin, CreateView):
     model = QuestionInfo
     form_class = QuestionInfoForm
     template_name = 'ajax/questioninfo_form_ajax.html'
 
+<<<<<<< HEAD
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
     #     context['Course_Code'] = get_object_or_404(CourseInfo, pk=self.kwargs.get('course'))
     #     context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
     #     # context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
     #     return context
+=======
+    def post(self, request, *args, **kwargs):
+        Obj = QuestionInfo()
+        Obj.Question_Title = request.POST["Question_Title"]
+        Obj.Question_Score = request.POST["Question_Score"]
+        Obj.Question_Description = request.POST["Question_Description"]
+        Obj.Answer_Type = request.POST["Answer_Type"]
+        Obj.Question_Media_File = request.POST["Question_Media_File"]
+        if request.POST["Use_Flag"] == 'true':
+            Obj.Use_Flag = True
+        else:
+            Obj.Use_Flag = False
+        Obj.Register_Agent = MemberInfo.objects.get(pk=request.POST["Register_Agent"])
+        Obj.Assignment_Code = AssignmentInfo.objects.get(pk=request.POST["Assignment_Code"])
+        Obj.save()
+
+        return JsonResponse(
+            data={'Message': 'Success'}
+        )
+>>>>>>> 716ac74864e414cb8b9c15afb02a2deb3da6c43a
 
 
 class QuestionInfoDetailView(DetailView):

@@ -205,8 +205,7 @@ class ParticipateSurvey(View):
     def post(self, request, *args, **kwargs):
         surveyId =  request.POST["surveyInfoId"]
         userId = self.request.user.id
-
-        print(request.POST)
+        # print(request.POST)
         submitSurvey = SubmitSurvey()
         submitSurvey.Survey_Code = SurveyInfo.objects.get(id = surveyId)
         submitSurvey.Student_Code = MemberInfo.objects.get(id = userId)
@@ -222,6 +221,7 @@ class ParticipateSurvey(View):
             answerObject.save()
     
         return redirect('questions_student')
+
 
 
 # def polls_student(request):

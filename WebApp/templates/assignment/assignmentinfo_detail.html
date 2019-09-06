@@ -48,14 +48,29 @@
         {% endif %}
     </div>
     <div class="col-md-6 col-sm-12 col-xs-12 ">
-        <div class="col-md-8 col-sm-12 col-xs-12 text-center">
+        <div class="col-md-8 col-sm-8 col-xs-12 text-center">
             <h2 class="subHeader">Questions</h2>
         </div>
+        {#        {% if '/students' not in request.path %}#}
+        {#            <div class="col-md-4 col-sm-12 col-xs-12 text-center" style="margin-top: 15px;">#}
+        {#                <a class="btn-sm btn-success" href="#}
+        {#                        {% url 'questioninfo_create' course=object.Lecture_Code.id chapter=Chapter_No.id assignment=object.pk %}#}
+        {#                   ">Create Question</a>#}
+        {#            </div>#}
+        {#        {% endif %}#}
         {% if '/students' not in request.path %}
+<<<<<<< HEAD
             <div class="col-md-4 col-sm-12 col-xs-12 text-center" style="margin-top: 15px;">
                 <a class="btn-sm btn-success" href="
                         {% url 'questioninfo_create' course=object.Course_Code.id chapter=Chapter_No.id assignment=object.pk %}
                    ">Create Question</a>
+=======
+            <div class="col-md-4 col-sm-4 col-xs-12 text-center" style="margin-top: 10px">
+                <button type="button" class="btn-sm btn-success" data-toggle="modal"
+                        data-target="#exampleModal1" id="add-newquestion-btn">
+                    Add Question
+                </button>
+>>>>>>> 716ac74864e414cb8b9c15afb02a2deb3da6c43a
             </div>
         {% endif %}
         {#            <hr class="header_hr">#}
@@ -140,3 +155,48 @@
     </div>
 
 </div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true" id="add_question_modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Add Question
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </h4>
+            </div>
+            <div class="modal-body" id="add_question_modal_body">
+            </div>
+        </div>
+    </div>
+</div>
+{% block customjss %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script src=" {% static 'vendorsx/jQuery-Smart-Wizard/js/jquery.smartWizard.js' %}"></script>
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        });
+
+        $('#add-newquestion-btn').on('click', function () {
+            $('#add_question_modal_body').empty();
+             $('#add_question_modal_body').append(
+                `<input type="hidden" name="Assignment_Code" id="id_Assignment_Code" value="{{ object.pk }}"
+                           class="select form-control">`
+            )
+            $.ajax({
+                type: "GET",
+                url: "{% url 'questioninfo_create_ajax' %}",  // URL to your view that serves new info
+                success: function (response) {
+                    $('#add_question_modal_body').append(response);
+                },
+                error: function () {
+                    console.log('Error in generating add question form')
+                }
+            });
+        });
+
+    </script>
+{% endblock %}
