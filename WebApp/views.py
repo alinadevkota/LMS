@@ -15,15 +15,10 @@ from django.views.generic import DetailView, ListView, UpdateView, CreateView, D
 from django.views.generic.edit import FormView
 from django.core.paginator import Paginator
 
-<<<<<<< HEAD
-from forum.models import Thread, Topic, Post, ForumAvatar, NodeGroup
-from forum.views import get_top_thread_keywords, NodeGroup, TopicView, ThreadView
-=======
 from forum.models import Thread
 from forum.views import get_top_thread_keywords
 from survey.models import SurveyInfo
 from quiz.models import Question
->>>>>>> a8d8cd896441464405aebc06b44900cd8349aba0
 
 from .forms import CenterInfoForm, CourseInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
     ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, SessionInfoForm, InningInfoForm, QuizInfoForm, \
