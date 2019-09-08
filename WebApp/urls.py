@@ -12,7 +12,7 @@ router = routers.DefaultRouter()
 # router.register(r'profile', api.ProfileViewSet)
 router.register(r'centerinfo', api.CenterInfoViewSet)
 router.register(r'memberinfo', api.MemberInfoViewSet)
-router.register(r'lectureinfo', api.LectureInfoViewSet)
+router.register(r'courseinfo', api.CourseInfoViewSet)
 router.register(r'chapterinfo', api.ChapterInfoViewSet)
 router.register(r'chaptercontentsinfo', api.ChapterContentsInfoViewSet)
 router.register(r'chaptermissoncheckcard', api.ChapterMissonCheckCardViewSet)
@@ -33,7 +33,7 @@ router.register(r'chapterwrite', api.ChapterWriteViewSet)
 router.register(r'groupmapping', api.GroupMappingViewSet)
 router.register(r'assignmentinfo', api.AssignmentInfoViewSet)
 router.register(r'learningnote', api.LearningNoteViewSet)
-router.register(r'lectureubtinfo', api.LectureUbtInfoViewSet)
+router.register(r'courseubtinfo', api.CourseUbtInfoViewSet)
 router.register(r'lessoninfo', api.LessonInfoViewSet)
 router.register(r'lessonlog', api.LessonLogViewSet)
 router.register(r'membergroup', api.MemberGroupViewSet)
@@ -107,6 +107,7 @@ urlpatterns += (
 urlpatterns += (
     # urls for MemberInfo
     path('memberinfo/', views.MemberInfoListView.as_view(), name='memberinfo_list'),
+    path('memberinfo/inactive', views.MemberInfoListViewInactive.as_view(), name='memberinfo_list_inactive'),
     path('memberinfo/create/', views.MemberInfoCreateView.as_view(), name='memberinfo_create'),
     path('memberinfo/detail/<int:pk>/', views.MemberInfoDetailView.as_view(), name='memberinfo_detail'),
     path('memberinfo/update/<int:pk>/', views.MemberInfoUpdateView.as_view(), name='memberinfo_update'),
@@ -114,11 +115,11 @@ urlpatterns += (
 )
 
 urlpatterns += (
-    # urls for LectureInfo
-    path('courseinfo/', views.LectureInfoListView.as_view(), name='lectureinfo_list'),
-    path('courseinfo/create /', views.LectureInfoCreateView.as_view(), name='lectureinfo_create'),
-    path('courseinfo/<int:pk>/', views.LectureInfoDetailView.as_view(), name='lectureinfo_detail'),
-    path('courseinfo/edit/<int:pk>/', views.LectureInfoUpdateView.as_view(), name='lectureinfo_update'),
+    # urls for CourseInfo
+    path('courseinfo/', views.CourseInfoListView.as_view(), name='courseinfo_list'),
+    path('courseinfo/create /', views.CourseInfoCreateView.as_view(), name='courseinfo_create'),
+    path('courseinfo/<int:pk>/', views.CourseInfoDetailView.as_view(), name='courseinfo_detail'),
+    path('courseinfo/edit/<int:pk>/', views.CourseInfoUpdateView.as_view(), name='courseinfo_update'),
 )
 
 urlpatterns += (
@@ -126,11 +127,9 @@ urlpatterns += (
     path('chapterinfo/create/ajax', views.ChapterInfoCreateViewAjax.as_view(), name='chapterinfo_create_ajax'),
     path('courseinfo/<int:course>/chapterinfo/', views.ChapterInfoListView.as_view(), name='chapterinfo_list'),
     path('courseinfo/<int:course>/create/', views.ChapterInfoCreateView.as_view(), name='chapterinfo_create'),
-    path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(),
-         name='chapterinfo_detail'),
-    path('courseinfo/<int:course>/chapterinfo/<int:pk>/edit/', views.ChapterInfoUpdateView.as_view(),
-         name='chapterinfo_update'),
-    path('courseinfo/<int:course>/forum/', views.CourseForum.as_view, name='Course_Forum'),
+    path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(), name='chapterinfo_detail'),
+    path('courseinfo/<int:course>/chapterinfo/<int:pk>/edit/', views.ChapterInfoUpdateView.as_view(), name='chapterinfo_update'),
+    path('courseinfo/<int:course>/forum/' , views.CourseForum.as_view(), name='Course_Forum'),
 )
 
 urlpatterns += (
@@ -200,8 +199,7 @@ urlpatterns += (
          views.AssignmentInfoDetailView.as_view(), name='assignmentinfo_detail'),
     path('courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/update/<int:pk>/',
          views.AssignmentInfoUpdateView.as_view(), name='assignmentinfo_update'),
-    path('assignmentinfo/create/ajax',
-         views.QuestionInfoCreateAjax.as_view(), name='questioninfo_create_ajax'),
+
 )
 
 urlpatterns += (
@@ -218,6 +216,8 @@ urlpatterns += (
     path(
         'courseinfo/<int:course>/chapterinfo/<int:chapter>/assignmentinfo/<int:assignment>/questioninfo/update/<int:pk>/',
         views.QuestionInfoUpdateView.as_view(), name='questioninfo_update'),
+    path('questioninfo/create/ajax',
+         views.QuestionInfoCreateViewAjax.as_view(), name='questioninfo_create_ajax'),
 
 )
 
@@ -403,15 +403,15 @@ urlpatterns += (
 )
 
 urlpatterns += (
-    # urls for LectureUbtInfo
-    path('lectureubtinfo/', views.LectureUbtInfoListView.as_view(),
-         name='lectureubtinfo_list'),
-    path('lectureubtinfo/create/', views.LectureUbtInfoCreateView.as_view(),
-         name='lectureubtinfo_create'),
-    path('lectureubtinfo/detail/<int:pk>/',
-         views.LectureUbtInfoDetailView.as_view(), name='lectureubtinfo_detail'),
-    path('lectureubtinfo/update/<int:pk>/',
-         views.LectureUbtInfoUpdateView.as_view(), name='lectureubtinfo_update'),
+    # urls for CourseUbtInfo
+    path('courseubtinfo/', views.CourseUbtInfoListView.as_view(),
+         name='courseubtinfo_list'),
+    path('courseubtinfo/create/', views.CourseUbtInfoCreateView.as_view(),
+         name='courseubtinfo_create'),
+    path('courseubtinfo/detail/<int:pk>/',
+         views.CourseUbtInfoDetailView.as_view(), name='courseubtinfo_detail'),
+    path('courseubtinfo/update/<int:pk>/',
+         views.CourseUbtInfoUpdateView.as_view(), name='courseubtinfo_update'),
 )
 
 urlpatterns += (

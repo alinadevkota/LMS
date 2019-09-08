@@ -6,25 +6,23 @@
 {% block content %}
 
 
-    <div class="memberInfoListClass">
+    <div class="memberDiv">
         <hr class="header_hr">
         <h2 class="tableHeader">List of Members</h2>
 
         <nav id="navbar_parent" class="navbar navbar-light" style="background-color: grey">
             <ul class="nav navbar-nav navbar-center member-list">
+                <li><a class="navbar-brand" id="all_button" href="#">All</a></li>
                 <li><a class="navbar-brand" id="teacher_button" href="#">Teacher</a></li>
                 <li><a class="navbar-brand" id="student_button" href="#">Student</a></li>
             </ul>
+            <span style="float:right; margin:15px"><a href="{% url 'memberinfo_list_inactive' %}" style="color: white">Inactive Members</a></span>
         </nav>
         <hr class="header_hr">
         <div class="col-md-6 text-danger">{% include 'WebApp/theme/alerts.html' %}</div>
         <div class="col-md-12 col-sm-12 col-xs-12">
             <nav id="navbar_parent" class="navbar navbar-dark">
-                <ul class="nav navbar-nav navbar-center">
-                    <li><a class="navbar-brand" id="all_button" href="#" style="padding-top: 0;">All</a></li>
-                    <li><a class="navbar-brand" id="active_button" href="#" style="padding-top: 0;">Active</a></li>
-                    <li><a class="navbar-brand" id="inactive_button" href="#" style="padding-top: 0;">Inactive</a></li>
-                </ul>
+
                 <div class="btn-createnew">
                     <a class="btn btn-success" href="{% url 'memberinfo_create' %}">Create new Member</a>
                 </div>
@@ -45,7 +43,7 @@
                     <td>Gender</td>
                     <td>Student</td>
                     <td>Teacher</td>
-                    <td>Status</td>
+                    {#                    <td>Status</td>#}
                 </tr>
                 </thead>
                 {% for object in object_list %}
@@ -59,21 +57,21 @@
                             <td>{{ object.email }}</td>
                             <td>{{ object.Member_Phone }}</td>
                             <td>
-                                {% if object.Member_Gender == '1' %}
+                                {% if object.Member_Gender == 'M' %}
                                     Male
-                                {% elif object.Member_Gender == '2' %}
+                                {% elif object.Member_Gender == 'F' %}
                                     Female
                                 {% endif %}
                             </td>
                             <td>{{ object.Is_Student }}</td>
                             <td>{{ object.Is_Teacher }}</td>
-                            <td>
-                                {% if object.Use_Flag == True %}
-                                    Active
-                                {% elif  object.Use_Flag == False %}
-                                    Deactivated
-                                {% endif %}
-                            </td>
+{#                            <td>#}
+{#                                {% if object.Use_Flag == True %}#}
+{#                                    Active#}
+{#                                {% elif  object.Use_Flag == False %}#}
+{#                                    Deactivated#}
+{#                                {% endif %}#}
+{#                            </td>#}
                         </tr>
 
 
@@ -93,7 +91,9 @@
 {% endblock %}
 {% block customjss %}
     <script type="text/javascript">
-        $("#all_button").css("color", "black");
+        $("#all_button").css("color", "white");
+        $("#student_button").css("color", "black");
+        $("#teacher_button").css("color", "black");
 
         setTimeout(function () {
             $('#message').fadeOut('slow');
@@ -134,6 +134,7 @@
             $("#student_button").bind("click", function () {
                 $("#student_button").css("color", "white");
                 $("#teacher_button").css("color", "black");
+                $("#all_button").css("color", "black");
                 table_main.columns().search('').draw();
                 table_main.column(7).search("True").draw();
 
@@ -142,35 +143,21 @@
             $("#teacher_button").bind("click", function () {
                 $("#student_button").css("color", "black");
                 $("#teacher_button").css("color", "white");
+                $("#all_button").css("color", "black");
+
                 table_main.columns().search('').draw();
                 table_main.column(8).search("True").draw();
 
             });
 
             $("#all_button").bind("click", function () {
-                $("#all_button").css("color", "black");
-                $("#active_button").css("color", "grey");
-                $("#inactive_button").css("color", "grey");
+                $("#all_button").css("color", "white");
+                $("#student_button").css("color", "black");
+                $("#teacher_button").css("color", "black");
                 table_main.columns().search('').draw();
             });
 
-            $("#active_button").bind("click", function () {
-                $("#all_button").css("color", "grey");
-                $("#active_button").css("color", "black");
-                $("#inactive_button").css("color", "grey");
-                table_main.columns().search('').draw();
-                table_main.column(9).search("Active").draw();
 
-            });
-
-            $("#inactive_button").bind("click", function () {
-                $("#all_button").css("color", "grey");
-                $("#active_button").css("color", "grey");
-                $("#inactive_button").css("color", "black");
-                table_main.columns().search('').draw();
-                table_main.column(9).search("Deactivated").draw();
-
-            });
         });
     </script>
 

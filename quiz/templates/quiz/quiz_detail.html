@@ -29,7 +29,7 @@
   <thead>
     <tr class="quiz-capital">
       <th>{% trans "Title" %}</th>
-      <th>{% trans "Lecture -> Chapter" %}</th>
+      <th>{% trans "Course -> Chapter" %}</th>
       <th>{% trans "No. of Questions" %}</th>
       <th>{% trans "Type" %}</th>
       <th>{% trans "Url" %}</th>
@@ -41,7 +41,7 @@
   <tbody>
     <tr>
       <td>{{ quiz.title }} </td>
-      <td>{{ quiz.category.Lecture_Name }} -> {{ quiz.chapter_code.Chapter_Name }}</td>       
+      <td>{{ quiz.category.Course_Name }} -> {{ quiz.chapter_code.Chapter_Name }}</td>       
       <td>{{ quiz.question_count }}</td>
       <td>
         {% if quiz.pre_test  %}pre test <br>{% endif %}

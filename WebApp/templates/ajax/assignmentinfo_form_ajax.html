@@ -28,7 +28,7 @@
     </div>
 
     {#    <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">#}
-    {#        <input type="hidden" name="Lecture_Code" id="id_Lecture_Code" value="{{ object.Lecture_Code.id }}"#}
+    {#        <input type="hidden" name="Course_Code" id="id_Course_Code" value="{{ object.Course_Code.id }}"#}
     {#               class="select form-control">#}
     {#    </div>#}
     {#    <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">#}
@@ -56,7 +56,7 @@
                 "csrfmiddlewaretoken":'{{ csrf_token }}',
                 "Assignment_Topic": $('#id_Assignment_Topic').val(),
                 "Assignment_Deadline": $('#id_Assignment_Deadline').val(),
-                "Lecture_Code": $('#id_Lecture_Code').val(),
+                "Course_Code": $('#id_Course_Code').val(),
                 "Chapter_Code": $('#id_Chapter_Code').val(),
                 "Register_Agent": $('#id_Register_Agent').val()
             },

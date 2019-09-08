@@ -7,7 +7,7 @@ from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField,
     ImageField, DateField, Count
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from WebApp.models import MemberInfo, InningInfo, LectureInfo, CenterInfo
+from WebApp.models import MemberInfo, InningInfo, CourseInfo, CenterInfo
 
 
 class CategoryInfo(models.Model):
@@ -61,7 +61,7 @@ class SurveyInfo(models.Model):
     )
     
     Course_Code = ForeignKey(
-        'WebApp.LectureInfo',
+        'WebApp.CourseInfo',
         related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
 

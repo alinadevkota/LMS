@@ -5,7 +5,7 @@ from .forms import CategoryInfoForm, SurveyInfoForm, QuestionInfoForm, OptionInf
     QuestionInfoFormset, OptionInfoFormset, AnswerInfoFormset, QuestionAnsInfoFormset
 from datetime import datetime
 
-from WebApp.models import InningInfo, LectureInfo
+from WebApp.models import InningInfo, CourseInfo
 from django.http import JsonResponse
 
 from django.db import transaction
@@ -84,7 +84,7 @@ class SurveyInfoListView(ListView):
     #         obj.Start_Date = request.POST['Start_Date']
     #         obj.End_Date = request.POST['End_Date']
     #         obj.Session_Code = InningInfo.objects.get(pk = request.POST['Session_Code'])
-    #         obj.Course_Code = LectureInfo.objects.get(pk = request.POST['Course_Code'])
+    #         obj.Course_Code = CourseInfo.objects.get(pk = request.POST['Course_Code'])
     #         obj.save()
     #         print(obj.id)
     #     return redirect('surveyinfo_detail', obj.id)

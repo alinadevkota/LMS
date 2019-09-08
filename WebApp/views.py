@@ -20,23 +20,23 @@ from forum.views import get_top_thread_keywords
 from survey.models import SurveyInfo
 from quiz.models import Question
 
-from .forms import CenterInfoForm, LectureInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
+from .forms import CenterInfoForm, CourseInfoForm, ChapterInfoForm, ChapterContentsInfoForm, \
     ChapterMissonCheckCardForm, ChapterMissonCheckItemForm, SessionInfoForm, InningInfoForm, QuizInfoForm, \
     AssignmentInfoForm, QuestionInfoForm, AssignAssignmentInfoForm, \
     AssignAnswerInfoForm, \
     BoardInfoForm, BoardContentInfoForm, InningGroupForm, \
     ChapterContentMediaForm, ChapterImgInfoForm, ChapterMissonCheckForm, ChapterWriteForm, GroupMappingForm, \
-    LearningNoteForm, LectureUbtInfoForm, LessonInfoForm, LessonLogForm, MemberGroupForm, \
+    LearningNoteForm, CourseUbtInfoForm, LessonInfoForm, LessonLogForm, MemberGroupForm, \
     MessageInfoForm, \
     QExampleInfoForm, QuizAnswerInfoForm, QuizExampleInfoForm, ScheduleInfoForm, TalkMemberForm, \
     TalkRoomForm, TalkMessageForm, TalkMessageReadForm, TodoInfoForm, TodoTInfoForm, UserUpdateForm, UserRegisterForm, \
     MemberInfoForm, ChangeOthersPasswordForm
-from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
+from .models import CenterInfo, MemberInfo, CourseInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
     ChapterMissonCheckItem, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
     AssignAnswerInfo, BoardInfo, \
     BoardContentInfo, SessionInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, \
     GroupMapping, \
-    LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
+    LearningNote, CourseUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
     QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, Events
 from datetime import datetime
@@ -180,8 +180,8 @@ def start(request):
             thread = Thread.objects.order_by('-pub_date')[:5]
             wordCloud = Thread.objects.all()
             thread_keywords = get_top_thread_keywords(request, 10)
-            course = LectureInfo.objects.order_by('-Register_DateTime')[:4]
-            coursecount = LectureInfo.objects.count()
+            course = CourseInfo.objects.order_by('-Register_DateTime')[:4]
+            coursecount = CourseInfo.objects.count()
             studentcount = MemberInfo.objects.filter(Is_Student=True, Center_Code=request.user.Center_Code).count
             teachercount = MemberInfo.objects.filter(Is_Teacher=True, Center_Code=request.user.Center_Code).count
             threadcount = Thread.objects.count()
@@ -301,7 +301,16 @@ class MemberInfoListView(ListView):
     model = MemberInfo
 
     def get_queryset(self):
-        return MemberInfo.objects.filter(Center_Code=self.request.user.Center_Code)
+        return MemberInfo.objects.filter(Center_Code=self.request.user.Center_Code,Use_Flag=True)
+
+
+class MemberInfoListViewInactive(ListView):
+    model = MemberInfo
+    template_name = 'WebApp/memberinfo_list_inactive.html'
+
+    def get_queryset(self):
+        return MemberInfo.objects.filter(Center_Code=self.request.user.Center_Code,Use_Flag=False)
+
 
 
 class MemberInfoCreateView(CreateView):
@@ -367,8 +376,8 @@ class MemberInfoDeleteView(DeleteView):
 #     MemberInfo.objects.filter(pk=pk).delete()
 
 
-class LectureInfoListView(ListView):
-    model = LectureInfo
+class CourseInfoListView(ListView):
+    model = CourseInfo
     paginate_by = 8
 
     def get_queryset(self):
@@ -376,40 +385,33 @@ class LectureInfoListView(ListView):
 
         query = self.request.GET.get('query')
         if query:
-            qs = qs.filter(Lecture_Name__contains=query)
+            qs = qs.filter(Course_Name__contains=query)
             if not len(qs):
                 messages.error(self.request, 'Search not found')
         qs = qs.order_by("-id")  # you don't need this if you set up your ordering on the model
         return qs
 
 
-class LectureInfoCreateView(CreateView):
-    model = LectureInfo
-    form_class = LectureInfoForm
-    # def form_valid(self, form):
-    #     image = form.cleaned_data['Lecture_Cover_File']
-    #     if (image.size/1024) > 500:
-    #         messages.error(self.request, "File size exceeds 2MB")
-    #         # return JsonResponse(data= {'mess':"file"})
-    #         return redirect()
-    #     valid_form = super().form_valid(form)
-    #     return valid_form
-    
-class LectureInfoDetailView(DetailView):
-    model = LectureInfo
+class CourseInfoCreateView(CreateView):
+    model = CourseInfo
+    form_class = CourseInfoForm
+
+
+class CourseInfoDetailView(DetailView):
+    model = CourseInfo
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).order_by('Chapter_No')
-        context['surveycount'] = SurveyInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).count()
+        context['chapters'] = ChapterInfo.objects.filter(Course_Code=self.kwargs.get('pk')).order_by('Chapter_No')
+        context['surveycount'] = SurveyInfo.objects.filter(Course_Code=self.kwargs.get('pk')).count()
         context['quizcount'] = Question.objects.filter(course_code=self.kwargs.get('pk')).count()
 
         return context
 
 
-class LectureInfoUpdateView(UpdateView):
-    model = LectureInfo
-    form_class = LectureInfoForm
+class CourseInfoUpdateView(UpdateView):
+    model = CourseInfo
+    form_class = CourseInfoForm
 
 
 class ChapterInfoListView(ListView):
@@ -422,7 +424,7 @@ class ChapterInfoCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Course_Code'] = get_object_or_404(CourseInfo, pk=self.kwargs.get('course'))
         return context
 
 
@@ -441,7 +443,7 @@ class ChapterInfoCreateViewAjax(AjaxableResponseMixin, CreateView):
             Obj.Use_Flag = True
         else:
             Obj.Use_Flag = False
-        Obj.Lecture_Code = LectureInfo.objects.get(pk=request.POST["Lecture_Code"])
+        Obj.Course_Code = CourseInfo.objects.get(pk=request.POST["Course_Code"])
         Obj.Register_Agent = MemberInfo.objects.get(pk=request.POST["Register_Agent"])
         Obj.save()
 
@@ -462,28 +464,16 @@ class ChapterInfoDetailView(DetailView):
 class CourseForum(ListView):
     model = Thread
     paginate_by = 20
-    template_name = 'courseinfo/Course_Forum.html'
+    template_name = 'lecture/Course_Forum.html'
     context_object_name = 'threads'
-
-    def get_queryset(self):
-        return Thread.objects.visible().filter(
-            topic__id=self.kwargs.get('course.pk')
-        ).select_related(
-            'user', 'topic'
-        ).prefetch_related(
-            'user__forum_avatar'
-        ).order_by(
-            *['order', get_thread_ordering(self.request)]
-        )
-
+  
     def get_context_data(self, **kwargs):
-        context = super(ListView, self).get_context_data(**kwargs)
-        print(self.kwargs.get('pk'))
-        context['topic'] = topic = Topic.objects.get(pk=self.kwargs.get('pk'))
-        context['title'] = context['panel_title'] = topic.title
-        context['show_order'] = True
+        context = super().get_context_data(**kwargs)
+        context['course'] = LectureInfo.objects.all().values('id', 'Lecture_Name',)
+        context['topic'] = Topic.objects.all()
+        context['thread'] = Thread.objects.all()
+        context['node_group'] = NodeGroup.objects.all()
         return context
-
 
 class ChapterInfoUpdateView(UpdateView):
     model = ChapterInfo
@@ -491,8 +481,9 @@ class ChapterInfoUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Course_Code'] = get_object_or_404(CourseInfo, pk=self.kwargs.get('course'))
         return context
+
 
 
 class ChapterContentsInfoListView(ListView):
@@ -727,7 +718,7 @@ class AssignmentInfoCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Course_Code'] = get_object_or_404(CourseInfo, pk=self.kwargs.get('course'))
         context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
         return context
 
@@ -741,8 +732,8 @@ class AssignmentInfoCreateViewAjax(AjaxableResponseMixin, CreateView):
         Obj = AssignmentInfo()
         Obj.Assignment_Topic = request.POST["Assignment_Topic"]
         Obj.Assignment_Deadline = request.POST["Assignment_Deadline"]
-        Obj.Lecture_Code = LectureInfo.objects.get(pk=request.POST["Lecture_Code"])
-        Obj.Chapter_Code = ChapterInfo.objects.get(Chapter_No=request.POST["Chapter_Code"])
+        Obj.Course_Code = CourseInfo.objects.get(pk=request.POST["Course_Code"])
+        Obj.Chapter_Code = ChapterInfo.objects.get(id=request.POST["Chapter_Code"])
         Obj.Register_Agent = MemberInfo.objects.get(pk=request.POST["Register_Agent"])
         Obj.save()
 
@@ -752,7 +743,7 @@ class AssignmentInfoCreateViewAjax(AjaxableResponseMixin, CreateView):
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
-    #     context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+    #     context['Course_Code'] = get_object_or_404(CourseInfo, pk=self.kwargs.get('course'))
     #     context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
     #     return context
 
@@ -763,7 +754,7 @@ class AssignmentInfoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['Questions'] = QuestionInfo.objects.filter(Assignment_Code=self.kwargs.get('pk'))
-        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Course_Code'] = get_object_or_404(CourseInfo, pk=self.kwargs.get('course'))
         context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
         # context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
         return context
@@ -775,7 +766,7 @@ class AssignmentInfoUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Course_Code'] = get_object_or_404(CourseInfo, pk=self.kwargs.get('course'))
         context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
         return context
 
@@ -792,23 +783,35 @@ class QuestionInfoCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Course_Code'] = get_object_or_404(CourseInfo, pk=self.kwargs.get('course'))
         context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
         context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
         return context
 
 
-class QuestionInfoCreateAjax(AjaxableResponseMixin, CreateView):
+class QuestionInfoCreateViewAjax(AjaxableResponseMixin, CreateView):
     model = QuestionInfo
     form_class = QuestionInfoForm
     template_name = 'ajax/questioninfo_form_ajax.html'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
-    #     context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
-    #     # context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
-    #     return context
+    def post(self, request, *args, **kwargs):
+        Obj = QuestionInfo()
+        Obj.Question_Title = request.POST["Question_Title"]
+        Obj.Question_Score = request.POST["Question_Score"]
+        Obj.Question_Description = request.POST["Question_Description"]
+        Obj.Answer_Type = request.POST["Answer_Type"]
+        Obj.Question_Media_File = request.POST["Question_Media_File"]
+        if request.POST["Use_Flag"] == 'true':
+            Obj.Use_Flag = True
+        else:
+            Obj.Use_Flag = False
+        Obj.Register_Agent = MemberInfo.objects.get(pk=request.POST["Register_Agent"])
+        Obj.Assignment_Code = AssignmentInfo.objects.get(pk=request.POST["Assignment_Code"])
+        Obj.save()
+
+        return JsonResponse(
+            data={'Message': 'Success'}
+        )
 
 
 class QuestionInfoDetailView(DetailView):
@@ -821,7 +824,7 @@ class QuestionInfoUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Course_Code'] = get_object_or_404(CourseInfo, pk=self.kwargs.get('course'))
         context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
         context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
         return context
@@ -1029,22 +1032,22 @@ class LearningNoteUpdateView(UpdateView):
     form_class = LearningNoteForm
 
 
-class LectureUbtInfoListView(ListView):
-    model = LectureUbtInfo
+class CourseUbtInfoListView(ListView):
+    model = CourseUbtInfo
 
 
-class LectureUbtInfoCreateView(CreateView):
-    model = LectureUbtInfo
-    form_class = LectureUbtInfoForm
+class CourseUbtInfoCreateView(CreateView):
+    model = CourseUbtInfo
+    form_class = CourseUbtInfoForm
 
 
-class LectureUbtInfoDetailView(DetailView):
-    model = LectureUbtInfo
+class CourseUbtInfoDetailView(DetailView):
+    model = CourseUbtInfo
 
 
-class LectureUbtInfoUpdateView(UpdateView):
-    model = LectureUbtInfo
-    form_class = LectureUbtInfoForm
+class CourseUbtInfoUpdateView(UpdateView):
+    model = CourseUbtInfo
+    form_class = CourseUbtInfoForm
 
 
 class LessonInfoListView(ListView):
@@ -1394,7 +1397,7 @@ def chapterviewer(request):
         path = settings.MEDIA_ROOT
         chapterID = request.GET['chapterID']
         chapterobj = ChapterInfo.objects.get(id=chapterID)
-        courseID = chapterobj.Lecture_Code.id
+        courseID = chapterobj.Course_Code.id
         try:
             with open(path + '/chapterBuilder/' + str(courseID) + '/' + str(chapterID) + '/' + str(
                     chapterID) + '.txt') as json_file:

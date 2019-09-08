@@ -14,7 +14,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.views import View
 
-from WebApp.models import LectureInfo, GroupMapping, InningInfo, InningGroup, ChapterInfo, AssignmentInfo, MemberInfo
+from WebApp.models import CourseInfo, GroupMapping, InningInfo, InningGroup, ChapterInfo, AssignmentInfo, MemberInfo
 from survey.models import SurveyInfo, CategoryInfo, QuestionInfo, OptionInfo, SubmitSurvey, AnswerInfo
 from datetime import datetime
 from quiz.models import Question
@@ -26,17 +26,21 @@ datetime_now = datetime.now()
 
 def start(request):
     if request.user.Is_Student:
-        GroupName = GroupMapping.objects.get(Students__id=request.user.id)
-        Group = InningInfo.objects.get(Groups__id=GroupName.id)
-        Course = Group.Course_Group.all()
+        batches = GroupMapping.objects.filter(Students__id=request.user.id, Center_Code=request.user.Center_Code)
+        sessions = []
+        if batches:
+            for batch in batches:
+                # Filtering out only active sessions
+                session = InningInfo.objects.filter(Groups__id=batch.id,End_Date__gt=datetime_now)
+                sessions += session
+        courses = set()
+        if sessions:
+            for session in sessions:
+                course = session.Course_Group.all()
+                courses.update(course)
 
         return render(request, 'student_module/dashboard.html',
-                      {'GroupName': GroupName, 'Group': Group, 'Course': Course})
-
-
-# def mycourse(request):
-#     return render(request, 'student_module/myCourse.html')
-
+                      {'GroupName': batches, 'Group': sessions, 'Course': courses})
 
 def quiz(request):
     return render(request, 'student_module/quiz.html')
@@ -49,12 +53,8 @@ def quizzes(request):
 def calendar(request):
     return render(request, 'student_module/calendar.html')
 
-
-# def coursedetail(request):
-#     return render(request, 'student_module/course_detail.html')
-# #
 class MyCoursesListView(ListView):
-    model = LectureInfo
+    model = CourseInfo
     template_name = 'student_module/myCourse.html'
 
     paginate_by = 8
@@ -70,17 +70,12 @@ class MyCoursesListView(ListView):
                 session = InningInfo.objects.filter(Groups__id=batch.id,End_Date__gt=datetime_now)
                 sessions += session
         context['sessions'] = sessions
-        # print(context['sessions'])
-
         courses = set()
         if context['sessions']:
             for session in context['sessions']:
                 course = session.Course_Group.all()
                 courses.update(course)
         context['Course'] = courses
-        # print(context['courses'])
-        
-        # context['Course'] = context['Group'].Course_Group.all()
 
         return context
 
@@ -89,7 +84,7 @@ class MyCoursesListView(ListView):
 
         query = self.request.GET.get('query')
         if query:
-            qs = qs.filter(Lecture_Name__contains=query)
+            qs = qs.filter(Course_Name__contains=query)
             if not len(qs):
                 messages.error(self.request, 'Search not found')
         qs = qs.order_by("-id")  # you don't need this if you set up your ordering on the model
@@ -110,19 +105,19 @@ class MyAssignmentsListView(ListView):
         return context
 
 
-class LectureInfoListView(ListView):
-    model = LectureInfo
-    template_name = 'student_module/lectureinfo_list.html'
+class CourseInfoListView(ListView):
+    model = CourseInfo
+    template_name = 'student_module/courseinfo_list.html'
 
 
-class LectureInfoDetailView(DetailView):
-    model = LectureInfo
-    template_name = 'student_module/lectureinfo_detail.html'
+class CourseInfoDetailView(DetailView):
+    model = CourseInfo
+    template_name = 'student_module/courseinfo_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['chapters'] = ChapterInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).order_by('Chapter_No')
-        context['surveycount'] = SurveyInfo.objects.filter(Lecture_Code=self.kwargs.get('pk')).count()
+        context['chapters'] = ChapterInfo.objects.filter(Course_Code=self.kwargs.get('pk')).order_by('Chapter_No')
+        context['surveycount'] = SurveyInfo.objects.filter(Course_Code=self.kwargs.get('pk')).count()
         context['quizcount'] = Question.objects.filter(course_code=self.kwargs.get('pk')).count()
         return context
 
@@ -148,7 +143,7 @@ class AssignmentInfoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['Questions'] = QuestionInfo.objects.filter(Assignment_Code=self.kwargs.get('pk'))
-        context['Lecture_Code'] = get_object_or_404(LectureInfo, pk=self.kwargs.get('course'))
+        context['Course_Code'] = get_object_or_404(CourseInfo, pk=self.kwargs.get('course'))
         context['Chapter_No'] = get_object_or_404(ChapterInfo, pk=self.kwargs.get('chapter'))
         # context['Assignment_Code'] = get_object_or_404(AssignmentInfo, pk=self.kwargs.get('assignment'))
         return context
@@ -205,8 +200,7 @@ class ParticipateSurvey(View):
     def post(self, request, *args, **kwargs):
         surveyId =  request.POST["surveyInfoId"]
         userId = self.request.user.id
-
-        print(request.POST)
+        # print(request.POST)
         submitSurvey = SubmitSurvey()
         submitSurvey.Survey_Code = SurveyInfo.objects.get(id = surveyId)
         submitSurvey.Student_Code = MemberInfo.objects.get(id = userId)
@@ -222,6 +216,7 @@ class ParticipateSurvey(View):
             answerObject.save()
     
         return redirect('questions_student')
+
 
 
 # def polls_student(request):

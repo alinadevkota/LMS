@@ -10,7 +10,7 @@ from django.views.generic import DetailView, ListView, TemplateView, FormView, C
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
 
-from WebApp.models import LectureInfo
+from WebApp.models import CourseInfo
 from .forms import QuestionForm, SAForm, QuizForm, TFQuestionForm, SAQuestionForm, MCQuestionForm, AnsFormset
 from .models import Quiz, Progress, Sitting, MCQuestion, TF_Question, Question, SA_Question, Answer
 
@@ -99,31 +99,31 @@ def QuizDeleteView(request, pk):
 
 
 class CategoriesListView(ListView):
-    model = LectureInfo
+    model = CourseInfo
 
 
-class ViewQuizListByLecture(ListView):
+class ViewQuizListByCourse(ListView):
     model = Quiz
     template_name = 'view_quiz_category.html'
 
     def dispatch(self, request, *args, **kwargs):
         self.category = get_object_or_404(
-            LectureInfo,
+            CourseInfo,
             category=self.kwargs['category_name']
         )
 
-        return super(ViewQuizListByLecture, self). \
+        return super(ViewQuizListByCourse, self). \
             dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(ViewQuizListByLecture, self) \
+        context = super(ViewQuizListByCourse, self) \
             .get_context_data(**kwargs)
 
         context['category'] = self.category
         return context
 
     def get_queryset(self):
-        queryset = super(ViewQuizListByLecture, self).get_queryset()
+        queryset = super(ViewQuizListByCourse, self).get_queryset()
         return queryset.filter(category=self.category, draft=False)
 
 
@@ -600,10 +600,18 @@ class TFQuestionListView(ListView):
     model = TF_Question
 
 
-class TFQuestionCreateView(CreateView):
+class TFQuestionCreateView(AjaxableResponseMixin, CreateView):
     model = TF_Question
     form_class = TFQuestionForm
-    success_url = reverse_lazy('quiz_create')
+    #success_url = reverse_lazy('quiz_create')
+    template_name = 'ajax/tfquestion_form_ajax.html'
+
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        new_tfq = {}
+        new_tfq['new_tfq_id'] = self.object.id
+        new_tfq['new_tfq_content'] = self.object.content
+        return JsonResponse(new_tfq)
 
 class TFQuestionCreateFromQuiz(CreateView):
     model = TF_Question
@@ -665,10 +673,18 @@ def TFQuestionDeleteView(request, pk):
 class SAQuestionListView(ListView):
     model = SA_Question
 
-class SAQuestionCreateView(CreateView):
+class SAQuestionCreateView(AjaxableResponseMixin, CreateView):
     model = SA_Question
     form_class = SAQuestionForm
-    success_url = reverse_lazy('quiz_create')
+    #success_url = reverse_lazy('quiz_create')
+    template_name = 'ajax/saquestion_form_ajax.html'
+
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        new_saq = {}
+        new_saq['new_saq_id'] = self.object.id
+        new_saq['new_Saq_content'] = self.object.content
+        return JsonResponse(new_saq)
 
 class SAQuestionCreateFromQuiz(CreateView):
     model = SA_Question

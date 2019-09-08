@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django import forms
-from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
+from .models import CenterInfo, MemberInfo, CourseInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
     ChapterMissonCheckItem, SessionInfo, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
     AssignAnswerInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
-    LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
+    LearningNote, CourseUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
     QExampleInfo, QuizAnswerInfo, \
     QuizExampleInfo, \
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo
@@ -59,21 +59,21 @@ class MemberInfoAdmin(admin.ModelAdmin):
 admin.site.register(MemberInfo, MemberInfoAdmin)
 
 
-class LectureInfoAdminForm(forms.ModelForm):
+class CourseInfoAdminForm(forms.ModelForm):
     class Meta:
-        model = LectureInfo
+        model = CourseInfo
         fields = '__all__'
 
 
-class LectureInfoAdmin(admin.ModelAdmin):
-    form = LectureInfoAdminForm
-    list_display = ['Lecture_Name', 'Lecture_Cover_File', 'Lecture_Level',
-                    'Lecture_Info', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent',
-                    'Lecture_Provider', 'Center_Code']
-    # readonly_fields = ['lecture_name', 'lecture_teacher', 'lecture_cover', 'lecture_cover_file', 'lecture_level', 'lecture_info', 'teacher', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'lecture_certification', 'lecture_provider', 'cert_crit_prog', 'cert_crit_post', 'cert_crit_ubt', 'cert_crit_issue']
+class CourseInfoAdmin(admin.ModelAdmin):
+    form = CourseInfoAdminForm
+    list_display = ['Course_Name', 'Course_Cover_File', 'Course_Level',
+                    'Course_Info', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent',
+                    'Course_Provider', 'Center_Code']
+    # readonly_fields = ['course_name', 'course_teacher', 'course_cover', 'course_cover_file', 'course_level', 'course_info', 'teacher', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'course_certification', 'course_provider', 'cert_crit_prog', 'cert_crit_post', 'cert_crit_ubt', 'cert_crit_issue']
 
 
-admin.site.register(LectureInfo, LectureInfoAdmin)
+admin.site.register(CourseInfo, CourseInfoAdmin)
 
 
 class ChapterInfoAdminForm(forms.ModelForm):
@@ -85,7 +85,7 @@ class ChapterInfoAdminForm(forms.ModelForm):
 class ChapterInfoAdmin(admin.ModelAdmin):
     form = ChapterInfoAdminForm
     list_display = ['Chapter_No', 'Chapter_Name', 'Summary', 'Page_Num', 'Use_Flag',
-                    'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'Lecture_Code']
+                    'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'Course_Code']
     # readonly_fields = ['chapter_no', 'chapter_name', 'topic', 'summary', 'page_num', 'vod_size', 'intro', 'target', 'top_img', 'bottom_img1', 'bottom_img2', 'bottom_img3', 'thum_file', 'vod_file', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'today', 'chapter_type', 'prologue_type', 'tabset', 'chapter_image', 'chapter_use', 'offline_file', 'pre_test_type', 'post_test_type', 'level1_avg', 'level2_avg', 'level3_avg', 'level1_hard_avg', 'level1_medium_avg', 'level1_easy_avg', 'level2_hard_avg', 'level2_medium_avg', 'level2_easy_avg', 'level3_hard_avg', 'level3_medium_avg', 'level3_easy_avg', 'homework_count', 'epilogue_type', 'epilogue_img', 'pbl_flag', 'chapter_use_time']
 
 
@@ -183,7 +183,7 @@ class AssignmentInfoAdminForm(forms.ModelForm):
 
 class AssignmentInfoAdmin(admin.ModelAdmin):
     form = AssignmentInfoAdminForm
-    list_display = ['Lecture_Code', 'Chapter_Code', 'Assignment_Topic', 'Use_Flag', 'Register_DateTime',
+    list_display = ['Course_Code', 'Chapter_Code', 'Assignment_Topic', 'Use_Flag', 'Register_DateTime',
                     'Updated_DateTime', 'Assignment_Deadline', 'Register_Agent']
     # readonly_fields = ['subject_code', 'level_score', 'use_flag', 'reg_date', 'reg_time', 'reg_agent', 'level']
 
@@ -313,7 +313,7 @@ class InningGroupAdminForm(forms.ModelForm):
 
 class InningGroupAdmin(admin.ModelAdmin):
     form = InningGroupAdminForm
-    list_display = ['InningGroup_Name', 'Lecture_Code', 'Center_Code', 'Use_Flag', 'Register_DateTime',
+    list_display = ['InningGroup_Name', 'Course_Code', 'Center_Code', 'Use_Flag', 'Register_DateTime',
                     'Updated_DateTime', 'Register_Agent']
     # readonly_fields = ['teacher_code', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
 
@@ -432,19 +432,19 @@ class LearningNoteAdmin(admin.ModelAdmin):
 admin.site.register(LearningNote, LearningNoteAdmin)
 
 
-class LectureUbtInfoAdminForm(forms.ModelForm):
+class CourseUbtInfoAdminForm(forms.ModelForm):
     class Meta:
-        model = LectureUbtInfo
+        model = CourseUbtInfo
         fields = '__all__'
 
 
-class LectureUbtInfoAdmin(admin.ModelAdmin):
-    form = LectureUbtInfoAdminForm
+class CourseUbtInfoAdmin(admin.ModelAdmin):
+    form = CourseUbtInfoAdminForm
     list_display = ['Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent']
     # readonly_fields = ['use_flag', 'reg_date', 'reg_time', 'reg_agent', 'udt_date', 'udt_time', 'udt_agent']
 
 
-admin.site.register(LectureUbtInfo, LectureUbtInfoAdmin)
+admin.site.register(CourseUbtInfo, CourseUbtInfoAdmin)
 
 
 class LessonInfoAdminForm(forms.ModelForm):
