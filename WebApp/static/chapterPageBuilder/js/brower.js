@@ -48,7 +48,7 @@ $("#SaveBtn").on("click",function(e){
       height=$(this).css("height");
       content=$(this).text();
 
-      console.log(value.classList);
+      // console.log(value.classList);
       if(value.classList.contains('textdiv')){
         textdiv.push(
           {
