@@ -55,7 +55,7 @@
             <div class="tile-stats" id="course_tile">
                 <div class="icon"><img src="/static/images/courses.png" id="course_icon"></div>
                 <div class="count">{{ coursecount }}</div>
-                <a href="{% url 'lectureinfo_list' %}">
+                <a href="{% url 'courseinfo_list' %}">
                     <h3>Courses</h3>
                 </a>
                 <p></p>
@@ -212,7 +212,7 @@
         <div class="col-lg-4">
             <div class="panel panel-default">
                 <div class="title">
-                    <a href="{% url 'lectureinfo_list' %}">
+                    <a href="{% url 'courseinfo_list' %}">
                         <h2 style="font-size: 23px ">Courses</h2>
                     </a>
 
@@ -224,7 +224,7 @@
                     <li class="list-group-item ">
                         <div class="media-body">
                             <B style="font-size: 14px"><a
-                                    href="{{ object.get_absolute_url }}">{{ object.Lecture_Name }}</a></B>
+                                    href="{{ object.get_absolute_url }}">{{ object.Course_Name }}</a></B>
                         </div>
                     </li>
                     {% endfor %}

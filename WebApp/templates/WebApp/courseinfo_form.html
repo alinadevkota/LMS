@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'lectureinfo_list' %}">Course</a></li>
+    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'courseinfo_list' %}">Course</a></li>
     <li class="breadcrumb-item active" aria-current="page">
         {% if 'create' in request.path %}
             Create New Course
@@ -17,7 +17,7 @@
 
 {% endblock %}
 {% block content %}
-    {% include 'lecture/lectureinfo_form.html' %}
+    {% include 'course/courseinfo_form.html' %}
 {% endblock content %}
 {% block customjss %}
 

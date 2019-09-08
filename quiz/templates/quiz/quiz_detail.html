@@ -3,6 +3,13 @@
 {% block title %}
 {{ quiz.title }}
 {% endblock %}
+{% block breadcrumb %} 
+<li class="breadcrumb-item"><a href="/">QUIZ</a></li>
+                
+ 
+<li class="breadcrumb-item active" aria-current="page">QUIZ LIST</li> 
+<li class="breadcrumb-item active" aria-current="page">{{quiz.title}}</li> 
+{% endblock %} 
 
 {% block content %}
 
@@ -22,7 +29,7 @@
   <thead>
     <tr class="quiz-capital">
       <th>{% trans "Title" %}</th>
-      <th>{% trans "Lecture -> Chapter" %}</th>
+      <th>{% trans "Course -> Chapter" %}</th>
       <th>{% trans "No. of Questions" %}</th>
       <th>{% trans "Type" %}</th>
       <th>{% trans "Url" %}</th>
@@ -34,7 +41,7 @@
   <tbody>
     <tr>
       <td>{{ quiz.title }} </td>
-      <td>{{ quiz.category.Lecture_Name }} -> {{ quiz.chapter_code.Chapter_Name }}</td>       
+      <td>{{ quiz.category.Course_Name }} -> {{ quiz.chapter_code.Chapter_Name }}</td>       
       <td>{{ quiz.question_count }}</td>
       <td>
         {% if quiz.pre_test  %}pre test <br>{% endif %}
@@ -51,60 +58,97 @@
   <div class="quiz-question-list">
         <a href="#mcqn_list" data-toggle="collapse">
           <p class="exam-results text-center">
-            MCQUESTIONS 
+           LIST OF MCQUESTIONS <span class="fa fa-chevron-down"></span>
           </p>
         </a>
         
         <div id="mcqn_list" class="collapse">
           <ul> 
               {% for quest in quiz.mcquestion.all %}
-                  <a href="#mcans_list" data-toggle="collapse">
-                    <li class="quiz-listing">  {{quest.content}}</li>
+                  <a href="#mcans_list_{{quest.id}}" data-toggle="collapse">
+                    <li class="quiz-listing">  {{quest.content}}</li> 
                   </a>
-                  <div id="mcans_list" class="collapse">
+                  
+                  <div id="mcans_list_{{quest.id}}" class="collapse">
                     <ul>
                       {% for ans in quest.get_answers %}
                         <li class="quiz-answer-listing"> {{ans.content}} {%if ans.correct%} -> Correct {%endif%}</li>
                       {% endfor %}
                     </ul>
                   </div> 
-                <form action="{% url 'mcquestion_update' pk=quest.id%}" method="get">
-                  {% csrf_token %}
-                  <input type="submit" value="Edit">
-                </form>
-                <form action="{% url 'mcquestion_create'%}" method="get">
-                  {% csrf_token %}
-                  <input type="submit" value="Add">
-                </form>
+                  <div class="row">
+                       <div class="col-md-12">
+                          <form action="{% url 'mcquestion_update_from_quiz' pk=quest.id quiz_id=quiz.id%}" method="get">
+                              <input type="submit" value="Edit">
+                            </form>
+                       </div>
+                  </div>
+              
               {% endfor %}
+              <div class="row">
+                <div class="col-md-12">
+                    <form action="{% url 'mcquestion_create_from_quiz' quiz_id=quiz.id %}" method="get">
+                        <input type="submit" value="Add">
+                      </form>
+                </div>
+              </div>
+             
           </ul>
         </div>
   </div>
   <div class="quiz-question-list">
       <a href="#tfqn_list" data-toggle="collapse">
         <p class="exam-results text-center">
-          TFQUESTIONS 
+          LIST OF TFQUESTIONS <span class="fa fa-chevron-down"></span>
         </p>
       </a>
       <div id="tfqn_list" class="collapse">
         <ul>
             {% for quest in quiz.tfquestion.all %}
-            <li>{{quest.content}}</li> 
+            <li>{{quest.content}}</li>
+            <div class="row">
+                       <div class="col-md-12">
+                          <form action="{% url 'tfquestion_update_from_quiz' pk=quest.id quiz_id=quiz.id%}" method="get">
+                              <input type="submit" value="Edit">
+                            </form>
+                       </div>
+                  </div> 
           {% endfor %}
+          <div class="row">
+                <div class="col-md-12">
+                    <form action="{% url 'tfquestion_create_from_quiz' quiz_id=quiz.id %}" method="get">
+                        <input type="submit" value="Add">
+                      </form>
+                </div>
+              </div>
         </ul>
       </div>
   </div>
 <div class="quiz-question-list">
     <a href="#esqn_list" data-toggle="collapse">
       <p class="exam-results text-center">
-        SHORT ANSWER QUESTIONS 
+        LIST OF SHORT ANSWER QUESTIONS <span class="fa fa-chevron-down"></span>
       </p>
     </a>
     <div id="esqn_list" class="collapse">
       <ul>
           {% for quest in quiz.saquestion.all %}
           <li>{{quest.content}}</li> 
+          <div class="row">
+                       <div class="col-md-12">
+                          <form action="{% url 'saquestion_update_from_quiz' pk=quest.id quiz_id=quiz.id%}" method="get">
+                              <input type="submit" value="Edit">
+                            </form>
+                       </div>
+                  </div>
         {% endfor %}
+        <div class="row">
+                <div class="col-md-12">
+                    <form action="{% url 'saquestion_create_from_quiz' quiz_id=quiz.id %}" method="get">
+                        <input type="submit" value="Add">
+                      </form>
+                </div>
+              </div>
       </ul>
     </div>  
 </div>

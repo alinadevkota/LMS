@@ -1,11 +1,9 @@
 /* =========================== Courses List ============================== */
 form {
-  display: inline-flex;
-  width: 60%;
+
+  
   border-radius: 0.2em;
-  position: relative;
-  top: 0px;
-  left: 1%;
+  
 }
 
 input[type="search"] {
@@ -563,7 +561,6 @@ form {
   padding: 20px;
 }
 #categoryTitle {
-  padding-bottom: 20px;
   font-size: 18px;
 }
 .questionContainer {
@@ -654,8 +651,8 @@ form {
   padding-top: 4px;
   display: inline-block;
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 30px;
+  right: 30px;
   transition: ease 0.25s all;
   -webkit-transform: translate(50%, -50%);
   transform: translate(50%, -50%);

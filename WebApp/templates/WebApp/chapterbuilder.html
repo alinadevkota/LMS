@@ -19,7 +19,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <title>Lecture Builder</title>
+  <title>Course Builder</title>
 </head>
 
 <style>
@@ -282,7 +282,7 @@
       <div class="  col-sm-8  col-md-7col-lg-8 col-xl-8 canvas">
 
         <div id="navbar-title">
-          <h2 class="tlimit" contenteditable="true">
+          <h2 class="tlimit" contenteditable="true" id="chaptertitle">
             Add Title....
           </h2>
   
@@ -443,12 +443,12 @@
           </div>
           <div class="right-sidebar">
             <div class="right-sidebar-content">
-
+              <i id="add-page-btn" class="fas fa-plus-square fas-5x"></i>
               <div class="img1 showSingle" target="1">
                 <div class="tabs-to-click">
                   <ul>
-                    <li class="tabs-link current " onclick="openTab(event,'tab1')">
-                      <i id="add-page-btn" class="fas fa-plus-square fas-5x"></i>
+                    <li class="tabs-link current pagenumber" onclick="openTab(event,'tab1')">
+                     
                     </li>
                   </ul>
                 </div>
@@ -458,10 +458,6 @@
         </div>
 
       </div>
-
-
-
-
 
     </div>
   </div>
@@ -475,11 +471,14 @@
 
 
   <script>
+    var data = `{{ data|safe }}`;
     var courseID = '{{course}}';
     var chapterID = '{{chapter}}';
+    var chaptertitle = '{{chaptertitle}}';
     var save_file_url = "{% url 'saveFile' %}";
-    {# var load_image_url = "{% url 'loadFile' %}"; #}
-    
+    var load_file_url = "/media/chapterBuilder/"+courseID+"/"+chapterID;
+    var save_json_url = "{% url 'saveJson' %}";
+        
   </script>
   <script src="{% static 'chapterPageBuilder/js/jquery.min.js' %}"></script>
   <script src="{% static 'chapterPageBuilder/js/jquery-ui.min.js' %}"></script>

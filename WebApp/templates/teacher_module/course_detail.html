@@ -14,12 +14,12 @@
             <div style="margin-bottom: 20px">
                 <div class="row"
                      style=" color: white;background-color:#2A3F54;margin-bottom: 30px; margin-top: 60px; padding-left: 15px">
-                    <h1 class="courseHeader">{{ Course.Lecture_Name|safe }} </h1>
+                    <h1 class="courseHeader">{{ Course.Course_Name|safe }} </h1>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                        <img class="img-responsive" src="/media/{{ Course.Lecture_Cover_File }}" style=""
+                        <img class="img-responsive" src="/media/{{ Course.Course_Cover_File }}" style=""
                              alt="courseImage">
                         <div class="courseDetailStyle1 row" style="margin: 20px">
                             <div class="col-lg-4"
@@ -99,7 +99,7 @@
             <div class="row">
                 <div class="" style="padding: 10px;">
                     <h2 class="text-display-1" style="margin-bottom: 20px">COURSE DESCRIPTION</h2>
-                    <p>{{ Course.Lecture_Description }}
+                    <p>{{ Course.Course_Description }}
                     </p>
                 </div>
 
@@ -112,11 +112,11 @@
                 <li>
                     <div class="panel boxShadow">
                         <div class="panel-body" style="padding: 30px">
-                            <div class="courseDetailStyle lectureList" data-toggle="collapse"
-                                 data-display-toggle="tooltip" title="Extend" data-target="#chapteronelectures">
+                            <div class="courseDetailStyle courseList" data-toggle="collapse"
+                                 data-display-toggle="tooltip" title="Extend" data-target="#chapteronecourses">
                                 <h5 style="color: black">CHAPTER 1</h5>
                                 <i class="fa fa-caret-down" style="font-size: 25px" data-toggle="collapse"
-                                   data-target="#lectures"></i>
+                                   data-target="#courses"></i>
                             </div>
 
                             <h2 style="color:black;font-weight: bold">The component Lifecycle</h2>
@@ -127,16 +127,16 @@
                                 to a simple HTML page, or start a complex React-powered app, the links in this section
                                 will help you
                                 get started. </p>
-                            <div class="collapse" id="chapteronelectures">
+                            <div class="collapse" id="chapteronecourses">
                                 <ol class="list-group">
-                                    <li class="list-group-item lectures">
+                                    <li class="list-group-item courses">
                                         Introduction
                                         <a href="#"></a>
                                     </li>
-                                    <li class="list-group-item lectures">
+                                    <li class="list-group-item courses">
                                         React JSX
                                     </li>
-                                    <li class="list-group-item lectures">
+                                    <li class="list-group-item courses">
                                         Playing with React Component
                                     </li>
 
@@ -167,10 +167,10 @@
                 <li>
                     <div class="panel boxShadow">
                         <div class="panel-body" style="padding: 30px">
-                            <div class="courseDetailStyle lectureList" data-toggle="collapse" data-target="#lectures">
+                            <div class="courseDetailStyle courseList" data-toggle="collapse" data-target="#courses">
                                 <h5 style="color: black">CHAPTER 2</h5>
                                 <i class="fa fa-caret-down" style="font-size: 25px" data-toggle="collapse"
-                                   data-target="#lectures"></i>
+                                   data-target="#courses"></i>
                             </div>
                             <h2 style="color:black;font-weight: bold">The component Lifecycle</h2>
                             <p class="courseTextColor">React has been designed from the start for gradual adoption, and
@@ -203,10 +203,10 @@
                 <li>
                     <div class="panel boxShadow">
                         <div class="panel-body" style="padding: 30px">
-                            <div class="courseDetailStyle lectureList" data-toggle="collapse" data-target="#lectures">
+                            <div class="courseDetailStyle courseList" data-toggle="collapse" data-target="#courses">
                                 <h5 style="color: black">CHAPTER 3</h5>
                                 <i class="fa fa-caret-down" style="font-size: 25px" data-toggle="collapse"
-                                   data-target="#lectures"></i>
+                                   data-target="#courses"></i>
                             </div>
                             <h2 style="color:black;font-weight: bold">The component Lifecycle</h2>
                             <p class="courseTextColor">React has been designed from the start for gradual adoption, and

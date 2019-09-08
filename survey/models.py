@@ -4,10 +4,10 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.files.storage import FileSystemStorage
 from django.db import models as models
 from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, BooleanField, \
-    ImageField, DateField
+    ImageField, DateField, Count
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from WebApp.models import MemberInfo, InningInfo, LectureInfo, CenterInfo
+from WebApp.models import MemberInfo, InningInfo, CourseInfo, CenterInfo
 
 
 class CategoryInfo(models.Model):
@@ -47,21 +47,21 @@ class SurveyInfo(models.Model):
         related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
 
-    Assigned_To = ForeignKey(
+    Session_Code = ForeignKey(
         'WebApp.InningInfo',
         related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
     Added_By = ForeignKey(
         'WebApp.MemberInfo',
-        related_name="surveyinfo", on_delete=models.DO_NOTHING
+        related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
     Category_Code = ForeignKey(
         'CategoryInfo',
         related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
-
-    Lecture_Code = ForeignKey(
-        'WebApp.LectureInfo',
+    
+    Course_Code = ForeignKey(
+        'WebApp.CourseInfo',
         related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
     )
 
@@ -71,7 +71,7 @@ class SurveyInfo(models.Model):
     def __unicode__(self):
         return u'%s' % self.pk
 
-    def __str__(self):
+    def __str__(self):      
         return self.Survey_Title
 
     def questions_count(self):
@@ -131,6 +131,10 @@ class OptionInfo(models.Model):
         'QuestionInfo',
         related_name="optioninfo", on_delete=models.CASCADE
     )
+    # Selected_By = models.ManyToManyField(
+    #     MemberInfo,
+    #     on_delete=models.CASCADE
+    # )
 
     class Meta:
         ordering = ('-pk',)
@@ -184,7 +188,8 @@ class AnswerInfo(models.Model):
     )
     Submit_Code = ForeignKey(
         'SubmitSurvey',
-        related_name="answerinfo", on_delete=models.CASCADE
+        related_name="answerinfo", on_delete=models.CASCADE, 
+        null=True,
     )
 
     class Meta:
@@ -198,3 +203,4 @@ class AnswerInfo(models.Model):
 
     def get_update_url(self):
         return reverse('answerinfo_update', args=(self.pk,))
+

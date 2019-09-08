@@ -15,7 +15,7 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from model_utils.managers import InheritanceManager
 
-from WebApp.models import LectureInfo, ChapterInfo, CenterInfo
+from WebApp.models import CourseInfo, ChapterInfo, CenterInfo
 
 # multichoice modelss___________________________________________________________
 
@@ -119,8 +119,8 @@ class Progress(models.Model):
         score_before = self.score
         output = {}
 
-        for cat in LectureInfo.objects.all():
-            to_find = re.escape(cat.Lecture_Name) + r",(\d+),(\d+),"
+        for cat in CourseInfo.objects.all():
+            to_find = re.escape(cat.Course_Name) + r",(\d+),(\d+),"
             #  group 1 is score, group 2 is highest possible
 
             match = re.search(to_find, self.score, re.IGNORECASE)
@@ -135,11 +135,11 @@ class Progress(models.Model):
                 except:
                     percent = 0
 
-                output[cat.Lecture_Name] = [score, possible, percent]
+                output[cat.Course_Name] = [score, possible, percent]
 
             else:  # if category has not been added yet, add it.
-                self.score += cat.Lecture_Name + ",0,0,"
-                output[cat.Lecture_Name] = [0, 0]
+                self.score += cat.Course_Name + ",0,0,"
+                output[cat.Course_Name] = [0, 0]
 
         if len(self.score) > len(score_before):
             # If a new category has been added, save changes.
@@ -205,6 +205,12 @@ class Progress(models.Model):
         return Sitting.objects.filter(user=self.user, complete=True)
 
 
+class QuestionInheritanceManager(InheritanceManager):
+    #def get_queryset(self):
+    #    return super().get_queryset().filter(cent_code=request.user.center_code)
+    pass
+
+
 @python_2_unicode_compatible
 class Question(models.Model):
     """
@@ -227,8 +233,8 @@ class Question(models.Model):
                                            "you want displayed"),
                                verbose_name=_('Question'))
 
-    course_code = models.ForeignKey(LectureInfo,
-                                 verbose_name=_("LectureInfo"),
+    course_code = models.ForeignKey(CourseInfo,
+                                 verbose_name=_("CourseInfo"),
                                  blank=True,
                                  null=True,
                                  on_delete=models.CASCADE)
@@ -352,7 +358,7 @@ class SA_Question(Question):
 
     def check_if_correct(self, guess):
         return True
-
+ 
     def get_answers(self):
         return False
 
@@ -398,8 +404,8 @@ class Quiz(models.Model):
         verbose_name=_("user friendly url"), unique=True)
 
     course_code = models.ForeignKey(
-        LectureInfo, null=True, blank=True,
-        verbose_name=_("Lecture"), on_delete=models.CASCADE)
+        CourseInfo, null=True, blank=True,
+        verbose_name=_("Course"), on_delete=models.CASCADE)
 
     cent_code = models.ForeignKey(
         CenterInfo, null=True, blank=True,
@@ -409,13 +415,13 @@ class Quiz(models.Model):
         help_text=_("Time limit for quiz"),
         verbose_name=_("Time limit for quiz"))
 
-    pre_test = models.BooleanField(
-        default = False,
-        help_text=_("Pre test quiz are taken at the beggining of the chapter")
+    pre_test = models.BooleanField( 
+        help_text=_("Before the course"),
+        default = False
     ) 
-    post_test = models.BooleanField(
-        default = False,
-        help_text=_("Post test quiz are taken at the end of the chapter")
+    post_test = models.BooleanField( 
+         help_text=_("After the course"),
+        default = False
     ) 
     created_date =  models.DateTimeField(
         auto_now_add=True
@@ -443,8 +449,7 @@ class Quiz(models.Model):
         blank=False, default=False,
         verbose_name=_("Random Order"),
         help_text=_("Display the questions in "
-                    "a random order or as they "
-                    "are set?"))
+                    "a random "))
 
     # max_questions = models.PositiveIntegerField(
     #     blank=True, null=True, verbose_name=_("Max Questions"),
@@ -452,22 +457,20 @@ class Quiz(models.Model):
 
     answers_at_end = models.BooleanField(
         blank=False, default=False,
-        help_text=_("Correct answer is NOT shown after question."
-                    " Answers displayed at the end."),
+        help_text=_("Correct answer is displayed at the end."),
         verbose_name=_("Answers at end"))
 
     exam_paper = models.BooleanField(
         blank=False, default=True,
-        help_text=_("If yes, the result of each"
-                    " attempt by a user will be"
-                    " stored. Necessary for marking."),
+        help_text=_("If yes, the result of attempts by user will be"
+                    " stored "),
         verbose_name=_("Exam Paper"))
 
     single_attempt = models.BooleanField(
         blank=False, default=False,
         help_text=_("If yes, only one attempt by"
                     " a user will be permitted."
-                    " Non users cannot sit this exam."),
+                   ),
         verbose_name=_("Single Attempt"))
 
     pass_mark = models.SmallIntegerField(
@@ -487,10 +490,8 @@ class Quiz(models.Model):
     draft = models.BooleanField(
         blank=True, default=False,
         verbose_name=_("Draft"),
-        help_text=_("If yes, the quiz is not displayed"
-                    " in the quiz list and can only be"
-                    " taken by users who can edit"
-                    " quizzes."))
+        help_text=_("If checked, the quiz is not displayed to the student"
+                   ))
 
     def get_absolute_url(self):
         return reverse('quiz_update', args=(self.pk,))
@@ -513,7 +514,7 @@ class Quiz(models.Model):
         super(Quiz, self).save(force_insert, force_update, *args, **kwargs)
 
     def question_count(self):
-        return len(self.mcquestion.all()) + len(self.tfquestion.all()) + len(self.essayquestion.all())
+        return len(self.mcquestion.all()) + len(self.tfquestion.all()) + len(self.saquestion.all())
 
     class Meta:
         verbose_name = _("Quiz")
@@ -528,8 +529,8 @@ class Quiz(models.Model):
     def get_tfquestions(self):
         return self.tfquestion_set.all()
 
-    def get_questions(self):
-        return self.question_set.all()
+    #def get_questions(self):
+    #    return self.question_set.all()
 
 
     def get_questions(self):
@@ -590,15 +591,15 @@ class SittingManager(models.Manager):
         if quiz.random_order is True:
             mcquestion_set = quiz.mcquestion.all().order_by('?')
             tfquestion_set = quiz.tfquestion.all().order_by('?')
-            question_set = quiz.question.all().order_by('?')
+            saquestion_set = quiz.saquestion.all().order_by('?')
         else:
             mcquestion_set = quiz.mcquestion.all()
             tfquestion_set = quiz.tfquestion.all()
-            question_set = quiz.question.all()
+            saquestion_set = quiz.saquestion.all()
 
         mcquestion_set = [item.id for item in mcquestion_set]
         tfquestion_set = [item.id for item in tfquestion_set]
-        question_set = [item.id for item in question_set]
+        saquestion_set = [item.id for item in saquestion_set]
 
         if (len(mcquestion_set) == 0 and len(tfquestion_set) == 0 and len(question_set) == 0):
             raise ImproperlyConfigured('Question set of the quiz is empty. Please configure questions properly')
@@ -608,13 +609,13 @@ class SittingManager(models.Manager):
         # if quiz.max_questions and quiz.max_questions < len(tfquestion_set):
         #     tfquestion_set = tfquestion_set[:quiz.max_questions]
         # if quiz.max_questions and quiz.max_questions < len(question_set):
-        #     question_set = question_set[:quiz.max_questions]
+        #     saquestion_set = saquestion_set[:quiz.max_questions]
 
         mcquestions = ",".join(map(str, mcquestion_set)) + ","
         tfquestions = ",".join(map(str, tfquestion_set)) + ","
-        questions = ",".join(map(str, question_set)) + ","
+        saquestions = ",".join(map(str, saquestion_set)) + ","
 
-        questions = mcquestions + tfquestions + questions
+        questions = mcquestions + tfquestions + saquestions
 
         new_sitting = self.create(user=user,
                                   quiz=quiz,
@@ -710,6 +711,7 @@ class Sitting(models.Model):
 
         first, _ = self.question_list.split(',', 1)
         question_id = int(first)
+        
         return Question.objects.get_subclass(id=question_id)
 
     def remove_first_question(self):
@@ -805,10 +807,10 @@ class Sitting(models.Model):
         tfquestions = sorted(
             self.quiz.tfquestion.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
-        questions = sorted(
-            self.quiz.question.filter(id__in=question_ids),
+        saquestions = sorted(
+            self.quiz.saquestion.filter(id__in=question_ids),
             key=lambda q: question_ids.index(q.id))
-        questions = mcquestions+ tfquestions+ questions
+        questions = mcquestions+ tfquestions+ saquestions
 
         if with_answers:
             user_answers = json.loads(self.user_answers)

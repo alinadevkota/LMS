@@ -45,18 +45,21 @@ class QuizForm(forms.ModelForm):
     # and hide friendly url for now????
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['mcquestion'].required = False
+        self.fields['mcquestion'].required = True
         self.fields['tfquestion'].required = False
-        self.fields['saquestion'].required = False
+        self.fields['saquestion'].required = False 
+        self.fields['cent_code'].required = True
+        #self.fields['cent_code'].widget = forms.HiddenInput()
+
         #self.fields['url'].required = False
         #self.fields['url'].widget = forms.HiddenInput()
-        last_quiz = Quiz.objects.last()
-        if(last_quiz):
-            self.fields['url'].initial = "quiz" + str(last_quiz.id)
-            self.fields['title'].initial = "quiz" + str(last_quiz.id)
-        else:
-            self.fields['url'].initial = "quiz0"
-            self.fields['title'].initial = "quiz0"
+        #last_quiz = Quiz.objects.last()
+        #if(last_quiz):
+        #    self.fields['url'].initial = "quiz" + str(last_quiz.id)
+        #    self.fields['title'].initial = "quiz" + str(last_quiz.id)
+        #else:
+        #    self.fields['url'].initial = "quiz0"
+        #    self.fields['title'].initial = "quiz0"
 
     class Meta:
         model = Quiz
@@ -82,11 +85,11 @@ class MCQuestionForm(forms.ModelForm):
         model = MCQuestion
         fields = '__all__'
 
-    quiz = forms.ModelMultipleChoiceField(
-        queryset=Quiz.objects.all(),
-        required=False,
-        # label=_("Questions"),
-        widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
+    # quiz = forms.ModelMultipleChoiceField(
+    #     queryset=Quiz.objects.all(),
+    #     required=False,
+    #     # label=_("Questions"),
+    #     widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
 
 
 class TFQuestionForm(forms.ModelForm):
@@ -94,22 +97,22 @@ class TFQuestionForm(forms.ModelForm):
         model = TF_Question
         fields = '__all__'
 
-    quiz = forms.ModelMultipleChoiceField(
-        queryset=Quiz.objects.all(),
-        required=False,
-        # label=_("Questions"),
-        widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
+    # quiz = forms.ModelMultipleChoiceField(
+    #     queryset=Quiz.objects.all(),
+    #     required=False,
+    #     # label=_("Questions"),
+    #     widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
 
 class SAQuestionForm(forms.ModelForm):
     class Meta:
         model = SA_Question
         fields = '__all__'
 
-    quiz = forms.ModelMultipleChoiceField(
-        queryset=Quiz.objects.all(),
-        required=False,
-        # label=_("Questions"),
-        widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
+    # quiz = forms.ModelMultipleChoiceField(
+    #     queryset=Quiz.objects.all(),
+    #     required=False,
+    #     # label=_("Questions"),
+    #     widget=FilteredSelectMultiple(verbose_name=_("Quizzes"), is_stacked=False))
 
 class AnswerForm(forms.ModelForm):
     class Meta:

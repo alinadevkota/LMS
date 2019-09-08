@@ -10,7 +10,7 @@ from django.views.generic import DetailView, ListView, TemplateView, FormView, C
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
 
-from WebApp.models import LectureInfo
+from WebApp.models import CourseInfo
 from .forms import QuestionForm, SAForm, QuizForm, TFQuestionForm, SAQuestionForm, MCQuestionForm, AnsFormset
 from .models import Quiz, Progress, Sitting, MCQuestion, TF_Question, Question, SA_Question, Answer
 
@@ -30,6 +30,31 @@ class SittingFilterTitleMixin(object):
             queryset = queryset.filter(quiz__title__icontains=quiz_filter)
 
         return queryset
+
+class AjaxableResponseMixin:
+    """
+    Mixin to add AJAX support to a form.
+    Must be used with an object-based FormView (e.g. CreateView)
+    """
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
+
+    def form_valid(self, form):
+        # We make sure to call the parent's form_valid() method because
+        # it might do some processing (in the case of CreateView, it will
+        # call form.save() for example).
+        response = super().form_valid(form)
+        if self.request.is_ajax():
+            data = {
+                'pk': self.object.pk,
+            }
+            return JsonResponse(data)
+        else:
+            return response
 
 
 class QuizCreateView(CreatePopupMixin, CreateView):
@@ -74,31 +99,31 @@ def QuizDeleteView(request, pk):
 
 
 class CategoriesListView(ListView):
-    model = LectureInfo
+    model = CourseInfo
 
 
-class ViewQuizListByLecture(ListView):
+class ViewQuizListByCourse(ListView):
     model = Quiz
     template_name = 'view_quiz_category.html'
 
     def dispatch(self, request, *args, **kwargs):
         self.category = get_object_or_404(
-            LectureInfo,
+            CourseInfo,
             category=self.kwargs['category_name']
         )
 
-        return super(ViewQuizListByLecture, self). \
+        return super(ViewQuizListByCourse, self). \
             dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(ViewQuizListByLecture, self) \
+        context = super(ViewQuizListByCourse, self) \
             .get_context_data(**kwargs)
 
         context['category'] = self.category
         return context
 
     def get_queryset(self):
-        queryset = super(ViewQuizListByLecture, self).get_queryset()
+        queryset = super(ViewQuizListByCourse, self).get_queryset()
         return queryset.filter(category=self.category, draft=False)
 
 
@@ -417,10 +442,13 @@ class QuestionCreateView(CreateView):
 class MCQuestionListView(ListView):
     model = MCQuestion
 
+from django.http import JsonResponse
 
-class MCQuestionCreateView(CreateView):
-    model =MCQuestion
+class MCQuestionCreateView(AjaxableResponseMixin, CreateView):
+    model = MCQuestion
     form_class = MCQuestionForm
+    #success_url = reverse_lazy('quiz_create')
+    template_name = 'ajax/mcquestion_form_ajax.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
@@ -438,11 +466,15 @@ class MCQuestionCreateView(CreateView):
             if ans.is_valid():
                 ans.instance = self.object
                 ans.save()
-        return vform
+        new_mcq = {}
+        new_mcq['new_mcq_id'] = self.object.id
+        new_mcq['new_mcq_content'] = self.object.content
+        return JsonResponse(new_mcq)
 
 class MCQuestionUpdateView(UpdateView):
     model = MCQuestion
     form_class = MCQuestionForm
+    success_url = reverse_lazy('quiz_create')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)        
@@ -461,7 +493,30 @@ class MCQuestionUpdateView(UpdateView):
                 ans.instance = self.object
                 ans.save()
         return vform
+
+class MCQuestionUpdateFromQuiz(UpdateView):
+    model = MCQuestion
+    form_class = MCQuestionForm
+    success_url = reverse_lazy('quiz_create')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)        
+        if self.request.POST:
+            context['answers_formset'] = AnsFormset(self.request.POST, instance = self.object)
+        else:
+            context['answers_formset'] = AnsFormset(instance = self.object)
+        return context
     
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        context = self.get_context_data()
+        ans = context['answers_formset']
+        with transaction.atomic():
+            if ans.is_valid():
+                ans.instance = self.object
+                ans.save()
+        return vform
+
 
 class MCQuestionDetailView(DetailView):
     model = MCQuestion
@@ -471,30 +526,73 @@ def MCQuestionDeleteView(request, pk):
     MCQuestion.objects.filter(pk=pk).delete()
     return redirect("mcquestion_list")
 
-#class MCQuestionCreateFromQuiz(CreateView):
-#    model = MCQuestion
-#    form_class = MCQuestionForm
-#    fields = ['figure', 'question', 'explanation', 'answer_order']
+class MCQuestionCreateFromQuiz(CreateView):
+    model = MCQuestion
+    fields = ['figure', 'content', 'explanation', 'answer_order']
 
-#    def get_context_data(self, **kwargs):
-#        context = super().get_context_data(**kwargs) 
-#        if self.request.POST:
-#            context['answers_formset'] = AnsFormset(self.request.POST)
-#        else:
-#            context['answers_formset'] = AnsFormset()
-#        return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        if self.request.POST:
+            context['answers_formset'] = AnsFormset(self.request.POST)
+        else:
+            context['answers_formset'] = AnsFormset()
+        return context
     
-#    def form_valid(self, form):
-#        quiz_id = self.kwargs['quiz_id']
-#        self.object
-#        vform = super().form_valid(form)
-#        context = self.get_context_data()
-#        ans = context['answers_formset']
-#        with transaction.atomic():
-#            if ans.is_valid():
-#                ans.instance = self.object
-#                ans.save()
-#        return vform
+    def form_valid(self, form):
+        related_quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
+        if form.is_valid():
+            self.object = form.save()
+        self.object.cent_code = related_quiz.cent_code
+        self.object.course_code = related_quiz.course_code
+        vform = super().form_valid(form)
+        related_quiz.mcquestion.add(self.object)
+        context = self.get_context_data()
+        ans = context['answers_formset']
+        with transaction.atomic():
+           if ans.is_valid():
+               ans.instance = self.object
+               ans.save()
+        return vform
+    
+    def get_success_url(self, **kwargs):
+        return reverse(
+            'quiz_detail',
+            kwargs = {'pk' : self.kwargs['quiz_id']},
+        )
+
+class MCQuestionUpdateFromQuiz(UpdateView):
+    model = MCQuestion
+    fields = ['figure', 'content', 'explanation', 'answer_order']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)        
+        if self.request.POST:
+            context['answers_formset'] = AnsFormset(self.request.POST, instance = self.object)
+        else:
+            context['answers_formset'] = AnsFormset(instance = self.object)
+        return context
+    
+    def form_valid(self, form):
+        related_quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
+        if form.is_valid():
+            self.object = form.save()
+        self.object.cent_code = related_quiz.cent_code
+        self.object.course_code = related_quiz.course_code
+        vform = super().form_valid(form)
+        related_quiz.mcquestion.add(self.object)
+        context = self.get_context_data()
+        ans = context['answers_formset']
+        with transaction.atomic():
+            if ans.is_valid():
+                ans.instance = self.object
+                ans.save()
+        return vform
+    
+    def get_success_url(self, **kwargs):
+        return reverse(
+            'quiz_detail',
+            kwargs = {'pk' : self.kwargs['quiz_id']},
+        )
 
 # -------------------------_Question Views------------------
 
@@ -502,14 +600,64 @@ class TFQuestionListView(ListView):
     model = TF_Question
 
 
-class TFQuestionCreateView(CreateView):
+class TFQuestionCreateView(AjaxableResponseMixin, CreateView):
     model = TF_Question
     form_class = TFQuestionForm
+    #success_url = reverse_lazy('quiz_create')
+    template_name = 'ajax/tfquestion_form_ajax.html'
+
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        new_tfq = {}
+        new_tfq['new_tfq_id'] = self.object.id
+        new_tfq['new_tfq_content'] = self.object.content
+        return JsonResponse(new_tfq)
+
+class TFQuestionCreateFromQuiz(CreateView):
+    model = TF_Question
+    fields = ['figure', 'content', 'explanation', 'correct']
+    
+    def form_valid(self, form):
+        related_quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
+        if form.is_valid():
+            self.object = form.save()
+        self.object.cent_code = related_quiz.cent_code
+        self.object.course_code = related_quiz.course_code
+        vform = super().form_valid(form)
+        related_quiz.tfquestion.add(self.object)
+        return vform
+    
+    def get_success_url(self, **kwargs):
+        return reverse(
+            'quiz_detail',
+            kwargs = {'pk' : self.kwargs['quiz_id']},
+        )
+
+class TFQuestionUpdateFromQuiz(UpdateView):
+    model = TF_Question
+    fields = ['figure', 'content', 'explanation', 'correct']
+    
+    def form_valid(self, form):
+        related_quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
+        if form.is_valid():
+            self.object = form.save()
+        self.object.cent_code = related_quiz.cent_code
+        self.object.course_code = related_quiz.course_code
+        vform = super().form_valid(form)
+        related_quiz.tfquestion.add(self.object)
+        return vform
+    
+    def get_success_url(self, **kwargs):
+        return reverse(
+            'quiz_detail',
+            kwargs = {'pk' : self.kwargs['quiz_id']},
+        )
 
 
 class TFQuestionUpdateView(UpdateView):
     model = TF_Question
     form_class = TFQuestionForm
+    success_url = reverse_lazy('quiz_create')
 
 
 class TFQuestionDetailView(DetailView):
@@ -525,13 +673,63 @@ def TFQuestionDeleteView(request, pk):
 class SAQuestionListView(ListView):
     model = SA_Question
 
-class SAQuestionCreateView(CreateView):
+class SAQuestionCreateView(AjaxableResponseMixin, CreateView):
     model = SA_Question
     form_class = SAQuestionForm
+    #success_url = reverse_lazy('quiz_create')
+    template_name = 'ajax/saquestion_form_ajax.html'
+
+    def form_valid(self, form):
+        vform = super().form_valid(form)
+        new_saq = {}
+        new_saq['new_saq_id'] = self.object.id
+        new_saq['new_Saq_content'] = self.object.content
+        return JsonResponse(new_saq)
+
+class SAQuestionCreateFromQuiz(CreateView):
+    model = SA_Question
+    fields = ['figure', 'content', 'explanation']
+    
+    def form_valid(self, form):
+        related_quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
+        if form.is_valid():
+            self.object = form.save()
+        self.object.cent_code = related_quiz.cent_code
+        self.object.course_code = related_quiz.course_code
+        vform = super().form_valid(form)
+        related_quiz.saquestion.add(self.object)
+        return vform
+    
+    def get_success_url(self, **kwargs):
+        return reverse(
+            'quiz_detail',
+            kwargs = {'pk' : self.kwargs['quiz_id']},
+        )
+
+class SAQuestionUpdateFromQuiz(UpdateView):
+    model = SA_Question
+    fields = ['figure', 'content', 'explanation']
+    
+    def form_valid(self, form):
+        related_quiz = Quiz.objects.get(id=self.kwargs['quiz_id'])
+        if form.is_valid():
+            self.object = form.save()
+        self.object.cent_code = related_quiz.cent_code
+        self.object.course_code = related_quiz.course_code
+        vform = super().form_valid(form)
+        related_quiz.saquestion.add(self.object)
+        return vform
+    
+    def get_success_url(self, **kwargs):
+        return reverse(
+            'quiz_detail',
+            kwargs = {'pk' : self.kwargs['quiz_id']},
+        )
 
 class SAQuestionUpdateView(UpdateView):
     model = SA_Question
     form_class = SAQuestionForm
+    success_url = reverse_lazy('quiz_create')
 
 class SAQuestionDetailView(DetailView):
     model = SA_Question

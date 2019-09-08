@@ -3,22 +3,22 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 from WebApp.teacher_module import views
-from WebApp.teacher_module.views import LectureInfoListView
+from WebApp.teacher_module.views import CourseInfoListView
 
 urlpatterns = (
     # urls for TodoTInfo
     path('', login_required(views.start), name='teacher_home'),
 )
 urlpatterns += (
-    # urls for LectureInfo
-    path('lectureinfo/', views.LectureInfoListView.as_view(),
-         name='teacher_lectureinfo_list'),
-    path('lectureinfo/create/', views.LectureInfoCreateView.as_view(),
-         name='teacher_lectureinfo_create'),
-    path('lectureinfo/detail/<int:pk>/', views.LectureInfoDetailView.as_view(),
-         name='teacher_lectureinfo_detail'),
-    path('lectureinfo/update/<int:pk>/', views.LectureInfoUpdateView.as_view(),
-         name='teacher_lectureinfo_update'),
+    # urls for CourseInfo
+    path('courseinfo/', views.CourseInfoListView.as_view(),
+         name='teacher_courseinfo_list'),
+    path('courseinfo/create/', views.CourseInfoCreateView.as_view(),
+         name='teacher_courseinfo_create'),
+    path('courseinfo/detail/<int:pk>/', views.CourseInfoDetailView.as_view(),
+         name='teacher_courseinfo_detail'),
+    path('courseinfo/update/<int:pk>/', views.CourseInfoUpdateView.as_view(),
+         name='teacher_courseinfo_update'),
 )
 
 urlpatterns += (

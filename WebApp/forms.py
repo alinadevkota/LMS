@@ -3,11 +3,11 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm, TextInput
 
-from .models import CenterInfo, MemberInfo, LectureInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
+from .models import CenterInfo, MemberInfo, CourseInfo, ChapterInfo, ChapterContentsInfo, ChapterMissonCheckCard, \
     ChapterMissonCheckItem, SessionInfo, InningInfo, QuizInfo, AssignmentInfo, QuestionInfo, AssignAssignmentInfo, \
     AssignAnswerInfo, BoardInfo, \
     BoardContentInfo, InningGroup, ChapterContentMedia, ChapterImgInfo, ChapterMissonCheck, ChapterWrite, GroupMapping, \
-    LearningNote, LectureUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
+    LearningNote, CourseUbtInfo, LessonInfo, LessonLog, MemberGroup, MessageInfo, \
     QExampleInfo, QuizAnswerInfo, QuizExampleInfo, \
     ScheduleInfo, TalkMember, TalkRoom, TalkMessage, TalkMessageRead, TodoInfo, TodoTInfo, USER_ROLES
 
@@ -23,7 +23,7 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = MemberInfo
-        fields = ('username', 'email', 'Member_Gender', 'Center_Code', 'Is_Student', 'Is_Teacher')
+        fields = ('username', 'email', 'Member_Gender', 'Center_Code', 'Is_Student', 'Is_Teacher','Use_Flag')
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -57,9 +57,9 @@ class MemberInfoForm(forms.ModelForm):
         exclude = ('last_login', 'date_joined', 'password', 'is_staff', 'is_active', 'is_superuser')
 
 
-class LectureInfoForm(forms.ModelForm):
+class CourseInfoForm(forms.ModelForm):
     class Meta:
-        model = LectureInfo
+        model = CourseInfo
         fields = '__all__'
 
 
@@ -221,9 +221,9 @@ class LearningNoteForm(forms.ModelForm):
         fields = '__all__'
 
 
-class LectureUbtInfoForm(forms.ModelForm):
+class CourseUbtInfoForm(forms.ModelForm):
     class Meta:
-        model = LectureUbtInfo
+        model = CourseUbtInfo
         fields = '__all__'
 
 
@@ -334,3 +334,8 @@ class ChangeOthersPasswordForm(forms.Form):
         "type": "password"
     }
     password = forms.CharField(widget=forms.TextInput(attrs=attrs))
+
+
+
+
+

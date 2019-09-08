@@ -3,13 +3,18 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.contrib.contenttypes.models import ContentType
 from django.core.files.storage import FileSystemStorage
 from django.db import models as models
-from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, BooleanField, \
-    ImageField, FileField
+from django.db.models import ForeignKey, CharField, IntegerField, DateTimeField, TextField, BooleanField, ImageField, FileField
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
 fs = FileSystemStorage(location='LMS')
 
+USER_ROLES = (
+    ('CenterAdmin', 'CenterAdmin'),
+    ('Teacher', 'Teacher'),
+    ('Student', 'Student'),
+    ('Parent', 'Parent'),
+)
 
 class CenterInfo(models.Model):
     # Fields
@@ -39,21 +44,18 @@ class CenterInfo(models.Model):
         return reverse('centerinfo_delete', args=(self.pk,))
 
 
-USER_ROLES = (
-    ('CenterAdmin', 'CenterAdmin'),
-    ('Teacher', 'Teacher'),
-    ('Student', 'Student'),
-    ('Parent', 'Parent'),
-)
-
-
 class MemberInfo(AbstractUser):
+    Gender_Choices = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
     username_validator = UnicodeUsernameValidator()
+
     username = models.CharField(
         _('username'),
         max_length=150,
         unique=True,
-        help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. Used for login'),
         validators=[username_validator],
         error_messages={
             'unique': _("A user with that username already exists."),
@@ -62,19 +64,16 @@ class MemberInfo(AbstractUser):
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
     email = models.EmailField(_('email address'), blank=True)
-
     is_staff = models.BooleanField(
         _('staff status'),
-        default=True,
+        default=False,
         help_text=_('Designates whether the user can log into this admin site.'),
     )
-
     is_superuser = models.BooleanField(
         _('is_superuser status'),
-        default=True,
+        default=False,
         help_text=_('Designates whether the user is superuser'),
     )
-
     is_active = models.BooleanField(
         _('active'),
         default=True,
@@ -84,19 +83,12 @@ class MemberInfo(AbstractUser):
         ),
     )
 
-    # Fields
-    # Member_ID = models.CharField(max_length=250, blank=True, null=True)
+    Member_ID = models.CharField(max_length=250, blank=True, null=True, help_text=_('ID assigned by university'))
     password = models.CharField(_('password'), max_length=128)
-    # remove this password field
-    # Member_Password = models.CharField(max_length=250, blank=True, null=True)
-    # Member_Type = models.IntegerField(blank=True, null=True)
-    # Member_Name = models.CharField(max_length=500, blank=True, null=True)
     Member_Permanent_Address = models.CharField(max_length=500, blank=True, null=True)
     Member_Temporary_Address = models.CharField(max_length=500, blank=True, null=True)
     Member_BirthDate = models.DateTimeField(blank=True, null=True)
-    # Member_Email = models.CharField(max_length=150, blank=True, null=True)
     Member_Phone = models.CharField(max_length=150, blank=True, null=True)
-    Member_Gender = models.CharField(max_length=150, blank=True, null=True)
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Register_Agent = CharField(max_length=500, blank=True, null=True)
@@ -108,8 +100,8 @@ class MemberInfo(AbstractUser):
     Is_Student = models.BooleanField(default=False)
     Is_CenterAdmin = models.BooleanField(default=False)
     Is_Parent = models.BooleanField(default=False)
+    Member_Gender = models.CharField(max_length=1, choices=Gender_Choices)
 
-    # Member_Role = models.CharField(max_length=30, default="Student")
 
     # Relationship Fields
     Center_Code = ForeignKey(
@@ -135,22 +127,21 @@ class MemberInfo(AbstractUser):
     #     return self._create_user(username, email, password, **extra_fields)
 
 
-class LectureInfo(models.Model):
+class CourseInfo(models.Model):
     # Fields
-    Lecture_Name = CharField(max_length=500, blank=True, null=True)
-    Lecture_Description = TextField(blank=True, null=True)
-    Lecture_Cover_File = ImageField(upload_to="Lecture_images/", blank=True, null=True, default='Images/course.jpg')
-    Lecture_Level = IntegerField(blank=True, null=True)
-    Lecture_Info = TextField(blank=True, null=True)
-    # teacher = CharField(max_length=120, blank=True, null=True)
+    Course_Name = CharField(max_length=500, blank=True, null=True)
+    Course_Description = TextField(blank=True, null=True)
+    Course_Cover_File = ImageField(upload_to="Course_images/", blank=True, null=True, default='Images/course.jpg')
+    Course_Level = IntegerField(blank=True, null=True)
+    Course_Info = TextField(blank=True, null=True)
 
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
     Register_Agent = CharField(max_length=500, blank=True, null=True)
 
-    # Lecture_Certification = CharField(max_length=1, blank=True, null=True)
-    Lecture_Provider = CharField(max_length=250, blank=True, null=True)
+    Course_Provider = CharField(max_length=250, blank=True, null=True)
+    # Course_Certification = CharField(max_length=1, blank=True, null=True)
     # cert_crit_prog = IntegerField(blank=True, null=True)
     # cert_crit_post = IntegerField(blank=True, null=True)
     # cert_crit_ubt = IntegerField(blank=True, null=True)
@@ -159,11 +150,11 @@ class LectureInfo(models.Model):
     # Relationship Fields
     Center_Code = ForeignKey(
         'CenterInfo',
-        related_name="lectureinfos", on_delete=models.DO_NOTHING)
+        related_name="courseinfos", on_delete=models.DO_NOTHING)
 
     # Teacher_Code = ForeignKey(
     #     'MemberInfo',
-    #     related_name="lectureinfos", on_delete=models.DO_NOTHING)
+    #     related_name="courseinfos", on_delete=models.DO_NOTHING)
 
     class Meta:
         ordering = ('-pk',)
@@ -172,25 +163,29 @@ class LectureInfo(models.Model):
         return u'%s' % self.pk
 
     def student_get_absolute_url(self):
-        return reverse('student_lectureinfo_detail', args=(self.pk,))
+        return reverse('student_courseinfo_detail', args=(self.pk,))
 
     def get_absolute_url(self):
-        return reverse('lectureinfo_detail', args=(self.pk,))
+        return reverse('courseinfo_detail', args=(self.pk,))
 
     def get_update_url(self):
-        return reverse('lectureinfo_update', args=(self.pk,))
+        return reverse('courseinfo_update', args=(self.pk,))
 
     def __str__(self):
-        return self.Lecture_Name
+        return self.Course_Name
 
 
 class ChapterInfo(models.Model):
     # Fields
     Chapter_No = IntegerField(blank=True, null=True)
     Chapter_Name = CharField(max_length=200, blank=True, null=True)
-    # topic = TextField(blank=True, null=True)
     Summary = TextField(blank=True, null=True)
     Page_Num = IntegerField(blank=True, null=True)
+
+    Use_Flag = BooleanField(default=True)
+    Register_DateTime = DateTimeField(auto_now_add=True)
+    Updated_DateTime = DateTimeField(auto_now=True)
+    Register_Agent = CharField(max_length=500, blank=True, null=True)
     # vod_size = CharField(max_length=200, blank=True, null=True)
     # intro = TextField(blank=True, null=True)
     # target = TextField(blank=True, null=True)
@@ -200,11 +195,6 @@ class ChapterInfo(models.Model):
     # bottom_img3 = CharField(max_length=200, blank=True, null=True)
     # thum_file = CharField(max_length=200, blank=True, null=True)
     # vod_file = CharField(max_length=200, blank=True, null=True)
-
-    Use_Flag = BooleanField(default=True)
-    Register_DateTime = DateTimeField(auto_now_add=True)
-    Updated_DateTime = DateTimeField(auto_now=True)
-    Register_Agent = CharField(max_length=500, blank=True, null=True)
 
     # today = TextField(blank=True, null=True)
     # chapter_type = CharField(max_length=50, blank=True, null=True)
@@ -234,25 +224,25 @@ class ChapterInfo(models.Model):
     # chapter_use_time = TimeField(blank=True, null=True)
 
     # Relationship Fields
-    Lecture_Code = ForeignKey(
-        'LectureInfo',
+    Course_Code = ForeignKey(
+        'CourseInfo',
         related_name="chapterinfos", on_delete=models.DO_NOTHING
     )
 
     class Meta:
-        ordering = ('-pk',)
+        ordering = ('pk',)
 
     def __unicode__(self):
         return u'%s' % self.pk
 
     def student_get_absolute_url(self):
-        return reverse('student_chapterinfo_detail', args=(self.Lecture_Code.id, self.pk,))
+        return reverse('student_chapterinfo_detail', args=(self.Course_Code.id, self.pk,))
 
     def get_absolute_url(self):
-        return reverse('chapterinfo_detail', args=(self.Lecture_Code.id, self.pk,))
+        return reverse('chapterinfo_detail', args=(self.Course_Code.id, self.pk,))
 
     def get_update_url(self):
-        return reverse('chapterinfo_update', args=(self.Lecture_Code.id, self.pk,))
+        return reverse('chapterinfo_update', args=(self.Course_Code.id, self.pk,))
 
     def __str__(self):
         return self.Chapter_Name
@@ -321,31 +311,15 @@ class ChapterContentsInfo(models.Model):
         return reverse('chaptercontentsinfo_update', args=(self.pk,))
 
 
-# class HomeworkInfo(models.Model):
-#     Homework_Topic = CharField(max_length=500, blank=True, null=True)
-#     Use_Flag = BooleanField(default=True)
-#     Register_DateTime = DateTimeField(auto_now_add=True)
-#     Updated_DateTime = DateTimeField(auto_now=True)
-#     Register_Agent = CharField(max_length=500, blank=True, null=True)
-#
-#     Chapter_Code = ForeignKey(
-#         'ChapterInfo',
-#         related_name="homeworkinfos", on_delete=models.DO_NOTHING
-#     )
-#
-#     def __str__(self):
-#         return self.Homework_Topic
-
-
-# AssignmentModels
+#================AssignmentModels================#
 class AssignmentInfo(models.Model):
     Assignment_Topic = CharField(max_length=500, blank=True, null=True)
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
     Updated_DateTime = DateTimeField(auto_now=True)
     Assignment_Deadline = DateTimeField(null=True, blank=True)
-    Lecture_Code = ForeignKey(
-        'LectureInfo',
+    Course_Code = ForeignKey(
+        'CourseInfo',
         related_name="assignmentinfos", on_delete=models.DO_NOTHING
     )
     Chapter_Code = ForeignKey(
@@ -360,11 +334,14 @@ class AssignmentInfo(models.Model):
     def __str__(self):
         return self.Assignment_Topic
 
+    def student_get_absolute_url(self):
+        return reverse('student_assignmentinfo_detail', args=(self.Course_Code.id, self.Chapter_Code.id, self.pk,))
+
     def get_absolute_url(self):
-        return reverse('assignmentinfo_detail', args=(self.Lecture_Code.id, self.Chapter_Code.id, self.pk,))
+        return reverse('assignmentinfo_detail', args=(self.Course_Code.id, self.Chapter_Code.id, self.pk,))
 
     def get_update_url(self):
-        return reverse('assignmentinfo_update', args=(self.Lecture_Code.id, self.Chapter_Code.id, self.pk,))
+        return reverse('assignmentinfo_update', args=(self.Course_Code.id, self.Chapter_Code.id, self.pk,))
 
 
 def upload_to(instance, filename):
@@ -375,7 +352,7 @@ class QuestionInfo(models.Model):
     # Fields
     # subject_code = IntegerField(blank=True, null=True)
     # question_type = CharField(max_length=10, blank=True, null=True)
-    Question_Title = CharField(max_length=4000, blank=True, null=True)
+    Question_Title = CharField(max_length=4000)
     # question_media_type = CharField(max_length=10, blank=True, null=True)
     # question_media_file = CharField(max_length=200, blank=True, null=True)
     Question_Score = IntegerField(blank=True, null=True)
@@ -386,14 +363,20 @@ class QuestionInfo(models.Model):
     Updated_DateTime = DateTimeField(auto_now=True)
 
     Question_Media_File = FileField(upload_to=upload_to, blank=True, null=True)
-    Question_Description = TextField(blank=True, null=True)
+    Question_Description = TextField()
+    Answer_Choices = (
+        ('S', 'Short Answer'),
+        ('F', 'File Upload'),
+    )
+    Answer_Type = CharField(max_length=1, choices=Answer_Choices)
+
     # question_level = IntegerField(blank=True, null=True)
     # teacher_contents = CharField(max_length=500, blank=True, null=True)
     # student_contents = CharField(max_length=500, blank=True, null=True)
 
     # Relationship Fields
-    # Lecture_Code = ForeignKey(
-    #     'LectureInfo',
+    # Course_Code = ForeignKey(
+    #     'CourseInfo',
     #     related_name="questioninfos", on_delete=models.DO_NOTHING
     # )
     # Chapter_Code = ForeignKey(
@@ -412,7 +395,7 @@ class QuestionInfo(models.Model):
     )
 
     class Meta:
-        ordering = ('-pk',)
+        ordering = ('pk',)
 
     def __unicode__(self):
         return u'%s' % self.pk
@@ -582,8 +565,8 @@ class AssignAnswerInfo(models.Model):
 #     Answer_Description = models.TextField(blank=True, null=True)
 #     Answer_Score = IntegerField(blank=True, null=True)
 #     # Relationship Fields
-#     # lecture_code = ForeignKey(
-#     #     'LectureInfo',
+#     # course_code = ForeignKey(
+#     #     'CourseInfo',
 #     #      related_name="omranswerinfos", on_delete=models.DO_NOTHING
 #     # )
 #     # chapter_code = ForeignKey(
@@ -694,8 +677,8 @@ class InningGroup(models.Model):
     #     'InningInfo',
     #     related_name="inninggroups", on_delete=models.DO_NOTHING
     # )
-    Lecture_Code = ForeignKey(
-        'LectureInfo',
+    Course_Code = ForeignKey(
+        'CourseInfo',
         related_name="inninggroups", on_delete=models.DO_NOTHING
     )
 
@@ -851,8 +834,8 @@ class QuizInfo(models.Model):
     quiz_media_file2 = CharField(max_length=250, blank=True, null=True)
 
     # Relationship Fields
-    lecture_code = ForeignKey(
-        'LectureInfo',
+    course_code = ForeignKey(
+        'CourseInfo',
         related_name="quizinfos", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
@@ -1074,8 +1057,8 @@ class LearningNote(models.Model):
         'InningInfo',
         related_name="learningnotes", on_delete=models.DO_NOTHING
     )
-    lecture_code = ForeignKey(
-        'LectureInfo',
+    course_code = ForeignKey(
+        'CourseInfo',
         related_name="learningnotes", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
@@ -1096,7 +1079,7 @@ class LearningNote(models.Model):
         return reverse('learningnote_update', args=(self.pk,))
 
 
-class LectureUbtInfo(models.Model):
+class CourseUbtInfo(models.Model):
     # Fields
     Use_Flag = BooleanField(default=True)
     Register_DateTime = DateTimeField(auto_now_add=True)
@@ -1105,11 +1088,11 @@ class LectureUbtInfo(models.Model):
     # Relationship Fields
     quiz_code = ForeignKey(
         'QuizInfo',
-        related_name="lectureubtinfos", on_delete=models.DO_NOTHING
+        related_name="courseubtinfos", on_delete=models.DO_NOTHING
     )
-    lecture_code = ForeignKey(
-        'LectureInfo',
-        related_name="lectureubtinfos", on_delete=models.DO_NOTHING
+    course_code = ForeignKey(
+        'CourseInfo',
+        related_name="courseubtinfos", on_delete=models.DO_NOTHING
     )
 
     class Meta:
@@ -1119,10 +1102,10 @@ class LectureUbtInfo(models.Model):
         return u'%s' % self.pk
 
     def get_absolute_url(self):
-        return reverse('lectureubtinfo_detail', args=(self.pk,))
+        return reverse('courseubtinfo_detail', args=(self.pk,))
 
     def get_update_url(self):
-        return reverse('lectureubtinfo_update', args=(self.pk,))
+        return reverse('courseubtinfo_update', args=(self.pk,))
 
 
 class LessonInfo(models.Model):
@@ -1143,8 +1126,8 @@ class LessonInfo(models.Model):
     download_date = CharField(max_length=19, blank=True, null=True)
 
     # Relationship Fields
-    lecture_code = ForeignKey(
-        'LectureInfo',
+    course_code = ForeignKey(
+        'CourseInfo',
         related_name="lessoninfos", on_delete=models.DO_NOTHING
     )
     member_code = ForeignKey(
@@ -1199,8 +1182,8 @@ class LessonLog(models.Model):
         'LessonInfo',
         related_name="lessonlogs", on_delete=models.DO_NOTHING
     )
-    lecture_code = ForeignKey(
-        'LectureInfo',
+    course_code = ForeignKey(
+        'CourseInfo',
         related_name="lessonlogs", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
@@ -1297,8 +1280,8 @@ class MessageInfo(models.Model):
 #         'OmrQuestionInfo',
 #         related_name="omrassigninfos", on_delete=models.DO_NOTHING
 #     )
-#     lecture_code = ForeignKey(
-#         'LectureInfo',
+#     course_code = ForeignKey(
+#         'CourseInfo',
 #         related_name="omrassigninfos", on_delete=models.DO_NOTHING
 #     )
 #     chapter_code = ForeignKey(
@@ -1362,8 +1345,8 @@ class MessageInfo(models.Model):
 #     Updated_DateTime = DateTimeField(auto_now=True)
 #     Register_Agent = CharField(max_length=500, blank=True, null=True)
 #     # Relationship Fields
-#     lecture_code = ForeignKey(
-#         'LectureInfo',
+#     course_code = ForeignKey(
+#         'CourseInfo',
 #         related_name="qanswerlogs", on_delete=models.DO_NOTHING
 #     )
 #     member_code = ForeignKey(
@@ -1434,8 +1417,8 @@ class QuizAnswerInfo(models.Model):
     test_type = IntegerField(blank=True, null=True)
 
     # Relationship Fields
-    lecture_code = ForeignKey(
-        'LectureInfo',
+    course_code = ForeignKey(
+        'CourseInfo',
         related_name="quizanswerinfos", on_delete=models.DO_NOTHING
     )
     chapter_code = ForeignKey(
@@ -1558,8 +1541,8 @@ class TalkRoom(models.Model):
     use_flag = BooleanField(blank=True, null=True)
 
     # Relationship Fields
-    lecture_code = ForeignKey(
-        'LectureInfo',
+    course_code = ForeignKey(
+        'CourseInfo',
         related_name="talkrooms", on_delete=models.DO_NOTHING
     )
     inning_code = ForeignKey(
@@ -1655,8 +1638,8 @@ class TodoInfo(models.Model):
         'MemberInfo',
         related_name="todoinfos", on_delete=models.DO_NOTHING
     )
-    lecture_code = ForeignKey(
-        'LectureInfo',
+    course_code = ForeignKey(
+        'CourseInfo',
         related_name="todoinfos", on_delete=models.DO_NOTHING
     )
 

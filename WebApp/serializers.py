@@ -31,13 +31,13 @@ class MemberInfoSerializer(serializers.ModelSerializer):
         )
 
 
-class LectureInfoSerializer(serializers.ModelSerializer):
+class CourseInfoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.LectureInfo
+        model = models.CourseInfo
         fields = (
-            'pk', 'Lecture_Name', 'Lecture_Description', 'Lecture_Cover_File', 'Lecture_Level',
-            'Lecture_Info', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent',
-            'Lecture_Provider', 'Center_Code'
+            'pk', 'Course_Name', 'Course_Description', 'Course_Cover_File', 'Course_Level',
+            'Course_Info', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent',
+            'Course_Provider', 'Center_Code'
         )
 
 
@@ -46,7 +46,7 @@ class ChapterInfoSerializer(serializers.ModelSerializer):
         model = models.ChapterInfo
         fields = (
             'pk', 'Chapter_No', 'Chapter_Name', 'Summary', 'Page_Num', 'Use_Flag',
-            'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'Lecture_Code'
+            'Register_DateTime', 'Updated_DateTime', 'Register_Agent', 'Course_Code'
         )
 
 
@@ -81,9 +81,10 @@ class InningInfoSerializer(serializers.ModelSerializer):
         model = models.InningInfo
         fields = (
             'pk', 'Inning_Name', 'Start_Date', 'End_Date', 'Use_Flag', 'Register_DateTime',
-            'Updated_DateTime','Groups','Course_Group',
+            'Updated_DateTime', 'Groups', 'Course_Group',
             'Register_Agent', 'Center_Code'
         )
+
 
 class SessionInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -92,21 +93,25 @@ class SessionInfoSerializer(serializers.ModelSerializer):
             'pk', 'Session_Name', 'Description', 'Use_Flag', 'Center_Code'
         )
 
+
 class InningGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.InningGroup
         fields = (
-            'pk', 'Teacher_Code', 'Lecture_Code', 'Use_Flag', 'Register_DateTime',
-            'Updated_DateTime', 'Register_Agent','InningGroup_Name','Center_Code'
+            'pk', 'Teacher_Code', 'Course_Code', 'Use_Flag', 'Register_DateTime',
+            'Updated_DateTime', 'Register_Agent', 'InningGroup_Name', 'Center_Code'
         )
+
 
 class GroupMappingSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.GroupMapping
         fields = (
             'pk', 'Center_Code', 'Students', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
-            'Register_Agent','GroupMapping_Name'
+            'Register_Agent', 'GroupMapping_Name'
         )
+
+
 #
 # class OmrQuestionInfoSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -133,8 +138,8 @@ class AssignmentInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.AssignmentInfo
         fields = (
-            'pk', 'Assignment_Topic','Assignment_Deadline', 'Use_Flag', 'Register_DateTime',
-            'Updated_DateTime', 'Register_Agent', 'Lecture_Code', 'Chapter_Code'
+            'pk', 'Assignment_Topic', 'Assignment_Deadline', 'Use_Flag', 'Register_DateTime',
+            'Updated_DateTime', 'Register_Agent', 'Course_Code', 'Chapter_Code'
         )
 
 
@@ -144,8 +149,10 @@ class QuestionInfoSerializer(serializers.ModelSerializer):
         fields = (
             'pk',
             'Question_Title', 'Question_Score', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime',
-            'Register_Agent', 'Question_Media_File', 'Question_Description', 'Lecture_Code', 'Chapter_Code'
+            'Register_Agent', 'Question_Media_File', 'Question_Description', 'Course_Code', 'Chapter_Code',
+            'Answer_Choices', 'Answer_Type'
         )
+
 
 class AssignAssignmentInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -193,8 +200,6 @@ class BoardContentInfoSerializer(serializers.ModelSerializer):
         )
 
 
-
-
 class ChapterContentMediaSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ChapterContentMedia
@@ -230,9 +235,6 @@ class ChapterWriteSerializer(serializers.ModelSerializer):
         )
 
 
-
-
-
 class LearningNoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.LearningNote
@@ -241,9 +243,9 @@ class LearningNoteSerializer(serializers.ModelSerializer):
         )
 
 
-class LectureUbtInfoSerializer(serializers.ModelSerializer):
+class CourseUbtInfoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.LectureUbtInfo
+        model = models.CourseUbtInfo
         fields = (
             'pk', 'Use_Flag', 'Register_DateTime', 'Updated_DateTime', 'Register_Agent'
         )

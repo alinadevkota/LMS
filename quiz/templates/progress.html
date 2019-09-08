@@ -4,7 +4,13 @@
 {% load quiz_tags %}
 
 {% block title %} {% trans "Progress Page" %} {% endblock %}
-{% block description %} {% trans "User Progress Page" %} {% endblock %}
+{% block description %} {% trans "User Progress Page" %} {% endblock %} 
+{% block breadcrumb %} 
+<li class="breadcrumb-item"><a href="/">QUIZ</a></li>
+                
+ 
+<li class="breadcrumb-item active" aria-current="page">PROGRESS PAGE</li> 
+{% endblock %} 
 
 {% block content %}
 

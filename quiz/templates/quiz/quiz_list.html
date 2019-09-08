@@ -2,12 +2,16 @@
 {% load i18n %}
 {% block title %}{% trans "All Quizzes" %}{% endblock %}
 
+{% block breadcrumb %} 
+<li class="breadcrumb-item"><a href="/">QUIZ</a></li>
+                
+ 
+<li class="breadcrumb-item active" aria-current="page">QUIZ LIST</li> 
+{% endblock %} 
+
 {% block content %}
 
-    {% block breadcrumb %}
-    <!-- <li class="breadcrumb-item active" aria-current="page">Quizzes
-    </li> -->
-{% endblock %}
+
 
 <div class=" ">
 	  <div class="row exam-results1">
@@ -33,7 +37,7 @@
 		  <thead>
 			<tr class="quiz-capital">
 				<th>{% trans "Title" %}</th>
-				<th>{% trans "Lecture -> Chapter" %}</th>
+				<th>{% trans "Course -> Chapter" %}</th>
 			  <th>{% trans "No. of Questions" %}</th>
 			  <th>{% trans "Type" %}</th>
 			  <th>{% trans "Url" %}</th>

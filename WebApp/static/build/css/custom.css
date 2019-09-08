@@ -81,11 +81,13 @@ html, body {
 
 .header_hr {
     border-color: #c2d6d6;
+
 }
 
 
 .table-responsive {
     /* padding:1em; */
+    overflow-x: hidden;!important;
 }
 
 .tableHeader {
@@ -121,7 +123,7 @@ html, body {
     color: #73879C
 }
 
-.lecture_submit {
+.course_submit {
     text-align: center;
 }
 
@@ -3881,7 +3883,7 @@ ul.project_files li a i {
 }
 
 .form-group .btn {
-    margin-bottom: -6px;
+    margin-bottom: 0px;
 }
 
 .input-group-btn .btn {
@@ -4593,7 +4595,8 @@ fieldset {
     margin: 0;
     padding: 0;
     border: 0 solid #CCC;
-    overflow: hidden
+    overflow: hidden;
+    height: auto !important
 }
 
 .wizard_horizontal ul.wizard_steps {
@@ -5012,7 +5015,7 @@ ul.notifications {
     color: #009999;
 }
 
-.lectureInfoListingHeader {
+.courseInfoListingHeader {
     text-align: center;
 
 }
@@ -5517,11 +5520,11 @@ article {
     cursor: pointer;
 }
 
-.lectureList:hover {
+.courseList:hover {
     cursor: pointer;
 }
 
-.lectures:hover {
+.courses:hover {
     background-color: lightgray;
 }
 
@@ -5600,7 +5603,7 @@ article {
     overflow: auto;
 }
 
-/*teacher lecturelist*/
+/*teacher courselist*/
 .cardgrid {
     background-color: white;
     border-radius: 0.25rem;
@@ -5610,7 +5613,7 @@ article {
     overflow: hidden;
 }
 
-/*  teacher lecturelist end*/
+/*  teacher courselist end*/
 
 #FormID {
     border-radius: 10px;
@@ -5694,7 +5697,7 @@ article {
 
 }
 
-.lectureDescription {
+.courseDescription {
     padding-left: 10px;
 }
 
@@ -5708,6 +5711,8 @@ article {
     text-align: center;
     margin-top: 15px;
 }
+
+
 
 #button.col-md-3.text-right {
     margin-top: 15px;
@@ -5991,7 +5996,8 @@ input[type=checkbox], input[type=radio] {
 
     font-weight: 600;
 
-    color: black;
+    /*color: black;*/
+
 
 }
 
@@ -6026,6 +6032,10 @@ input[type=checkbox], input[type=radio] {
 
 /* ends */
 /* FORM QUIZ */
+.quiz-admin-btn {
+    margin-top: 10px
+}
+
 .related-widget-wrapper {
     width: 100%;
 }
@@ -6100,6 +6110,26 @@ input[type=checkbox], input[type=radio] {
 
 }
 
+.add-mcq {
+    padding: 8px 8px;
+    background-color: #007fbe;
+    border: none;
+    color: white;
+    border-radius: 5px;
+}
+
+.mcq-edit {
+    margin-top: 10px;
+}
+
+.mcq-line li {
+    display: inline-block;
+}
+
+.add-more-text {
+    cursor: pointer;
+}
+
 /* end */
 /*inninginfoform popup*/
 
@@ -6117,7 +6147,51 @@ input[type=checkbox], input[type=radio] {
     width: 1050px;
 }
 
-/*screen loading*/
+/* quiz create page */
+.quiz-type-head{
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 16px;
+    margin-bottom: 20px;
+
+
+}
+.quiz-type-border{
+    border-bottom: 1px solid #cccccc!important;
+    margin-bottom: 10px;
+}
+
+.qts-button {
+    padding: 4px 6px;
+    color: white;
+    background-color: #007fbe;
+    text-align: center
+}
+
+.questions-only {
+    text-align: right;
+    padding: 0 0 10px 0;
+    margin-top: 10px
+
+}
+
+.quiz-add-label {
+    padding-top: 13px;
+    text-transform: uppercase;
+}
+
+.tabButton {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.tabButton.active {
+    color: #000000;
+}
+
 .se-pre-con {
     position: fixed;
     left: 0px;
@@ -6125,17 +6199,9 @@ input[type=checkbox], input[type=radio] {
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: url(http://smallenvelop.com/wp-content/uploads/2014/08/Preloader_11.gif) center no-repeat #fff;
+    background: url('../../images/uLMS2019_Loading_SVG.svg') center no-repeat #fff;
+    /* http://smallenvelop.com/wp-content/uploads/2014/08/Preloader_11.gif */
 }
 
+/*memberinfo list status buttons*/
 
-/* Course Forum */
-.course_btn{
-    margin-top: -44px;
-}
-
-.btn-white {
-    color: #444444;
-    background-color: #ffffff;
-    border-color: #efefef;
-}

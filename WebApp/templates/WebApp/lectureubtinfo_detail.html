@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'lectureubtinfo_list' %}">LectureUbtInfo Listing</a></p>
+<p><a class="btn btn-default" href="{% url 'courseubtinfo_list' %}">CourseUbtInfo Listing</a></p>
 <table class="table">
 <tr><td>use_flag</td><td>{{ object.use_flag }}</td></tr>
 <tr><td>reg_date</td><td>{{ object.reg_date }}</td></tr>
@@ -11,6 +11,6 @@
 <tr><td>udt_time</td><td>{{ object.udt_time }}</td></tr>
 <tr><td>udt_agent</td><td>{{ object.udt_agent }}</td></tr>
 </table>
-<a class="btn btn-primary" href="{{object.get_update_url}}">Edit LectureUbtInfo</a>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit CourseUbtInfo</a>
 
 {% endblock %}

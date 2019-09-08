@@ -95,32 +95,20 @@
 
 
                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                <label for="id_Member_Gender" class="control-label ">
-                                    Member Gender
-                                </label>
-                                <select name="Member_Gender" id="id_Member_Gender" value="{{ object.Member_Gender }}"
-                                        required="required"
-                                        class="select form-control">
-                                    <option value="">Select Gender</option>
-                                    <option value="1" {% if object.Member_Gender == '1' %}selected{% endif %}>Male</option>
-                                    <option value="2" {% if object.Member_Gender == '2' %}selected{% endif %}>Female</option>
-
-                                    <span class="fa fa-child form-control-feedback left" aria-hidden="true"></span>
-                                </select>
+                                {#                                <label for="id_Member_Gender" class="control-label ">#}
+                                {#                                    Member Gender#}
+                                {#                                </label>#}
+                                {#                                <select name="Member_Gender" id="id_Member_Gender" value="{{ object.Member_Gender }}"#}
+                                {#                                        required="required"#}
+                                {#                                        class="select form-control">#}
+                                {#                                    <option value="">Select Gender</option>#}
+                                {#                                    <option value="1" {% if object.Member_Gender == '1' %}selected{% endif %}>Male</option>#}
+                                {#                                    <option value="2" {% if object.Member_Gender == '2' %}selected{% endif %}>Female</option>#}
+                                {##}
+                                {#                                    <span class="fa fa-child form-control-feedback left" aria-hidden="true"></span>#}
+                                {#                                </select>#}
+                                {{ form.Member_Gender|as_crispy_field }}
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                <label>
-                                    Status
-                                </label><br>
-                                <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
-                                        {% if object.Use_Flag == False %}
-                                       &nbsp;
-                                        {% else %}
-                                       checked
-                                        {% endif %}
-                                ><br> <br>
-                            </div>
-
                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group  has-feedback">
                                     <b>Member Type</b>
@@ -133,11 +121,29 @@
 
                                     {{ form.Is_Student }}<br>
                                     <b>Student</b>
-
                                 </div>
-
-
                             </div>
+                            {% if 'create' in request.path %}
+                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                    <input type="hidden" name="Use_Flag" id="id_Use_Flag"
+                                           value="True"
+                                           class="select form-control">
+                                </div>
+                            {% elif 'update' in request.path %}
+                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                    <label>
+                                        Status
+                                    </label><br>
+                                    <input type="checkbox" id="id_Use_Flag" class="js-switch" name="Use_Flag"
+                                            {% if object.Use_Flag == False %}
+                                           &nbsp;
+                                            {% else %}
+                                           checked
+                                            {% endif %}
+                                    ><br> <br>
+                                </div>
+                            {% endif %}
+
                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                 <input type="hidden" name="Center_Code" id="id_Center_Code"
                                        value="{{ request.user.Center_Code.id }}"
