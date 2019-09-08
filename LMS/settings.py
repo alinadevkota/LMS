@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'forum',
     'quiz',
     'survey',
+    'formtools',
 ]
 
 MIDDLEWARE = [
