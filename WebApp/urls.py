@@ -127,7 +127,7 @@ urlpatterns += (
     path('courseinfo/<int:course>/create/', views.ChapterInfoCreateView.as_view(), name='chapterinfo_create'),
     path('courseinfo/<int:course>/chapterinfo/<int:pk>/', views.ChapterInfoDetailView.as_view(), name='chapterinfo_detail'),
     path('courseinfo/<int:course>/chapterinfo/<int:pk>/edit/', views.ChapterInfoUpdateView.as_view(), name='chapterinfo_update'),
-    path('courseinfo/<int:course>/forum/' , views.CourseForum.as_view, name='Course_Forum'),
+    path('courseinfo/<int:course>/forum/' , views.CourseForum.as_view(), name='Course_Forum'),
 )
 
 urlpatterns += (

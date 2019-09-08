@@ -10,7 +10,7 @@
         <form method="get" action="">
             <div class="col-md-4">
                 <input type="text" name="query" placeholder="Search Lecture" value="{{ request.GET.query }}"
-                       class="form-control">
+                    class="form-control">
             </div>
             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i>&nbsp;Search</button>
 
@@ -31,90 +31,89 @@
 
     <div class="container" id="divID">
         {% for object in object_list %}
-            <div class="col-md-3 col-sm-6 col-xs-12" id="listCard">
-                <div class="gridContentsList">
-                    <div class="card-header">
-                        <a href="{% if '/teachers' in request.path %}
+        
+        <div class="col-md-3 col-sm-6 col-xs-12" id="listCard">
+            <div class="gridContentsList">
+                <div class="card-header">
+                    <a href="{% if '/teachers' in request.path %}
                                 /teachers{{ object.get_absolute_url }}
                             {% else %}
                                {{ object.get_absolute_url }}
                             {% endif %}">
-                            <img id="lectureListImage" class="card-img-top" src="
+                        <img id="lectureListImage" class="card-img-top" src="
                             {% if object.Lecture_Cover_File %}
                                 /media/{{ object.Lecture_Cover_File }}
                             {% else %}
                                 {% static 'images/course.jpg' %}
-                            {% endif %}"
-                                 alt="Card image cap" width="100%" height="180px" style="object-fit: cover">
-                        </a>
-                    </div>
-                    <div class="card-body" id="cardInfo">
-                        <h2 class="card-title"><strong><a
-                                href="{% if '/teachers' in request.path %}
+                            {% endif %}" alt="Card image cap" width="100%" height="180px" style="object-fit: cover">
+                    </a>
+                </div>
+                <div class="card-body" id="cardInfo">
+                    <h2 class="card-title"><strong><a href="{% if '/teachers' in request.path %}
                                         /teachers{{ object.get_absolute_url }}
                                       {% else %}
                                         {{ object.get_absolute_url }}
                                       {% endif %}">{{ object.Lecture_Name }}</a></strong></h2>
 
-                        {#                        <p class="ratingIcons">#}
-                        {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
-                        {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
-                        {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
-                        {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
-                        {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
-                        {#                        </p>#}
+                    {#                        <p class="ratingIcons">#}
+                    {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
+                    {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
+                    {#                            <span class="fa fa-fw fa-star text-yellow-800"></span>#}
+                    {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
+                    {#                            <span class="fa fa-fw fa-star-o text-yellow-800"></span>#}
+                    {#                        </p>#}
 
-                        <hr>
+                    <hr>
 
-                        <h5 class="lectureDescription" style="padding-bottom: 10px;">
-                            {% if object.Lecture_Description %}
-                                {{ object.Lecture_Description }}
-                            {% else %}
-                                No Description
-                            {% endif %}
-                        </h5>
+                    <h5 class="lectureDescription" style="padding-bottom: 10px;">
+                        {% if object.Lecture_Description %}
+                        {{ object.Lecture_Description }}
+                        {% else %}
+                        No Description
+                        {% endif %}
+                    </h5>
 
 
-{#                        <div class="row d-flex flex-row">#}
-{#                            <div class="col-md-3">#}
-{#                                            <span class="">#}
-{#                                                <img width="60px" id="avatar"#}
-{#                                                     src="{{ object.Teacher_Code.Member_Avatar.url }}">#}
-{#                                            </span>#}
-{#                            </div>#}
-{##}
-{#                            <div class="col-md-9 text-center">#}
-{##}
-{#                                <p>Instructor</p>#}
-{#                                <h5>{{ object.Teacher_Code }}</h5>#}
-{#                            </div>#}
-{#                        </div>#}
-                    </div>
+                    {#                        <div class="row d-flex flex-row">#}
+                    {#                            <div class="col-md-3">#}
+                    {#                                            <span class="">#}
+                    {#                                                <img width="60px" id="avatar"#}
+                    {#                                                     src="{{ object.Teacher_Code.Member_Avatar.url }}">#}
+                    {#                                            </span>#}
+                    {#                            </div>#}
+                    {##}
+                    {#                            <div class="col-md-9 text-center">#}
+                    {##}
+                    {#                                <p>Instructor</p>#}
+                    {#                                <h5>{{ object.Teacher_Code }}</h5>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
     <div class=" text-center">
         {% if is_paginated %}
-            <ul class="pagination">
-                {% if page_obj.has_previous %}
-                    <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-                {% else %}
-                    <li class="disabled"><span>&laquo;</span></li>
-                {% endif %}
-                {% for i in paginator.page_range %}
-                    {% if page_obj.number == i %}
-                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                    {% else %}
-                        <li><a href="?page={{ i }}">{{ i }}</a></li>
-                    {% endif %}
-                {% endfor %}
-                {% if page_obj.has_next %}
-                    <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-                {% else %}
-                    <li class="disabled"><span>&raquo;</span></li>
-                {% endif %}
-            </ul>
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+            {% if page_obj.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
         {% endif %}
     </div>
 </div>

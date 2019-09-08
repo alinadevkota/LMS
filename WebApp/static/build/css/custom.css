@@ -6127,3 +6127,15 @@ input[type=checkbox], input[type=radio] {
     z-index: 9999;
     background: url(http://smallenvelop.com/wp-content/uploads/2014/08/Preloader_11.gif) center no-repeat #fff;
 }
+
+
+/* Course Forum */
+.course_btn{
+    margin-top: -44px;
+}
+
+.btn-white {
+    color: #444444;
+    background-color: #ffffff;
+    border-color: #efefef;
+}
