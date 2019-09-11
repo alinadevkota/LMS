@@ -464,28 +464,16 @@ class ChapterInfoDetailView(DetailView):
 class CourseForum(ListView):
     model = Thread
     paginate_by = 20
-    template_name = 'courseinfo/Course_Forum.html'
+    template_name = 'lecture/Course_Forum.html'
     context_object_name = 'threads'
-
-    def get_queryset(self):
-        return Thread.objects.visible().filter(
-            topic__id=self.kwargs.get('course.pk')
-        ).select_related(
-            'user', 'topic'
-        ).prefetch_related(
-            'user__forum_avatar'
-        ).order_by(
-            *['order', get_thread_ordering(self.request)]
-        )
-
+  
     def get_context_data(self, **kwargs):
-        context = super(ListView, self).get_context_data(**kwargs)
-        print(self.kwargs.get('pk'))
-        context['topic'] = topic = Topic.objects.get(pk=self.kwargs.get('pk'))
-        context['title'] = context['panel_title'] = topic.title
-        context['show_order'] = True
+        context = super().get_context_data(**kwargs)
+        context['course'] = LectureInfo.objects.all().values('id', 'Lecture_Name',)
+        context['topic'] = Topic.objects.all()
+        context['thread'] = Thread.objects.all()
+        context['node_group'] = NodeGroup.objects.all()
         return context
-
 
 class ChapterInfoUpdateView(UpdateView):
     model = ChapterInfo
@@ -495,6 +483,7 @@ class ChapterInfoUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['Course_Code'] = get_object_or_404(CourseInfo, pk=self.kwargs.get('course'))
         return context
+
 
 
 class ChapterContentsInfoListView(ListView):
@@ -1441,26 +1430,26 @@ def chapterpagebuilder(request, course, chapter):
 @csrf_exempt
 def save_file(request):
     if request.method == "POST":
-        count = request.POST['count']
+        # count = request.POST['count']
         chapterID = request.POST['chapterID']
         courseID = request.POST['courseID']
         path = ''
-        for x in range(int(count)):
-            if request.FILES['file-'+str(x)]:
-                image = request.FILES['file-'+str(x)]
-                if (image.size/1024) > 500:
-                    return JsonResponse(data = {"message":"File size exceeds 2MB"}, status=500)
-                path = settings.MEDIA_ROOT
-                image
-                # following is commented because filesystemstorage auto create directories if not exist
-                # if not os.path.exists(os.path.join(path, 'chapterBuilder')):
-                #     os.makedirs(os.path.join(path, 'chapterBuilder'))
-                # if not os.path.exists(path+'chapterBuilder/'+courseID):
-                #     os.makedirs(os.path.join(path, 'chapterBuilder/'+courseID))
-                # if not os.path.exists(path+'chapterBuilder/'+courseID+'/'+chapterID):
-                #     os.makedirs(os.path.join(path, 'chapterBuilder/'+courseID+'/'+chapterID))    
-                fs = FileSystemStorage(location=path + '/chapterBuilder/' + courseID + '/' + chapterID)
-                filename = fs.save(image.name, image)
+        # for x in range(int(count)):
+        if request.FILES['file-0']:
+            image = request.FILES['file-0']
+            # print(image)
+            if (image.size/1024) > 2048:
+                return JsonResponse(data = {"message":"File size exceeds 2MB"}, status=500)
+            path = settings.MEDIA_ROOT
+            # following is commented because filesystemstorage auto create directories if not exist
+            # if not os.path.exists(os.path.join(path, 'chapterBuilder')):
+            #     os.makedirs(os.path.join(path, 'chapterBuilder'))
+            # if not os.path.exists(path+'chapterBuilder/'+courseID):
+            #     os.makedirs(os.path.join(path, 'chapterBuilder/'+courseID))
+            # if not os.path.exists(path+'chapterBuilder/'+courseID+'/'+chapterID):
+            #     os.makedirs(os.path.join(path, 'chapterBuilder/'+courseID+'/'+chapterID))    
+            fs = FileSystemStorage(location=path + '/chapterBuilder/' + courseID + '/' + chapterID)
+            filename = fs.save(image.name, image)
         return JsonResponse(data={"message": "success"})
 
 
