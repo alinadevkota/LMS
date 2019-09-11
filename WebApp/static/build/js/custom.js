@@ -6052,42 +6052,6 @@ $(document).ready(function () {
     $(".discussions").hide();
     $(".users").hide();
   });
-
-  // ..............................................................
-
-  $(".General").on("click", function () {
-    $("#chooseSession").hide();
-    $("#chooseCourse").hide();
-    $(".sessionLabel").hide();
-    $(".courseLabel").hide();
-    $(".systemLabel").hide();
-  });
-
-  $(".System").on("click", function () {
-    $("#chooseSession").hide();
-    $("#chooseCourse").hide();
-    $(".generalLabel").hide();
-    $(".sessionLabel").hide();
-    $(".courseLabel").hide();
-    $(".systemLabel").show();
-  });
-
-  $(".Session").on("click", function () {
-    $("#chooseSession").show();
-    $("#chooseCourse").hide();
-    $(".generalLabel").hide();
-    $(".sessionLabel").show();
-    $(".courseLabel").hide();
-    $(".systemLabel").hide();
-  });
-  $(".Course").on("click", function () {
-    $("#chooseSession").show();
-    $("#chooseCourse").show();
-    $(".generalLabel").hide();
-    $(".sessionLabel").hide();
-    $(".courseLabel").show();
-    $(".systemLabel").hide();
-  });
   // .................................................................................
   $(".mcq_question").on("click", function () {
     $("#mcq_que").show(200);

@@ -69,15 +69,19 @@ urlpatterns += (
 
     path('questions_student_detail/detail/<int:pk>/',
          views.questions_student_detail.as_view(), name='questions_student_detail'),
-
-     # path('surveyinfo/detail', views.get_survey_info,
-     #     name='get_survey_info'),
+    
+    path('questions_student_detail_history/detail/<int:pk>/',
+         views.questions_student_detail_history.as_view(), name='questions_student_detail_history'),
 
     path('surveyinfo_ajax/', surveyViews.SurveyInfo_ajax.as_view(),
         name='surveyinfo_ajax'),
     
     path('ParticipateSurvey/', views.ParticipateSurvey.as_view(),
         name='ParticipateSurvey'),
+        
+    path('surveyFilterCategory_student/', views.surveyFilterCategory_student.as_view(),
+    name='surveyFilterCategory_student'),
+
 )
 
 # urlpatterns += (

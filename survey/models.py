@@ -49,7 +49,7 @@ class SurveyInfo(models.Model):
 
     Session_Code = ForeignKey(
         'WebApp.InningInfo',
-        related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
+        related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True, blank=True
     )
     Added_By = ForeignKey(
         'WebApp.MemberInfo',
@@ -62,7 +62,7 @@ class SurveyInfo(models.Model):
     
     Course_Code = ForeignKey(
         'WebApp.CourseInfo',
-        related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True
+        related_name="surveyinfo", on_delete=models.DO_NOTHING, null=True, blank=True
     )
 
     class Meta:
